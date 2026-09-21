@@ -83,4 +83,4 @@ Easiest path — go to civitai.com, filter by "Workflows," grab any AnimateDiff 
 
 **For video specifically:** start with 16 frames at 8fps. That's ~2 seconds. Scale up once you know it works.
 
-What's your GPU? I can tailor the VRAM settings and model recs if you tell me.
+---
