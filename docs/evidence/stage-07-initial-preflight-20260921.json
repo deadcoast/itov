@@ -1,0 +1,197 @@
+{
+  "observed_at": "2026-09-21T19:46:28.333315+00:00",
+  "package_version": "0.7.0",
+  "scope": "pinned_wan22_5b_neutral_image_to_video",
+  "initial_catalog_head": "5cddeda02eb3ba4c5a0e2a2536809192385ee62257a07317b987618a57c5e99b",
+  "specification": {
+    "count": 2,
+    "diffusion": {
+      "loader_name": "wan2.2_ti2v_5B_fp16.safetensors",
+      "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+    },
+    "fps": 24,
+    "frames": 33,
+    "height": 640,
+    "input_image": {
+      "name": "video/still-life.png",
+      "sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+    },
+    "negative_prompt": "text, watermark, blurry, flickering, distorted objects",
+    "profile": "wan22-ti2v-5b-v1",
+    "prompt": "The camera slowly moves to the right around a red ceramic teapot and green pears on a wooden table, gentle natural window light, coherent still life, smooth subtle camera motion.",
+    "seed": 720260921,
+    "text_encoder": {
+      "loader_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+    },
+    "vae": {
+      "loader_name": "wan2.2_vae.safetensors",
+      "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+    },
+    "version": 1,
+    "width": 640
+  },
+  "runtime": {
+    "system": {
+      "os": "win32",
+      "ram_total": 66095271936,
+      "ram_free": 30417829888,
+      "comfyui_version": "0.37.0",
+      "required_frontend_version": "1.52.7",
+      "installed_templates_version": "0.11.66",
+      "required_templates_version": "0.11.66",
+      "comfy_package_versions": [
+        {
+          "name": "comfyui-frontend-package",
+          "installed": "1.52.7",
+          "required": "1.52.7"
+        },
+        {
+          "name": "comfyui-workflow-templates",
+          "installed": "0.11.66",
+          "required": "0.11.66"
+        },
+        {
+          "name": "comfyui-embedded-docs",
+          "installed": "0.5.12",
+          "required": "0.5.12"
+        },
+        {
+          "name": "comfy-kitchen",
+          "installed": "0.2.35",
+          "required": "0.2.35"
+        },
+        {
+          "name": "comfy-aimdo",
+          "installed": "0.5.5",
+          "required": "0.5.5"
+        }
+      ],
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130",
+      "embedded_python": true,
+      "deploy_environment": "local-portable",
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8188",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes"
+      ]
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0,
+        "vram_total": 34162016256,
+        "vram_free": 25351789306,
+        "torch_vram_total": 67108864,
+        "torch_vram_free": 31824634
+      }
+    ]
+  },
+  "downloads": [
+    {
+      "bytes": 6735906897,
+      "destination": "models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "id": "wan-umt5-fp8",
+      "license_label": "apache-2.0",
+      "model_card": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "observed_at": "2026-09-21T19:38:32.172249+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68",
+      "source_file": "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    },
+    {
+      "bytes": 9999658848,
+      "destination": "models/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+      "id": "wan22-ti2v-5b",
+      "license_label": "apache-2.0",
+      "model_card": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+      "observed_at": "2026-09-21T19:36:05.817379+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\diffusion_models\\wan2.2_ti2v_5B_fp16.safetensors",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e",
+      "source_file": "split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors"
+    },
+    {
+      "bytes": 1409400960,
+      "destination": "models/vae/wan2.2_vae.safetensors",
+      "id": "wan22-vae",
+      "license_label": "apache-2.0",
+      "model_card": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+      "observed_at": "2026-09-21T19:39:00.593456+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\vae\\wan2.2_vae.safetensors",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156",
+      "source_file": "split_files/vae/wan2.2_vae.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/vae/wan2.2_vae.safetensors"
+    }
+  ],
+  "upstream_workflow": {
+    "url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/main/templates/video_wan2_2_5B_ti2v.json",
+    "downloaded_sha256": "50390798a133757075d750ab78b26274e3bf3e4a09f46aaa2f08d9559e62750b",
+    "changes": "Pinned model/input hashes, neutral prompt, 640x640, 33 frames, two explicit seeds, MP4/H.264 and video output contract; sampler and shift follow upstream."
+  },
+  "limits": [
+    "Two short silent clips with one model; not arbitrary video model or LoRA compatibility.",
+    "No audio synchronization, long clips, cross-runtime pixel determinism, or human aesthetic acceptance.",
+    "GPU samples are whole-device observed lower bounds; no calibrated memory predictor or concurrency acceptance."
+  ],
+  "passed_machine_checks": false,
+  "failure": {
+    "phase": "preflight before any POST",
+    "error": "Live workflow validation failed at job 0: invalid_choice for LoadImage.image; stock INPUT_TYPES lists top-level files only.",
+    "specification": {
+      "count": 2,
+      "diffusion": {
+        "loader_name": "wan2.2_ti2v_5B_fp16.safetensors",
+        "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+      },
+      "fps": 24,
+      "frames": 33,
+      "height": 640,
+      "input_image": {
+        "name": "video/still-life.png",
+        "sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+      },
+      "negative_prompt": "text, watermark, blurry, flickering, distorted objects",
+      "profile": "wan22-ti2v-5b-v1",
+      "prompt": "The camera slowly moves to the right around a red ceramic teapot and green pears on a wooden table, gentle natural window light, coherent still life, smooth subtle camera motion.",
+      "seed": 720260921,
+      "text_encoder": {
+        "loader_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+      },
+      "vae": {
+        "loader_name": "wan2.2_vae.safetensors",
+        "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+      },
+      "version": 1,
+      "width": 640
+    },
+    "unsubmitted_preset": "video-9d8c9a423df4f1820897d72674e7c4584886d1b0286154101ba5a9d22629be60"
+  },
+  "correction_catalog": {
+    "removed_only_unsubmitted_preset": "video-9d8c9a423df4f1820897d72674e7c4584886d1b0286154101ba5a9d22629be60",
+    "before": "0a886430f3bb35a6317ee34adda0fc528cc0a76d7311f517883a9c3918f024f4",
+    "after": "278110548aabf9fdddb586627384bd986b3ff7ca9ec98ce8ea142ed8289cb5f2",
+    "history_and_candidate_files_preserved": true
+  }
+}

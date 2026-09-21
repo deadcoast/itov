@@ -1,0 +1,27 @@
+[32m[INFO][0m got prompt
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\vae\\wan2.2_vae.safetensors']
+[32m[INFO][0m Using pytorch attention in VAE
+[32m[INFO][0m Using pytorch attention in VAE
+[32m[INFO][0m VAE load device: cuda:0, offload device: cpu, dtype: torch.bfloat16
+[32m[INFO][0m Found quantization metadata version 1
+[32m[INFO][0m Using MixedPrecisionOps for text encoder
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\umt5_xxl_fp8_e4m3fn_scaled.safetensors']
+[32m[INFO][0m CLIP/text encoder model load device: cuda:0, offload device: cpu, current: cpu, dtype: torch.float16
+[32m[INFO][0m Requested to load WanTEModel
+[32m[INFO][0m Model WanTEModel prepared for dynamic VRAM loading. 6419MB Staged. 0 patches attached. Force pre-loaded 73 weights: 488 KB.
+[32m[INFO][0m Model WanTEModel prepared for dynamic VRAM loading. 6419MB Staged. 0 patches attached. Force pre-loaded 73 weights: 488 KB.
+[32m[INFO][0m model weight dtype torch.float16, manual cast: None
+[32m[INFO][0m model_type FLOW
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\diffusion_models\\wan2.2_ti2v_5B_fp16.safetensors']
+[32m[INFO][0m Requested to load WanVAE
+[32m[INFO][0m Model WanVAE prepared for dynamic VRAM loading. 1344MB Staged. 0 patches attached. Force pre-loaded 54 weights: 69 KB.
+[32m[INFO][0m Requested to load WAN22
+[32m[INFO][0m Model WAN22 prepared for dynamic VRAM loading. 9535MB Staged. 0 patches attached. Force pre-loaded 180 weights: 1083 KB.
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:02<00:50,  2.68s/it] 10%|█         | 2/20 [00:03<00:23,  1.31s/it] 15%|█▌        | 3/20 [00:04<00:26,  1.57s/it] 20%|██        | 4/20 [00:06<00:23,  1.46s/it] 25%|██▌       | 5/20 [00:07<00:21,  1.43s/it] 30%|███       | 6/20 [00:08<00:15,  1.13s/it] 35%|███▌      | 7/20 [00:09<00:15,  1.17s/it] 40%|████      | 8/20 [00:10<00:14,  1.19s/it] 45%|████▌     | 9/20 [00:12<00:14,  1.28s/it] 50%|█████     | 10/20 [00:13<00:13,  1.38s/it] 55%|█████▌    | 11/20 [00:15<00:12,  1.37s/it] 60%|██████    | 12/20 [00:16<00:11,  1.41s/it] 65%|██████▌   | 13/20 [00:18<00:10,  1.44s/it] 70%|███████   | 14/20 [00:18<00:07,  1.29s/it] 75%|███████▌  | 15/20 [00:20<00:06,  1.30s/it] 80%|████████  | 16/20 [00:21<00:05,  1.32s/it] 85%|████████▌ | 17/20 [00:23<00:04,  1.41s/it] 90%|█████████ | 18/20 [00:24<00:02,  1.43s/it] 95%|█████████▌| 19/20 [00:26<00:01,  1.42s/it]100%|██████████| 20/20 [00:28<00:00,  1.71s/it]100%|██████████| 20/20 [00:28<00:00,  1.43s/it]
+[32m[INFO][0m Model WanVAE prepared for dynamic VRAM loading. 1344MB Staged. 0 patches attached. Force pre-loaded 54 weights: 69 KB.
+[32m[INFO][0m [32mPrompt executed in 38.71 seconds[0m
+[32m[INFO][0m got prompt
+[32m[INFO][0m Model WAN22 prepared for dynamic VRAM loading. 9535MB Staged. 0 patches attached. Force pre-loaded 180 weights: 1083 KB.
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:00<00:02,  6.51it/s] 10%|█         | 2/20 [00:01<00:16,  1.09it/s] 15%|█▌        | 3/20 [00:02<00:18,  1.11s/it] 20%|██        | 4/20 [00:04<00:21,  1.32s/it] 25%|██▌       | 5/20 [00:05<00:19,  1.30s/it] 30%|███       | 6/20 [00:07<00:20,  1.44s/it] 35%|███▌      | 7/20 [00:09<00:20,  1.55s/it] 40%|████      | 8/20 [00:11<00:19,  1.60s/it] 45%|████▌     | 9/20 [00:12<00:16,  1.46s/it] 50%|█████     | 10/20 [00:12<00:11,  1.15s/it] 55%|█████▌    | 11/20 [00:13<00:08,  1.03it/s] 60%|██████    | 12/20 [00:13<00:06,  1.22it/s] 65%|██████▌   | 13/20 [00:14<00:05,  1.38it/s] 70%|███████   | 14/20 [00:15<00:04,  1.34it/s] 75%|███████▌  | 15/20 [00:16<00:05,  1.04s/it] 80%|████████  | 16/20 [00:18<00:05,  1.32s/it] 85%|████████▌ | 17/20 [00:20<00:04,  1.44s/it] 90%|█████████ | 18/20 [00:22<00:03,  1.58s/it] 95%|█████████▌| 19/20 [00:24<00:01,  1.61s/it]100%|██████████| 20/20 [00:27<00:00,  2.14s/it]100%|██████████| 20/20 [00:27<00:00,  1.37s/it]
+[32m[INFO][0m Model WanVAE prepared for dynamic VRAM loading. 1344MB Staged. 0 patches attached. Force pre-loaded 54 weights: 69 KB.
+[32m[INFO][0m [32mPrompt executed in 35.33 seconds[0m

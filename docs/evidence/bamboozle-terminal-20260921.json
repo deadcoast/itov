@@ -1,0 +1,156 @@
+{
+  "date": "2026-09-21",
+  "python": "3.13.9",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "focused_tests": {
+    "passed": 111,
+    "command": "uv run --locked pytest tests/test_cipher.py tests/test_bamboozle_cli.py -q -p no:cacheprovider --basetemp AI/dev_tools/.test-tmp/terminal-release"
+  },
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "package": {
+    "version": "0.2.0",
+    "wheel_sha256": "9c22fe4bd9bf91d8d8f05ab1e6664f6db0c17293b535017cd785d0754baa3d23",
+    "sdist_sha256": "6269759d84b21cb9bee828351c1b299aa8a04f5e24989e1c4eb8710d314404a3",
+    "installed": {
+      "package": "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Lib\\site-packages\\bamboozle\\__init__.py",
+      "cipher": "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Lib\\site-packages\\bamboozle\\cipher.py"
+    },
+    "source_parity": [
+      "__init__.py",
+      "__main__.py",
+      "cipher.py",
+      "cli.py",
+      "cipher_dict.json"
+    ],
+    "initial_build_review": "setup.py was initially included as a package module; filtered from the final wheel before installation"
+  },
+  "installed_commands": [
+    {
+      "command": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+        "validate",
+        "--json"
+      ],
+      "exit_code": 0,
+      "status": "dictionary_valid"
+    },
+    {
+      "command": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+        "preview",
+        "sample input.py",
+        "--json"
+      ],
+      "exit_code": 0,
+      "status": "preview"
+    },
+    {
+      "command": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+        "encode",
+        "sample input.py",
+        "--json"
+      ],
+      "exit_code": 0,
+      "status": "saved"
+    },
+    {
+      "command": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+        "verify",
+        "sample input_safe.py",
+        "--json"
+      ],
+      "exit_code": 0,
+      "status": "verified"
+    },
+    {
+      "command": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+        "preview",
+        "sample input_safe.py",
+        "--reverse",
+        "--json"
+      ],
+      "exit_code": 0,
+      "status": "preview"
+    },
+    {
+      "command": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+        "decode",
+        "sample input_safe.py",
+        "-o",
+        "restored file.py",
+        "--strict",
+        "--keep-ledger",
+        "--json"
+      ],
+      "exit_code": 0,
+      "status": "saved"
+    },
+    {
+      "command": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\scm-cipher.exe",
+        "--mode",
+        "verify",
+        "--input",
+        "sample input_safe.py",
+        "--json"
+      ],
+      "exit_code": 0,
+      "status": "verified"
+    },
+    {
+      "command": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "bamboozle",
+        "verify",
+        "sample input_safe.py",
+        "--json"
+      ],
+      "exit_code": 0,
+      "status": "verified"
+    }
+  ],
+  "byte_identical_round_trip": true,
+  "scope": "Local Windows CLI, filesystem safety, and installed package. No ComfyUI or generated-code correctness acceptance.",
+  "live_terminal": {
+    "launch": ".\\AI\\dev_tools\\bamboozle.ps1",
+    "tty": true,
+    "operations": [
+      "encode preview",
+      "save",
+      "verify",
+      "decode preview",
+      "save",
+      "quit"
+    ],
+    "byte_identical_round_trip": true,
+    "ledger_removed_after_decode": true
+  },
+  "final_installation": {
+    "version": "0.2.0",
+    "mode": "editable",
+    "package_path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\__init__.py",
+    "environment": "C:\\Users\\ryanf\\github\\_active\\itov\\.venv",
+    "validation_command": "uv run --no-sync bamboozle validate --json",
+    "validation_status": "dictionary_valid"
+  },
+  "installed_terminal_menu": {
+    "launch": "bamboozle",
+    "tty": true,
+    "operations": [
+      "automatic menu",
+      "encode preview",
+      "existing destination shown",
+      "invalid-choice recovery",
+      "cancel",
+      "quit"
+    ],
+    "count_labels": "1 substitution, 1 native literal"
+  }
+}

@@ -2,6 +2,8 @@
 
 ITOV executes immutable plans one job at a time, introduced in 0.5.0 and extended for pinned image inference in 0.6.0. A qualification receipt binds a plan to observed live node schemas, runtime identity, input bytes, and supported stock loader paths. Submission is opt-in; `batch plan`, `verify`, and `qualify` never POST a prompt.
 
+Version 0.7.0 adds the separately identified `stock-wan22-v1` profile for [pinned silent image-to-video](image-to-video.md). Existing image receipts retain the `stock-local-v1` shape. Wan qualification additionally binds the required stock extras modules and pinned diffusion/text-encoder/VAE/input files, rejects ambiguous loader aliases, and requires an MP4/H.264 output contract. V3 nested choices are validated through their dotted API inputs.
+
 ## Commands
 
 Start the configured server with `uv run --locked itov server start`. With an existing saved plan:
@@ -75,7 +77,7 @@ Paused batches retain persistent workspace ownership even after the process exit
 uv run --locked itov batch abandon workspace/state/plans/PLAN_ID.json
 ```
 
-Abandon refuses active or uncertain jobs. It only retires remaining unsubmitted picks after all submitted work has a known terminal outcome; it never cancels server jobs or releases reserved seeds. An abandoned plan cannot later be submitted. A missing database with an existing initialization marker is an error, not an empty reservation store. Preserve the complete workspace state for inspection/consistent recovery; partial backup restoration and manual record edits are not supported recovery procedures.
+Abandon refuses active or uncertain jobs. It only retires remaining unsubmitted picks after all submitted work has a known terminal outcome; it never cancels server jobs or releases reserved seeds. From 0.7.0, a `collection_failed` job can be retired only after fresh server checks establish matching request/graph ownership and terminal success. This supports preserving an invalid video while retiring its remainder; missing or ambiguous history still refuses. An abandoned plan cannot later be submitted. A missing database with an existing initialization marker is an error, not an empty reservation store. Preserve the complete workspace state for inspection/consistent recovery; partial backup restoration and manual record edits are not supported recovery procedures.
 
 ## Evidence and remaining gates
 
@@ -84,3 +86,5 @@ The [real execution record](evidence/stage-05-execution-20260921.json) retains a
 The [source/package verification](evidence/stage-05-verification-20260921.json) records automated checks, including controlled process exits at preparation/submission/acknowledgement boundaries, interrupted transaction rollback, competing dispatcher exclusion, seed collisions, stale inputs/catalogs, wrong ownership, and artifact preservation. These do not qualify sudden power loss, remote filesystems, backup restore, other operating systems, pretrained model inference, video/audio generation, performance, or parallel GPU execution.
 
 The separate [stage-six inference evidence](evidence/stage-06-inference-20260921.json) establishes sequential execution with the selected pretrained checkpoint and LoRA. It retains the initial observation/collection failures and successful recovery using the already accepted prompt, plus the four final images. Its [source/package verification](evidence/stage-06-verification-20260921.json) includes numeric-normalization and Windows descriptor regressions. The broader storage, model, quality, performance, and concurrency limits above remain open.
+
+The [stage-seven video evidence](evidence/stage-07-video-20260921.json) records two real Wan 2.2 5B clips and completed resume without new prompts. Video collection and completed resume additionally verify full local decoding and the pinned media contract. Source tests inject invalid-video collection, successful resume, safe retirement, and missing-history refusal. These establish the bounded silent-video path; audio, long-video quality and concurrent GPU execution remain unqualified.

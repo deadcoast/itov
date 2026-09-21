@@ -46,6 +46,19 @@ def abandon_batch(config: Config, path: Path) -> dict:
                 record["status"] != "prepared" or row["status"] in {"prepared", "reserved"},
                 "Job record moved backwards to prepared; preserve and inspect",
             )
+            if record["status"] == "collection_failed":
+                client = ComfyUIClient(config.url)
+                client.find_submission(
+                    record["request_id"], record["workflow"], prompt_id=record["prompt_id"]
+                )
+                history = client.history(record["prompt_id"])
+                require(
+                    history is not None
+                    and history["status"].get("completed") is True
+                    and history["status"].get("status_str") == "success",
+                    "Cannot abandon failed collection without owned terminal server evidence",
+                )
+                continue
             require(
                 record["status"]
                 in {"prepared", "succeeded", "failed", "rejected", "validation_failed"},

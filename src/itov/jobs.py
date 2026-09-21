@@ -16,6 +16,7 @@ from pathlib import Path, PurePosixPath
 from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json, submission_matches
 from itov.config import Config, validate_timeout
 from itov.locking import file_lock
+from itov.media import verify_video, video_contract
 from itov.workflow import validate_workflow
 
 
@@ -122,6 +123,23 @@ def _collect(config: Config, client: ComfyUIClient, record: dict, history: dict)
         download = client.download_output(descriptor, destination)
         artifacts.append({**descriptor, **download})
     record["artifacts"] = artifacts
+    _verify_videos(record)
+
+
+def _verify_videos(record: dict):
+    for node_id, node in record.get("workflow", {}).items():
+        if node["class_type"] != "SaveVideo":
+            continue
+        metadata = node.get("_meta", {})
+        if not isinstance(metadata, dict):
+            raise ValueError("Video metadata must be an object")
+        if "itov_video" not in metadata:
+            continue
+        expected = video_contract(metadata["itov_video"])
+        outputs = [item for item in record["artifacts"] if item["node_id"] == node_id]
+        if len(outputs) != 1:
+            raise ValueError("Expected exactly one collected artifact for each video output")
+        outputs[0]["video_validation"] = verify_video(Path(outputs[0]["path"]), expected)
 
 
 def _wait(
@@ -321,6 +339,7 @@ def wait_job(
                             intact = False
                             break
             if intact:
+                _verify_videos(record)
                 return record
         if record.get("status") in {"failed", "rejected", "validation_failed"}:
             return record

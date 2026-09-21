@@ -19,9 +19,12 @@ from itov.config import DEFAULT_URL, initialize, load_config, validate_timeout
 from itov.doctor import diagnose
 from itov.inference import load_spec, plan_inference, prepare_inference
 from itov.jobs import run_job, wait_job
+from itov.media import verify_video
 from itov.qualification import qualify, save_qualification
 from itov.rotation import PlanningError
 from itov.runtime import launch_command
+from itov.video import load_spec as load_video_spec
+from itov.video import plan_video, prepare_video
 from itov.workflow import load_json, validate_workflow
 
 
@@ -144,6 +147,21 @@ def parser() -> argparse.ArgumentParser:
         item.add_argument("--json", action="store_true")
         if action == "plan":
             item.add_argument("--save", action="store_true")
+    video = commands.add_parser("video", help="Prepare, plan, and verify pinned Wan video batches")
+    video_actions = video.add_subparsers(dest="action", required=True)
+    for action in ("prepare", "plan", "verify"):
+        item = video_actions.add_parser(action)
+        item.add_argument("file", type=Path, help="Video specification JSON")
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "prepare":
+            item.add_argument(
+                "--image-source", type=Path, help="Copy this exact pinned PNG into workspace input"
+            )
+        elif action == "plan":
+            item.add_argument("--save", action="store_true")
+        else:
+            item.add_argument("artifact", type=Path, help="Collected MP4 to decode and verify")
     return root
 
 
@@ -240,6 +258,27 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1
+        elif args.command == "video":
+            spec = load_video_spec(args.file)
+            if args.action == "verify":
+                result = verify_video(
+                    args.artifact, {key: spec[key] for key in ("width", "height", "frames", "fps")}
+                )
+            else:
+                config = load_config(args.config)
+                if args.action == "prepare":
+                    result = prepare_video(config, spec, image_source=args.image_source)
+                else:
+                    plan = plan_video(config, spec)
+                    path = save_plan(config.root, plan) if args.save else None
+                    result = {
+                        "ok": True,
+                        "plan": plan,
+                        "path": str(path) if path else None,
+                        "limits": "No jobs submitted; qualify before execution.",
+                    }
+            print(json.dumps(result, indent=2))
+            return 0
         elif args.command == "inference":
             config = load_config(args.config)
             spec = load_spec(args.file)

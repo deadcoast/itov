@@ -50,6 +50,69 @@ def _compatible(actual: str, expected: str) -> bool:
     return "*" in source or "*" in target or bool(source & target)
 
 
+def _expand_inputs(required: dict, optional: dict, values: dict) -> tuple[dict, dict]:
+    """Expand selected V3 dynamic combos into their dotted API input names."""
+    groups = {"required": {}, "optional": {}}
+    pending = [("required", required, "", 0), ("optional", optional, "", 0)]
+    while pending:
+        group, declarations, prefix, depth = pending.pop()
+        if not isinstance(declarations, dict) or depth > 8:
+            raise ValueError("Invalid or excessively nested input schema")
+        for name, spec in declarations.items():
+            if (
+                not isinstance(name, str)
+                or not name
+                or not isinstance(spec, list)
+                or not spec
+                or not isinstance(spec[0], (str, list))
+                or (len(spec) > 1 and not isinstance(spec[1], dict))
+            ):
+                raise ValueError("Invalid input declaration")
+            key = prefix + name
+            if key in groups["required"] or key in groups["optional"]:
+                raise ValueError("Overlapping dynamic input names")
+            if spec[0] == "COMBO":
+                choices = spec[1].get("options") if len(spec) > 1 else None
+                if not isinstance(choices, list):
+                    raise ValueError("Invalid COMBO choices")
+                groups[group][key] = [choices]
+            elif spec[0] == "COMFY_DYNAMICCOMBO_V3":
+                choices = spec[1].get("options") if len(spec) > 1 else None
+                if (
+                    not isinstance(choices, list)
+                    or not choices
+                    or any(
+                        not isinstance(choice, dict)
+                        or not isinstance(choice.get("key"), str)
+                        or not isinstance(choice.get("inputs"), dict)
+                        for choice in choices
+                    )
+                ):
+                    raise ValueError("Invalid dynamic combo choices")
+                keys = [choice["key"] for choice in choices]
+                if len(set(keys)) != len(keys):
+                    raise ValueError("Duplicate dynamic combo choices")
+                groups[group][key] = [keys]
+                selected = next(
+                    (choice for choice in choices if choice["key"] == values.get(key)), None
+                )
+                if selected is not None:
+                    for child_group in ("required", "optional"):
+                        pending.append(
+                            (
+                                child_group,
+                                selected["inputs"].get(child_group, {}),
+                                key + ".",
+                                depth + 1,
+                            )
+                        )
+            else:
+                groups[group][key] = spec
+            if len(groups["required"]) + len(groups["optional"]) > 1024:
+                raise ValueError("Excessive input declarations")
+    return groups["required"], groups["optional"]
+
+
 def validate_workflow(graph: object, object_info: object | None = None) -> Validation:
     report = Validation(scope="node_schema" if object_info is not None else "structure")
 
@@ -156,16 +219,12 @@ def validate_workflow(graph: object, object_info: object | None = None) -> Valid
         ):
             issue("invalid_registry", f"Invalid input/output schema for {class_type}", node_id)
             continue
-        declarations = {**required, **optional}
-        if any(
-            not isinstance(spec, list)
-            or not spec
-            or not isinstance(spec[0], (str, list))
-            or (len(spec) > 1 and not isinstance(spec[1], dict))
-            for spec in declarations.values()
-        ):
+        try:
+            required, optional = _expand_inputs(required, optional, node["inputs"])
+        except ValueError:
             issue("invalid_registry", f"Invalid input declaration for {class_type}", node_id)
             continue
+        declarations = {**required, **optional}
         schemas[node_id] = metadata, declarations
         for name in sorted(required.keys() - node["inputs"].keys()):
             issue("missing_input", f"Required input {name!r} is missing", node_id, name)

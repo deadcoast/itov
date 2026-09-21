@@ -4,6 +4,7 @@ import argparse
 import difflib
 import hashlib
 import json
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -30,7 +31,7 @@ def load_json(file_path):
         return json.load(source, object_pairs_hook=_unique_pairs)
 
 
-def write_text_atomic(text, file_path):
+def write_text_atomic(text, file_path, overwrite=True):
     """Publish a complete UTF-8 file without truncating an existing destination."""
     file_path = Path(file_path)
     temporary_path = None
@@ -46,14 +47,18 @@ def write_text_atomic(text, file_path):
         ) as output:
             temporary_path = Path(output.name)
             output.write(text)
-        temporary_path.replace(file_path)
+        if overwrite:
+            temporary_path.replace(file_path)
+        else:
+            # Same-directory hard linking publishes atomically without replacing a raced-in file.
+            os.link(temporary_path, file_path)
     finally:
         if temporary_path is not None:
             temporary_path.unlink(missing_ok=True)
 
 
-def save_json(data, file_path):
-    write_text_atomic(json.dumps(data, indent=2) + "\n", file_path)
+def save_json(data, file_path, overwrite=True):
+    write_text_atomic(json.dumps(data, indent=2) + "\n", file_path, overwrite=overwrite)
 
 
 def validate_dictionary(cipher_dict):
@@ -252,6 +257,14 @@ def preview_diff(original, result, input_path, output_path):
     )
 
 
+def describe_counts(counts):
+    substitutions = counts["substitutions"]
+    literals = counts["literals"]
+    terms = f"{substitutions} substitution{'s' if substitutions != 1 else ''}"
+    native = f"{literals} native literal{'s' if literals != 1 else ''}"
+    return f"{terms}, {native}"
+
+
 def emit_report(report, as_json):
     if as_json:
         print(json.dumps(report, sort_keys=True))
@@ -263,8 +276,7 @@ def emit_report(report, as_json):
     if status == "verified":
         print(f"[*] VERIFIED: {report['input']}; encoded and restored hashes match the ledger.")
         return
-    counts = report["counts"]
-    summary = f"{counts['substitutions']} substitutions, {counts['literals']} native literals"
+    summary = describe_counts(report["counts"])
     if status == "preview":
         print(f"[*] PREVIEW: {report['output']} ({summary}). No files written.")
     else:
@@ -273,6 +285,148 @@ def emit_report(report, as_json):
         print("[*] Input differs from the forward pass; restored edited text requires review.")
     if report.get("diff"):
         print(report["diff"], end="")
+
+
+def file_fingerprint(path):
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except FileNotFoundError:
+        return None
+
+
+def check_snapshot(snapshot):
+    for path, expected in snapshot.items():
+        if file_fingerprint(path) != expected:
+            raise ValueError(f"File changed since preview: {path}. Preview again before saving.")
+
+
+def prepare_conversion(
+    mode, input_path=None, output_path=None, dict_path=None, *, strict=False, keep_ledger=False
+):
+    """Prepare a frozen conversion and capture every file that could affect publication."""
+    if mode not in ("forward", "reverse", "verify", "validate"):
+        raise ValueError(f"Unknown conversion mode: {mode}")
+    dict_path = Path(dict_path or Path(__file__).with_name("cipher_dict.json")).resolve()
+    report = {"schema_version": 1, "mode": mode}
+    snapshot = {dict_path: file_fingerprint(dict_path)}
+    if mode == "validate":
+        cipher_dict = load_json(dict_path)
+        validate_dictionary(cipher_dict)
+        check_snapshot(snapshot)
+        report.update(
+            status="dictionary_valid",
+            dictionary=str(dict_path),
+            entries=len(cipher_dict),
+            dictionary_sha256=dictionary_hash(cipher_dict),
+        )
+        return {"report": report, "snapshot": snapshot}
+
+    input_path = Path(input_path).resolve()
+    suffix = "_safe" if mode == "forward" else "_ready"
+    output_path = (
+        Path(output_path).resolve()
+        if output_path
+        else input_path.with_name(input_path.stem + suffix + input_path.suffix)
+    )
+    ledger_path = ledger_path_for(output_path if mode == "forward" else input_path)
+    if mode != "verify" and (
+        output_path in (dict_path, ledger_path_for(input_path))
+        or ledger_path in (input_path, output_path, dict_path)
+    ):
+        raise ValueError("Input, output, dictionary, and ledger paths must not conflict.")
+    if keep_ledger and output_path == input_path:
+        raise ValueError("Cannot keep the encoded-file ledger when reversing in place.")
+    watched_paths = {input_path, ledger_path, ledger_path_for(input_path)}
+    if mode != "verify":
+        watched_paths.add(output_path)
+    for path in watched_paths:
+        if path not in snapshot:
+            snapshot[path] = file_fingerprint(path)
+
+    cipher_dict = load_json(dict_path)
+    validate_dictionary(cipher_dict)
+    with input_path.open(encoding="utf-8", newline="") as source:
+        text = source.read()
+    ledger_data = None
+    if mode == "forward":
+        if snapshot[ledger_path_for(input_path)] is not None:
+            raise ValueError("Input already has a cipher ledger; reverse it before encoding again.")
+        result = process_forward(text, cipher_dict)
+        ledger_data = make_ledger(text, result, cipher_dict, input_path, output_path)
+        integrity = "round_trip_checked"
+    else:
+        if snapshot[ledger_path] is not None:
+            ledger_data = load_json(ledger_path)
+            validate_ledger(ledger_data, cipher_dict, input_path)
+        result = process_reverse(text, cipher_dict)
+        integrity = reverse_integrity(text, result, ledger_data, strict=strict or mode == "verify")
+
+    check_snapshot(snapshot)
+    report.update(
+        status="verified" if mode == "verify" else "preview",
+        input=str(input_path),
+        ledger=str(ledger_path),
+        integrity=integrity,
+        input_sha256=text_hash(text),
+        output_sha256=text_hash(result),
+        input_bytes=len(text.encode("utf-8")),
+        output_bytes=len(result.encode("utf-8")),
+        counts=conversion_counts(text, cipher_dict, mode),
+        changed=text != result,
+    )
+    if mode != "verify":
+        report["output"] = str(output_path)
+    return {
+        "report": report,
+        "snapshot": snapshot,
+        "input_text": text,
+        "result": result,
+        "output_path": output_path,
+        "ledger_path": ledger_path,
+        "ledger_data": ledger_data,
+        "keep_ledger": keep_ledger,
+    }
+
+
+def add_preview_diff(plan):
+    report = plan["report"]
+    report["diff"] = preview_diff(
+        plan["input_text"], plan["result"], report["input"], report["output"]
+    )
+
+
+def apply_conversion(plan, *, overwrite=True):
+    """Save exactly the prepared text, rejecting stale source, mapping, ledger, or output."""
+    report = plan["report"]
+    if report["status"] != "preview":
+        raise ValueError("Only an unsaved conversion preview can be applied.")
+    check_snapshot(plan["snapshot"])
+    output_path = plan["output_path"]
+    ledger_path = plan["ledger_path"]
+    if not overwrite:
+        destinations = [output_path]
+        if report["mode"] == "forward":
+            destinations.append(ledger_path)
+        for path in destinations:
+            if plan["snapshot"][path] is not None:
+                raise FileExistsError(
+                    f"Destination already exists: {path}. Use --force to replace it."
+                )
+    if overwrite:
+        write_text_atomic(plan["result"], output_path)
+    else:
+        write_text_atomic(plan["result"], output_path, overwrite=False)
+    report["output_saved"] = True
+    # An interrupted finalization must not let this plan be applied a second time.
+    report["status"] = "finalizing"
+    if report["mode"] == "forward":
+        if overwrite:
+            save_json(plan["ledger_data"], ledger_path)
+        else:
+            save_json(plan["ledger_data"], ledger_path, overwrite=False)
+    elif plan["ledger_data"] is not None and not plan["keep_ledger"]:
+        ledger_path.unlink()
+    report["status"] = "saved"
 
 
 def main(argv=None):
@@ -313,96 +467,32 @@ def main(argv=None):
     if args.mode != "reverse" and (args.strict or args.keep_ledger):
         parser.error("--strict and --keep-ledger apply only to reverse")
 
-    output_saved = False
     report = {"schema_version": 1, "mode": args.mode}
     try:
-        dict_path = args.dict.resolve()
-        cipher_dict = load_json(dict_path)
-        validate_dictionary(cipher_dict)
-        if args.mode == "validate":
-            report.update(
-                status="dictionary_valid",
-                dictionary=str(dict_path),
-                entries=len(cipher_dict),
-                dictionary_sha256=dictionary_hash(cipher_dict),
-            )
-            emit_report(report, args.json)
-            return 0
-
-        input_path = args.input.resolve()
-        suffix = "_safe" if args.mode == "forward" else "_ready"
-        output_path = (
-            args.output.resolve()
-            if args.output
-            else input_path.with_name(input_path.stem + suffix + input_path.suffix)
+        plan = prepare_conversion(
+            args.mode,
+            args.input,
+            args.output,
+            args.dict,
+            strict=args.strict,
+            keep_ledger=args.keep_ledger,
         )
-        encoded_path = output_path if args.mode == "forward" else input_path
-        ledger_path = ledger_path_for(encoded_path)
-        if args.mode != "verify" and (
-            output_path in (dict_path, ledger_path_for(input_path))
-            or ledger_path in (input_path, output_path, dict_path)
-        ):
-            raise ValueError("Input, output, dictionary, and ledger paths must not conflict.")
-        if args.keep_ledger and output_path == input_path:
-            raise ValueError("Cannot keep the encoded-file ledger when reversing in place.")
-        report.update(input=str(input_path), ledger=str(ledger_path))
-        with input_path.open(encoding="utf-8", newline="") as source:
-            text = source.read()
-
-        ledger_data = None
-        if args.mode == "forward":
-            if ledger_path_for(input_path).exists():
-                raise ValueError(
-                    "Input already has a cipher ledger; reverse it before encoding again."
-                )
-            result = process_forward(text, cipher_dict)
-            ledger_data = make_ledger(text, result, cipher_dict, input_path, output_path)
-            integrity = "round_trip_checked"
-        else:
-            if ledger_path.exists():
-                ledger_data = load_json(ledger_path)
-                validate_ledger(ledger_data, cipher_dict, input_path)
-            result = process_reverse(text, cipher_dict)
-            integrity = reverse_integrity(
-                text, result, ledger_data, strict=args.strict or args.mode == "verify"
-            )
-
-        report.update(
-            integrity=integrity,
-            input_sha256=text_hash(text),
-            output_sha256=text_hash(result),
-            input_bytes=len(text.encode("utf-8")),
-            output_bytes=len(result.encode("utf-8")),
-            counts=conversion_counts(text, cipher_dict, args.mode),
-            changed=text != result,
-        )
-        if args.mode == "verify":
-            report["status"] = "verified"
-            emit_report(report, args.json)
-            return 0
-
-        report["output"] = str(output_path)
-        if args.diff:
-            report["diff"] = preview_diff(text, result, input_path, output_path)
-        if args.dry_run or args.diff:
-            report["status"] = "preview"
-        else:
-            write_text_atomic(result, output_path)
-            output_saved = True
-            if args.mode == "forward":
-                save_json(ledger_data, ledger_path)
-            elif ledger_data is not None and not args.keep_ledger:
-                ledger_path.unlink()
-            report["status"] = "saved"
+        report = plan["report"]
+        if args.mode in ("forward", "reverse"):
+            if args.diff:
+                add_preview_diff(plan)
+            if not (args.dry_run or args.diff):
+                apply_conversion(plan)
         emit_report(report, args.json)
         return 0
     except (OSError, UnicodeError, ValueError) as error:
+        output_saved = report.get("output_saved", False)
         if args.json:
             report.update(status="error", error=str(error), output_saved=output_saved)
             emit_report(report, True)
         elif output_saved:
             print(
-                f"[!] Output saved to {output_path}, but finalization failed: {error}",
+                f"[!] Output saved to {report['output']}, but finalization failed: {error}",
                 file=sys.stderr,
             )
         else:

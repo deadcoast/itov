@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "source": "https://docs.comfy.org/tutorials/video/wan/wan2_2",
+  "assets": [
+    {
+      "id": "wan22-ti2v-5b",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "source_file": "split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+      "destination": "models/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+      "bytes": 9999658848,
+      "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e",
+      "model_card": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+      "license_label": "apache-2.0"
+    },
+    {
+      "id": "wan-umt5-fp8",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "source_file": "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "destination": "models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "bytes": 6735906897,
+      "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68",
+      "model_card": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "license_label": "apache-2.0"
+    },
+    {
+      "id": "wan22-vae",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "source_file": "split_files/vae/wan2.2_vae.safetensors",
+      "destination": "models/vae/wan2.2_vae.safetensors",
+      "bytes": 1409400960,
+      "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156",
+      "model_card": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+      "license_label": "apache-2.0"
+    }
+  ]
+}

@@ -1,29 +1,33 @@
-import os
 from setuptools import setup
+from setuptools.command.build_py import build_py
 
-# Grab the absolute path of the current directory
-HERE = os.path.abspath(os.path.dirname(__file__))
+
+class BuildPy(build_py):
+    def find_package_modules(self, package, package_dir):
+        # The source directory is also the package root; setup.py is build metadata.
+        return [
+            module
+            for module in super().find_package_modules(package, package_dir)
+            if module[1] != "setup"
+        ]
+
 
 setup(
     name="scm_dev_tools",
-    version="0.1.0",
-    description="Semantic Cipher Middleware for uncensored explicit LLM node generation",
+    version="0.2.0",
+    description="Bamboozle reversible text conversion and verification CLI",
     author="deadcoast",
-    # Since cipher.py is a standalone script in this directory
-    py_modules=["cipher"],
-    # Ensure the dictionary and batch files are bundled if packaged
-    package_data={
-        "": ["cipher_dict.json", "*.bat"],
-    },
+    packages=["bamboozle"],
+    package_dir={"bamboozle": "."},
+    cmdclass={"build_py": BuildPy},
+    package_data={"bamboozle": ["cipher_dict.json", "*.ps1", "*.bat", "*.md"]},
     include_package_data=True,
-    # Creates a terminal command 'scm-cipher' linked to your main() function
     entry_points={
         "console_scripts": [
-            "scm-cipher=cipher:main",
+            "bamboozle=bamboozle.cli:main",
+            "scm-cipher=bamboozle.cipher:main",
         ],
     },
     python_requires=">=3.8",
-    # No external pip dependencies required for the base cipher yet.
-    # Add shit like 'numpy' or 'torch' here if the tool itself needs them later.
     install_requires=[],
 )

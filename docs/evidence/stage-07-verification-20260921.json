@@ -1,0 +1,328 @@
+{
+  "observed_at": "2026-09-21T19:54:52.389105+00:00",
+  "package_version": "0.7.0",
+  "platform": "Windows",
+  "checks": [
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage07-source"
+      ],
+      "exit_code": 0,
+      "seconds": 120.728,
+      "stdout": "........................................................................ [ 15%]\n........................................................................ [ 30%]\n........................................................................ [ 45%]\n........................................................................ [ 60%]\n........................................................................ [ 75%]\n........................................................................ [ 91%]\n..........................................                               [100%]\n474 passed in 120.22s (0:02:00)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_import",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov,importlib.metadata; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.7.0'; print('Preserved SCM',importlib.metadata.version('scm-dev-tools'))"
+      ],
+      "exit_code": 0,
+      "seconds": 0.162,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py\nPreserved SCM 0.2.0\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.057,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.055,
+      "stdout": "46 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.081,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.7.0.tar.gz\nSuccessfully built dist\\itov-0.7.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "installed_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\7607c89adda28551231fd92a244a5b1097223ebae128a312554ab36bfe99c95e\\itov-0.7.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.7.0'; assert all((root/p.name).read_bytes()==p.read_bytes() for p in files); print(sys.version); print(root); print(len(files),'modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.985,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\YdjxpG-G0z4jKPbOwhpm2\\Lib\\site-packages\\itov\n23 modules match source\n",
+      "stderr": "Installed 9 packages in 444ms\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\7607c89adda28551231fd92a244a5b1097223ebae128a312554ab36bfe99c95e\\itov-0.7.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage07-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 131.384,
+      "stdout": "........................................................................ [ 15%]\n........................................................................ [ 30%]\n........................................................................ [ 45%]\n........................................................................ [ 60%]\n........................................................................ [ 75%]\n........................................................................ [ 91%]\n..........................................                               [100%]\n474 passed in 129.45s (0:02:09)\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_wheel_completed_video_resume",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\7607c89adda28551231fd92a244a5b1097223ebae128a312554ab36bfe99c95e\\itov-0.7.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "batch",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.887,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n      \"job_index\": 0,\n      \"request_id\": \"914bd070-aea2-52d5-995b-a5419cb1e0b0\",\n      \"workflow_sha256\": \"55beb74bf4d187555094ca66ea0b367efde492e9fd5dca2111a7f3a8df361a38\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"185c0efa-a86a-459e-b369-dff7ca63d522\"\n    },\n    {\n      \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n      \"job_index\": 1,\n      \"request_id\": \"b7433210-997e-5ca5-9907-2eb82958bec8\",\n      \"workflow_sha256\": \"4fce6193695df1f81d70674dd5ae47718ae314ba39fd6294d9d7b8f520efac47\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"9fcef9b8-9331-434e-8fdb-206602b2cc08\"\n    }\n  ],\n  \"succeeded\": 2,\n  \"scope\": \"sequential_batch_observations\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_wheel_video_verify",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\7607c89adda28551231fd92a244a5b1097223ebae128a312554ab36bfe99c95e\\itov-0.7.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "video",
+        "verify",
+        "examples/wan22.video.json",
+        "docs/evidence/stage-07-output-01.mp4",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.633,
+      "stdout": "{\n  \"ok\": true,\n  \"scope\": \"silent_h264_full_decode_and_timing\",\n  \"sha256\": \"60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e\",\n  \"width\": 640,\n  \"height\": 640,\n  \"frames\": 33,\n  \"fps\": 24,\n  \"duration_seconds\": 1.375,\n  \"decoded_frame_md5\": [\n    \"a46f14f371b870c23528e86a2cba3d62\",\n    \"cff2291cb143baa097a2bee03a9ceacd\",\n    \"9b6d2f96772bafa0c23a15e8d83b2966\",\n    \"298e2139bb14b3e7bd4e70a73a2f8836\",\n    \"2bf78f2c74acbbbb73444ee9506b1d98\",\n    \"d3e15004c99d4935fa2532c893556fe6\",\n    \"746f8e4a70a3a79ebd88605f68757a98\",\n    \"1c9d81c8c92c6cbea832ca9b009a0d03\",\n    \"8c2a3852fbe5abf8a3ff908f713d4edb\",\n    \"4968e0716c8d51e9c92a470d5ca47902\",\n    \"15046b9193dd51fc3f2347867ad926d6\",\n    \"fe811b951ec07cfb0c6879e128ac9eb6\",\n    \"251af9350c30f39afb801c554453af4b\",\n    \"3ded6df9051042977706960e895c0080\",\n    \"295abdb58c22c5295a22a6455beb2ad3\",\n    \"45013484dc181e1886c173666b7660e2\",\n    \"7ce4545a8f8942a7355e9a66f89bfa4a\",\n    \"ff2bc4d9e136b9a382efcbfb3f5e6ef9\",\n    \"60461dc19f30edec4ba4dfeafa769fbb\",\n    \"8cd7bb2a3759b8b549bc6040a3cec7d4\",\n    \"dffb1a98ec6a285dcdfa13469b8b3e7a\",\n    \"025b54630be03361857d90f832db3076\",\n    \"df5f3cc30dcaa85dbacad677bbc53958\",\n    \"ec9f3c0a38175478afc01de8a27b21db\",\n    \"4a83df530417d953ecb47b8b09bcaa03\",\n    \"b67de454de9d3c4db7ed34c2e9ca7113\",\n    \"88e9b7221b2a91e3427952d571cbbd21\",\n    \"9b036ddfa78a43cb2ca84c7ab5381d18\",\n    \"5a676612ed66ffc04d6b6e1ba157849e\",\n    \"b620c592a7d81665accedca133ebe1ad\",\n    \"7a3536ae3f17c627065d405351645fc6\",\n    \"6f779e95e6fe87796a80c19a5dfb6821\",\n    \"afd15886ebc84d9765b8e680d9ab9a0b\"\n  ],\n  \"distinct_frames\": 33,\n  \"constant_frame_timestamps\": true,\n  \"tools\": {\n    \"ffmpeg\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n    \"ffprobe\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffprobe.EXE\"\n  },\n  \"limits\": \"Frame variation does not establish quality, fidelity, or human acceptance.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "final_documentation_build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.085,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.7.0.tar.gz\nSuccessfully built dist\\itov-0.7.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "final_installed_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\6057761c19e888aea334783d1fd2f170ccd46630e5b0cee85321dc8f369bd47b\\itov-0.7.0-py3-none-any.whl",
+        "python",
+        "-c",
+        "import itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert itov.__version__=='0.7.0' and 'site-packages' in str(root); assert len(files)==23; assert all((root/p.name).read_bytes()==p.read_bytes() for p in files); print(root); print('23 modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 1.016,
+      "stdout": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\kS1p4Vhgvjb8wG9VAoJaj\\Lib\\site-packages\\itov\n23 modules match source\n",
+      "stderr": "Installed 3 packages in 423ms\n"
+    },
+    {
+      "name": "final_wheel_completed_video_resume",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\6057761c19e888aea334783d1fd2f170ccd46630e5b0cee85321dc8f369bd47b\\itov-0.7.0-py3-none-any.whl",
+        "itov",
+        "batch",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.133,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n      \"job_index\": 0,\n      \"request_id\": \"914bd070-aea2-52d5-995b-a5419cb1e0b0\",\n      \"workflow_sha256\": \"55beb74bf4d187555094ca66ea0b367efde492e9fd5dca2111a7f3a8df361a38\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"185c0efa-a86a-459e-b369-dff7ca63d522\"\n    },\n    {\n      \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n      \"job_index\": 1,\n      \"request_id\": \"b7433210-997e-5ca5-9907-2eb82958bec8\",\n      \"workflow_sha256\": \"4fce6193695df1f81d70674dd5ae47718ae314ba39fd6294d9d7b8f520efac47\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"9fcef9b8-9331-434e-8fdb-206602b2cc08\"\n    }\n  ],\n  \"succeeded\": 2,\n  \"scope\": \"sequential_batch_observations\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "retained_initial_failures": [
+    {
+      "scope": "Environment resolution",
+      "cause": "Offline lock refresh lacked cached metadata for the user-added setuptools dependencies; default network access was restricted.",
+      "correction": "Resolved unchanged requirements using approved PyPI access. Restored the exact prior local scm-dev-tools 0.2.0 wheel removed by exact uv sync; use inexact sync for this shared development environment."
+    },
+    {
+      "scope": "Focused tests",
+      "result": "1 failed, 77 passed",
+      "cause": "Wrong expected regex: differs versus the actual dimensions differ diagnostic.",
+      "correction": "Corrected only the diagnostic matcher; invalid dimensions remain rejected."
+    },
+    {
+      "scope": "Focused recovery tests",
+      "result": "1 failed, 36 passed",
+      "cause": "Test expected ValueError where ownership refusal correctly raises ComfyUIError.",
+      "correction": "Assert the existing ComfyUIError and ownership diagnostic; refusal behavior unchanged."
+    },
+    {
+      "scope": "Real preflight",
+      "evidence": "stage-07-initial-preflight-20260921.json",
+      "cause": "Stock LoadImage only enumerates top-level input filenames.",
+      "correction": "Bounded video specification now requires a top-level PNG. Retired only the new unsubmitted preset through catalog history; preserved failed evidence/candidate files."
+    }
+  ],
+  "limits": [
+    "Source/package tests use model-byte and HTTP fixtures; actual model evidence is separate.",
+    "FFmpeg tests encode synthetic local clips; this qualifies media checks, not pretrained inference.",
+    "Actual video acceptance is limited to two short silent Wan 2.2 5B clips.",
+    "Visual inspection found an unrequested hand in clip 1; general quality is not accepted.",
+    "No audio, long-video, calibrated VRAM prediction, parallel GPU or human aesthetic acceptance."
+  ],
+  "runtime_evidence": "stage-07-video-20260921.json",
+  "source_sha256": {
+    "src/itov/__init__.py": "28c487267505cb2752ffe7126756514d2c0731c731126486d9e536a521a58ad4",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+    "src/itov/batch_execution.py": "858f9edf34ce3ebdc05f1e33f94318fa044b1f5862b96d802746d4bd04c4e680",
+    "src/itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+    "src/itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+    "src/itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+    "src/itov/cli.py": "d631aeea27e913ca64ddb39ffd827ca8c799e7ba33d4cc4d8079592c753ff363",
+    "src/itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+    "src/itov/config.py": "360e4e5451194c11ec3fdf39b001edb784d984448cf5cd0af740b36d4f2b2d8a",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/execution_store.py": "10b08ddbb19171e3ab1294bc38fee9cd5e709aa9e3c6b0795c9566935903d04a",
+    "src/itov/inference.py": "ac08d4ecb954745da0781be1ecd4cf1fc5ed03833e97bdad2163859760dc6abf",
+    "src/itov/jobs.py": "e9da55c9370661eb8f6775c49179e6f05d1e8f0bfc6299a115466c2dd1e39c3b",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/media.py": "f9165bdd1ae507d3cdcf1b9d7c50630b61574c4bbedd944eaaab797047418e28",
+    "src/itov/owned_jobs.py": "5eb31fc19bdf9fc1cd1f366e30cf66979df2f5ddf5c12920230b222c1ab97dd0",
+    "src/itov/qualification.py": "d787a040bb5a1bc51a2c016c840abd86ffeabe82e40157281389b80aa5dc0cd2",
+    "src/itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+    "src/itov/runtime.py": "e2e39fcb7be1c9f9a8e5c7d78786ff55440edf9c53b90bbd719483b515792077",
+    "src/itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+    "src/itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+  },
+  "wheel_source_byte_parity": 23,
+  "artifact_sha256": {
+    "dist/itov-0.7.0-py3-none-any.whl": "6057761c19e888aea334783d1fd2f170ccd46630e5b0cee85321dc8f369bd47b",
+    "dist/itov-0.7.0.tar.gz": "6d08bb7780e04e5e1f9a3dc63a22c1e4bd325903003278c6b7ba7626da4e6769"
+  },
+  "passed": true,
+  "tested_artifact_sha256": {
+    "dist/itov-0.7.0-py3-none-any.whl": "7607c89adda28551231fd92a244a5b1097223ebae128a312554ab36bfe99c95e",
+    "dist/itov-0.7.0.tar.gz": "1f844e7b2eed4d2890a7a0204af8b35cd55a0332a6bc1b6bd56682c1b8e7c14a"
+  },
+  "final_documentation_build": {
+    "reason": "README updates landed while the full verification script was building. Final package was rebuilt with the current usage guide.",
+    "changed_wheel_entries": [
+      "itov-0.7.0.dist-info/METADATA",
+      "itov-0.7.0.dist-info/RECORD"
+    ],
+    "same_23_module_bytes_as_474_test_wheel": true,
+    "readme_matches_current": true
+  },
+  "final_wheel_server_history_unchanged": true,
+  "documentation_local_links_exist": true,
+  "scoped_whitespace_check": {
+    "exit_code": 0,
+    "scope": "This development increment only; untracked text files also inspected for trailing whitespace below."
+  },
+  "unrelated_workspace_limit": "The unrestricted git diff --check reported access errors under the user-deleted/protected .cipher-review-temp tree. Those files were left unchanged; the scoped check for this increment passed.",
+  "untracked_text_whitespace_checked": true
+}

@@ -1,0 +1,2607 @@
+{
+  "observed_at": "2026-09-21T19:48:40.180946+00:00",
+  "package_version": "0.7.0",
+  "scope": "pinned_wan22_5b_neutral_image_to_video",
+  "initial_catalog_head": "278110548aabf9fdddb586627384bd986b3ff7ca9ec98ce8ea142ed8289cb5f2",
+  "specification": {
+    "count": 2,
+    "diffusion": {
+      "loader_name": "wan2.2_ti2v_5B_fp16.safetensors",
+      "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+    },
+    "fps": 24,
+    "frames": 33,
+    "height": 640,
+    "input_image": {
+      "name": "itov-video-still-life.png",
+      "sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+    },
+    "negative_prompt": "text, watermark, blurry, flickering, distorted objects",
+    "profile": "wan22-ti2v-5b-v1",
+    "prompt": "The camera slowly moves to the right around a red ceramic teapot and green pears on a wooden table, gentle natural window light, coherent still life, smooth subtle camera motion.",
+    "seed": 720260921,
+    "text_encoder": {
+      "loader_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+    },
+    "vae": {
+      "loader_name": "wan2.2_vae.safetensors",
+      "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+    },
+    "version": 1,
+    "width": 640
+  },
+  "runtime": {
+    "system": {
+      "os": "win32",
+      "ram_total": 66095271936,
+      "ram_free": 30742233088,
+      "comfyui_version": "0.37.0",
+      "required_frontend_version": "1.52.7",
+      "installed_templates_version": "0.11.66",
+      "required_templates_version": "0.11.66",
+      "comfy_package_versions": [
+        {
+          "name": "comfyui-frontend-package",
+          "installed": "1.52.7",
+          "required": "1.52.7"
+        },
+        {
+          "name": "comfyui-workflow-templates",
+          "installed": "0.11.66",
+          "required": "0.11.66"
+        },
+        {
+          "name": "comfyui-embedded-docs",
+          "installed": "0.5.12",
+          "required": "0.5.12"
+        },
+        {
+          "name": "comfy-kitchen",
+          "installed": "0.2.35",
+          "required": "0.2.35"
+        },
+        {
+          "name": "comfy-aimdo",
+          "installed": "0.5.5",
+          "required": "0.5.5"
+        }
+      ],
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130",
+      "embedded_python": true,
+      "deploy_environment": "local-portable",
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8188",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes"
+      ]
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0,
+        "vram_total": 34162016256,
+        "vram_free": 25351789306,
+        "torch_vram_total": 67108864,
+        "torch_vram_free": 31824634
+      }
+    ]
+  },
+  "downloads": [
+    {
+      "bytes": 6735906897,
+      "destination": "models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "id": "wan-umt5-fp8",
+      "license_label": "apache-2.0",
+      "model_card": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "observed_at": "2026-09-21T19:38:32.172249+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68",
+      "source_file": "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    },
+    {
+      "bytes": 9999658848,
+      "destination": "models/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+      "id": "wan22-ti2v-5b",
+      "license_label": "apache-2.0",
+      "model_card": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+      "observed_at": "2026-09-21T19:36:05.817379+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\diffusion_models\\wan2.2_ti2v_5B_fp16.safetensors",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e",
+      "source_file": "split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors"
+    },
+    {
+      "bytes": 1409400960,
+      "destination": "models/vae/wan2.2_vae.safetensors",
+      "id": "wan22-vae",
+      "license_label": "apache-2.0",
+      "model_card": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+      "observed_at": "2026-09-21T19:39:00.593456+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\vae\\wan2.2_vae.safetensors",
+      "repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "revision": "c4f60d30c55a624e35427060fdd217579a6c1d77",
+      "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156",
+      "source_file": "split_files/vae/wan2.2_vae.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/c4f60d30c55a624e35427060fdd217579a6c1d77/split_files/vae/wan2.2_vae.safetensors"
+    }
+  ],
+  "upstream_workflow": {
+    "url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/main/templates/video_wan2_2_5B_ti2v.json",
+    "downloaded_sha256": "50390798a133757075d750ab78b26274e3bf3e4a09f46aaa2f08d9559e62750b",
+    "changes": "Pinned model/input hashes, neutral prompt, 640x640, 33 frames, two explicit seeds, MP4/H.264 and video output contract; sampler and shift follow upstream."
+  },
+  "limits": [
+    "Two short silent clips with one model; not arbitrary video model or LoRA compatibility.",
+    "No audio synchronization, long clips, cross-runtime pixel determinism, or human aesthetic acceptance.",
+    "GPU samples are whole-device observed lower bounds; no calibrated memory predictor or concurrency acceptance."
+  ],
+  "prepared": {
+    "ok": true,
+    "scope": "prepared_video_candidates",
+    "spec_id": "3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e",
+    "catalog": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\templates\\video\\95f23b32d99c36502ec463b3e48deed2a527918e5f9299a47b615e28d40fa9e7.catalog.json",
+    "workflow": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\workflows\\video\\3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e.api.json",
+    "expected_head": "278110548aabf9fdddb586627384bd986b3ff7ca9ec98ce8ea142ed8289cb5f2",
+    "limits": "No catalog import, seed reservation, or runtime submission."
+  },
+  "catalog": {
+    "ok": true,
+    "head": "1fe3d939fbadbc4915ee434b5c7247ba35c47e561012f918ce8e901af352caa0",
+    "ledger_head": "183623e2fc24d3b2b114e5eb2cb22bf8dd90c426ac850b8386ec58d0f13fa66c",
+    "events": 7,
+    "presets": 4,
+    "loras": 1
+  },
+  "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+  "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9.json",
+  "qualification": {
+    "version": 1,
+    "profile": "stock-wan22-v1",
+    "scope": "runtime_schema_and_asset_binding",
+    "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+    "server": "http://127.0.0.1:8188",
+    "runtime": {
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8188",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes"
+      ],
+      "comfyui_version": "0.37.0",
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130"
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0
+      }
+    ],
+    "node_schema_sha256": "bed7fd501e730a3c1a0b18c67e835c1513efa86030f0bcd35922d0d4244c8c50",
+    "files": [
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy_extras\\nodes_model_advanced.py",
+        "bytes": 17422,
+        "sha256": "5ec2f231a8c1b5cc6220b5ec3b725bb11fada6cdab4e97d07a52863040687402"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy_extras\\nodes_video.py",
+        "bytes": 24222,
+        "sha256": "0d4b52774965c84f6ce8ba5bc37eb8eb7a5028a31a315ccb7aefc1cda30914ae"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy_extras\\nodes_wan.py",
+        "bytes": 89359,
+        "sha256": "39ff111cc45c8d2a75cab1aa3b97ad9bf9037868178af2468bc52b34dbd0d96d"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\folder_paths.py",
+        "bytes": 23745,
+        "sha256": "a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "bytes": 25024,
+        "sha256": "5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\diffusion_models\\wan2.2_ti2v_5B_fp16.safetensors",
+        "bytes": 9999658848,
+        "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "bytes": 6735906897,
+        "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\vae\\wan2.2_vae.safetensors",
+        "bytes": 1409400960,
+        "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py",
+        "bytes": 111280,
+        "sha256": "4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input\\itov-video-still-life.png",
+        "bytes": 1258916,
+        "sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+      }
+    ],
+    "jobs": 2,
+    "qualification_id": "fbd30cae35253c4b5589d4fbed68811cf2ec0d9d171d20dd7cbe35c7730173e3"
+  },
+  "command_seconds": 112.833,
+  "gpu_samples": [
+    {
+      "at": "2026-09-21T19:49:17.618832+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 63",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:18.158462+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 56",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:18.701980+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 62",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:19.281201+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 59",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:19.828723+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 62",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:20.370361+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 58",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:20.912577+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 65",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:21.454265+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 58",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:21.993854+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 61",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:22.534042+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 65",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:23.074991+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 71",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:23.617116+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 49",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:24.162140+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 69",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:24.707845+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 67",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:25.249779+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 58",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:25.792481+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 67",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:26.333943+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 62",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:26.876023+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 85",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:27.419944+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 81",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:27.964828+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 80",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:28.510169+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 74",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:29.069135+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 72",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:29.614440+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 68",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:30.158172+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 69",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:30.697341+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 67",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:31.238625+00:00",
+      "exit_code": 0,
+      "csv": "0, 18045, 32607, 69",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:31.778727+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 66",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:32.325113+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 77",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:32.867915+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 74",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:33.410915+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 76",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:33.953526+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 83",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:34.495823+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 89",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:35.038283+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 89",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:35.582690+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 90",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:36.165502+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 87",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:36.707996+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 84",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:37.253021+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 85",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:37.798298+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 85",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:38.344415+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 85",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:38.885745+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 89",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:39.429293+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 88",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:39.974988+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 88",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:40.520464+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 89",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:41.064536+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 87",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:41.606348+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 87",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:42.147597+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 88",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:42.702957+00:00",
+      "exit_code": 0,
+      "csv": "0, 18080, 32607, 57",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:43.253840+00:00",
+      "exit_code": 0,
+      "csv": "0, 11456, 32607, 71",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:43.797495+00:00",
+      "exit_code": 0,
+      "csv": "0, 11456, 32607, 80",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:44.357241+00:00",
+      "exit_code": 0,
+      "csv": "0, 13472, 32607, 71",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:44.909547+00:00",
+      "exit_code": 0,
+      "csv": "0, 17184, 32607, 94",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:45.449237+00:00",
+      "exit_code": 0,
+      "csv": "0, 18336, 32607, 92",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:45.999699+00:00",
+      "exit_code": 0,
+      "csv": "0, 18000, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:46.549144+00:00",
+      "exit_code": 0,
+      "csv": "0, 19154, 32607, 82",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:47.096831+00:00",
+      "exit_code": 0,
+      "csv": "0, 19186, 32607, 85",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:47.650678+00:00",
+      "exit_code": 0,
+      "csv": "0, 22418, 32607, 84",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:48.199246+00:00",
+      "exit_code": 0,
+      "csv": "0, 25074, 32607, 96",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:48.752009+00:00",
+      "exit_code": 0,
+      "csv": "0, 27538, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:49.293731+00:00",
+      "exit_code": 0,
+      "csv": "0, 28754, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:49.838267+00:00",
+      "exit_code": 0,
+      "csv": "0, 28754, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:50.381008+00:00",
+      "exit_code": 0,
+      "csv": "0, 28754, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:50.923499+00:00",
+      "exit_code": 0,
+      "csv": "0, 28754, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:51.464355+00:00",
+      "exit_code": 0,
+      "csv": "0, 28784, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:52.006241+00:00",
+      "exit_code": 0,
+      "csv": "0, 28784, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:52.551832+00:00",
+      "exit_code": 0,
+      "csv": "0, 28784, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:53.094722+00:00",
+      "exit_code": 0,
+      "csv": "0, 28784, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:53.636235+00:00",
+      "exit_code": 0,
+      "csv": "0, 28790, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:54.167194+00:00",
+      "exit_code": 0,
+      "csv": "0, 28790, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:54.710407+00:00",
+      "exit_code": 0,
+      "csv": "0, 28830, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:55.290608+00:00",
+      "exit_code": 0,
+      "csv": "0, 28830, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:55.839712+00:00",
+      "exit_code": 0,
+      "csv": "0, 28830, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:56.382642+00:00",
+      "exit_code": 0,
+      "csv": "0, 28830, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:56.930278+00:00",
+      "exit_code": 0,
+      "csv": "0, 28830, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:57.474984+00:00",
+      "exit_code": 0,
+      "csv": "0, 28830, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:58.019421+00:00",
+      "exit_code": 0,
+      "csv": "0, 28830, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:58.563392+00:00",
+      "exit_code": 0,
+      "csv": "0, 28828, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:59.105066+00:00",
+      "exit_code": 0,
+      "csv": "0, 28828, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:49:59.646699+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:00.192135+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:00.732998+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:01.278190+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 95",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:01.820969+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:02.361301+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:02.894152+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 95",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:03.430827+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:03.969213+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:04.508259+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 97",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:05.041303+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:05.583624+00:00",
+      "exit_code": 0,
+      "csv": "0, 28824, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:06.126203+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:06.671425+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:07.214337+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:07.755627+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:08.294760+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:08.833815+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:09.373552+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:09.913891+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:10.456680+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:11.002681+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:11.543574+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:12.086553+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:12.629608+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:13.177513+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:13.718065+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:14.257969+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:14.801272+00:00",
+      "exit_code": 0,
+      "csv": "0, 28864, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:15.341669+00:00",
+      "exit_code": 0,
+      "csv": "0, 31472, 32607, 87",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:15.887492+00:00",
+      "exit_code": 0,
+      "csv": "0, 31505, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:16.433946+00:00",
+      "exit_code": 0,
+      "csv": "0, 31281, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:16.975284+00:00",
+      "exit_code": 0,
+      "csv": "0, 31507, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:17.519589+00:00",
+      "exit_code": 0,
+      "csv": "0, 31507, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:18.061207+00:00",
+      "exit_code": 0,
+      "csv": "0, 31507, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:18.605619+00:00",
+      "exit_code": 0,
+      "csv": "0, 29404, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:19.146946+00:00",
+      "exit_code": 0,
+      "csv": "0, 29404, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:19.728832+00:00",
+      "exit_code": 0,
+      "csv": "0, 29404, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:20.271869+00:00",
+      "exit_code": 0,
+      "csv": "0, 29372, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:20.827113+00:00",
+      "exit_code": 0,
+      "csv": "0, 24028, 32607, 59",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:21.371394+00:00",
+      "exit_code": 0,
+      "csv": "0, 24028, 32607, 53",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:21.952971+00:00",
+      "exit_code": 0,
+      "csv": "0, 24027, 32607, 73",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:22.496449+00:00",
+      "exit_code": 0,
+      "csv": "0, 24027, 32607, 81",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:23.038944+00:00",
+      "exit_code": 0,
+      "csv": "0, 24027, 32607, 77",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:23.585096+00:00",
+      "exit_code": 0,
+      "csv": "0, 24027, 32607, 84",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:24.130472+00:00",
+      "exit_code": 0,
+      "csv": "0, 24030, 32607, 77",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:24.673007+00:00",
+      "exit_code": 0,
+      "csv": "0, 24024, 32607, 60",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:25.214264+00:00",
+      "exit_code": 0,
+      "csv": "0, 24024, 32607, 73",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:25.789176+00:00",
+      "exit_code": 0,
+      "csv": "0, 24024, 32607, 75",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:26.367266+00:00",
+      "exit_code": 0,
+      "csv": "0, 24024, 32607, 72",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:26.944673+00:00",
+      "exit_code": 0,
+      "csv": "0, 24024, 32607, 65",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:27.489030+00:00",
+      "exit_code": 0,
+      "csv": "0, 24024, 32607, 79",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:28.067546+00:00",
+      "exit_code": 0,
+      "csv": "0, 24024, 32607, 79",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:28.613120+00:00",
+      "exit_code": 0,
+      "csv": "0, 24024, 32607, 78",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:29.192722+00:00",
+      "exit_code": 0,
+      "csv": "0, 24023, 32607, 71",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:29.736640+00:00",
+      "exit_code": 0,
+      "csv": "0, 24021, 32607, 74",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:30.313902+00:00",
+      "exit_code": 0,
+      "csv": "0, 24021, 32607, 84",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:30.859083+00:00",
+      "exit_code": 0,
+      "csv": "0, 24021, 32607, 77",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:31.437114+00:00",
+      "exit_code": 0,
+      "csv": "0, 24017, 32607, 86",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:31.979945+00:00",
+      "exit_code": 0,
+      "csv": "0, 24017, 32607, 74",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:32.554440+00:00",
+      "exit_code": 0,
+      "csv": "0, 24013, 32607, 66",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:33.098103+00:00",
+      "exit_code": 0,
+      "csv": "0, 24013, 32607, 76",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:33.674421+00:00",
+      "exit_code": 0,
+      "csv": "0, 24013, 32607, 78",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:34.218114+00:00",
+      "exit_code": 0,
+      "csv": "0, 24013, 32607, 81",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:34.808207+00:00",
+      "exit_code": 0,
+      "csv": "0, 24821, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:35.349138+00:00",
+      "exit_code": 0,
+      "csv": "0, 24821, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:35.930635+00:00",
+      "exit_code": 0,
+      "csv": "0, 24821, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:36.490324+00:00",
+      "exit_code": 0,
+      "csv": "0, 24821, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:37.069672+00:00",
+      "exit_code": 0,
+      "csv": "0, 24821, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:37.613229+00:00",
+      "exit_code": 0,
+      "csv": "0, 24853, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:38.194574+00:00",
+      "exit_code": 0,
+      "csv": "0, 24853, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:38.736016+00:00",
+      "exit_code": 0,
+      "csv": "0, 24853, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:39.319443+00:00",
+      "exit_code": 0,
+      "csv": "0, 24853, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:39.866104+00:00",
+      "exit_code": 0,
+      "csv": "0, 24853, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:40.447136+00:00",
+      "exit_code": 0,
+      "csv": "0, 24853, 32607, 95",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:40.988261+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:41.565378+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:42.113115+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:42.689119+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:43.230525+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:43.802994+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:44.344932+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:44.922463+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:45.468319+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:46.045694+00:00",
+      "exit_code": 0,
+      "csv": "0, 24847, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:46.580747+00:00",
+      "exit_code": 0,
+      "csv": "0, 25346, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:47.145015+00:00",
+      "exit_code": 0,
+      "csv": "0, 25412, 32607, 92",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:47.716073+00:00",
+      "exit_code": 0,
+      "csv": "0, 27039, 32607, 97",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:48.282961+00:00",
+      "exit_code": 0,
+      "csv": "0, 27039, 32607, 91",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:48.832049+00:00",
+      "exit_code": 0,
+      "csv": "0, 26965, 32607, 93",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:49.421112+00:00",
+      "exit_code": 0,
+      "csv": "0, 25681, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:50.004492+00:00",
+      "exit_code": 0,
+      "csv": "0, 25681, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:50.552373+00:00",
+      "exit_code": 0,
+      "csv": "0, 25681, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:51.143895+00:00",
+      "exit_code": 0,
+      "csv": "0, 25660, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:51.724988+00:00",
+      "exit_code": 0,
+      "csv": "0, 25654, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:52.268345+00:00",
+      "exit_code": 0,
+      "csv": "0, 25653, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:52.842901+00:00",
+      "exit_code": 0,
+      "csv": "0, 25653, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:53.386405+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:53.969742+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:54.514341+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:55.094488+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:55.639103+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:56.182458+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:56.733146+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:57.275380+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:57.818280+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:58.365311+00:00",
+      "exit_code": 0,
+      "csv": "0, 25661, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:58.905343+00:00",
+      "exit_code": 0,
+      "csv": "0, 25657, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:59.445922+00:00",
+      "exit_code": 0,
+      "csv": "0, 25653, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:50:59.986487+00:00",
+      "exit_code": 0,
+      "csv": "0, 25653, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:00.533571+00:00",
+      "exit_code": 0,
+      "csv": "0, 25653, 32607, 97",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:01.074230+00:00",
+      "exit_code": 0,
+      "csv": "0, 25653, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:01.616896+00:00",
+      "exit_code": 0,
+      "csv": "0, 25653, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:02.164630+00:00",
+      "exit_code": 0,
+      "csv": "0, 29237, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:02.702921+00:00",
+      "exit_code": 0,
+      "csv": "0, 29237, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:03.244631+00:00",
+      "exit_code": 0,
+      "csv": "0, 29237, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:03.782681+00:00",
+      "exit_code": 0,
+      "csv": "0, 29237, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:04.320878+00:00",
+      "exit_code": 0,
+      "csv": "0, 30037, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:04.866630+00:00",
+      "exit_code": 0,
+      "csv": "0, 30037, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:05.411878+00:00",
+      "exit_code": 0,
+      "csv": "0, 30037, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:05.951550+00:00",
+      "exit_code": 0,
+      "csv": "0, 30037, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:06.500162+00:00",
+      "exit_code": 0,
+      "csv": "0, 29781, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:07.043307+00:00",
+      "exit_code": 0,
+      "csv": "0, 29781, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:07.585255+00:00",
+      "exit_code": 0,
+      "csv": "0, 29781, 32607, 99",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:08.129280+00:00",
+      "exit_code": 0,
+      "csv": "0, 29781, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:08.670503+00:00",
+      "exit_code": 0,
+      "csv": "0, 29781, 32607, 98",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:09.217715+00:00",
+      "exit_code": 0,
+      "csv": "0, 24565, 32607, 54",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:09.777445+00:00",
+      "exit_code": 0,
+      "csv": "0, 24565, 32607, 51",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T19:51:10.318748+00:00",
+      "exit_code": 0,
+      "csv": "0, 24565, 32607, 78",
+      "error": ""
+    }
+  ],
+  "runtime_log_sha256": "8ffb748969a51a278b622af8c34814f54219550fff575c8782b35eb2c8011bc8",
+  "result": {
+    "ok": true,
+    "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+    "status": "succeeded",
+    "error": null,
+    "jobs": [
+      {
+        "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+        "job_index": 0,
+        "request_id": "914bd070-aea2-52d5-995b-a5419cb1e0b0",
+        "workflow_sha256": "55beb74bf4d187555094ca66ea0b367efde492e9fd5dca2111a7f3a8df361a38",
+        "status": "succeeded",
+        "prompt_id": "185c0efa-a86a-459e-b369-dff7ca63d522"
+      },
+      {
+        "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+        "job_index": 1,
+        "request_id": "b7433210-997e-5ca5-9907-2eb82958bec8",
+        "workflow_sha256": "4fce6193695df1f81d70674dd5ae47718ae314ba39fd6294d9d7b8f520efac47",
+        "status": "succeeded",
+        "prompt_id": "9fcef9b8-9331-434e-8fdb-206602b2cc08"
+      }
+    ],
+    "succeeded": 2,
+    "scope": "sequential_batch_observations"
+  },
+  "records": [
+    {
+      "version": 1,
+      "request_id": "914bd070-aea2-52d5-995b-a5419cb1e0b0",
+      "server": "http://127.0.0.1:8188",
+      "owner": {
+        "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+        "index": 0
+      },
+      "workflow_path": null,
+      "workflow_sha256": "55beb74bf4d187555094ca66ea0b367efde492e9fd5dca2111a7f3a8df361a38",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+          },
+          "class_type": "UNETLoader",
+          "inputs": {
+            "unet_name": "wan2.2_ti2v_5B_fp16.safetensors",
+            "weight_dtype": "default"
+          }
+        },
+        "10": {
+          "class_type": "VAEDecode",
+          "inputs": {
+            "samples": [
+              "9",
+              0
+            ],
+            "vae": [
+              "3",
+              0
+            ]
+          }
+        },
+        "11": {
+          "class_type": "CreateVideo",
+          "inputs": {
+            "fps": 24,
+            "images": [
+              "10",
+              0
+            ]
+          }
+        },
+        "12": {
+          "_meta": {
+            "itov_video": {
+              "fps": 24,
+              "frames": 33,
+              "height": 640,
+              "width": 640
+            }
+          },
+          "class_type": "SaveVideo",
+          "inputs": {
+            "filename_prefix": "itov/video/3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e",
+            "format": "mp4",
+            "format.codec": "h264",
+            "video": [
+              "11",
+              0
+            ]
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+            "device": "default",
+            "type": "wan"
+          }
+        },
+        "3": {
+          "_meta": {
+            "itov_asset_sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+          },
+          "class_type": "VAELoader",
+          "inputs": {
+            "vae_name": "wan2.2_vae.safetensors"
+          }
+        },
+        "4": {
+          "_meta": {
+            "itov_asset_sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+          },
+          "class_type": "LoadImage",
+          "inputs": {
+            "image": "itov-video-still-life.png"
+          }
+        },
+        "5": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "The camera slowly moves to the right around a red ceramic teapot and green pears on a wooden table, gentle natural window light, coherent still life, smooth subtle camera motion."
+          }
+        },
+        "6": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "text, watermark, blurry, flickering, distorted objects"
+          }
+        },
+        "7": {
+          "class_type": "Wan22ImageToVideoLatent",
+          "inputs": {
+            "batch_size": 1,
+            "height": 640,
+            "length": 33,
+            "start_image": [
+              "4",
+              0
+            ],
+            "vae": [
+              "3",
+              0
+            ],
+            "width": 640
+          }
+        },
+        "8": {
+          "class_type": "ModelSamplingSD3",
+          "inputs": {
+            "model": [
+              "1",
+              0
+            ],
+            "shift": 8
+          }
+        },
+        "9": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 5,
+            "denoise": 1,
+            "latent_image": [
+              "7",
+              0
+            ],
+            "model": [
+              "8",
+              0
+            ],
+            "negative": [
+              "6",
+              0
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "uni_pc",
+            "scheduler": "simple",
+            "seed": 720260921,
+            "steps": 20
+          }
+        }
+      },
+      "created_at": "2026-09-21T19:49:30.023496+00:00",
+      "status": "succeeded",
+      "prompt_id": "185c0efa-a86a-459e-b369-dff7ca63d522",
+      "artifacts": [
+        {
+          "node_id": "12",
+          "category": "images",
+          "filename": "3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e_00001_.mp4",
+          "subfolder": "itov\\video",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\914bd070-aea2-52d5-995b-a5419cb1e0b0\\artifact-0000.mp4",
+          "bytes": 85313,
+          "sha256": "60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e",
+          "video_validation": {
+            "ok": true,
+            "scope": "silent_h264_full_decode_and_timing",
+            "sha256": "60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e",
+            "fps": 24,
+            "frames": 33,
+            "height": 640,
+            "width": 640,
+            "duration_seconds": 1.375,
+            "decoded_frame_md5": [
+              "a46f14f371b870c23528e86a2cba3d62",
+              "cff2291cb143baa097a2bee03a9ceacd",
+              "9b6d2f96772bafa0c23a15e8d83b2966",
+              "298e2139bb14b3e7bd4e70a73a2f8836",
+              "2bf78f2c74acbbbb73444ee9506b1d98",
+              "d3e15004c99d4935fa2532c893556fe6",
+              "746f8e4a70a3a79ebd88605f68757a98",
+              "1c9d81c8c92c6cbea832ca9b009a0d03",
+              "8c2a3852fbe5abf8a3ff908f713d4edb",
+              "4968e0716c8d51e9c92a470d5ca47902",
+              "15046b9193dd51fc3f2347867ad926d6",
+              "fe811b951ec07cfb0c6879e128ac9eb6",
+              "251af9350c30f39afb801c554453af4b",
+              "3ded6df9051042977706960e895c0080",
+              "295abdb58c22c5295a22a6455beb2ad3",
+              "45013484dc181e1886c173666b7660e2",
+              "7ce4545a8f8942a7355e9a66f89bfa4a",
+              "ff2bc4d9e136b9a382efcbfb3f5e6ef9",
+              "60461dc19f30edec4ba4dfeafa769fbb",
+              "8cd7bb2a3759b8b549bc6040a3cec7d4",
+              "dffb1a98ec6a285dcdfa13469b8b3e7a",
+              "025b54630be03361857d90f832db3076",
+              "df5f3cc30dcaa85dbacad677bbc53958",
+              "ec9f3c0a38175478afc01de8a27b21db",
+              "4a83df530417d953ecb47b8b09bcaa03",
+              "b67de454de9d3c4db7ed34c2e9ca7113",
+              "88e9b7221b2a91e3427952d571cbbd21",
+              "9b036ddfa78a43cb2ca84c7ab5381d18",
+              "5a676612ed66ffc04d6b6e1ba157849e",
+              "b620c592a7d81665accedca133ebe1ad",
+              "7a3536ae3f17c627065d405351645fc6",
+              "6f779e95e6fe87796a80c19a5dfb6821",
+              "afd15886ebc84d9765b8e680d9ab9a0b"
+            ],
+            "distinct_frames": 33,
+            "constant_frame_timestamps": true,
+            "tools": {
+              "ffmpeg": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+              "ffprobe": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE"
+            },
+            "limits": "Frame variation does not establish quality, fidelity, or human acceptance."
+          }
+        }
+      ],
+      "updated_at": "2026-09-21T19:50:22.103013+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\914bd070-aea2-52d5-995b-a5419cb1e0b0.json",
+      "acknowledgement": {
+        "prompt_id": "185c0efa-a86a-459e-b369-dff7ca63d522",
+        "number": 14,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          14,
+          "185c0efa-a86a-459e-b369-dff7ca63d522",
+          {
+            "1": {
+              "_meta": {
+                "itov_asset_sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+              },
+              "class_type": "UNETLoader",
+              "inputs": {
+                "unet_name": "wan2.2_ti2v_5B_fp16.safetensors",
+                "weight_dtype": "default"
+              }
+            },
+            "10": {
+              "class_type": "VAEDecode",
+              "inputs": {
+                "samples": [
+                  "9",
+                  0
+                ],
+                "vae": [
+                  "3",
+                  0
+                ]
+              }
+            },
+            "11": {
+              "class_type": "CreateVideo",
+              "inputs": {
+                "fps": 24.0,
+                "images": [
+                  "10",
+                  0
+                ]
+              }
+            },
+            "12": {
+              "_meta": {
+                "itov_video": {
+                  "fps": 24,
+                  "frames": 33,
+                  "height": 640,
+                  "width": 640
+                }
+              },
+              "class_type": "SaveVideo",
+              "inputs": {
+                "filename_prefix": "itov/video/3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e",
+                "format": "mp4",
+                "format.codec": "h264",
+                "video": [
+                  "11",
+                  0
+                ]
+              }
+            },
+            "2": {
+              "_meta": {
+                "itov_asset_sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+              },
+              "class_type": "CLIPLoader",
+              "inputs": {
+                "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+                "device": "default",
+                "type": "wan"
+              }
+            },
+            "3": {
+              "_meta": {
+                "itov_asset_sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+              },
+              "class_type": "VAELoader",
+              "inputs": {
+                "vae_name": "wan2.2_vae.safetensors"
+              }
+            },
+            "4": {
+              "_meta": {
+                "itov_asset_sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+              },
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "itov-video-still-life.png"
+              }
+            },
+            "5": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "The camera slowly moves to the right around a red ceramic teapot and green pears on a wooden table, gentle natural window light, coherent still life, smooth subtle camera motion."
+              }
+            },
+            "6": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "text, watermark, blurry, flickering, distorted objects"
+              }
+            },
+            "7": {
+              "class_type": "Wan22ImageToVideoLatent",
+              "inputs": {
+                "batch_size": 1,
+                "height": 640,
+                "length": 33,
+                "start_image": [
+                  "4",
+                  0
+                ],
+                "vae": [
+                  "3",
+                  0
+                ],
+                "width": 640
+              }
+            },
+            "8": {
+              "class_type": "ModelSamplingSD3",
+              "inputs": {
+                "model": [
+                  "1",
+                  0
+                ],
+                "shift": 8.0
+              }
+            },
+            "9": {
+              "class_type": "KSampler",
+              "inputs": {
+                "cfg": 5.0,
+                "denoise": 1.0,
+                "latent_image": [
+                  "7",
+                  0
+                ],
+                "model": [
+                  "8",
+                  0
+                ],
+                "negative": [
+                  "6",
+                  0
+                ],
+                "positive": [
+                  "5",
+                  0
+                ],
+                "sampler_name": "uni_pc",
+                "scheduler": "simple",
+                "seed": 720260921,
+                "steps": 20
+              }
+            }
+          },
+          {
+            "itov_request_id": "914bd070-aea2-52d5-995b-a5419cb1e0b0",
+            "client_id": "914bd070-aea2-52d5-995b-a5419cb1e0b0",
+            "create_time": 1790020182516
+          },
+          [
+            "12"
+          ]
+        ],
+        "outputs": {
+          "12": {
+            "images": [
+              {
+                "filename": "3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e_00001_.mp4",
+                "subfolder": "itov\\video",
+                "type": "output"
+              }
+            ],
+            "animated": [
+              true
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "185c0efa-a86a-459e-b369-dff7ca63d522",
+                "timestamp": 1790020182519
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "185c0efa-a86a-459e-b369-dff7ca63d522",
+                "timestamp": 1790020182530
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "185c0efa-a86a-459e-b369-dff7ca63d522",
+                "timestamp": 1790020221224
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "12": {
+            "node_id": "12",
+            "display_node": "12",
+            "parent_node": null,
+            "real_node_id": "12"
+          }
+        }
+      }
+    },
+    {
+      "version": 1,
+      "request_id": "b7433210-997e-5ca5-9907-2eb82958bec8",
+      "server": "http://127.0.0.1:8188",
+      "owner": {
+        "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+        "index": 1
+      },
+      "workflow_path": null,
+      "workflow_sha256": "4fce6193695df1f81d70674dd5ae47718ae314ba39fd6294d9d7b8f520efac47",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+          },
+          "class_type": "UNETLoader",
+          "inputs": {
+            "unet_name": "wan2.2_ti2v_5B_fp16.safetensors",
+            "weight_dtype": "default"
+          }
+        },
+        "10": {
+          "class_type": "VAEDecode",
+          "inputs": {
+            "samples": [
+              "9",
+              0
+            ],
+            "vae": [
+              "3",
+              0
+            ]
+          }
+        },
+        "11": {
+          "class_type": "CreateVideo",
+          "inputs": {
+            "fps": 24,
+            "images": [
+              "10",
+              0
+            ]
+          }
+        },
+        "12": {
+          "_meta": {
+            "itov_video": {
+              "fps": 24,
+              "frames": 33,
+              "height": 640,
+              "width": 640
+            }
+          },
+          "class_type": "SaveVideo",
+          "inputs": {
+            "filename_prefix": "itov/video/3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e",
+            "format": "mp4",
+            "format.codec": "h264",
+            "video": [
+              "11",
+              0
+            ]
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+            "device": "default",
+            "type": "wan"
+          }
+        },
+        "3": {
+          "_meta": {
+            "itov_asset_sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+          },
+          "class_type": "VAELoader",
+          "inputs": {
+            "vae_name": "wan2.2_vae.safetensors"
+          }
+        },
+        "4": {
+          "_meta": {
+            "itov_asset_sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+          },
+          "class_type": "LoadImage",
+          "inputs": {
+            "image": "itov-video-still-life.png"
+          }
+        },
+        "5": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "The camera slowly moves to the right around a red ceramic teapot and green pears on a wooden table, gentle natural window light, coherent still life, smooth subtle camera motion."
+          }
+        },
+        "6": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "text, watermark, blurry, flickering, distorted objects"
+          }
+        },
+        "7": {
+          "class_type": "Wan22ImageToVideoLatent",
+          "inputs": {
+            "batch_size": 1,
+            "height": 640,
+            "length": 33,
+            "start_image": [
+              "4",
+              0
+            ],
+            "vae": [
+              "3",
+              0
+            ],
+            "width": 640
+          }
+        },
+        "8": {
+          "class_type": "ModelSamplingSD3",
+          "inputs": {
+            "model": [
+              "1",
+              0
+            ],
+            "shift": 8
+          }
+        },
+        "9": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 5,
+            "denoise": 1,
+            "latent_image": [
+              "7",
+              0
+            ],
+            "model": [
+              "8",
+              0
+            ],
+            "negative": [
+              "6",
+              0
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "uni_pc",
+            "scheduler": "simple",
+            "seed": 720260922,
+            "steps": 20
+          }
+        }
+      },
+      "created_at": "2026-09-21T19:50:22.111711+00:00",
+      "status": "succeeded",
+      "prompt_id": "9fcef9b8-9331-434e-8fdb-206602b2cc08",
+      "artifacts": [
+        {
+          "node_id": "12",
+          "category": "images",
+          "filename": "3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e_00002_.mp4",
+          "subfolder": "itov\\video",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\b7433210-997e-5ca5-9907-2eb82958bec8\\artifact-0000.mp4",
+          "bytes": 91403,
+          "sha256": "1074820a01d8a339bab414cb0350547b58a6f5a03987f0cbe12191dd3701a362",
+          "video_validation": {
+            "ok": true,
+            "scope": "silent_h264_full_decode_and_timing",
+            "sha256": "1074820a01d8a339bab414cb0350547b58a6f5a03987f0cbe12191dd3701a362",
+            "fps": 24,
+            "frames": 33,
+            "height": 640,
+            "width": 640,
+            "duration_seconds": 1.375,
+            "decoded_frame_md5": [
+              "33fee0c0c8a494d72948cf76f9030145",
+              "ff1e88e84c50c301a329502bea619237",
+              "9b5328796274c1466dd451d9918c1d23",
+              "1d5b7978b549123732f305d1c0a8caef",
+              "e41ab9ddfdfb52d03c48748595b1a53e",
+              "0731492491ec4e3e8b4caea7c88f1ce1",
+              "00c810825223307e25720d0c3961e1aa",
+              "5acedf29336901d6f1e4b6e269c8873d",
+              "abc3b5c522e0c77b18bdb30099a78671",
+              "c7ebcfa9c79d79e4d0cc532c3da03bf4",
+              "10afae0390c388cf4cae98fbfeabea4e",
+              "1a9760e7201e1cf1c5bb28e9a4862e52",
+              "4342c161b8a26b09cd46390a2ccd9c33",
+              "16bb9a3a20836fdcc558b3f1747ad64d",
+              "1b60739de111ddc3dd9f5d7cc0df36c0",
+              "648b7e917a8029031c4c5019736d49f7",
+              "d731e5c222de83c492ac27b80a0b88ad",
+              "3afce229d26c18a345ed3646a0fa7e40",
+              "f28d020c961f1b8a34f12c49b0cb8a11",
+              "c6442efa1770807479045fab245bee8b",
+              "803595e12a42501bc21959403e8cb098",
+              "0e47b27c747ff40d667a11b951fae76d",
+              "d7a1492865045bf4abdfd3837ea8fa62",
+              "a343b4a6edfe2a9d1bc3338b70980cb2",
+              "df132d09710c96dcfd0cd8c2e8deedc8",
+              "def8005e6e400de0162275a0391bbdf3",
+              "12e818e1bfb74065a8ea875abb597b9f",
+              "e4f116563541c7caf09d1da39f52872b",
+              "caeb85d1e8b28eb4c24c98c780638702",
+              "30c9ac0515f71563404a94fbf889fb4c",
+              "3561e21e7b7ebee067a9e44645480829",
+              "22c49ae724bfeb14a1de1afae8303d7f",
+              "4457923c2e4b32d8a986835553edb589"
+            ],
+            "distinct_frames": 33,
+            "constant_frame_timestamps": true,
+            "tools": {
+              "ffmpeg": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+              "ffprobe": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE"
+            },
+            "limits": "Frame variation does not establish quality, fidelity, or human acceptance."
+          }
+        }
+      ],
+      "updated_at": "2026-09-21T19:51:10.385334+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\b7433210-997e-5ca5-9907-2eb82958bec8.json",
+      "acknowledgement": {
+        "prompt_id": "9fcef9b8-9331-434e-8fdb-206602b2cc08",
+        "number": 15,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          15,
+          "9fcef9b8-9331-434e-8fdb-206602b2cc08",
+          {
+            "1": {
+              "_meta": {
+                "itov_asset_sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+              },
+              "class_type": "UNETLoader",
+              "inputs": {
+                "unet_name": "wan2.2_ti2v_5B_fp16.safetensors",
+                "weight_dtype": "default"
+              }
+            },
+            "10": {
+              "class_type": "VAEDecode",
+              "inputs": {
+                "samples": [
+                  "9",
+                  0
+                ],
+                "vae": [
+                  "3",
+                  0
+                ]
+              }
+            },
+            "11": {
+              "class_type": "CreateVideo",
+              "inputs": {
+                "fps": 24.0,
+                "images": [
+                  "10",
+                  0
+                ]
+              }
+            },
+            "12": {
+              "_meta": {
+                "itov_video": {
+                  "fps": 24,
+                  "frames": 33,
+                  "height": 640,
+                  "width": 640
+                }
+              },
+              "class_type": "SaveVideo",
+              "inputs": {
+                "filename_prefix": "itov/video/3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e",
+                "format": "mp4",
+                "format.codec": "h264",
+                "video": [
+                  "11",
+                  0
+                ]
+              }
+            },
+            "2": {
+              "_meta": {
+                "itov_asset_sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+              },
+              "class_type": "CLIPLoader",
+              "inputs": {
+                "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+                "device": "default",
+                "type": "wan"
+              }
+            },
+            "3": {
+              "_meta": {
+                "itov_asset_sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+              },
+              "class_type": "VAELoader",
+              "inputs": {
+                "vae_name": "wan2.2_vae.safetensors"
+              }
+            },
+            "4": {
+              "_meta": {
+                "itov_asset_sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+              },
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "itov-video-still-life.png"
+              }
+            },
+            "5": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "The camera slowly moves to the right around a red ceramic teapot and green pears on a wooden table, gentle natural window light, coherent still life, smooth subtle camera motion."
+              }
+            },
+            "6": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "text, watermark, blurry, flickering, distorted objects"
+              }
+            },
+            "7": {
+              "class_type": "Wan22ImageToVideoLatent",
+              "inputs": {
+                "batch_size": 1,
+                "height": 640,
+                "length": 33,
+                "start_image": [
+                  "4",
+                  0
+                ],
+                "vae": [
+                  "3",
+                  0
+                ],
+                "width": 640
+              }
+            },
+            "8": {
+              "class_type": "ModelSamplingSD3",
+              "inputs": {
+                "model": [
+                  "1",
+                  0
+                ],
+                "shift": 8.0
+              }
+            },
+            "9": {
+              "class_type": "KSampler",
+              "inputs": {
+                "cfg": 5.0,
+                "denoise": 1.0,
+                "latent_image": [
+                  "7",
+                  0
+                ],
+                "model": [
+                  "8",
+                  0
+                ],
+                "negative": [
+                  "6",
+                  0
+                ],
+                "positive": [
+                  "5",
+                  0
+                ],
+                "sampler_name": "uni_pc",
+                "scheduler": "simple",
+                "seed": 720260922,
+                "steps": 20
+              }
+            }
+          },
+          {
+            "itov_request_id": "b7433210-997e-5ca5-9907-2eb82958bec8",
+            "client_id": "b7433210-997e-5ca5-9907-2eb82958bec8",
+            "create_time": 1790020234427
+          },
+          [
+            "12"
+          ]
+        ],
+        "outputs": {
+          "12": {
+            "images": [
+              {
+                "filename": "3b2f33f91ff6b320fd72b3942a39f66faa4d10e0cb712f3fc3f9edb95aa1dd0e_00002_.mp4",
+                "subfolder": "itov\\video",
+                "type": "output"
+              }
+            ],
+            "animated": [
+              true
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "9fcef9b8-9331-434e-8fdb-206602b2cc08",
+                "timestamp": 1790020234428
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8"
+                ],
+                "prompt_id": "9fcef9b8-9331-434e-8fdb-206602b2cc08",
+                "timestamp": 1790020234431
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "9fcef9b8-9331-434e-8fdb-206602b2cc08",
+                "timestamp": 1790020269758
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "12": {
+            "node_id": "12",
+            "display_node": "12",
+            "parent_node": null,
+            "real_node_id": "12"
+          }
+        }
+      }
+    }
+  ],
+  "completed_resume": {
+    "ok": true,
+    "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+    "status": "succeeded",
+    "error": null,
+    "jobs": [
+      {
+        "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+        "job_index": 0,
+        "request_id": "914bd070-aea2-52d5-995b-a5419cb1e0b0",
+        "workflow_sha256": "55beb74bf4d187555094ca66ea0b367efde492e9fd5dca2111a7f3a8df361a38",
+        "status": "succeeded",
+        "prompt_id": "185c0efa-a86a-459e-b369-dff7ca63d522"
+      },
+      {
+        "plan_id": "92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9",
+        "job_index": 1,
+        "request_id": "b7433210-997e-5ca5-9907-2eb82958bec8",
+        "workflow_sha256": "4fce6193695df1f81d70674dd5ae47718ae314ba39fd6294d9d7b8f520efac47",
+        "status": "succeeded",
+        "prompt_id": "9fcef9b8-9331-434e-8fdb-206602b2cc08"
+      }
+    ],
+    "succeeded": 2,
+    "scope": "sequential_batch_observations"
+  },
+  "prior_job_records_unchanged": true,
+  "outputs": [
+    "stage-07-output-01.mp4",
+    "stage-07-output-02.mp4"
+  ],
+  "one_prompt_per_request": true,
+  "final_queue": {
+    "queue_running": [],
+    "queue_pending": []
+  },
+  "passed_machine_checks": true,
+  "visual_inspection": {
+    "observer": "Codex inspection of decoded frames 0, 16 and 32 from each clip",
+    "scope": "Representative frames only; no full-playback or human quality acceptance",
+    "source_scene_recognizable": true,
+    "exact_prompt_compliance": false,
+    "findings": [
+      {
+        "clip": "stage-07-output-01.mp4",
+        "finding": "Red teapot and four pears remain recognizable; an unrequested human hand enters near the end."
+      },
+      {
+        "clip": "stage-07-output-02.mp4",
+        "finding": "Still-life subjects remain recognizable with subtle composition changes; these samples do not establish smooth natural camera motion."
+      }
+    ]
+  },
+  "retained_initial_preflight": "stage-07-initial-preflight-20260921.json",
+  "media_tools": {
+    "ffmpeg": {
+      "path": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+      "version_line": "ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+      "sha256": "05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740"
+    },
+    "ffprobe": {
+      "path": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE",
+      "version_line": "ffprobe version 9.0-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers",
+      "sha256": "51e0780cd881f83749b029ed716cbb841c2eac6289f418050f2f2961b158896b"
+    }
+  },
+  "runtime_video_encoder": {
+    "pyav": "18.1.0",
+    "libraries": {
+      "libavutil": [
+        60,
+        26,
+        102
+      ],
+      "libavcodec": [
+        62,
+        28,
+        102
+      ],
+      "libavformat": [
+        62,
+        12,
+        102
+      ],
+      "libavdevice": [
+        62,
+        3,
+        102
+      ],
+      "libavfilter": [
+        11,
+        14,
+        102
+      ],
+      "libswscale": [
+        9,
+        5,
+        102
+      ],
+      "libswresample": [
+        6,
+        3,
+        102
+      ]
+    }
+  },
+  "gpu_observation_summary": {
+    "samples": 206,
+    "max_observed_memory_used_MiB": 31507,
+    "min_observed_memory_used_MiB": 11456,
+    "scope": "Whole device; includes other allocations, sampling can miss peaks; no admission calibration."
+  },
+  "runtime_log_review": {
+    "server_prompt_seconds": [
+      "38.71",
+      "35.33"
+    ],
+    "explicit_error_traceback": false,
+    "scope": "Server timings are observations, not a repeatable throughput benchmark."
+  },
+  "final_catalog": {
+    "ok": true,
+    "head": "1fe3d939fbadbc4915ee434b5c7247ba35c47e561012f918ce8e901af352caa0",
+    "ledger_head": "183623e2fc24d3b2b114e5eb2cb22bf8dd90c426ac850b8386ec58d0f13fa66c",
+    "events": 7,
+    "presets": 4,
+    "loras": 1
+  },
+  "final_prompt_ownership": {
+    "914bd070-aea2-52d5-995b-a5419cb1e0b0": [
+      "185c0efa-a86a-459e-b369-dff7ca63d522"
+    ],
+    "b7433210-997e-5ca5-9907-2eb82958bec8": [
+      "9fcef9b8-9331-434e-8fdb-206602b2cc08"
+    ]
+  },
+  "final_review_at": "2026-09-21T19:58:56.233995+00:00"
+}

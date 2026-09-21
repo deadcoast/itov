@@ -6,60 +6,46 @@ Bamboozle is a local, reversible dictionary-based text translator. It maps confi
 
 It processes UTF-8 text, including identifiers, comments, and string literals. Each forward conversion checks that the unedited result reverses exactly. Edited code still needs review and testing.
 
-## Directory Structure
+## Start here
 
-Ensure your `dev_tools` directory is structured exactly as follows within your ComfyUI Portable installation:
+From the repository root in PowerShell:
 
-```text
-D:\AI\ComfyUI_portable\workshop\dev_tools\
-├── cipher_dict.json
-├── cipher.py
-├── ENCRYPT_FOR_CLAUDE.bat
-├── DECRYPT_FOR_CLAUDE.bat
-└── README.md
+```powershell
+.\AI\dev_tools\bamboozle.ps1
 ```
 
-## Environment & Package Management (uv)
+Choose **Encode**, **Decode**, or **Verify**, then paste a file path. Paths with spaces can be pasted with or without quotes. Encode and Decode show the destination, substitution counts, and a diff before offering **Save**, **Full diff**, **Output path**, or **Cancel**. Enter cancels at the save prompt. Replacing an existing destination requires typing `OVERWRITE`.
 
-> `setup.py`
+The launcher finds this repository's Python environment automatically and keeps relative file paths relative to your current directory. It also accepts direct commands:
 
-```bash
-# Using uv to install the local directory into your specific venv
-uv pip install -e "\AI\dev_tools" --python ".venv"
+```powershell
+.\AI\dev_tools\bamboozle.ps1 preview ".\node.py"
+.\AI\dev_tools\bamboozle.ps1 encode ".\node.py"
+.\AI\dev_tools\bamboozle.ps1 verify ".\node_safe.py"
+.\AI\dev_tools\bamboozle.ps1 decode ".\node_safe.py" -o ".\node_ready.py"
 ```
 
-We use `uv` for dependency management due to its speed and efficiency. The base SCM script relies entirely on Python standard libraries, so no external dependencies are required for the cipher itself.
+You can also run `uv run --locked python AI/dev_tools` from the repository root. An explicit `interactive` command opens the guided workflow; with no arguments and redirected input/output, the CLI prints help and exits without waiting for input.
 
-However, when you begin expanding your custom ComfyUI nodes and need external packages (like `numpy`, `torch`, etc.), use `uv` to install them directly into ComfyUI's isolated environment.
+## Install the short command
 
-To install a package using `uv`, point it to the embedded executable:
+To make `bamboozle` available in the existing project environment:
 
-```bash
-uv pip install <package_name> --python ..\..\python_embeded\python.exe
+```powershell
+uv pip install --python .venv/Scripts/python.exe -e ./AI/dev_tools
+.\.venv\Scripts\Activate.ps1
+bamboozle
 ```
 
-## The Development Loop
+After installation, `uv run --no-sync bamboozle` also works from the repository without activating the environment. The installed package includes its dictionary and supports `python -m bamboozle`. Runtime code uses only Python's standard library.
 
-Follow this strict three-step loop when utilizing an LLM to generate or modify your node logic.
+The original `scm-cipher --mode ...` command and direct `cipher.py` invocation remain available for existing scripts. The `.bat` files are compatibility launchers; the terminal workflow above is the primary interface.
 
-### 1. Forward Pass (Encrypt)
+## Review and restore
 
-1. Locate your working script containing your explicit variables and functions.
-2. Drag and drop the file onto `ENCRYPT_FOR_CLAUDE.bat`.
-3. The script outputs a translated file and a separate ledger beside it: `node_safe.py` gets `.node_safe.py.scm_ledger.json`. Native target terms are protected by `__SCM_LIT_...__` markers in the text. The ledger records those terms and the dictionary used; keep it local and preserve the markers when editing the translated file.
+Encoding `node.py` creates `node_safe.py` and `.node_safe.py.scm_ledger.json`. Review the translated file and preserve all `__SCM_LIT_...__` markers when editing. The ledger records the mapping and native terms; keep it local and use the same dictionary for decoding.
 
-### 2. LLM Processing
-
-1. Open the newly generated `_safe.py` file and review the translated terms.
-2. Use this file in your code-review or editing workflow.
-3. Preserve the `__SCM_LIT_...__` markers and use the same dictionary for reversal. Any editing tool may introduce changes that need manual review.
-
-### 3. Reverse Pass (Decrypt)
-
-1. Save the LLM's generated response as a Python file (you can overwrite the `_safe.py` file).
-2. Drag and drop this file onto `DECRYPT_FOR_CLAUDE.bat`.
-3. The script outputs a `_ready.py` file and deletes only the matching file's ledger after saving successfully. If that ledger exists, its dictionary must match. Legacy markers can also be reversed without a ledger; old directory-wide `.scm_ledger.json` files are left untouched.
-4. Move the `_ready.py` file into your ComfyUI `custom_nodes` directory for testing.
+Use `verify` before editing to check the encoded bytes and restored original against the ledger. For edited files, use `preview --reverse` to inspect restoration, then `decode` to save it. Successful decoding removes the matching ledger unless `--keep-ledger` is set. Review and test the restored code before using it.
 
 ## Dictionary Maintenance (`cipher_dict.json`)
 
@@ -74,23 +60,24 @@ If you need to introduce new explicit terms to your workflow, you must update th
 
 ## Command-line use
 
-From the repository root:
+With the environment activated:
 
 ```powershell
 # Validate the dictionary without reading or changing any source files.
-uv run --locked python AI/dev_tools/cipher.py --mode validate
+bamboozle validate
 
-# Preview a conversion. --diff always implies --dry-run.
-uv run --locked python AI/dev_tools/cipher.py --mode forward --input node.py --diff
+# Preview encoding or decoding without writing files.
+bamboozle preview node.py
+bamboozle preview node_safe.py --reverse
 
 # Save the converted file and its per-file ledger.
-uv run --locked python AI/dev_tools/cipher.py --mode forward --input node.py --output node_safe.py
+bamboozle encode node.py -o node_safe.py
 
 # Verify the encoded bytes and the restored original against the ledger, without writing.
-uv run --locked python AI/dev_tools/cipher.py --mode verify --input node_safe.py
+bamboozle verify node_safe.py
 
 # Reverse an edited file, or add --strict to require the unchanged original conversion.
-uv run --locked python AI/dev_tools/cipher.py --mode reverse --input node_safe.py --output node_ready.py
+bamboozle decode node_safe.py -o node_ready.py
 ```
 
 The default dictionary is resolved beside `cipher.py`, regardless of the working directory. Pass `--dict path/to/mapping.json` to use another mapping. If `--output` is omitted, forward uses `<input-stem>_safe<extension>` and reverse uses `<input-stem>_ready<extension>`. For example, reversing `node_safe.py` defaults to `node_safe_ready.py`.
@@ -98,24 +85,29 @@ The default dictionary is resolved beside `cipher.py`, regardless of the working
 | Option | Behavior |
 | --- | --- |
 | `--dry-run` | Convert and validate in memory, report counts, and leave outputs and ledgers untouched. |
-| `--diff` | Include a unified diff in a preview; never writes conversion files. |
+| `--preview` / `--diff` | On Encode or Decode, include a unified diff and leave conversion files untouched. |
+| `--force` | Explicitly permit replacing an existing destination during Encode or Decode. |
 | `--json` | Emit one JSON execution report to stdout, including conversion failures. Can include a diff. |
 | `--strict` | Require a valid version-2 ledger and unchanged encoded bytes when reversing. |
 | `--keep-ledger` | Preserve the ledger after reversing to a separate output, allowing repeated verification/restoration. |
-| `--mode verify` | Read-only check of the dictionary, encoded hash, and restored-original hash. Requires a version-2 ledger. |
-| `--mode validate` | Read-only dictionary schema and uniqueness checks; takes no input/output paths. |
+| `verify FILE` | Read-only check of the dictionary, encoded hash, and restored-original hash. Requires a version-2 ledger. |
+| `validate` | Read-only dictionary schema and uniqueness checks; takes no input/output paths. |
 
-The output directory must already exist for a write. Explicit conversion replaces an existing output; use `--diff` to inspect changes first. In-place conversion is supported, but `--keep-ledger` is rejected for in-place reversal because it would leave an encoded-file ledger attached to restored text. An input with an existing cipher ledger is rejected for another forward pass, preventing accidental double conversion.
+The output directory must already exist for a write. Encode and Decode refuse existing output files or forward ledgers unless `--force` is given. In-place conversion therefore also requires `--force`; `--keep-ledger` is rejected for in-place decoding because it would attach an encoded-file ledger to restored text. The legacy `cipher.py --mode ...` interface retains its existing overwrite behavior.
 
-Successful operations return exit code 0; file, dictionary, conversion, and integrity errors return 1. Invalid CLI arguments return 2 through argparse on stderr, including when `--json` was requested.
+Interactive Save publishes the exact text shown in the preview. It checks the source, dictionary, ledger, and destination fingerprints again immediately before saving; changed files require a fresh preview. Creating a new output uses atomic no-overwrite publication, so a file created concurrently is preserved. Output and ledger publication remain separate operations, as described below.
+
+An input with an existing cipher ledger is rejected for another forward pass, preventing accidental double conversion. `--dict` and `--json` may appear before or after the subcommand. Use `bamboozle --help` or `bamboozle encode --help` for command-specific options.
+
+Successful operations and cancelled previews return exit code 0; file, dictionary, conversion, and integrity errors return 1. Invalid CLI arguments return 2 through argparse on stderr, including when `--json` was requested. Ctrl+C returns 130. End-of-input closes the guided workflow without saving a pending preview.
 
 ### JSON reports
 
 ```powershell
-uv run --locked python AI/dev_tools/cipher.py --mode forward --input node.py --dry-run --json
+bamboozle encode node.py --dry-run --json
 ```
 
-Reports use `schema_version: 1`. Conversion reports include `status`, `mode`, input/output paths, byte counts and SHA-256 hashes, `changed`, and `counts` (`substitutions`, `literals`, and per-source-term counts). A literal count means protected native terms during forward conversion and restored markers during reverse conversion. `--diff --json` adds a `diff` string. A failed operation includes `error` and `output_saved`, so callers can distinguish a failed conversion from a ledger failure after output publication.
+Reports use `schema_version: 1`. Conversion reports include `status`, `mode` (`forward` or `reverse`), input/output paths, byte counts and SHA-256 hashes, `changed`, and `counts` (`substitutions`, `literals`, and per-source-term counts). A literal count means protected native terms during encoding and restored markers during decoding. `preview --json` adds a `diff` string. A failed operation includes `error` and `output_saved`, so callers can distinguish a failed conversion from a ledger failure after output publication.
 
 The `integrity` field states exactly what was checked:
 
@@ -139,6 +131,9 @@ The round-trip check covers unedited text with the same dictionary. Newly introd
 
 ## Troubleshooting
 
-- **Batch files crashing instantly:** The `.bat` files use relative paths to locate `..\..\python_embeded\python.exe`. If you move the `dev_tools` folder to a different directory depth, you must edit the `.bat` files and update the `PYTHON_EXE` path, otherwise Windows will fail to execute the script.
+- **Command not found:** Use `.\AI\dev_tools\bamboozle.ps1`, or install the package and activate `.venv` as above.
+- **PowerShell blocks script execution:** Run `uv run --locked python AI/dev_tools` from the repository instead.
+- **Destination already exists:** Preview the change, choose another `-o` path, or explicitly pass `--force`.
+- **File changed since preview:** Start another preview and inspect the updated source/destination before saving.
 
 ---

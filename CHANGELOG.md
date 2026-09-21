@@ -4,6 +4,24 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Pinned image-to-video and persistent development TODO
+
+- Added [TODO.md](TODO.md) with the current stage map, checked deliverables, required assets/tools, discovered defects and concrete next-stage tasks. Stage 7 is complete for the bounded silent-video baseline; stage 8 audio contracts are next.
+- Advanced ITOV to 0.7.0 with `video prepare`, `video plan`, and `video verify`, a pinned Wan 2.2 TI2V 5B stock workflow, immutable PNG/model bindings, and deterministic seeded plans. Added a three-file, 18.145 GB video download manifest and complete-baseline capacity checks; weights remain local and Git-ignored.
+- Added the `stock-wan22-v1` qualification profile with exact stock module identity/source checks and refusal of ambiguous loader aliases. Preserved existing image receipts. Added ComfyUI V3 selected-branch input validation for native MP4/H.264 encoding.
+- Require exact video dimensions, frame rate/count, duration, full RGB decode, constant timestamps and frame variation before the next batch job. Completed resume revalidates media. Failed collection may be retired only with fresh owned terminal server evidence, preserving artifacts and permanent seed reservations.
+- Completed two actual 640×640 Wan clips, each 33 frames at 24 fps. Verified one prompt per request, distinct artifacts, completed resume, and unchanged prior job records. Retained [clips, frames, runtime observations and evidence](docs/image-to-video.md#evidence-and-limits). Fixed the initial top-level-input preflight failure before any render submission and preserved its evidence.
+- Passed 474 tests against source on Python 3.13.9 and 474 against the installed wheel on Python 3.11.14, plus lint, formatting, package builds, 23-module byte parity, installed-wheel resume and real MP4 verification. The [verification record](docs/evidence/stage-07-verification-20260921.json) retains initial environment/test failures and their corrections.
+- Representative-frame inspection found an unrequested hand in the first clip. Quality acceptance, audio, long clips, calibrated VRAM prediction and parallel GPU execution remain open. Updated the build plan and usage guides while preserving original specifications and unrelated user work.
+
+### 2026-09-21 — Bamboozle terminal interface
+
+- Added `bamboozle encode`, `decode`, `preview`, `verify`, and `validate`, plus a guided no-argument terminal menu with pasted paths, a diff before Save, output-path selection, explicit overwrite confirmation, and clean cancellation/EOF/Ctrl+C behavior. Added a repository-aware PowerShell launcher and directory/module entry points.
+- Prepared conversions now retain the exact reviewed text and file fingerprints. Save rejects changes to the input, mapping, ledger, or output after preview. New commands preserve existing destinations unless `--force` is supplied; publishing a new file also preserves a destination created concurrently.
+- Packaged SCM dev tools 0.2.0 with its dictionary and both `bamboozle` and legacy `scm-cipher` entry points. Retained the legacy flag interface and the user's existing author metadata. Installed the final tool as an editable package in the existing project environment.
+- Passed all 111 focused cipher/CLI tests, Ruff lint and formatting, and whitespace checks. Built the source distribution and wheel, verified five packaged/installed files against source, and passed eight installed-wheel command exercises from an unrelated working directory. Corrected an initial package build that included `setup.py` as a runtime module before installing the final wheel.
+- Operated the real Windows terminal through preview, encode/save, verification, decode/save, and quit; the restored bytes matched the original and successful decode removed its ledger. Also checked the installed command's no-argument menu, preview, invalid-choice recovery, and cancellation. Retained [verification evidence](docs/evidence/bamboozle-terminal-20260921.json). These checks cover local CLI and package behavior; generated-code correctness and ComfyUI acceptance remain separate.
+
 ### 2026-09-21 — Pinned SDXL and LCM image inference
 
 - Advanced development to 0.6.0 with `inference prepare` and `inference plan`, versioned stock SDXL base/LCM workflows, explicit seeds, immutable catalog candidates, and checkpoint/LoRA hash verification. Preparation preserves existing entries and submits no jobs.

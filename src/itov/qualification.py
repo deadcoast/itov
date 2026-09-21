@@ -11,6 +11,7 @@ from itov.catalog import canonical_bytes, digest, read_document, relative_path, 
 from itov.catalog_store import _atomic_write
 from itov.comfyui import ComfyUIClient, parse_json
 from itov.config import Config
+from itov.media import video_contract, video_tools
 from itov.runtime import launch_command
 from itov.workflow import validate_workflow
 
@@ -27,6 +28,41 @@ SUPPORTED = {
     "VAEDecode",
     "VAEEncode",
 }
+VIDEO_MODULES = {
+    "UNETLoader": "nodes",
+    "CLIPLoader": "nodes",
+    "VAELoader": "nodes",
+    "ModelSamplingSD3": "comfy_extras.nodes_model_advanced",
+    "Wan22ImageToVideoLatent": "comfy_extras.nodes_wan",
+    "CreateVideo": "comfy_extras.nodes_video",
+    "SaveVideo": "comfy_extras.nodes_video",
+}
+MODEL_FOLDERS = {
+    "UNETLoader": ("unet", "diffusion_models"),
+    "CLIPLoader": ("text_encoders", "clip"),
+    "VAELoader": ("vae",),
+}
+
+
+def model_path(config: Config, kind: str, name: str) -> Path:
+    require(
+        isinstance(name, str) and name.endswith(".safetensors"), "Video models must be safetensors"
+    )
+    candidates = [
+        safe_path(config.comfyui_root / "models" / folder, name) for folder in MODEL_FOLDERS[kind]
+    ]
+    present = [path for path in candidates if path.exists()]
+    require(len(present) == 1, f"Expected one unambiguous stock model path for {kind}: {name}")
+    require(present[0].is_file(), "Model path must be a regular file")
+    return present[0]
+
+
+def _pin(node: dict, asset: dict, label: str, *, required: bool = False):
+    metadata = node.get("_meta", {})
+    require(isinstance(metadata, dict), f"{label} metadata must be an object")
+    if required or "itov_asset_sha256" in metadata:
+        expected = digest(metadata.get("itov_asset_sha256"), label + ".itov_asset_sha256")
+        require(asset["sha256"] == expected, f"Pinned {label} SHA-256 mismatch")
 
 
 def json_text(value) -> str:
@@ -74,6 +110,12 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
         "Extra model search paths are not supported by this qualification profile",
     )
     used, files = set(), {}
+    video = any(
+        node["class_type"] in VIDEO_MODULES
+        for job in plan["jobs"]
+        for node in parse_json(job["workflow_json"]).values()
+    )
+    profile = "stock-wan22-v1" if video else PROFILE
 
     def bind(root, name):
         path = safe_path(root, name)
@@ -106,18 +148,25 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
         }
         for node_id, node in graph.items():
             kind, inputs = node["class_type"], node["inputs"]
-            require(kind in SUPPORTED, f"Node is outside the {PROFILE} profile: {kind}")
             require(
-                registry[kind].get("python_module") == "nodes",
+                kind in SUPPORTED or kind in VIDEO_MODULES,
+                f"Node is outside the {profile} profile: {kind}",
+            )
+            module = VIDEO_MODULES.get(kind, "nodes")
+            require(
+                registry[kind].get("python_module") == module,
                 f"Node is not the stock implementation: {kind}",
             )
+            if module != "nodes":
+                bind(config.comfyui_root, module.replace(".", "/") + ".py")
             used.add(kind)
             if kind == "LoadImage":
                 require(
                     not inputs["image"].endswith(("[input]", "[output]", "[temp]")),
                     "Annotated LoadImage paths are outside this qualification profile",
                 )
-                bind(config.root / "input", inputs["image"])
+                asset = bind(config.root / "input", inputs["image"])
+                _pin(node, asset, "input image", required=video)
             elif kind == "CLIPTextEncode":
                 require(
                     isinstance(inputs["text"], str) and "embedding:" not in inputs["text"].lower(),
@@ -125,11 +174,26 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                 )
             elif kind == "CheckpointLoaderSimple":
                 asset = bind(config.comfyui_root / "models/checkpoints", inputs["ckpt_name"])
-                metadata = node.get("_meta", {})
-                require(isinstance(metadata, dict), "Checkpoint metadata must be an object")
-                if "itov_asset_sha256" in metadata:
-                    expected = digest(metadata["itov_asset_sha256"], "checkpoint.itov_asset_sha256")
-                    require(asset["sha256"] == expected, "Pinned checkpoint SHA-256 mismatch")
+                _pin(node, asset, "checkpoint")
+            elif kind in MODEL_FOLDERS:
+                field = {
+                    "UNETLoader": "unet_name",
+                    "CLIPLoader": "clip_name",
+                    "VAELoader": "vae_name",
+                }[kind]
+                path = model_path(config, kind, inputs[field])
+                asset = bind(path.parent, path.name)
+                _pin(node, asset, kind, required=True)
+                if kind == "CLIPLoader":
+                    require(
+                        inputs["type"] == "wan" and inputs.get("device", "default") == "default",
+                        "Video profile requires the default Wan text encoder",
+                    )
+                if kind == "UNETLoader":
+                    require(
+                        inputs["weight_dtype"] == "default",
+                        "Video profile requires the pinned model's default dtype",
+                    )
             elif kind in {"LoraLoader", "LoraLoaderModelOnly"}:
                 name = inputs["lora_name"]
                 asset = bind(config.comfyui_root / "models/loras", name)
@@ -137,13 +201,34 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                     asset["sha256"] == planned_loras.get(name),
                     f"Loader name does not resolve to the planned LoRA bytes: {name}",
                 )
-            elif kind == "SaveImage":
+            elif kind in {"SaveImage", "SaveVideo"}:
                 prefix = inputs["filename_prefix"]
                 require(
                     isinstance(prefix, str) and "%" not in prefix,
-                    "SaveImage requires a literal relative filename prefix",
+                    f"{kind} requires a literal relative filename prefix",
                 )
                 safe_path(config.root / "output", prefix)
+                if kind == "SaveVideo":
+                    require(
+                        set(inputs) == {"video", "filename_prefix", "format", "format.codec"}
+                        and inputs["format"] == "mp4"
+                        and inputs["format.codec"] == "h264",
+                        "Video profile requires explicit MP4/H.264 output",
+                    )
+                    metadata = node.get("_meta", {})
+                    require(isinstance(metadata, dict), "Video metadata must be an object")
+                    video_contract(metadata.get("itov_video"))
+                    video_tools()
+            elif kind == "CreateVideo":
+                require(
+                    set(inputs) == {"images", "fps"},
+                    "Video profile supports silent CreateVideo with default encoding only",
+                )
+            elif kind == "Wan22ImageToVideoLatent":
+                require(
+                    inputs["batch_size"] == 1 and isinstance(inputs.get("start_image"), list),
+                    "Video profile requires one latent batch and an explicit start image",
+                )
             elif kind == "KSampler":
                 require(
                     node_id in seed_nodes
@@ -154,7 +239,7 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
     system = stats["system"]
     body = {
         "version": 1,
-        "profile": PROFILE,
+        "profile": profile,
         "scope": "runtime_schema_and_asset_binding",
         "plan_id": plan["plan_id"],
         "server": config.url,

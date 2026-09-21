@@ -125,7 +125,7 @@ uv run --locked itov batch resume workspace/state/plans/PLAN_ID.json
 
 Use the IDs printed by planning and qualification. The executor reserves seeds and job ownership atomically, rechecks qualification before each new submission, and advances only after verified output collection. Lost acknowledgements are reconciled from server ownership evidence; uncertain work is never automatically submitted again. Timeouts and Ctrl+C detach observation without cancelling server work. See [execution, resume, and qualification limits](docs/batch-execution.md), including safe abandonment of an unsubmitted remainder.
 
-The stage-five acceptance run used the neutral image-copy workflow: seven jobs across sequential, lost-acknowledgement, and timeout/resume cases produced pixel-identical images. Stage six also completed the four pinned model-inference jobs described below. Video/audio integration and parallel GPU execution remain unqualified.
+The stage-five acceptance run used the neutral image-copy workflow: seven jobs across sequential, lost-acknowledgement, and timeout/resume cases produced pixel-identical images. Stages six and seven also completed the pinned image and silent-video jobs described below. Audio integration and parallel GPU execution remain unqualified.
 
 ## Pinned image inference
 
@@ -141,9 +141,21 @@ Run the saved plan through `batch qualify` and `batch run`. Preparation requires
 
 The local RTX 5090 completed two SDXL base and two SDXL+LCM jobs with distinct reserved seeds and verified 1024×1024 outputs. The [execution evidence and saved images](docs/image-inference.md#local-acceptance-evidence) establish this selected model pair's functional path. Visual inspection found recognisable subjects with object-count and shape errors; general media quality, other model combinations, and calibrated VRAM prediction remain open.
 
+## Pinned image-to-video
+
+Version 0.7.0 adds the stock Wan 2.2 TI2V 5B profile with pinned diffusion/text-encoder/VAE files and a source PNG. Prepare and plan the neutral example:
+
+```powershell
+uv run --locked itov video prepare examples/wan22.video.json --image-source docs/evidence/stage-06-output-02.png --json
+# Import the printed catalog candidate with its printed expected head.
+uv run --locked itov video plan examples/wan22.video.json --save --json
+```
+
+Then use `batch qualify` and `batch run`. Each collected MP4 must pass dimensions, frame count/rate, duration, complete decode, constant timestamps, and frame-variation checks before the next job. The local runtime completed two 640×640 clips, each 33 frames at 24 fps. Representative-frame inspection found an unrequested hand in one clip; functional execution passes while general motion/prompt quality remains open. See [video setup, commands, evidence, and limits](docs/image-to-video.md).
+
 ## Development
 
-Follow the gates in the [development review](docs/development-review.md) and update [CHANGELOG.md](CHANGELOG.md) with each completed development increment. Record passing checks and any unfulfilled runtime or rendering acceptance separately.
+Use [TODO.md](TODO.md) as the working task list, including current stages, dependencies, newly discovered requirements, and evidence needed for completion. Follow the gates in the [development review](docs/development-review.md) and update [CHANGELOG.md](CHANGELOG.md) with each completed increment. Record passing checks and any unfulfilled runtime or rendering acceptance separately.
 
 ```powershell
 $env:UV_CACHE_DIR = "$PWD\.uv-cache"

@@ -1,4 +1,4 @@
-"""Download the reviewed SDXL baseline assets; publish only exact upstream hashes."""
+"""Download reviewed image/video baseline assets; publish only exact upstream hashes."""
 
 from __future__ import annotations
 
@@ -74,10 +74,21 @@ def fetch(root: Path, asset: dict, *, opener=None) -> dict:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+    parser.add_argument("--baseline", choices=("image", "video"), default="image")
     args = parser.parse_args()
     config = load_config(args.config)
-    manifest = Path(__file__).resolve().parents[1] / "examples/inference-assets.json"
+    filename = "video-assets.json" if args.baseline == "video" else "inference-assets.json"
+    manifest = Path(__file__).resolve().parents[1] / "examples" / filename
     assets = parse_json(read_document(manifest))["assets"]
+    missing_bytes = sum(
+        asset["bytes"]
+        for asset in assets
+        if not safe_path(config.comfyui_root, asset["destination"]).exists()
+    )
+    require(
+        shutil.disk_usage(config.comfyui_root).free >= missing_bytes + 2 * 1024**3,
+        "Insufficient disk space for the complete baseline plus 2 GiB reserve",
+    )
     directory = safe_path(config.root, "state/model-downloads")
     directory.mkdir(parents=True, exist_ok=True)
     for asset in assets:
