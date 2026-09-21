@@ -1871,11 +1871,12 @@ schtasks /Create /XML "D:\AI\ComfyUI_portable\workshop\scrape\integrity\bin\veri
 
 ## 10.12 Failure modes
 
-| Symptom                                                      | Root cause                                                 | First response                                                       | Escalation                                                                 |
-|--------------------------------------------------------------|------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------|
-| Exit 2 from rolling verify, single `hash_mismatch` at tail   | Concurrent writer raced the seal step                      | Re-run `--rolling 50`; if it clears, the writer already fixed itself | If persistent, `--repair`                                                  |
-| Exit 2 from full verify, contiguous block of `prev_mismatch` | Row reordering (someone opened the CSV in Excel and saved) | `--repair`; anchor will be the last snapshot before the save         | Retrain the operator; revoke Excel file association for `.csv` in this dir |
-| Exit 2, `hash_mismatch` scattered across ancient rows        | Float precision drift from a schema change                 | `--seal-legacy` **only** after diffing against the last clean snapshot; otherwise `--repair` | If unresolved, restore from monthly snapshot                               | Exit 3, "ledger missing" | Antivirus quarantined the file | Recover from quarantine, then `--rolling |
+| Symptom                                                      | Root cause                                                 | First response                                                                                   | Escalation                                                                 |
+|--------------------------------------------------------------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| Exit 2 from rolling verify, single `hash_mismatch` at tail   | Concurrent writer raced the seal step                      | Re-run `--rolling 50`; if it clears, the writer already fixed itself                             | If persistent, run `--repair`                                              |
+| Exit 2 from full verify, contiguous block of `prev_mismatch` | Row reordering (someone opened the CSV in Excel and saved) | Run `--repair`; anchor will be the last snapshot before the save                                 | Retrain the operator; revoke Excel file association for `.csv` in this dir |
+| Exit 2, `hash_mismatch` scattered across ancient rows        | Float precision drift from a schema change                 | Run `--seal-legacy` **only** after diffing against the last clean snapshot; otherwise `--repair` | If unresolved, restore from monthly snapshot                               |
+| Exit 3, `ledger missing`                                     | Antivirus quarantined the file                             | Recover the ledger from quarantine, then run `--rolling 50`                                      | If verification still fails, restore from the latest clean snapshot        |
 
 ---
 

@@ -1,9 +1,3 @@
-[workshop, D:\AI\ComfyUI_portable\workshop\scrape\vram, 2026-09-21 08:00 EST]
-
-Word said. Opening Part 11.
-
----
-
 # PART 11 — THE VRAM BUDGET PLANNER
 
 ## 11.0 Why this exists before Part 14
@@ -11,7 +5,8 @@ Word said. Opening Part 11.
 The batch orchestrator (Part 14) is going to press "go" on hundreds of compositions overnight. If even 3% of them OOM at model-load time, you lose that percentage of the queue plus the tail of everything that was warming behind it, because ComfyUI's crash recovery flushes the whole VRAM state and re-cold-starts. On a 40-clip/hour cadence that's a full hour of throughput per crash. The planner's job is to catch OOM compositions *before* they're ever queued — a static pass over the proposed stack that says "yes fits," "borderline, offload N blocks," or "no, reject."
 
 Directory anchor:
-```
+
+```txt
 D:\AI\ComfyUI_portable\workshop\scrape\vram\
 ├── config\
 │   └── vram_budget.yaml
@@ -36,7 +31,7 @@ D:\AI\ComfyUI_portable\workshop\scrape\vram\
 
 Peak VRAM on a Wan 2.2 / Hunyuan 2.0 / LTX 2.5 i2v render is the sum of, roughly:
 
-```
+```txt
 peak = base_checkpoint
      + text_encoder_resident
      + vae_resident

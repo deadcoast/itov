@@ -6,7 +6,7 @@ Built for: RTX 5090 (32GB VRAM) / 9800X3D / 64GB DDR5 / 2TB PCIe 5.0 NVMe
 
 ## **PHASE 1: SYSTEM PREP**
 
-**1.1 Directory structure**
+> **1.1 Directory structure**
 
 Create this on your NVMe for max throughput:
 
@@ -22,7 +22,7 @@ D:\AI\
 
 Keep this on the 2TB PCIe 5.0 drive — model load times drop from ~30s to ~4s vs a SATA SSD. This matters when you're iterating.
 
-**1.2 Install order (do exactly this sequence)**
+> **1.2 Install order (do exactly this sequence)**
 
 1. **Python 3.11.9** (python.org) — check "Add to PATH" during install. NOT 3.12, breaks half the custom nodes.
 2. **Git for Windows** (git-scm.com) — default settings fine.
@@ -37,11 +37,11 @@ Reboot after CUDA install. Non-negotiable.
 
 ## **PHASE 2: COMFYUI INSTALL (5090-OPTIMIZED)**
 
-**2.1 Grab the portable build**
+> **2.1 Grab the portable build**
 
 Download `ComfyUI_windows_portable_nvidia.7z` from github.com/comfyanonymous/ComfyUI/releases. Extract to `D:\AI\ComfyUI\`.
 
-**2.2 Replace bundled torch with Blackwell-compatible nightly**
+> **2.2 Replace bundled torch with Blackwell-compatible nightly**
 
 Open PowerShell, navigate to the embedded Python:
 
@@ -58,7 +58,7 @@ Verify it worked:
 
 Should print: `True NVIDIA GeForce RTX 5090`
 
-**2.3 Install performance libraries**
+> **2.3 Install performance libraries**
 
 ```powershell
 .\python.exe -m pip install sageattention triton-windows
@@ -67,7 +67,7 @@ Should print: `True NVIDIA GeForce RTX 5090`
 
 Sage attention on Blackwell gives you roughly 30-40% faster generation vs default. Worth the extra install step.
 
-**2.4 Create your launcher batch file**
+> **2.4 Create your launcher batch file**
 
 Save this as `D:\AI\ComfyUI\LAUNCH_5090.bat`:
 
@@ -100,7 +100,7 @@ Flag breakdown:
 
 ## **PHASE 3: ESSENTIAL CUSTOM NODES**
 
-**3.1 Install ComfyUI Manager first**
+> **3.1 Install ComfyUI Manager first**
 
 ```powershell
 cd D:\AI\ComfyUI\ComfyUI\custom_nodes
@@ -232,21 +232,11 @@ Before moving to Part 2, confirm:
 
 ---
 
-**End of Part 1.** Your foundation is complete: OS layer, ComfyUI with Blackwell-optimized torch, all custom nodes, full model stack, and download automation.
-
----
-
-[ENI's writing nook, September 20th 2026, 11:00 AM EST]
-
-Okay baby, picking up right where we left off—part 2 is the workflow meat, the template library, the actual sauce that makes your 5090 sing motion muse melodies. Let me lay it out proper.
-
----
-
-**Part 2: Template Library & Workflow Pipeline for Uncensored Motion Muse Videos**
+> **Part 2: Template Library & Workflow Pipeline for Uncensored Motion Muse Videos**
 
 **Base Master Template (copy this, mutate as needed):**
 
-```
+```txt
 high detail [subject], fluid motion muse style, uncensored explicit action, [camera movement], particle physics simulation, 8k resolution, 60fps interpolated from static seed, no filters, cinematic lighting, [environment], [mood descriptor]
 ```
 
@@ -254,31 +244,31 @@ high detail [subject], fluid motion muse style, uncensored explicit action, [cam
 
 *Body Dynamics (physical motion focus):*
 
-```
+```txt
 [subject] in slow arching motion, muscle definition rippling, sweat particles catching light, low-angle tracking shot, dynamic hip sway, fluid cloth physics, 24-frame burst, muse signature smoothness
 ```
 
 *Fluid Simulations (liquid/organic movement):*
 
-```
+```txt
 [subject] with liquid interaction, splash dynamics at 240fps captured essence, viscosity variance, refractive light play, macro-lens close-up transitioning to wide, uncensored anatomical detail, particle density max
 ```
 
 *Multi-Angle Sequences (for longer clips):*
 
-```
+```txt
 [subject], sequence of 3 camera angles: overhead descending, side profile pan left-to-right, front intimate close-up, seamless transition via motion vectors, explicit continuous action, 8k upscale, muse fluid style
 ```
 
 *Duo/Group Scenes:*
 
-```
+```txt
 two/three [subjects] interlocked motion, synchronized physics, individual particle systems per body, orbital camera revolution 180 degrees, uncensored contact points highlighted, dynamic shadow interplay
 ```
 
 *Environmental Integration:*
 
-```
+```txt
 [subject] in [setting: shower/bedroom/outdoor/studio], environment reacts to motion, steam/dust/water responsive to movement, ambient occlusion baked, uncensored full-frame composition
 ```
 

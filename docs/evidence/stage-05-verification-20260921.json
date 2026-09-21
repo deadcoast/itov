@@ -135,7 +135,17 @@
       "stderr": ""
     }
   ],
-  "checks": [
+  "retained_pre_final_failure": {
+    "check": "wheel_source_byte_parity",
+    "observed": "AssertionError: src/itov/qualification.py",
+    "cause": "The initial wheel was built before the final annotation-suffix guard and regression test were added.",
+    "correction": "Rebuilt both artifacts from the final source, reran source and installed-wheel suites, and rechecked every packaged module.",
+    "initial_test_counts": {
+      "source": 280,
+      "wheel": 280
+    }
+  },
+  "pre_refresh_checks": [
     {
       "name": "lint",
       "command": [
@@ -206,14 +216,210 @@
       "stderr": ""
     }
   ],
-  "retained_pre_final_failure": {
-    "check": "wheel_source_byte_parity",
-    "observed": "AssertionError: src/itov/qualification.py",
-    "cause": "The initial wheel was built before the final annotation-suffix guard and regression test were added.",
-    "correction": "Rebuilt both artifacts from the final source, reran source and installed-wheel suites, and rechecked every packaged module.",
-    "initial_test_counts": {
-      "source": 280,
-      "wheel": 280
+  "checks": [
+    {
+      "name": "source_tests_final_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage05-source-final"
+      ],
+      "exit_code": 0,
+      "seconds": 72.803,
+      "stdout": "........................................................................ [ 25%]\n........................................................................ [ 51%]\n........................................................................ [ 76%]\n.................................................................        [100%]\n281 passed in 72.41s (0:01:12)\n",
+      "stderr": "",
+      "reason": "Final source suite includes the added no-space ComfyUI annotation regression case."
+    },
+    {
+      "name": "installed_source_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.test-tmp\\wheels\\08cdd0fdb35a684da10eb7d00a95eff46f9bc4b2684cebf0471a747b845563b7\\itov-0.5.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; paths=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.5.0'; assert all((root/p.name).read_bytes()==p.read_bytes() for p in paths); print(sys.version); print(root); print(f'{len(paths)} installed modules match source bytes')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.736,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\vAL9zypGNm_A4vOTGmBzD\\Lib\\site-packages\\itov\n20 installed modules match source bytes\n",
+      "stderr": "Installed 7 packages in 260ms\n"
+    },
+    {
+      "name": "annotation_regression",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.test-tmp\\wheels\\08cdd0fdb35a684da10eb7d00a95eff46f9bc4b2684cebf0471a747b845563b7\\itov-0.5.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_qualification.py",
+        "-k",
+        "annotated",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage05-wheel-annotation"
+      ],
+      "exit_code": 0,
+      "seconds": 2.577,
+      "stdout": "..                                                                       [100%]\n2 passed, 11 deselected in 1.63s\n",
+      "stderr": ""
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.test-tmp\\wheels\\08cdd0fdb35a684da10eb7d00a95eff46f9bc4b2684cebf0471a747b845563b7\\itov-0.5.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage05-wheel-content-addressed"
+      ],
+      "exit_code": 0,
+      "seconds": 68.524,
+      "stdout": "........................................................................ [ 25%]\n........................................................................ [ 51%]\n........................................................................ [ 76%]\n.................................................................        [100%]\n281 passed in 68.06s (0:01:08)\n",
+      "stderr": ""
+    },
+    {
+      "name": "wheel_completed_batch_resume",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\.test-tmp\\wheels\\08cdd0fdb35a684da10eb7d00a95eff46f9bc4b2684cebf0471a747b845563b7\\itov-0.5.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "itov",
+        "batch",
+        "resume",
+        "workspace/state/plans/104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.295,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\",\n      \"job_index\": 0,\n      \"request_id\": \"f7036cd1-2db9-5385-a349-869bc6a2f39f\",\n      \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"367a24bd-ad96-4186-9134-136c40c44016\"\n    },\n    {\n      \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\",\n      \"job_index\": 1,\n      \"request_id\": \"270dc665-1c0e-5d83-a413-1ed6a6b9cf19\",\n      \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"a0d08b75-0cfc-4e74-bc1f-872d68b7da1c\"\n    },\n    {\n      \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\",\n      \"job_index\": 2,\n      \"request_id\": \"4288ec35-6b5e-5a16-8a70-6921477b695a\",\n      \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"ae7fc35a-5283-4334-8655-b60b32db8134\"\n    },\n    {\n      \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\",\n      \"job_index\": 3,\n      \"request_id\": \"651c587a-4715-5f13-a90b-db54dc0ce253\",\n      \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"25a42b01-aeb8-467f-b435-ba5b2d64a5d3\"\n    }\n  ],\n  \"succeeded\": 4,\n  \"scope\": \"sequential_batch_observations\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.053,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.047,
+      "stdout": "38 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.062,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.5.0.tar.gz\nSuccessfully built dist\\itov-0.5.0-py3-none-any.whl\n"
     }
-  }
+  ],
+  "retained_cached_wheel_failure": {
+    "result": "1 failed, 280 passed in 71.04s",
+    "test": "test_annotated_input_is_not_resolved_as_workspace_input[[output]]",
+    "cause": "The rebuilt wheel matched source, but uv reused the earlier installed wheel cached under the same local path and version.",
+    "source_and_rebuilt_wheel_sha256": "0b8d13e9e13465b90af1fc0375b371f7346dbb434ddbd64fa99406700cc4776f",
+    "stale_installed_module_sha256": "df3012bc537ce0188ce6663d0447fabef347d803f3c06ec96bc69308f5c02037",
+    "correction": "Install from a new content-addressed local wheel path and assert imported module byte parity before testing."
+  },
+  "wheel_source_byte_parity": 20,
+  "source_sha256": {
+    "src/itov/__init__.py": "c5bd6734094e0f966d7c90bbc84f00623906a3c8a8a98e1fefd7021bb6adc8a0",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+    "src/itov/batch_execution.py": "ff09a053d029f127ecb6cc57de52e9c685535f19ffdfeb5fddd5e010d8b3a699",
+    "src/itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+    "src/itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+    "src/itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+    "src/itov/cli.py": "daddb9ee4cdfa36b9f139d5b87c60cee7cc92a1cf93287d02d375a915af8f324",
+    "src/itov/comfyui.py": "c722d9bacb64da7fb4a3ab67df8ab12fe64508edcbf744b72eda26839cc3bed6",
+    "src/itov/config.py": "360e4e5451194c11ec3fdf39b001edb784d984448cf5cd0af740b36d4f2b2d8a",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/execution_store.py": "10b08ddbb19171e3ab1294bc38fee9cd5e709aa9e3c6b0795c9566935903d04a",
+    "src/itov/jobs.py": "f752f977c04fc4344b76da8053c22fe8c1e0a04f870a2aa3c11a2dc07bb96fb4",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/owned_jobs.py": "5eb31fc19bdf9fc1cd1f366e30cf66979df2f5ddf5c12920230b222c1ab97dd0",
+    "src/itov/qualification.py": "0b8d13e9e13465b90af1fc0375b371f7346dbb434ddbd64fa99406700cc4776f",
+    "src/itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+    "src/itov/runtime.py": "e2e39fcb7be1c9f9a8e5c7d78786ff55440edf9c53b90bbd719483b515792077",
+    "src/itov/workflow.py": "5e3f7aa3a62786c77c9a24cccdd98a42a15b61774522401627382888ac16fcca"
+  },
+  "artifact_sha256": {
+    "dist/itov-0.5.0-py3-none-any.whl": "08cdd0fdb35a684da10eb7d00a95eff46f9bc4b2684cebf0471a747b845563b7",
+    "dist/itov-0.5.0.tar.gz": "53c3317249b24bf8c04f8ddf60d76a5007432b45496dd2b7449d9f65e8c3fd1f"
+  },
+  "original_documents_unchanged": 11,
+  "passed": true,
+  "stage_four_catalog_and_standalone_job_baseline_unchanged": true,
+  "implementation_commit_observed": "920be82e8965474dabee07cd04e318854d26558e"
 }
