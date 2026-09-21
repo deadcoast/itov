@@ -1,0 +1,28 @@
+[project]
+name = "directory-markdown-pdf"
+version = "0.1.0"
+description = "Combine a directory of Markdown specifications into one searchable PDF"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.13,<5",
+    "markdown-it-py>=4,<5",
+    "mdit-py-plugins>=0.5,<0.6",
+    "reportlab>=4.4,<5",
+]
+
+[project.scripts]
+markdown-pdf = "markdown_pdf.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.9.5,<0.10"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "markdown_pdf"
+
+[dependency-groups]
+dev = ["pytest>=8,<9", "pypdf>=6,<7", "pymupdf>=1.26,<2", "ruff>=0.9,<1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

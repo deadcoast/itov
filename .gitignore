@@ -22,5 +22,9 @@ __pycache__/
 /dist/
 /build/
 
+# Generated documentation exports and rendering checks.
+/output/pdf/
+/tmp/pdfs/
+
 # sensitive docs
 docs/design_spec/scene_templates/sensitive/

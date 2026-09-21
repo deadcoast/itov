@@ -2,6 +2,10 @@
 
 ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, versioned preset/LoRA catalogs, deterministic batch planning, and qualified sequential execution. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
 
+To combine a directory of Markdown specifications into one searchable PDF, run
+`.\markdown-to-pdf.ps1` (prompts for a path) or `.\markdown-to-pdf.ps1 "C:\path\to\specs"`.
+See the [converter guide](tools/markdown_pdf/README.md) for exclusions and output options.
+
 The original material in `docs/01_*` through `docs/10_*` is a design reference, not an executable installation guide. Read the [development review](docs/development-review.md) for defects, current compatibility findings, and the implementation sequence.
 
 ## Quick start
