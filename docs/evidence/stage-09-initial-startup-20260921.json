@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "package_version": "0.9.0",
+  "observed_at": "2026-09-21T21:49:46.011243+00:00",
+  "initial_gpu": {
+    "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver": "616.64",
+    "total_bytes": 34190917632,
+    "used_bytes": 5435817984,
+    "free_bytes": 28315746304
+  },
+  "runs": [
+    {
+      "family": "audio",
+      "repeat": 1,
+      "specification": {
+        "checkpoint": {
+          "loader_name": "stable-audio-open-1.0.safetensors",
+          "sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+        },
+        "count": 2,
+        "negative_prompt": "speech, voices, music, distortion",
+        "profile": "stable-audio-open-v1",
+        "prompt": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music.",
+        "seconds": 4,
+        "seed": 920260921,
+        "text_encoder": {
+          "loader_name": "t5_base.safetensors",
+          "sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+        },
+        "version": 1
+      },
+      "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\6ac93360d07efa7114ce233f7c25c8a9600f58913c8a020ce0850b104e280f06.json",
+      "plan_id": "6ac93360d07efa7114ce233f7c25c8a9600f58913c8a020ce0850b104e280f06",
+      "log": "workspace\\state\\verification\\stage09\\audio-1.log",
+      "owned_pid": 64008,
+      "failure": "RuntimeError('Owned observer exited at startup')",
+      "owned_process_stopped": true,
+      "log_sha256": "af7fdbb9fd21f84f149322a3321cf4dcb7179bff38b47e5cabcb692e1051f140"
+    }
+  ],
+  "policy": {
+    "version": 1,
+    "max_age_seconds": 604800,
+    "minimum_cold_sessions": 2,
+    "minimum_warm_sessions": 2,
+    "reserve_bytes": 2147483648,
+    "uncertainty_percent": 20,
+    "max_sample_gap_ns": 1000000000,
+    "minimum_samples": 3,
+    "max_workers": 1
+  },
+  "limits": [
+    "Exact neutral workloads only; no capacity interpolation or parallel GPU acceptance.",
+    "Allocator peaks exclude non-Torch memory; global device polling can miss peaks.",
+    "Normal runtime remains idle; Windows display and other device allocations remain included."
+  ],
+  "catalog": {
+    "ok": true,
+    "head": "9e333e5270850365c70565bbbc3dd85a5914281d3d1e447767441b5176451821",
+    "ledger_head": "64293b5a2ebefab263dc56b6cb60a3c9462706f1da3e7d41b3fc497d63d612df",
+    "events": 16,
+    "presets": 13,
+    "loras": 1
+  }
+}

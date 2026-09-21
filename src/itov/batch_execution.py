@@ -11,7 +11,15 @@ from itov.catalog import canonical_bytes, require
 from itov.catalog_store import CatalogStore
 from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json
 from itov.config import Config, validate_timeout
-from itov.execution_store import check_run, claim, open_store, record_job, record_run, report
+from itov.execution_store import (
+    check_run,
+    claim,
+    open_store,
+    record_job,
+    record_run,
+    report,
+    transaction,
+)
 from itov.jobs import _timing
 from itov.locking import file_lock
 from itov.owned_jobs import job_path, observe_owned, prepare_owned, read_owned, submit_owned
@@ -80,11 +88,25 @@ def run_batch(
     timeout: float = 3,
     wait_timeout: float = 120,
     poll_interval: float = 1,
+    vram_profiles: list[Path] | None = None,
 ) -> dict:
     _timing(wait_timeout, poll_interval)
     validate_timeout(timeout)
     plan = load_plan(path)
     with _lock(config), closing(open_store(config, create=not resume)) as db:
+        from itov.vram import enforce, guard
+
+        guards = db.execute(
+            "SELECT status FROM events WHERE plan_id = ? AND status LIKE 'vram_guard:%'",
+            (plan["plan_id"],),
+        ).fetchall()
+        require(len(guards) <= 1, "Duplicate durable VRAM guard bindings")
+        expected_guard = guards[0]["status"].split(":", 1)[1] if guards else None
+        profiles = guard(config, plan, vram_profiles, expected_id=expected_guard)
+        guard_id = None
+        if profiles is not None:
+            guard_file = safe_path(config.root, f"state/vram/guards/{plan['plan_id']}.json")
+            guard_id = parse_json(guard_file.read_bytes())["guard_id"]
         existing = db.execute(
             "SELECT plan_id FROM runs WHERE plan_id = ?", (plan["plan_id"],)
         ).fetchone()
@@ -98,7 +120,15 @@ def run_batch(
                 receipt == qualify(config, plan, timeout=timeout),
                 "Qualification changed; qualify and inspect the current bindings",
             )
-            claim(db, config, plan, receipt)
+            claim(db, config, plan, receipt, vram_guard_id=guard_id)
+        elif profiles is not None and not guards:
+            from itov.jobs import _now
+
+            with transaction(db):
+                db.execute(
+                    "INSERT INTO events(plan_id, status, observed_at) VALUES (?, ?, ?)",
+                    (plan["plan_id"], "vram_guard:" + guard_id, _now()),
+                )
         run, rows = check_run(db, config, plan)
         if run["status"] == "abandoned":
             return report(db, config, plan)
@@ -157,6 +187,8 @@ def run_batch(
                         not queue["queue_running"] and not queue["queue_pending"],
                         "Server queue is busy; resume when it is idle",
                     )
+                    if profiles is not None:
+                        enforce(config, plan, profiles, current)
                     # Catalog writers cannot change HEAD between the final check and POST.
                     store = CatalogStore(config.root)
                     with file_lock(store._path("catalog.lock")):

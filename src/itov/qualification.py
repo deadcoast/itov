@@ -13,7 +13,8 @@ from itov.catalog_store import _atomic_write
 from itov.comfyui import ComfyUIClient, parse_json
 from itov.config import Config
 from itov.media import video_contract, video_tools
-from itov.runtime import launch_command
+from itov.runtime import launch_command, profile_main_argv
+from itov.vram_identity import MARKER
 from itov.workflow import validate_workflow
 
 PROFILE = "stock-local-v1"
@@ -110,8 +111,11 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
     expected_argv = launch_command(config)[2:]
     client = ComfyUIClient(config.url, timeout=timeout)
     stats, registry = client.system_stats(), client.object_info()
+    instrumented = stats["system"].get("argv") != expected_argv and (
+        stats["system"].get("argv") == profile_main_argv(config) + [MARKER]
+    )
     require(
-        stats["system"].get("argv") == expected_argv,
+        stats["system"].get("argv") == expected_argv or instrumented,
         "Qualification requires the exact stock runtime launched by itov server start",
     )
     require(
@@ -151,6 +155,28 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
 
     for name in ("main.py", "nodes.py", "folder_paths.py"):
         bind(config.comfyui_root, name)
+    observer = None
+    if instrumented:
+        observer = client._json("/itov/vram").get("identity")
+        require(
+            isinstance(observer, dict) and observer.get("version") == 1,
+            "Missing VRAM observer identity",
+        )
+        for name, field in (
+            ("vram_runtime.py", "bootstrap_sha256"),
+            ("vram_identity.py", "identity_sha256"),
+        ):
+            require(
+                observer.get(field) == _file(Path(__file__).with_name(name))["sha256"],
+                "VRAM observer source differs from this ITOV installation",
+            )
+        for name in (
+            "execution.py",
+            "comfy/model_management.py",
+            "comfy/model_patcher.py",
+            "comfy/memory_management.py",
+        ):
+            bind(config.comfyui_root, name)
     for job in plan["jobs"]:
         graph = parse_json(job["workflow_json"])
         validation = validate_workflow(graph, registry).to_dict()
@@ -304,6 +330,8 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
         "files": [files[key] for key in sorted(files)],
         "jobs": len(plan["jobs"]),
     }
+    if observer is not None:
+        body["vram_observer"] = observer
     return {**body, "qualification_id": sha256(canonical_bytes(body))}
 
 

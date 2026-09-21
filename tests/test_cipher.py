@@ -720,3 +720,139 @@ def test_engine_rejects_invalid_modes_and_non_text_input():
         engine.count("alpha", "unknown")
     with pytest.raises(ValueError, match="string"):
         engine.transform(None, "forward")
+
+
+@pytest.mark.parametrize("mode", ["reverse", "verify"])
+def test_restore_uses_saved_mapping_after_dictionary_removed(encoded_case, mode):
+    source, encoded, _restored, dictionary = encoded_case
+    dictionary.unlink()
+    before = file_snapshot(source.parent)
+    plan = cipher.prepare_conversion(mode, encoded)
+    assert plan["result"].encode("utf-8") == source.read_bytes()
+    assert plan["report"]["dictionary_source"] == "ledger"
+    assert plan["report"]["dictionary"] == str(cipher.ledger_path_for(encoded))
+    assert plan["report"]["dictionary_sha256"] == cipher.dictionary_hash(MAPPING)
+    assert plan["report"]["integrity"] == "unchanged"
+    assert file_snapshot(source.parent) == before
+    if mode == "reverse":
+        cipher.apply_conversion(plan, overwrite=False)
+        assert plan["output_path"].read_bytes() == source.read_bytes()
+
+
+def test_explicit_dictionary_still_must_match_the_saved_mapping(encoded_case):
+    source, encoded, _restored, dictionary = encoded_case
+    dictionary.write_text('{"alpha": "different"}', encoding="utf-8")
+    before = file_snapshot(source.parent)
+    with pytest.raises(ValueError, match="does not match"):
+        cipher.prepare_conversion("reverse", encoded, dict_path=dictionary)
+    assert cipher.prepare_conversion("reverse", encoded)["result"].encode() == source.read_bytes()
+    assert file_snapshot(source.parent) == before
+
+
+@pytest.mark.parametrize("damage", ["object", "mapping", "hash", "filename", "version"])
+def test_automatic_mapping_rejects_invalid_ledgers(encoded_case, damage):
+    source, encoded, _restored, _dictionary = encoded_case
+    path = cipher.ledger_path_for(encoded)
+    ledger = cipher.load_json(path)
+    if damage == "object":
+        ledger = []
+    elif damage == "mapping":
+        ledger["dictionary"] = {"alpha": "fluid", "beta": "fluid"}
+    elif damage == "hash":
+        ledger["dictionary_sha256"] = "0" * 64
+    elif damage == "filename":
+        ledger["encoded_file"] = "another.py"
+    else:
+        ledger["version"] = 99
+    path.write_text(json.dumps(ledger), encoding="utf-8")
+    before = file_snapshot(source.parent)
+    with pytest.raises(ValueError):
+        cipher.prepare_conversion("reverse", encoded)
+    assert file_snapshot(source.parent) == before
+
+
+def test_automatic_mapping_keeps_legacy_integrity_limits(encoded_case):
+    source, encoded, _restored, _dictionary = encoded_case
+    path = cipher.ledger_path_for(encoded)
+    ledger = cipher.load_json(path)
+    ledger["version"] = 1
+    for field in ("dictionary_sha256", "original_sha256", "encoded_sha256"):
+        ledger.pop(field)
+    path.write_text(json.dumps(ledger), encoding="utf-8")
+    plan = cipher.prepare_conversion("reverse", encoded)
+    assert plan["report"]["integrity"] == "legacy_ledger"
+    assert plan["result"].encode() == source.read_bytes()
+    with pytest.raises(ValueError, match="version-2"):
+        cipher.prepare_conversion("verify", encoded)
+
+
+def test_saved_mapping_is_watched_between_preview_and_save(encoded_case):
+    source, encoded, _restored, _dictionary = encoded_case
+    plan = cipher.prepare_conversion("reverse", encoded)
+    cipher.ledger_path_for(encoded).write_text("changed", encoding="utf-8")
+    before = file_snapshot(source.parent)
+    with pytest.raises(ValueError, match="changed since preview"):
+        cipher.apply_conversion(plan)
+    assert file_snapshot(source.parent) == before
+
+
+def test_ledger_free_restore_reports_the_default_mapping(tmp_path):
+    source = tmp_path / "encoded.py"
+    source.write_bytes(b"base_topology")
+    plan = cipher.prepare_conversion("reverse", source)
+    assert plan["result"] == "nude"
+    assert plan["report"]["dictionary_source"] == "default"
+    assert plan["report"]["integrity"] == "missing_ledger"
+
+
+def test_decode_cannot_replace_another_file_with_a_ledger(encoded_case):
+    source, encoded, restored, _dictionary = encoded_case
+    restored.write_bytes(b"another encoded file")
+    cipher.ledger_path_for(restored).write_bytes(b"another ledger")
+    before = file_snapshot(source.parent)
+    with pytest.raises(ValueError, match="Destination has its own cipher ledger"):
+        cipher.prepare_conversion("reverse", encoded, restored)
+    assert file_snapshot(source.parent) == before
+
+
+def test_decode_rejects_a_destination_ledger_created_after_preview(encoded_case):
+    source, encoded, restored, _dictionary = encoded_case
+    plan = cipher.prepare_conversion("reverse", encoded, restored)
+    cipher.ledger_path_for(restored).write_bytes(b"another ledger")
+    before = file_snapshot(source.parent)
+    with pytest.raises(ValueError, match="changed since preview"):
+        cipher.apply_conversion(plan)
+    assert file_snapshot(source.parent) == before
+
+
+@pytest.mark.parametrize("newline", ["\r", "\n", "\r\n"])
+def test_diff_uses_physical_lines_without_false_unterminated_markers(newline):
+    original = "alpha\u2028same\x85text" + newline + "tail" + newline
+    result = original.replace("alpha", "fluid_sim")
+    diff = cipher.preview_diff(original, result, "before", "after")
+    assert "@@ -1,2 +1,2 @@" in diff
+    assert "-alpha\u2028same\x85text\n" in diff
+    assert "No newline" not in diff
+    assert "\r" not in diff
+
+
+def test_diff_detects_line_ending_changes_even_when_display_is_normalized():
+    diff = cipher.preview_diff("same\r", "same\n", "before", "after")
+    assert "-same\n+same\n" in diff
+
+
+@pytest.mark.parametrize("context", [-1, True, "3"])
+def test_diff_rejects_invalid_context(context):
+    with pytest.raises(ValueError, match="nonnegative integer"):
+        cipher.preview_diff("alpha", "fluid", "before", "after", context=context)
+
+
+def test_diff_context_controls_only_surrounding_lines():
+    original = "first\nsecond\nalpha\nfourth\nfifth\n"
+    result = original.replace("alpha", "fluid")
+    minimal = cipher.preview_diff(original, result, "before", "after", context=0)
+    assert "-alpha\n+fluid\n" in minimal
+    assert "second" not in minimal
+    expanded = cipher.preview_diff(original, result, "before", "after", context=1)
+    assert " second\n" in expanded and " fourth\n" in expanded
+    assert "first" not in expanded

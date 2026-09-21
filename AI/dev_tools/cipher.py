@@ -331,17 +331,28 @@ def reverse_integrity(text, result, ledger, strict=False):
     return "unchanged"
 
 
-def preview_diff(original, result, input_path, output_path):
+def _diff_lines(text):
+    # Compare exact physical lines; Unicode separators remain text content.
+    return re.findall(r"[^\r\n]*(?:\r\n|\r|\n)|[^\r\n]+$", text)
+
+
+def preview_diff(original, result, input_path, output_path, context=3):
+    if type(context) is not int or context < 0:
+        raise ValueError("Diff context must be a nonnegative integer.")
     lines = difflib.unified_diff(
-        original.splitlines(keepends=True),
-        result.splitlines(keepends=True),
+        _diff_lines(original),
+        _diff_lines(result),
         fromfile=str(input_path),
         tofile=str(output_path),
+        n=context,
     )
-    # Keep a final unterminated source line from swallowing the next diff line.
-    return "".join(
-        line if line.endswith("\n") else line + "\n\\ No newline at end of file\n" for line in lines
-    )
+    displayed = []
+    for line in lines:
+        if line.endswith(("\r", "\n")):
+            displayed.append(line.rstrip("\r\n") + "\n")
+        else:
+            displayed.append(line + "\n\\ No newline at end of file\n")
+    return "".join(displayed)
 
 
 def describe_counts(counts):
@@ -352,6 +363,22 @@ def describe_counts(counts):
     return f"{terms}, {native}"
 
 
+def describe_dictionary(report):
+    source = report["dictionary_source"]
+    label = "saved in ledger" if source == "ledger" else source
+    return f"Dictionary: {label} ({report['dictionary']})"
+
+
+def nonnegative_int(value):
+    try:
+        number = int(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError("must be a nonnegative integer") from error
+    if number < 0:
+        raise argparse.ArgumentTypeError("must be a nonnegative integer")
+    return number
+
+
 def emit_report(report, as_json):
     if as_json:
         print(json.dumps(report, sort_keys=True))
@@ -360,6 +387,8 @@ def emit_report(report, as_json):
     if status == "dictionary_valid":
         print(f"[*] Dictionary valid: {report['entries']} mappings ({report['dictionary']}).")
         return
+    if "dictionary_source" in report:
+        print(f"[*] {describe_dictionary(report)}")
     if status == "verified":
         print(f"[*] VERIFIED: {report['input']}; encoded and restored hashes match the ledger.")
         return
@@ -407,10 +436,12 @@ def prepare_conversion(
         raise ValueError("Strict verification is available only when reversing or verifying.")
     if keep_ledger and mode != "reverse":
         raise ValueError("Keeping the ledger applies only to reverse conversion.")
+    explicit_dictionary = dict_path is not None
     dict_path = Path(dict_path or Path(__file__).with_name("cipher_dict.json")).resolve()
     report = {"schema_version": 1, "mode": mode}
-    snapshot = {dict_path: file_fingerprint(dict_path)}
+    snapshot = {}
     if mode == "validate":
+        snapshot[dict_path] = file_fingerprint(dict_path)
         cipher_dict = load_json(dict_path)
         validate_dictionary(cipher_dict)
         check_snapshot(snapshot)
@@ -440,15 +471,37 @@ def prepare_conversion(
     watched_paths = {input_path, ledger_path, ledger_path_for(input_path)}
     if mode != "verify":
         watched_paths.add(output_path)
+    destination_ledger = ledger_path_for(output_path)
+    if mode == "reverse" and output_path != input_path:
+        watched_paths.add(destination_ledger)
     for path in watched_paths:
         if path not in snapshot:
             snapshot[path] = file_fingerprint(path)
 
-    cipher_dict = load_json(dict_path)
+    if mode == "reverse" and output_path != input_path and snapshot[destination_ledger] is not None:
+        raise ValueError(
+            f"Destination has its own cipher ledger: {destination_ledger}. "
+            "Choose another output path to preserve that encoded file and its metadata."
+        )
+    ledger_data = None
+    if mode in ("reverse", "verify") and snapshot[ledger_path] is not None:
+        ledger_data = load_json(ledger_path)
+        if not isinstance(ledger_data, dict):
+            raise ValueError("Ledger must be a JSON object; left untouched.")
+    if ledger_data is not None and not explicit_dictionary:
+        cipher_dict = ledger_data.get("dictionary")
+        dictionary_source = "ledger"
+        dictionary_path = ledger_path
+    else:
+        snapshot[dict_path] = file_fingerprint(dict_path)
+        cipher_dict = load_json(dict_path)
+        dictionary_source = "explicit" if explicit_dictionary else "default"
+        dictionary_path = dict_path
     engine = CipherEngine(cipher_dict)
+    if ledger_data is not None:
+        validate_ledger(ledger_data, cipher_dict, input_path)
     with input_path.open(encoding="utf-8", newline="") as source:
         text = source.read()
-    ledger_data = None
     if mode == "forward":
         if snapshot[ledger_path_for(input_path)] is not None:
             raise ValueError("Input already has a cipher ledger; reverse it before encoding again.")
@@ -456,9 +509,6 @@ def prepare_conversion(
         ledger_data = make_ledger(text, result, cipher_dict, input_path, output_path)
         integrity = "round_trip_checked"
     else:
-        if snapshot[ledger_path] is not None:
-            ledger_data = load_json(ledger_path)
-            validate_ledger(ledger_data, cipher_dict, input_path)
         result, counts = engine.transform(text, "reverse")
         integrity = reverse_integrity(text, result, ledger_data, strict=strict or mode == "verify")
 
@@ -467,6 +517,9 @@ def prepare_conversion(
         status="verified" if mode == "verify" else "preview",
         input=str(input_path),
         ledger=str(ledger_path),
+        dictionary=str(dictionary_path),
+        dictionary_source=dictionary_source,
+        dictionary_sha256=dictionary_hash(cipher_dict),
         integrity=integrity,
         input_sha256=text_hash(text),
         output_sha256=text_hash(result),
@@ -489,11 +542,12 @@ def prepare_conversion(
     }
 
 
-def add_preview_diff(plan):
+def add_preview_diff(plan, context=3):
     report = plan["report"]
     report["diff"] = preview_diff(
-        plan["input_text"], plan["result"], report["input"], report["output"]
+        plan["input_text"], plan["result"], report["input"], report["output"], context=context
     )
+    report["diff_context"] = context
 
 
 def apply_conversion(plan, *, overwrite=True):
@@ -549,13 +603,17 @@ def main(argv=None):
     )
     parser.add_argument(
         "--dict",
-        default=Path(__file__).with_name("cipher_dict.json"),
         type=Path,
-        help="Mapping JSON (default: cipher_dict.json beside this script)",
+        help="Mapping JSON (default: saved ledger on reverse/verify, otherwise bundled dictionary)",
     )
     parser.add_argument("--dry-run", action="store_true", help="Preview without writing files")
     parser.add_argument(
         "--diff", action="store_true", help="Show a unified diff; implies --dry-run"
+    )
+    parser.add_argument(
+        "--context",
+        type=nonnegative_int,
+        help="Show a diff with N context lines; implies --dry-run",
     )
     parser.add_argument("--json", action="store_true", help="Print a machine-readable report")
     parser.add_argument(
@@ -567,8 +625,10 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.mode != "validate" and args.input is None:
         parser.error("--input is required for forward, reverse, and verify")
-    if args.mode in ("validate", "verify") and (args.output or args.diff or args.dry_run):
-        parser.error("--output, --diff, and --dry-run apply only to forward and reverse")
+    if args.mode in ("validate", "verify") and (
+        args.output or args.diff or args.dry_run or args.context is not None
+    ):
+        parser.error("--output, --diff, --context, and --dry-run apply only to forward and reverse")
     if args.mode == "validate" and args.input:
         parser.error("--input does not apply to dictionary validation")
     if args.mode != "reverse" and (args.strict or args.keep_ledger):
@@ -586,9 +646,9 @@ def main(argv=None):
         )
         report = plan["report"]
         if args.mode in ("forward", "reverse"):
-            if args.diff:
-                add_preview_diff(plan)
-            if not (args.dry_run or args.diff):
+            if args.diff or args.context is not None:
+                add_preview_diff(plan, context=3 if args.context is None else args.context)
+            if not (args.dry_run or args.diff or args.context is not None):
                 apply_conversion(plan)
         emit_report(report, args.json)
         return 0

@@ -27,7 +27,7 @@ from itov.jobs import run_job, wait_job
 from itov.media import verify_video
 from itov.qualification import qualify, save_qualification
 from itov.rotation import PlanningError
-from itov.runtime import launch_command
+from itov.runtime import launch_command, profile_launch_command
 from itov.video import load_spec as load_video_spec
 from itov.video import plan_video, prepare_video
 from itov.workflow import load_json, validate_workflow
@@ -143,6 +143,12 @@ def parser() -> argparse.ArgumentParser:
         if action in {"run", "resume"}:
             item.add_argument("--wait-timeout", type=float, default=120.0)
             item.add_argument("--poll-interval", type=float, default=1.0)
+            item.add_argument(
+                "--vram-profile",
+                type=Path,
+                action="append",
+                help="Bind measured VRAM profiles; retained automatically on resume",
+            )
     inference = commands.add_parser("inference", help="Prepare pinned stock SDXL inference batches")
     inference_actions = inference.add_subparsers(dest="action", required=True)
     for action in ("prepare", "plan"):
@@ -184,6 +190,25 @@ def parser() -> argparse.ArgumentParser:
     item.add_argument("file", type=Path, help="Pinned audiovisual specification JSON")
     item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
     item.add_argument("--json", action="store_true")
+    vram = commands.add_parser("vram", help="Measure exact workloads and check VRAM admission")
+    actions = vram.add_subparsers(dest="action", required=True)
+    server = actions.add_parser(
+        "server", help="Start a stock runtime with in-process memory observation"
+    )
+    server.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+    server.add_argument("--print-command", action="store_true")
+    for action in ("capture", "check"):
+        item = actions.add_parser(action)
+        item.add_argument("file", type=Path, help="Saved batch plan")
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "capture":
+            item.add_argument("--qualification", type=Path, required=True)
+            item.add_argument("--wait-timeout", type=float, default=900)
+        else:
+            item.add_argument("--profile", type=Path, action="append", default=[])
+            item.add_argument("--workers", type=int, default=1)
+            item.add_argument("--save", action="store_true")
     return root
 
 
@@ -280,6 +305,32 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1
+        elif args.command == "vram":
+            from itov import vram
+
+            config = load_config(args.config)
+            if args.action == "server":
+                command = profile_launch_command(config)
+                if args.print_command:
+                    print(json.dumps(command))
+                    return 0
+                return subprocess.run(command, cwd=config.comfyui_root).returncode
+            if args.action == "capture":
+                result = vram.capture(
+                    config, args.file, args.qualification, wait_timeout=args.wait_timeout
+                )
+            else:
+                result = vram.check(
+                    config,
+                    load_plan(args.file),
+                    [vram.load_profile(path) for path in args.profile],
+                    workers=args.workers,
+                )
+                if args.save:
+                    result, path = vram._save(config, "decisions", result, "decision_id")
+                    result = {**result, "path": str(path)}
+            print(json.dumps(result, indent=2))
+            return 0 if result["ok"] else 1
         elif args.command == "av":
             result = mux(load_config(args.config), load_av_spec(args.file))
             print(json.dumps(result, indent=2))
@@ -413,6 +464,7 @@ def main(argv: list[str] | None = None) -> int:
                         args.file,
                         qualification=getattr(args, "qualification", None),
                         resume=args.action == "resume",
+                        vram_profiles=args.vram_profile,
                         prompt_id=getattr(args, "prompt_id", None),
                         timeout=args.timeout,
                         wait_timeout=args.wait_timeout,

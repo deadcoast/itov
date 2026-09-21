@@ -1,0 +1,298 @@
+{
+  "date": "2026-09-21",
+  "python": "3.13.9",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "pre_fix_findings": {
+    "automatic_ledger_mapping": "Ledger does not match this file and dictionary; left untouched.",
+    "destination_ledger": {
+      "output": "alpha fluid_sim\n",
+      "ledger": "unrelated metadata"
+    },
+    "cr_diff": "--- before\n+++ after\n@@ -1 +1 @@\n-alpha\r\n\\ No newline at end of file\n+fluid_sim\r\n\\ No newline at end of file\n"
+  },
+  "focused_tests": {
+    "passed": 169,
+    "new_regressions": 31,
+    "command": "uv run --locked pytest tests/test_cipher.py tests/test_bamboozle_cli.py -q -p no:cacheprovider --basetemp AI/dev_tools/.test-tmp/operations-final",
+    "coverage": [
+      "automatic saved dictionary selection after original dictionary removal",
+      "explicit dictionary mismatch rejection",
+      "malformed ledger refusal without fallback",
+      "version-1 automatic mapping and strict integrity limits",
+      "ledger changes after preview",
+      "destination ledger conflict and newly created ledger rejection",
+      "CR/LF/CRLF and Unicode physical diff lines",
+      "line-ending-only diff detection",
+      "diff context and read-only command behavior",
+      "live preview refresh before save",
+      "legacy and terminal restoration using saved mappings"
+    ]
+  },
+  "development_checks": {
+    "initial_focused_tests": 168,
+    "initial_lint": "E501 on the expanded terminal prompt; split the string and reran lint successfully"
+  },
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "package": {
+    "version": "0.4.0",
+    "wheel_sha256": "69639f6f52160c66fbcbfa4dcf4c00a9aff4553dda3ac39a8161cd4d1d260174",
+    "sdist_sha256": "297aba1bc89450144640e74b0b348895977752ecb6f9cb2841686d8dd444b440",
+    "source_parity": [
+      "__init__.py",
+      "__main__.py",
+      "cipher.py",
+      "cli.py",
+      "cipher_dict.json",
+      "README.md",
+      "development_loop.md"
+    ],
+    "setup_excluded": true
+  },
+  "installed_wheel_checks": {
+    "python": "3.13.9",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "working_directory": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-operations-g54apgjp",
+    "installed_path": "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Lib\\site-packages\\bamboozle",
+    "installed_version": "0.4.0",
+    "installed_source_parity": [
+      "__init__.py",
+      "__main__.py",
+      "cipher.py",
+      "cli.py",
+      "cipher_dict.json",
+      "README.md",
+      "development_loop.md"
+    ],
+    "commands": [
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Bamboozle 0.4.0",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "validate",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "dictionary_valid"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "encode",
+          "sample input.py",
+          "--dict",
+          "custom mapping.json",
+          "--context",
+          "0",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "dictionary_source": "explicit",
+        "integrity": "round_trip_checked",
+        "diff_context": 0
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "preview",
+          "sample input.py",
+          "--dict",
+          "custom mapping.json",
+          "--context",
+          "1",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "dictionary_source": "explicit",
+        "integrity": "round_trip_checked",
+        "diff_context": 1
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "encode",
+          "sample input.py",
+          "--dict",
+          "custom mapping.json",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "saved",
+        "dictionary_source": "explicit",
+        "integrity": "round_trip_checked",
+        "output_saved": true
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "verify",
+          "sample input_safe.py",
+          "--dict",
+          "custom mapping.json",
+          "--json"
+        ],
+        "exit_code": 1,
+        "status": "error",
+        "error": "Ledger does not match this file and dictionary; left untouched.",
+        "output_saved": false
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "verify",
+          "sample input_safe.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "verified",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "preview",
+          "sample input_safe.py",
+          "--reverse",
+          "--context",
+          "0",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged",
+        "diff_context": 0
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "decode",
+          "sample input_safe.py",
+          "--context",
+          "0",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged",
+        "diff_context": 0
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\scm-cipher.exe",
+          "--mode",
+          "reverse",
+          "--input",
+          "sample input_safe.py",
+          "--context",
+          "1",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged",
+        "diff_context": 1
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "bamboozle",
+          "verify",
+          "sample input_safe.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "verified",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "decode",
+          "sample input_safe.py",
+          "-o",
+          "restored file.py",
+          "--strict",
+          "--keep-ledger",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "saved",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged",
+        "output_saved": true
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "decode",
+          "sample input_safe.py",
+          "-o",
+          "other.py",
+          "--force",
+          "--json"
+        ],
+        "exit_code": 1,
+        "status": "error",
+        "error": "Destination has its own cipher ledger: C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-operations-g54apgjp\\.other.py.scm_ledger.json. Choose another output path to preserve that encoded file and its metadata.",
+        "output_saved": false
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "preview",
+          "sample input.py",
+          "--context",
+          "-1"
+        ],
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: bamboozle preview [-h] [--dict DICT] [--json] [-o OUTPUT]\n                         [--context CONTEXT] [--reverse] [--strict]\n                         file\nbamboozle preview: error: argument --context: must be a nonnegative integer"
+      }
+    ],
+    "restore_after_custom_dictionary_removed": true,
+    "bom_cr_unicode_round_trip": true,
+    "explicit_mismatch_rejected": true,
+    "destination_ledger_conflict_preserved": true,
+    "context_commands_read_only": true
+  },
+  "live_terminal": {
+    "launch": ".\\.venv\\Scripts\\bamboozle.exe",
+    "tty": true,
+    "working_directory": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\terminal-operations-_mw4ve8t",
+    "operations": [
+      "decode using saved custom mapping",
+      "edit encoded file while preview open",
+      "refresh",
+      "inspect updated diff and edited-file warning",
+      "save",
+      "quit"
+    ],
+    "saved_exact_refreshed_bytes": true,
+    "ledger_removed_after_save": true,
+    "exit_code": 0
+  },
+  "final_installation": {
+    "version": "0.4.0",
+    "mode": "editable",
+    "package_path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\__init__.py",
+    "validation_status": "dictionary_valid"
+  },
+  "scope": "Local Windows conversion, previews, ledger selection and validation, terminal refresh/save, and installed package. Ledger hashes check consistency rather than independent authenticity. Output and ledger remain separate operations without an exclusive cross-process transaction or crash durability guarantee. Generated-code correctness is not established."
+}

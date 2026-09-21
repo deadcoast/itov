@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from urllib.parse import urlsplit
 
 from itov.config import Config
@@ -35,3 +36,31 @@ def launch_command(config: Config, *, custom_nodes: bool = False) -> list[str]:
     if not custom_nodes:
         command.append("--disable-all-custom-nodes")
     return command
+
+
+def profile_launch_command(config: Config) -> list[str]:
+    command = launch_command(config)
+    directory = config.root / "state/vram/telemetry"
+    if directory.resolve() != directory.absolute():
+        raise ValueError("VRAM telemetry directory redirects")
+    return (
+        command[:2]
+        + [str(Path(__file__).with_name("vram_runtime.py")), str(directory), "--"]
+        + profile_main_argv(config)
+    )
+
+
+def profile_main_argv(config: Config) -> list[str]:
+    directory = config.root / "state/vram"
+    if directory.resolve() != directory.absolute():
+        raise ValueError("VRAM runtime directory redirects")
+    for name in ("user", "asset-index.sqlite", "asset-index.sqlite-wal", "asset-index.sqlite-shm"):
+        path = directory / name
+        if path.resolve() != path.absolute() or path.is_symlink():
+            raise ValueError("VRAM runtime data path redirects")
+    return launch_command(config)[2:] + [
+        "--user-directory",
+        str(directory / "user"),
+        "--database-url",
+        "sqlite:///" + (directory / "asset-index.sqlite").as_posix(),
+    ]

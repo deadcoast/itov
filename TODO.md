@@ -2,7 +2,7 @@
 
 Updated 2026-09-21. This is the working task list for continued development. The [build plan](docs/development-review.md) records design decisions and acceptance evidence; [CHANGELOG.md](CHANGELOG.md) records delivered increments. Original documents under `docs/design_spec/` are design inputs, not proof that their examples work.
 
-Current checkpoint: stage 8 is complete for the bounded audio/A/V baseline. Next development stage: 9, measured VRAM profiles and conservative admission. Image/video defects, human listening and semantic synchronization remain open.
+Current checkpoint: stage 9 is active: measured VRAM profiles and conservative admission. Image/video defects, human listening and semantic synchronization remain open.
 
 ## Working rules
 
@@ -24,7 +24,7 @@ Current checkpoint: stage 8 is complete for the bounded audio/A/V baseline. Next
 | 6. Pinned image inference | Complete for selected baseline | User-selected official SDXL 1.0 + LCM LoRA; four real 1024×1024 outputs; [evidence](docs/evidence/stage-06-inference-20260921.json). Exact prompt compliance and general quality remain open. |
 | 7. Image-to-video | Complete for the bounded baseline | Two real Wan 2.2 TI2V 5B clips, pinned input/model files, sequential execution, full media validation, resume and resource observations; [evidence](docs/evidence/stage-07-video-20260921.json). General quality remains open. |
 | 8. Audio and audiovisual output | Complete for the bounded baseline | Two real Stable Audio Open stereo FLACs and two owned H.264/AAC pairs; full decode, trim/pad, timing, source-frame preservation and repeat verification. [Evidence](docs/evidence/stage-08-audio-20260921.json). Listening and semantic synchronization remain open. |
-| 9. Measured VRAM and parallel admission | **Next** | Reconcile Part 11, measure cold/warm workloads and uncertainty, validate refusal/admission and isolated ownership before parallel GPU jobs. |
+| 9. Measured VRAM and parallel admission | **Active** | Exact-workload cold/warm profiles, in-process allocator telemetry, conservative guarded sequential admission; parallel execution remains a separate qualification gate. |
 | 10. Trigger and scene constraints | Planned | Reconcile Part 12 aliases, scoring and phrase/template schemas against the real catalogs; retain source provenance and explicit constraints. |
 | 11. Training, evaluation and promotion | Planned | Replace design skeletons with selected upstream APIs, dataset provenance, independent acceptance and explicit catalog promotion. |
 | 12. Discovery, lookup, scheduling and curation | Planned | Reconcile Parts 7/8 and 12.1–12.4; build on accepted media contracts and durable ownership rather than filename guesses. |
@@ -54,7 +54,7 @@ Current checkpoint: stage 8 is complete for the bounded audio/A/V baseline. Next
 - [x] Exercise real audio generation, paired video/audio output and completed replay. Synthetic failure-injection tests cover collection pause/resume and retained mux attempts. Keep those boundaries explicit in the separate runtime and source/package evidence.
 - [x] Pass 543 tests against source and the installed wheel, lint/format/build checks, 26-module byte parity, installed audio verification/mux replay and prior-video resume. Update this TODO, development review and changelog before advancing to stage 9.
 
-## Next stage 9 tasks
+## Active stage 9 tasks
 
 - [ ] Reconcile Part 11's fixed reserves, LoRA-strength exponent, attention ratios and block-swap savings with the installed stock loaders. Treat unsupported constants as unverified.
 - [ ] Define versioned measurement records keyed by model/workflow hashes, dimensions/duration, precision, runtime/driver, cache state and device identity.

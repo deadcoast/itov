@@ -377,3 +377,109 @@ def test_powershell_launcher_works_from_another_directory(files):
     assert report["status"] == "preview"
     assert report["input"] == str(source)
     assert not source.with_name("source file_safe.py").exists()
+
+
+def test_cli_and_legacy_restore_custom_mapping_without_dictionary_argument(files):
+    source, mapping = files
+    assert run_cli(["encode", source, "--dict", mapping], source.parent).returncode == 0
+    mapping.unlink()
+    encoded = source.with_name("source file_safe.py")
+    for command in (["verify", encoded], ["preview", encoded, "--reverse"]):
+        result = run_cli([*command, "--json"], source.parent)
+        assert result.returncode == 0, result.stderr
+        assert json.loads(result.stdout)["dictionary_source"] == "ledger"
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(TOOLS / "cipher.py"),
+            "--mode",
+            "reverse",
+            "--input",
+            str(encoded),
+            "--json",
+        ],
+        cwd=source.parent,
+        capture_output=True,
+        text=True,
+        timeout=15,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert Path(json.loads(result.stdout)["output"]).read_bytes() == source.read_bytes()
+
+
+@pytest.mark.parametrize("command", ["encode", "decode", "preview"])
+def test_context_option_implies_a_read_only_diff(files, capsys, command):
+    source, mapping = files
+    source.write_bytes(b"neighbor\nalpha\ntail\n")
+    before = snapshot(source.parent)
+    assert cli.main([command, str(source), "--dict", str(mapping), "--context", "0", "--json"]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["status"] == "preview"
+    assert report["diff_context"] == 0
+    assert "neighbor" not in report["diff"]
+    assert snapshot(source.parent) == before
+
+
+@pytest.mark.parametrize("value", ["-1", "invalid"])
+def test_invalid_context_is_an_argument_error(value):
+    with pytest.raises(SystemExit) as error:
+        cli.main(["preview", "unused.py", "--context", value])
+    assert error.value.code == 2
+
+
+def test_interactive_refresh_reviews_updated_source_before_save(files, monkeypatch, capsys):
+    source, mapping = files
+    answers = iter(["e", str(source), "r", "s", "q"])
+    previews = 0
+
+    def answer(prompt):
+        nonlocal previews
+        if "[S] Save" in prompt:
+            previews += 1
+            if previews == 1:
+                source.write_bytes(b"alpha alpha\r\n")
+        return next(answers)
+
+    monkeypatch.setattr("builtins.input", answer)
+    assert cli.main(["interactive", "--dict", str(mapping)]) == 0
+    shown = capsys.readouterr().out
+    assert previews == 2 and "-alpha alpha" in shown
+    assert source.with_name("source file_safe.py").read_bytes() == b"fluid_sim fluid_sim\r\n"
+
+
+def test_interactive_restore_displays_saved_dictionary(files):
+    source, mapping = files
+    assert run_cli(["encode", source, "--dict", mapping], source.parent).returncode == 0
+    mapping.unlink()
+    encoded = source.with_name("source file_safe.py")
+    result = run_cli(["interactive"], source.parent, f"d\n{encoded}\ns\nq\n")
+    assert result.returncode == 0, result.stderr
+    assert "Dictionary: saved in ledger" in result.stdout
+    assert source.with_name("source file_safe_ready.py").read_bytes() == source.read_bytes()
+
+
+def test_force_does_not_bypass_destination_ledger_conflict(files, capsys):
+    source, mapping = files
+    encoded = cipher.prepare_conversion("forward", source, dict_path=mapping)
+    cipher.apply_conversion(encoded, overwrite=False)
+    output = source.with_name("other.py")
+    output.write_bytes(b"other encoded file")
+    cipher.ledger_path_for(output).write_bytes(b"other ledger")
+    before = snapshot(source.parent)
+    assert (
+        cli.main(["decode", str(encoded["output_path"]), "-o", str(output), "--force", "--json"])
+        == 1
+    )
+    report = json.loads(capsys.readouterr().out)
+    assert "own cipher ledger" in report["error"]
+    assert report["output_saved"] is False
+    assert snapshot(source.parent) == before
+
+
+def test_interactive_preview_preserves_unicode_separators_in_diff_lines(files, capsys):
+    source, mapping = files
+    source.write_text("alpha\u2028tail\n", encoding="utf-8")
+    plan = cipher.prepare_conversion("forward", source, dict_path=mapping)
+    cipher.add_preview_diff(plan)
+    cli.show_preview(plan)
+    assert "-alpha\u2028tail\n+fluid_sim\u2028tail\n" in capsys.readouterr().out

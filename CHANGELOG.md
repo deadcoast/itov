@@ -4,6 +4,14 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Bamboozle restoration and preview improvements
+
+- Advanced SCM dev tools to 0.4.0. Decode, Verify, and reverse Preview now use the dictionary saved in a valid ledger by default, allowing restoration after a custom dictionary is changed or removed. Explicit dictionaries must still match; malformed ledgers never silently fall back. Terminal and JSON reports identify the selected dictionary source and hash.
+- Prevent decoding over a separate destination with its own cipher ledger, including with `--force`, and reject destination ledgers created between preview and save. Existing in-place restoration and version-1 ledger integrity limits remain supported.
+- Added `--context N` for concise or expanded diffs; using it with Encode or Decode always previews without writes. Corrected CR-only newline markers and Unicode separator handling in diffs, while retaining exact source line comparisons and saved bytes.
+- Added Refresh to the terminal preview so changed files can be reloaded and reviewed before saving. Updated both usage guides and the legacy flag interface.
+- Passed all 169 focused tests, Ruff lint/format, and whitespace checks. Built source and wheel packages, checked seven packaged/installed files against source, passed 14 installed-command exercises, and operated the live Windows terminal through edit-during-preview, refresh, and save. Retained [verification evidence](docs/evidence/bamboozle-operations-20260921.json), including the reproduced prior defects and corrected initial lint finding. Checks cover local conversion and operations; ledger hashes remain consistency checks, and output/ledger updates are not a crash-atomic pair.
+
 ### 2026-09-21 — Pinned audio and owned audiovisual composition
 
 - Advanced ITOV to 0.8.0 with `audio prepare`, `audio plan`, `audio verify`, and `av mux`. Added a pinned Stable Audio Open 1.0/T5 baseline using installed stock ComfyUI nodes; 5.746 GB of model files were downloaded and hash-verified locally.

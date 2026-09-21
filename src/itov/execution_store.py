@@ -89,7 +89,7 @@ def open_store(config: Config, *, create: bool) -> sqlite3.Connection:
     return db
 
 
-def claim(db, config: Config, plan: dict, receipt: dict):
+def claim(db, config: Config, plan: dict, receipt: dict, *, vram_guard_id: str | None = None):
     with transaction(db):
         active = db.execute(
             "SELECT plan_id FROM runs WHERE status NOT IN ('succeeded', 'failed', 'abandoned')"
@@ -116,6 +116,11 @@ def claim(db, config: Config, plan: dict, receipt: dict):
             "INSERT INTO events(plan_id, status, observed_at) VALUES (?, 'reserved', ?)",
             (plan["plan_id"], _now()),
         )
+        if vram_guard_id is not None:
+            db.execute(
+                "INSERT INTO events(plan_id, status, observed_at) VALUES (?, ?, ?)",
+                (plan["plan_id"], "vram_guard:" + vram_guard_id, _now()),
+            )
 
 
 def check_run(db, config: Config, plan: dict):

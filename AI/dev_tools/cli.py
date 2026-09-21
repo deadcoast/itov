@@ -19,7 +19,9 @@ def build_parser():
         epilog="Run without arguments for the guided terminal menu. Paths with spaces need quotes.",
     )
     parser.add_argument("--version", action="version", version=f"Bamboozle {__version__}")
-    parser.add_argument("--dict", type=Path, help="Use another mapping JSON file")
+    parser.add_argument(
+        "--dict", type=Path, help="Mapping JSON (restore uses the saved ledger by default)"
+    )
     parser.add_argument("--json", action="store_true", help="Print one JSON execution report")
     commands = parser.add_subparsers(dest="command", metavar="COMMAND")
     for name, help_text in (
@@ -32,7 +34,10 @@ def build_parser():
     ):
         command = commands.add_parser(name, help=help_text, description=help_text)
         command.add_argument(
-            "--dict", type=Path, default=argparse.SUPPRESS, help="Mapping JSON file"
+            "--dict",
+            type=Path,
+            default=argparse.SUPPRESS,
+            help="Mapping JSON (restore uses the saved ledger by default)",
         )
         command.add_argument(
             "--json",
@@ -46,6 +51,11 @@ def build_parser():
             )
         if name in ("encode", "decode", "preview"):
             command.add_argument("-o", "--output", type=Path, help="Choose the destination path")
+            command.add_argument(
+                "--context",
+                type=cipher.nonnegative_int,
+                help="Show a diff with N context lines; implies preview without saving",
+            )
         if name in ("encode", "decode"):
             command.add_argument(
                 "--force", action="store_true", help="Replace an existing destination"
@@ -111,12 +121,15 @@ def prompt_file():
 def show_preview(plan):
     report = plan["report"]
     print(f"\nInput:  {report['input']}\nOutput: {report['output']}")
+    print(cipher.describe_dictionary(report))
     print(cipher.describe_counts(report["counts"]) + ".")
     if report["integrity"] == "edited":
         print("This file was edited after encoding. Review the restored changes before saving.")
     elif report["integrity"] in ("legacy_ledger", "missing_ledger"):
         print("No version-2 integrity record is available; original byte hashes cannot be checked.")
-    lines = report["diff"].splitlines()
+    lines = report["diff"].split("\n")
+    if not lines[-1]:
+        lines.pop()
     if lines:
         print("\n".join(lines[:60]))
         if len(lines) > 60:
@@ -167,7 +180,10 @@ def interactive(dict_path=None):
                 occupied = show_preview(plan)
                 while True:
                     choice = (
-                        input("[S] Save  [F] Full diff  [O] Output path  [C] Cancel (Enter): ")
+                        input(
+                            "[S] Save  [F] Full diff  [O] Output path  "
+                            "[R] Refresh  [C] Cancel (Enter): "
+                        )
                         .strip()
                         .lower()
                     )
@@ -177,6 +193,8 @@ def interactive(dict_path=None):
                     if choice in ("f", "diff"):
                         print(report["diff"] or "No text changes.")
                         continue
+                    if choice in ("r", "refresh"):
+                        break
                     if choice in ("o", "output"):
                         destination = input("Output path (Enter to keep current): ").strip()
                         if destination:
@@ -196,7 +214,9 @@ def interactive(dict_path=None):
                         report.pop("diff", None)
                         cipher.emit_report(report, False)
                         break
-                    print("Choose S, F, O, or C.")
+                    print("Choose S, F, O, R, or C.")
+                if choice in ("r", "refresh"):
+                    continue
                 if choice in ("o", "output") and destination:
                     continue
                 break
@@ -240,9 +260,12 @@ def main(argv=None):
             keep_ledger=getattr(args, "keep_ledger", False),
         )
         report = plan["report"]
-        is_preview = args.command == "preview" or getattr(args, "preview", False)
+        context = getattr(args, "context", None)
+        is_preview = (
+            args.command == "preview" or getattr(args, "preview", False) or context is not None
+        )
         if is_preview:
-            cipher.add_preview_diff(plan)
+            cipher.add_preview_diff(plan, context=3 if context is None else context)
         if mode in ("forward", "reverse") and not (is_preview or getattr(args, "dry_run", False)):
             cipher.apply_conversion(plan, overwrite=args.force)
         cipher.emit_report(report, args.json)
