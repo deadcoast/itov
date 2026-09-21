@@ -1,2 +1,22 @@
 # Keep downloaded ComfyUI installers local.
 /AI/ComfyUI/*.7z
+
+# Local runtimes, model weights, generated media, and workspace state.
+/AI/ComfyUI/ComfyUI_windows_portable/
+/workspace/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# Python development outputs.
+.venv/
+.uv-cache/
+.pytest_cache/
+.ruff_cache/
+.test-tmp/
+__pycache__/
+*.py[cod]
+*.egg-info/
+/dist/
+/build/
