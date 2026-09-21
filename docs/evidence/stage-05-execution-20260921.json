@@ -1,0 +1,1411 @@
+{
+  "observed_at": "2026-09-21T12:14:52.774785+00:00",
+  "scope": "real_local_neutral_image_copy_sequential_execution",
+  "limits": [
+    "No checkpoints or LoRAs installed; no model inference, compatibility, or media quality acceptance.",
+    "Neutral graphs may use ComfyUI's execution cache; this is transport and image-I/O qualification.",
+    "Lost acknowledgement is injected in the local client after an actual successful POST; not a physical network outage.",
+    "The timeout is an intentionally tiny observer budget; no server job is cancelled.",
+    "No parallel GPU workers, power-loss, remote storage, or backup-restore qualification."
+  ],
+  "runs": [
+    {
+      "case": "four_job_sequential",
+      "result": {
+        "ok": true,
+        "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+        "status": "succeeded",
+        "error": null,
+        "jobs": [
+          {
+            "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+            "job_index": 0,
+            "request_id": "f7036cd1-2db9-5385-a349-869bc6a2f39f",
+            "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+            "status": "succeeded",
+            "prompt_id": "367a24bd-ad96-4186-9134-136c40c44016"
+          },
+          {
+            "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+            "job_index": 1,
+            "request_id": "270dc665-1c0e-5d83-a413-1ed6a6b9cf19",
+            "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+            "status": "succeeded",
+            "prompt_id": "a0d08b75-0cfc-4e74-bc1f-872d68b7da1c"
+          },
+          {
+            "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+            "job_index": 2,
+            "request_id": "4288ec35-6b5e-5a16-8a70-6921477b695a",
+            "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+            "status": "succeeded",
+            "prompt_id": "ae7fc35a-5283-4334-8655-b60b32db8134"
+          },
+          {
+            "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+            "job_index": 3,
+            "request_id": "651c587a-4715-5f13-a90b-db54dc0ce253",
+            "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+            "status": "succeeded",
+            "prompt_id": "25a42b01-aeb8-467f-b435-ba5b2d64a5d3"
+          }
+        ],
+        "succeeded": 4,
+        "scope": "sequential_batch_observations"
+      },
+      "records": [
+        {
+          "version": 1,
+          "request_id": "f7036cd1-2db9-5385-a349-869bc6a2f39f",
+          "server": "http://127.0.0.1:8188",
+          "owner": {
+            "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+            "index": 0
+          },
+          "workflow_path": null,
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "workflow": {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "itov/preflight",
+                "images": [
+                  "1",
+                  0
+                ]
+              }
+            }
+          },
+          "created_at": "2026-09-21T12:08:30.535882+00:00",
+          "status": "succeeded",
+          "prompt_id": "367a24bd-ad96-4186-9134-136c40c44016",
+          "artifacts": [
+            {
+              "node_id": "2",
+              "category": "images",
+              "filename": "preflight_00002_.png",
+              "subfolder": "itov",
+              "type": "output",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\f7036cd1-2db9-5385-a349-869bc6a2f39f\\artifact-0000.png",
+              "bytes": 512,
+              "sha256": "c0a56e4ca0f6765cc6208c523c56ad8c3dac9ceceaf8534439b60bc5a5a99b82"
+            }
+          ],
+          "updated_at": "2026-09-21T12:08:31.184926+00:00",
+          "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\f7036cd1-2db9-5385-a349-869bc6a2f39f.json",
+          "acknowledgement": {
+            "prompt_id": "367a24bd-ad96-4186-9134-136c40c44016",
+            "number": 3,
+            "node_errors": {}
+          },
+          "execution": {
+            "prompt": [
+              3,
+              "367a24bd-ad96-4186-9134-136c40c44016",
+              {
+                "1": {
+                  "class_type": "LoadImage",
+                  "inputs": {
+                    "image": "example.png"
+                  }
+                },
+                "2": {
+                  "class_type": "SaveImage",
+                  "inputs": {
+                    "filename_prefix": "itov/preflight",
+                    "images": [
+                      "1",
+                      0
+                    ]
+                  }
+                }
+              },
+              {
+                "itov_request_id": "f7036cd1-2db9-5385-a349-869bc6a2f39f",
+                "client_id": "f7036cd1-2db9-5385-a349-869bc6a2f39f",
+                "create_time": 1789992510701
+              },
+              [
+                "2"
+              ]
+            ],
+            "outputs": {
+              "2": {
+                "images": [
+                  {
+                    "filename": "preflight_00002_.png",
+                    "subfolder": "itov",
+                    "type": "output"
+                  }
+                ]
+              }
+            },
+            "status": {
+              "status_str": "success",
+              "completed": true,
+              "messages": [
+                [
+                  "execution_start",
+                  {
+                    "prompt_id": "367a24bd-ad96-4186-9134-136c40c44016",
+                    "timestamp": 1789992510703
+                  }
+                ],
+                [
+                  "execution_cached",
+                  {
+                    "nodes": [
+                      "1"
+                    ],
+                    "prompt_id": "367a24bd-ad96-4186-9134-136c40c44016",
+                    "timestamp": 1789992510706
+                  }
+                ],
+                [
+                  "execution_success",
+                  {
+                    "prompt_id": "367a24bd-ad96-4186-9134-136c40c44016",
+                    "timestamp": 1789992510715
+                  }
+                ]
+              ]
+            },
+            "meta": {
+              "2": {
+                "node_id": "2",
+                "display_node": "2",
+                "parent_node": null,
+                "real_node_id": "2"
+              }
+            }
+          }
+        },
+        {
+          "version": 1,
+          "request_id": "270dc665-1c0e-5d83-a413-1ed6a6b9cf19",
+          "server": "http://127.0.0.1:8188",
+          "owner": {
+            "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+            "index": 1
+          },
+          "workflow_path": null,
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "workflow": {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "itov/preflight",
+                "images": [
+                  "1",
+                  0
+                ]
+              }
+            }
+          },
+          "created_at": "2026-09-21T12:08:31.192083+00:00",
+          "status": "succeeded",
+          "prompt_id": "a0d08b75-0cfc-4e74-bc1f-872d68b7da1c",
+          "artifacts": [
+            {
+              "node_id": "2",
+              "category": "images",
+              "filename": "preflight_00002_.png",
+              "subfolder": "itov",
+              "type": "output",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\270dc665-1c0e-5d83-a413-1ed6a6b9cf19\\artifact-0000.png",
+              "bytes": 512,
+              "sha256": "c0a56e4ca0f6765cc6208c523c56ad8c3dac9ceceaf8534439b60bc5a5a99b82"
+            }
+          ],
+          "updated_at": "2026-09-21T12:08:31.489275+00:00",
+          "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\270dc665-1c0e-5d83-a413-1ed6a6b9cf19.json",
+          "acknowledgement": {
+            "prompt_id": "a0d08b75-0cfc-4e74-bc1f-872d68b7da1c",
+            "number": 4,
+            "node_errors": {}
+          },
+          "execution": {
+            "prompt": [
+              4,
+              "a0d08b75-0cfc-4e74-bc1f-872d68b7da1c",
+              {
+                "1": {
+                  "class_type": "LoadImage",
+                  "inputs": {
+                    "image": "example.png"
+                  }
+                },
+                "2": {
+                  "class_type": "SaveImage",
+                  "inputs": {
+                    "filename_prefix": "itov/preflight",
+                    "images": [
+                      "1",
+                      0
+                    ]
+                  }
+                }
+              },
+              {
+                "itov_request_id": "270dc665-1c0e-5d83-a413-1ed6a6b9cf19",
+                "client_id": "270dc665-1c0e-5d83-a413-1ed6a6b9cf19",
+                "create_time": 1789992511436
+              },
+              [
+                "2"
+              ]
+            ],
+            "outputs": {
+              "2": {
+                "images": [
+                  {
+                    "filename": "preflight_00002_.png",
+                    "subfolder": "itov",
+                    "type": "output"
+                  }
+                ]
+              }
+            },
+            "status": {
+              "status_str": "success",
+              "completed": true,
+              "messages": [
+                [
+                  "execution_start",
+                  {
+                    "prompt_id": "a0d08b75-0cfc-4e74-bc1f-872d68b7da1c",
+                    "timestamp": 1789992511437
+                  }
+                ],
+                [
+                  "execution_cached",
+                  {
+                    "nodes": [
+                      "1",
+                      "2"
+                    ],
+                    "prompt_id": "a0d08b75-0cfc-4e74-bc1f-872d68b7da1c",
+                    "timestamp": 1789992511439
+                  }
+                ],
+                [
+                  "execution_success",
+                  {
+                    "prompt_id": "a0d08b75-0cfc-4e74-bc1f-872d68b7da1c",
+                    "timestamp": 1789992511439
+                  }
+                ]
+              ]
+            },
+            "meta": {
+              "2": {
+                "node_id": "2",
+                "display_node": "2",
+                "parent_node": null,
+                "real_node_id": "2"
+              }
+            }
+          }
+        },
+        {
+          "version": 1,
+          "request_id": "4288ec35-6b5e-5a16-8a70-6921477b695a",
+          "server": "http://127.0.0.1:8188",
+          "owner": {
+            "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+            "index": 2
+          },
+          "workflow_path": null,
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "workflow": {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "itov/preflight",
+                "images": [
+                  "1",
+                  0
+                ]
+              }
+            }
+          },
+          "created_at": "2026-09-21T12:08:31.497273+00:00",
+          "status": "succeeded",
+          "prompt_id": "ae7fc35a-5283-4334-8655-b60b32db8134",
+          "artifacts": [
+            {
+              "node_id": "2",
+              "category": "images",
+              "filename": "preflight_00002_.png",
+              "subfolder": "itov",
+              "type": "output",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\4288ec35-6b5e-5a16-8a70-6921477b695a\\artifact-0000.png",
+              "bytes": 512,
+              "sha256": "c0a56e4ca0f6765cc6208c523c56ad8c3dac9ceceaf8534439b60bc5a5a99b82"
+            }
+          ],
+          "updated_at": "2026-09-21T12:08:31.836565+00:00",
+          "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\4288ec35-6b5e-5a16-8a70-6921477b695a.json",
+          "acknowledgement": {
+            "prompt_id": "ae7fc35a-5283-4334-8655-b60b32db8134",
+            "number": 5,
+            "node_errors": {}
+          },
+          "execution": {
+            "prompt": [
+              5,
+              "ae7fc35a-5283-4334-8655-b60b32db8134",
+              {
+                "1": {
+                  "class_type": "LoadImage",
+                  "inputs": {
+                    "image": "example.png"
+                  }
+                },
+                "2": {
+                  "class_type": "SaveImage",
+                  "inputs": {
+                    "filename_prefix": "itov/preflight",
+                    "images": [
+                      "1",
+                      0
+                    ]
+                  }
+                }
+              },
+              {
+                "itov_request_id": "4288ec35-6b5e-5a16-8a70-6921477b695a",
+                "client_id": "4288ec35-6b5e-5a16-8a70-6921477b695a",
+                "create_time": 1789992511794
+              },
+              [
+                "2"
+              ]
+            ],
+            "outputs": {
+              "2": {
+                "images": [
+                  {
+                    "filename": "preflight_00002_.png",
+                    "subfolder": "itov",
+                    "type": "output"
+                  }
+                ]
+              }
+            },
+            "status": {
+              "status_str": "success",
+              "completed": true,
+              "messages": [
+                [
+                  "execution_start",
+                  {
+                    "prompt_id": "ae7fc35a-5283-4334-8655-b60b32db8134",
+                    "timestamp": 1789992511795
+                  }
+                ],
+                [
+                  "execution_cached",
+                  {
+                    "nodes": [
+                      "1",
+                      "2"
+                    ],
+                    "prompt_id": "ae7fc35a-5283-4334-8655-b60b32db8134",
+                    "timestamp": 1789992511797
+                  }
+                ],
+                [
+                  "execution_success",
+                  {
+                    "prompt_id": "ae7fc35a-5283-4334-8655-b60b32db8134",
+                    "timestamp": 1789992511797
+                  }
+                ]
+              ]
+            },
+            "meta": {
+              "2": {
+                "node_id": "2",
+                "display_node": "2",
+                "parent_node": null,
+                "real_node_id": "2"
+              }
+            }
+          }
+        },
+        {
+          "version": 1,
+          "request_id": "651c587a-4715-5f13-a90b-db54dc0ce253",
+          "server": "http://127.0.0.1:8188",
+          "owner": {
+            "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+            "index": 3
+          },
+          "workflow_path": null,
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "workflow": {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "itov/preflight",
+                "images": [
+                  "1",
+                  0
+                ]
+              }
+            }
+          },
+          "created_at": "2026-09-21T12:08:31.844963+00:00",
+          "status": "succeeded",
+          "prompt_id": "25a42b01-aeb8-467f-b435-ba5b2d64a5d3",
+          "artifacts": [
+            {
+              "node_id": "2",
+              "category": "images",
+              "filename": "preflight_00002_.png",
+              "subfolder": "itov",
+              "type": "output",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\651c587a-4715-5f13-a90b-db54dc0ce253\\artifact-0000.png",
+              "bytes": 512,
+              "sha256": "c0a56e4ca0f6765cc6208c523c56ad8c3dac9ceceaf8534439b60bc5a5a99b82"
+            }
+          ],
+          "updated_at": "2026-09-21T12:08:32.209575+00:00",
+          "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\651c587a-4715-5f13-a90b-db54dc0ce253.json",
+          "acknowledgement": {
+            "prompt_id": "25a42b01-aeb8-467f-b435-ba5b2d64a5d3",
+            "number": 6,
+            "node_errors": {}
+          },
+          "execution": {
+            "prompt": [
+              6,
+              "25a42b01-aeb8-467f-b435-ba5b2d64a5d3",
+              {
+                "1": {
+                  "class_type": "LoadImage",
+                  "inputs": {
+                    "image": "example.png"
+                  }
+                },
+                "2": {
+                  "class_type": "SaveImage",
+                  "inputs": {
+                    "filename_prefix": "itov/preflight",
+                    "images": [
+                      "1",
+                      0
+                    ]
+                  }
+                }
+              },
+              {
+                "itov_request_id": "651c587a-4715-5f13-a90b-db54dc0ce253",
+                "client_id": "651c587a-4715-5f13-a90b-db54dc0ce253",
+                "create_time": 1789992512134
+              },
+              [
+                "2"
+              ]
+            ],
+            "outputs": {
+              "2": {
+                "images": [
+                  {
+                    "filename": "preflight_00002_.png",
+                    "subfolder": "itov",
+                    "type": "output"
+                  }
+                ]
+              }
+            },
+            "status": {
+              "status_str": "success",
+              "completed": true,
+              "messages": [
+                [
+                  "execution_start",
+                  {
+                    "prompt_id": "25a42b01-aeb8-467f-b435-ba5b2d64a5d3",
+                    "timestamp": 1789992512135
+                  }
+                ],
+                [
+                  "execution_cached",
+                  {
+                    "nodes": [
+                      "1",
+                      "2"
+                    ],
+                    "prompt_id": "25a42b01-aeb8-467f-b435-ba5b2d64a5d3",
+                    "timestamp": 1789992512136
+                  }
+                ],
+                [
+                  "execution_success",
+                  {
+                    "prompt_id": "25a42b01-aeb8-467f-b435-ba5b2d64a5d3",
+                    "timestamp": 1789992512137
+                  }
+                ]
+              ]
+            },
+            "meta": {
+              "2": {
+                "node_id": "2",
+                "display_node": "2",
+                "parent_node": null,
+                "real_node_id": "2"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "lost_ack_reconciled_without_resubmission",
+      "result": {
+        "ok": true,
+        "plan_id": "086e39aea02a9feca8aad51114a802632b2562bf3ebd2b110bbac127400a0346",
+        "status": "succeeded",
+        "error": null,
+        "jobs": [
+          {
+            "plan_id": "086e39aea02a9feca8aad51114a802632b2562bf3ebd2b110bbac127400a0346",
+            "job_index": 0,
+            "request_id": "7ae0066f-96d3-5480-96e9-fd42f592c273",
+            "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+            "status": "succeeded",
+            "prompt_id": "12e81f7d-c363-4635-9613-04b17a1b8b28"
+          },
+          {
+            "plan_id": "086e39aea02a9feca8aad51114a802632b2562bf3ebd2b110bbac127400a0346",
+            "job_index": 1,
+            "request_id": "c9aad4ab-6b64-5f33-84e9-86f5faa892f0",
+            "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+            "status": "succeeded",
+            "prompt_id": "f674b884-ead1-4679-8f33-e1fce1fd4849"
+          }
+        ],
+        "succeeded": 2,
+        "scope": "sequential_batch_observations"
+      },
+      "records": [
+        {
+          "version": 1,
+          "request_id": "7ae0066f-96d3-5480-96e9-fd42f592c273",
+          "server": "http://127.0.0.1:8188",
+          "owner": {
+            "plan_id": "086e39aea02a9feca8aad51114a802632b2562bf3ebd2b110bbac127400a0346",
+            "index": 0
+          },
+          "workflow_path": null,
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "workflow": {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "itov/preflight",
+                "images": [
+                  "1",
+                  0
+                ]
+              }
+            }
+          },
+          "created_at": "2026-09-21T12:14:53.445432+00:00",
+          "status": "succeeded",
+          "prompt_id": "12e81f7d-c363-4635-9613-04b17a1b8b28",
+          "artifacts": [
+            {
+              "node_id": "2",
+              "category": "images",
+              "filename": "preflight_00002_.png",
+              "subfolder": "itov",
+              "type": "output",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\7ae0066f-96d3-5480-96e9-fd42f592c273\\artifact-0000.png",
+              "bytes": 512,
+              "sha256": "c0a56e4ca0f6765cc6208c523c56ad8c3dac9ceceaf8534439b60bc5a5a99b82"
+            }
+          ],
+          "updated_at": "2026-09-21T12:14:53.921579+00:00",
+          "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\7ae0066f-96d3-5480-96e9-fd42f592c273.json",
+          "server_error": null,
+          "reconciled_from": "server_request_id_and_exact_workflow",
+          "execution": {
+            "prompt": [
+              7,
+              "12e81f7d-c363-4635-9613-04b17a1b8b28",
+              {
+                "1": {
+                  "class_type": "LoadImage",
+                  "inputs": {
+                    "image": "example.png"
+                  }
+                },
+                "2": {
+                  "class_type": "SaveImage",
+                  "inputs": {
+                    "filename_prefix": "itov/preflight",
+                    "images": [
+                      "1",
+                      0
+                    ]
+                  }
+                }
+              },
+              {
+                "itov_request_id": "7ae0066f-96d3-5480-96e9-fd42f592c273",
+                "client_id": "7ae0066f-96d3-5480-96e9-fd42f592c273",
+                "create_time": 1789992893625
+              },
+              [
+                "2"
+              ]
+            ],
+            "outputs": {
+              "2": {
+                "images": [
+                  {
+                    "filename": "preflight_00002_.png",
+                    "subfolder": "itov",
+                    "type": "output"
+                  }
+                ]
+              }
+            },
+            "status": {
+              "status_str": "success",
+              "completed": true,
+              "messages": [
+                [
+                  "execution_start",
+                  {
+                    "prompt_id": "12e81f7d-c363-4635-9613-04b17a1b8b28",
+                    "timestamp": 1789992893626
+                  }
+                ],
+                [
+                  "execution_cached",
+                  {
+                    "nodes": [
+                      "1",
+                      "2"
+                    ],
+                    "prompt_id": "12e81f7d-c363-4635-9613-04b17a1b8b28",
+                    "timestamp": 1789992893627
+                  }
+                ],
+                [
+                  "execution_success",
+                  {
+                    "prompt_id": "12e81f7d-c363-4635-9613-04b17a1b8b28",
+                    "timestamp": 1789992893627
+                  }
+                ]
+              ]
+            },
+            "meta": {
+              "2": {
+                "node_id": "2",
+                "display_node": "2",
+                "parent_node": null,
+                "real_node_id": "2"
+              }
+            }
+          }
+        },
+        {
+          "version": 1,
+          "request_id": "c9aad4ab-6b64-5f33-84e9-86f5faa892f0",
+          "server": "http://127.0.0.1:8188",
+          "owner": {
+            "plan_id": "086e39aea02a9feca8aad51114a802632b2562bf3ebd2b110bbac127400a0346",
+            "index": 1
+          },
+          "workflow_path": null,
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "workflow": {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "itov/preflight",
+                "images": [
+                  "1",
+                  0
+                ]
+              }
+            }
+          },
+          "created_at": "2026-09-21T12:14:53.928118+00:00",
+          "status": "succeeded",
+          "prompt_id": "f674b884-ead1-4679-8f33-e1fce1fd4849",
+          "artifacts": [
+            {
+              "node_id": "2",
+              "category": "images",
+              "filename": "preflight_00002_.png",
+              "subfolder": "itov",
+              "type": "output",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\c9aad4ab-6b64-5f33-84e9-86f5faa892f0\\artifact-0000.png",
+              "bytes": 512,
+              "sha256": "c0a56e4ca0f6765cc6208c523c56ad8c3dac9ceceaf8534439b60bc5a5a99b82"
+            }
+          ],
+          "updated_at": "2026-09-21T12:14:54.146575+00:00",
+          "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\c9aad4ab-6b64-5f33-84e9-86f5faa892f0.json",
+          "acknowledgement": {
+            "prompt_id": "f674b884-ead1-4679-8f33-e1fce1fd4849",
+            "number": 8,
+            "node_errors": {}
+          },
+          "execution": {
+            "prompt": [
+              8,
+              "f674b884-ead1-4679-8f33-e1fce1fd4849",
+              {
+                "1": {
+                  "class_type": "LoadImage",
+                  "inputs": {
+                    "image": "example.png"
+                  }
+                },
+                "2": {
+                  "class_type": "SaveImage",
+                  "inputs": {
+                    "filename_prefix": "itov/preflight",
+                    "images": [
+                      "1",
+                      0
+                    ]
+                  }
+                }
+              },
+              {
+                "itov_request_id": "c9aad4ab-6b64-5f33-84e9-86f5faa892f0",
+                "client_id": "c9aad4ab-6b64-5f33-84e9-86f5faa892f0",
+                "create_time": 1789992894115
+              },
+              [
+                "2"
+              ]
+            ],
+            "outputs": {
+              "2": {
+                "images": [
+                  {
+                    "filename": "preflight_00002_.png",
+                    "subfolder": "itov",
+                    "type": "output"
+                  }
+                ]
+              }
+            },
+            "status": {
+              "status_str": "success",
+              "completed": true,
+              "messages": [
+                [
+                  "execution_start",
+                  {
+                    "prompt_id": "f674b884-ead1-4679-8f33-e1fce1fd4849",
+                    "timestamp": 1789992894116
+                  }
+                ],
+                [
+                  "execution_cached",
+                  {
+                    "nodes": [
+                      "1",
+                      "2"
+                    ],
+                    "prompt_id": "f674b884-ead1-4679-8f33-e1fce1fd4849",
+                    "timestamp": 1789992894116
+                  }
+                ],
+                [
+                  "execution_success",
+                  {
+                    "prompt_id": "f674b884-ead1-4679-8f33-e1fce1fd4849",
+                    "timestamp": 1789992894117
+                  }
+                ]
+              ]
+            },
+            "meta": {
+              "2": {
+                "node_id": "2",
+                "display_node": "2",
+                "parent_node": null,
+                "real_node_id": "2"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "timeout_resume_same_prompt",
+      "result": {
+        "ok": true,
+        "plan_id": "e0a5c926fafd2e322326b630fa36e29859497417fd57d9b23ed5f74e826a25dd",
+        "status": "succeeded",
+        "error": null,
+        "jobs": [
+          {
+            "plan_id": "e0a5c926fafd2e322326b630fa36e29859497417fd57d9b23ed5f74e826a25dd",
+            "job_index": 0,
+            "request_id": "699a9a03-8fdc-59c6-90dc-81e507112f6f",
+            "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+            "status": "succeeded",
+            "prompt_id": "8ad727ef-aeb9-4ac0-ab42-60536193066a"
+          }
+        ],
+        "succeeded": 1,
+        "scope": "sequential_batch_observations"
+      },
+      "records": [
+        {
+          "version": 1,
+          "request_id": "699a9a03-8fdc-59c6-90dc-81e507112f6f",
+          "server": "http://127.0.0.1:8188",
+          "owner": {
+            "plan_id": "e0a5c926fafd2e322326b630fa36e29859497417fd57d9b23ed5f74e826a25dd",
+            "index": 0
+          },
+          "workflow_path": null,
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "workflow": {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "itov/preflight",
+                "images": [
+                  "1",
+                  0
+                ]
+              }
+            }
+          },
+          "created_at": "2026-09-21T12:14:54.566586+00:00",
+          "status": "succeeded",
+          "prompt_id": "8ad727ef-aeb9-4ac0-ab42-60536193066a",
+          "artifacts": [
+            {
+              "node_id": "2",
+              "category": "images",
+              "filename": "preflight_00002_.png",
+              "subfolder": "itov",
+              "type": "output",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\699a9a03-8fdc-59c6-90dc-81e507112f6f\\artifact-0000.png",
+              "bytes": 512,
+              "sha256": "c0a56e4ca0f6765cc6208c523c56ad8c3dac9ceceaf8534439b60bc5a5a99b82"
+            }
+          ],
+          "updated_at": "2026-09-21T12:14:54.845920+00:00",
+          "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\699a9a03-8fdc-59c6-90dc-81e507112f6f.json",
+          "acknowledgement": {
+            "prompt_id": "8ad727ef-aeb9-4ac0-ab42-60536193066a",
+            "number": 9,
+            "node_errors": {}
+          },
+          "execution": {
+            "prompt": [
+              9,
+              "8ad727ef-aeb9-4ac0-ab42-60536193066a",
+              {
+                "1": {
+                  "class_type": "LoadImage",
+                  "inputs": {
+                    "image": "example.png"
+                  }
+                },
+                "2": {
+                  "class_type": "SaveImage",
+                  "inputs": {
+                    "filename_prefix": "itov/preflight",
+                    "images": [
+                      "1",
+                      0
+                    ]
+                  }
+                }
+              },
+              {
+                "itov_request_id": "699a9a03-8fdc-59c6-90dc-81e507112f6f",
+                "client_id": "699a9a03-8fdc-59c6-90dc-81e507112f6f",
+                "create_time": 1789992894761
+              },
+              [
+                "2"
+              ]
+            ],
+            "outputs": {
+              "2": {
+                "images": [
+                  {
+                    "filename": "preflight_00002_.png",
+                    "subfolder": "itov",
+                    "type": "output"
+                  }
+                ]
+              }
+            },
+            "status": {
+              "status_str": "success",
+              "completed": true,
+              "messages": [
+                [
+                  "execution_start",
+                  {
+                    "prompt_id": "8ad727ef-aeb9-4ac0-ab42-60536193066a",
+                    "timestamp": 1789992894762
+                  }
+                ],
+                [
+                  "execution_cached",
+                  {
+                    "nodes": [
+                      "1",
+                      "2"
+                    ],
+                    "prompt_id": "8ad727ef-aeb9-4ac0-ab42-60536193066a",
+                    "timestamp": 1789992894763
+                  }
+                ],
+                [
+                  "execution_success",
+                  {
+                    "prompt_id": "8ad727ef-aeb9-4ac0-ab42-60536193066a",
+                    "timestamp": 1789992894763
+                  }
+                ]
+              ]
+            },
+            "meta": {
+              "2": {
+                "node_id": "2",
+                "display_node": "2",
+                "parent_node": null,
+                "real_node_id": "2"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "qualification": {
+    "version": 1,
+    "profile": "stock-local-v1",
+    "scope": "runtime_schema_and_asset_binding",
+    "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+    "server": "http://127.0.0.1:8188",
+    "runtime": {
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8188",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes"
+      ],
+      "comfyui_version": "0.37.0",
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130"
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0
+      }
+    ],
+    "node_schema_sha256": "65a1dc93ec37a7df460c53413ee75fd243d280231cccb7833d8258bcc51c3b50",
+    "files": [
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\folder_paths.py",
+        "bytes": 23745,
+        "sha256": "a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "bytes": 25024,
+        "sha256": "5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py",
+        "bytes": 111280,
+        "sha256": "4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input\\example.png",
+        "bytes": 243,
+        "sha256": "f0bd095306c785347fcd260ebcd40a26b1c837d5006581b21d9b800e28950afb"
+      }
+    ],
+    "jobs": 4,
+    "qualification_id": "36349395a20289a547dafd6f73a19e24e0fb180a62b9c8edf9531d3de0572ff4"
+  },
+  "completed_resume": {
+    "result": {
+      "ok": true,
+      "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+      "status": "succeeded",
+      "error": null,
+      "jobs": [
+        {
+          "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+          "job_index": 0,
+          "request_id": "f7036cd1-2db9-5385-a349-869bc6a2f39f",
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "status": "succeeded",
+          "prompt_id": "367a24bd-ad96-4186-9134-136c40c44016"
+        },
+        {
+          "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+          "job_index": 1,
+          "request_id": "270dc665-1c0e-5d83-a413-1ed6a6b9cf19",
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "status": "succeeded",
+          "prompt_id": "a0d08b75-0cfc-4e74-bc1f-872d68b7da1c"
+        },
+        {
+          "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+          "job_index": 2,
+          "request_id": "4288ec35-6b5e-5a16-8a70-6921477b695a",
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "status": "succeeded",
+          "prompt_id": "ae7fc35a-5283-4334-8655-b60b32db8134"
+        },
+        {
+          "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+          "job_index": 3,
+          "request_id": "651c587a-4715-5f13-a90b-db54dc0ce253",
+          "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+          "status": "succeeded",
+          "prompt_id": "25a42b01-aeb8-467f-b435-ba5b2d64a5d3"
+        }
+      ],
+      "succeeded": 4,
+      "scope": "sequential_batch_observations"
+    },
+    "network_requests": 0
+  },
+  "lost_ack_initial": {
+    "ok": false,
+    "plan_id": "086e39aea02a9feca8aad51114a802632b2562bf3ebd2b110bbac127400a0346",
+    "status": "paused",
+    "error": "Qualification injection: acknowledgement lost after real server acceptance",
+    "jobs": [
+      {
+        "plan_id": "086e39aea02a9feca8aad51114a802632b2562bf3ebd2b110bbac127400a0346",
+        "job_index": 0,
+        "request_id": "7ae0066f-96d3-5480-96e9-fd42f592c273",
+        "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+        "status": "submission_unknown",
+        "prompt_id": null
+      },
+      {
+        "plan_id": "086e39aea02a9feca8aad51114a802632b2562bf3ebd2b110bbac127400a0346",
+        "job_index": 1,
+        "request_id": "c9aad4ab-6b64-5f33-84e9-86f5faa892f0",
+        "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+        "status": "reserved",
+        "prompt_id": null
+      }
+    ],
+    "succeeded": 0,
+    "scope": "sequential_batch_observations"
+  },
+  "timeout_initial": {
+    "ok": false,
+    "plan_id": "e0a5c926fafd2e322326b630fa36e29859497417fd57d9b23ed5f74e826a25dd",
+    "status": "paused",
+    "error": "Stopped waiting; the server job may still run. Resume with job wait.",
+    "jobs": [
+      {
+        "plan_id": "e0a5c926fafd2e322326b630fa36e29859497417fd57d9b23ed5f74e826a25dd",
+        "job_index": 0,
+        "request_id": "699a9a03-8fdc-59c6-90dc-81e507112f6f",
+        "workflow_sha256": "38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498",
+        "status": "timed_out",
+        "prompt_id": "8ad727ef-aeb9-4ac0-ab42-60536193066a"
+      }
+    ],
+    "succeeded": 0,
+    "scope": "sequential_batch_observations"
+  },
+  "request_trace": [
+    {
+      "method": "GET",
+      "endpoint": "/system_stats",
+      "observed_at": "2026-09-21T12:14:53.124803+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/object_info",
+      "observed_at": "2026-09-21T12:14:53.128028+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/system_stats",
+      "observed_at": "2026-09-21T12:14:53.298829+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/object_info",
+      "observed_at": "2026-09-21T12:14:53.301535+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/system_stats",
+      "observed_at": "2026-09-21T12:14:53.484864+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/object_info",
+      "observed_at": "2026-09-21T12:14:53.488022+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/queue",
+      "observed_at": "2026-09-21T12:14:53.598722+00:00",
+      "request_id": null
+    },
+    {
+      "method": "POST",
+      "endpoint": "/prompt",
+      "observed_at": "2026-09-21T12:14:53.613091+00:00",
+      "request_id": "7ae0066f-96d3-5480-96e9-fd42f592c273"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/queue",
+      "observed_at": "2026-09-21T12:14:53.669021+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/history?max_items=200",
+      "observed_at": "2026-09-21T12:14:53.873704+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/history/12e81f7d-c363-4635-9613-04b17a1b8b28",
+      "observed_at": "2026-09-21T12:14:53.894132+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/system_stats",
+      "observed_at": "2026-09-21T12:14:53.965895+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/object_info",
+      "observed_at": "2026-09-21T12:14:53.978467+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/queue",
+      "observed_at": "2026-09-21T12:14:54.094362+00:00",
+      "request_id": null
+    },
+    {
+      "method": "POST",
+      "endpoint": "/prompt",
+      "observed_at": "2026-09-21T12:14:54.113471+00:00",
+      "request_id": "c9aad4ab-6b64-5f33-84e9-86f5faa892f0"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/history/f674b884-ead1-4679-8f33-e1fce1fd4849",
+      "observed_at": "2026-09-21T12:14:54.138050+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/system_stats",
+      "observed_at": "2026-09-21T12:14:54.233777+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/object_info",
+      "observed_at": "2026-09-21T12:14:54.246015+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/system_stats",
+      "observed_at": "2026-09-21T12:14:54.418025+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/object_info",
+      "observed_at": "2026-09-21T12:14:54.421207+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/system_stats",
+      "observed_at": "2026-09-21T12:14:54.602742+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/object_info",
+      "observed_at": "2026-09-21T12:14:54.615134+00:00",
+      "request_id": null
+    },
+    {
+      "method": "GET",
+      "endpoint": "/queue",
+      "observed_at": "2026-09-21T12:14:54.743820+00:00",
+      "request_id": null
+    },
+    {
+      "method": "POST",
+      "endpoint": "/prompt",
+      "observed_at": "2026-09-21T12:14:54.759377+00:00",
+      "request_id": "699a9a03-8fdc-59c6-90dc-81e507112f6f"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/history/8ad727ef-aeb9-4ac0-ab42-60536193066a",
+      "observed_at": "2026-09-21T12:14:54.828076+00:00",
+      "request_id": null
+    }
+  ],
+  "pixel_checks": [
+    {
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\f7036cd1-2db9-5385-a349-869bc6a2f39f\\artifact-0000.png",
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f",
+      "pixel_identical": true
+    },
+    {
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\270dc665-1c0e-5d83-a413-1ed6a6b9cf19\\artifact-0000.png",
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f",
+      "pixel_identical": true
+    },
+    {
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\4288ec35-6b5e-5a16-8a70-6921477b695a\\artifact-0000.png",
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f",
+      "pixel_identical": true
+    },
+    {
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\651c587a-4715-5f13-a90b-db54dc0ce253\\artifact-0000.png",
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f",
+      "pixel_identical": true
+    },
+    {
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\7ae0066f-96d3-5480-96e9-fd42f592c273\\artifact-0000.png",
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f",
+      "pixel_identical": true
+    },
+    {
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\c9aad4ab-6b64-5f33-84e9-86f5faa892f0\\artifact-0000.png",
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f",
+      "pixel_identical": true
+    },
+    {
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\699a9a03-8fdc-59c6-90dc-81e507112f6f\\artifact-0000.png",
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f",
+      "pixel_identical": true
+    }
+  ],
+  "catalog_head_unchanged": "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+  "prior_standalone_jobs_unchanged": {
+    "2c984936-344f-42af-aec4-ada4d9a663dd.json": "d7989b456a979355e0cfae3a7fb4f3ead2b78fa39eeee8b40ed21d331cb3a7ee",
+    "87128584-281d-4bb3-af72-c0963c9a7c21.json": "73b387317673e1dfecd87b5b88f97ff8fb565c3b13fd110c731d8e0fb2eaae87",
+    "ee416183-a0f6-4161-9190-7d6c9e3fab8c.json": "047d103ae3ed6caa06580c1c31560cec62a68abb182a7bf90acb7f5c5e93a7e1"
+  },
+  "passed": true
+}

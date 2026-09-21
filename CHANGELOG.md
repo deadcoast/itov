@@ -4,6 +4,26 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Qualified sequential batch execution
+
+- Advanced development to 0.5.0 and implemented opt-in `batch qualify`, `run`, `status`, `resume`, and `abandon` commands.
+- Added immutable stock-runtime qualification receipts with live schema checks, controlled launch arguments, runtime/input/model hashes, exact planned LoRA loader resolution, safe output prefixes, and explicit sampler seed coverage. Recheck qualification before each new submission.
+- Added transactional whole-batch ownership and permanent workspace seed reservations, deterministic per-job IDs, execution observations, and an OS-owned dispatcher lock. Only verified output collection permits the next job.
+- Added safe acknowledgement reconciliation using exact server request IDs and graphs, timeout/crash resume without automatic resubmission, missing/regressed ownership refusal, and conservative abandonment that keeps seeds and refuses unresolved work.
+- Qualified seven actual neutral ComfyUI jobs across a four-job sequential run, a two-job lost-acknowledgement recovery run, and a timeout/resume run. All outputs were pixel-identical; completed resume made zero runtime requests. Retained [real execution evidence](docs/evidence/stage-05-execution-20260921.json).
+- Added [execution and recovery guidance](docs/batch-execution.md), updated the build plan, and retained the original eleven design documents. Checkpoint/LoRA inference, custom nodes, video/audio generation, parallel GPU workers, power loss, and backup restore remain unqualified.
+
+### 2026-09-21 — Deterministic batch and rotation planning
+
+- Advanced development to 0.4.0 and completed the planning portion of build-plan gate four.
+- Added `itov batch plan` and `batch verify`, clean catalog-head pinning, explicit seed/LoRA loader bindings, exact workflow expansion, asset provenance, and optional immutable plan persistence.
+- Added versioned deterministic weighted selection, preset/category/LoRA cooldowns, active/model/slot filtering, hard and explicit soft-conflict handling, preference and synergy weights, and configurable strength budgets that preserve declared minima.
+- Added unsigned 64-bit seed derivation with in-plan collision checks and overflow rejection. Exhausted or oversized requests fail explicitly without saving partial plans or relaxing constraints.
+- Added frozen random-draw, selection, strength, and workflow-hash vectors, cross-process reproducibility checks, replay/tamper checks, and a neutral planning example. Retained [local planning evidence](docs/evidence/stage-04-planning-20260921.json) and [verification evidence](docs/evidence/stage-04-verification-20260921.json).
+- Passed all 234 tests against source on Python 3.13.9 and all 234 against the installed wheel on Python 3.11.14, including identical frozen rotation/workflow vectors. Lint, formatting, wheel/source-distribution builds, and byte parity for all 16 packaged source modules passed.
+- Documented request fields, algorithm order, provenance, and limits in [batch planning guidance](docs/batch-planning.md). Catalog/ledger schema v1 remains compatible.
+- Batch submission, global seed/history reservation, actual model and loader-name qualification, and GPU concurrency remain open. Planning does not queue work or change render history.
+
 ### 2026-09-21 — Catalog schemas and recoverable revision history
 
 - Advanced development to 0.3.0 and implemented build-plan gate three for catalog revisions.

@@ -4,17 +4,22 @@ from __future__ import annotations
 
 import argparse
 import json
+import sqlite3
 import subprocess
 import sys
 from pathlib import Path
 
 from itov import __version__
+from itov.batch import create_plan, load_plan, load_request, save_plan, verify_plan
+from itov.batch_execution import abandon_batch, batch_status, run_batch
 from itov.catalog import load_catalog, verify_assets
 from itov.catalog_store import CatalogStore
 from itov.comfyui import ComfyUIClient, ComfyUIError
 from itov.config import DEFAULT_URL, initialize, load_config, validate_timeout
 from itov.doctor import diagnose
 from itov.jobs import run_job, wait_job
+from itov.qualification import qualify, save_qualification
+from itov.rotation import PlanningError
 from itov.runtime import launch_command
 from itov.workflow import load_json, validate_workflow
 
@@ -102,6 +107,33 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--expected-head", required=action == "import")
         if action in {"validate", "verify"}:
             item.add_argument("--check-files", action="store_true")
+    batch = commands.add_parser("batch", help="Plan, qualify, and execute sequential batches")
+    batch_actions = batch.add_subparsers(dest="action", required=True)
+    for action in ("plan", "verify"):
+        item = batch_actions.add_parser(action)
+        item.add_argument(
+            "file", type=Path, help="Planning request" if action == "plan" else "Saved plan"
+        )
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "plan":
+            item.add_argument(
+                "--save", action="store_true", help="Save under workspace/state/plans"
+            )
+    for action in ("qualify", "run", "resume", "status", "abandon"):
+        item = batch_actions.add_parser(action)
+        item.add_argument("file", type=Path, help="Saved immutable batch plan")
+        _connection_arguments(item)
+        item.add_argument("--json", action="store_true")
+        if action == "qualify":
+            item.add_argument("--save", action="store_true")
+        if action == "run":
+            item.add_argument("--qualification", type=Path, required=True)
+        if action == "resume":
+            item.add_argument("--prompt-id", help="Reconcile only with matching server provenance")
+        if action in {"run", "resume"}:
+            item.add_argument("--wait-timeout", type=float, default=120.0)
+            item.add_argument("--poll-interval", type=float, default=1.0)
     return root
 
 
@@ -214,6 +246,81 @@ def main(argv: list[str] | None = None) -> int:
                 if "recovery" in result:
                     print(f"Recovery: {result['recovery']}")
             return 0 if result["ok"] else 1
+        elif args.command == "batch":
+            workspace = load_config(args.config).root
+            if args.action == "plan":
+                plan = create_plan(workspace, load_request(args.file))
+                path = save_plan(workspace, plan) if args.save else None
+                result = {"ok": True, "plan": plan, "path": str(path) if path else None}
+                if args.json:
+                    print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
+                else:
+                    print(f"Planned {len(plan['jobs'])} jobs: {plan['plan_id']}")
+                    for job in plan["jobs"][:10]:
+                        stack = ", ".join(
+                            f"{item['id']}@{item['strength_milli']}/1000" for item in job["loras"]
+                        )
+                        print(
+                            f"  {job['index'] + 1}: {job['preset']} seed={job['seed']} "
+                            f"LoRAs={stack or 'none'}"
+                        )
+                    if len(plan["jobs"]) > 10:
+                        print("  Use --json to inspect all jobs.")
+                    if path:
+                        print(f"Plan: {path}")
+                    print("Planning only; no jobs submitted or render history changed.")
+            elif args.action == "verify":
+                result = verify_plan(workspace, args.file)
+                print(
+                    json.dumps(result, indent=2)
+                    if args.json
+                    else f"PASS {result['jobs']} jobs reproduced: {result['plan_id']}"
+                )
+            elif args.action == "qualify":
+                config = load_config(args.config)
+                receipt = qualify(config, load_plan(args.file), timeout=args.timeout)
+                path = save_qualification(config, receipt) if args.save else None
+                result = {"ok": True, "qualification": receipt, "path": str(path) if path else None}
+                if args.json:
+                    print(json.dumps(result, indent=2))
+                else:
+                    print(f"PASS {receipt['scope']}: {receipt['jobs']} jobs")
+                    print(f"Qualification: {path or receipt['qualification_id']}")
+                    print("Preflight only; model inference and output quality require execution.")
+            else:
+                config = load_config(args.config)
+                if args.action in {"status", "abandon"}:
+                    operation = batch_status if args.action == "status" else abandon_batch
+                    result = operation(config, args.file)
+                else:
+                    result = run_batch(
+                        config,
+                        args.file,
+                        qualification=getattr(args, "qualification", None),
+                        resume=args.action == "resume",
+                        prompt_id=getattr(args, "prompt_id", None),
+                        timeout=args.timeout,
+                        wait_timeout=args.wait_timeout,
+                        poll_interval=args.poll_interval,
+                    )
+                if args.json:
+                    print(json.dumps(result, indent=2))
+                else:
+                    print(
+                        f"{result['status'].upper()} "
+                        f"{result['succeeded']}/{len(result['jobs'])} jobs"
+                    )
+                    print(f"Plan: {result['plan_id']}")
+                    if result.get("error"):
+                        print(result["error"])
+                    for job in result["jobs"]:
+                        print(
+                            f"  {job['job_index'] + 1}: {job['status']} "
+                            f"request={job['request_id']} "
+                            f"prompt={job['prompt_id'] or 'unknown'}"
+                        )
+                return 0 if result["ok"] or args.action in {"status", "abandon"} else 1
+            return 0
         else:
             graph = load_json(args.file)
             registry = None
@@ -227,7 +334,16 @@ def main(argv: list[str] | None = None) -> int:
             result = validate_workflow(graph, registry).to_dict()
         _print_result(result, as_json=args.json)
         return 0 if result.get("ok", result.get("valid", False)) else 1
-    except (OSError, ValueError, ComfyUIError) as error:
+    except PlanningError as error:
+        if getattr(args, "json", False):
+            print(json.dumps(error.to_dict()))
+        else:
+            print(
+                f"itov: {error.code} at job index {error.index}: {error}; {error.details}",
+                file=sys.stderr,
+            )
+        return 2
+    except (OSError, ValueError, ComfyUIError, sqlite3.Error) as error:
         if getattr(args, "json", False):
             print(json.dumps({"ok": False, "error": str(error)}))
         else:

@@ -1,0 +1,147 @@
+{
+  "algorithm": "itov-rotation-v1",
+  "description": "Frozen protocol-fixture selection and serialized workflow vectors; not model or render evidence.",
+  "seed": 19,
+  "bounds": [
+    1,
+    2,
+    3,
+    10,
+    1000,
+    1208925819614629174706193
+  ],
+  "draws": [
+    0,
+    1,
+    0,
+    3,
+    234,
+    1182832626110927860389040
+  ],
+  "picks": [
+    {
+      "preset": "beta",
+      "seed": 119,
+      "loras": [
+        [
+          "light-a",
+          719
+        ],
+        [
+          "style-b",
+          434
+        ]
+      ],
+      "workflow_sha256": "abc9ee02c3ef132b0d94f1cc2e529a16a3c3eca48d3f732c00809cdb04e04b7a"
+    },
+    {
+      "preset": "alpha",
+      "seed": 126,
+      "loras": [
+        [
+          "light-b",
+          766
+        ],
+        [
+          "style-b",
+          357
+        ]
+      ],
+      "workflow_sha256": "957a8ba9f500bc0d978c3f7b5b7a0481a0c7cc45bf0bf16c98b2110ab8189a5a"
+    },
+    {
+      "preset": "beta",
+      "seed": 133,
+      "loras": [
+        [
+          "light-b",
+          423
+        ],
+        [
+          "style-b",
+          342
+        ]
+      ],
+      "workflow_sha256": "8c346f6472143b5c442009776e9b62b063479a5203fa047bc27a58b6038a942e"
+    },
+    {
+      "preset": "alpha",
+      "seed": 140,
+      "loras": [
+        [
+          "light-b",
+          844
+        ],
+        [
+          "style-b",
+          300
+        ]
+      ],
+      "workflow_sha256": "75547115cc828f6711ab9303727aecc2aa1167e43bff447e096e74ff34e8bfb5"
+    },
+    {
+      "preset": "beta",
+      "seed": 147,
+      "loras": [
+        [
+          "light-b",
+          845
+        ],
+        [
+          "style-a",
+          345
+        ]
+      ],
+      "workflow_sha256": "a10978db9c8eca6549d1a0769a295102f6f42b916dc08ebe58dc6c723b6b9b9c"
+    },
+    {
+      "preset": "alpha",
+      "seed": 154,
+      "loras": [
+        [
+          "light-a",
+          413
+        ],
+        [
+          "style-b",
+          563
+        ]
+      ],
+      "workflow_sha256": "d16bc915286484a4ba793a3dc4787f82209efc0dd9d926696d46dc183c97576f"
+    },
+    {
+      "preset": "beta",
+      "seed": 161,
+      "loras": [
+        [
+          "light-b",
+          204
+        ],
+        [
+          "style-b",
+          333
+        ]
+      ],
+      "workflow_sha256": "7cece7b41c5a347cda083ed29de3f1163129ec0f74e3e7da0af406311f1c0331"
+    },
+    {
+      "preset": "alpha",
+      "seed": 168,
+      "loras": [
+        [
+          "light-b",
+          288
+        ],
+        [
+          "style-a",
+          245
+        ]
+      ],
+      "workflow_sha256": "ef50663bba5fca771c1b7ca6dd2a22619647f80344999d6a46a0f40520d42f28"
+    }
+  ],
+  "stack_counts": {
+    "alpha": 3,
+    "beta": 3
+  }
+}

@@ -130,6 +130,53 @@ class ComfyUIClient:
             raise ComfyUIError("/history: invalid execution record")
         return record
 
+    def queue(self) -> dict:
+        result = self._json("/queue")
+        if any(not isinstance(result.get(key), list) for key in ("queue_running", "queue_pending")):
+            raise ComfyUIError("/queue: invalid queue metadata")
+        return result
+
+    def find_submission(
+        self, request_id: str, graph: dict, *, prompt_id: str | None = None
+    ) -> str | None:
+        """Recover positive acceptance evidence; absence never authorizes a retry."""
+        queue = self.queue()
+        history = self._json("/history?max_items=200")
+        if prompt_id:
+            record = self.history(prompt_id)
+            if record is not None:
+                history[prompt_id] = record
+        entries = [*queue["queue_running"], *queue["queue_pending"]]
+        for key, record in history.items():
+            if not isinstance(record, dict) or not isinstance(record.get("prompt"), list):
+                raise ComfyUIError("/history: missing submission provenance")
+            item = record["prompt"]
+            if len(item) < 4 or item[1] != key:
+                raise ComfyUIError("/history: inconsistent prompt identity")
+            entries.append(item)
+        matches = set()
+        encoded = json.dumps(graph, sort_keys=True, allow_nan=False)
+        for item in entries:
+            if not isinstance(item, list) or len(item) < 4 or not isinstance(item[3], dict):
+                raise ComfyUIError("Invalid queue/history submission provenance")
+            if item[3].get("itov_request_id") != request_id:
+                continue
+            if (
+                not isinstance(item[1], str)
+                or not item[1]
+                or json.dumps(item[2], sort_keys=True, allow_nan=False) != encoded
+            ):
+                raise ComfyUIError(
+                    "Submission owner matches but workflow or prompt identity differs"
+                )
+            matches.add(item[1])
+        if len(matches) > 1:
+            raise ComfyUIError("Multiple prompts claim this request; preserve and inspect")
+        match = next(iter(matches), None)
+        if prompt_id and match != prompt_id:
+            raise ComfyUIError("Supplied prompt ID has no matching server ownership evidence")
+        return match
+
     def download_output(self, descriptor: dict, destination: Path) -> dict:
         """Download one exact /view descriptor; preserve any differing existing file."""
         if destination.is_symlink():

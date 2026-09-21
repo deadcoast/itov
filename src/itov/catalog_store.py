@@ -124,12 +124,19 @@ class CatalogStore:
         digest(head, "snapshot head")
         return _snapshot(read_document(self._path(f"objects/{head}.json")), head)
 
-    def snapshot(self) -> Snapshot:
+    def snapshot(
+        self, *, expected_head: str | None = None, require_clean: bool = False
+    ) -> Snapshot:
         require(self.root.is_dir(), "Catalog is not initialized")
         # Protect the short HEAD read from Windows replacement/share conflicts.
         # Load immutable bytes after releasing ownership; generations are never deleted.
         with file_lock(self._path("catalog.lock"), timeout=self.lock_timeout):
+            if require_clean:
+                self._clean()
             head = self._head()
+            if expected_head is not None:
+                digest(expected_head, "expected_head")
+                require(head == expected_head, "Stale catalog head; review the current snapshot")
         return self._load(head)
 
     def _publish_object(self, snapshot: Snapshot):

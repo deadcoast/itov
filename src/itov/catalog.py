@@ -97,9 +97,8 @@ def _strings(value, location: str, *, ids: bool = False) -> list[str]:
     return values
 
 
-def _asset(value, location: str):
-    object_fields(value, {"path", "sha256"}, location)
-    relative = text(value["path"], location + ".path")
+def relative_path(value, location: str) -> str:
+    relative = text(value, location)
     parts = relative.split("/")
     reserved = {
         "CON",
@@ -113,8 +112,14 @@ def _asset(value, location: str):
         not any(c in relative for c in '\\:<>"|?*')
         and all(part not in {"", ".", ".."} and not part.endswith((".", " ")) for part in parts)
         and all(part.split(".")[0].upper() not in reserved for part in parts),
-        f"{location}.path: expected a portable relative path",
+        f"{location}: expected a portable relative path",
     )
+    return relative
+
+
+def _asset(value, location: str):
+    object_fields(value, {"path", "sha256"}, location)
+    relative_path(value["path"], location + ".path")
     digest(value["sha256"], location + ".sha256")
 
 

@@ -1,0 +1,124 @@
+{
+  "observed_at": "2026-09-21T11:37:00.396911+00:00",
+  "package_version": "0.4.0",
+  "checks": [
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/create_batch_example.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.162,
+      "stdout": "Created C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\templates\\neutral.batch.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "batch",
+        "plan",
+        "workspace/templates/neutral.batch.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.228,
+      "stdout": "{\n  \"ok\": true,\n  \"plan\": {\n    \"version\": 1,\n    \"algorithm\": \"itov-rotation-v1\",\n    \"scope\": \"planning_only\",\n    \"catalog_head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n    \"ledger_head\": \"c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5\",\n    \"request\": {\n      \"bindings\": {\n        \"neutral-copy\": {\n          \"lora_slots\": [],\n          \"seed_inputs\": []\n        }\n      },\n      \"catalog_head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n      \"category_cooldown\": 0,\n      \"count\": 4,\n      \"lora_policy\": {\n        \"ids\": [],\n        \"loader_names\": {},\n        \"max_strength_milli\": 0,\n        \"no_repeat_within\": 0,\n        \"preferred_multiplier_milli\": 1000,\n        \"slots\": [],\n        \"soft_conflicts\": \"exclude\",\n        \"strength_mode\": \"recommended\"\n      },\n      \"no_repeat_within\": 0,\n      \"presets\": [\n        \"neutral-copy\"\n      ],\n      \"seed\": 0,\n      \"version\": 1\n    },\n    \"assets\": [\n      {\n        \"kind\": \"workflow\",\n        \"id\": \"neutral-copy\",\n        \"path\": \"workflows/catalog-copy.api.json\",\n        \"sha256\": \"300ca4ea1c0e8850b920c5e3c680049787a1051a32d7c9d8464a9780d7186d4d\"\n      }\n    ],\n    \"exclusions\": [],\n    \"stack_counts\": {\n      \"neutral-copy\": 1\n    },\n    \"jobs\": [\n      {\n        \"index\": 0,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 1,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 2,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 3,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      }\n    ],\n    \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\"\n  },\n  \"path\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "batch",
+        "plan",
+        "workspace/templates/neutral.batch.json",
+        "--save",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.222,
+      "stdout": "{\n  \"ok\": true,\n  \"plan\": {\n    \"version\": 1,\n    \"algorithm\": \"itov-rotation-v1\",\n    \"scope\": \"planning_only\",\n    \"catalog_head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n    \"ledger_head\": \"c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5\",\n    \"request\": {\n      \"bindings\": {\n        \"neutral-copy\": {\n          \"lora_slots\": [],\n          \"seed_inputs\": []\n        }\n      },\n      \"catalog_head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n      \"category_cooldown\": 0,\n      \"count\": 4,\n      \"lora_policy\": {\n        \"ids\": [],\n        \"loader_names\": {},\n        \"max_strength_milli\": 0,\n        \"no_repeat_within\": 0,\n        \"preferred_multiplier_milli\": 1000,\n        \"slots\": [],\n        \"soft_conflicts\": \"exclude\",\n        \"strength_mode\": \"recommended\"\n      },\n      \"no_repeat_within\": 0,\n      \"presets\": [\n        \"neutral-copy\"\n      ],\n      \"seed\": 0,\n      \"version\": 1\n    },\n    \"assets\": [\n      {\n        \"kind\": \"workflow\",\n        \"id\": \"neutral-copy\",\n        \"path\": \"workflows/catalog-copy.api.json\",\n        \"sha256\": \"300ca4ea1c0e8850b920c5e3c680049787a1051a32d7c9d8464a9780d7186d4d\"\n      }\n    ],\n    \"exclusions\": [],\n    \"stack_counts\": {\n      \"neutral-copy\": 1\n    },\n    \"jobs\": [\n      {\n        \"index\": 0,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 1,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 2,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 3,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      }\n    ],\n    \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\"\n  },\n  \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\plans\\\\104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305.json\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "batch",
+        "verify",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.214,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\",\n  \"catalog_head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n  \"jobs\": 4,\n  \"scope\": \"deterministic_replay_and_asset_bytes\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "batch",
+        "plan",
+        "workspace/templates/neutral.batch.json",
+        "--save",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.216,
+      "stdout": "{\n  \"ok\": true,\n  \"plan\": {\n    \"version\": 1,\n    \"algorithm\": \"itov-rotation-v1\",\n    \"scope\": \"planning_only\",\n    \"catalog_head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n    \"ledger_head\": \"c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5\",\n    \"request\": {\n      \"bindings\": {\n        \"neutral-copy\": {\n          \"lora_slots\": [],\n          \"seed_inputs\": []\n        }\n      },\n      \"catalog_head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n      \"category_cooldown\": 0,\n      \"count\": 4,\n      \"lora_policy\": {\n        \"ids\": [],\n        \"loader_names\": {},\n        \"max_strength_milli\": 0,\n        \"no_repeat_within\": 0,\n        \"preferred_multiplier_milli\": 1000,\n        \"slots\": [],\n        \"soft_conflicts\": \"exclude\",\n        \"strength_mode\": \"recommended\"\n      },\n      \"no_repeat_within\": 0,\n      \"presets\": [\n        \"neutral-copy\"\n      ],\n      \"seed\": 0,\n      \"version\": 1\n    },\n    \"assets\": [\n      {\n        \"kind\": \"workflow\",\n        \"id\": \"neutral-copy\",\n        \"path\": \"workflows/catalog-copy.api.json\",\n        \"sha256\": \"300ca4ea1c0e8850b920c5e3c680049787a1051a32d7c9d8464a9780d7186d4d\"\n      }\n    ],\n    \"exclusions\": [],\n    \"stack_counts\": {\n      \"neutral-copy\": 1\n    },\n    \"jobs\": [\n      {\n        \"index\": 0,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 1,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 2,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      },\n      {\n        \"index\": 3,\n        \"preset\": \"neutral-copy\",\n        \"category\": \"neutral\",\n        \"seed\": null,\n        \"loras\": [],\n        \"total_strength_milli\": 0,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"class_type\\\":\\\"LoadImage\\\",\\\"inputs\\\":{\\\"image\\\":\\\"example.png\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/preflight\\\",\\\"images\\\":[\\\"1\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"38529f4eb47f92e0f130d6dd6af7313e53fad3acf9ffb6d099b127f0eab06498\"\n      }\n    ],\n    \"plan_id\": \"104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305\"\n  },\n  \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\plans\\\\104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305.json\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "batch",
+        "plan",
+        "workspace/templates/neutral-impossible.batch.json",
+        "--save",
+        "--json"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "seconds": 0.193,
+      "stdout": "{\"ok\": false, \"code\": \"rotation_exhausted\", \"error\": \"No next pick satisfies the requested constraints\", \"index\": 1, \"details\": {\"neutral-copy\": \"preset_cooldown\"}}\n",
+      "stderr": ""
+    }
+  ],
+  "plan_id": "104e41149f4b8f61f77a416c8b61a90186cb8904e95239652562f82a46927305",
+  "catalog_and_job_state_unchanged": true,
+  "state_sha256": {
+    "workspace/state/catalog/HEAD": "8939080b93584d682394873dbf36f0d90cc8db846c58b275c585ffb45d720827",
+    "workspace/state/catalog/objects/252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810.json": "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+    "workspace/state/catalog/objects/eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d.json": "eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d",
+    "workspace/state/jobs/2c984936-344f-42af-aec4-ada4d9a663dd.json": "d7989b456a979355e0cfae3a7fb4f3ead2b78fa39eeee8b40ed21d331cb3a7ee",
+    "workspace/state/jobs/87128584-281d-4bb3-af72-c0963c9a7c21.json": "73b387317673e1dfecd87b5b88f97ff8fb565c3b13fd110c731d8e0fb2eaae87",
+    "workspace/state/jobs/ee416183-a0f6-4161-9190-7d6c9e3fab8c.json": "047d103ae3ed6caa06580c1c31560cec62a68abb182a7bf90acb7f5c5e93a7e1"
+  },
+  "saved_plan_sha256": "83fe13f7658a8f7a0ae2cf6d7dbf2629bebbace84284406c096feebfe205ed9a",
+  "limits": [
+    "Four neutral image-copy payloads planned; no requests submitted to ComfyUI.",
+    "Model-graph and LoRA-selection tests use synthetic fixtures, recorded separately.",
+    "No model compatibility, server asset-name resolution, global seed reservation, or GPU concurrency acceptance."
+  ]
+}

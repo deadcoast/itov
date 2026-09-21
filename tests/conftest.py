@@ -54,6 +54,8 @@ def http_server(registry):
         def do_GET(self):
             requests.append(("GET", self.path))
             code, body = routes.get(self.path, (404, {"error": "missing"}))
+            if callable(body):
+                body = body()
             self.respond(code, body)
 
         def respond(self, code, body):
@@ -71,6 +73,8 @@ def http_server(registry):
             payload = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
             routes.setdefault("_posted", []).append(payload)
             code, body = routes.get("POST " + self.path, (405, {"error": "unsupported"}))
+            if callable(body):
+                body = body(payload)
             self.respond(code, body)
 
         def log_message(self, *_args):

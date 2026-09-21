@@ -1,6 +1,6 @@
 # Catalog contracts and ledger integrity
 
-Stage three defines the version-one data contract used by executable ITOV. The original Parts 3, 4, 8, 9, and 10 remain design references. Their incompatible JSON/CSV variants are not silently imported, sealed, or repaired. This implementation records whole catalog revisions; it does not implement render-pick ledgers, automated promotion, or rotation yet.
+Stage three defines the version-one data contract used by executable ITOV. The original Parts 3, 4, 8, 9, and 10 remain design references. Their incompatible JSON/CSV variants are not silently imported, sealed, or repaired. This implementation records whole catalog revisions; render-pick ledgers and automated promotion remain future work. Stage four adds [rotation planning](batch-planning.md) over these snapshots.
 
 ## Operator workflow
 
@@ -37,9 +37,9 @@ The top-level object has `version: 1`, `presets: []`, `loras: []`, and `compatib
 | `workflow` | Asset reference: `{path, sha256}` |
 | `base_model` | Model-family ID, or null for a workflow with no model |
 | `rotation_weight_milli` | Positive integer; 1000 represents 1.0 |
-| `seed` | Null, or `{base, step}` with a nonnegative base and positive step; retained metadata, not yet applied to nodes |
+| `seed` | Null, or `{base, step}` with a nonnegative base and positive step; stage-four requests declare the corresponding workflow bindings |
 
-Sampler, motion, prompts, and post-processing settings belong to the referenced real ComfyUI API graph. The catalog does not introduce a competing synthetic workflow representation. Runtime node adapters and model-specific seed/LoRA input binding remain later work.
+Sampler, motion, prompts, and post-processing settings belong to the referenced real ComfyUI API graph. The catalog does not introduce a competing synthetic workflow representation. Stage-four planning supports explicit seed and built-in LoRA loader bindings; actual model-specific runtime qualification remains later work.
 
 | LoRA field | Contract |
 | --- | --- |
@@ -59,7 +59,7 @@ These fields record operator assertions. Neither `active`, a declared model fami
 | `synergies` | Array of `{loras, weight_milli}`; at least two distinct existing IDs, positive weight, no duplicate combination or hard-conflict subset |
 | `preset_pairings` | Array of `{preset, loras}`; unique existing preset, at least one distinct existing LoRA, and each LoRA declares the preset's base model |
 
-Pairings are preference pools, not complete stacks: they may include alternatives in the same slot or mutually conflicting alternatives. The later selector must resolve conflicts, statuses, slots, and budgets. Synergy and base-model metadata are declarations, not measured compatibility.
+Pairings are preference pools, not complete stacks: they may include alternatives in the same slot or mutually conflicting alternatives. The stage-four selector resolves conflicts, statuses, slots, and budgets. Synergy and base-model metadata are declarations, not measured compatibility.
 
 Asset paths use `/` separators, have no absolute paths, empty/dot/parent components, Windows stream syntax, device names, wildcard characters, or trailing dots/spaces. LoRA paths must be unique ignoring case. Hashes are 64 lowercase hexadecimal characters. File checks reject redirects outside the workspace. Input, snapshot, and journal JSON documents are each limited to 32 MiB; large model files are hashed incrementally.
 

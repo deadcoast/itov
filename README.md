@@ -1,6 +1,6 @@
 # ITOV
 
-ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, and versioned preset/LoRA catalogs with recoverable revision history. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
+ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, versioned preset/LoRA catalogs, deterministic batch planning, and qualified sequential execution. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
 
 The original material in `docs/01_*` through `docs/10_*` is a design reference, not an executable installation guide. Read the [development review](docs/development-review.md) for defects, current compatibility findings, and the implementation sequence.
 
@@ -93,7 +93,35 @@ uv run --locked itov catalog import workspace/templates/neutral.catalog.json --e
 uv run --locked itov catalog verify --check-files --json
 ```
 
-Imports verify asset hashes and reject stale heads. Each revision keeps the catalog and its hash-chained ledger together in an immutable snapshot. Interrupted transactions require explicit `catalog recover`; ordinary reads never repair data. See [catalog schemas, commands, and recovery](docs/catalog-and-ledger.md) for the contract and qualification boundaries. Rotation and automated promotion remain later development stages.
+Imports verify asset hashes and reject stale heads. Each revision keeps the catalog and its hash-chained ledger together in an immutable snapshot. Interrupted transactions require explicit `catalog recover`; ordinary reads never repair data. See [catalog schemas, commands, and recovery](docs/catalog-and-ledger.md) for the contract and qualification boundaries. Automated promotion remains a later development stage.
+
+## Deterministic batch planning
+
+After importing the neutral catalog, create a reviewed planning request and preview it:
+
+```powershell
+uv run --locked python scripts/create_batch_example.py
+uv run --locked itov batch plan workspace/templates/neutral.batch.json
+uv run --locked itov batch plan workspace/templates/neutral.batch.json --save
+uv run --locked itov batch verify workspace/state/plans/PLAN_ID.json
+```
+
+Plans pin the catalog head and asset hashes, select presets and compatible declared LoRA stacks, enforce cooldowns and strength budgets, and retain expanded workflow payloads for deterministic replay. Requests declare their seed and loader-node bindings explicitly. Planning does not queue jobs or change render history. See [batch request contracts, selection, and limits](docs/batch-planning.md).
+
+## Qualified sequential batches
+
+With the stock local server running, qualify a saved plan and execute it explicitly:
+
+```powershell
+uv run --locked itov batch qualify workspace/state/plans/PLAN_ID.json --save
+uv run --locked itov batch run workspace/state/plans/PLAN_ID.json --qualification workspace/state/qualifications/QUALIFICATION_ID.json
+uv run --locked itov batch status workspace/state/plans/PLAN_ID.json
+uv run --locked itov batch resume workspace/state/plans/PLAN_ID.json
+```
+
+Use the IDs printed by planning and qualification. The executor reserves seeds and job ownership atomically, rechecks qualification before each new submission, and advances only after verified output collection. Lost acknowledgements are reconciled from server ownership evidence; uncertain work is never automatically submitted again. Timeouts and Ctrl+C detach observation without cancelling server work. See [execution, resume, and qualification limits](docs/batch-execution.md), including safe abandonment of an unsubmitted remainder.
+
+The real local acceptance run uses the neutral image-copy workflow: seven jobs across sequential, lost-acknowledgement, and timeout/resume cases produced pixel-identical images. Checkpoint/LoRA inference, video/audio integration, and parallel GPU execution remain unqualified.
 
 ## Development
 

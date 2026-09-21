@@ -139,6 +139,18 @@ def _wait(
             client.timeout = min(original_timeout, max(0.001, deadline - time.monotonic()))
             history = client.history(record["prompt_id"])
             if history is not None:
+                if "owner" in record:
+                    prompt = history.get("prompt")
+                    if (
+                        not isinstance(prompt, list)
+                        or len(prompt) < 4
+                        or prompt[1] != record["prompt_id"]
+                        or not isinstance(prompt[3], dict)
+                        or prompt[3].get("itov_request_id") != record["request_id"]
+                        or json.dumps(prompt[2], sort_keys=True, allow_nan=False)
+                        != json.dumps(record["workflow"], sort_keys=True, allow_nan=False)
+                    ):
+                        raise ComfyUIError("History does not belong to this batch job and workflow")
                 status = history["status"]
                 messages = status.get("messages", [])
                 if not isinstance(messages, list):
@@ -264,6 +276,7 @@ def wait_job(
             or not isinstance(record.get("status"), str)
             or record.get("status")
             not in {
+                "prepared",
                 "validating",
                 "validation_failed",
                 "submitting",

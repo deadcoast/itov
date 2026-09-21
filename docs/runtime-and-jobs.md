@@ -53,7 +53,7 @@ Job Ctrl+C handling detaches the observer; it does not call the server's interru
 
 HTTP operations default to a three-second socket timeout. Execution observation defaults to 120 seconds, adjustable with `--wait-timeout`; artifact transfer follows successful execution and uses the HTTP timeout. Each artifact is limited to 512 MiB. Persistent `type=output` files are retrieved through `/view` using exact history descriptors. Input references and temporary previews are excluded. Jobs producing only text or previews do not qualify as delivered media.
 
-Artifacts are published without replacing a differing existing file. Partial downloads are removed, Content-Length is checked when supplied, and resume can retrieve a missing artifact. Job records are replaced atomically. An OS-backed lock prevents two local processes from operating on the same record and releases on process exit; no PID signalling or age-based lock deletion is used. This is a per-job mechanism, not the future manifest/ledger concurrency system.
+Artifacts are published without replacing a differing existing file. Partial downloads are removed, Content-Length is checked when supplied, and resume can retrieve a missing artifact. Job records are replaced atomically. An OS-backed lock prevents two local processes from operating on the same record and releases on process exit; no PID signalling or age-based lock deletion is used. Batch dispatch adds separate [workspace ownership and reservation records](batch-execution.md). Use `batch resume PLAN` for batch-owned jobs, including their pre-submission `prepared` state and uncertain-acknowledgement reconciliation.
 
 ## Real qualification results
 

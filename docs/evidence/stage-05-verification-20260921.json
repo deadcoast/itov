@@ -1,0 +1,219 @@
+{
+  "observed_at": "2026-09-21T12:18:52.351729+00:00",
+  "platform": "Windows",
+  "package_version": "0.5.0",
+  "local_execution_evidence": "stage-05-execution-20260921.json",
+  "limits": [
+    "LoRA asset tests use plain-byte fixtures, not actual models or inference.",
+    "Crash tests exit owned processes at controlled write boundaries and during partial temporary writes.",
+    "No power-loss, remote-filesystem, backup-restore, or non-Windows platform qualification.",
+    "Real neutral execution is recorded separately; no checkpoint inference, model compatibility, or GPU concurrency acceptance."
+  ],
+  "rotation_vector_sha256": "d9ccc180f34c493e75e9faa4ade304205c6d71e50a55950179489b7029a02f91",
+  "pre_final_checks": [
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage05-final"
+      ],
+      "exit_code": 0,
+      "seconds": 75.283,
+      "stdout": "........................................................................ [ 25%]\n........................................................................ [ 51%]\n........................................................................ [ 77%]\n................................................................         [100%]\n280 passed in 74.66s (0:01:14)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_import",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.5.0'"
+      ],
+      "exit_code": 0,
+      "seconds": 0.066,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.048,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.05,
+      "stdout": "38 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.068,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.5.0.tar.gz\nSuccessfully built dist\\itov-0.5.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.5.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage05-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 76.556,
+      "stdout": "........................................................................ [ 25%]\n........................................................................ [ 51%]\n........................................................................ [ 77%]\n................................................................         [100%]\n280 passed in 75.17s (0:01:15)\n",
+      "stderr": "Installed 7 packages in 231ms\n"
+    },
+    {
+      "name": "wheel_import",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.5.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,11); assert 'site-packages' in itov.__file__; assert itov.__version__=='0.5.0'"
+      ],
+      "exit_code": 0,
+      "seconds": 0.296,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\JHA5rvAI1o1K2tUsbTTjj\\Lib\\site-packages\\itov\\__init__.py\n",
+      "stderr": ""
+    }
+  ],
+  "checks": [
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.053,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.047,
+      "stdout": "38 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.062,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.5.0.tar.gz\nSuccessfully built dist\\itov-0.5.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.5.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage05-wheel-final"
+      ],
+      "exit_code": 1,
+      "seconds": 71.56,
+      "stdout": "........................................................................ [ 25%]\n........................................................................ [ 51%]\n........................................................................ [ 76%]\n.........................F.......................................        [100%]\n================================== FAILURES ===================================\n______ test_annotated_input_is_not_resolved_as_workspace_input[[output]] ______\n\nexecution_case = (Config(file=WindowsPath('C:/Users/ryanf/github/_active/itov/.test-tmp/stage05-wheel-final/test_annotated_input_is_not...ture'}}), ...}, [('GET', '/system_stats'), ('GET', '/object_info'), ('GET', '/system_stats'), ('GET', '/object_info')])\nannotation = '[output]'\n\n    @pytest.mark.parametrize(\"annotation\", [\" [output]\", \"[output]\"])\n    def test_annotated_input_is_not_resolved_as_workspace_input(execution_case, annotation):\n        graph = json.loads(execution_case[1][\"jobs\"][0][\"workflow_json\"])\n        graph[\"1\"][\"inputs\"][\"image\"] = \"example.png\" + annotation\n        registry = execution_case[4][\"/object_info\"][1]\n        registry[\"LoadImage\"][\"input\"][\"required\"][\"image\"] = [[\"example.png\" + annotation]]\n        plan = replace_workflow(execution_case, graph)\n        with pytest.raises(ValueError, match=\"Annotated\"):\n>           qualify(execution_case[0], plan)\n\ntests\\test_qualification.py:184: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n.uv-cache\\archive-v0\\JHA5rvAI1o1K2tUsbTTjj\\Lib\\site-packages\\itov\\qualification.py:120: in qualify\n    bind(config.root / \"input\", inputs[\"image\"])\n.uv-cache\\archive-v0\\JHA5rvAI1o1K2tUsbTTjj\\Lib\\site-packages\\itov\\qualification.py:82: in bind\n    files[key] = _file(path)\n                 ^^^^^^^^^^^\n.uv-cache\\archive-v0\\JHA5rvAI1o1K2tUsbTTjj\\Lib\\site-packages\\itov\\qualification.py:47: in _file\n    with path.open(\"rb\") as source:\n         ^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = WindowsPath('C:/Users/ryanf/github/_active/itov/.test-tmp/stage05-wheel-final/test_annotated_input_is_not_re1/workspace/input/example.png[output]')\nmode = 'rb', buffering = -1, encoding = None, errors = None, newline = None\n\n    def open(self, mode='r', buffering=-1, encoding=None,\n             errors=None, newline=None):\n        \"\"\"\n        Open the file pointed by this path and return a file object, as\n        the built-in open() function does.\n        \"\"\"\n        if \"b\" not in mode:\n            encoding = io.text_encoding(encoding)\n>       return io.open(self, mode, buffering, encoding, errors, newline)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\.test-tmp\\\\stage05-wheel-final\\\\test_annotated_input_is_not_re1\\\\workspace\\\\input\\\\example.png[output]'\n\n..\\..\\..\\AppData\\Roaming\\uv\\python\\cpython-3.11.14-windows-x86_64-none\\Lib\\pathlib.py:1044: FileNotFoundError\n=========================== short test summary info ===========================\nFAILED tests/test_qualification.py::test_annotated_input_is_not_resolved_as_workspace_input[[output]]\n1 failed, 280 passed in 71.04s (0:01:11)\n",
+      "stderr": ""
+    }
+  ],
+  "retained_pre_final_failure": {
+    "check": "wheel_source_byte_parity",
+    "observed": "AssertionError: src/itov/qualification.py",
+    "cause": "The initial wheel was built before the final annotation-suffix guard and regression test were added.",
+    "correction": "Rebuilt both artifacts from the final source, reran source and installed-wheel suites, and rechecked every packaged module.",
+    "initial_test_counts": {
+      "source": 280,
+      "wheel": 280
+    }
+  }
+}

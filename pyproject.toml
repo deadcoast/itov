@@ -1,7 +1,7 @@
 [project]
 name = "itov"
-version = "0.3.0"
-description = "Local workspace and workflow preflight tools for ComfyUI"
+version = "0.5.0"
+description = "Local ComfyUI jobs, catalogs, deterministic planning, and sequential batches"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []

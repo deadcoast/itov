@@ -1,0 +1,161 @@
+{
+  "observed_at": "2026-09-21T11:37:32.291787+00:00",
+  "platform": "Windows",
+  "package_version": "0.4.0",
+  "checks": [
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage04-final"
+      ],
+      "exit_code": 0,
+      "seconds": 35.672,
+      "stdout": "........................................................................ [ 30%]\n........................................................................ [ 61%]\n........................................................................ [ 92%]\n..................                                                       [100%]\n234 passed in 35.34s\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_import",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.4.0'"
+      ],
+      "exit_code": 0,
+      "seconds": 0.083,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.103,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.04,
+      "stdout": "32 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.062,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.4.0.tar.gz\nSuccessfully built dist\\itov-0.4.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.4.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage04-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 34.315,
+      "stdout": "........................................................................ [ 30%]\n........................................................................ [ 61%]\n........................................................................ [ 92%]\n..................                                                       [100%]\n234 passed in 33.10s\n",
+      "stderr": "Installed 7 packages in 221ms\n"
+    },
+    {
+      "name": "wheel_import",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.4.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,11); assert 'site-packages' in itov.__file__; assert itov.__version__=='0.4.0'"
+      ],
+      "exit_code": 0,
+      "seconds": 0.27,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\KTDFyTY-77gfoX4hOPQZL\\Lib\\site-packages\\itov\\__init__.py\n",
+      "stderr": ""
+    }
+  ],
+  "local_planning_evidence": "stage-04-planning-20260921.json",
+  "limits": [
+    "LoRA asset tests use plain-byte fixtures, not actual models or inference.",
+    "Crash tests exit owned processes at controlled write boundaries and during partial temporary writes.",
+    "No power-loss, remote-filesystem, backup-restore, or non-Windows platform qualification.",
+    "No GPU render/concurrency or model compatibility acceptance in this stage."
+  ],
+  "rotation_vector_sha256": "d9ccc180f34c493e75e9faa4ade304205c6d71e50a55950179489b7029a02f91",
+  "wheel_source_byte_parity": 16,
+  "source_sha256": {
+    "src/itov/__init__.py": "6a5d06b7ac23680978c6c931c5d80e75e6623544bc3a23bc68bf97cd762423db",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/batch.py": "8487d1409b4feedb71f3f2fef06495eaae5998c7cff59c082b47b823a77dd53c",
+    "src/itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+    "src/itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+    "src/itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+    "src/itov/cli.py": "10c4bd71b2e7ceac51009be947392e6ffbaae8af37930317ff6a5536ce735815",
+    "src/itov/comfyui.py": "dc9fb7f81a9cfc35b738f2cfd7562a524da2fa4ebf97c4b03dec8e06ab9f6f86",
+    "src/itov/config.py": "360e4e5451194c11ec3fdf39b001edb784d984448cf5cd0af740b36d4f2b2d8a",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/jobs.py": "a4ee29c8066948c05e7aa949199a69fb5eb115580971b763bf0f1aee697cf963",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+    "src/itov/runtime.py": "e2e39fcb7be1c9f9a8e5c7d78786ff55440edf9c53b90bbd719483b515792077",
+    "src/itov/workflow.py": "5e3f7aa3a62786c77c9a24cccdd98a42a15b61774522401627382888ac16fcca"
+  },
+  "artifact_sha256": {
+    "dist/itov-0.4.0-py3-none-any.whl": "6299ad85be58214937aa4feb55a97685d3e401e2adffe24cc492e37eee6684ea",
+    "dist/itov-0.4.0.tar.gz": "187c7838348f98734e1e66c3a34451b0d50bdefc7dd2c01581134b0abb5eb893"
+  }
+}
