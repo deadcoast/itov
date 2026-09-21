@@ -25,7 +25,7 @@ D:\AI\ComfyUI_portable\workshop\dev_tools\
 
 ```bash
 # Using uv to install the local directory into your specific venv
-uv pip install -e "C:\Users\ryanf\github\_active\itov\AI\dev_tools" --python "C:\Users\ryanf\github\_active\itov\.venv"
+uv pip install -e "\AI\dev_tools" --python ".venv"
 ```
 
 We use `uv` for dependency management due to its speed and efficiency. The base SCM script relies entirely on Python standard libraries, so no external dependencies are required for the cipher itself.

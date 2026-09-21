@@ -8,7 +8,7 @@ setup(
     name="scm_dev_tools",
     version="0.1.0",
     description="Semantic Cipher Middleware for uncensored explicit LLM node generation",
-    author="ryanf",
+    author="deadcoast",
     # Since cipher.py is a standalone script in this directory
     py_modules=["cipher"],
     # Ensure the dictionary and batch files are bundled if packaged

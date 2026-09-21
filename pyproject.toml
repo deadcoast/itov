@@ -4,7 +4,10 @@ version = "0.6.0"
 description = "Local ComfyUI catalogs, deterministic batches, and pinned image inference"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "setuptools>=84.0.0",
+    "types-setuptools>=84.0.0.20260812",
+]
 
 [project.scripts]
 itov = "itov.cli:main"
