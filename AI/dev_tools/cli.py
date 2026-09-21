@@ -6,9 +6,10 @@ import sys
 from pathlib import Path
 
 if __package__:
-    from . import cipher
+    from . import __version__, cipher
 else:
     import cipher
+    from __init__ import __version__
 
 
 def build_parser():
@@ -17,6 +18,7 @@ def build_parser():
         description="Preview, encode, decode, and verify local text files.",
         epilog="Run without arguments for the guided terminal menu. Paths with spaces need quotes.",
     )
+    parser.add_argument("--version", action="version", version=f"Bamboozle {__version__}")
     parser.add_argument("--dict", type=Path, help="Use another mapping JSON file")
     parser.add_argument("--json", action="store_true", help="Print one JSON execution report")
     commands = parser.add_subparsers(dest="command", metavar="COMMAND")
@@ -92,6 +94,20 @@ def entered_path(value):
     return Path(os.path.expandvars(value)).expanduser()
 
 
+def prompt_file():
+    while True:
+        value = input("File path (Enter to go back): ").strip()
+        if not value:
+            return None
+        source = entered_path(value)
+        try:
+            if source.is_file():
+                return source
+            print(f"[!] Choose an existing file: {source}", file=sys.stderr)
+        except OSError as error:
+            report_error(error, {})
+
+
 def show_preview(plan):
     report = plan["report"]
     print(f"\nInput:  {report['input']}\nOutput: {report['output']}")
@@ -134,10 +150,9 @@ def interactive(dict_path=None):
         if action not in modes:
             print("Choose E, D, V, or Q.")
             continue
-        value = input("File path (Enter to go back): ").strip()
-        if not value:
+        source = prompt_file()
+        if source is None:
             continue
-        source = entered_path(value)
         mode = modes[action]
         output = None
         while True:
@@ -198,6 +213,8 @@ def main(argv=None):
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.command is None:
+        if args.json:
+            parser.error("Choose a command when using --json")
         if not (sys.stdin.isatty() and sys.stdout.isatty()):
             parser.print_help()
             return 0

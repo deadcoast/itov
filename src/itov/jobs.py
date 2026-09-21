@@ -13,6 +13,7 @@ import uuid
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 
+from itov.audio_media import audio_contract, verify_audio
 from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json, submission_matches
 from itov.config import Config, validate_timeout
 from itov.locking import file_lock
@@ -123,11 +124,23 @@ def _collect(config: Config, client: ComfyUIClient, record: dict, history: dict)
         download = client.download_output(descriptor, destination)
         artifacts.append({**descriptor, **download})
     record["artifacts"] = artifacts
-    _verify_videos(record)
+    _verify_media(record)
 
 
-def _verify_videos(record: dict):
+def _verify_media(record: dict):
     for node_id, node in record.get("workflow", {}).items():
+        if node["class_type"] == "SaveAudioAdvanced":
+            metadata = node.get("_meta", {})
+            if not isinstance(metadata, dict):
+                raise ValueError("Audio metadata must be an object")
+            if "itov_audio" in metadata:
+                expected = audio_contract(metadata["itov_audio"])
+                outputs = [item for item in record["artifacts"] if item["node_id"] == node_id]
+                if len(outputs) != 1:
+                    raise ValueError(
+                        "Expected exactly one collected artifact for each audio output"
+                    )
+                outputs[0]["audio_validation"] = verify_audio(Path(outputs[0]["path"]), expected)
         if node["class_type"] != "SaveVideo":
             continue
         metadata = node.get("_meta", {})
@@ -339,7 +352,7 @@ def wait_job(
                             intact = False
                             break
             if intact:
-                _verify_videos(record)
+                _verify_media(record)
                 return record
         if record.get("status") in {"failed", "rejected", "validation_failed"}:
             return record

@@ -1,0 +1,275 @@
+{
+  "date": "2026-09-21",
+  "python": "3.13.9",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "pre_fix_findings": {
+    "unicode_identifier": {
+      "input": "alpha\u0301",
+      "actual": "fluid_sim\u0301",
+      "expected": "alpha\u0301"
+    },
+    "cleanup_failure": {
+      "error": "simulated temporary cleanup failure",
+      "output_exists": true,
+      "reported_output_saved": false
+    }
+  },
+  "focused_tests": {
+    "passed": 138,
+    "new_regressions": 27,
+    "command": "uv run --locked pytest tests/test_cipher.py tests/test_bamboozle_cli.py -q -p no:cacheprovider --basetemp AI/dev_tools/.test-tmp/core-regressions",
+    "coverage": [
+      "Unicode identifier continuations and longest-match fallback",
+      "reusable engine dictionary copy and concurrent per-call counts",
+      "line and column diagnostics with LF, CRLF and CR",
+      "saved-output reporting on temporary cleanup failure",
+      "publication and cleanup error preservation",
+      "ledger changes during output publication",
+      "multi-chunk fingerprints",
+      "core API argument checks",
+      "CLI version, file reprompt and JSON requirements"
+    ]
+  },
+  "package": {
+    "version": "0.3.0",
+    "wheel_sha256": "dba46bd2971815f39a3eeac72a817fd1688a2caabcd5cf67248de25a4bee0471",
+    "sdist_sha256": "7d5fccde7345104664cea73d271123f1b157235960cd5be03dafe675392eeb07",
+    "source_parity": [
+      "__init__.py",
+      "__main__.py",
+      "cipher.py",
+      "cli.py",
+      "cipher_dict.json",
+      "README.md"
+    ],
+    "setup_excluded": true,
+    "contents": [
+      "bamboozle/DECRYPT_FOR_CLAUDE.bat",
+      "bamboozle/ENCRYPT_FOR_CLAUDE.bat",
+      "bamboozle/README.md",
+      "bamboozle/__init__.py",
+      "bamboozle/__main__.py",
+      "bamboozle/bamboozle.ps1",
+      "bamboozle/cipher.py",
+      "bamboozle/cipher_dict.json",
+      "bamboozle/cli.py",
+      "bamboozle/development_loop.md",
+      "scm_dev_tools-0.3.0.dist-info/METADATA",
+      "scm_dev_tools-0.3.0.dist-info/WHEEL",
+      "scm_dev_tools-0.3.0.dist-info/entry_points.txt",
+      "scm_dev_tools-0.3.0.dist-info/top_level.txt",
+      "scm_dev_tools-0.3.0.dist-info/RECORD"
+    ]
+  },
+  "installed_wheel_checks": {
+    "python": "3.13.9",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "working_directory": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-core-bbdrl_ia",
+    "installed_path": "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Lib\\site-packages\\bamboozle",
+    "installed_version": "0.3.0",
+    "installed_source_parity": [
+      "__init__.py",
+      "__main__.py",
+      "cipher.py",
+      "cli.py",
+      "cipher_dict.json",
+      "README.md"
+    ],
+    "commands": [
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Bamboozle 0.3.0",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "validate",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "dictionary_valid"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "preview",
+          "sample input.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "counts": {
+          "literals": 1,
+          "substitutions": 1,
+          "terms": {
+            "nude": 1
+          }
+        }
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "encode",
+          "sample input.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "saved",
+        "counts": {
+          "literals": 1,
+          "substitutions": 1,
+          "terms": {
+            "nude": 1
+          }
+        }
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "verify",
+          "sample input_safe.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "verified",
+        "counts": {
+          "literals": 1,
+          "substitutions": 1,
+          "terms": {
+            "nude": 1
+          }
+        }
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "preview",
+          "sample input_safe.py",
+          "--reverse",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "counts": {
+          "literals": 1,
+          "substitutions": 1,
+          "terms": {
+            "nude": 1
+          }
+        }
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "decode",
+          "sample input_safe.py",
+          "-o",
+          "restored file.py",
+          "--strict",
+          "--keep-ledger",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "saved",
+        "counts": {
+          "literals": 1,
+          "substitutions": 1,
+          "terms": {
+            "nude": 1
+          }
+        }
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\scm-cipher.exe",
+          "--mode",
+          "verify",
+          "--input",
+          "sample input_safe.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "verified",
+        "counts": {
+          "literals": 1,
+          "substitutions": 1,
+          "terms": {
+            "nude": 1
+          }
+        }
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "bamboozle",
+          "verify",
+          "sample input_safe.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "verified",
+        "counts": {
+          "literals": 1,
+          "substitutions": 1,
+          "terms": {
+            "nude": 1
+          }
+        }
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "--json"
+        ],
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: bamboozle [-h] [--version] [--dict DICT] [--json] COMMAND ...\nbamboozle: error: Choose a command when using --json"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "preview",
+          "mixed.py",
+          "--json"
+        ],
+        "exit_code": 1,
+        "status": "error"
+      }
+    ],
+    "unicode_identifier_preserved": true,
+    "bom_crlf_round_trip": true,
+    "readme_engine_example": "passed"
+  },
+  "live_terminal": {
+    "launch": ".\\.venv\\Scripts\\bamboozle.exe",
+    "tty": true,
+    "operations": [
+      "automatic menu",
+      "encode",
+      "missing path",
+      "same-action path retry",
+      "quoted valid path with spaces",
+      "Unicode preview",
+      "Enter cancels",
+      "quit"
+    ],
+    "exit_code": 0
+  },
+  "final_installation": {
+    "version": "0.3.0",
+    "mode": "editable",
+    "package_path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\__init__.py",
+    "validation_status": "dictionary_valid"
+  },
+  "scope": "Local Windows text conversion, error handling, terminal flow and installed package. Output and ledger are separate operations, not an atomic pair or exclusive cross-process transaction. No generated-code correctness or crash-durability acceptance.",
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "git_diff_check": "passed for the changed cipher, CLI, tests and changelog"
+}

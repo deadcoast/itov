@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "policy": "start-zero-trim-or-pad-v1",
+  "video": {
+    "request_id": "914bd070-aea2-52d5-995b-a5419cb1e0b0",
+    "node_id": "12",
+    "sha256": "60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e",
+    "record_sha256": "a19b8297d74a053877c702f51597485d28d90e8a76bd1e9730fe490d0ca8d002"
+  },
+  "audio": {
+    "request_id": "c2f1ecd5-a273-54ba-8496-cd3a6c04e59a",
+    "node_id": "9",
+    "sha256": "22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad",
+    "record_sha256": "efdf110bf53ca567d194837e8f5deff4903d43238dd805cd4f6def1590531abd"
+  }
+}

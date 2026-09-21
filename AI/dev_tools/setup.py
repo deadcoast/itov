@@ -14,7 +14,7 @@ class BuildPy(build_py):
 
 setup(
     name="scm_dev_tools",
-    version="0.2.0",
+    version="0.3.0",
     description="Bamboozle reversible text conversion and verification CLI",
     author="deadcoast",
     packages=["bamboozle"],

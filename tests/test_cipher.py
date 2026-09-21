@@ -3,6 +3,7 @@ import importlib.util
 import json
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pytest
@@ -559,3 +560,163 @@ def test_new_cli_modes_work_in_subprocesses_with_default_output_names(tmp_path):
         if expected == "preview":
             assert not encoded.exists()
     assert (tmp_path / "source_safe_ready.py").read_bytes() == source.read_bytes()
+
+
+@pytest.mark.parametrize("continuation", ["\u0301", "\u093e", "\u05b0", "\u203f", "\u00b7"])
+def test_unicode_identifier_continuations_do_not_split_terms(continuation):
+    assert ("a" + continuation).isidentifier()
+    original = "alpha" + continuation
+    assert cipher.process_forward(original, MAPPING) == original
+    assert cipher.process_reverse("fluid_sim" + continuation, MAPPING) == "fluid_sim" + continuation
+    assert cipher.conversion_counts(original, MAPPING, "forward")["substitutions"] == 0
+
+
+def test_unicode_boundary_falls_back_to_a_shorter_complete_component(tmp_path):
+    mapping = {"alpha_beta": "state", "alpha": "fluid"}
+    original = "alpha\u0301 alpha_beta\u0301"
+    engine = cipher.CipherEngine(mapping)
+    result, counts = engine.transform(original, "forward")
+    assert result == "alpha\u0301 fluid_beta\u0301"
+    assert counts == {"substitutions": 1, "literals": 0, "terms": {"alpha": 1}}
+    assert engine.transform(result, "reverse")[0] == original
+    source = tmp_path / "source.py"
+    dictionary = tmp_path / "mapping.json"
+    source.write_text(original, encoding="utf-8")
+    dictionary.write_text(json.dumps(mapping), encoding="utf-8")
+    plan = cipher.prepare_conversion("forward", source, dict_path=dictionary)
+    assert plan["result"] == result
+    assert plan["report"]["counts"] == counts
+
+
+def test_reusable_engine_freezes_mapping_and_keeps_counts_per_call():
+    mapping = dict(MAPPING)
+    engine = cipher.CipherEngine(mapping)
+    mapping["alpha"] = "new_target"
+    with pytest.raises(TypeError):
+        engine.mapping["alpha"] = "new_target"
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        results = list(
+            pool.map(lambda _: engine.transform("alpha fluid_sim", "forward"), range(24))
+        )
+    assert all(result == "fluid_sim __SCM_LIT_fluid_sim__" for result, _counts in results)
+    assert all(
+        counts == {"substitutions": 1, "literals": 1, "terms": {"alpha": 1}}
+        for _, counts in results
+    )
+    results[0][1]["terms"]["alpha"] = 99
+    assert engine.transform("alpha", "forward")[1]["terms"] == {"alpha": 1}
+
+
+@pytest.mark.parametrize("newline", ["\n", "\r\n", "\r"])
+def test_case_errors_identify_line_and_column(newline):
+    with pytest.raises(ValueError, match="line 2, column 3"):
+        cipher.process_forward("first" + newline + "  aLpHa", MAPPING)
+
+
+def test_marker_and_ambiguity_errors_identify_their_location():
+    with pytest.raises(ValueError, match="marker at line 2, column 4"):
+        cipher.process_reverse("first\n   __SCM_LIT_unknown__", MAPPING)
+    with pytest.raises(ValueError, match="ambiguous at line 2, column 2"):
+        cipher.process_forward("first\nAlpha", {"alpha": "x"})
+
+
+@pytest.mark.parametrize("overwrite", [False, True])
+def test_cleanup_failure_after_publication_records_saved_output(tmp_path, monkeypatch, overwrite):
+    source = tmp_path / "source.py"
+    source.write_bytes(b"nude")
+    plan = cipher.prepare_conversion("forward", source)
+    original_unlink = Path.unlink
+
+    def deny_cleanup(path, *args, **kwargs):
+        if path.suffix == ".tmp":
+            raise PermissionError("simulated cleanup failure")
+        return original_unlink(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "unlink", deny_cleanup)
+    with pytest.raises(cipher.PublishedWriteError, match="cleanup"):
+        cipher.apply_conversion(plan, overwrite=overwrite)
+    assert plan["output_path"].read_bytes() == b"base_topology"
+    assert plan["report"]["output_saved"] is True
+    assert plan["report"]["status"] == "finalizing"
+    assert not plan["ledger_path"].exists()
+    with pytest.raises(ValueError, match="unsaved"):
+        cipher.apply_conversion(plan)
+
+
+def test_write_and_cleanup_failures_preserve_both_diagnostics(tmp_path, monkeypatch):
+    output = tmp_path / "output.py"
+    output.write_bytes(b"existing")
+
+    def fail_publish(*_args):
+        raise OSError("publication failure")
+
+    def fail_cleanup(*_args, **_kwargs):
+        raise OSError("cleanup failure")
+
+    monkeypatch.setattr(Path, "replace", fail_publish)
+    monkeypatch.setattr(Path, "unlink", fail_cleanup)
+    with pytest.raises(OSError, match="publication failure.*cleanup.*cleanup failure"):
+        cipher.write_text_atomic("replacement", output)
+    assert output.read_bytes() == b"existing"
+
+
+@pytest.mark.parametrize("mode", ["forward", "reverse"])
+def test_ledger_changes_during_publication_are_preserved(tmp_path, monkeypatch, mode):
+    source = tmp_path / "source.py"
+    source.write_bytes(b"nude base_topology")
+    if mode == "reverse":
+        forward = cipher.prepare_conversion("forward", source)
+        cipher.apply_conversion(forward, overwrite=False)
+        source = forward["output_path"]
+    plan = cipher.prepare_conversion(mode, source)
+    original_write = cipher.write_text_atomic
+
+    def publish_then_change_ledger(text, path, **kwargs):
+        original_write(text, path, **kwargs)
+        if path == plan["output_path"]:
+            plan["ledger_path"].write_bytes(b"another operation's ledger")
+
+    monkeypatch.setattr(cipher, "write_text_atomic", publish_then_change_ledger)
+    with pytest.raises(ValueError, match="changed since preview"):
+        cipher.apply_conversion(plan)
+    assert plan["ledger_path"].read_bytes() == b"another operation's ledger"
+    assert plan["report"]["output_saved"] is True
+    assert plan["output_path"].read_text(encoding="utf-8") == plan["result"]
+
+
+def test_file_fingerprint_covers_multiple_chunks_and_the_tail(tmp_path):
+    path = tmp_path / "large.txt"
+    payload = b"x" * (2 * 1024 * 1024) + b"tail"
+    path.write_bytes(payload)
+    first = cipher.file_fingerprint(path)
+    assert first == hashlib.sha256(payload).hexdigest()
+    with path.open("r+b") as output:
+        output.seek(-1, 2)
+        output.write(b"X")
+    with pytest.raises(ValueError, match="changed since preview"):
+        cipher.check_snapshot({path: first})
+
+
+@pytest.mark.parametrize(
+    "options",
+    [
+        {"mode": "forward"},
+        {"mode": "validate", "input_path": "unused"},
+        {"mode": "verify", "input_path": "unused", "output_path": "unused-output"},
+        {"mode": "forward", "input_path": "unused", "strict": True},
+        {"mode": "verify", "input_path": "unused", "keep_ledger": True},
+    ],
+)
+def test_core_rejects_invalid_options_before_reading_files(options):
+    with pytest.raises(ValueError):
+        cipher.prepare_conversion(**options, dict_path="missing-dictionary.json")
+
+
+def test_engine_rejects_invalid_modes_and_non_text_input():
+    engine = cipher.CipherEngine(MAPPING)
+    with pytest.raises(ValueError, match="mode"):
+        engine.transform("alpha", "unknown")
+    with pytest.raises(ValueError, match="mode"):
+        engine.count("alpha", "unknown")
+    with pytest.raises(ValueError, match="string"):
+        engine.transform(None, "forward")

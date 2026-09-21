@@ -10,11 +10,20 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from tempfile import NamedTemporaryFile
+from types import MappingProxyType
 
 LITERAL_PREFIX = "__SCM_LIT_"
 LITERAL_TEMPLATE = LITERAL_PREFIX + "{}__"
 LEDGER_FILE = ".scm_ledger.json"
 LEDGER_VERSION = 2
+
+
+class PublishedWriteError(OSError):
+    """The destination exists, but removing its temporary link failed."""
+
+    def __init__(self, file_path, cleanup_error):
+        super().__init__(f"Temporary cleanup failed after saving {file_path}: {cleanup_error}")
+        self.published_path = Path(file_path)
 
 
 def _unique_pairs(pairs):
@@ -35,6 +44,7 @@ def write_text_atomic(text, file_path, overwrite=True):
     """Publish a complete UTF-8 file without truncating an existing destination."""
     file_path = Path(file_path)
     temporary_path = None
+    published = False
     try:
         with NamedTemporaryFile(
             mode="w",
@@ -52,9 +62,22 @@ def write_text_atomic(text, file_path, overwrite=True):
         else:
             # Same-directory hard linking publishes atomically without replacing a raced-in file.
             os.link(temporary_path, file_path)
+        published = True
     finally:
+        pending_error = sys.exc_info()[1]
         if temporary_path is not None:
-            temporary_path.unlink(missing_ok=True)
+            try:
+                temporary_path.unlink(missing_ok=True)
+            except OSError as cleanup_error:
+                if published:
+                    raise PublishedWriteError(file_path, cleanup_error) from cleanup_error
+                if pending_error is None:
+                    raise
+                if isinstance(pending_error, Exception):
+                    raise OSError(
+                        f"{pending_error}; temporary cleanup also failed: {cleanup_error}"
+                    ) from pending_error
+                # Preserve Ctrl+C/SystemExit instead of replacing them with a cleanup failure.
 
 
 def save_json(data, file_path, overwrite=True):
@@ -101,10 +124,13 @@ def _alternatives(terms):
     )
 
 
-def _term_pattern(terms):
+def _term_pattern(terms, identifier_extras=""):
     # Underscores separate terms; Unicode letters/digits remain identifier characters.
     # ASCII case folding avoids matching e.g. a Kelvin sign as the letter K.
-    return r"(?<![^\W_])(?ai:" + _alternatives(terms) + r")(?![^\W_])"
+    boundary = r"[^\W_]"
+    if identifier_extras:
+        boundary = "(?:" + boundary + "|[" + re.escape(identifier_extras) + "])"
+    return "(?<!" + boundary + ")(?ai:" + _alternatives(terms) + ")(?!" + boundary + ")"
 
 
 def _literal_pattern(cipher_dict):
@@ -116,45 +142,125 @@ def _literal_pattern(cipher_dict):
     )
 
 
-def process_forward(text, cipher_dict):
-    """Convert once, shielding native target terms from all substitutions."""
-    validate_dictionary(cipher_dict)
-    if LITERAL_PREFIX.lower() in text.lower():
-        raise ValueError(f"Input contains reserved {LITERAL_PREFIX} markers; reverse it first.")
+def _location(text, offset):
+    line = (
+        text.count("\n", 0, offset)
+        + text.count("\r", 0, offset)
+        - text.count("\r\n", 0, offset)
+        + 1
+    )
+    column = offset - max(text.rfind("\n", 0, offset), text.rfind("\r", 0, offset))
+    return f"line {line}, column {column}"
 
-    def replace(match):
-        original = match.group(0)
-        target = cipher_dict.get(original.lower())
-        if target is None:
-            return LITERAL_TEMPLATE.format(original)
-        return match_case(original, target)
 
-    pattern = _term_pattern(set(cipher_dict) | set(cipher_dict.values()))
-    result = re.sub(pattern, replace, text)
-    # Compound names or lossy case mappings can otherwise decode into a different term.
-    if process_reverse(result, cipher_dict) != text:
-        raise ValueError(
-            "Dictionary mapping is ambiguous for this input; round trip would lose text."
+class CipherEngine:
+    """Reusable matching rules with an immutable dictionary and per-call conversion counts."""
+
+    def __init__(self, cipher_dict):
+        validate_dictionary(cipher_dict)
+        self.mapping = MappingProxyType(dict(cipher_dict))
+        self.reverse_mapping = MappingProxyType({v: k for k, v in self.mapping.items()})
+        self._literal = re.compile(_literal_pattern(self.mapping))
+        self._prefix = re.compile(re.escape(LITERAL_PREFIX), re.IGNORECASE | re.ASCII)
+        self._patterns = self._compile_patterns()
+
+    def _compile_patterns(self, identifier_extras=""):
+        return {
+            "forward": re.compile(
+                _term_pattern(set(self.mapping) | set(self.mapping.values()), identifier_extras)
+            ),
+            "reverse": re.compile(
+                self._literal.pattern + "|" + _term_pattern(self.reverse_mapping, identifier_extras)
+            ),
+        }
+
+    def _patterns_for(self, text):
+        if not isinstance(text, str):
+            raise ValueError("Text must be a string.")
+        # Python's Unicode identifier continuations include combining marks and connector
+        # punctuation that re's \w omits. Keep underscores as deliberate term separators.
+        extras = (
+            ""
+            if text.isascii()
+            else "".join(
+                sorted(
+                    char
+                    for char in set(text)
+                    if char != "_" and not char.isalnum() and ("a" + char).isidentifier()
+                )
+            )
         )
-    return result
+        return self._compile_patterns(extras) if extras else self._patterns
+
+    def _substitute(self, text, mode, patterns, count_only=False):
+        for prefix in self._prefix.finditer(text):
+            if mode == "forward":
+                raise ValueError(
+                    f"Input contains reserved {LITERAL_PREFIX} markers at "
+                    f"{_location(text, prefix.start())}; reverse it first."
+                )
+            if self._literal.match(text, prefix.start()) is None:
+                raise ValueError(
+                    f"Unrecognized or damaged literal marker at {_location(text, prefix.start())}."
+                )
+        counts = {"substitutions": 0, "literals": 0, "terms": {}}
+
+        def replace(match):
+            original = match.group(0)
+            if mode == "forward":
+                target = self.mapping.get(original.lower())
+                if target is None:
+                    counts["literals"] += 1
+                    return original if count_only else LITERAL_TEMPLATE.format(original)
+                term = original.lower()
+            elif match.group("literal") is not None:
+                counts["literals"] += 1
+                return original if count_only else match.group("literal")
+            else:
+                term = target = self.reverse_mapping[original.lower()]
+            counts["substitutions"] += 1
+            counts["terms"][term] = counts["terms"].get(term, 0) + 1
+            if count_only:
+                return original
+            try:
+                return match_case(original, target)
+            except ValueError as error:
+                raise ValueError(f"{error} At {_location(text, match.start())}.") from error
+
+        return patterns[mode].sub(replace, text), counts
+
+    def transform(self, text, mode):
+        if mode not in ("forward", "reverse"):
+            raise ValueError(f"Unknown conversion mode: {mode}")
+        patterns = self._patterns_for(text)
+        result, counts = self._substitute(text, mode, patterns)
+        if mode == "forward":
+            restored, _ = self._substitute(result, "reverse", patterns)
+            if restored != text:
+                offset = next(
+                    (i for i in range(min(len(text), len(restored))) if text[i] != restored[i]),
+                    min(len(text), len(restored)),
+                )
+                raise ValueError(
+                    f"Dictionary mapping is ambiguous at {_location(text, offset)}; "
+                    "round trip would lose text."
+                )
+        return result, counts
+
+    def count(self, text, mode):
+        if mode == "verify":
+            mode = "reverse"
+        if mode not in ("forward", "reverse"):
+            raise ValueError(f"Unknown conversion mode: {mode}")
+        return self._substitute(text, mode, self._patterns_for(text), count_only=True)[1]
+
+
+def process_forward(text, cipher_dict):
+    return CipherEngine(cipher_dict).transform(text, "forward")[0]
 
 
 def process_reverse(text, cipher_dict):
-    """Restore literals and reverse substitutions in one pass, without rescanning output."""
-    validate_dictionary(cipher_dict)
-    literal_pattern = _literal_pattern(cipher_dict)
-    unprotected = re.sub(literal_pattern, "", text)
-    if LITERAL_PREFIX.lower() in unprotected.lower():
-        raise ValueError("Unrecognized or damaged literal marker; preserve the original markers.")
-    reverse_dict = {target: source for source, target in cipher_dict.items()}
-
-    def replace(match):
-        if match.group("literal") is not None:
-            return match.group("literal")
-        original = match.group(0)
-        return match_case(original, reverse_dict[original.lower()])
-
-    return re.sub(literal_pattern + "|" + _term_pattern(reverse_dict), replace, text)
+    return CipherEngine(cipher_dict).transform(text, "reverse")[0]
 
 
 def ledger_path_for(encoded_path):
@@ -171,26 +277,7 @@ def dictionary_hash(cipher_dict):
 
 def conversion_counts(text, cipher_dict, mode):
     """Count original matches, without counting text introduced by replacements."""
-    terms = {}
-    literals = 0
-    if mode == "forward":
-        pattern = _term_pattern(set(cipher_dict) | set(cipher_dict.values()))
-        for match in re.finditer(pattern, text):
-            term = match.group(0).lower()
-            if term in cipher_dict:
-                terms[term] = terms.get(term, 0) + 1
-            else:
-                literals += 1
-    else:
-        reverse_dict = {target: source for source, target in cipher_dict.items()}
-        pattern = _literal_pattern(cipher_dict) + "|" + _term_pattern(reverse_dict)
-        for match in re.finditer(pattern, text):
-            if match.group("literal") is not None:
-                literals += 1
-            else:
-                term = reverse_dict[match.group(0).lower()]
-                terms[term] = terms.get(term, 0) + 1
-    return {"substitutions": sum(terms.values()), "literals": literals, "terms": terms}
+    return CipherEngine(cipher_dict).count(text, mode)
 
 
 def make_ledger(text, result, cipher_dict, input_path, output_path):
@@ -289,7 +376,11 @@ def emit_report(report, as_json):
 
 def file_fingerprint(path):
     try:
-        return hashlib.sha256(path.read_bytes()).hexdigest()
+        digest = hashlib.sha256()
+        with path.open("rb") as source:
+            for chunk in iter(lambda: source.read(1024 * 1024), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
     except FileNotFoundError:
         return None
 
@@ -306,6 +397,16 @@ def prepare_conversion(
     """Prepare a frozen conversion and capture every file that could affect publication."""
     if mode not in ("forward", "reverse", "verify", "validate"):
         raise ValueError(f"Unknown conversion mode: {mode}")
+    if mode != "validate" and input_path is None:
+        raise ValueError("An input file is required for conversion and verification.")
+    if mode == "validate" and input_path is not None:
+        raise ValueError("Dictionary validation does not take an input file.")
+    if mode in ("validate", "verify") and output_path is not None:
+        raise ValueError("Read-only validation and verification do not take an output file.")
+    if strict and mode not in ("reverse", "verify"):
+        raise ValueError("Strict verification is available only when reversing or verifying.")
+    if keep_ledger and mode != "reverse":
+        raise ValueError("Keeping the ledger applies only to reverse conversion.")
     dict_path = Path(dict_path or Path(__file__).with_name("cipher_dict.json")).resolve()
     report = {"schema_version": 1, "mode": mode}
     snapshot = {dict_path: file_fingerprint(dict_path)}
@@ -344,21 +445,21 @@ def prepare_conversion(
             snapshot[path] = file_fingerprint(path)
 
     cipher_dict = load_json(dict_path)
-    validate_dictionary(cipher_dict)
+    engine = CipherEngine(cipher_dict)
     with input_path.open(encoding="utf-8", newline="") as source:
         text = source.read()
     ledger_data = None
     if mode == "forward":
         if snapshot[ledger_path_for(input_path)] is not None:
             raise ValueError("Input already has a cipher ledger; reverse it before encoding again.")
-        result = process_forward(text, cipher_dict)
+        result, counts = engine.transform(text, "forward")
         ledger_data = make_ledger(text, result, cipher_dict, input_path, output_path)
         integrity = "round_trip_checked"
     else:
         if snapshot[ledger_path] is not None:
             ledger_data = load_json(ledger_path)
             validate_ledger(ledger_data, cipher_dict, input_path)
-        result = process_reverse(text, cipher_dict)
+        result, counts = engine.transform(text, "reverse")
         integrity = reverse_integrity(text, result, ledger_data, strict=strict or mode == "verify")
 
     check_snapshot(snapshot)
@@ -371,7 +472,7 @@ def prepare_conversion(
         output_sha256=text_hash(result),
         input_bytes=len(text.encode("utf-8")),
         output_bytes=len(result.encode("utf-8")),
-        counts=conversion_counts(text, cipher_dict, mode),
+        counts=counts,
         changed=text != result,
     )
     if mode != "verify":
@@ -412,13 +513,19 @@ def apply_conversion(plan, *, overwrite=True):
                 raise FileExistsError(
                     f"Destination already exists: {path}. Use --force to replace it."
                 )
-    if overwrite:
-        write_text_atomic(plan["result"], output_path)
-    else:
-        write_text_atomic(plan["result"], output_path, overwrite=False)
+    try:
+        if overwrite:
+            write_text_atomic(plan["result"], output_path)
+        else:
+            write_text_atomic(plan["result"], output_path, overwrite=False)
+    except PublishedWriteError:
+        report.update(output_saved=True, status="finalizing")
+        raise
     report["output_saved"] = True
     # An interrupted finalization must not let this plan be applied a second time.
     report["status"] = "finalizing"
+    if report["mode"] == "forward" or (plan["ledger_data"] is not None and not plan["keep_ledger"]):
+        check_snapshot({ledger_path: plan["snapshot"][ledger_path]})
     if report["mode"] == "forward":
         if overwrite:
             save_json(plan["ledger_data"], ledger_path)

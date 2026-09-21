@@ -10,6 +10,11 @@ import sys
 from pathlib import Path
 
 from itov import __version__
+from itov.audio import load_spec as load_audio_spec
+from itov.audio import output_contract, plan_audio, prepare_audio
+from itov.audio_media import verify_audio
+from itov.audiovisual import load_spec as load_av_spec
+from itov.audiovisual import mux
 from itov.batch import create_plan, load_plan, load_request, save_plan, verify_plan
 from itov.batch_execution import abandon_batch, batch_status, run_batch
 from itov.catalog import load_catalog, verify_assets
@@ -162,6 +167,23 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--save", action="store_true")
         else:
             item.add_argument("artifact", type=Path, help="Collected MP4 to decode and verify")
+    audio = commands.add_parser("audio", help="Prepare, plan, and verify pinned audio batches")
+    audio_actions = audio.add_subparsers(dest="action", required=True)
+    for action in ("prepare", "plan", "verify"):
+        item = audio_actions.add_parser(action)
+        item.add_argument("file", type=Path, help="Audio specification JSON")
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "plan":
+            item.add_argument("--save", action="store_true")
+        if action == "verify":
+            item.add_argument("artifact", type=Path)
+    av = commands.add_parser("av", help="Compose completed owned audio/video artifacts")
+    av_actions = av.add_subparsers(dest="action", required=True)
+    item = av_actions.add_parser("mux", help="Create or reverify an immutable audiovisual output")
+    item.add_argument("file", type=Path, help="Pinned audiovisual specification JSON")
+    item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+    item.add_argument("--json", action="store_true")
     return root
 
 
@@ -258,6 +280,28 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1
+        elif args.command == "av":
+            result = mux(load_config(args.config), load_av_spec(args.file))
+            print(json.dumps(result, indent=2))
+            return 0
+        elif args.command == "audio":
+            spec = load_audio_spec(args.file)
+            if args.action == "verify":
+                result = verify_audio(args.artifact, output_contract(spec))
+            elif args.action == "prepare":
+                result = prepare_audio(load_config(args.config), spec)
+            else:
+                config = load_config(args.config)
+                plan = plan_audio(config, spec)
+                path = save_plan(config.root, plan) if args.save else None
+                result = {
+                    "ok": True,
+                    "plan": plan,
+                    "path": str(path) if path else None,
+                    "limits": "No jobs submitted; qualify before execution.",
+                }
+            print(json.dumps(result, indent=2))
+            return 0
         elif args.command == "video":
             spec = load_video_spec(args.file)
             if args.action == "verify":

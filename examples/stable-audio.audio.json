@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "profile": "stable-audio-open-v1",
+  "checkpoint": {
+    "loader_name": "stable-audio-open-1.0.safetensors",
+    "sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+  },
+  "text_encoder": {
+    "loader_name": "t5_base.safetensors",
+    "sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+  },
+  "prompt": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music.",
+  "negative_prompt": "speech, voices, music, distortion",
+  "seconds": 4,
+  "seed": 820260921,
+  "count": 2
+}

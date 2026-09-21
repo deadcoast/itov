@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 
+from itov.audio_media import audio_contract
 from itov.batch import replay_plan
 from itov.catalog import canonical_bytes, digest, read_document, relative_path, require, sha256
 from itov.catalog_store import _atomic_write
@@ -38,16 +39,24 @@ VIDEO_MODULES = {
     "SaveVideo": "comfy_extras.nodes_video",
 }
 MODEL_FOLDERS = {
+    "CheckpointLoaderSimple": ("checkpoints",),
     "UNETLoader": ("unet", "diffusion_models"),
     "CLIPLoader": ("text_encoders", "clip"),
     "VAELoader": ("vae",),
 }
+AUDIO_MODULES = {
+    name: "comfy_extras.nodes_audio"
+    for name in (
+        "EmptyLatentAudio",
+        "ConditioningStableAudio",
+        "VAEDecodeAudio",
+        "SaveAudioAdvanced",
+    )
+}
 
 
 def model_path(config: Config, kind: str, name: str) -> Path:
-    require(
-        isinstance(name, str) and name.endswith(".safetensors"), "Video models must be safetensors"
-    )
+    require(isinstance(name, str) and name.endswith(".safetensors"), "Models must be safetensors")
     candidates = [
         safe_path(config.comfyui_root / "models" / folder, name) for folder in MODEL_FOLDERS[kind]
     ]
@@ -115,7 +124,23 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
         for job in plan["jobs"]
         for node in parse_json(job["workflow_json"]).values()
     )
-    profile = "stock-wan22-v1" if video else PROFILE
+    audio = any(
+        node["class_type"] in AUDIO_MODULES
+        for job in plan["jobs"]
+        for node in parse_json(job["workflow_json"]).values()
+    )
+    require(
+        not (
+            audio
+            and any(
+                node["class_type"] in {"CreateVideo", "SaveVideo", "Wan22ImageToVideoLatent"}
+                for job in plan["jobs"]
+                for node in parse_json(job["workflow_json"]).values()
+            )
+        ),
+        "Audio and video generation require separate qualified plans",
+    )
+    profile = "stock-stable-audio-v1" if audio else "stock-wan22-v1" if video else PROFILE
 
     def bind(root, name):
         path = safe_path(root, name)
@@ -149,10 +174,10 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
         for node_id, node in graph.items():
             kind, inputs = node["class_type"], node["inputs"]
             require(
-                kind in SUPPORTED or kind in VIDEO_MODULES,
+                kind in SUPPORTED or kind in VIDEO_MODULES or kind in AUDIO_MODULES,
                 f"Node is outside the {profile} profile: {kind}",
             )
-            module = VIDEO_MODULES.get(kind, "nodes")
+            module = AUDIO_MODULES.get(kind, VIDEO_MODULES.get(kind, "nodes"))
             require(
                 registry[kind].get("python_module") == module,
                 f"Node is not the stock implementation: {kind}",
@@ -174,7 +199,7 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                 )
             elif kind == "CheckpointLoaderSimple":
                 asset = bind(config.comfyui_root / "models/checkpoints", inputs["ckpt_name"])
-                _pin(node, asset, "checkpoint")
+                _pin(node, asset, "checkpoint", required=audio)
             elif kind in MODEL_FOLDERS:
                 field = {
                     "UNETLoader": "unet_name",
@@ -186,8 +211,9 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                 _pin(node, asset, kind, required=True)
                 if kind == "CLIPLoader":
                     require(
-                        inputs["type"] == "wan" and inputs.get("device", "default") == "default",
-                        "Video profile requires the default Wan text encoder",
+                        inputs["type"] == ("stable_audio" if audio else "wan")
+                        and inputs.get("device", "default") == "default",
+                        "Profile requires its default text encoder type and device",
                     )
                 if kind == "UNETLoader":
                     require(
@@ -201,13 +227,23 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                     asset["sha256"] == planned_loras.get(name),
                     f"Loader name does not resolve to the planned LoRA bytes: {name}",
                 )
-            elif kind in {"SaveImage", "SaveVideo"}:
+            elif kind in {"SaveImage", "SaveVideo", "SaveAudioAdvanced"}:
                 prefix = inputs["filename_prefix"]
                 require(
                     isinstance(prefix, str) and "%" not in prefix,
                     f"{kind} requires a literal relative filename prefix",
                 )
                 safe_path(config.root / "output", prefix)
+                if kind == "SaveAudioAdvanced":
+                    require(
+                        set(inputs) == {"audio", "filename_prefix", "format"}
+                        and inputs["format"] == "flac",
+                        "Audio profile requires explicit lossless FLAC output",
+                    )
+                    metadata = node.get("_meta", {})
+                    require(isinstance(metadata, dict), "Audio metadata must be an object")
+                    audio_contract(metadata.get("itov_audio"))
+                    video_tools()
                 if kind == "SaveVideo":
                     require(
                         set(inputs) == {"video", "filename_prefix", "format", "format.codec"}
@@ -219,6 +255,18 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                     require(isinstance(metadata, dict), "Video metadata must be an object")
                     video_contract(metadata.get("itov_video"))
                     video_tools()
+            elif kind == "EmptyLatentAudio":
+                require(
+                    type(inputs["seconds"]) is int
+                    and 1 <= inputs["seconds"] <= 10
+                    and inputs["batch_size"] == 1,
+                    "Audio profile requires 1..10 seconds and batch size one",
+                )
+            elif kind == "ConditioningStableAudio":
+                require(
+                    inputs["seconds_start"] == 0 and 1 <= inputs["seconds_total"] <= 10,
+                    "Audio conditioning must start at zero and last 1..10 seconds",
+                )
             elif kind == "CreateVideo":
                 require(
                     set(inputs) == {"images", "fps"},

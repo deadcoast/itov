@@ -1,0 +1,1683 @@
+{
+  "observed_at": "2026-09-21T20:31:48.046874+00:00",
+  "package_version": "0.8.0",
+  "scope": "pinned_stable_audio_open_neutral_ambience_and_owned_av_mux",
+  "specification": {
+    "checkpoint": {
+      "loader_name": "stable-audio-open-1.0.safetensors",
+      "sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+    },
+    "count": 2,
+    "negative_prompt": "speech, voices, music, distortion",
+    "profile": "stable-audio-open-v1",
+    "prompt": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music.",
+    "seconds": 4,
+    "seed": 820260921,
+    "text_encoder": {
+      "loader_name": "t5_base.safetensors",
+      "sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+    },
+    "version": 1
+  },
+  "runtime": {
+    "system": {
+      "os": "win32",
+      "ram_total": 66095271936,
+      "ram_free": 36006633472,
+      "comfyui_version": "0.37.0",
+      "required_frontend_version": "1.52.7",
+      "installed_templates_version": "0.11.66",
+      "required_templates_version": "0.11.66",
+      "comfy_package_versions": [
+        {
+          "name": "comfyui-frontend-package",
+          "installed": "1.52.7",
+          "required": "1.52.7"
+        },
+        {
+          "name": "comfyui-workflow-templates",
+          "installed": "0.11.66",
+          "required": "0.11.66"
+        },
+        {
+          "name": "comfyui-embedded-docs",
+          "installed": "0.5.12",
+          "required": "0.5.12"
+        },
+        {
+          "name": "comfy-kitchen",
+          "installed": "0.2.35",
+          "required": "0.2.35"
+        },
+        {
+          "name": "comfy-aimdo",
+          "installed": "0.5.5",
+          "required": "0.5.5"
+        }
+      ],
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130",
+      "embedded_python": true,
+      "deploy_environment": "local-portable",
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8188",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes"
+      ]
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0,
+        "vram_total": 34162016256,
+        "vram_free": 18872617148,
+        "torch_vram_total": 67108864,
+        "torch_vram_free": 30755004
+      }
+    ]
+  },
+  "initial_free_bytes": 101102731264,
+  "initial_catalog_head": "1fe3d939fbadbc4915ee434b5c7247ba35c47e561012f918ce8e901af352caa0",
+  "downloads": [
+    {
+      "bytes": 4853889016,
+      "destination": "models/checkpoints/stable-audio-open-1.0.safetensors",
+      "id": "stable-audio-open-1.0",
+      "observed_at": "2026-09-21T20:21:27.121861+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\stable-audio-open-1.0.safetensors",
+      "repository": "Comfy-Org/stable-audio-open-1.0_repackaged",
+      "revision": "1ad51d70f09a4955d5470df358d632e321fd3d7b",
+      "sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e",
+      "source_file": "stable-audio-open-1.0.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/Comfy-Org/stable-audio-open-1.0_repackaged/resolve/1ad51d70f09a4955d5470df358d632e321fd3d7b/stable-audio-open-1.0.safetensors"
+    },
+    {
+      "bytes": 891646390,
+      "destination": "models/text_encoders/t5_base.safetensors",
+      "id": "t5-base-audio",
+      "observed_at": "2026-09-21T20:21:35.855163+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\t5_base.safetensors",
+      "repository": "google-t5/t5-base",
+      "revision": "a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1",
+      "sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4",
+      "source_file": "model.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/google-t5/t5-base/resolve/a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1/model.safetensors"
+    }
+  ],
+  "upstream_workflow": {
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/main/templates/audio_stable_audio_example.json",
+    "downloaded_sha256": "8211e43e3c3e9eac683ef325fb4ddab2a5d129462f0c5d74df915df29b464a9b",
+    "changes": "Pinned assets, neutral ambience, 4-second latent and zero-start duration conditioning, two explicit seeds, FLAC output contract; 50-step upstream sampler settings."
+  },
+  "limits": [
+    "Machine decode, signal and container timing only; no human listening or semantic sync acceptance.",
+    "No voice/LoRA/lip-sync qualification, long audio, parallel execution or memory prediction."
+  ],
+  "prepared": {
+    "ok": true,
+    "scope": "prepared_audio_candidates",
+    "spec_id": "3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d",
+    "catalog": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\templates\\audio\\05a75b5e8a6a06f3c324313bac3fc314e078ee78997f6e5766a9f25021738864.catalog.json",
+    "workflow": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\workflows\\audio\\3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d.api.json",
+    "expected_head": "1fe3d939fbadbc4915ee434b5c7247ba35c47e561012f918ce8e901af352caa0",
+    "limits": "No catalog import, seed reservation, or runtime submission."
+  },
+  "catalog": {
+    "ok": true,
+    "head": "3307da8655a36aefe7b80b483ded8eac8300bc51cb635117489af03f2808c67b",
+    "ledger_head": "77499bfab50907357291e6c91cd7722e99d764341a2e7c558f435be233912094",
+    "events": 8,
+    "presets": 5,
+    "loras": 1
+  },
+  "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+  "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf.json",
+  "qualification": {
+    "version": 1,
+    "profile": "stock-stable-audio-v1",
+    "scope": "runtime_schema_and_asset_binding",
+    "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+    "server": "http://127.0.0.1:8188",
+    "runtime": {
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8188",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes"
+      ],
+      "comfyui_version": "0.37.0",
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130"
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0
+      }
+    ],
+    "node_schema_sha256": "3803b184f7e7a1b239d4b91c1069139d78bbaac355da99d4ba5b9ba38cb9fd81",
+    "files": [
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy_extras\\nodes_audio.py",
+        "bytes": 34429,
+        "sha256": "12697959683e88024e0dfe339973d2413f62bf2ff59a0571ea84acd948793643"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\folder_paths.py",
+        "bytes": 23745,
+        "sha256": "a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "bytes": 25024,
+        "sha256": "5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\stable-audio-open-1.0.safetensors",
+        "bytes": 4853889016,
+        "sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\t5_base.safetensors",
+        "bytes": 891646390,
+        "sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py",
+        "bytes": 111280,
+        "sha256": "4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891"
+      }
+    ],
+    "jobs": 2,
+    "qualification_id": "5c74d0b86b296056883a4e79ed899ecccc7657e28a69749ace79351438ca12d1"
+  },
+  "command_seconds": 16.755,
+  "gpu_samples": [
+    {
+      "at": "2026-09-21T20:31:57.458772+00:00",
+      "exit_code": 0,
+      "csv": "0, 17735, 32607, 7",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:31:57.992195+00:00",
+      "exit_code": 0,
+      "csv": "0, 17757, 32607, 13",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:31:58.526316+00:00",
+      "exit_code": 0,
+      "csv": "0, 17797, 32607, 13",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:31:59.059895+00:00",
+      "exit_code": 0,
+      "csv": "0, 17792, 32607, 12",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:31:59.594375+00:00",
+      "exit_code": 0,
+      "csv": "0, 17793, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:00.128278+00:00",
+      "exit_code": 0,
+      "csv": "0, 17809, 32607, 12",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:00.662640+00:00",
+      "exit_code": 0,
+      "csv": "0, 17806, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:01.196759+00:00",
+      "exit_code": 0,
+      "csv": "0, 17806, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:01.731731+00:00",
+      "exit_code": 0,
+      "csv": "0, 17806, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:02.265415+00:00",
+      "exit_code": 0,
+      "csv": "0, 17806, 32607, 10",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:02.797653+00:00",
+      "exit_code": 0,
+      "csv": "0, 17806, 32607, 12",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:03.329967+00:00",
+      "exit_code": 0,
+      "csv": "0, 17806, 32607, 12",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:03.894405+00:00",
+      "exit_code": 0,
+      "csv": "0, 17806, 32607, 12",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:04.428948+00:00",
+      "exit_code": 0,
+      "csv": "0, 5358, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:04.962220+00:00",
+      "exit_code": 0,
+      "csv": "0, 5534, 32607, 17",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:05.506021+00:00",
+      "exit_code": 0,
+      "csv": "0, 7310, 32607, 12",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:06.042432+00:00",
+      "exit_code": 0,
+      "csv": "0, 7502, 32607, 34",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:06.585292+00:00",
+      "exit_code": 0,
+      "csv": "0, 7502, 32607, 34",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:07.121114+00:00",
+      "exit_code": 0,
+      "csv": "0, 7502, 32607, 32",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:07.658985+00:00",
+      "exit_code": 0,
+      "csv": "0, 7406, 32607, 34",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:08.191121+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:08.725536+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 12",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:09.259777+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:09.792492+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:10.325891+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:10.859497+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:11.394397+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 11",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:11.928648+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 36",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:12.495506+00:00",
+      "exit_code": 0,
+      "csv": "0, 7662, 32607, 32",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:13.029391+00:00",
+      "exit_code": 0,
+      "csv": "0, 7662, 32607, 33",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:13.567286+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 33",
+      "error": ""
+    },
+    {
+      "at": "2026-09-21T20:32:14.099595+00:00",
+      "exit_code": 0,
+      "csv": "0, 7630, 32607, 17",
+      "error": ""
+    }
+  ],
+  "runtime_log_sha256": "3c36a7de99d87dded99b43cfabef7986b576819b3493aec7ab5c3bcc764f7184",
+  "result": {
+    "ok": true,
+    "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+    "status": "succeeded",
+    "error": null,
+    "jobs": [
+      {
+        "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+        "job_index": 0,
+        "request_id": "c2f1ecd5-a273-54ba-8496-cd3a6c04e59a",
+        "workflow_sha256": "2c294a5080b82cfe708134c89847f9574493db4b2c8649f341959b3db8889a18",
+        "status": "succeeded",
+        "prompt_id": "319575d0-1408-42ad-b0e9-5ac6ff7f1732"
+      },
+      {
+        "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+        "job_index": 1,
+        "request_id": "1c87e283-2fcc-5250-a90b-d0bf24b17057",
+        "workflow_sha256": "f5d4aa1e56ea323021acefce21d537d5de91d877ed8e6c6f1950dc7d3232ede3",
+        "status": "succeeded",
+        "prompt_id": "5bb37411-08da-4add-8207-b18f1629fc0c"
+      }
+    ],
+    "succeeded": 2,
+    "scope": "sequential_batch_observations"
+  },
+  "records": [
+    {
+      "version": 1,
+      "request_id": "c2f1ecd5-a273-54ba-8496-cd3a6c04e59a",
+      "server": "http://127.0.0.1:8188",
+      "owner": {
+        "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+        "index": 0
+      },
+      "workflow_path": null,
+      "workflow_sha256": "2c294a5080b82cfe708134c89847f9574493db4b2c8649f341959b3db8889a18",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "stable-audio-open-1.0.safetensors"
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "t5_base.safetensors",
+            "device": "default",
+            "type": "stable_audio"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "speech, voices, music, distortion"
+          }
+        },
+        "5": {
+          "class_type": "ConditioningStableAudio",
+          "inputs": {
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "seconds_start": 0,
+            "seconds_total": 4
+          }
+        },
+        "6": {
+          "class_type": "EmptyLatentAudio",
+          "inputs": {
+            "batch_size": 1,
+            "seconds": 4
+          }
+        },
+        "7": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 4.98,
+            "denoise": 1,
+            "latent_image": [
+              "6",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "5",
+              1
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "dpmpp_3m_sde_gpu",
+            "scheduler": "exponential",
+            "seed": 820260921,
+            "steps": 50
+          }
+        },
+        "8": {
+          "class_type": "VAEDecodeAudio",
+          "inputs": {
+            "samples": [
+              "7",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "9": {
+          "_meta": {
+            "itov_audio": {
+              "channels": 2,
+              "sample_rate": 44100,
+              "samples": 176128
+            }
+          },
+          "class_type": "SaveAudioAdvanced",
+          "inputs": {
+            "audio": [
+              "8",
+              0
+            ],
+            "filename_prefix": "itov/audio/3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d",
+            "format": "flac"
+          }
+        }
+      },
+      "created_at": "2026-09-21T20:32:00.675530+00:00",
+      "status": "succeeded",
+      "prompt_id": "319575d0-1408-42ad-b0e9-5ac6ff7f1732",
+      "artifacts": [
+        {
+          "node_id": "9",
+          "category": "audio",
+          "filename": "3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d_00001.flac",
+          "subfolder": "itov\\audio",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\c2f1ecd5-a273-54ba-8496-cd3a6c04e59a\\artifact-0000.flac",
+          "bytes": 262902,
+          "sha256": "22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad",
+          "audio_validation": {
+            "ok": true,
+            "scope": "lossless_audio_full_decode",
+            "sha256": "22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad",
+            "channels": 2,
+            "sample_rate": 44100,
+            "samples": 176128,
+            "peak": 0.032684326171875,
+            "rms": 0.009291575217721188,
+            "decoded_f32le_sha256": "2e465b4bcbe426f1add6461824cbe9163b9a8f10b321724d203426c4e25567d0",
+            "duration_seconds": 3.9938321995464854,
+            "limits": "Finite nonzero samples do not establish quality or prompt compliance."
+          }
+        }
+      ],
+      "updated_at": "2026-09-21T20:32:08.241773+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\c2f1ecd5-a273-54ba-8496-cd3a6c04e59a.json",
+      "acknowledgement": {
+        "prompt_id": "319575d0-1408-42ad-b0e9-5ac6ff7f1732",
+        "number": 16,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          16,
+          "319575d0-1408-42ad-b0e9-5ac6ff7f1732",
+          {
+            "1": {
+              "_meta": {
+                "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+              },
+              "class_type": "CheckpointLoaderSimple",
+              "inputs": {
+                "ckpt_name": "stable-audio-open-1.0.safetensors"
+              }
+            },
+            "2": {
+              "_meta": {
+                "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+              },
+              "class_type": "CLIPLoader",
+              "inputs": {
+                "clip_name": "t5_base.safetensors",
+                "device": "default",
+                "type": "stable_audio"
+              }
+            },
+            "3": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+              }
+            },
+            "4": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "speech, voices, music, distortion"
+              }
+            },
+            "5": {
+              "class_type": "ConditioningStableAudio",
+              "inputs": {
+                "negative": [
+                  "4",
+                  0
+                ],
+                "positive": [
+                  "3",
+                  0
+                ],
+                "seconds_start": 0.0,
+                "seconds_total": 4.0
+              }
+            },
+            "6": {
+              "class_type": "EmptyLatentAudio",
+              "inputs": {
+                "batch_size": 1,
+                "seconds": 4.0
+              }
+            },
+            "7": {
+              "class_type": "KSampler",
+              "inputs": {
+                "cfg": 4.98,
+                "denoise": 1.0,
+                "latent_image": [
+                  "6",
+                  0
+                ],
+                "model": [
+                  "1",
+                  0
+                ],
+                "negative": [
+                  "5",
+                  1
+                ],
+                "positive": [
+                  "5",
+                  0
+                ],
+                "sampler_name": "dpmpp_3m_sde_gpu",
+                "scheduler": "exponential",
+                "seed": 820260921,
+                "steps": 50
+              }
+            },
+            "8": {
+              "class_type": "VAEDecodeAudio",
+              "inputs": {
+                "samples": [
+                  "7",
+                  0
+                ],
+                "vae": [
+                  "1",
+                  2
+                ]
+              }
+            },
+            "9": {
+              "_meta": {
+                "itov_audio": {
+                  "channels": 2,
+                  "sample_rate": 44100,
+                  "samples": 176128
+                }
+              },
+              "class_type": "SaveAudioAdvanced",
+              "inputs": {
+                "audio": [
+                  "8",
+                  0
+                ],
+                "filename_prefix": "itov/audio/3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d",
+                "format": "flac"
+              }
+            }
+          },
+          {
+            "itov_request_id": "c2f1ecd5-a273-54ba-8496-cd3a6c04e59a",
+            "client_id": "c2f1ecd5-a273-54ba-8496-cd3a6c04e59a",
+            "create_time": 1790022723872
+          },
+          [
+            "9"
+          ]
+        ],
+        "outputs": {
+          "9": {
+            "audio": [
+              {
+                "filename": "3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d_00001.flac",
+                "subfolder": "itov\\audio",
+                "type": "output"
+              }
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "319575d0-1408-42ad-b0e9-5ac6ff7f1732",
+                "timestamp": 1790022723873
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "319575d0-1408-42ad-b0e9-5ac6ff7f1732",
+                "timestamp": 1790022723873
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "319575d0-1408-42ad-b0e9-5ac6ff7f1732",
+                "timestamp": 1790022727795
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "9": {
+            "node_id": "9",
+            "display_node": "9",
+            "parent_node": null,
+            "real_node_id": "9"
+          }
+        }
+      }
+    },
+    {
+      "version": 1,
+      "request_id": "1c87e283-2fcc-5250-a90b-d0bf24b17057",
+      "server": "http://127.0.0.1:8188",
+      "owner": {
+        "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+        "index": 1
+      },
+      "workflow_path": null,
+      "workflow_sha256": "f5d4aa1e56ea323021acefce21d537d5de91d877ed8e6c6f1950dc7d3232ede3",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "stable-audio-open-1.0.safetensors"
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "t5_base.safetensors",
+            "device": "default",
+            "type": "stable_audio"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "speech, voices, music, distortion"
+          }
+        },
+        "5": {
+          "class_type": "ConditioningStableAudio",
+          "inputs": {
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "seconds_start": 0,
+            "seconds_total": 4
+          }
+        },
+        "6": {
+          "class_type": "EmptyLatentAudio",
+          "inputs": {
+            "batch_size": 1,
+            "seconds": 4
+          }
+        },
+        "7": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 4.98,
+            "denoise": 1,
+            "latent_image": [
+              "6",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "5",
+              1
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "dpmpp_3m_sde_gpu",
+            "scheduler": "exponential",
+            "seed": 820260922,
+            "steps": 50
+          }
+        },
+        "8": {
+          "class_type": "VAEDecodeAudio",
+          "inputs": {
+            "samples": [
+              "7",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "9": {
+          "_meta": {
+            "itov_audio": {
+              "channels": 2,
+              "sample_rate": 44100,
+              "samples": 176128
+            }
+          },
+          "class_type": "SaveAudioAdvanced",
+          "inputs": {
+            "audio": [
+              "8",
+              0
+            ],
+            "filename_prefix": "itov/audio/3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d",
+            "format": "flac"
+          }
+        }
+      },
+      "created_at": "2026-09-21T20:32:08.249255+00:00",
+      "status": "succeeded",
+      "prompt_id": "5bb37411-08da-4add-8207-b18f1629fc0c",
+      "artifacts": [
+        {
+          "node_id": "9",
+          "category": "audio",
+          "filename": "3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d_00002.flac",
+          "subfolder": "itov\\audio",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\1c87e283-2fcc-5250-a90b-d0bf24b17057\\artifact-0000.flac",
+          "bytes": 176538,
+          "sha256": "01b667b48c61e4e2ef11462c1d32c4ace1db337f83d28580657d857ea9c6be66",
+          "audio_validation": {
+            "ok": true,
+            "scope": "lossless_audio_full_decode",
+            "sha256": "01b667b48c61e4e2ef11462c1d32c4ace1db337f83d28580657d857ea9c6be66",
+            "channels": 2,
+            "sample_rate": 44100,
+            "samples": 176128,
+            "peak": 0.08526611328125,
+            "rms": 0.023464172438848952,
+            "decoded_f32le_sha256": "0d0faf1881ed89250e38b43e175c410160a92c7f115a42c35a3ee081ac9aff5a",
+            "duration_seconds": 3.9938321995464854,
+            "limits": "Finite nonzero samples do not establish quality or prompt compliance."
+          }
+        }
+      ],
+      "updated_at": "2026-09-21T20:32:14.164724+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\1c87e283-2fcc-5250-a90b-d0bf24b17057.json",
+      "acknowledgement": {
+        "prompt_id": "5bb37411-08da-4add-8207-b18f1629fc0c",
+        "number": 17,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          17,
+          "5bb37411-08da-4add-8207-b18f1629fc0c",
+          {
+            "1": {
+              "_meta": {
+                "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+              },
+              "class_type": "CheckpointLoaderSimple",
+              "inputs": {
+                "ckpt_name": "stable-audio-open-1.0.safetensors"
+              }
+            },
+            "2": {
+              "_meta": {
+                "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+              },
+              "class_type": "CLIPLoader",
+              "inputs": {
+                "clip_name": "t5_base.safetensors",
+                "device": "default",
+                "type": "stable_audio"
+              }
+            },
+            "3": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+              }
+            },
+            "4": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "speech, voices, music, distortion"
+              }
+            },
+            "5": {
+              "class_type": "ConditioningStableAudio",
+              "inputs": {
+                "negative": [
+                  "4",
+                  0
+                ],
+                "positive": [
+                  "3",
+                  0
+                ],
+                "seconds_start": 0.0,
+                "seconds_total": 4.0
+              }
+            },
+            "6": {
+              "class_type": "EmptyLatentAudio",
+              "inputs": {
+                "batch_size": 1,
+                "seconds": 4.0
+              }
+            },
+            "7": {
+              "class_type": "KSampler",
+              "inputs": {
+                "cfg": 4.98,
+                "denoise": 1.0,
+                "latent_image": [
+                  "6",
+                  0
+                ],
+                "model": [
+                  "1",
+                  0
+                ],
+                "negative": [
+                  "5",
+                  1
+                ],
+                "positive": [
+                  "5",
+                  0
+                ],
+                "sampler_name": "dpmpp_3m_sde_gpu",
+                "scheduler": "exponential",
+                "seed": 820260922,
+                "steps": 50
+              }
+            },
+            "8": {
+              "class_type": "VAEDecodeAudio",
+              "inputs": {
+                "samples": [
+                  "7",
+                  0
+                ],
+                "vae": [
+                  "1",
+                  2
+                ]
+              }
+            },
+            "9": {
+              "_meta": {
+                "itov_audio": {
+                  "channels": 2,
+                  "sample_rate": 44100,
+                  "samples": 176128
+                }
+              },
+              "class_type": "SaveAudioAdvanced",
+              "inputs": {
+                "audio": [
+                  "8",
+                  0
+                ],
+                "filename_prefix": "itov/audio/3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d",
+                "format": "flac"
+              }
+            }
+          },
+          {
+            "itov_request_id": "1c87e283-2fcc-5250-a90b-d0bf24b17057",
+            "client_id": "1c87e283-2fcc-5250-a90b-d0bf24b17057",
+            "create_time": 1790022731410
+          },
+          [
+            "9"
+          ]
+        ],
+        "outputs": {
+          "9": {
+            "audio": [
+              {
+                "filename": "3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d_00002.flac",
+                "subfolder": "itov\\audio",
+                "type": "output"
+              }
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "5bb37411-08da-4add-8207-b18f1629fc0c",
+                "timestamp": 1790022731411
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6"
+                ],
+                "prompt_id": "5bb37411-08da-4add-8207-b18f1629fc0c",
+                "timestamp": 1790022731412
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "5bb37411-08da-4add-8207-b18f1629fc0c",
+                "timestamp": 1790022733537
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "9": {
+            "node_id": "9",
+            "display_node": "9",
+            "parent_node": null,
+            "real_node_id": "9"
+          }
+        }
+      }
+    }
+  ],
+  "completed_resume": {
+    "ok": true,
+    "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+    "status": "succeeded",
+    "error": null,
+    "jobs": [
+      {
+        "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+        "job_index": 0,
+        "request_id": "c2f1ecd5-a273-54ba-8496-cd3a6c04e59a",
+        "workflow_sha256": "2c294a5080b82cfe708134c89847f9574493db4b2c8649f341959b3db8889a18",
+        "status": "succeeded",
+        "prompt_id": "319575d0-1408-42ad-b0e9-5ac6ff7f1732"
+      },
+      {
+        "plan_id": "cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf",
+        "job_index": 1,
+        "request_id": "1c87e283-2fcc-5250-a90b-d0bf24b17057",
+        "workflow_sha256": "f5d4aa1e56ea323021acefce21d537d5de91d877ed8e6c6f1950dc7d3232ede3",
+        "status": "succeeded",
+        "prompt_id": "5bb37411-08da-4add-8207-b18f1629fc0c"
+      }
+    ],
+    "succeeded": 2,
+    "scope": "sequential_batch_observations"
+  },
+  "one_prompt_per_request": true,
+  "prior_job_records_unchanged": true,
+  "muxes": [
+    {
+      "specification_path": "examples\\stage-08-pair-01.av.json",
+      "result": {
+        "ok": true,
+        "status": "created",
+        "directory": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\av\\c6a05fb08cd3ee328099144e63cb1723c5b197d941546bc28ded5511f6db08f7",
+        "receipt": {
+          "version": 1,
+          "operation_id": "c6a05fb08cd3ee328099144e63cb1723c5b197d941546bc28ded5511f6db08f7",
+          "specification": {
+            "audio": {
+              "node_id": "9",
+              "record_sha256": "efdf110bf53ca567d194837e8f5deff4903d43238dd805cd4f6def1590531abd",
+              "request_id": "c2f1ecd5-a273-54ba-8496-cd3a6c04e59a",
+              "sha256": "22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad"
+            },
+            "policy": "start-zero-trim-or-pad-v1",
+            "version": 1,
+            "video": {
+              "node_id": "12",
+              "record_sha256": "a19b8297d74a053877c702f51597485d28d90e8a76bd1e9730fe490d0ca8d002",
+              "request_id": "914bd070-aea2-52d5-995b-a5419cb1e0b0",
+              "sha256": "60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e"
+            }
+          },
+          "sources": {
+            "video": {
+              "node_id": "12",
+              "record_sha256": "a19b8297d74a053877c702f51597485d28d90e8a76bd1e9730fe490d0ca8d002",
+              "request_id": "914bd070-aea2-52d5-995b-a5419cb1e0b0",
+              "sha256": "60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\914bd070-aea2-52d5-995b-a5419cb1e0b0\\artifact-0000.mp4",
+              "prompt_id": "185c0efa-a86a-459e-b369-dff7ca63d522",
+              "contract": {
+                "fps": 24,
+                "frames": 33,
+                "height": 640,
+                "width": 640
+              },
+              "validation": {
+                "ok": true,
+                "scope": "silent_h264_full_decode_and_timing",
+                "sha256": "60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e",
+                "fps": 24,
+                "frames": 33,
+                "height": 640,
+                "width": 640,
+                "duration_seconds": 1.375,
+                "decoded_frame_md5": [
+                  "a46f14f371b870c23528e86a2cba3d62",
+                  "cff2291cb143baa097a2bee03a9ceacd",
+                  "9b6d2f96772bafa0c23a15e8d83b2966",
+                  "298e2139bb14b3e7bd4e70a73a2f8836",
+                  "2bf78f2c74acbbbb73444ee9506b1d98",
+                  "d3e15004c99d4935fa2532c893556fe6",
+                  "746f8e4a70a3a79ebd88605f68757a98",
+                  "1c9d81c8c92c6cbea832ca9b009a0d03",
+                  "8c2a3852fbe5abf8a3ff908f713d4edb",
+                  "4968e0716c8d51e9c92a470d5ca47902",
+                  "15046b9193dd51fc3f2347867ad926d6",
+                  "fe811b951ec07cfb0c6879e128ac9eb6",
+                  "251af9350c30f39afb801c554453af4b",
+                  "3ded6df9051042977706960e895c0080",
+                  "295abdb58c22c5295a22a6455beb2ad3",
+                  "45013484dc181e1886c173666b7660e2",
+                  "7ce4545a8f8942a7355e9a66f89bfa4a",
+                  "ff2bc4d9e136b9a382efcbfb3f5e6ef9",
+                  "60461dc19f30edec4ba4dfeafa769fbb",
+                  "8cd7bb2a3759b8b549bc6040a3cec7d4",
+                  "dffb1a98ec6a285dcdfa13469b8b3e7a",
+                  "025b54630be03361857d90f832db3076",
+                  "df5f3cc30dcaa85dbacad677bbc53958",
+                  "ec9f3c0a38175478afc01de8a27b21db",
+                  "4a83df530417d953ecb47b8b09bcaa03",
+                  "b67de454de9d3c4db7ed34c2e9ca7113",
+                  "88e9b7221b2a91e3427952d571cbbd21",
+                  "9b036ddfa78a43cb2ca84c7ab5381d18",
+                  "5a676612ed66ffc04d6b6e1ba157849e",
+                  "b620c592a7d81665accedca133ebe1ad",
+                  "7a3536ae3f17c627065d405351645fc6",
+                  "6f779e95e6fe87796a80c19a5dfb6821",
+                  "afd15886ebc84d9765b8e680d9ab9a0b"
+                ],
+                "distinct_frames": 33,
+                "constant_frame_timestamps": true,
+                "tools": {
+                  "ffmpeg": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+                  "ffprobe": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE"
+                },
+                "limits": "Frame variation does not establish quality, fidelity, or human acceptance."
+              }
+            },
+            "audio": {
+              "node_id": "9",
+              "record_sha256": "efdf110bf53ca567d194837e8f5deff4903d43238dd805cd4f6def1590531abd",
+              "request_id": "c2f1ecd5-a273-54ba-8496-cd3a6c04e59a",
+              "sha256": "22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\c2f1ecd5-a273-54ba-8496-cd3a6c04e59a\\artifact-0000.flac",
+              "prompt_id": "319575d0-1408-42ad-b0e9-5ac6ff7f1732",
+              "contract": {
+                "channels": 2,
+                "sample_rate": 44100,
+                "samples": 176128
+              },
+              "validation": {
+                "ok": true,
+                "scope": "lossless_audio_full_decode",
+                "sha256": "22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad",
+                "channels": 2,
+                "sample_rate": 44100,
+                "samples": 176128,
+                "peak": 0.032684326171875,
+                "rms": 0.009291575217721188,
+                "decoded_f32le_sha256": "2e465b4bcbe426f1add6461824cbe9163b9a8f10b321724d203426c4e25567d0",
+                "duration_seconds": 3.9938321995464854,
+                "limits": "Finite nonzero samples do not establish quality or prompt compliance."
+              }
+            }
+          },
+          "alignment": {
+            "sample_rate": 48000,
+            "channels": 2,
+            "target_samples": 66000,
+            "offset_samples": 0,
+            "resampled_source_samples_estimate": 191704,
+            "trim_samples_estimate": 125704,
+            "pad_samples_estimate": 0,
+            "normalization": "none",
+            "sample_format": "s16le",
+            "codec": "aac",
+            "bitrate": "192k"
+          },
+          "validation": {
+            "ok": true,
+            "scope": "decoded_av_container_timing",
+            "video": {
+              "ok": true,
+              "scope": "mux_h264_full_decode_and_timing",
+              "sha256": "a8a6b98feff5f8fcb489796f233e218ec7ef119b70b2469ef0459a6eeb31d868",
+              "fps": 24,
+              "frames": 33,
+              "height": 640,
+              "width": 640,
+              "duration_seconds": 1.375,
+              "decoded_frame_md5": [
+                "a46f14f371b870c23528e86a2cba3d62",
+                "cff2291cb143baa097a2bee03a9ceacd",
+                "9b6d2f96772bafa0c23a15e8d83b2966",
+                "298e2139bb14b3e7bd4e70a73a2f8836",
+                "2bf78f2c74acbbbb73444ee9506b1d98",
+                "d3e15004c99d4935fa2532c893556fe6",
+                "746f8e4a70a3a79ebd88605f68757a98",
+                "1c9d81c8c92c6cbea832ca9b009a0d03",
+                "8c2a3852fbe5abf8a3ff908f713d4edb",
+                "4968e0716c8d51e9c92a470d5ca47902",
+                "15046b9193dd51fc3f2347867ad926d6",
+                "fe811b951ec07cfb0c6879e128ac9eb6",
+                "251af9350c30f39afb801c554453af4b",
+                "3ded6df9051042977706960e895c0080",
+                "295abdb58c22c5295a22a6455beb2ad3",
+                "45013484dc181e1886c173666b7660e2",
+                "7ce4545a8f8942a7355e9a66f89bfa4a",
+                "ff2bc4d9e136b9a382efcbfb3f5e6ef9",
+                "60461dc19f30edec4ba4dfeafa769fbb",
+                "8cd7bb2a3759b8b549bc6040a3cec7d4",
+                "dffb1a98ec6a285dcdfa13469b8b3e7a",
+                "025b54630be03361857d90f832db3076",
+                "df5f3cc30dcaa85dbacad677bbc53958",
+                "ec9f3c0a38175478afc01de8a27b21db",
+                "4a83df530417d953ecb47b8b09bcaa03",
+                "b67de454de9d3c4db7ed34c2e9ca7113",
+                "88e9b7221b2a91e3427952d571cbbd21",
+                "9b036ddfa78a43cb2ca84c7ab5381d18",
+                "5a676612ed66ffc04d6b6e1ba157849e",
+                "b620c592a7d81665accedca133ebe1ad",
+                "7a3536ae3f17c627065d405351645fc6",
+                "6f779e95e6fe87796a80c19a5dfb6821",
+                "afd15886ebc84d9765b8e680d9ab9a0b"
+              ],
+              "distinct_frames": 33,
+              "constant_frame_timestamps": true,
+              "tools": {
+                "ffmpeg": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+                "ffprobe": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE"
+              },
+              "limits": "Frame variation does not establish quality, fidelity, or human acceptance."
+            },
+            "aligned_audio": {
+              "samples": 66000,
+              "peak": 0.02825927734375,
+              "rms": 0.00897948235594482,
+              "decoded_f32le_sha256": "8e4fd52d81c0c78a97d9a76ab6e8b4fb0272653af97068032133540d68abb45c"
+            },
+            "aac_audio": {
+              "samples": 66000,
+              "peak": 0.027589891105890274,
+              "rms": 0.008901163319857982,
+              "decoded_f32le_sha256": "c34f6e591ac6c7e458b007b26b40efbc5cc11b0f7c813500d6136c32f5621974"
+            },
+            "aac_terminal_padding_samples": 0,
+            "contiguous_audio_timestamps": true,
+            "stream_timing": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "time_base": "1/12288",
+                "start_time": "0.000000",
+                "duration_ts": 16896,
+                "duration": "1.375000"
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio",
+                "sample_rate": "48000",
+                "channels": 2,
+                "time_base": "1/48000",
+                "start_time": "0.000000",
+                "duration_ts": 66000,
+                "duration": "1.375000"
+              }
+            ],
+            "limits": "Container alignment does not establish semantic synchronization, lip sync, loudness targets, or human acceptance."
+          },
+          "tools": {
+            "ffmpeg": {
+              "path": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+              "sha256": "05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740",
+              "version": "ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+            },
+            "ffprobe": {
+              "path": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE",
+              "sha256": "51e0780cd881f83749b029ed716cbb841c2eac6289f418050f2f2961b158896b",
+              "version": "ffprobe version 9.0-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+            }
+          },
+          "outputs": {
+            "aligned.wav": {
+              "bytes": 264078,
+              "sha256": "69ef33e650bb565da862363fa9fe0958f8ef7ab1e68b91d166ffe496b3c50b25"
+            },
+            "output.mp4": {
+              "bytes": 117375,
+              "sha256": "a8a6b98feff5f8fcb489796f233e218ec7ef119b70b2469ef0459a6eeb31d868"
+            }
+          },
+          "receipt_sha256": "79d09f4d6ddf274bf2962ad4fa5551496405eaa5ee9fc3789c1c6cfa4aca9234"
+        }
+      },
+      "completed_resume": "verified_existing",
+      "evidence_output": "docs\\evidence\\stage-08-av-01.mp4"
+    },
+    {
+      "specification_path": "examples\\stage-08-pair-02.av.json",
+      "result": {
+        "ok": true,
+        "status": "created",
+        "directory": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\av\\f24fc40e94f400e1c25a15395219fd9b22bd4a09ddc309dc66e9261833dc4d5c",
+        "receipt": {
+          "version": 1,
+          "operation_id": "f24fc40e94f400e1c25a15395219fd9b22bd4a09ddc309dc66e9261833dc4d5c",
+          "specification": {
+            "audio": {
+              "node_id": "9",
+              "record_sha256": "04e2c852742081124744df17b9e488b0c5744c727039f0464086e0aef14f7e30",
+              "request_id": "1c87e283-2fcc-5250-a90b-d0bf24b17057",
+              "sha256": "01b667b48c61e4e2ef11462c1d32c4ace1db337f83d28580657d857ea9c6be66"
+            },
+            "policy": "start-zero-trim-or-pad-v1",
+            "version": 1,
+            "video": {
+              "node_id": "12",
+              "record_sha256": "180780e7a02b9bf1ff7c4bc8b68dc5ec345e60ae4f9e8c4d85f3f9c4b142c03e",
+              "request_id": "b7433210-997e-5ca5-9907-2eb82958bec8",
+              "sha256": "1074820a01d8a339bab414cb0350547b58a6f5a03987f0cbe12191dd3701a362"
+            }
+          },
+          "sources": {
+            "video": {
+              "node_id": "12",
+              "record_sha256": "180780e7a02b9bf1ff7c4bc8b68dc5ec345e60ae4f9e8c4d85f3f9c4b142c03e",
+              "request_id": "b7433210-997e-5ca5-9907-2eb82958bec8",
+              "sha256": "1074820a01d8a339bab414cb0350547b58a6f5a03987f0cbe12191dd3701a362",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\b7433210-997e-5ca5-9907-2eb82958bec8\\artifact-0000.mp4",
+              "prompt_id": "9fcef9b8-9331-434e-8fdb-206602b2cc08",
+              "contract": {
+                "fps": 24,
+                "frames": 33,
+                "height": 640,
+                "width": 640
+              },
+              "validation": {
+                "ok": true,
+                "scope": "silent_h264_full_decode_and_timing",
+                "sha256": "1074820a01d8a339bab414cb0350547b58a6f5a03987f0cbe12191dd3701a362",
+                "fps": 24,
+                "frames": 33,
+                "height": 640,
+                "width": 640,
+                "duration_seconds": 1.375,
+                "decoded_frame_md5": [
+                  "33fee0c0c8a494d72948cf76f9030145",
+                  "ff1e88e84c50c301a329502bea619237",
+                  "9b5328796274c1466dd451d9918c1d23",
+                  "1d5b7978b549123732f305d1c0a8caef",
+                  "e41ab9ddfdfb52d03c48748595b1a53e",
+                  "0731492491ec4e3e8b4caea7c88f1ce1",
+                  "00c810825223307e25720d0c3961e1aa",
+                  "5acedf29336901d6f1e4b6e269c8873d",
+                  "abc3b5c522e0c77b18bdb30099a78671",
+                  "c7ebcfa9c79d79e4d0cc532c3da03bf4",
+                  "10afae0390c388cf4cae98fbfeabea4e",
+                  "1a9760e7201e1cf1c5bb28e9a4862e52",
+                  "4342c161b8a26b09cd46390a2ccd9c33",
+                  "16bb9a3a20836fdcc558b3f1747ad64d",
+                  "1b60739de111ddc3dd9f5d7cc0df36c0",
+                  "648b7e917a8029031c4c5019736d49f7",
+                  "d731e5c222de83c492ac27b80a0b88ad",
+                  "3afce229d26c18a345ed3646a0fa7e40",
+                  "f28d020c961f1b8a34f12c49b0cb8a11",
+                  "c6442efa1770807479045fab245bee8b",
+                  "803595e12a42501bc21959403e8cb098",
+                  "0e47b27c747ff40d667a11b951fae76d",
+                  "d7a1492865045bf4abdfd3837ea8fa62",
+                  "a343b4a6edfe2a9d1bc3338b70980cb2",
+                  "df132d09710c96dcfd0cd8c2e8deedc8",
+                  "def8005e6e400de0162275a0391bbdf3",
+                  "12e818e1bfb74065a8ea875abb597b9f",
+                  "e4f116563541c7caf09d1da39f52872b",
+                  "caeb85d1e8b28eb4c24c98c780638702",
+                  "30c9ac0515f71563404a94fbf889fb4c",
+                  "3561e21e7b7ebee067a9e44645480829",
+                  "22c49ae724bfeb14a1de1afae8303d7f",
+                  "4457923c2e4b32d8a986835553edb589"
+                ],
+                "distinct_frames": 33,
+                "constant_frame_timestamps": true,
+                "tools": {
+                  "ffmpeg": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+                  "ffprobe": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE"
+                },
+                "limits": "Frame variation does not establish quality, fidelity, or human acceptance."
+              }
+            },
+            "audio": {
+              "node_id": "9",
+              "record_sha256": "04e2c852742081124744df17b9e488b0c5744c727039f0464086e0aef14f7e30",
+              "request_id": "1c87e283-2fcc-5250-a90b-d0bf24b17057",
+              "sha256": "01b667b48c61e4e2ef11462c1d32c4ace1db337f83d28580657d857ea9c6be66",
+              "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\1c87e283-2fcc-5250-a90b-d0bf24b17057\\artifact-0000.flac",
+              "prompt_id": "5bb37411-08da-4add-8207-b18f1629fc0c",
+              "contract": {
+                "channels": 2,
+                "sample_rate": 44100,
+                "samples": 176128
+              },
+              "validation": {
+                "ok": true,
+                "scope": "lossless_audio_full_decode",
+                "sha256": "01b667b48c61e4e2ef11462c1d32c4ace1db337f83d28580657d857ea9c6be66",
+                "channels": 2,
+                "sample_rate": 44100,
+                "samples": 176128,
+                "peak": 0.08526611328125,
+                "rms": 0.023464172438848952,
+                "decoded_f32le_sha256": "0d0faf1881ed89250e38b43e175c410160a92c7f115a42c35a3ee081ac9aff5a",
+                "duration_seconds": 3.9938321995464854,
+                "limits": "Finite nonzero samples do not establish quality or prompt compliance."
+              }
+            }
+          },
+          "alignment": {
+            "sample_rate": 48000,
+            "channels": 2,
+            "target_samples": 66000,
+            "offset_samples": 0,
+            "resampled_source_samples_estimate": 191704,
+            "trim_samples_estimate": 125704,
+            "pad_samples_estimate": 0,
+            "normalization": "none",
+            "sample_format": "s16le",
+            "codec": "aac",
+            "bitrate": "192k"
+          },
+          "validation": {
+            "ok": true,
+            "scope": "decoded_av_container_timing",
+            "video": {
+              "ok": true,
+              "scope": "mux_h264_full_decode_and_timing",
+              "sha256": "720aa36996c7b193c5bf146f34648bd2448cdf080887d7b97b39cb14f15a02e3",
+              "fps": 24,
+              "frames": 33,
+              "height": 640,
+              "width": 640,
+              "duration_seconds": 1.375,
+              "decoded_frame_md5": [
+                "33fee0c0c8a494d72948cf76f9030145",
+                "ff1e88e84c50c301a329502bea619237",
+                "9b5328796274c1466dd451d9918c1d23",
+                "1d5b7978b549123732f305d1c0a8caef",
+                "e41ab9ddfdfb52d03c48748595b1a53e",
+                "0731492491ec4e3e8b4caea7c88f1ce1",
+                "00c810825223307e25720d0c3961e1aa",
+                "5acedf29336901d6f1e4b6e269c8873d",
+                "abc3b5c522e0c77b18bdb30099a78671",
+                "c7ebcfa9c79d79e4d0cc532c3da03bf4",
+                "10afae0390c388cf4cae98fbfeabea4e",
+                "1a9760e7201e1cf1c5bb28e9a4862e52",
+                "4342c161b8a26b09cd46390a2ccd9c33",
+                "16bb9a3a20836fdcc558b3f1747ad64d",
+                "1b60739de111ddc3dd9f5d7cc0df36c0",
+                "648b7e917a8029031c4c5019736d49f7",
+                "d731e5c222de83c492ac27b80a0b88ad",
+                "3afce229d26c18a345ed3646a0fa7e40",
+                "f28d020c961f1b8a34f12c49b0cb8a11",
+                "c6442efa1770807479045fab245bee8b",
+                "803595e12a42501bc21959403e8cb098",
+                "0e47b27c747ff40d667a11b951fae76d",
+                "d7a1492865045bf4abdfd3837ea8fa62",
+                "a343b4a6edfe2a9d1bc3338b70980cb2",
+                "df132d09710c96dcfd0cd8c2e8deedc8",
+                "def8005e6e400de0162275a0391bbdf3",
+                "12e818e1bfb74065a8ea875abb597b9f",
+                "e4f116563541c7caf09d1da39f52872b",
+                "caeb85d1e8b28eb4c24c98c780638702",
+                "30c9ac0515f71563404a94fbf889fb4c",
+                "3561e21e7b7ebee067a9e44645480829",
+                "22c49ae724bfeb14a1de1afae8303d7f",
+                "4457923c2e4b32d8a986835553edb589"
+              ],
+              "distinct_frames": 33,
+              "constant_frame_timestamps": true,
+              "tools": {
+                "ffmpeg": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+                "ffprobe": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE"
+              },
+              "limits": "Frame variation does not establish quality, fidelity, or human acceptance."
+            },
+            "aligned_audio": {
+              "samples": 66000,
+              "peak": 0.066375732421875,
+              "rms": 0.021926599364940746,
+              "decoded_f32le_sha256": "badd1394bf289bdac7adb106a4b4abd3f554a8d22e4354e7605a1745b3c6d58e"
+            },
+            "aac_audio": {
+              "samples": 66000,
+              "peak": 0.06581566482782364,
+              "rms": 0.021920309149865112,
+              "decoded_f32le_sha256": "79a6f4de217ce40ccb536175def32a286ba800d58739685cf9f817bb2f89256d"
+            },
+            "aac_terminal_padding_samples": 0,
+            "contiguous_audio_timestamps": true,
+            "stream_timing": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "time_base": "1/12288",
+                "start_time": "0.000000",
+                "duration_ts": 16896,
+                "duration": "1.375000"
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio",
+                "sample_rate": "48000",
+                "channels": 2,
+                "time_base": "1/48000",
+                "start_time": "0.000000",
+                "duration_ts": 66000,
+                "duration": "1.375000"
+              }
+            ],
+            "limits": "Container alignment does not establish semantic synchronization, lip sync, loudness targets, or human acceptance."
+          },
+          "tools": {
+            "ffmpeg": {
+              "path": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+              "sha256": "05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740",
+              "version": "ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+            },
+            "ffprobe": {
+              "path": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffprobe.EXE",
+              "sha256": "51e0780cd881f83749b029ed716cbb841c2eac6289f418050f2f2961b158896b",
+              "version": "ffprobe version 9.0-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+            }
+          },
+          "outputs": {
+            "aligned.wav": {
+              "bytes": 264078,
+              "sha256": "68a5b5b865944f8f49dc31a390b1aef49880ac77643bbd85b610720f3706b9c0"
+            },
+            "output.mp4": {
+              "bytes": 123638,
+              "sha256": "720aa36996c7b193c5bf146f34648bd2448cdf080887d7b97b39cb14f15a02e3"
+            }
+          },
+          "receipt_sha256": "e54521b0bd0c08fdbd254e75cf02b1d17e6200b799292b832e97568dadd0b427"
+        }
+      },
+      "completed_resume": "verified_existing",
+      "evidence_output": "docs\\evidence\\stage-08-av-02.mp4"
+    }
+  ],
+  "final_queue": {
+    "queue_running": [],
+    "queue_pending": []
+  },
+  "passed_machine_checks": true
+}

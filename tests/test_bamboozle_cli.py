@@ -62,6 +62,49 @@ def test_directory_entry_point_works_without_installation(tmp_path):
     assert json.loads(result.stdout)["status"] == "dictionary_valid"
 
 
+def test_version_flag_reports_the_package_version(tmp_path):
+    result = run_cli(["--version"], tmp_path)
+    assert result.returncode == 0
+    assert result.stdout.strip() == "Bamboozle " + PACKAGE.__version__
+
+
+def test_interactive_reprompts_for_a_missing_file_without_restarting_action(files):
+    source, mapping = files
+    before = snapshot(source.parent)
+    result = run_cli(
+        ["interactive", "--dict", mapping],
+        source.parent,
+        f"e\nmissing.py\n{source}\nc\nq\n",
+    )
+    assert result.returncode == 0
+    assert "Choose an existing file" in result.stderr
+    assert "-alpha" in result.stdout
+    assert snapshot(source.parent) == before
+
+
+def test_json_without_a_command_is_an_argument_error():
+    with pytest.raises(SystemExit) as error:
+        cli.main(["--json"])
+    assert error.value.code == 2
+
+
+def test_cli_reports_saved_output_when_temporary_cleanup_fails(files, monkeypatch, capsys):
+    source, mapping = files
+    original_unlink = Path.unlink
+
+    def deny_cleanup(path, *args, **kwargs):
+        if path.suffix == ".tmp":
+            raise PermissionError("temporary cleanup denied")
+        return original_unlink(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "unlink", deny_cleanup)
+    assert cli.main(["encode", str(source), "--dict", str(mapping), "--json"]) == 1
+    report = json.loads(capsys.readouterr().out)
+    assert report["status"] == "error"
+    assert report["output_saved"] is True
+    assert Path(report["output"]).is_file()
+
+
 @pytest.mark.parametrize(
     "command", ["preview", "encode", "decode", "verify", "validate", "interactive"]
 )

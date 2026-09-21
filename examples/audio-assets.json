@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "profile": "stable-audio-open-v1",
+  "upstream": "https://docs.comfy.org/tutorials/audio/stable-audio/stable-audio-1",
+  "assets": [
+    {
+      "id": "stable-audio-open-1.0",
+      "repository": "Comfy-Org/stable-audio-open-1.0_repackaged",
+      "revision": "1ad51d70f09a4955d5470df358d632e321fd3d7b",
+      "source_file": "stable-audio-open-1.0.safetensors",
+      "destination": "models/checkpoints/stable-audio-open-1.0.safetensors",
+      "bytes": 4853889016,
+      "sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+    },
+    {
+      "id": "t5-base-audio",
+      "repository": "google-t5/t5-base",
+      "revision": "a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1",
+      "source_file": "model.safetensors",
+      "destination": "models/text_encoders/t5_base.safetensors",
+      "bytes": 891646390,
+      "sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+    }
+  ]
+}

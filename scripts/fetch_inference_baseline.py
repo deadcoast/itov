@@ -1,4 +1,4 @@
-"""Download reviewed image/video baseline assets; publish only exact upstream hashes."""
+"""Download reviewed media baseline assets; publish only exact upstream hashes."""
 
 from __future__ import annotations
 
@@ -74,10 +74,14 @@ def fetch(root: Path, asset: dict, *, opener=None) -> dict:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
-    parser.add_argument("--baseline", choices=("image", "video"), default="image")
+    parser.add_argument("--baseline", choices=("image", "video", "audio"), default="image")
     args = parser.parse_args()
     config = load_config(args.config)
-    filename = "video-assets.json" if args.baseline == "video" else "inference-assets.json"
+    filename = {
+        "image": "inference-assets.json",
+        "video": "video-assets.json",
+        "audio": "audio-assets.json",
+    }[args.baseline]
     manifest = Path(__file__).resolve().parents[1] / "examples" / filename
     assets = parse_json(read_document(manifest))["assets"]
     missing_bytes = sum(

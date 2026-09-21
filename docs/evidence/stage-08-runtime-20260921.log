@@ -1,0 +1,26 @@
+[32m[INFO][0m got prompt
+[32m[INFO][0m model weight dtype torch.float16, manual cast: None
+[32m[INFO][0m model_type V_PREDICTION_CONTINUOUS
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\stable-audio-open-1.0.safetensors']
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\stable-audio-open-1.0.safetensors']
+[32m[INFO][0m VAE load device: cuda:0, offload device: cpu, dtype: torch.float16
+[1m[33m[WARNING][0m no CLIP/text encoder weights in checkpoint, the text encoder model will not be loaded.
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\t5_base.safetensors']
+[32m[INFO][0m CLIP/text encoder model load device: cuda:0, offload device: cpu, current: cpu, dtype: torch.float16
+[32m[INFO][0m Requested to load SAT5Model
+[32m[INFO][0m Model SAT5Model prepared for dynamic VRAM loading. 209MB Staged. 0 patches attached. Force pre-loaded 26 weights: 39 KB.
+[32m[INFO][0m Model SAT5Model prepared for dynamic VRAM loading. 209MB Staged. 0 patches attached. Force pre-loaded 26 weights: 39 KB.
+[32m[INFO][0m Requested to load StableAudio1
+[32m[INFO][0m Model StableAudio1 prepared for dynamic VRAM loading. 2017MB Staged. 0 patches attached. Force pre-loaded 77 weights: 257 KB.
+  0%|          | 0/50 [00:00<?, ?it/s]  0%|          | 0/50 [00:00<?, ?it/s,   Model Initializing ...  ]C:\Users\ryanf\github\_active\itov\AI\ComfyUI\ComfyUI_windows_portable\python_embeded\Lib\site-packages\torchsde\_brownian\brownian_interval.py:608: UserWarning: Should have tb<=t1 but got tb=500.00006103515625 and t1=500.000061.
+  warnings.warn(f"Should have {tb_name}<=t1 but got {tb_name}={tb} and t1={self._end}.")
+  0%|          | 0/50 [00:00<?, ?it/s,  Model Initialization complete!  ]  2%|▏         | 1/50 [00:00<00:48,  1.01it/s,  Model Initialization complete!  ]  2%|▏         | 1/50 [00:00<00:48,  1.01it/s]                                     8%|▊         | 4/50 [00:00<00:02, 22.98it/s] 14%|█▍        | 7/50 [00:00<00:01, 23.38it/s] 20%|██        | 10/50 [00:00<00:01, 23.48it/s] 26%|██▌       | 13/50 [00:00<00:01, 23.93it/s] 32%|███▏      | 16/50 [00:00<00:01, 24.91it/s] 38%|███▊      | 19/50 [00:00<00:01, 24.84it/s] 44%|████▍     | 22/50 [00:01<00:01, 24.15it/s] 50%|█████     | 25/50 [00:01<00:01, 22.26it/s] 56%|█████▌    | 28/50 [00:01<00:00, 24.52it/s] 62%|██████▏   | 31/50 [00:01<00:00, 24.58it/s] 68%|██████▊   | 34/50 [00:01<00:00, 23.50it/s] 74%|███████▍  | 37/50 [00:01<00:00, 25.16it/s] 80%|████████  | 40/50 [00:01<00:00, 25.24it/s] 86%|████████▌ | 43/50 [00:01<00:00, 24.16it/s] 92%|█████████▏| 46/50 [00:01<00:00, 25.31it/s]C:\Users\ryanf\github\_active\itov\AI\ComfyUI\ComfyUI_windows_portable\python_embeded\Lib\site-packages\torchsde\_brownian\brownian_interval.py:599: UserWarning: Should have ta>=t0 but got ta=0.029999999329447746 and t0=0.03.
+  warnings.warn(f"Should have ta>=t0 but got ta={ta} and t0={self._start}.")
+ 98%|█████████▊| 49/50 [00:02<00:00, 25.51it/s]100%|██████████| 50/50 [00:02<00:00, 23.25it/s]
+[32m[INFO][0m Requested to load AudioOobleckVAE
+[32m[INFO][0m loaded completely;  297.70 MB loaded, full load: True
+[32m[INFO][0m [32mPrompt executed in 3.92 seconds[0m
+[32m[INFO][0m got prompt
+[32m[INFO][0m Model StableAudio1 prepared for dynamic VRAM loading. 2017MB Staged. 0 patches attached. Force pre-loaded 77 weights: 257 KB.
+  0%|          | 0/50 [00:00<?, ?it/s]  0%|          | 0/50 [00:00<?, ?it/s,   Model Initializing ...  ]  0%|          | 0/50 [00:00<?, ?it/s,  Model Initialization complete!  ]  6%|▌         | 3/50 [00:00<00:02, 23.29it/s,  Model Initialization complete!  ]  6%|▌         | 3/50 [00:00<00:02, 23.29it/s]                                    12%|█▏        | 6/50 [00:00<00:01, 22.09it/s] 18%|█▊        | 9/50 [00:00<00:01, 23.30it/s] 24%|██▍       | 12/50 [00:00<00:01, 22.95it/s] 30%|███       | 15/50 [00:00<00:01, 23.54it/s] 36%|███▌      | 18/50 [00:00<00:01, 26.56it/s] 42%|████▏     | 21/50 [00:00<00:01, 22.90it/s] 48%|████▊     | 24/50 [00:01<00:01, 23.00it/s] 54%|█████▍    | 27/50 [00:01<00:00, 24.97it/s] 60%|██████    | 30/50 [00:01<00:00, 24.28it/s] 66%|██████▌   | 33/50 [00:01<00:00, 24.41it/s] 72%|███████▏  | 36/50 [00:01<00:00, 26.96it/s] 78%|███████▊  | 39/50 [00:01<00:00, 24.73it/s] 84%|████████▍ | 42/50 [00:01<00:00, 25.13it/s] 90%|█████████ | 45/50 [00:01<00:00, 24.26it/s] 96%|█████████▌| 48/50 [00:01<00:00, 25.71it/s]100%|██████████| 50/50 [00:02<00:00, 24.24it/s]
+[32m[INFO][0m [32mPrompt executed in 2.13 seconds[0m

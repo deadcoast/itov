@@ -14,7 +14,7 @@ From the repository root in PowerShell:
 .\AI\dev_tools\bamboozle.ps1
 ```
 
-Choose **Encode**, **Decode**, or **Verify**, then paste a file path. Paths with spaces can be pasted with or without quotes. Encode and Decode show the destination, substitution counts, and a diff before offering **Save**, **Full diff**, **Output path**, or **Cancel**. Enter cancels at the save prompt. Replacing an existing destination requires typing `OVERWRITE`.
+Choose **Encode**, **Decode**, or **Verify**, then paste a file path. Paths with spaces can be pasted with or without quotes. A missing file leaves you at the path prompt so you can correct it; Enter returns to the menu. Encode and Decode show the destination, substitution counts, and a diff before offering **Save**, **Full diff**, **Output path**, or **Cancel**. Enter cancels at the save prompt. Replacing an existing destination requires typing `OVERWRITE`.
 
 The launcher finds this repository's Python environment automatically and keeps relative file paths relative to your current directory. It also accepts direct commands:
 
@@ -56,13 +56,16 @@ If you need to introduce new explicit terms to your workflow, you must update th
 1. **Strict 1:1 Mapping:** No two source terms can map to the same target term. Invalid mappings are rejected before conversion.
 2. **Valid JSON Formatting:** Ensure standard JSON syntax. Do not leave trailing commas.
 3. **Lowercase Base:** Keys and values must be nonempty lowercase ASCII strings without surrounding whitespace. Source and target sets must be disjoint. Duplicate JSON keys, duplicate targets, and the reserved `__SCM_LIT_` prefix are rejected.
-4. **Case and Boundaries:** Lowercase, uppercase, and title case are supported. Mixed case is rejected when a term matches. Underscores separate terms; letters and digits do not. Before writing a forward result, the script checks that reversing it restores the original text exactly and rejects ambiguous mappings.
+4. **Case and Boundaries:** Lowercase, uppercase, and title case are supported. Mixed case is rejected when a term matches. Underscores separate terms; Unicode letters, digits, combining marks, and other Python identifier continuation characters do not. For example, a mapping for `alpha` leaves `alphá` intact. Before writing a forward result, the script checks that reversing it restores the original text exactly and rejects ambiguous mappings. Unsupported case, damaged markers, and ambiguous conversions report a line and column to help locate the problem.
 
 ## Command-line use
 
 With the environment activated:
 
 ```powershell
+# Show the installed tool version.
+bamboozle --version
+
 # Validate the dictionary without reading or changing any source files.
 bamboozle validate
 
@@ -87,7 +90,7 @@ The default dictionary is resolved beside `cipher.py`, regardless of the working
 | `--dry-run` | Convert and validate in memory, report counts, and leave outputs and ledgers untouched. |
 | `--preview` / `--diff` | On Encode or Decode, include a unified diff and leave conversion files untouched. |
 | `--force` | Explicitly permit replacing an existing destination during Encode or Decode. |
-| `--json` | Emit one JSON execution report to stdout, including conversion failures. Can include a diff. |
+| `--json` | Emit one JSON execution report to stdout, including conversion failures. Requires an explicit command. Can include a diff. |
 | `--strict` | Require a valid version-2 ledger and unchanged encoded bytes when reversing. |
 | `--keep-ledger` | Preserve the ledger after reversing to a separate output, allowing repeated verification/restoration. |
 | `verify FILE` | Read-only check of the dictionary, encoded hash, and restored-original hash. Requires a version-2 ledger. |
@@ -95,7 +98,7 @@ The default dictionary is resolved beside `cipher.py`, regardless of the working
 
 The output directory must already exist for a write. Encode and Decode refuse existing output files or forward ledgers unless `--force` is given. In-place conversion therefore also requires `--force`; `--keep-ledger` is rejected for in-place decoding because it would attach an encoded-file ledger to restored text. The legacy `cipher.py --mode ...` interface retains its existing overwrite behavior.
 
-Interactive Save publishes the exact text shown in the preview. It checks the source, dictionary, ledger, and destination fingerprints again immediately before saving; changed files require a fresh preview. Creating a new output uses atomic no-overwrite publication, so a file created concurrently is preserved. Output and ledger publication remain separate operations, as described below.
+Interactive Save publishes the exact text shown in the preview. It checks the source, dictionary, ledger, and destination fingerprints again immediately before saving; changed files require a fresh preview. Fingerprints are read in bounded chunks. Creating a new output uses atomic no-overwrite publication, so a file created concurrently is preserved. The ledger is checked again after saving output and before updating or removing it; a change detected then preserves the ledger and reports that output was saved. These checks do not lock other programs out of the files. Output and ledger publication remain separate operations, as described below.
 
 An input with an existing cipher ledger is rejected for another forward pass, preventing accidental double conversion. `--dict` and `--json` may appear before or after the subcommand. Use `bamboozle --help` or `bamboozle encode --help` for command-specific options.
 
@@ -125,9 +128,25 @@ New ledgers use version 2 and record SHA-256 hashes of the original UTF-8 bytes,
 
 Ordinary reverse still accepts version-1 ledgers and files without ledgers, including the existing `__SCM_LIT_...__` marker format. `verify` and `--strict` require version 2. A malformed or mismatched ledger is rejected and preserved. Keep the encoded filename and matching ledger together; the stored filename must match when a sidecar is present.
 
-UTF-8 content, its BOM if present, and existing line endings are preserved. Output files are replaced only after a complete temporary write. Output and ledger updates are separate operations: if a ledger write or cleanup fails after output was saved, the error explicitly says so.
+UTF-8 content, its BOM if present, and existing line endings are preserved. Output files are replaced only after a complete temporary write. Output and ledger updates are separate operations: if a ledger write or temporary-file cleanup fails after output was saved, the error explicitly says so and JSON reports `output_saved: true`. A conversion that has published output cannot reuse the same prepared preview after a finalization failure.
 
-The round-trip check covers unedited text with the same dictionary. Newly introduced, unmarked target terms in edited text are reverse-mapped too. This tool does not parse or validate Python. The `process_forward(text, mapping)` and `process_reverse(text, mapping)` helpers remain pure transformations; the CLI manages files and ledgers.
+The round-trip check covers unedited text with the same dictionary. Newly introduced, unmarked target terms in edited text are reverse-mapped too. This tool does not parse or validate Python. Version 0.3 corrects partial matches inside Unicode identifiers; older outputs affected by that bug can fail their original-hash check and need review against the original source.
+
+## Use the conversion engine in Python
+
+For repeated conversions with one dictionary, construct a `CipherEngine` once:
+
+```python
+from bamboozle.cipher import CipherEngine
+
+engine = CipherEngine({"alpha": "fluid_sim"})
+encoded, counts = engine.transform("alpha = 'fluid_sim'", "forward")
+assert counts == {"substitutions": 1, "literals": 1, "terms": {"alpha": 1}}
+restored, _ = engine.transform(encoded, "reverse")
+assert restored == "alpha = 'fluid_sim'"
+```
+
+The engine validates and copies the dictionary, exposes read-only mapping views, and reuses compiled matching rules. Each call returns independent counts collected during substitution; forward conversion also verifies an exact reverse round trip. The engine performs no file writes. `engine.count(text, "forward")` counts matches without converting or proving a round trip. The existing `process_forward(text, mapping)` and `process_reverse(text, mapping)` helpers still return strings; the CLI manages files and ledgers.
 
 ## Troubleshooting
 

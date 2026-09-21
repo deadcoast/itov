@@ -49,6 +49,10 @@ def _run(command: list[str]) -> str:
 
 
 def verify_video(path: Path, expected: dict) -> dict:
+    return _verify_video(path, expected, with_audio=False)
+
+
+def _verify_video(path: Path, expected: dict, *, with_audio: bool) -> dict:
     expected = video_contract(expected)
     path = path.absolute()
     require(path.is_file() and not path.is_symlink(), "Video must be a local regular file")
@@ -76,8 +80,18 @@ def verify_video(path: Path, expected: dict) -> dict:
     require(
         isinstance(probe, dict) and isinstance(probe.get("streams"), list), "Invalid video probe"
     )
-    require(len(probe["streams"]) == 1, "Baseline requires one video stream and no audio")
-    stream = probe["streams"][0]
+    if with_audio:
+        require(
+            sorted(item.get("codec_type", "") for item in probe["streams"]) == ["audio", "video"],
+            "Mux requires exactly one video and one audio stream",
+        )
+    else:
+        require(len(probe["streams"]) == 1, "Baseline requires one video stream and no audio")
+    stream = (
+        next(item for item in probe["streams"] if item.get("codec_type") == "video")
+        if with_audio
+        else probe["streams"][0]
+    )
     require(
         stream.get("codec_type") == "video" and stream.get("codec_name") == "h264",
         "Expected H.264 video",
@@ -160,7 +174,9 @@ def verify_video(path: Path, expected: dict) -> dict:
         )
     return {
         "ok": True,
-        "scope": "silent_h264_full_decode_and_timing",
+        "scope": "mux_h264_full_decode_and_timing"
+        if with_audio
+        else "silent_h264_full_decode_and_timing",
         "sha256": before,
         **expected,
         "duration_seconds": float(duration),

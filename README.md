@@ -14,7 +14,7 @@ From PowerShell in this repository:
 
 ```powershell
 $env:UV_CACHE_DIR = "$PWD\.uv-cache"
-uv sync --locked
+uv sync --inexact --locked
 uv run itov init
 uv run itov doctor
 ```
@@ -125,7 +125,7 @@ uv run --locked itov batch resume workspace/state/plans/PLAN_ID.json
 
 Use the IDs printed by planning and qualification. The executor reserves seeds and job ownership atomically, rechecks qualification before each new submission, and advances only after verified output collection. Lost acknowledgements are reconciled from server ownership evidence; uncertain work is never automatically submitted again. Timeouts and Ctrl+C detach observation without cancelling server work. See [execution, resume, and qualification limits](docs/batch-execution.md), including safe abandonment of an unsubmitted remainder.
 
-The stage-five acceptance run used the neutral image-copy workflow: seven jobs across sequential, lost-acknowledgement, and timeout/resume cases produced pixel-identical images. Stages six and seven also completed the pinned image and silent-video jobs described below. Audio integration and parallel GPU execution remain unqualified.
+The stage-five acceptance run used the neutral image-copy workflow: seven jobs across sequential, lost-acknowledgement, and timeout/resume cases produced pixel-identical images. Subsequent stages completed the pinned image, silent-video, audio and audiovisual jobs described below. Parallel GPU execution remains unqualified.
 
 ## Pinned image inference
 
@@ -152,6 +152,20 @@ uv run --locked itov video plan examples/wan22.video.json --save --json
 ```
 
 Then use `batch qualify` and `batch run`. Each collected MP4 must pass dimensions, frame count/rate, duration, complete decode, constant timestamps, and frame-variation checks before the next job. The local runtime completed two 640×640 clips, each 33 frames at 24 fps. Representative-frame inspection found an unrequested hand in one clip; functional execution passes while general motion/prompt quality remains open. See [video setup, commands, evidence, and limits](docs/image-to-video.md).
+
+## Pinned audio and audiovisual output
+
+Version 0.8.0 adds stock Stable Audio Open 1.0 generation and composition of completed audio/video jobs:
+
+```powershell
+uv run --locked itov audio prepare examples/stable-audio.audio.json --json
+# Import the printed catalog candidate with its printed expected head.
+uv run --locked itov audio plan examples/stable-audio.audio.json --save --json
+# Qualify and run through the existing batch commands.
+uv run --locked itov av mux examples/stage-08-pair-01.av.json --json
+```
+
+The mux example references the completed jobs in this qualification workspace. For new work, bind your own completed job IDs, record hashes and artifact hashes. Audio is validated by full decode; composition retains a precisely aligned WAV, copies all video frames, and verifies both streams' timing. Repeating `av mux` verifies its immutable output. See [setup, contracts, commands and retained audio/A/V samples](docs/audio-and-av.md). Functional media checks pass for two neutral pairs; listening quality and semantic/lip synchronization remain open.
 
 ## Development
 

@@ -4,6 +4,23 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Pinned audio and owned audiovisual composition
+
+- Advanced ITOV to 0.8.0 with `audio prepare`, `audio plan`, `audio verify`, and `av mux`. Added a pinned Stable Audio Open 1.0/T5 baseline using installed stock ComfyUI nodes; 5.746 GB of model files were downloaded and hash-verified locally.
+- Added bounded stereo FLAC contracts, checkpoint/encoder pins, stock audio module/schema qualification, explicit seeds and full decoded sample validation. Failed collection preserves ownership/artifacts and pauses later jobs; completed resume validates audio without new submissions.
+- Added composition from exact completed job records and artifact hashes. Audio starts at zero, resamples to 48 kHz, trims or pads to the video's duration, and retains its aligned PCM WAV. Immutable H.264/AAC outputs preserve every decoded video frame and verify stream duration plus contiguous audio timestamps. Repeated composition revalidates the existing output; failed attempts and differing files are preserved.
+- Completed two actual 176128-sample stereo generations and two 1.375-second audiovisual pairs, with no duplicate prompts, no changed prior job records and successful completed replay. Retained [audio, video and runtime evidence](docs/audio-and-av.md#evidence-and-limits), including upstream sampler warnings.
+- Passed 543 tests against source on Python 3.13.9 and 543 against the installed wheel on Python 3.11.14, plus lint, formatting, both package builds, 26-module byte parity and installed-package audio/mux/prior-video checks. [Verification evidence](docs/evidence/stage-08-verification-20260921.json) retains the initial receipt-serialization failures and their correction. Listening quality, semantic/lip synchronization and parallel GPU acceptance remain open.
+- Updated the TODO and build plan with stage-nine measurement tasks, unresolved listening/semantic synchronization criteria, upstream warning review and capacity-measurement requirements. Original specifications and concurrent Bamboozle work remain separate.
+
+### 2026-09-21 — Bamboozle core and terminal polish
+
+- Advanced SCM dev tools to 0.3.0. Added a reusable `CipherEngine` that copies and validates its dictionary, reuses compiled matching rules, and collects independent counts during conversion. Existing string-returning helpers and CLI commands remain available.
+- Fixed partial matches inside Unicode identifiers, including combining marks and connector characters. Conversion errors now identify a line and column; file fingerprinting reads bounded chunks, and the core API rejects invalid option combinations before accessing files.
+- Corrected a reproduced cleanup failure that reported output as unsaved after publication. Preserve both publication and cleanup diagnostics when both fail, prevent reuse of partially finalized previews, and recheck the ledger after output publication before metadata changes. Output and ledger remain separate operations without an exclusive cross-process lock.
+- Added `bamboozle --version` and retry-in-place for missing file paths in the terminal menu. `--json` now requires an explicit command. Updated engine, Unicode, error-reporting, and compatibility guidance.
+- Passed all 138 focused cipher/CLI tests, including 27 new regressions. Built the source distribution and wheel, verified six packaged/installed files against source, passed 11 installed command exercises, and operated the real Windows terminal through missing-path recovery, preview, cancellation, and quit. Restored the editable installation in the existing environment. [Verification evidence](docs/evidence/bamboozle-core-20260921.json) records the original failures and local checks; generated-code correctness and crash durability remain unqualified.
+
 ### 2026-09-21 — Pinned image-to-video and persistent development TODO
 
 - Added [TODO.md](TODO.md) with the current stage map, checked deliverables, required assets/tools, discovered defects and concrete next-stage tasks. Stage 7 is complete for the bounded silent-video baseline; stage 8 audio contracts are next.
