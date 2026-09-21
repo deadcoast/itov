@@ -60,6 +60,43 @@ def parse_json(value: str | bytes) -> object:
     )
 
 
+def submission_matches(expected: dict, actual: object) -> bool:
+    """Compare provenance, allowing only lossless scalar numeric input coercion.
+
+    ComfyUI validates FLOAT inputs by calling float(value), mutating the queued
+    graph. Integer/float equality is exact in Python, including large integers;
+    booleans, links, metadata, strings and node identity keep strict JSON equality.
+    """
+
+    def exact(left, right):
+        return json.dumps(left, sort_keys=True, allow_nan=False) == json.dumps(
+            right, sort_keys=True, allow_nan=False
+        )
+
+    if not isinstance(actual, dict) or expected.keys() != actual.keys():
+        return False
+    for key, node in expected.items():
+        other = actual[key]
+        if not isinstance(other, dict) or node.keys() != other.keys():
+            return False
+        if not exact(
+            {k: v for k, v in node.items() if k != "inputs"},
+            {k: v for k, v in other.items() if k != "inputs"},
+        ):
+            return False
+        inputs, received = node["inputs"], other.get("inputs")
+        if not isinstance(received, dict) or inputs.keys() != received.keys():
+            return False
+        for name, value in inputs.items():
+            incoming = received[name]
+            if type(value) in {int, float} and type(incoming) in {int, float}:
+                if value != incoming:
+                    return False
+            elif not exact(value, incoming):
+                return False
+    return True
+
+
 class ComfyUIClient:
     def __init__(self, url: str, *, timeout: float = 3.0):
         self.url = validate_url(url)
@@ -155,7 +192,6 @@ class ComfyUIClient:
                 raise ComfyUIError("/history: inconsistent prompt identity")
             entries.append(item)
         matches = set()
-        encoded = json.dumps(graph, sort_keys=True, allow_nan=False)
         for item in entries:
             if not isinstance(item, list) or len(item) < 4 or not isinstance(item[3], dict):
                 raise ComfyUIError("Invalid queue/history submission provenance")
@@ -164,7 +200,7 @@ class ComfyUIClient:
             if (
                 not isinstance(item[1], str)
                 or not item[1]
-                or json.dumps(item[2], sort_keys=True, allow_nan=False) != encoded
+                or not submission_matches(graph, item[2])
             ):
                 raise ComfyUIError(
                     "Submission owner matches but workflow or prompt identity differs"

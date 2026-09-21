@@ -1,7 +1,7 @@
 [project]
 name = "itov"
-version = "0.5.0"
-description = "Local ComfyUI jobs, catalogs, deterministic planning, and sequential batches"
+version = "0.6.0"
+description = "Local ComfyUI catalogs, deterministic batches, and pinned image inference"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []

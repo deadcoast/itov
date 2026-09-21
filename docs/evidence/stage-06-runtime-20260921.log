@@ -1,0 +1,36 @@
+[32m[INFO][0m got prompt
+[32m[INFO][0m model weight dtype torch.float16, manual cast: None
+[32m[INFO][0m model_type EPS
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\sd_xl_base_1.0.safetensors']
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\sd_xl_base_1.0.safetensors']
+[32m[INFO][0m Using pytorch attention in VAE
+[32m[INFO][0m Using pytorch attention in VAE
+[32m[INFO][0m VAE load device: cuda:0, offload device: cpu, dtype: torch.bfloat16
+[32m[INFO][0m Model storage policy: fast_disk=True paths=['C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\sd_xl_base_1.0.safetensors']
+[32m[INFO][0m CLIP/text encoder model load device: cuda:0, offload device: cpu, current: cpu, dtype: torch.float16
+[32m[INFO][0m Requested to load SDXLClipModel
+[32m[INFO][0m Model SDXLClipModel prepared for dynamic VRAM loading. 1560MB Staged. 0 patches attached. Force pre-loaded 180 weights: 400 KB.
+[32m[INFO][0m Model SDXLClipModel prepared for dynamic VRAM loading. 1560MB Staged. 0 patches attached. Force pre-loaded 180 weights: 400 KB.
+[32m[INFO][0m Requested to load SDXL
+[32m[INFO][0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 0 patches attached. Force pre-loaded 512 weights: 1197 KB.
+  0%|          | 0/20 [00:00<?, ?it/s]  0%|          | 0/20 [00:00<?, ?it/s,   Model Initializing ...  ]  0%|          | 0/20 [00:02<?, ?it/s,  Model Initialization complete!  ]  5%|▌         | 1/20 [00:02<00:47,  2.52s/it,  Model Initialization complete!  ]  5%|▌         | 1/20 [00:00<00:47,  2.52s/it]                                    10%|█         | 2/20 [00:00<00:02,  7.20it/s] 15%|█▌        | 3/20 [00:00<00:02,  8.19it/s] 20%|██        | 4/20 [00:00<00:02,  7.20it/s] 25%|██▌       | 5/20 [00:00<00:01,  8.90it/s] 30%|███       | 6/20 [00:00<00:01,  7.78it/s] 35%|███▌      | 7/20 [00:00<00:01,  6.78it/s] 40%|████      | 8/20 [00:01<00:01,  6.12it/s] 45%|████▌     | 9/20 [00:01<00:01,  7.51it/s] 50%|█████     | 10/20 [00:01<00:01,  7.80it/s] 55%|█████▌    | 11/20 [00:01<00:01,  8.21it/s] 60%|██████    | 12/20 [00:01<00:00,  8.62it/s] 65%|██████▌   | 13/20 [00:01<00:00,  8.89it/s] 70%|███████   | 14/20 [00:01<00:00,  9.31it/s] 75%|███████▌  | 15/20 [00:01<00:00,  7.70it/s] 80%|████████  | 16/20 [00:02<00:00,  8.66it/s] 85%|████████▌ | 17/20 [00:02<00:00,  8.37it/s] 90%|█████████ | 18/20 [00:02<00:00,  7.28it/s] 95%|█████████▌| 19/20 [00:02<00:00,  7.73it/s]100%|██████████| 20/20 [00:02<00:00,  7.73it/s]100%|██████████| 20/20 [00:02<00:00,  7.78it/s]
+[32m[INFO][0m Requested to load AutoencoderKL
+[32m[INFO][0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.
+[32m[INFO][0m [32mPrompt executed in 7.24 seconds[0m
+[32m[INFO][0m got prompt
+[32m[INFO][0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 0 patches attached. Force pre-loaded 512 weights: 1197 KB.
+  0%|          | 0/20 [00:00<?, ?it/s]  0%|          | 0/20 [00:00<?, ?it/s,   Model Initializing ...  ]  0%|          | 0/20 [00:00<?, ?it/s,  Model Initialization complete!  ]  5%|▌         | 1/20 [00:00<00:02,  8.90it/s,  Model Initialization complete!  ]  5%|▌         | 1/20 [00:00<00:02,  8.90it/s]                                    10%|█         | 2/20 [00:00<00:02,  7.02it/s] 15%|█▌        | 3/20 [00:00<00:01,  8.52it/s] 20%|██        | 4/20 [00:00<00:01,  8.52it/s] 25%|██▌       | 5/20 [00:00<00:01,  7.61it/s] 30%|███       | 6/20 [00:00<00:01,  8.28it/s] 35%|███▌      | 7/20 [00:00<00:01,  8.30it/s] 40%|████      | 8/20 [00:01<00:01,  7.91it/s] 45%|████▌     | 9/20 [00:01<00:01,  8.22it/s] 50%|█████     | 10/20 [00:01<00:01,  8.01it/s] 55%|█████▌    | 11/20 [00:01<00:00,  9.33it/s] 60%|██████    | 12/20 [00:01<00:00,  8.19it/s] 65%|██████▌   | 13/20 [00:01<00:00,  7.69it/s] 70%|███████   | 14/20 [00:01<00:00,  8.65it/s] 75%|███████▌  | 15/20 [00:01<00:00,  8.04it/s] 80%|████████  | 16/20 [00:02<00:00,  6.92it/s] 85%|████████▌ | 17/20 [00:02<00:00,  6.41it/s] 90%|█████████ | 18/20 [00:02<00:00,  8.24it/s] 95%|█████████▌| 19/20 [00:02<00:00,  7.51it/s]100%|██████████| 20/20 [00:02<00:00,  8.40it/s]100%|██████████| 20/20 [00:02<00:00,  7.87it/s]
+[32m[INFO][0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.
+[32m[INFO][0m [32mPrompt executed in 2.97 seconds[0m
+[32m[INFO][0m got prompt
+[32m[INFO][0m Model SDXLClipModel prepared for dynamic VRAM loading. 1560MB Staged. 0 patches attached. Force pre-loaded 180 weights: 400 KB.
+[32m[INFO][0m Requested to load SDXL
+[32m[INFO][0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 788 patches attached. Force pre-loaded 512 weights: 1197 KB.
+  0%|          | 0/4 [00:00<?, ?it/s]  0%|          | 0/4 [00:00<?, ?it/s,   Model Initializing ...  ]  0%|          | 0/4 [00:02<?, ?it/s,  Model Initialization complete!  ] 25%|██▌       | 1/4 [00:02<00:06,  2.20s/it,  Model Initialization complete!  ] 25%|██▌       | 1/4 [00:00<00:06,  2.20s/it]                                    50%|█████     | 2/4 [00:00<00:00,  8.34it/s] 75%|███████▌  | 3/4 [00:00<00:00,  7.82it/s]100%|██████████| 4/4 [00:00<00:00,  8.35it/s]100%|██████████| 4/4 [00:00<00:00,  8.20it/s]
+[32m[INFO][0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.
+[32m[INFO][0m [32mPrompt executed in 3.25 seconds[0m
+[32m[INFO][0m got prompt
+[32m[INFO][0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 788 patches attached. Force pre-loaded 512 weights: 1197 KB.
+  0%|          | 0/4 [00:00<?, ?it/s]  0%|          | 0/4 [00:00<?, ?it/s,   Model Initializing ...  ]  0%|          | 0/4 [00:00<?, ?it/s,  Model Initialization complete!  ] 25%|██▌       | 1/4 [00:00<00:00,  9.08it/s,  Model Initialization complete!  ] 25%|██▌       | 1/4 [00:00<00:00,  9.08it/s]                                    50%|█████     | 2/4 [00:00<00:00,  8.90it/s] 75%|███████▌  | 3/4 [00:00<00:00,  8.50it/s]100%|██████████| 4/4 [00:00<00:00,  9.05it/s]100%|██████████| 4/4 [00:00<00:00,  8.79it/s]
+[32m[INFO][0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.
+[32m[INFO][0m [32mPrompt executed in 0.87 seconds[0m

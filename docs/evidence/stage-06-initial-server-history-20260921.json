@@ -1,0 +1,150 @@
+{
+  "prompt": [
+    10,
+    "80261342-489a-49a5-bab5-574f52299214",
+    {
+      "1": {
+        "_meta": {
+          "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+        },
+        "class_type": "CheckpointLoaderSimple",
+        "inputs": {
+          "ckpt_name": "sd_xl_base_1.0.safetensors"
+        }
+      },
+      "3": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {
+          "clip": [
+            "1",
+            1
+          ],
+          "text": "A studio photograph of a red ceramic teapot beside two green pears on a pale wooden table, soft window light, plain background, clear natural colors"
+        }
+      },
+      "4": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {
+          "clip": [
+            "1",
+            1
+          ],
+          "text": "text, watermark, blurry"
+        }
+      },
+      "5": {
+        "class_type": "EmptyLatentImage",
+        "inputs": {
+          "batch_size": 1,
+          "height": 1024,
+          "width": 1024
+        }
+      },
+      "6": {
+        "class_type": "KSampler",
+        "inputs": {
+          "cfg": 7.0,
+          "denoise": 1.0,
+          "latent_image": [
+            "5",
+            0
+          ],
+          "model": [
+            "1",
+            0
+          ],
+          "negative": [
+            "4",
+            0
+          ],
+          "positive": [
+            "3",
+            0
+          ],
+          "sampler_name": "dpmpp_2m",
+          "scheduler": "karras",
+          "seed": 620260921,
+          "steps": 20
+        }
+      },
+      "7": {
+        "class_type": "VAEDecode",
+        "inputs": {
+          "samples": [
+            "6",
+            0
+          ],
+          "vae": [
+            "1",
+            2
+          ]
+        }
+      },
+      "8": {
+        "class_type": "SaveImage",
+        "inputs": {
+          "filename_prefix": "itov/inference/6db51ced8d88af6078573ffdaf5106062f96ceeca31db0919cb08939abd6ed0a",
+          "images": [
+            "7",
+            0
+          ]
+        }
+      }
+    },
+    {
+      "itov_request_id": "cbcd091e-f429-5f66-b97a-c996f869bef3",
+      "client_id": "cbcd091e-f429-5f66-b97a-c996f869bef3",
+      "create_time": 1790013224022
+    },
+    [
+      "8"
+    ]
+  ],
+  "outputs": {
+    "8": {
+      "images": [
+        {
+          "filename": "6db51ced8d88af6078573ffdaf5106062f96ceeca31db0919cb08939abd6ed0a_00001_.png",
+          "subfolder": "itov\\inference",
+          "type": "output"
+        }
+      ]
+    }
+  },
+  "status": {
+    "status_str": "success",
+    "completed": true,
+    "messages": [
+      [
+        "execution_start",
+        {
+          "prompt_id": "80261342-489a-49a5-bab5-574f52299214",
+          "timestamp": 1790013224025
+        }
+      ],
+      [
+        "execution_cached",
+        {
+          "nodes": [],
+          "prompt_id": "80261342-489a-49a5-bab5-574f52299214",
+          "timestamp": 1790013224029
+        }
+      ],
+      [
+        "execution_success",
+        {
+          "prompt_id": "80261342-489a-49a5-bab5-574f52299214",
+          "timestamp": 1790013231256
+        }
+      ]
+    ]
+  },
+  "meta": {
+    "8": {
+      "node_id": "8",
+      "display_node": "8",
+      "parent_node": null,
+      "real_node_id": "8"
+    }
+  }
+}

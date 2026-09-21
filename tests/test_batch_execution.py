@@ -172,6 +172,39 @@ def test_lost_ack_reconciles_exact_owner_without_duplicate(execution_case, monke
     assert len(execution_case[4]["_posted"]) == 3
 
 
+def test_numeric_coercion_in_history_and_lost_ack_preserves_ownership(execution_case, monkeypatch):
+    config, plan, _, _, routes, _ = execution_case
+    # The neutral fixture accepts a numeric extra input; the server serializes it as float.
+
+    graph = json.loads(plan["jobs"][0]["workflow_json"])
+    graph["1"]["inputs"]["fixture_number"] = 7
+    raw = json.dumps(graph).encode()
+    (config.root / "workflows/copy.json").write_bytes(raw)
+    store = CatalogStore(config.root)
+    catalog = store.snapshot().to_dict()["catalog"]
+    catalog["presets"][0]["workflow"]["sha256"] = sha256(raw)
+    snapshot = store.import_catalog(catalog, expected_head=plan["catalog_head"])
+    plan["request"]["catalog_head"] = snapshot.head
+    current = create_plan(config.root, plan["request"])
+    path = save_plan(config.root, current)
+    receipt = save_qualification(config, qualify(config, current))
+    original = routes["POST /prompt"][1]
+
+    def submit(payload):
+        assert len(routes["_posted"]) == 1, "Resume submitted a duplicate or another job"
+        payload["prompt"]["1"]["inputs"]["fixture_number"] = 7.0
+        return original(payload)
+
+    routes["POST /prompt"] = (200, submit)
+    lost_ack(monkeypatch)
+    assert run_batch(config, path, qualification=receipt, wait_timeout=0.2)["status"] == "paused"
+    # Occupy the queue after the accepted first job so resume cannot dispatch another fixture job.
+    routes["/queue"][1]["queue_pending"] = [[0, "external", {}, {}]]
+    result = run_batch(config, path, resume=True, wait_timeout=0.2)
+    assert result["succeeded"] == 1 and result["status"] == "paused"
+    assert len(routes["_posted"]) == 1
+
+
 @pytest.mark.parametrize("mismatch", ["missing", "graph", "duplicate", "owner"])
 def test_uncertain_acceptance_never_retries(execution_case, monkeypatch, mismatch):
     lost_ack(monkeypatch)

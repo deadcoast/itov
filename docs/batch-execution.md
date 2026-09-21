@@ -1,6 +1,6 @@
 # Qualified sequential batch execution
 
-ITOV 0.5.0 executes immutable plans one job at a time. A qualification receipt binds a plan to observed live node schemas, runtime identity, input bytes, and supported stock loader paths. Submission is opt-in; `batch plan`, `verify`, and `qualify` never POST a prompt.
+ITOV executes immutable plans one job at a time, introduced in 0.5.0 and extended for pinned image inference in 0.6.0. A qualification receipt binds a plan to observed live node schemas, runtime identity, input bytes, and supported stock loader paths. Submission is opt-in; `batch plan`, `verify`, and `qualify` never POST a prompt.
 
 ## Commands
 
@@ -34,7 +34,7 @@ Before **each new POST**, ITOV replays the plan against the current clean catalo
 
 These are local preflight observations, not a runtime attestation or a model-compatibility certificate. The operator must keep runtime files, input/model bytes, search-path configuration, and the server under exclusive control during execution. Restart ComfyUI after changes to model bytes or search paths: existing node/model caches cannot be attested through these metadata endpoints. Changes between the final file check and server use, and a different client racing the queue check, are outside this guarantee. Other clients and standalone `job run` do not participate in the batch lease.
 
-The configured local installation currently has no checkpoint or LoRA weights. The real acceptance evidence uses the neutral image-copy workflow. Loader resolution tests use plain-byte files and protocol fixtures; they establish adapter checks, not successful model loading or inference.
+Stage five qualified the neutral image-copy workflow before any weights were installed. Stage six subsequently qualified four real jobs using the pinned SDXL base checkpoint and LCM SDXL LoRA; see [image-inference evidence](image-inference.md#local-acceptance-evidence). Loader resolution unit tests still use plain-byte files and protocol fixtures, and do not establish inference by themselves.
 
 ## Ownership, seeds, and history
 
@@ -46,6 +46,8 @@ Job request IDs are deterministic UUIDv5 values derived from the plan ID and zer
 
 The next job starts only after the previous job succeeds and every persistent output has been downloaded from its exact history descriptor and hashed. Existing differing output bytes are preserved with an error. Repeating run/resume for a completed plan verifies local artifacts and does not submit the plan again. To intentionally render again, create a distinct plan; seed reservations still apply.
 
+Stock Windows ComfyUI reports nested output subfolders with backslashes. ITOV accepts both separator forms for safe relative subfolders and preserves the exact descriptor when requesting `/view`; parent traversal, rooted paths, and drive paths remain rejected.
+
 ## Resume and uncertain acceptance
 
 | Durable state | Resume behavior |
@@ -53,13 +55,13 @@ The next job starts only after the previous job succeeds and every persistent ou
 | Reserved, no job file | Create that owned record in `prepared` state. |
 | Prepared record published before reservation observation | Adopt the matching prepared record; requalify before submission. |
 | Prepared | Requalify, check idle queue/current catalog, save `submitting`, then issue one POST. |
-| Submitting / submission unknown | Search running/pending queue and the latest 200 history entries for the exact request ID **and exact graph**. Never POST again. |
+| Submitting / submission unknown | Search running/pending queue and the latest 200 history entries for the exact request ID and matching graph under the numeric-normalization rule below. Never POST again. |
 | Known prompt ID | Observe that prompt and validate returned batch ownership; collect verified outputs. |
 | Succeeded | Verify downloaded artifacts; recollect missing artifacts from existing history without resubmission. Differing files remain untouched. |
 | Rejected / execution failed | Stop the batch; leave remaining jobs unsubmitted and retain reservations. |
 | Missing, inconsistent, or regressed ownership | Preserve the evidence and stop. Never recreate a previously prepared/started job. |
 
-A matching server record is positive acceptance evidence. An empty queue, missing history, or server restart never proves a POST was not accepted. If the relevant entry has aged out of the recent-history query, an explicit ID can be checked:
+A matching server record is positive acceptance evidence. From 0.6.0, graph matching permits ComfyUI's lossless integer/float normalization of scalar input values (for example, `cfg: 7` becoming `7.0`). All other graph values, connection arrays, metadata, and owner IDs retain strict equality; booleans and rounded large integers do not qualify. Original submitted bytes remain in the plan/job record. An empty queue, missing history, or server restart never proves a POST was not accepted. If the relevant entry has aged out of the recent-history query, an explicit ID can be checked:
 
 ```powershell
 uv run --locked itov batch resume workspace/state/plans/PLAN_ID.json --prompt-id KNOWN_PROMPT_ID
@@ -80,3 +82,5 @@ Abandon refuses active or uncertain jobs. It only retires remaining unsubmitted 
 The [real execution record](evidence/stage-05-execution-20260921.json) retains a four-job neutral batch, a two-job real-server run with an injected lost acknowledgement and safe reconciliation, and a one-job timeout/resume with the same prompt ID. All seven collected images were pixel-identical to the 64×64 input. Repeating the completed primary batch made zero runtime requests. Existing standalone job records and the catalog head remained unchanged.
 
 The [source/package verification](evidence/stage-05-verification-20260921.json) records automated checks, including controlled process exits at preparation/submission/acknowledgement boundaries, interrupted transaction rollback, competing dispatcher exclusion, seed collisions, stale inputs/catalogs, wrong ownership, and artifact preservation. These do not qualify sudden power loss, remote filesystems, backup restore, other operating systems, pretrained model inference, video/audio generation, performance, or parallel GPU execution.
+
+The separate [stage-six inference evidence](evidence/stage-06-inference-20260921.json) establishes sequential execution with the selected pretrained checkpoint and LoRA. It retains the initial observation/collection failures and successful recovery using the already accepted prompt, plus the four final images. Its [source/package verification](evidence/stage-06-verification-20260921.json) includes numeric-normalization and Windows descriptor regressions. The broader storage, model, quality, performance, and concurrency limits above remain open.

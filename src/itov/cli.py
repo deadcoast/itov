@@ -17,6 +17,7 @@ from itov.catalog_store import CatalogStore
 from itov.comfyui import ComfyUIClient, ComfyUIError
 from itov.config import DEFAULT_URL, initialize, load_config, validate_timeout
 from itov.doctor import diagnose
+from itov.inference import load_spec, plan_inference, prepare_inference
 from itov.jobs import run_job, wait_job
 from itov.qualification import qualify, save_qualification
 from itov.rotation import PlanningError
@@ -134,6 +135,15 @@ def parser() -> argparse.ArgumentParser:
         if action in {"run", "resume"}:
             item.add_argument("--wait-timeout", type=float, default=120.0)
             item.add_argument("--poll-interval", type=float, default=1.0)
+    inference = commands.add_parser("inference", help="Prepare pinned stock SDXL inference batches")
+    inference_actions = inference.add_subparsers(dest="action", required=True)
+    for action in ("prepare", "plan"):
+        item = inference_actions.add_parser(action)
+        item.add_argument("file", type=Path, help="Inference specification JSON")
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "plan":
+            item.add_argument("--save", action="store_true")
     return root
 
 
@@ -230,6 +240,28 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1
+        elif args.command == "inference":
+            config = load_config(args.config)
+            spec = load_spec(args.file)
+            if args.action == "prepare":
+                result = prepare_inference(config, spec)
+                if not args.json:
+                    print(f"Prepared preset: {result['preset_id']}")
+                    print(f"Catalog candidate: {result['catalog']}")
+                    print(f"Import with --expected-head {result['expected_head']}")
+                    print(result["limits"])
+            else:
+                plan = plan_inference(config, spec)
+                path = save_plan(config.root, plan) if args.save else None
+                result = {"ok": True, "plan": plan, "path": str(path) if path else None}
+                if not args.json:
+                    print(f"Planned {len(plan['jobs'])} inference jobs: {plan['plan_id']}")
+                    if path:
+                        print(f"Plan: {path}")
+                    print("Qualify the saved plan before running; no jobs were submitted.")
+            if args.json:
+                print(json.dumps(result, indent=2))
+            return 0
         elif args.command == "catalog":
             result = _catalog_command(args)
             if args.json:

@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 from itov.batch import replay_plan
-from itov.catalog import canonical_bytes, read_document, relative_path, require, sha256
+from itov.catalog import canonical_bytes, digest, read_document, relative_path, require, sha256
 from itov.catalog_store import _atomic_write
 from itov.comfyui import ComfyUIClient, parse_json
 from itov.config import Config
@@ -93,12 +93,12 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
         )
         planned_loras = {}
         for item in job["loras"]:
-            name, digest = item["loader_name"], item["asset"]["sha256"]
+            name, asset_hash = item["loader_name"], item["asset"]["sha256"]
             require(
-                name not in planned_loras or planned_loras[name] == digest,
+                name not in planned_loras or planned_loras[name] == asset_hash,
                 f"One loader name refers to different planned LoRA assets: {name}",
             )
-            planned_loras[name] = digest
+            planned_loras[name] = asset_hash
         seed_nodes = {
             binding["node"]
             for binding in plan["request"]["bindings"][job["preset"]]["seed_inputs"]
@@ -124,7 +124,12 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                     "External text embeddings are outside this qualification profile",
                 )
             elif kind == "CheckpointLoaderSimple":
-                bind(config.comfyui_root / "models/checkpoints", inputs["ckpt_name"])
+                asset = bind(config.comfyui_root / "models/checkpoints", inputs["ckpt_name"])
+                metadata = node.get("_meta", {})
+                require(isinstance(metadata, dict), "Checkpoint metadata must be an object")
+                if "itov_asset_sha256" in metadata:
+                    expected = digest(metadata["itov_asset_sha256"], "checkpoint.itov_asset_sha256")
+                    require(asset["sha256"] == expected, "Pinned checkpoint SHA-256 mismatch")
             elif kind in {"LoraLoader", "LoraLoaderModelOnly"}:
                 name = inputs["lora_name"]
                 asset = bind(config.comfyui_root / "models/loras", name)

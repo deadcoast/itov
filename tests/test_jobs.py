@@ -133,6 +133,11 @@ def test_artifact_failure_is_not_success_and_can_be_resumed(job_setup):
         ("render.png", "../escape"),
         ("C:\\escape.png", ""),
         ("render.png", "/outside"),
+        ("render.png", "..\\escape"),
+        ("render.png", "safe\\..\\escape"),
+        ("render.png", "\\outside"),
+        ("render.png", "\\\\host\\share"),
+        ("render.png", "C:\\outside"),
     ],
 )
 def test_unsafe_history_artifacts_are_not_downloaded(job_setup, filename, subfolder):
@@ -142,6 +147,19 @@ def test_unsafe_history_artifacts_are_not_downloaded(job_setup, filename, subfol
     result = run_job(config, workflow)
     assert result["status"] == "collection_failed"
     assert not any(path.startswith("/view") for _, path in requests)
+
+
+def test_windows_nested_output_descriptor_is_preserved(job_setup):
+    config, workflow, history, routes, requests = job_setup
+    descriptor = history["outputs"]["2"]["images"][0]
+    descriptor["subfolder"] = "itov\\inference"
+    endpoint = "/view?filename=render.png&subfolder=itov%5Cinference&type=output"
+    routes[endpoint] = 200, b"nested Windows output"
+    result = run_job(config, workflow)
+    assert result["status"] == "succeeded"
+    assert result["artifacts"][0]["subfolder"] == "itov\\inference"
+    assert ("GET", endpoint) in requests
+    assert Path(result["artifacts"][0]["path"]).read_bytes() == b"nested Windows output"
 
 
 def test_no_persistent_outputs_cannot_claim_delivery(job_setup):

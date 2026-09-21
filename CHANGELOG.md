@@ -4,6 +4,31 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Pinned SDXL and LCM image inference
+
+- Advanced development to 0.6.0 with `inference prepare` and `inference plan`, versioned stock SDXL base/LCM workflows, explicit seeds, immutable catalog candidates, and checkpoint/LoRA hash verification. Preparation preserves existing entries and submits no jobs.
+- Added example specifications and an optional model downloader pinned to immutable upstream revisions, exact byte lengths, and SHA-256 hashes. Existing differing files are preserved; weights and workspace copies remain Git-ignored.
+- Completed four actual sequential 1024×1024 inference jobs on the local RTX 5090: two SDXL base and two SDXL+LCM. Collected distinct decoded outputs with verified ownership/artifact hashes and retained prior job records. See [execution evidence and images](docs/image-inference.md#local-acceptance-evidence).
+- Fixed two defects revealed by real inference: lossless integer/float input normalization in ComfyUI history and Windows backslashes in nested output descriptors. Kept strict ownership/path checks, retained both original failures, and resumed the same accepted prompt without resubmitting it.
+- Passed 400 tests against source on Python 3.13.9 and 400 against the installed wheel on Python 3.11.14, plus lint, formatting, package builds, and byte parity for 21 modules. [Verification evidence](docs/evidence/stage-06-verification-20260921.json) distinguishes fixtures, packaging, and real inference.
+- Recorded visual object-count/shape errors despite recognisable subjects. General media quality, additional model compatibility, calibrated VRAM prediction, video/audio integration, and parallel GPU execution remain open. Updated the build plan and usage guidance; original design specifications remain unchanged.
+
+### 2026-09-21 — Bamboozle previews and integrity verification
+
+- Expanded the standalone cipher with read-only `--dry-run` and `--diff`, versioned JSON reports, substitution/literal counts, and a dictionary-only `--mode validate` command. Omitted output paths now use the established `_safe` and `_ready` filename conventions.
+- Added version-2 ledgers with original/encoded byte hashes and a canonical dictionary hash. `--mode verify` checks both encoded content and restored-original bytes without writes; reverse `--strict` requires the unchanged encoded file. Ordinary reverse continues to accept edited files and reports the integrity boundary.
+- Retained version-1 and ledger-free reverse compatibility, added `--keep-ledger` for repeated restoration to separate outputs, and reject accidental double encoding when an input already has a ledger. JSON failures state whether output publication already succeeded.
+- Updated the Bamboozle usage guides with commands, report fields, compatibility rules, and the distinction between consistency checks and authentication.
+- Passed all 74 focused tests, including the prior 48 regressions and 26 new cases covering preview non-mutation, actual CLI subprocesses, strict/edited/legacy reversal, malformed hashes, canonical dictionary hashing, default paths, repeated restoration, and structured failure reporting. Focused Ruff lint/format and `git diff --check` passed. Verification covers local text conversion on Windows Python 3.13; it does not establish Python refactoring correctness or installed SCM package acceptance.
+
+### 2026-09-21 — Cipher conversion repair
+
+- Continued from the user's startup syntax fix. Replaced sequential substitutions with a single pass so generated replacements and protected native terms are never rewritten during the same conversion.
+- Added dictionary and marker validation, explicit rejection of unsupported case and ambiguous mappings, and an exact forward/reverse round-trip check before publishing forward output.
+- Resolved the default dictionary beside the script, preserved UTF-8 BOMs and line endings, and used complete temporary writes before replacing output files. Errors return a nonzero status; failures after output publication explicitly identify that the output was saved.
+- Replaced the shared directory ledger with one ledger beside each encoded output. Reverse conversion checks its recorded dictionary and removes it only after saving output; legacy directory ledgers remain untouched. Updated both usage guides.
+- Passed 48 focused regression tests on local Windows Python 3.13, including real CLI subprocesses, native literals, cascading substitutions, dictionary errors, multiple files/directories, in-place conversion, and injected output/ledger failures. Focused Ruff lint/format and `git diff --check` passed. The first file-test run had 34 passes and 12 setup errors because the existing `.test-tmp` directory denied access; all tests passed using a fresh repository-local temporary directory. This verification covers local text conversion, not edited-code correctness, installed SCM packaging, or ComfyUI execution.
+
 ### 2026-09-21 — Qualified sequential batch execution
 
 - Advanced development to 0.5.0 and implemented opt-in `batch qualify`, `run`, `status`, `resume`, and `abandon` commands.

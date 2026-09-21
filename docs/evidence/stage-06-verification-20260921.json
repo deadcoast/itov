@@ -1,0 +1,289 @@
+{
+  "observed_at": "2026-09-21T18:03:17.420137+00:00",
+  "package_version": "0.6.0",
+  "platform": "Windows",
+  "checks": [
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage06-source"
+      ],
+      "exit_code": 0,
+      "seconds": 79.965,
+      "stdout": "........................................................................ [ 18%]\n........................................................................ [ 36%]\n........................................................................ [ 54%]\n........................................................................ [ 72%]\n........................................................................ [ 90%]\n........................................                                 [100%]\n400 passed in 79.57s (0:01:19)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_import",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.6.0'"
+      ],
+      "exit_code": 0,
+      "seconds": 0.073,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.041,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.071,
+      "stdout": "42 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.057,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.6.0.tar.gz\nSuccessfully built dist\\itov-0.6.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "installed_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8b1aeb55633457e9cf1f8dcdd5d345531138874ab450a8986f149f85d11eb4c2\\itov-0.6.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.6.0'; assert all((root/f.name).read_bytes()==f.read_bytes() for f in files); print(sys.version); print(root); print(len(files),'modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.637,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\QPkagFSLCyfSD4JJeps84\\Lib\\site-packages\\itov\n21 modules match source\n",
+      "stderr": "Installed 7 packages in 222ms\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8b1aeb55633457e9cf1f8dcdd5d345531138874ab450a8986f149f85d11eb4c2\\itov-0.6.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage06-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 80.7,
+      "stdout": "........................................................................ [ 18%]\n........................................................................ [ 36%]\n........................................................................ [ 54%]\n........................................................................ [ 72%]\n........................................................................ [ 90%]\n........................................                                 [100%]\n400 passed in 79.85s (0:01:19)\n",
+      "stderr": ""
+    },
+    {
+      "name": "final_documentation_build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.057,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.6.0.tar.gz\nSuccessfully built dist\\itov-0.6.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "final_installed_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\b5e8cdceb2299f7f1c413bee0f2766fb7c1f56f0ba7db959b58591e3afeb0b5b\\itov-0.6.0-py3-none-any.whl",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.6.0'; assert all((root/f.name).read_bytes()==f.read_bytes() for f in files); print(sys.version); print(root); print(len(files),'modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.405,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\mazsdYkfmFo85dMeAPD6Z\\Lib\\site-packages\\itov\n21 modules match source\n",
+      "stderr": "Installed 1 package in 28ms\n"
+    },
+    {
+      "name": "final_wheel_real_lcm_plan",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\b5e8cdceb2299f7f1c413bee0f2766fb7c1f56f0ba7db959b58591e3afeb0b5b\\itov-0.6.0-py3-none-any.whl",
+        "itov",
+        "inference",
+        "plan",
+        "examples/sdxl-lcm.inference.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 4.688,
+      "stdout": "{\n  \"ok\": true,\n  \"plan\": {\n    \"version\": 1,\n    \"algorithm\": \"itov-rotation-v1\",\n    \"scope\": \"planning_only\",\n    \"catalog_head\": \"5cddeda02eb3ba4c5a0e2a2536809192385ee62257a07317b987618a57c5e99b\",\n    \"ledger_head\": \"4f757faf630edcaffafb12eed8885d1f0a4864fd2c8ad5ce0f111120c39a47e3\",\n    \"request\": {\n      \"bindings\": {\n        \"inference-ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318\": {\n          \"lora_slots\": [\n            {\n              \"node\": \"2\",\n              \"slot\": \"lcm\"\n            }\n          ],\n          \"seed_inputs\": [\n            {\n              \"class_type\": \"KSampler\",\n              \"input\": \"seed\",\n              \"node\": \"6\"\n            }\n          ]\n        }\n      },\n      \"catalog_head\": \"5cddeda02eb3ba4c5a0e2a2536809192385ee62257a07317b987618a57c5e99b\",\n      \"category_cooldown\": 0,\n      \"count\": 2,\n      \"lora_policy\": {\n        \"ids\": [\n          \"inference-lcm-a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n        ],\n        \"loader_names\": {\n          \"inference-lcm-a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\": \"lcm_lora_sdxl.safetensors\"\n        },\n        \"max_strength_milli\": 1000,\n        \"no_repeat_within\": 0,\n        \"preferred_multiplier_milli\": 1000,\n        \"slots\": [\n          \"lcm\"\n        ],\n        \"soft_conflicts\": \"exclude\",\n        \"strength_mode\": \"recommended\"\n      },\n      \"no_repeat_within\": 0,\n      \"presets\": [\n        \"inference-ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318\"\n      ],\n      \"seed\": 0,\n      \"version\": 1\n    },\n    \"assets\": [\n      {\n        \"kind\": \"workflow\",\n        \"id\": \"inference-ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318\",\n        \"path\": \"workflows/inference/ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318.api.json\",\n        \"sha256\": \"796b013715288267025ef3eb3ed0cc99c2a8170fd0df65c9a6bcbcf011ab29c7\"\n      },\n      {\n        \"kind\": \"lora\",\n        \"id\": \"inference-lcm-a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n        \"path\": \"models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors\",\n        \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n      }\n    ],\n    \"exclusions\": [],\n    \"stack_counts\": {\n      \"inference-ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318\": 1\n    },\n    \"jobs\": [\n      {\n        \"index\": 0,\n        \"preset\": \"inference-ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318\",\n        \"category\": \"image-inference\",\n        \"seed\": 620260931,\n        \"loras\": [\n          {\n            \"id\": \"inference-lcm-a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n            \"slot\": \"lcm\",\n            \"asset\": {\n              \"path\": \"models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors\",\n              \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n            },\n            \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n            \"strength_milli\": 1000\n          }\n        ],\n        \"total_strength_milli\": 1000,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"_meta\\\":{\\\"itov_asset_sha256\\\":\\\"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\\\"},\\\"class_type\\\":\\\"CheckpointLoaderSimple\\\",\\\"inputs\\\":{\\\"ckpt_name\\\":\\\"sd_xl_base_1.0.safetensors\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"LoraLoaderModelOnly\\\",\\\"inputs\\\":{\\\"lora_name\\\":\\\"lcm_lora_sdxl.safetensors\\\",\\\"model\\\":[\\\"1\\\",0],\\\"strength_model\\\":1.0}},\\\"3\\\":{\\\"class_type\\\":\\\"CLIPTextEncode\\\",\\\"inputs\\\":{\\\"clip\\\":[\\\"1\\\",1],\\\"text\\\":\\\"A studio photograph of a red ceramic teapot beside two green pears on a pale wooden table, soft window light, plain background, clear natural colors\\\"}},\\\"4\\\":{\\\"class_type\\\":\\\"CLIPTextEncode\\\",\\\"inputs\\\":{\\\"clip\\\":[\\\"1\\\",1],\\\"text\\\":\\\"\\\"}},\\\"5\\\":{\\\"class_type\\\":\\\"EmptyLatentImage\\\",\\\"inputs\\\":{\\\"batch_size\\\":1,\\\"height\\\":1024,\\\"width\\\":1024}},\\\"6\\\":{\\\"class_type\\\":\\\"KSampler\\\",\\\"inputs\\\":{\\\"cfg\\\":1,\\\"denoise\\\":1,\\\"latent_image\\\":[\\\"5\\\",0],\\\"model\\\":[\\\"2\\\",0],\\\"negative\\\":[\\\"4\\\",0],\\\"positive\\\":[\\\"3\\\",0],\\\"sampler_name\\\":\\\"lcm\\\",\\\"scheduler\\\":\\\"sgm_uniform\\\",\\\"seed\\\":620260931,\\\"steps\\\":4}},\\\"7\\\":{\\\"class_type\\\":\\\"VAEDecode\\\",\\\"inputs\\\":{\\\"samples\\\":[\\\"6\\\",0],\\\"vae\\\":[\\\"1\\\",2]}},\\\"8\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/inference/ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318\\\",\\\"images\\\":[\\\"7\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"227d3af9746d57099ff39d67b75c21db7919b4df99d736de9dd7d4f62e7defbd\"\n      },\n      {\n        \"index\": 1,\n        \"preset\": \"inference-ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318\",\n        \"category\": \"image-inference\",\n        \"seed\": 620260932,\n        \"loras\": [\n          {\n            \"id\": \"inference-lcm-a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n            \"slot\": \"lcm\",\n            \"asset\": {\n              \"path\": \"models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors\",\n              \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n            },\n            \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n            \"strength_milli\": 1000\n          }\n        ],\n        \"total_strength_milli\": 1000,\n        \"soft_conflicts\": [],\n        \"workflow_json\": \"{\\\"1\\\":{\\\"_meta\\\":{\\\"itov_asset_sha256\\\":\\\"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\\\"},\\\"class_type\\\":\\\"CheckpointLoaderSimple\\\",\\\"inputs\\\":{\\\"ckpt_name\\\":\\\"sd_xl_base_1.0.safetensors\\\"}},\\\"2\\\":{\\\"class_type\\\":\\\"LoraLoaderModelOnly\\\",\\\"inputs\\\":{\\\"lora_name\\\":\\\"lcm_lora_sdxl.safetensors\\\",\\\"model\\\":[\\\"1\\\",0],\\\"strength_model\\\":1.0}},\\\"3\\\":{\\\"class_type\\\":\\\"CLIPTextEncode\\\",\\\"inputs\\\":{\\\"clip\\\":[\\\"1\\\",1],\\\"text\\\":\\\"A studio photograph of a red ceramic teapot beside two green pears on a pale wooden table, soft window light, plain background, clear natural colors\\\"}},\\\"4\\\":{\\\"class_type\\\":\\\"CLIPTextEncode\\\",\\\"inputs\\\":{\\\"clip\\\":[\\\"1\\\",1],\\\"text\\\":\\\"\\\"}},\\\"5\\\":{\\\"class_type\\\":\\\"EmptyLatentImage\\\",\\\"inputs\\\":{\\\"batch_size\\\":1,\\\"height\\\":1024,\\\"width\\\":1024}},\\\"6\\\":{\\\"class_type\\\":\\\"KSampler\\\",\\\"inputs\\\":{\\\"cfg\\\":1,\\\"denoise\\\":1,\\\"latent_image\\\":[\\\"5\\\",0],\\\"model\\\":[\\\"2\\\",0],\\\"negative\\\":[\\\"4\\\",0],\\\"positive\\\":[\\\"3\\\",0],\\\"sampler_name\\\":\\\"lcm\\\",\\\"scheduler\\\":\\\"sgm_uniform\\\",\\\"seed\\\":620260932,\\\"steps\\\":4}},\\\"7\\\":{\\\"class_type\\\":\\\"VAEDecode\\\",\\\"inputs\\\":{\\\"samples\\\":[\\\"6\\\",0],\\\"vae\\\":[\\\"1\\\",2]}},\\\"8\\\":{\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/inference/ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318\\\",\\\"images\\\":[\\\"7\\\",0]}}}\\n\",\n        \"workflow_sha256\": \"0a350e91539e1468ad9fd49c269243da71dc9f9202d494a1ce490f6022aaf388\"\n      }\n    ],\n    \"plan_id\": \"07b4625cf0847f4b4463c3077edb4b9e3ded81a37d50332f1e3acb3ea8adac65\"\n  },\n  \"path\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "final_wheel_completed_real_lcm_resume",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\b5e8cdceb2299f7f1c413bee0f2766fb7c1f56f0ba7db959b58591e3afeb0b5b\\itov-0.6.0-py3-none-any.whl",
+        "itov",
+        "batch",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\07b4625cf0847f4b4463c3077edb4b9e3ded81a37d50332f1e3acb3ea8adac65.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.328,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"07b4625cf0847f4b4463c3077edb4b9e3ded81a37d50332f1e3acb3ea8adac65\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"07b4625cf0847f4b4463c3077edb4b9e3ded81a37d50332f1e3acb3ea8adac65\",\n      \"job_index\": 0,\n      \"request_id\": \"fecc6e3e-0cfa-5a99-bde0-053bd3b67baf\",\n      \"workflow_sha256\": \"227d3af9746d57099ff39d67b75c21db7919b4df99d736de9dd7d4f62e7defbd\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"223b2528-c9ed-43be-bbcc-8d7541710f48\"\n    },\n    {\n      \"plan_id\": \"07b4625cf0847f4b4463c3077edb4b9e3ded81a37d50332f1e3acb3ea8adac65\",\n      \"job_index\": 1,\n      \"request_id\": \"b6121452-2898-5811-828e-ad773eecae13\",\n      \"workflow_sha256\": \"0a350e91539e1468ad9fd49c269243da71dc9f9202d494a1ce490f6022aaf388\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"8527aafd-8e0e-4457-b8e2-6c962fff2ebf\"\n    }\n  ],\n  \"succeeded\": 2,\n  \"scope\": \"sequential_batch_observations\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "retained_initial_failures": [
+    {
+      "scope": "focused test setup",
+      "result": "1 passed, 27 errors",
+      "cause": "The new nested pytest basetemp parent did not exist.",
+      "correction": "Created workspace/state/verification; all 28 initial focused tests passed."
+    },
+    {
+      "scope": "real ComfyUI observation",
+      "evidence": "stage-06-initial-observation-20260921.json",
+      "cause": "ComfyUI normalized integer CFG/denoise to floats in history.",
+      "correction": "Permit lossless scalar integer/float normalization only; keep ownership, metadata, links and other inputs exact."
+    },
+    {
+      "scope": "real ComfyUI artifact collection",
+      "evidence": "stage-06-initial-collection-20260921.json",
+      "cause": "Stock Windows SaveImage returned a nested subfolder with backslashes.",
+      "correction": "Validate both separator forms while preserving the exact server descriptor and rejecting traversal, absolute paths and drive paths."
+    }
+  ],
+  "limits": [
+    "The full checkout suite includes existing cipher and Markdown utility tests; model execution is qualified separately.",
+    "Model adapter tests use plain-byte files and registry fixtures; they do not prove inference.",
+    "Real inference evidence is limited to the selected SDXL base checkpoint and LCM SDXL LoRA.",
+    "No video/audio, general LoRA compatibility, calibrated VRAM prediction, or concurrent GPU qualification."
+  ],
+  "inference_evidence": "stage-06-inference-20260921.json",
+  "wheel_source_byte_parity": 21,
+  "source_sha256": {
+    "src/itov/__init__.py": "cb613a232f4538c9db5d64103f71927746765645243072bda826e4a94a4b2370",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+    "src/itov/batch_execution.py": "ff09a053d029f127ecb6cc57de52e9c685535f19ffdfeb5fddd5e010d8b3a699",
+    "src/itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+    "src/itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+    "src/itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+    "src/itov/cli.py": "3897420e111f3555d499bd6baf5876d8c3900759e43e9bf983d26aefd2d58b64",
+    "src/itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+    "src/itov/config.py": "360e4e5451194c11ec3fdf39b001edb784d984448cf5cd0af740b36d4f2b2d8a",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/execution_store.py": "10b08ddbb19171e3ab1294bc38fee9cd5e709aa9e3c6b0795c9566935903d04a",
+    "src/itov/inference.py": "ac08d4ecb954745da0781be1ecd4cf1fc5ed03833e97bdad2163859760dc6abf",
+    "src/itov/jobs.py": "9a8f343c240b2e7171a4e27103a7381fbbd5d767c7a5191647f6b6ce45126903",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/owned_jobs.py": "5eb31fc19bdf9fc1cd1f366e30cf66979df2f5ddf5c12920230b222c1ab97dd0",
+    "src/itov/qualification.py": "05de86040e147db280f9fc1f52057ae01783cf7b4fa54ca073f08f0c780452fb",
+    "src/itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+    "src/itov/runtime.py": "e2e39fcb7be1c9f9a8e5c7d78786ff55440edf9c53b90bbd719483b515792077",
+    "src/itov/workflow.py": "5e3f7aa3a62786c77c9a24cccdd98a42a15b61774522401627382888ac16fcca"
+  },
+  "artifact_sha256": {
+    "dist/itov-0.6.0-py3-none-any.whl": "b5e8cdceb2299f7f1c413bee0f2766fb7c1f56f0ba7db959b58591e3afeb0b5b",
+    "dist/itov-0.6.0.tar.gz": "62c3b0da3041ce4f37f1aeea732844e476083352916c33c2de62748a61ea6e4c"
+  },
+  "passed": true,
+  "tested_artifact_sha256": {
+    "dist/itov-0.6.0-py3-none-any.whl": "8b1aeb55633457e9cf1f8dcdd5d345531138874ab450a8986f149f85d11eb4c2",
+    "dist/itov-0.6.0.tar.gz": "6d7586c13b79bc691c3d43deb35bbb061dedb767d224bf6c9fe21192707ebcc1"
+  },
+  "final_documentation_build": {
+    "changed_wheel_entries": [
+      "itov-0.6.0.dist-info/METADATA",
+      "itov-0.6.0.dist-info/RECORD"
+    ],
+    "scope": "Rebuilt after final README/evidence documentation. All 21 module bytes match the wheel that passed 400 tests; only README package metadata and its RECORD checksum changed."
+  },
+  "final_wheel_live_smoke": {
+    "same_lcm_plan": true,
+    "completed_resume_succeeded": true,
+    "server_history_unchanged": true,
+    "queue_empty": true,
+    "scope": "Read/check completed inference artifacts; no additional render was submitted."
+  }
+}

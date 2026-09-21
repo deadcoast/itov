@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "profile": "sdxl-base-v1",
+  "checkpoint": {
+    "loader_name": "sd_xl_base_1.0.safetensors",
+    "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+  },
+  "lora": null,
+  "prompt": "A studio photograph of a red ceramic teapot beside two green pears on a pale wooden table, soft window light, plain background, clear natural colors",
+  "negative_prompt": "text, watermark, blurry",
+  "width": 1024,
+  "height": 1024,
+  "seed": 620260921,
+  "count": 2
+}

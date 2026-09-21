@@ -6,7 +6,7 @@ To combine a directory of Markdown specifications into one searchable PDF, run
 `.\markdown-to-pdf.ps1` (prompts for a path) or `.\markdown-to-pdf.ps1 "C:\path\to\specs"`.
 See the [converter guide](tools/markdown_pdf/README.md) for exclusions and output options.
 
-The original material in `docs/01_*` through `docs/10_*` is a design reference, not an executable installation guide. Read the [development review](docs/development-review.md) for defects, current compatibility findings, and the implementation sequence.
+The original material in `docs/design_spec/` is a design reference, not an executable installation guide. Read the [development review](docs/development-review.md) for defects, current compatibility findings, and the implementation sequence.
 
 ## Quick start
 
@@ -125,7 +125,21 @@ uv run --locked itov batch resume workspace/state/plans/PLAN_ID.json
 
 Use the IDs printed by planning and qualification. The executor reserves seeds and job ownership atomically, rechecks qualification before each new submission, and advances only after verified output collection. Lost acknowledgements are reconciled from server ownership evidence; uncertain work is never automatically submitted again. Timeouts and Ctrl+C detach observation without cancelling server work. See [execution, resume, and qualification limits](docs/batch-execution.md), including safe abandonment of an unsubmitted remainder.
 
-The real local acceptance run uses the neutral image-copy workflow: seven jobs across sequential, lost-acknowledgement, and timeout/resume cases produced pixel-identical images. Checkpoint/LoRA inference, video/audio integration, and parallel GPU execution remain unqualified.
+The stage-five acceptance run used the neutral image-copy workflow: seven jobs across sequential, lost-acknowledgement, and timeout/resume cases produced pixel-identical images. Stage six also completed the four pinned model-inference jobs described below. Video/audio integration and parallel GPU execution remain unqualified.
+
+## Pinned image inference
+
+The SDXL base and SDXL+LCM profiles prepare stock workflows with expected checkpoint/LoRA hashes, fixed sampler settings, and explicit seeds:
+
+```powershell
+uv run --locked itov inference prepare examples/sdxl-base.inference.json --json
+# Import the printed catalog candidate with its printed expected head.
+uv run --locked itov inference plan examples/sdxl-base.inference.json --save
+```
+
+Run the saved plan through `batch qualify` and `batch run`. Preparation requires the named model files and does not download or submit anything. [Image-inference guidance](docs/image-inference.md) covers the optional pinned download helper, both example specifications, import commands, and acceptance limits.
+
+The local RTX 5090 completed two SDXL base and two SDXL+LCM jobs with distinct reserved seeds and verified 1024×1024 outputs. The [execution evidence and saved images](docs/image-inference.md#local-acceptance-evidence) establish this selected model pair's functional path. Visual inspection found recognisable subjects with object-count and shape errors; general media quality, other model combinations, and calibrated VRAM prediction remain open.
 
 ## Development
 

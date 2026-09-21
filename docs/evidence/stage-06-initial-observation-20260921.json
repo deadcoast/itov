@@ -1,0 +1,486 @@
+{
+  "observed_at": "2026-09-21T17:53:23.451098+00:00",
+  "package_version": "0.6.0",
+  "scope": "real_seeded_sdxl_base_and_lcm_lora_image_inference",
+  "downloads": [
+    {
+      "bytes": 393855224,
+      "destination": "models/loras/lcm_lora_sdxl.safetensors",
+      "id": "lcm-lora-sdxl",
+      "license_label": "openrail++",
+      "model_card": "https://huggingface.co/latent-consistency/lcm-lora-sdxl",
+      "observed_at": "2026-09-21T17:51:32.174259+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\loras\\lcm_lora_sdxl.safetensors",
+      "repository": "latent-consistency/lcm-lora-sdxl",
+      "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+      "sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141",
+      "source_file": "pytorch_lora_weights.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/a18548dd4956b174ec5b0d78d340c8dae0a129cd/pytorch_lora_weights.safetensors"
+    },
+    {
+      "bytes": 6938078334,
+      "destination": "models/checkpoints/sd_xl_base_1.0.safetensors",
+      "id": "sdxl-base-1.0",
+      "license_label": "openrail++",
+      "model_card": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0",
+      "observed_at": "2026-09-21T17:51:25.632582+00:00",
+      "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\sd_xl_base_1.0.safetensors",
+      "repository": "stabilityai/stable-diffusion-xl-base-1.0",
+      "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+      "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+      "source_file": "sd_xl_base_1.0.safetensors",
+      "status": "downloaded_and_verified",
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/462165984030d82259a11f4367a4eed129e94a7b/sd_xl_base_1.0.safetensors"
+    }
+  ],
+  "initial_catalog_head": "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+  "runs": [
+    {
+      "profile": "sdxl-base",
+      "specification": {
+        "checkpoint": {
+          "loader_name": "sd_xl_base_1.0.safetensors",
+          "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+        },
+        "count": 2,
+        "height": 1024,
+        "lora": null,
+        "negative_prompt": "text, watermark, blurry",
+        "profile": "sdxl-base-v1",
+        "prompt": "A studio photograph of a red ceramic teapot beside two green pears on a pale wooden table, soft window light, plain background, clear natural colors",
+        "seed": 620260921,
+        "version": 1,
+        "width": 1024
+      },
+      "prepared": {
+        "ok": true,
+        "scope": "prepared_inference_candidates",
+        "spec_id": "6db51ced8d88af6078573ffdaf5106062f96ceeca31db0919cb08939abd6ed0a",
+        "preset_id": "inference-6db51ced8d88af6078573ffdaf5106062f96ceeca31db0919cb08939abd6ed0a",
+        "catalog": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\templates\\inference\\bf4d1e9710879b60998b02191d3933fd426bfcdb8b2f975f084fd43a3b70bbc1.catalog.json",
+        "workflow": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\workflows\\inference\\6db51ced8d88af6078573ffdaf5106062f96ceeca31db0919cb08939abd6ed0a.api.json",
+        "expected_head": "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+        "limits": "No catalog import, runtime validation, seed reservation, or submission."
+      },
+      "catalog_head": "9249a19de6c4a83b00a6e7f7afa49ce57a1157255d960860817711248020a4ec",
+      "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\4fb88b73a80ff8d1ce2b7fec8b1ff207d8f4c93ced70525c271769e045419427.json",
+      "qualification": {
+        "version": 1,
+        "profile": "stock-local-v1",
+        "scope": "runtime_schema_and_asset_binding",
+        "plan_id": "4fb88b73a80ff8d1ce2b7fec8b1ff207d8f4c93ced70525c271769e045419427",
+        "server": "http://127.0.0.1:8188",
+        "runtime": {
+          "argv": [
+            "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+            "--disable-auto-launch",
+            "--listen",
+            "127.0.0.1",
+            "--port",
+            "8188",
+            "--input-directory",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+            "--output-directory",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+            "--disable-all-custom-nodes"
+          ],
+          "comfyui_version": "0.37.0",
+          "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+          "pytorch_version": "2.13.0+cu130"
+        },
+        "devices": [
+          {
+            "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+            "type": "cuda",
+            "index": 0
+          }
+        ],
+        "node_schema_sha256": "d4244893ef4a411ab6aeb2d53b028e8b1580fe970a54f3f5198acfb9177c2cb2",
+        "files": [
+          {
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\folder_paths.py",
+            "bytes": 23745,
+            "sha256": "a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66"
+          },
+          {
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+            "bytes": 25024,
+            "sha256": "5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96"
+          },
+          {
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\sd_xl_base_1.0.safetensors",
+            "bytes": 6938078334,
+            "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+          },
+          {
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py",
+            "bytes": 111280,
+            "sha256": "4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891"
+          }
+        ],
+        "jobs": 2,
+        "qualification_id": "77dbd314abb20f61acd6f2972e0565146f5f2afef581d4f23874760fcb49db19"
+      },
+      "result": {
+        "ok": false,
+        "plan_id": "4fb88b73a80ff8d1ce2b7fec8b1ff207d8f4c93ced70525c271769e045419427",
+        "status": "paused",
+        "error": "History does not belong to this batch job and workflow",
+        "jobs": [
+          {
+            "plan_id": "4fb88b73a80ff8d1ce2b7fec8b1ff207d8f4c93ced70525c271769e045419427",
+            "job_index": 0,
+            "request_id": "cbcd091e-f429-5f66-b97a-c996f869bef3",
+            "workflow_sha256": "99d551c08fd083d181569146c9d39fddf08c1b560defb98548a263b453e5c65a",
+            "status": "observation_failed",
+            "prompt_id": "80261342-489a-49a5-bab5-574f52299214"
+          },
+          {
+            "plan_id": "4fb88b73a80ff8d1ce2b7fec8b1ff207d8f4c93ced70525c271769e045419427",
+            "job_index": 1,
+            "request_id": "32065d48-8a4a-50fd-9db0-a6393d7ff011",
+            "workflow_sha256": "cb66067f86c84ce3f2d89d8cdb95d1ff3f1a68ea15e63d5f0d0ad08a48fa3d11",
+            "status": "reserved",
+            "prompt_id": null
+          }
+        ],
+        "succeeded": 0,
+        "scope": "sequential_batch_observations"
+      },
+      "command_seconds": 15.728,
+      "gpu_samples": [
+        {
+          "at": "2026-09-21T17:53:36.098727+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 7",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:36.390088+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 13",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:36.676735+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 10",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:36.966395+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 10",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:37.252423+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 8",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:37.544540+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 8",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:37.833281+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 13",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:38.119724+00:00",
+          "exit_code": 0,
+          "csv": "0, 5358, 32607, 10",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:38.412363+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 10",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:38.700808+00:00",
+          "exit_code": 0,
+          "csv": "0, 5358, 32607, 8",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:38.988344+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 8",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:39.274639+00:00",
+          "exit_code": 0,
+          "csv": "0, 5358, 32607, 8",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:39.564667+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 8",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:39.852459+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 8",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:40.152430+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 11",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:40.444137+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 11",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:40.735271+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 17",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:41.027292+00:00",
+          "exit_code": 0,
+          "csv": "0, 5359, 32607, 17",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:41.317739+00:00",
+          "exit_code": 0,
+          "csv": "0, 5360, 32607, 20",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:41.615407+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:41.909513+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:42.201942+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:42.489817+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:42.779841+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:43.065096+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:43.351570+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:43.639677+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:43.957762+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 98",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:44.264955+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 23",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:44.558120+00:00",
+          "exit_code": 0,
+          "csv": "0, 5350, 32607, 23",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:44.855298+00:00",
+          "exit_code": 0,
+          "csv": "0, 5727, 32607, 21",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:45.146209+00:00",
+          "exit_code": 0,
+          "csv": "0, 6943, 32607, 35",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:45.442183+00:00",
+          "exit_code": 0,
+          "csv": "0, 7167, 32607, 35",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:45.729114+00:00",
+          "exit_code": 0,
+          "csv": "0, 7134, 32607, 16",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:46.021525+00:00",
+          "exit_code": 0,
+          "csv": "0, 7166, 32607, 16",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:46.314808+00:00",
+          "exit_code": 0,
+          "csv": "0, 7584, 32607, 3",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:46.600837+00:00",
+          "exit_code": 0,
+          "csv": "0, 7584, 32607, 3",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:46.890789+00:00",
+          "exit_code": 0,
+          "csv": "0, 7776, 32607, 7",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:47.181773+00:00",
+          "exit_code": 0,
+          "csv": "0, 8032, 32607, 12",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:47.470507+00:00",
+          "exit_code": 0,
+          "csv": "0, 8192, 32607, 12",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:47.763562+00:00",
+          "exit_code": 0,
+          "csv": "0, 9920, 32607, 32",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:48.055243+00:00",
+          "exit_code": 0,
+          "csv": "0, 11712, 32607, 32",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:48.346876+00:00",
+          "exit_code": 0,
+          "csv": "0, 12417, 32607, 43",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:48.644799+00:00",
+          "exit_code": 0,
+          "csv": "0, 12545, 32607, 68",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:48.940249+00:00",
+          "exit_code": 0,
+          "csv": "0, 12559, 32607, 68",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:49.241008+00:00",
+          "exit_code": 0,
+          "csv": "0, 12560, 32607, 65",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:49.534947+00:00",
+          "exit_code": 0,
+          "csv": "0, 12560, 32607, 65",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:49.832163+00:00",
+          "exit_code": 0,
+          "csv": "0, 12560, 32607, 76",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:50.133359+00:00",
+          "exit_code": 0,
+          "csv": "0, 12560, 32607, 86",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:50.426804+00:00",
+          "exit_code": 0,
+          "csv": "0, 12560, 32607, 86",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:50.720522+00:00",
+          "exit_code": 0,
+          "csv": "0, 12560, 32607, 74",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:51.018793+00:00",
+          "exit_code": 0,
+          "csv": "0, 12624, 32607, 74",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:51.314766+00:00",
+          "exit_code": 0,
+          "csv": "0, 12208, 32607, 56",
+          "error": ""
+        },
+        {
+          "at": "2026-09-21T17:53:51.603973+00:00",
+          "exit_code": 0,
+          "csv": "0, 12208, 32607, 56",
+          "error": ""
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "One checkpoint and one compatible acceleration LoRA; no broader model compatibility acceptance.",
+    "Distinct reserved seeds; this is not a same-seed image-quality or deterministic-pixel comparison.",
+    "GPU memory samples are whole-device observations and lower bounds on peaks, not per-job allocator measurements.",
+    "No VRAM prediction calibration, parallel workers, video/audio integration, or human aesthetic acceptance."
+  ]
+}

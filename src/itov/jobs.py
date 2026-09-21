@@ -13,7 +13,7 @@ import uuid
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 
-from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json
+from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json, submission_matches
 from itov.config import Config, validate_timeout
 from itov.locking import file_lock
 from itov.workflow import validate_workflow
@@ -76,6 +76,9 @@ def _descriptors(history: dict) -> list[dict]:
                     continue
                 filename = value["filename"]
                 folder = value.get("subfolder", "")
+                # ComfyUI uses the host's path separator in nested subfolders.
+                # Validate both spellings, but retain the exact server descriptor.
+                portable_folder = folder.replace("\\", "/") if isinstance(folder, str) else ""
                 kind = value.get("type")
                 if isinstance(kind, str) and kind in {"input", "temp"}:
                     continue
@@ -85,9 +88,9 @@ def _descriptors(history: dict) -> list[dict]:
                     or any(c in filename for c in "/\\:\0")
                     or filename in {".", ".."}
                     or not isinstance(folder, str)
-                    or any(c in folder for c in "\\:\0")
-                    or PurePosixPath(folder).is_absolute()
-                    or ".." in PurePosixPath(folder).parts
+                    or any(c in folder for c in ":\0")
+                    or PurePosixPath(portable_folder).is_absolute()
+                    or ".." in PurePosixPath(portable_folder).parts
                     or kind != "output"
                 ):
                     raise ComfyUIError(
@@ -147,8 +150,7 @@ def _wait(
                         or prompt[1] != record["prompt_id"]
                         or not isinstance(prompt[3], dict)
                         or prompt[3].get("itov_request_id") != record["request_id"]
-                        or json.dumps(prompt[2], sort_keys=True, allow_nan=False)
-                        != json.dumps(record["workflow"], sort_keys=True, allow_nan=False)
+                        or not submission_matches(record["workflow"], prompt[2])
                     ):
                         raise ComfyUIError("History does not belong to this batch job and workflow")
                 status = history["status"]
