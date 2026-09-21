@@ -1,4 +1,4 @@
-# Development review and first implementation stage
+# Development review and build plan
 
 Reviewed 2026-09-21. The repository started with eleven Markdown documents, two published document commits, and a local ComfyUI download. There was no executable package, environment lock, test suite, or installed ComfyUI under the documented repository path. The documents describe a broad image/video pipeline, but their embedded scripts need reconciliation before use.
 
@@ -25,7 +25,7 @@ The workflow shape and metadata endpoints are established by the [official API e
 
 The documents' blanket prohibition on Python 3.12+ is outdated. Current [ComfyUI system requirements](https://docs.comfy.org/installation/system_requirements) recommend Python 3.13 and describe 3.12 as a fallback. The [portable installation guide](https://docs.comfy.org/installation/comfyui_portable_windows) lists CUDA 13.0/Python 3.13 for modern RTX hardware and the CUDA 12.6/Python 3.12 build for older NVIDIA hardware. Re-check those sources when installing; this is not a permanent version pin for ComfyUI or custom nodes.
 
-Read-only local inspection found an NVIDIA GeForce RTX 5090 with 32607 MiB VRAM and driver 616.64. FFmpeg and 7-Zip are on PATH. The repository contains only `AI/ComfyUI/ComfyUI_windows_portable_nvidia_cu126.7z`, not an extracted runtime. Hardware detection does not establish Torch compatibility, SageAttention availability, the examples' speed claims, or render quality.
+Initial read-only inspection found an NVIDIA GeForce RTX 5090 with 32607 MiB VRAM and driver 616.64. FFmpeg and 7-Zip are on PATH. At that checkpoint, the repository contained only `AI/ComfyUI/ComfyUI_windows_portable_nvidia_cu126.7z`, not an extracted runtime. Stage two subsequently qualified a current runtime as recorded below. Hardware detection alone does not establish Torch compatibility, SageAttention availability, the examples' speed claims, or render quality.
 
 The ITOV development environment is separate from ComfyUI's environment. It uses an installed Python 3.13 through uv and has no runtime dependencies on Torch, custom nodes, or model downloads.
 
@@ -40,18 +40,26 @@ The new package implements:
 
 This is an implemented preflight stage. It is not completion of the studio, an installation of ComfyUI, or a tested image/video generation pipeline. Original design documents remain unchanged.
 
-## Next development gates
+## Development gates
 
-1. Select and qualify the current RTX-compatible ComfyUI runtime. Record its version, embedded Python, Torch/CUDA versions, installed nodes, and one real neutral workflow execution. Retain failures as well as successful output evidence.
-2. Implement single-worker job submission/history tracking with bounded polling, structured server errors, cancellation semantics, and exact artifact provenance. Validate with the real exported workflow before adding concurrency.
-3. Define canonical preset, LoRA manifest, compatibility, and ledger schemas. Build versioned serialization, OS-backed locking, immutable read snapshots, and crash-recovery tests before any automated manifest promotion.
+1. **Complete for the neutral workflow:** qualified ComfyUI v0.37.0, recorded embedded Python/Torch/CUDA/node metadata, passed a BF16 GPU operation, and completed real image-copy execution. Model inference remains a separate acceptance gate.
+2. **Complete for one workflow per command:** implemented submission/history tracking, bounded polling, structured errors, timeout/detachment semantics, resumable observation, and exact artifact retrieval. Real success, timeout/resume, and execution-error cases were exercised. Targeted server-side cancellation and parallel worker orchestration remain deferred.
+3. **Next:** define canonical preset, LoRA manifest, compatibility, and ledger schemas. Build versioned serialization, OS-backed locking, immutable read snapshots, and crash-recovery tests before any automated manifest promotion.
 4. Add deterministic batch expansion and rotation over validated manifests. Introduce parallel workers only after measuring GPU capacity and isolated job ownership.
 5. Implement model-specific video and audio integration against actual upstream APIs, with real checkpoints and separately defined output acceptance. Training, scraping, promotion, and scheduling remain later work.
 
-## Verification record
+## Stage one verification record
 
 On Windows, all 74 tests passed against the source on Python 3.13.9 (6.56 seconds). All 74 also passed against the built wheel in an isolated Python 3.11.14 environment (6.42 seconds); the imported package path was confirmed to be that environment's `site-packages`. Ruff lint and formatting checks passed, and both the wheel and source distribution built successfully. The example workflow passed structural validation only. Package hashes and verification scope are retained in [the verification record](evidence/stage-01-verification-20260921.json).
 
-The real local `doctor` command returned exit code 1: workspace directories, FFmpeg, and NVIDIA diagnostics passed; the configured ComfyUI program, embedded interpreter, and live API checks failed. The complete [failed preflight result](evidence/stage-01-doctor-20260921.json) is retained. There was no listening ComfyUI server at the configured address, and no real workflow was submitted or rendered. Installing and qualifying an appropriate runtime remains the next gate.
+The real local `doctor` command returned exit code 1: workspace directories, FFmpeg, and NVIDIA diagnostics passed; the configured ComfyUI program, embedded interpreter, and live API checks failed. The complete [failed preflight result](evidence/stage-01-doctor-20260921.json) is retained. There was no listening ComfyUI server at the configured address, and no real workflow was submitted or rendered. Installing and qualifying an appropriate runtime was the next gate at this checkpoint and is addressed in stage two below.
 
 The original eleven documents were checked against Git and remain unchanged. Tests exercise protocol fixtures and package behavior; they do not establish live ComfyUI, model, CUDA execution, or media-quality acceptance.
+
+## Stage two runtime and job execution
+
+The runtime and single-worker increment is described in [runtime and job guidance](runtime-and-jobs.md) and [CHANGELOG.md](../CHANGELOG.md). Its [runtime evidence](evidence/stage-02-runtime-20260921.json) records actual local checks, separately from the [automated verification record](evidence/stage-02-verification-20260921.json).
+
+The live doctor now passes, a BF16 CUDA operation completed, and the neutral image-copy workflow produced a pixel-identical output. Timeout/resume preserved the acknowledged prompt ID; a deliberately invalid input produced a retained execution failure. This qualifies the runtime and job transport/image-I/O path. No checkpoint-based image or video generation, voice training, custom-node acceptance, or performance tuning acceptance is claimed.
+
+All 101 tests passed against source on Python 3.13.9 and against the built 0.2.0 wheel in isolated Python 3.11.14. Ruff lint and formatting, wheel and source-distribution builds, and packaged-source byte parity passed. Automated tests include a child-process crash releasing its job lock; these checks do not qualify the future ledger or concurrent GPU workers.

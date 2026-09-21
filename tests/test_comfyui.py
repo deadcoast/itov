@@ -65,3 +65,19 @@ def test_oversized_metadata_is_rejected(monkeypatch):
     monkeypatch.setattr(client._opener, "open", lambda *_a, **_k: io.BytesIO(b"0123456789"))
     with pytest.raises(ComfyUIError, match="metadata limit"):
         client.object_info()
+
+
+def test_truncated_download_is_not_published(tmp_path, monkeypatch):
+    client = ComfyUIClient("http://127.0.0.1:8188")
+
+    class TruncatedResponse(io.BytesIO):
+        headers = {"Content-Length": "100"}
+
+    monkeypatch.setattr(client._opener, "open", lambda *_a, **_k: TruncatedResponse(b"partial"))
+    destination = tmp_path / "artifact.png"
+    with pytest.raises(ComfyUIError, match="incomplete artifact"):
+        client.download_output(
+            {"filename": "test.png", "subfolder": "", "type": "output"}, destination
+        )
+    assert not destination.exists()
+    assert list(tmp_path.iterdir()) == []

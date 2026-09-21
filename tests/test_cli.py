@@ -1,6 +1,7 @@
 import json
 import subprocess
 import sys
+from importlib.metadata import version
 
 import pytest
 
@@ -14,7 +15,7 @@ def test_module_entrypoint():
         [sys.executable, "-m", "itov", "--version"], capture_output=True, text=True
     )
     assert result.returncode == 0
-    assert result.stdout.strip() == "itov 0.1.0"
+    assert result.stdout.strip() == f"itov {version('itov')}"
 
 
 def test_cli_init_and_refused_overwrite(tmp_path, capsys):

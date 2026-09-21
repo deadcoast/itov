@@ -1,0 +1,135 @@
+{
+  "observed_at": "2026-09-21T08:27:14.785521+00:00",
+  "platform": "Windows",
+  "package_version": "0.2.0",
+  "checks": [
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage02-verified"
+      ],
+      "exit_code": 0,
+      "seconds": 17.329,
+      "stdout": "........................................................................ [ 71%]\n.............................                                            [100%]\n101 passed in 17.03s\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.042,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.041,
+      "stdout": "17 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build"
+      ],
+      "exit_code": 0,
+      "seconds": 0.043,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.2.0.tar.gz\nSuccessfully built dist\\itov-0.2.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.2.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage02-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 17.835,
+      "stdout": "........................................................................ [ 71%]\n.............................                                            [100%]\n101 passed in 16.79s\n",
+      "stderr": "Installed 7 packages in 174ms\n"
+    },
+    {
+      "name": "wheel_import",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.2.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,11); assert 'site-packages' in itov.__file__; assert itov.__version__=='0.2.0'"
+      ],
+      "exit_code": 0,
+      "seconds": 0.237,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\htqx2noa3OZhyqqwA2aKI\\Lib\\site-packages\\itov\\__init__.py\n",
+      "stderr": ""
+    }
+  ],
+  "runtime_evidence": "stage-02-runtime-20260921.json",
+  "limits": [
+    "Automated HTTP tests use fixtures; real runtime checks are recorded separately.",
+    "No image/video model inference or media-quality acceptance."
+  ],
+  "wheel_source_byte_parity": 9,
+  "source_sha256": {
+    "src/itov/__init__.py": "9862059c7c393f2e3a10f00471928a6db911455012c925dcb73dae600fae60d6",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/cli.py": "576647aadec7d77d38b9a9e42f0c766a5aff50d6bdcedb4a1b6d7ae4f7726a4a",
+    "src/itov/comfyui.py": "dc9fb7f81a9cfc35b738f2cfd7562a524da2fa4ebf97c4b03dec8e06ab9f6f86",
+    "src/itov/config.py": "360e4e5451194c11ec3fdf39b001edb784d984448cf5cd0af740b36d4f2b2d8a",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/jobs.py": "9d72c151b006e77d60dbcc0a08b439ce09b483d0d37fb7d1629a2fa110280c07",
+    "src/itov/runtime.py": "e2e39fcb7be1c9f9a8e5c7d78786ff55440edf9c53b90bbd719483b515792077",
+    "src/itov/workflow.py": "5e3f7aa3a62786c77c9a24cccdd98a42a15b61774522401627382888ac16fcca"
+  },
+  "artifact_sha256": {
+    "dist/itov-0.2.0-py3-none-any.whl": "1ede7c62a424b146bf258a7f0256fb4bac2d1342420830e0304af2a4b8c30e84",
+    "dist/itov-0.2.0.tar.gz": "f0e4f0da567620cfcf7cf5445776f61b667edfce88babf8b334da3edbd50f02f"
+  }
+}

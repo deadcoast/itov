@@ -1,5 +1,6 @@
 # Keep downloaded ComfyUI installers local.
 /AI/ComfyUI/*.7z
+/AI/ComfyUI/*.7z.partial
 
 # Local runtimes, model weights, generated media, and workspace state.
 /AI/ComfyUI/ComfyUI_windows_portable/

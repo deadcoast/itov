@@ -1,0 +1,724 @@
+{
+  "observed_at": "2026-09-21T08:26:27.385828+00:00",
+  "runtime_release": {
+    "tag": "v0.37.0",
+    "url": "https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.37.0",
+    "metadata_source": "https://api.github.com/repos/Comfy-Org/ComfyUI/releases/latest",
+    "archive_url": "https://github.com/Comfy-Org/ComfyUI/releases/download/v0.37.0/ComfyUI_windows_portable_nvidia.7z",
+    "archive_bytes": 1925204508,
+    "published_and_verified_sha256": "7805f634fab51f63a238aaf0cfe2a9833bb7c86ddfc8400a60919f44460d7d65",
+    "validated_archive_entries": 63872,
+    "expanded_file_bytes": 4185588121,
+    "source_revision": "73c9bad4d21e7addbe1d13bc92eee0f1431b017d"
+  },
+  "probe": {
+    "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "torch": "2.13.0+cu130",
+    "cuda_runtime": "13.0",
+    "cuda_available": true,
+    "device": "NVIDIA GeForce RTX 5090",
+    "capability": [
+      12,
+      0
+    ],
+    "architectures": [
+      "sm_75",
+      "sm_80",
+      "sm_86",
+      "sm_90",
+      "sm_100",
+      "sm_120"
+    ],
+    "bf16_matmul": {
+      "shape": [
+        256,
+        256
+      ],
+      "finite": true
+    },
+    "image_copy": {
+      "dimensions": [
+        64,
+        64
+      ],
+      "pixel_equal": true,
+      "pixel_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f"
+    }
+  },
+  "live_preflight": {
+    "ok": true,
+    "scope": "live",
+    "config": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+    "checks": [
+      {
+        "name": "itov.python",
+        "status": "pass",
+        "detail": "3.13.9"
+      },
+      {
+        "name": "workspace.input",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input"
+      },
+      {
+        "name": "workspace.output",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output"
+      },
+      {
+        "name": "workspace.models_shared",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\models_shared"
+      },
+      {
+        "name": "workspace.templates",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\templates"
+      },
+      {
+        "name": "workspace.workflows",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\workflows"
+      },
+      {
+        "name": "workspace.logs",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\logs"
+      },
+      {
+        "name": "workspace.state",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state"
+      },
+      {
+        "name": "comfyui.installation",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py"
+      },
+      {
+        "name": "comfyui.python",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\python.exe"
+      },
+      {
+        "name": "ffmpeg",
+        "status": "pass",
+        "detail": "ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+      },
+      {
+        "name": "nvidia-smi",
+        "status": "pass",
+        "detail": "NVIDIA GeForce RTX 5090, 616.64, 32607 MiB"
+      },
+      {
+        "name": "comfyui.api",
+        "status": "pass",
+        "detail": "http://127.0.0.1:8188; 959 node classes"
+      },
+      {
+        "name": "comfyui.cuda",
+        "status": "pass",
+        "detail": "CUDA device reported"
+      }
+    ],
+    "server": {
+      "system": {
+        "os": "win32",
+        "ram_total": 66095271936,
+        "ram_free": 33367154688,
+        "comfyui_version": "0.37.0",
+        "required_frontend_version": "1.52.7",
+        "installed_templates_version": "0.11.66",
+        "required_templates_version": "0.11.66",
+        "comfy_package_versions": [
+          {
+            "name": "comfyui-frontend-package",
+            "installed": "1.52.7",
+            "required": "1.52.7"
+          },
+          {
+            "name": "comfyui-workflow-templates",
+            "installed": "0.11.66",
+            "required": "0.11.66"
+          },
+          {
+            "name": "comfyui-embedded-docs",
+            "installed": "0.5.12",
+            "required": "0.5.12"
+          },
+          {
+            "name": "comfy-kitchen",
+            "installed": "0.2.35",
+            "required": "0.2.35"
+          },
+          {
+            "name": "comfy-aimdo",
+            "installed": "0.5.5",
+            "required": "0.5.5"
+          }
+        ],
+        "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+        "pytorch_version": "2.13.0+cu130",
+        "embedded_python": true,
+        "deploy_environment": "local-portable",
+        "argv": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+          "--disable-auto-launch",
+          "--listen",
+          "127.0.0.1",
+          "--port",
+          "8188",
+          "--input-directory",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+          "--output-directory",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+          "--disable-all-custom-nodes"
+        ]
+      },
+      "devices": [
+        {
+          "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+          "type": "cuda",
+          "index": 0,
+          "vram_total": 34162016256,
+          "vram_free": 32496418816,
+          "torch_vram_total": 0,
+          "torch_vram_free": 0
+        }
+      ],
+      "node_classes": 959
+    },
+    "limits": "Preflight only; model compatibility, CUDA execution, and rendering are unverified."
+  },
+  "node_registry": {
+    "classes": 959,
+    "sha256": "33d4824885b3522467c6ead4ea3031034a823124e3f51d920d89de724539fc58",
+    "local_snapshot": "workspace/logs/object-info-stage02.json",
+    "custom_nodes_disabled": true,
+    "workflow_classes": {
+      "LoadImage": {
+        "input": {
+          "required": {
+            "image": [
+              [
+                "example.png",
+                "itov-invalid-probe.png"
+              ],
+              {
+                "image_upload": true
+              }
+            ]
+          }
+        },
+        "input_order": {
+          "required": [
+            "image"
+          ]
+        },
+        "is_input_list": false,
+        "output": [
+          "IMAGE",
+          "MASK"
+        ],
+        "output_is_list": [
+          false,
+          false
+        ],
+        "output_name": [
+          "IMAGE",
+          "MASK"
+        ],
+        "name": "LoadImage",
+        "display_name": "Load Image",
+        "description": "",
+        "python_module": "nodes",
+        "category": "image",
+        "output_node": false,
+        "has_intermediate_output": false,
+        "search_aliases": [
+          "load image",
+          "open image",
+          "import image",
+          "image input",
+          "upload image",
+          "read image",
+          "image loader"
+        ],
+        "essentials_category": "Basics"
+      },
+      "SaveImage": {
+        "input": {
+          "required": {
+            "images": [
+              "IMAGE",
+              {
+                "tooltip": "The images to save."
+              }
+            ],
+            "filename_prefix": [
+              "STRING",
+              {
+                "default": "ComfyUI",
+                "tooltip": "The prefix for the file to save. This may include formatting information such as %date:yyyy-MM-dd% or %Empty Latent Image.width% to include values from nodes."
+              }
+            ]
+          },
+          "hidden": {
+            "prompt": "PROMPT",
+            "extra_pnginfo": "EXTRA_PNGINFO"
+          }
+        },
+        "input_order": {
+          "required": [
+            "images",
+            "filename_prefix"
+          ],
+          "hidden": [
+            "prompt",
+            "extra_pnginfo"
+          ]
+        },
+        "is_input_list": false,
+        "output": [
+          "IMAGE"
+        ],
+        "output_is_list": [
+          false
+        ],
+        "output_name": [
+          "images"
+        ],
+        "name": "SaveImage",
+        "display_name": "Save Image",
+        "description": "Saves the input images to your ComfyUI output directory.",
+        "python_module": "nodes",
+        "category": "image",
+        "output_node": true,
+        "has_intermediate_output": false,
+        "search_aliases": [
+          "save",
+          "save image",
+          "export image",
+          "output image",
+          "write image",
+          "download"
+        ],
+        "essentials_category": "Basics"
+      }
+    }
+  },
+  "jobs": {
+    "image_copy": {
+      "version": 1,
+      "request_id": "87128584-281d-4bb3-af72-c0963c9a7c21",
+      "server": "http://127.0.0.1:8188",
+      "workflow_path": "C:\\Users\\ryanf\\github\\_active\\itov\\examples\\image-copy.api.json",
+      "workflow_sha256": "300ca4ea1c0e8850b920c5e3c680049787a1051a32d7c9d8464a9780d7186d4d",
+      "workflow": {
+        "1": {
+          "class_type": "LoadImage",
+          "inputs": {
+            "image": "example.png"
+          }
+        },
+        "2": {
+          "class_type": "SaveImage",
+          "inputs": {
+            "images": [
+              "1",
+              0
+            ],
+            "filename_prefix": "itov/preflight"
+          }
+        }
+      },
+      "validation": {
+        "valid": true,
+        "scope": "node_schema",
+        "node_count": 2,
+        "issues": [],
+        "limits": "Static checks only; custom node validation and rendering were not executed."
+      },
+      "created_at": "2026-09-21T08:14:19.563572+00:00",
+      "status": "succeeded",
+      "prompt_id": "28fc3309-413e-4e57-a631-32ac4ee7f4a6",
+      "artifacts": [
+        {
+          "node_id": "2",
+          "category": "images",
+          "filename": "preflight_00001_.png",
+          "subfolder": "itov",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\87128584-281d-4bb3-af72-c0963c9a7c21\\artifact-0000.png",
+          "bytes": 512,
+          "sha256": "941b0014c3652b83f72bb7be7e0ebbd95373a5c18725a9eb51e7e0098071606d"
+        }
+      ],
+      "updated_at": "2026-09-21T08:14:20.618066+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\87128584-281d-4bb3-af72-c0963c9a7c21.json",
+      "acknowledgement": {
+        "prompt_id": "28fc3309-413e-4e57-a631-32ac4ee7f4a6",
+        "number": 0,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          0,
+          "28fc3309-413e-4e57-a631-32ac4ee7f4a6",
+          {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "images": [
+                  "1",
+                  0
+                ],
+                "filename_prefix": "itov/preflight"
+              }
+            }
+          },
+          {
+            "itov_request_id": "87128584-281d-4bb3-af72-c0963c9a7c21",
+            "client_id": "87128584-281d-4bb3-af72-c0963c9a7c21",
+            "create_time": 1789978459577
+          },
+          [
+            "2"
+          ]
+        ],
+        "outputs": {
+          "2": {
+            "images": [
+              {
+                "filename": "preflight_00001_.png",
+                "subfolder": "itov",
+                "type": "output"
+              }
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "28fc3309-413e-4e57-a631-32ac4ee7f4a6",
+                "timestamp": 1789978459578
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "28fc3309-413e-4e57-a631-32ac4ee7f4a6",
+                "timestamp": 1789978459583
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "28fc3309-413e-4e57-a631-32ac4ee7f4a6",
+                "timestamp": 1789978459593
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "2": {
+            "node_id": "2",
+            "display_node": "2",
+            "parent_node": null,
+            "real_node_id": "2"
+          }
+        }
+      }
+    },
+    "timeout_resume": {
+      "version": 1,
+      "request_id": "2c984936-344f-42af-aec4-ada4d9a663dd",
+      "server": "http://127.0.0.1:8188",
+      "workflow_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\workflows\\stage02-timeout.api.json",
+      "workflow_sha256": "079b7ca43ce88f992549589922bed1f4072511110fce8eeff9b2cbc023bb6241",
+      "workflow": {
+        "1": {
+          "class_type": "LoadImage",
+          "inputs": {
+            "image": "example.png"
+          }
+        },
+        "2": {
+          "class_type": "SaveImage",
+          "inputs": {
+            "images": [
+              "1",
+              0
+            ],
+            "filename_prefix": "itov/timeout-resume"
+          }
+        }
+      },
+      "validation": {
+        "valid": true,
+        "scope": "node_schema",
+        "node_count": 2,
+        "issues": [],
+        "limits": "Static checks only; custom node validation and rendering were not executed."
+      },
+      "created_at": "2026-09-21T08:20:34.696992+00:00",
+      "status": "succeeded",
+      "prompt_id": "4fcee83a-a0a8-4c78-82d3-5755f553eda7",
+      "artifacts": [
+        {
+          "node_id": "2",
+          "category": "images",
+          "filename": "timeout-resume_00001_.png",
+          "subfolder": "itov",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\2c984936-344f-42af-aec4-ada4d9a663dd\\artifact-0000.png",
+          "bytes": 517,
+          "sha256": "cebb80cf82635f1d3302efa7095c5df408b5bf43c886745ed35e384adb3c2be7"
+        }
+      ],
+      "updated_at": "2026-09-21T08:20:35.006566+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\2c984936-344f-42af-aec4-ada4d9a663dd.json",
+      "acknowledgement": {
+        "prompt_id": "4fcee83a-a0a8-4c78-82d3-5755f553eda7",
+        "number": 1,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          1,
+          "4fcee83a-a0a8-4c78-82d3-5755f553eda7",
+          {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "example.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "images": [
+                  "1",
+                  0
+                ],
+                "filename_prefix": "itov/timeout-resume"
+              }
+            }
+          },
+          {
+            "itov_request_id": "2c984936-344f-42af-aec4-ada4d9a663dd",
+            "client_id": "2c984936-344f-42af-aec4-ada4d9a663dd",
+            "create_time": 1789978834711
+          },
+          [
+            "2"
+          ]
+        ],
+        "outputs": {
+          "2": {
+            "images": [
+              {
+                "filename": "timeout-resume_00001_.png",
+                "subfolder": "itov",
+                "type": "output"
+              }
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "4fcee83a-a0a8-4c78-82d3-5755f553eda7",
+                "timestamp": 1789978834713
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [
+                  "1"
+                ],
+                "prompt_id": "4fcee83a-a0a8-4c78-82d3-5755f553eda7",
+                "timestamp": 1789978834714
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "4fcee83a-a0a8-4c78-82d3-5755f553eda7",
+                "timestamp": 1789978834716
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "2": {
+            "node_id": "2",
+            "display_node": "2",
+            "parent_node": null,
+            "real_node_id": "2"
+          }
+        }
+      }
+    },
+    "expected_execution_failure": {
+      "version": 1,
+      "request_id": "ee416183-a0f6-4161-9190-7d6c9e3fab8c",
+      "server": "http://127.0.0.1:8188",
+      "workflow_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\workflows\\stage02-execution-error.api.json",
+      "workflow_sha256": "7f23bf2d6efa1be34fe1bee47c808a3d5eede8187eecca293bf825f296c40a0d",
+      "workflow": {
+        "1": {
+          "class_type": "LoadImage",
+          "inputs": {
+            "image": "itov-invalid-probe.png"
+          }
+        },
+        "2": {
+          "class_type": "SaveImage",
+          "inputs": {
+            "images": [
+              "1",
+              0
+            ],
+            "filename_prefix": "itov/expected-failure"
+          }
+        }
+      },
+      "validation": {
+        "valid": true,
+        "scope": "node_schema",
+        "node_count": 2,
+        "issues": [],
+        "limits": "Static checks only; custom node validation and rendering were not executed."
+      },
+      "created_at": "2026-09-21T08:20:35.126036+00:00",
+      "status": "failed",
+      "prompt_id": "c278f018-8ac8-45e7-8af9-54f66a699fcf",
+      "artifacts": [],
+      "updated_at": "2026-09-21T08:20:36.156669+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\ee416183-a0f6-4161-9190-7d6c9e3fab8c.json",
+      "acknowledgement": {
+        "prompt_id": "c278f018-8ac8-45e7-8af9-54f66a699fcf",
+        "number": 2,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          2,
+          "c278f018-8ac8-45e7-8af9-54f66a699fcf",
+          {
+            "1": {
+              "class_type": "LoadImage",
+              "inputs": {
+                "image": "itov-invalid-probe.png"
+              }
+            },
+            "2": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "images": [
+                  "1",
+                  0
+                ],
+                "filename_prefix": "itov/expected-failure"
+              }
+            }
+          },
+          {
+            "itov_request_id": "ee416183-a0f6-4161-9190-7d6c9e3fab8c",
+            "client_id": "ee416183-a0f6-4161-9190-7d6c9e3fab8c",
+            "create_time": 1789978835130
+          },
+          [
+            "2"
+          ]
+        ],
+        "outputs": {},
+        "status": {
+          "status_str": "error",
+          "completed": false,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "c278f018-8ac8-45e7-8af9-54f66a699fcf",
+                "timestamp": 1789978835131
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "c278f018-8ac8-45e7-8af9-54f66a699fcf",
+                "timestamp": 1789978835136
+              }
+            ],
+            [
+              "execution_error",
+              {
+                "prompt_id": "c278f018-8ac8-45e7-8af9-54f66a699fcf",
+                "node_id": "1",
+                "node_type": "LoadImage",
+                "executed": [],
+                "exception_message": "cannot identify image file 'C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\input\\\\itov-invalid-probe.png'\n",
+                "exception_type": "PIL.UnidentifiedImageError",
+                "traceback": [
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 547, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 352, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 326, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 314, in process_inputs\n    result = f(**inputs)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py\", line 1766, in load_image\n    img = node_helpers.pillow(Image.open, image_path)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\node_helpers.py\", line 62, in pillow\n    x = fn(arg)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\PIL\\Image.py\", line 3715, in open\n    raise UnidentifiedImageError(msg)\n"
+                ],
+                "current_inputs": {
+                  "image": [
+                    "itov-invalid-probe.png"
+                  ]
+                },
+                "current_outputs": [
+                  "1",
+                  "2"
+                ],
+                "timestamp": 1789978835226
+              }
+            ]
+          ]
+        },
+        "meta": {}
+      }
+    }
+  },
+  "timeout_resume_observations": {
+    "initial_state": "timed_out",
+    "resumed_state": "succeeded",
+    "same_prompt_id": "4fcee83a-a0a8-4c78-82d3-5755f553eda7",
+    "second_submission": false
+  },
+  "retained_images": {
+    "input": "stage-02-image-copy-input.png",
+    "output": "stage-02-image-copy-output.png"
+  },
+  "limits": [
+    "Image copy is not diffusion model inference or video generation.",
+    "BF16 GPU operation is separate from the image-copy workflow.",
+    "Custom nodes are disabled; no SageAttention, Triton, or voice-training acceptance.",
+    "The invalid PNG failure is an intentional negative case and is retained."
+  ]
+}

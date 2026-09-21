@@ -54,6 +54,9 @@ def http_server(registry):
         def do_GET(self):
             requests.append(("GET", self.path))
             code, body = routes.get(self.path, (404, {"error": "missing"}))
+            self.respond(code, body)
+
+        def respond(self, code, body):
             payload = body if isinstance(body, bytes) else json.dumps(body).encode()
             self.send_response(code)
             if code == 302:
@@ -65,7 +68,10 @@ def http_server(registry):
 
         def do_POST(self):
             requests.append(("POST", self.path))
-            self.send_error(405)
+            payload = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            routes.setdefault("_posted", []).append(payload)
+            code, body = routes.get("POST " + self.path, (405, {"error": "unsupported"}))
+            self.respond(code, body)
 
         def log_message(self, *_args):
             pass
