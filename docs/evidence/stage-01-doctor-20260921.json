@@ -1,0 +1,86 @@
+{
+  "observed_at": "2026-09-21T07:52:56.269997+00:00",
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "itov",
+    "doctor",
+    "--json"
+  ],
+  "exit_code": 1,
+  "report": {
+    "ok": false,
+    "scope": "live",
+    "config": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+    "checks": [
+      {
+        "name": "itov.python",
+        "status": "pass",
+        "detail": "3.13.9"
+      },
+      {
+        "name": "workspace.input",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input"
+      },
+      {
+        "name": "workspace.output",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output"
+      },
+      {
+        "name": "workspace.models_shared",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\models_shared"
+      },
+      {
+        "name": "workspace.templates",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\templates"
+      },
+      {
+        "name": "workspace.workflows",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\workflows"
+      },
+      {
+        "name": "workspace.logs",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\logs"
+      },
+      {
+        "name": "workspace.state",
+        "status": "pass",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state"
+      },
+      {
+        "name": "comfyui.installation",
+        "status": "fail",
+        "detail": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py"
+      },
+      {
+        "name": "comfyui.python",
+        "status": "fail",
+        "detail": "No embedded Python; set [comfyui] python for a manual install"
+      },
+      {
+        "name": "ffmpeg",
+        "status": "pass",
+        "detail": "ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+      },
+      {
+        "name": "nvidia-smi",
+        "status": "pass",
+        "detail": "NVIDIA GeForce RTX 5090, 616.64, 32607 MiB"
+      },
+      {
+        "name": "comfyui.api",
+        "status": "fail",
+        "detail": "/system_stats: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+      }
+    ],
+    "server": null,
+    "limits": "Preflight only; model compatibility, CUDA execution, and rendering are unverified."
+  }
+}

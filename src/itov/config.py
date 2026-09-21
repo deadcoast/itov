@@ -121,11 +121,11 @@ def initialize(
 
     content = (
         "version = 1\n\n[comfyui]\n"
-        f"root = {json.dumps(relative(comfyui_root))}\n"
+        f"root = {json.dumps(relative(comfyui_root), ensure_ascii=False)}\n"
         f"url = {json.dumps(url)}\n"
     )
     if python is not None:
-        content += f"python = {json.dumps(relative(python))}\n"
+        content += f"python = {json.dumps(relative(python), ensure_ascii=False)}\n"
     root.mkdir(parents=True, exist_ok=True)
     with config_file.open("x", encoding="utf-8", newline="\n") as target:
         target.write(content)

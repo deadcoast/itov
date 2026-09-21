@@ -1,0 +1,60 @@
+{
+  "recorded_at": "2026-09-21T07:54:27.927027+00:00",
+  "platform": "Windows",
+  "source_tests": {
+    "command": "uv run --locked pytest -q --basetemp .test-tmp/source",
+    "python": "3.13.9",
+    "passed": 74,
+    "seconds": 6.56,
+    "exit_code": 0
+  },
+  "wheel_tests": {
+    "command": "uv run --offline --no-project --isolated --python 3.11 --with ./dist/itov-0.1.0-py3-none-any.whl --with pytest==8.4.2 python -m pytest -q --basetemp .test-tmp/wheel-311",
+    "python": "3.11.14",
+    "passed": 74,
+    "seconds": 6.42,
+    "exit_code": 0,
+    "site_packages_import_confirmed": true
+  },
+  "lint": {
+    "command": "uv run --locked ruff check .",
+    "exit_code": 0
+  },
+  "format": {
+    "command": "uv run --locked ruff format --check .",
+    "exit_code": 0
+  },
+  "build": {
+    "command": "uv build",
+    "exit_code": 0,
+    "artifacts_sha256": {
+      "dist/itov-0.1.0-py3-none-any.whl": "2fe8c127f4016c898681c05ba274927f8f9b4532dbe73acc1fffcae759d30670",
+      "dist/itov-0.1.0.tar.gz": "df16f826c774f1f3244e61310301fe5bf7bbba0542284878bdeb4333d95679aa"
+    }
+  },
+  "wheel_matches_source": true,
+  "source_sha256": {
+    "src/itov/__init__.py": "ac0ce8a7a030fd8983416c98d9a5a5d3b2150cf296f371ccc895a67ab5cf13e9",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/cli.py": "e6e8473a659788305cdbb4303368092f5e64675a3c29f1121467b328e91bee61",
+    "src/itov/comfyui.py": "9ac3fedc4382c0cf5a7d5bd2f358f1b031497f433d80e8d8b09a733ed8376916",
+    "src/itov/config.py": "360e4e5451194c11ec3fdf39b001edb784d984448cf5cd0af740b36d4f2b2d8a",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/workflow.py": "5e3f7aa3a62786c77c9a24cccdd98a42a15b61774522401627382888ac16fcca"
+  },
+  "example": {
+    "command": "uv run --locked itov workflow validate examples/image-copy.api.json --json",
+    "scope": "structure",
+    "exit_code": 0
+  },
+  "runtime_preflight": {
+    "evidence": "stage-01-doctor-20260921.json",
+    "exit_code": 1,
+    "accepted": false
+  },
+  "limitations": [
+    "HTTP tests use a loopback fixture, not ComfyUI.",
+    "No ComfyUI runtime installed by this stage.",
+    "No model generation, GPU execution, or media-quality acceptance."
+  ]
+}

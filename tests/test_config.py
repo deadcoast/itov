@@ -80,3 +80,11 @@ def test_explicit_interpreter_survives_load(tmp_path):
     config = initialize(tmp_path / "work", tmp_path / "comfy", python=python)
     assert config.python == python
     assert not Path(config.file.read_text().split('root = "')[1].split('"')[0]).is_absolute()
+
+
+def test_unicode_paths_round_trip_without_invalid_toml_surrogates(tmp_path):
+    comfy = tmp_path / "ComfyUI \U0001f680"
+    python = comfy / "python.exe"
+    config = initialize(tmp_path / "workspace", comfy, python=python)
+    assert config.comfyui_root == comfy
+    assert config.python == python
