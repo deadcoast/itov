@@ -9,6 +9,8 @@ import sys
 from pathlib import Path
 
 from itov import __version__
+from itov.catalog import load_catalog, verify_assets
+from itov.catalog_store import CatalogStore
 from itov.comfyui import ComfyUIClient, ComfyUIError
 from itov.config import DEFAULT_URL, initialize, load_config, validate_timeout
 from itov.doctor import diagnose
@@ -88,7 +90,53 @@ def parser() -> argparse.ArgumentParser:
         )
         item.add_argument("--poll-interval", type=float, default=1.0)
         item.add_argument("--json", action="store_true")
+    catalog = commands.add_parser("catalog", help="Validate and record versioned catalog snapshots")
+    catalog_actions = catalog.add_subparsers(dest="action", required=True)
+    for action in ("validate", "init", "import", "show", "verify", "recover"):
+        item = catalog_actions.add_parser(action)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"validate", "import"}:
+            item.add_argument("file", type=Path)
+        if action in {"import", "verify"}:
+            item.add_argument("--expected-head", required=action == "import")
+        if action in {"validate", "verify"}:
+            item.add_argument("--check-files", action="store_true")
     return root
+
+
+def _catalog_command(args) -> dict:
+    if args.action == "validate":
+        catalog = load_catalog(args.file)
+        result = {
+            "ok": True,
+            "scope": "catalog_schema",
+            "presets": len(catalog["presets"]),
+            "loras": len(catalog["loras"]),
+        }
+        if args.check_files:
+            result["assets"] = verify_assets(catalog, load_config(args.config).root)
+            result["scope"] = "catalog_schema_and_asset_bytes"
+        return result
+    store = CatalogStore(load_config(args.config).root)
+    if args.action == "recover":
+        return store.recover()
+    if args.action == "init":
+        snapshot = store.initialize()
+    elif args.action == "import":
+        snapshot = store.import_catalog(load_catalog(args.file), expected_head=args.expected_head)
+    else:
+        snapshot = store.snapshot()
+    result = {**snapshot.report(), "recovery_required": store.recovery_required}
+    if args.action == "show":
+        result["snapshot"] = snapshot.to_dict()
+    if args.action == "verify":
+        if args.expected_head and snapshot.head != args.expected_head:
+            raise ValueError("Catalog differs from expected head")
+        if args.check_files:
+            result["assets"] = verify_assets(snapshot.to_dict()["catalog"], store.workspace)
+        result["ok"] = not result["recovery_required"]
+    return result
 
 
 def _print_result(result: dict, *, as_json: bool):
@@ -150,6 +198,22 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1
+        elif args.command == "catalog":
+            result = _catalog_command(args)
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
+            else:
+                print(
+                    f"{'PASS' if result['ok'] else 'FAIL'} catalog {args.action}: "
+                    f"{result['presets']} presets, {result['loras']} LoRAs"
+                )
+                if "head" in result:
+                    print(f"Head: {result['head']} ({result['events']} ledger events)")
+                if result.get("recovery_required"):
+                    print("Pending transaction: run catalog recover")
+                if "recovery" in result:
+                    print(f"Recovery: {result['recovery']}")
+            return 0 if result["ok"] else 1
         else:
             graph = load_json(args.file)
             registry = None

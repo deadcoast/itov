@@ -4,6 +4,17 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Catalog schemas and recoverable revision history
+
+- Advanced development to 0.3.0 and implemented build-plan gate three for catalog revisions.
+- Added strict version-one preset, LoRA asset, and compatibility contracts, workspace-relative asset hashes, API graph checks, exact integer weights/strengths, and one documented ledger hash encoding with frozen vectors.
+- Added `itov catalog validate`, `init`, `import`, `show`, `verify`, and `recover`; imports require the reviewed head and verify referenced file bytes before recording a revision.
+- Added immutable catalog/history generations, complete redo intent before publication, a single atomic commit pointer, shared OS-backed locking, and explicit idempotent recovery that preserves corrupt or divergent data.
+- Tested Windows process crashes at commit boundaries and during partial temporary writes, competing writers, concurrent readers, stale updates, immutable reads, tampering, and junction containment. Retained [local catalog evidence](docs/evidence/stage-03-catalog-20260921.json) and [automated verification](docs/evidence/stage-03-verification-20260921.json).
+- Passed all 186 tests against source on Python 3.13.9 and all 186 against the installed wheel on Python 3.11.14. Lint, formatting, wheel/source-distribution builds, and byte parity for all 13 packaged source modules passed. Retained the initial CRLF test-fixture failure and its correction in the verification record.
+- Added [catalog schema and recovery guidance](docs/catalog-and-ledger.md) and a neutral example helper that refuses overwrites. Updated the build plan to deterministic batch/rotation planning next.
+- Rotation, automated promotion, legacy ledger migration, backup restore, power-loss durability, and real LoRA/model acceptance remain open.
+
 ### 2026-09-21 — Runtime qualification and single-worker jobs
 
 - Advanced the package to 0.2.0 in development; no package release was published.

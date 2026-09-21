@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import contextlib
 import hashlib
 import json
 import math
@@ -16,6 +15,7 @@ from pathlib import Path, PurePosixPath
 
 from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json
 from itov.config import Config, validate_timeout
+from itov.locking import file_lock
 from itov.workflow import validate_workflow
 
 
@@ -49,33 +49,8 @@ def _save(path: Path, record: dict) -> dict:
     return record
 
 
-@contextlib.contextmanager
 def _guard(path: Path):
-    """The OS releases ownership on process exit; the stable lock file is never deleted."""
-    with path.with_suffix(".lock").open("a+b") as handle:
-        if handle.tell() == 0:
-            handle.write(b"\0")
-            handle.flush()
-        handle.seek(0)
-        try:
-            if os.name == "nt":
-                import msvcrt
-
-                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
-            else:
-                import fcntl
-
-                fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except OSError as error:
-            raise ValueError(f"Another process is operating on this job: {path}") from error
-        try:
-            yield
-        finally:
-            handle.seek(0)
-            if os.name == "nt":
-                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
-            else:
-                fcntl.flock(handle, fcntl.LOCK_UN)
+    return file_lock(path.with_suffix(".lock"))
 
 
 def _timing(wait_timeout: float, poll_interval: float):

@@ -1,0 +1,203 @@
+{
+  "observed_at": "2026-09-21T11:07:17.750099+00:00",
+  "package_version": "0.3.0",
+  "checks": [
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "scripts/create_catalog_example.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.135,
+      "stdout": "Created C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\templates\\neutral.catalog.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "catalog",
+        "validate",
+        "workspace/templates/neutral.catalog.json",
+        "--check-files",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.205,
+      "stdout": "{\n  \"ok\": true,\n  \"scope\": \"catalog_schema_and_asset_bytes\",\n  \"presets\": 1,\n  \"loras\": 0,\n  \"assets\": [\n    {\n      \"id\": \"neutral-copy\",\n      \"path\": \"workflows/catalog-copy.api.json\",\n      \"sha256\": \"300ca4ea1c0e8850b920c5e3c680049787a1051a32d7c9d8464a9780d7186d4d\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "catalog",
+        "init",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.155,
+      "stdout": "{\n  \"ok\": true,\n  \"head\": \"eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d\",\n  \"ledger_head\": \"91612f9f8215a4ea729ef4b46abfa0232756fd042bc42ffbc8f61877e1478f2c\",\n  \"events\": 1,\n  \"presets\": 0,\n  \"loras\": 0,\n  \"recovery_required\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "catalog",
+        "import",
+        "workspace/templates/neutral.catalog.json",
+        "--expected-head",
+        "eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.205,
+      "stdout": "{\n  \"ok\": true,\n  \"head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n  \"ledger_head\": \"c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5\",\n  \"events\": 2,\n  \"presets\": 1,\n  \"loras\": 0,\n  \"recovery_required\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "catalog",
+        "verify",
+        "--check-files",
+        "--expected-head",
+        "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.196,
+      "stdout": "{\n  \"ok\": true,\n  \"head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n  \"ledger_head\": \"c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5\",\n  \"events\": 2,\n  \"presets\": 1,\n  \"loras\": 0,\n  \"recovery_required\": false,\n  \"assets\": [\n    {\n      \"id\": \"neutral-copy\",\n      \"path\": \"workflows/catalog-copy.api.json\",\n      \"sha256\": \"300ca4ea1c0e8850b920c5e3c680049787a1051a32d7c9d8464a9780d7186d4d\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "catalog",
+        "import",
+        "workspace/templates/neutral.catalog.json",
+        "--expected-head",
+        "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.166,
+      "stdout": "{\n  \"ok\": true,\n  \"head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n  \"ledger_head\": \"c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5\",\n  \"events\": 2,\n  \"presets\": 1,\n  \"loras\": 0,\n  \"recovery_required\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "catalog",
+        "import",
+        "workspace/templates/neutral.catalog.json",
+        "--expected-head",
+        "eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d",
+        "--json"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "seconds": 0.157,
+      "stdout": "{\"ok\": false, \"error\": \"Stale catalog head; review the current snapshot\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "itov",
+        "catalog",
+        "show",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.157,
+      "stdout": "{\n  \"ok\": true,\n  \"head\": \"252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810\",\n  \"ledger_head\": \"c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5\",\n  \"events\": 2,\n  \"presets\": 1,\n  \"loras\": 0,\n  \"recovery_required\": false,\n  \"snapshot\": {\n    \"catalog\": {\n      \"compatibility\": {\n        \"hard_conflicts\": [],\n        \"preset_pairings\": [],\n        \"soft_conflicts\": [],\n        \"synergies\": []\n      },\n      \"loras\": [],\n      \"presets\": [\n        {\n          \"base_model\": null,\n          \"category\": \"neutral\",\n          \"id\": \"neutral-copy\",\n          \"rotation_weight_milli\": 1000,\n          \"seed\": null,\n          \"tags\": [\n            \"image-copy\"\n          ],\n          \"workflow\": {\n            \"path\": \"workflows/catalog-copy.api.json\",\n            \"sha256\": \"300ca4ea1c0e8850b920c5e3c680049787a1051a32d7c9d8464a9780d7186d4d\"\n          }\n        }\n      ],\n      \"version\": 1\n    },\n    \"ledger\": [\n      {\n        \"action\": \"initialize\",\n        \"catalog_sha256\": \"c26077af87c2384578451ca4296b770a2cb8289e4387541f8de1e2d152e0a7f9\",\n        \"created_at\": \"2026-09-21T11:07:16.843913Z\",\n        \"event_id\": \"9245c737-531a-4280-a19d-ce14cac801a4\",\n        \"previous_hash\": \"0000000000000000000000000000000000000000000000000000000000000000\",\n        \"row_hash\": \"91612f9f8215a4ea729ef4b46abfa0232756fd042bc42ffbc8f61877e1478f2c\",\n        \"sequence\": 1,\n        \"version\": 1\n      },\n      {\n        \"action\": \"catalog_import\",\n        \"catalog_sha256\": \"62bce40f01bc6719d41b119dfd8aa58a1478b73ac7b41a5e9f84fa3c2a1abc22\",\n        \"created_at\": \"2026-09-21T11:07:17.053062Z\",\n        \"event_id\": \"6efa9007-553a-4008-b657-3369cf70ee0a\",\n        \"previous_hash\": \"91612f9f8215a4ea729ef4b46abfa0232756fd042bc42ffbc8f61877e1478f2c\",\n        \"row_hash\": \"c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5\",\n        \"sequence\": 2,\n        \"version\": 1\n      }\n    ],\n    \"version\": 1\n  }\n}\n",
+      "stderr": ""
+    }
+  ],
+  "snapshot": {
+    "catalog": {
+      "compatibility": {
+        "hard_conflicts": [],
+        "preset_pairings": [],
+        "soft_conflicts": [],
+        "synergies": []
+      },
+      "loras": [],
+      "presets": [
+        {
+          "base_model": null,
+          "category": "neutral",
+          "id": "neutral-copy",
+          "rotation_weight_milli": 1000,
+          "seed": null,
+          "tags": [
+            "image-copy"
+          ],
+          "workflow": {
+            "path": "workflows/catalog-copy.api.json",
+            "sha256": "300ca4ea1c0e8850b920c5e3c680049787a1051a32d7c9d8464a9780d7186d4d"
+          }
+        }
+      ],
+      "version": 1
+    },
+    "ledger": [
+      {
+        "action": "initialize",
+        "catalog_sha256": "c26077af87c2384578451ca4296b770a2cb8289e4387541f8de1e2d152e0a7f9",
+        "created_at": "2026-09-21T11:07:16.843913Z",
+        "event_id": "9245c737-531a-4280-a19d-ce14cac801a4",
+        "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "row_hash": "91612f9f8215a4ea729ef4b46abfa0232756fd042bc42ffbc8f61877e1478f2c",
+        "sequence": 1,
+        "version": 1
+      },
+      {
+        "action": "catalog_import",
+        "catalog_sha256": "62bce40f01bc6719d41b119dfd8aa58a1478b73ac7b41a5e9f84fa3c2a1abc22",
+        "created_at": "2026-09-21T11:07:17.053062Z",
+        "event_id": "6efa9007-553a-4008-b657-3369cf70ee0a",
+        "previous_hash": "91612f9f8215a4ea729ef4b46abfa0232756fd042bc42ffbc8f61877e1478f2c",
+        "row_hash": "c6e95ecb9629f05b4ac5df2063ffb16a3755e6234466d20f2ece555baf20fdf5",
+        "sequence": 2,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  "head": "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+  "limits": [
+    "Only the neutral image-copy workflow was cataloged; this exercise did not submit a render.",
+    "No real LoRA weights or model compatibility were qualified.",
+    "Synthetic asset and child-process recovery tests are recorded separately."
+  ]
+}

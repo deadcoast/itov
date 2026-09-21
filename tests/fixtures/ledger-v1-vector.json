@@ -1,0 +1,9 @@
+{
+  "encoding": "ITOV canonical JSON v1; integer-only; UTF-8; sorted object keys; compact; arrays retain order",
+  "domain_hex": "49544f562d4c45444745522d763100",
+  "canonical_body": "{\"action\":\"initialize\",\"catalog_sha256\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"created_at\":\"2026-09-21T00:00:00.000000Z\",\"event_id\":\"00000000-0000-4000-8000-000000000001\",\"sequence\":1,\"version\":1}",
+  "genesis": "0000000000000000000000000000000000000000000000000000000000000000",
+  "row_hash": "0f9b7710a02d085f369751c4d38d6f222f842ebf0aeb4435f1bd7087d157520b",
+  "nonzero_predecessor": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "nonzero_predecessor_hash": "7056b679809cde2d057ef335db2740f0817a7b8ba3214be030a48d2ba666452f"
+}

@@ -1,0 +1,150 @@
+{
+  "observed_at": "2026-09-21T11:08:17.209998+00:00",
+  "platform": "Windows",
+  "package_version": "0.3.0",
+  "checks": [
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage03-final"
+      ],
+      "exit_code": 0,
+      "seconds": 24.537,
+      "stdout": "........................................................................ [ 38%]\n........................................................................ [ 77%]\n..........................................                               [100%]\n186 passed in 24.24s\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.039,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.038,
+      "stdout": "26 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.043,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.3.0.tar.gz\nSuccessfully built dist\\itov-0.3.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.3.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        ".test-tmp/stage03-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 22.732,
+      "stdout": "........................................................................ [ 38%]\n........................................................................ [ 77%]\n..........................................                               [100%]\n186 passed in 21.70s\n",
+      "stderr": "Installed 7 packages in 172ms\n"
+    },
+    {
+      "name": "wheel_import",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\dist\\itov-0.3.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,11); assert 'site-packages' in itov.__file__; assert itov.__version__=='0.3.0'"
+      ],
+      "exit_code": 0,
+      "seconds": 0.247,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\oEAfz7Swv8BXzkUtbEDDk\\Lib\\site-packages\\itov\\__init__.py\n",
+      "stderr": ""
+    }
+  ],
+  "retained_initial_failure": {
+    "test": "tests/test_catalog_store.py::test_recomputed_snapshot_digest_cannot_hide_ledger_edit",
+    "focused_run": "1 failed, 76 passed in 2.29s",
+    "expected_error": "hash mismatch",
+    "observed_error": "HEAD: expected lowercase SHA-256",
+    "cause": "The test wrote HEAD in text mode, introducing CRLF on Windows; the required encoding is LF.",
+    "correction": "Write exact LF bytes so the test reaches the intended ledger tampering check. Production validation was unchanged."
+  },
+  "local_catalog_evidence": "stage-03-catalog-20260921.json",
+  "limits": [
+    "LoRA asset tests use plain-byte fixtures, not actual models or inference.",
+    "Crash tests exit owned processes at controlled write boundaries and during partial temporary writes.",
+    "No power-loss, remote-filesystem, backup-restore, or non-Windows platform qualification.",
+    "No GPU render/concurrency or model compatibility acceptance in this stage."
+  ],
+  "wheel_source_byte_parity": 13,
+  "source_sha256": {
+    "src/itov/__init__.py": "acb64b3168dd2cdefc7e4cce768ddff8150e630a7773ab1f1d8f1c5c02f22ee9",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/catalog.py": "b4aff8caf26166c51ba9e179293d2609053156b93b6f812443d24076248abccb",
+    "src/itov/catalog_store.py": "87a2d6b281a0b1091b421ef7bc9614d8f25138157ebeef8d45815e83b1af4db5",
+    "src/itov/cli.py": "ff8f53efe505176ffbdf27f0db85643f9cd2aa5dd5bfb7bdc0e391b81c88c6ec",
+    "src/itov/comfyui.py": "dc9fb7f81a9cfc35b738f2cfd7562a524da2fa4ebf97c4b03dec8e06ab9f6f86",
+    "src/itov/config.py": "360e4e5451194c11ec3fdf39b001edb784d984448cf5cd0af740b36d4f2b2d8a",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/jobs.py": "a4ee29c8066948c05e7aa949199a69fb5eb115580971b763bf0f1aee697cf963",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/runtime.py": "e2e39fcb7be1c9f9a8e5c7d78786ff55440edf9c53b90bbd719483b515792077",
+    "src/itov/workflow.py": "5e3f7aa3a62786c77c9a24cccdd98a42a15b61774522401627382888ac16fcca"
+  },
+  "artifact_sha256": {
+    "dist/itov-0.3.0-py3-none-any.whl": "6084e5e3e856c72c1f93a5dd803d02b6f056ee9516a73c29e6f85738b0fd6b3a",
+    "dist/itov-0.3.0.tar.gz": "04862d78e7c1a72c1917611e58e73648cd6d254d406968d011468eef36d852bb"
+  }
+}

@@ -1,6 +1,6 @@
 # ITOV
 
-ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, and single-workflow execution with durable job records and verified output downloads. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
+ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, and versioned preset/LoRA catalogs with recoverable revision history. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
 
 The original material in `docs/01_*` through `docs/10_*` is a design reference, not an executable installation guide. Read the [development review](docs/development-review.md) for defects, current compatibility findings, and the implementation sequence.
 
@@ -75,6 +75,26 @@ uv run --locked itov job wait 'workspace/state/jobs/REQUEST_ID.json'
 
 Resume never resubmits a workflow. An uncertain submission without an acknowledged prompt ID is recorded as `submission_unknown` and needs inspection before another submission. See [job states and limits](docs/runtime-and-jobs.md#job-states-and-limits).
 
+## Catalogs and revision history
+
+Create and inspect the neutral catalog example:
+
+```powershell
+uv run --locked python scripts/create_catalog_example.py
+uv run --locked itov catalog validate workspace/templates/neutral.catalog.json --check-files
+uv run --locked itov catalog init
+uv run --locked itov catalog show --json
+```
+
+The helper and `catalog init` refuse to overwrite existing data. To record a reviewed catalog, pass the head printed by `show`:
+
+```powershell
+uv run --locked itov catalog import workspace/templates/neutral.catalog.json --expected-head HEAD_FROM_SHOW
+uv run --locked itov catalog verify --check-files --json
+```
+
+Imports verify asset hashes and reject stale heads. Each revision keeps the catalog and its hash-chained ledger together in an immutable snapshot. Interrupted transactions require explicit `catalog recover`; ordinary reads never repair data. See [catalog schemas, commands, and recovery](docs/catalog-and-ledger.md) for the contract and qualification boundaries. Rotation and automated promotion remain later development stages.
+
 ## Development
 
 Follow the gates in the [development review](docs/development-review.md) and update [CHANGELOG.md](CHANGELOG.md) with each completed development increment. Record passing checks and any unfulfilled runtime or rendering acceptance separately.
@@ -87,4 +107,4 @@ uv run --locked ruff format --check .
 uv build
 ```
 
-Automated tests use temporary workspaces, a local HTTP fixture, and an owned child process for lock recovery. Real runtime qualification is recorded separately. The [development review](docs/development-review.md) records completed gates, acceptance limits, and the next stage.
+Automated tests use temporary workspaces, a local HTTP fixture, and owned child processes for lock contention and crash recovery. Real runtime qualification is recorded separately. The [development review](docs/development-review.md) records completed gates, acceptance limits, and the next stage.
