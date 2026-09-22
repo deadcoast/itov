@@ -50,7 +50,7 @@ uv run --locked itov training run workspace/state/training/plans/PLAN_ID.json --
 uv run --locked itov training status workspace/state/training/plans/PLAN_ID.json --json
 ```
 
-Use the printed plan ID and observed GPU UUID. Plans bind the prepared dataset, model checkpoint, all 14 configuration/tokenizer files, executable, selected package versions and three trainer source modules. Added config files, changed captions, changed dependencies and stale plans are refused before training. Plans permit rank 4 or 8, 1–256 steps and 60–3600 seconds. Fixed seeds do not guarantee bitwise reproducibility across different runtimes/devices.
+Use the printed plan ID and observed GPU UUID. Plans bind the prepared dataset, model checkpoint, all 14 configuration/tokenizer files, executable, selected package versions and the trainer/result-validation source modules. Added config files, changed captions, changed dependencies and stale plans are refused before training. Plans permit rank 4 or 8, 1–256 steps and 60–3600 seconds. Fixed seeds do not guarantee bitwise reproducibility across different runtimes/devices.
 
 ## Ownership, failures and resource limits
 

@@ -46,7 +46,7 @@ This is an implemented preflight stage. It is not completion of the studio, an i
 
 The previous stage-completion map is superseded by the [2026-09-22 source audit](development-audit-20260922.md) and the [new TODO](../TODO.md). ITOV remains an incomplete application built from low-level integrations and narrowly qualified prototypes. Historical test counts and live trials below retain their original evidence scope. They do not establish completion of the product areas.
 
-1. **Phase A, active:** reconcile training result/artifact state, integrate deployed-runtime evaluation, unify ownership boundaries and expose coherent command contracts. A-01 is next.
+1. **Phase A, active:** A-01 delivered shared training result validation, separate worker/artifact state and explicit publication recovery, with [bounded verification](evidence/phase-a01-verification-20260922.json). A-02 is next: integrate deployed-runtime evaluation, then reconcile ownership and command contracts. Phase A remains incomplete.
 2. **Phase B, open:** develop transactional datasets, sampling/configuration, durable checkpoints and bounded experiments.
 3. **Phase C, open:** implement representative autonomous evaluation, calibrated checks, runtime comparisons and evidence-backed improvement/candidate handling.
 4. **Phase D, open:** develop end-to-end media workflows, operator diagnostics, installation, recovery and resource qualification.

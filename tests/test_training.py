@@ -603,3 +603,24 @@ training.run(load_config(Path(sys.argv[2])),Path(sys.argv[3]),GPU,registry=Path(
     assert recovered["worker"] == pending["worker"]
     assert device.status(GPU, root=item.registry)["status"] == "idle"
     assert training.status(item.config, item.plan_path) == recovered
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Native Windows training ownership")
+def test_interrupt_during_weight_validation_reports_its_boundary(protocol, monkeypatch):
+    from itov import training_results
+
+    item = protocol
+    fake_job(monkeypatch, "success")
+
+    def interrupt(*args):
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(training_results, "inspect_weights", interrupt)
+    observed = training.run(item.config, item.plan_path, GPU, registry=item.registry)
+    assert observed["status"] == "failed"
+    assert observed["failure_boundary"] == "weights"
+    assert observed["worker_completion"] == "completed"
+    assert observed["artifact_validation"] == "failed"
+    assert observed["error"] == "Interrupted"
+    assert process_state(observed["worker"]) == "dead"
+    assert device.status(GPU, root=item.registry)["status"] == "idle"

@@ -28,6 +28,9 @@ def boundary(name):
         yield
     except ResultValidationError:
         raise
+    except KeyboardInterrupt as error:
+        error.boundary = name
+        raise
     except (OSError, ValueError, KeyError, TypeError, struct.error) as error:
         raise ResultValidationError(name, str(error)) from error
 

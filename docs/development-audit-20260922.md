@@ -37,7 +37,7 @@ This is a targeted source audit of the execution, inference, dataset, trainer an
 
 The old TODO is retained verbatim at [the historical snapshot](history/TODO-20260922-stage-prototypes.md). Its completed checkboxes describe work performed at the time; the stage-level completion interpretation is superseded by this audit. [CHANGELOG.md](../CHANGELOG.md) records the delivered prototype increments and this correction. [TODO.md](../TODO.md) is the new active plan, containing open tasks with dependencies and observable exit criteria.
 
-Start with **A-01: training result state and artifact validation**. Then integrate deployed-runtime evaluation (A-02) and reconcile ownership (A-03). Training/data expansion and measured quality work follow those execution foundations. A status report must identify what is still missing even when the focused implementation or package checks pass.
+The first follow-up, **A-01: training result state and artifact validation**, is now implemented with [separate execution/artifact states and explicit recovery](training-result-states.md). Its [verification](evidence/phase-a01-verification-20260922.json) covers the retained result-binding defect, corrupt/incomplete artifacts, native controller interruption and CLI replay. The original finding above records the pre-fix behavior. Next, integrate deployed-runtime evaluation (A-02) and reconcile ownership (A-03). Training/data expansion and measured quality work follow those execution foundations. A status report must identify what is still missing even when the focused implementation or package checks pass.
 
 ## Verification of this correction
 

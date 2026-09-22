@@ -6,7 +6,7 @@ Updated 2026-09-22 following the user's scope and completion-reporting correctio
 
 The mandatory independent-human review gate is shelved. The assistant owns testing, visual inspection, evidence collection and reasoned quality decisions. Failed or uncertain results remain failed or uncertain. The current curated candidate has object-count/regression failures and unresolved trigger specificity; it is not accepted for production.
 
-Current focus: **Phase A**, beginning with A-01. The reviewer-policy correction, audit and historical task rollover are recorded in [CHANGELOG.md](CHANGELOG.md). The [source audit](docs/development-audit-20260922.md) explains why these tasks are necessary. The [previous TODO](docs/history/TODO-20260922-stage-prototypes.md) is preserved as a historical snapshot and is no longer the active plan.
+Current focus: **Phase A**, with A-02 next. A-01's shared result validation, separate execution/artifact states and publication recovery are delivered with [verification evidence](docs/evidence/phase-a01-verification-20260922.json) and recorded in [CHANGELOG.md](CHANGELOG.md). The [source audit](docs/development-audit-20260922.md) explains why the remaining tasks are necessary. The [previous TODO](docs/history/TODO-20260922-stage-prototypes.md) is preserved as a historical snapshot and is no longer the active plan.
 
 ## How work is tracked
 
@@ -29,10 +29,11 @@ Current focus: **Phase A**, beginning with A-01. The reviewer-policy correction,
 
 ## Phase A — execution and integration foundations
 
+Delivered A-01 has moved to the changelog. Its [state/recovery contract](docs/training-result-states.md) separates worker completion, validated artifacts and candidate assessment. Historical records remain unchanged; the retained PNG-as-weights attempt now reports a failed weights boundary. This closes that execution-validation increment, not Phase A or model-quality acceptance.
+
 | ID | Status | Work | Acceptance evidence |
 | --- | --- | --- | --- |
-| A-01 | **Next** | Separate worker completion, artifact validation and candidate assessment. Extract result validation so the training controller cannot label a PNG-as-weights result technically successful. Define errors and recovery transitions explicitly. | Exercise the retained Stage 11B result-binding failure plus truncated weights, incomplete matrices and interrupted publication. CLI state must identify the failed boundary without rewriting old records. |
-| A-02 | Open; A-01 | Replace the local ComfyUI qualification helper with a supported evaluation plan/run/status/replay path. Bind candidate deployment, sampler settings, exact graph/runtime identity and every case/seed. | Reproduce complete evaluation on the installed package without manually editing graph dictionaries or invoking ignored helper scripts; resume observes owned jobs without duplicate submission. |
+| A-02 | **Next; A-01 delivered** | Replace the local ComfyUI qualification helper with a supported evaluation plan/run/status/replay path. Bind candidate deployment, sampler settings, exact graph/runtime identity and every case/seed. | Reproduce complete evaluation on the installed package without manually editing graph dictionaries or invoking ignored helper scripts; resume observes owned jobs without duplicate submission. |
 | A-03 | Open; A-01 | Reconcile device/workspace ownership across ordinary jobs, sequential batches, training and managed parallel workers. Make unmanaged-server behavior explicit and enforce the supported exclusion rules. | Contention tests spanning command families, actual owned-process shutdown and conservative uncertain-owner recovery; preserve unrelated server work. |
 | A-04 | Open; A-02 | Make trained-candidate deployment and applicable LoRA stacks first-class inference inputs. Separate model capabilities, graph construction and qualification from the two current fixed inference presets. | A trained candidate travels through public commands with verified model/adapter/strength bindings; incompatible stacks fail before submission. Stock nodes may remain where they meet the capability contract. |
 | A-05 | Open; A-01/A-02 | Introduce clear internal records and module boundaries for training results, evaluation cases and review decisions. Remove repeated assessment/hash work from one operation after profiling it; retain final freshness checks. | Targeted contract/migration tests and measured repeated-command cost. No silent behavior change in saved artifacts or historical read paths. |

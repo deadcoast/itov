@@ -1,0 +1,739 @@
+{
+  "observed_at": "2026-09-22T09:54:47.234134+00:00",
+  "task": "A-01",
+  "project_version": "0.13.1",
+  "scope": "Training execution/result-validation boundaries and conservative recovery; not product or model-quality acceptance",
+  "implementation": [
+    "Shared read-only result validator used by controller, status and technical assessment",
+    "Version 2 run states distinguish running, validating, artifacts_validated and failed",
+    "Historical success is rechecked without changing its original run/result records",
+    "Durable transition copies precede current-record publication; explicit dead-owner recovery never retrains",
+    "Default text and JSON expose failure boundary, original/current status and next action"
+  ],
+  "pre_fix_regression": [
+    {
+      "arguments": [
+        "training",
+        "status",
+        "workspace/state/training/plans/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"error\": null,\n  \"finished_at\": \"2026-09-22T07:23:51.150735+00:00\",\n  \"gpu\": {\n    \"driver\": \"616.64\",\n    \"free_bytes\": 31230787584,\n    \"name\": \"NVIDIA GeForce RTX 5090\",\n    \"total_bytes\": 34190917632,\n    \"used_bytes\": 2520776704,\n    \"uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\"\n  },\n  \"host\": {\n    \"available_commit\": 31889518592,\n    \"available_physical\": 40374304768,\n    \"total_commit\": 70256021504,\n    \"total_physical\": 66095271936\n  },\n  \"lease\": {\n    \"gpu_uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\",\n    \"job_name\": \"Global\\\\ITOV-owned-11048292-fb25-44e0-baa3-ca8cdeb3c0db\",\n    \"lease_id\": \"11048292-fb25-44e0-baa3-ca8cdeb3c0db\",\n    \"owner\": {\n      \"created\": 134345352560819482,\n      \"pid\": 72160\n    },\n    \"plan_id\": \"a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\",\n    \"record_id\": \"a7857bb27ae2b57cd4f66fc7cf9c5cb9d0ae1748746121e19c5d278a6429b5a0\",\n    \"started_at\": \"2026-09-22T07:21:00.318957+00:00\",\n    \"status\": \"held\",\n    \"version\": 1,\n    \"workers\": [\n      {\n        \"created\": 134345352603341660,\n        \"pid\": 61476\n      }\n    ],\n    \"workspace\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\"\n  },\n  \"owner\": {\n    \"created\": 134345352560819482,\n    \"pid\": 72160\n  },\n  \"plan_id\": \"a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\",\n  \"record_id\": \"a93e931a29bf6f53003b29075fb10f9148e5f04fb2004930b86433cf870a4319\",\n  \"result_id\": \"c2cb79832917f6506fe431a2bfc1552e153dcdbaaee33f7135c383c29ba675f7\",\n  \"started_at\": \"2026-09-22T07:21:00.324845+00:00\",\n  \"status\": \"succeeded\",\n  \"version\": 1,\n  \"worker\": {\n    \"created\": 134345352603341660,\n    \"pid\": 61476\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "evaluation",
+        "assess",
+        "workspace/state/training/plans/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+        "--json"
+      ],
+      "exit_code": 2,
+      "stdout": "{\"ok\": false, \"error\": \"Invalid safetensors header size\"}\n",
+      "stderr": ""
+    }
+  ],
+  "tests": [
+    {
+      "name": "source-final",
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "912",
+        "time": "265.352",
+        "timestamp": "2026-09-22T02:48:52.893079-07:00",
+        "hostname": "homeone"
+      },
+      "stdout": "........................................................................ [  7%]\n........................................................................ [ 15%]\n........................................................................ [ 23%]\n........................................................................ [ 31%]\n........................................................................ [ 39%]\n........................................................................ [ 47%]\n........................................................................ [ 55%]\n........................................................................ [ 63%]\n........................................................................ [ 71%]\n........................................................................ [ 78%]\n........................................................................ [ 86%]\n........................................................................ [ 94%]\n................................................                         [100%]\n- generated xml file: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a01\\source-final.xml -\n912 passed in 265.38s (0:04:25)\n",
+      "scope": "Full root test suite"
+    },
+    {
+      "name": "wheel-final",
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "149",
+        "time": "62.191",
+        "timestamp": "2026-09-22T02:48:53.724725-07:00",
+        "hostname": "homeone"
+      },
+      "stdout": "Installed 9 packages in 320ms\n........................................................................ [ 48%]\n........................................................................ [ 96%]\n.....                                                                    [100%]\n- generated xml file: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a01\\wheel-final.xml -\n149 passed in 62.21s (0:01:02)\n",
+      "scope": "Installed wheel: training, result validation, evaluation and quality suites"
+    }
+  ],
+  "static_checks": [
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--inexact",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--inexact",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "stdout": "79 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: in the working copy of 'TODO.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/training-result-states.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/test_training.py', LF will be replaced by CRLF the next time Git touches it\n"
+    }
+  ],
+  "package_parity": {
+    "module_count": 43,
+    "module_sha256": {
+      "itov/__init__.py": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a",
+      "itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+      "itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+      "itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+      "itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+      "itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+      "itov/batch_execution.py": "cde37a4566b175409a66945114e81e83c9b9582e46129d50209e666060117cd7",
+      "itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+      "itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+      "itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+      "itov/cli.py": "99c728a0afb5f20bf3c54b349e9615f07076a7c932e79c1403dbe224f5f0fda5",
+      "itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+      "itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+      "itov/curation.py": "36262325466b3f8055f029acbec6db7c8f7626d08ef3e4420994b4256afdc835",
+      "itov/device.py": "91a07bcdad002a9b8a4f0bcc19232f0863bf7dadf39a8d8f2d48b9de774938a5",
+      "itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+      "itov/evaluation.py": "02da838fb7e216e4bfbb4e542e197fe6be6bfe2feae03e7f5d5733f24d9d0b5f",
+      "itov/execution_store.py": "83d653dbd032595e8b4689aeb4bd18e9113d3020c918030df8fa61fe7e60f362",
+      "itov/inference.py": "ac08d4ecb954745da0781be1ecd4cf1fc5ed03833e97bdad2163859760dc6abf",
+      "itov/jobs.py": "0d7702175f0fca7f812f0e4fede137690cfe9b468b08b85d114e5db3be3b551d",
+      "itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+      "itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+      "itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+      "itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+      "itov/owned_jobs.py": "5eb31fc19bdf9fc1cd1f366e30cf66979df2f5ddf5c12920230b222c1ab97dd0",
+      "itov/parallel.py": "07559a6355e2cc8c729b4425fc4eadae0a56ec667d4d3f03a4db3c89d4b8e556",
+      "itov/qualification.py": "80d19c5eff4902b172d0e5be45f6214b7c7261b453356b403ebbebaa6bfc1279",
+      "itov/quality.py": "4a8603dd444fd4393d70bc42c739a03b29062385507ce590db8d9eb7da8c50e5",
+      "itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+      "itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+      "itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+      "itov/training.py": "688265a28350c832bb23579819be32e1fc354a3aee71bc7035f181dde0e3ab32",
+      "itov/training_data.py": "b1fea5581261d396381e809f83bbde030f0ed2ebc7487761a543619b6f24daa7",
+      "itov/training_results.py": "83a85a2876e6044df6f0a8fa951a1ad391ab2dfe89cf9cc1ae8cf54b7218f045",
+      "itov/training_worker.py": "7e422a1ab493df1282987d60bdb2fdf7722c80a4d0c3bc8bbb1f3bf3a7a6d495",
+      "itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+      "itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+      "itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+      "itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+      "itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+      "itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+      "itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+      "itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+    },
+    "source_wheel_installed_equal": true,
+    "readme_exact_bytes": true,
+    "scm_packages": {
+      "scm_dev_tools": "0.5.0"
+    },
+    "archives": {
+      "itov-0.13.1-py3-none-any.whl": "3a37e6d9a949185eb7cd84847fd9375b325f31e4d8cea49597a32abf8955fcf7",
+      "itov-0.13.1.tar.gz": "7fb94c637d5a5b773de0379ea3b9d968acd6fa53c922685a9a643e03d31685f0"
+    }
+  },
+  "replays": [
+    {
+      "scope": "Read-only retained-artifact and public CLI replay; no training or model-quality acceptance",
+      "python": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]",
+      "package": "C:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py",
+      "commands": [
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "31ed2ad067875388bcab2f5c11c6369f9548ab1b90537da4ce86453fd05474ce",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "a13db991743072d487a59142d8dfd9a512bce640d30865332183f4a36d2b3711",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "057e34037967b7539bc8de9e1f342a3663153a0124b87bac98de5d09c356b99b",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "8c0b37a22c867bd351af854fd23377e8278cbdf51f7878c5bac52c5ec826ac29",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "d4a6959917c057fa6e2d63797d137b671e15116a9f91098bbef03e6a10390ad6",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "90517b2fe536a52232e11606130c35beed6756cc79ff075b3af63b5d7242b09b",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "9e894d53d8be336d0c4606d10f369e2668d094eea22f3871a4b62485f9693ba2",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "2f3e45436efa0156cdbc2f0f81475fb5aa50da1af2d445eed9c751d5dfdf3a9b",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 1,
+          "stdout_sha256": "209f2eaf659fb336ecf3c21f3fc1d6d369953fd1ea44858180a9b9bacd1da958",
+          "stderr": "",
+          "stdout": "{\n  \"error\": \"Invalid safetensors header size\",\n  \"finished_at\": \"2026-09-22T07:23:51.150735+00:00\",\n  \"gpu\": {\n    \"driver\": \"616.64\",\n    \"free_bytes\": 31230787584,\n    \"name\": \"NVIDIA GeForce RTX 5090\",\n    \"total_bytes\": 34190917632,\n    \"used_bytes\": 2520776704,\n    \"uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\"\n  },\n  \"host\": {\n    \"available_commit\": 31889518592,\n    \"available_physical\": 40374304768,\n    \"total_commit\": 70256021504,\n    \"total_physical\": 66095271936\n  },\n  \"lease\": {\n    \"gpu_uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\",\n    \"job_name\": \"Global\\\\ITOV-owned-11048292-fb25-44e0-baa3-ca8cdeb3c0db\",\n    \"lease_id\": \"11048292-fb25-44e0-baa3-ca8cdeb3c0db\",\n    \"owner\": {\n      \"created\": 134345352560819482,\n      \"pid\": 72160\n    },\n    \"plan_id\": \"a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\",\n    \"record_id\": \"a7857bb27ae2b57cd4f66fc7cf9c5cb9d0ae1748746121e19c5d278a6429b5a0\",\n    \"started_at\": \"2026-09-22T07:21:00.318957+00:00\",\n    \"status\": \"held\",\n    \"version\": 1,\n    \"workers\": [\n      {\n        \"created\": 134345352603341660,\n        \"pid\": 61476\n      }\n    ],\n    \"workspace\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\"\n  },\n  \"owner\": {\n    \"created\": 134345352560819482,\n    \"pid\": 72160\n  },\n  \"plan_id\": \"a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\",\n  \"record_id\": \"a93e931a29bf6f53003b29075fb10f9148e5f04fb2004930b86433cf870a4319\",\n  \"result_id\": \"c2cb79832917f6506fe431a2bfc1552e153dcdbaaee33f7135c383c29ba675f7\",\n  \"started_at\": \"2026-09-22T07:21:00.324845+00:00\",\n  \"status\": \"failed\",\n  \"version\": 1,\n  \"worker\": {\n    \"created\": 134345352603341660,\n    \"pid\": 61476\n  },\n  \"scope\": \"training_status_observation\",\n  \"recorded_status\": \"succeeded\",\n  \"worker_completion\": \"completed\",\n  \"artifact_validation\": \"failed\",\n  \"failure_boundary\": \"weights\",\n  \"candidate_assessment\": \"not_performed_by_training\",\n  \"artifacts\": {\n    \"run.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\run.json\",\n    \"result.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\result.json\",\n    \"worker.log\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\worker.log\"\n  },\n  \"next_action\": \"Inspect result.json and worker.log; preserve this attempt and create a new plan.\"\n}\n"
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 1,
+          "stdout_sha256": "165918365b782f27d46bce0f723a39aee4c55c4a3b8798d0c7d0a98d104b5a3d",
+          "stderr": "",
+          "stdout": "FAILED\nPlan id: a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\nRecorded status: succeeded\nWorker completion: completed\nArtifact validation: failed\nFailure boundary: weights\nCandidate assessment: not_performed_by_training\nNext action: Inspect result.json and worker.log; preserve this attempt and create a new plan.\nrun.json: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\run.json\nresult.json: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\result.json\nworker.log: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\worker.log\nInvalid safetensors header size\n"
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 2,
+          "stdout_sha256": "9ac280fde27fd65875f006e8e14ba8adde0c01a72e2582684e0ed434b86861dd",
+          "stderr": "",
+          "stdout": "{\"ok\": false, \"error\": \"Invalid safetensors header size\", \"failure_boundary\": \"weights\"}\n"
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 2,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "itov: weights: Invalid safetensors header size\n",
+          "stdout": ""
+        }
+      ],
+      "attempts": [
+        {
+          "plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+          "recorded_status": "succeeded",
+          "status": "artifacts_validated",
+          "worker_completion": "completed",
+          "artifact_validation": "passed",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59",
+          "recorded_status": "failed",
+          "status": "failed",
+          "worker_completion": "unknown",
+          "artifact_validation": "not_run",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734",
+          "recorded_status": "failed",
+          "status": "failed",
+          "worker_completion": "unknown",
+          "artifact_validation": "not_run",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+          "recorded_status": "succeeded",
+          "status": "artifacts_validated",
+          "worker_completion": "completed",
+          "artifact_validation": "passed",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9",
+          "recorded_status": "failed",
+          "status": "failed",
+          "worker_completion": "unknown",
+          "artifact_validation": "not_run",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d",
+          "recorded_status": "succeeded",
+          "status": "failed",
+          "worker_completion": "completed",
+          "artifact_validation": "failed",
+          "failure_boundary": "weights"
+        }
+      ],
+      "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada",
+      "curated_candidate_still_rejected": true,
+      "preserved_files": 103,
+      "preserved_files_match": true,
+      "ml_imports": []
+    },
+    {
+      "scope": "Read-only retained-artifact and public CLI replay; no training or model-quality acceptance",
+      "python": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]",
+      "package": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\cgwBbdLsWsG4VOhHEtD-3\\Lib\\site-packages\\itov\\__init__.py",
+      "commands": [
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "31ed2ad067875388bcab2f5c11c6369f9548ab1b90537da4ce86453fd05474ce",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "a13db991743072d487a59142d8dfd9a512bce640d30865332183f4a36d2b3711",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "057e34037967b7539bc8de9e1f342a3663153a0124b87bac98de5d09c356b99b",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "8c0b37a22c867bd351af854fd23377e8278cbdf51f7878c5bac52c5ec826ac29",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "d4a6959917c057fa6e2d63797d137b671e15116a9f91098bbef03e6a10390ad6",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "90517b2fe536a52232e11606130c35beed6756cc79ff075b3af63b5d7242b09b",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "9e894d53d8be336d0c4606d10f369e2668d094eea22f3871a4b62485f9693ba2",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 0,
+          "stdout_sha256": "2f3e45436efa0156cdbc2f0f81475fb5aa50da1af2d445eed9c751d5dfdf3a9b",
+          "stderr": ""
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 1,
+          "stdout_sha256": "209f2eaf659fb336ecf3c21f3fc1d6d369953fd1ea44858180a9b9bacd1da958",
+          "stderr": "",
+          "stdout": "{\n  \"error\": \"Invalid safetensors header size\",\n  \"finished_at\": \"2026-09-22T07:23:51.150735+00:00\",\n  \"gpu\": {\n    \"driver\": \"616.64\",\n    \"free_bytes\": 31230787584,\n    \"name\": \"NVIDIA GeForce RTX 5090\",\n    \"total_bytes\": 34190917632,\n    \"used_bytes\": 2520776704,\n    \"uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\"\n  },\n  \"host\": {\n    \"available_commit\": 31889518592,\n    \"available_physical\": 40374304768,\n    \"total_commit\": 70256021504,\n    \"total_physical\": 66095271936\n  },\n  \"lease\": {\n    \"gpu_uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\",\n    \"job_name\": \"Global\\\\ITOV-owned-11048292-fb25-44e0-baa3-ca8cdeb3c0db\",\n    \"lease_id\": \"11048292-fb25-44e0-baa3-ca8cdeb3c0db\",\n    \"owner\": {\n      \"created\": 134345352560819482,\n      \"pid\": 72160\n    },\n    \"plan_id\": \"a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\",\n    \"record_id\": \"a7857bb27ae2b57cd4f66fc7cf9c5cb9d0ae1748746121e19c5d278a6429b5a0\",\n    \"started_at\": \"2026-09-22T07:21:00.318957+00:00\",\n    \"status\": \"held\",\n    \"version\": 1,\n    \"workers\": [\n      {\n        \"created\": 134345352603341660,\n        \"pid\": 61476\n      }\n    ],\n    \"workspace\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\"\n  },\n  \"owner\": {\n    \"created\": 134345352560819482,\n    \"pid\": 72160\n  },\n  \"plan_id\": \"a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\",\n  \"record_id\": \"a93e931a29bf6f53003b29075fb10f9148e5f04fb2004930b86433cf870a4319\",\n  \"result_id\": \"c2cb79832917f6506fe431a2bfc1552e153dcdbaaee33f7135c383c29ba675f7\",\n  \"started_at\": \"2026-09-22T07:21:00.324845+00:00\",\n  \"status\": \"failed\",\n  \"version\": 1,\n  \"worker\": {\n    \"created\": 134345352603341660,\n    \"pid\": 61476\n  },\n  \"scope\": \"training_status_observation\",\n  \"recorded_status\": \"succeeded\",\n  \"worker_completion\": \"completed\",\n  \"artifact_validation\": \"failed\",\n  \"failure_boundary\": \"weights\",\n  \"candidate_assessment\": \"not_performed_by_training\",\n  \"artifacts\": {\n    \"run.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\run.json\",\n    \"result.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\result.json\",\n    \"worker.log\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\worker.log\"\n  },\n  \"next_action\": \"Inspect result.json and worker.log; preserve this attempt and create a new plan.\"\n}\n"
+        },
+        {
+          "arguments": [
+            "training",
+            "status",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 1,
+          "stdout_sha256": "165918365b782f27d46bce0f723a39aee4c55c4a3b8798d0c7d0a98d104b5a3d",
+          "stderr": "",
+          "stdout": "FAILED\nPlan id: a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\nRecorded status: succeeded\nWorker completion: completed\nArtifact validation: failed\nFailure boundary: weights\nCandidate assessment: not_performed_by_training\nNext action: Inspect result.json and worker.log; preserve this attempt and create a new plan.\nrun.json: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\run.json\nresult.json: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\result.json\nworker.log: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\worker.log\nInvalid safetensors header size\n"
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml",
+            "--json"
+          ],
+          "exit_code": 2,
+          "stdout_sha256": "9ac280fde27fd65875f006e8e14ba8adde0c01a72e2582684e0ed434b86861dd",
+          "stderr": "",
+          "stdout": "{\"ok\": false, \"error\": \"Invalid safetensors header size\", \"failure_boundary\": \"weights\"}\n"
+        },
+        {
+          "arguments": [
+            "evaluation",
+            "assess",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+            "--config",
+            "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\itov.toml"
+          ],
+          "exit_code": 2,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr": "itov: weights: Invalid safetensors header size\n",
+          "stdout": ""
+        }
+      ],
+      "attempts": [
+        {
+          "plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+          "recorded_status": "succeeded",
+          "status": "artifacts_validated",
+          "worker_completion": "completed",
+          "artifact_validation": "passed",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59",
+          "recorded_status": "failed",
+          "status": "failed",
+          "worker_completion": "unknown",
+          "artifact_validation": "not_run",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734",
+          "recorded_status": "failed",
+          "status": "failed",
+          "worker_completion": "unknown",
+          "artifact_validation": "not_run",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+          "recorded_status": "succeeded",
+          "status": "artifacts_validated",
+          "worker_completion": "completed",
+          "artifact_validation": "passed",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9",
+          "recorded_status": "failed",
+          "status": "failed",
+          "worker_completion": "unknown",
+          "artifact_validation": "not_run",
+          "failure_boundary": null
+        },
+        {
+          "plan_id": "a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d",
+          "recorded_status": "succeeded",
+          "status": "failed",
+          "worker_completion": "completed",
+          "artifact_validation": "failed",
+          "failure_boundary": "weights"
+        }
+      ],
+      "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada",
+      "curated_candidate_still_rejected": true,
+      "preserved_files": 103,
+      "preserved_files_match": true,
+      "ml_imports": []
+    }
+  ],
+  "preserved_files_sha256": {
+    "workspace/state/training/assessments/6ec9a2b09cf0100bcc223862386b8082f7a799af488d909973b4df4a1046a3ac.json": "ead041ef0ac0352a799dd511b2c88936eec3ca35fdccc5e06166f01563fe9b7b",
+    "workspace/state/training/assessments/9dd708fd9ce15fff187578479611c67229a9b7f198817fd281f80b4fcc6ddb6e.json": "ff99e6455cad275dc6a39ffc4f435750688cd87d0dd0417e7fd0d41168652bc7",
+    "workspace/state/training/assessments/ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a.json": "1c1b7106445db58ddf5c7cd253ce0c81503bb3960c27fd511a429e2480edcb2a",
+    "workspace/state/training/candidates/2c212dec3f32a2d2144a1a4528628e212f89bc57a1ec681c7137308d260334d9.json": "b59f2a9653ec6a4d5b8c1cb86a4745d97b0343e32a1ec81eaeaa27aab1302055",
+    "workspace/state/training/candidates/9515cbd760f74ba2fe9a9a4c3f1d4f24888fe88e35ec5e8320d48d5ff3fc01eb.json": "b6920a5b0ef8d7a3b483915ff7e0eefd8d1f6e95c69f2d4340b71da8af46e07d",
+    "workspace/state/training/candidates/b1eeb9951d2a880b0573a12d4cf5679469b70f72f032b521d9021189cc28b96a.json": "728643faa1c0e64e4a5ed213c60da7b006d72500eb2198186e092c712ead9cf7",
+    "workspace/state/training/candidates/e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada.json": "5c5bea44cc6128ac9d09148ef795e41d85667ba89a8506cf9cd14e70835cb79b",
+    "workspace/state/training/curation/92a6e0e15617b0215a257a4580efc63272932311ff8d3cc25c7fd8f7e64e999a.json": "56e82262dfb7f8fceb1033ac9f2beb708a2f0e82605abcb102d3bb6e239814dd",
+    "workspace/state/training/datasets/0c8453f3f0c36a8e033696b32679ca8bea24a21bd5600f141cd4fbedacf56992.json": "aa552df1942ab288bd1092c61d578fa0af894f7b56343b5c6f3419e687670c8c",
+    "workspace/state/training/datasets/877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751.json": "36d5ef75a604711d9d8e47d32cd51a495ffe721fc47e633a725027cfb37fec98",
+    "workspace/state/training/plans/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json": "95f84804c94af24bbdb9481f0e062e21f1dfd7b7a6724c7fb8ae254c438a674b",
+    "workspace/state/training/plans/5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59.json": "fd7f8170bf2fecec099413a92c25b3ff874f28e52dd9cac9f8e321c75d488615",
+    "workspace/state/training/plans/5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734.json": "692ace62addb9d0bc90e0f014a8ad721f39ac90bf21fa3e59df50cebc0567328",
+    "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json": "ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764",
+    "workspace/state/training/plans/7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9.json": "93f0f4d55849aaea3ee6d29651a631c04d56cab64fb6aec13fe495b120170a65",
+    "workspace/state/training/plans/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json": "61bb1508cbcd7bbc7b75f25521f901eb5556ec2ff83003dfdf8fc10972b6a8ce",
+    "workspace/state/training/reviews/49da619516f080c8a6da4f5806b122b8221170690e5e935cd72c51c01653c600.json": "d02e0347acdbad90a1c7b1752b1f1563485becd64d6e3929feff73b6a77c5320",
+    "workspace/state/training/reviews/49da619516f080c8a6da4f5806b122b8221170690e5e935cd72c51c01653c600.review.json": "ee024aff7de6c34fde3a67d105c7fe5001baea7d84018bc3fed462e6f022f257",
+    "workspace/state/training/reviews/b7f6c2f6edb501191c08ac0d3b0313793f7ef93a9247d912b2da71daada781c7.json": "6ce415e52b84bd74011cf6045f00191a49cbe7ebdae676844160a7f6212160dc",
+    "workspace/state/training/reviews/b7f6c2f6edb501191c08ac0d3b0313793f7ef93a9247d912b2da71daada781c7.review.json": "6d5083f61bc2ed5460b831b9f9391da2d0764db14758878645a596902f82c0e9",
+    "workspace/state/training/reviews/stage11b-assistant-rejection-20260922.json": "f2808b2288327ae2f5121309c91c8334f808b1ba977b6146187a792ab92597a4",
+    "workspace/state/training/runs/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb/request.json": "a623308a97fba97d8c737a8013aaebd49925b8badd19e3084cec4f3be6d58548",
+    "workspace/state/training/runs/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb/result.json": "9096d81b24e9607eab49307847cb702e573a643b6abcb1c192d176242d6b3ac1",
+    "workspace/state/training/runs/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb/run.json": "5deb161d3183e1a8857eea62ae32e2b887b4049936757b25c327f94bda2f10ea",
+    "workspace/state/training/runs/5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59/request.json": "e8a0442b91f6935bcf270834f3b8e5a37cb3b67a41bc1120936bbabdb3bfe26b",
+    "workspace/state/training/runs/5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59/result.json": "0d9771db10f28daf79fd63ca25082c2b661df18b61c2e5c586e7a0bdb3cb9115",
+    "workspace/state/training/runs/5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59/run.json": "79fa3656876de53f697a90d3e0e4c606e50662c329df990fea99ee7b9db9773f",
+    "workspace/state/training/runs/5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734/request.json": "c42815f6d24dad12da0e4b2c5021b5728fc6f7c97b2fbe6b26e80b1ce8d6ee1a",
+    "workspace/state/training/runs/5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734/result.json": "62f09714eec565d71ff905a2aa9e6225c71a24f9d6cc76313092bba1ac5f39b6",
+    "workspace/state/training/runs/5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734/run.json": "6f52e65e49a84be87f3aa65cdf556918aacf30f166e87715be3f2fb13dc62d3b",
+    "workspace/state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/request.json": "5ee60d61a413f7a274f2cbddebefe32425f7926e7fc9ab206109b3d109ffb81b",
+    "workspace/state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/result.json": "799b5c0af6e373a08bbb64cb00ada3b2fd7c1a688b9c3eadaca1290716c31a4d",
+    "workspace/state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/run.json": "7ab18b54f0aa580de3dfe9d0eee908a6329162fa6124d0ab0b697da7c4bd35d1",
+    "workspace/state/training/runs/7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9/request.json": "5687ca0f8e7a8622a7b804f487d835efa69858d50d04f50c005b599b5ab15f1f",
+    "workspace/state/training/runs/7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9/result.json": "e1b241ce489b60c3d121f5761f59fa9d92e0d66779daf51b21dd60da4079a899",
+    "workspace/state/training/runs/7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9/run.json": "2068aeb44c1cd6a0a9b7d6d0a4607db5949a79792f355cb3c360c03ee6145f5b",
+    "workspace/state/training/runs/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d/request.json": "9e74aa51a2f6f4c742d4ac15037e7a3999d85c0dadd7d9a1e009eb383953e12b",
+    "workspace/state/training/runs/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d/result.json": "f089cd228d104feb4353880c182388680943edb1f6cf29085058bbf4e8dfc910",
+    "workspace/state/training/runs/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d/run.json": "868867699b2754899b06ad5e8815a431240d140e0319c4486a71f3b37b7c6f70",
+    "workspace/state/training/review-evidence/20260922/comfy-export.json": "e071fec654c5d3d3988d9a07a81ccee5e80ee9eb38c21fd583dd455068969471",
+    "workspace/state/catalog/catalog.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "workspace/state/catalog/HEAD": "8ea47fb63367b466a4883e1a3c5d4f91ef60cd28c62cbf4f6b1f117e736ac0b5",
+    "workspace/state/catalog/objects/0a886430f3bb35a6317ee34adda0fc528cc0a76d7311f517883a9c3918f024f4.json": "0a886430f3bb35a6317ee34adda0fc528cc0a76d7311f517883a9c3918f024f4",
+    "workspace/state/catalog/objects/1ebdfc01d9fa9a2075b1a944c50eb8f8feebd80ae8f457e564f6e82886ecef0c.json": "1ebdfc01d9fa9a2075b1a944c50eb8f8feebd80ae8f457e564f6e82886ecef0c",
+    "workspace/state/catalog/objects/1fe3d939fbadbc4915ee434b5c7247ba35c47e561012f918ce8e901af352caa0.json": "1fe3d939fbadbc4915ee434b5c7247ba35c47e561012f918ce8e901af352caa0",
+    "workspace/state/catalog/objects/252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810.json": "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+    "workspace/state/catalog/objects/278110548aabf9fdddb586627384bd986b3ff7ca9ec98ce8ea142ed8289cb5f2.json": "278110548aabf9fdddb586627384bd986b3ff7ca9ec98ce8ea142ed8289cb5f2",
+    "workspace/state/catalog/objects/31425f338b6178ad47f9030cbad972fcba4f91f53cc52449590ebd0a68a9cddb.json": "31425f338b6178ad47f9030cbad972fcba4f91f53cc52449590ebd0a68a9cddb",
+    "workspace/state/catalog/objects/3307da8655a36aefe7b80b483ded8eac8300bc51cb635117489af03f2808c67b.json": "3307da8655a36aefe7b80b483ded8eac8300bc51cb635117489af03f2808c67b",
+    "workspace/state/catalog/objects/33fe637c8299e19a1d299ce8f43b36c94b1aac8d820b080dfae3424cdd667d28.json": "33fe637c8299e19a1d299ce8f43b36c94b1aac8d820b080dfae3424cdd667d28",
+    "workspace/state/catalog/objects/393204bf88ed3f3c23490113241b808ce6478339dbb17727fc10c7a507aa06d1.json": "393204bf88ed3f3c23490113241b808ce6478339dbb17727fc10c7a507aa06d1",
+    "workspace/state/catalog/objects/5c52e92c36383c3b23cd1dac31adf9d88c0559d0688f61871d0882633b7608ca.json": "5c52e92c36383c3b23cd1dac31adf9d88c0559d0688f61871d0882633b7608ca",
+    "workspace/state/catalog/objects/5cddeda02eb3ba4c5a0e2a2536809192385ee62257a07317b987618a57c5e99b.json": "5cddeda02eb3ba4c5a0e2a2536809192385ee62257a07317b987618a57c5e99b",
+    "workspace/state/catalog/objects/619b363946fdb5833557d6855b2bfb77fd3781cba6f6f8ea9d3c01cac64d2c94.json": "619b363946fdb5833557d6855b2bfb77fd3781cba6f6f8ea9d3c01cac64d2c94",
+    "workspace/state/catalog/objects/6711b684e65ee14b13c5b13c6e1a8b6c25447321b36d998327d9849e442f6646.json": "6711b684e65ee14b13c5b13c6e1a8b6c25447321b36d998327d9849e442f6646",
+    "workspace/state/catalog/objects/7a533214262d4f41b58e8de9889f3645c527f898d8394305535dfddb0500b5f6.json": "7a533214262d4f41b58e8de9889f3645c527f898d8394305535dfddb0500b5f6",
+    "workspace/state/catalog/objects/7f0c103962aafba17c36fa0f0f4f5d7d417fa12c3e5cc4c9b8d6a28eb0288bae.json": "7f0c103962aafba17c36fa0f0f4f5d7d417fa12c3e5cc4c9b8d6a28eb0288bae",
+    "workspace/state/catalog/objects/834338ce7b067a98e834365e214c487311fe4893e8b1ac677a8f978395e7e8a6.json": "834338ce7b067a98e834365e214c487311fe4893e8b1ac677a8f978395e7e8a6",
+    "workspace/state/catalog/objects/8e78d64e25b1c99efe16329334459cfd9d682f6d9ba72e5f563ae0b9a7fe3eb5.json": "8e78d64e25b1c99efe16329334459cfd9d682f6d9ba72e5f563ae0b9a7fe3eb5",
+    "workspace/state/catalog/objects/90d66e96a1f4c51c9f5a0b0125cda7eaac729ea1e41cde6f0c6f12abf210be0d.json": "90d66e96a1f4c51c9f5a0b0125cda7eaac729ea1e41cde6f0c6f12abf210be0d",
+    "workspace/state/catalog/objects/9171d95d8653783dba11fb620e10e7a430ce48ba9308c7dce27e58c7ba8aae7c.json": "9171d95d8653783dba11fb620e10e7a430ce48ba9308c7dce27e58c7ba8aae7c",
+    "workspace/state/catalog/objects/9249a19de6c4a83b00a6e7f7afa49ce57a1157255d960860817711248020a4ec.json": "9249a19de6c4a83b00a6e7f7afa49ce57a1157255d960860817711248020a4ec",
+    "workspace/state/catalog/objects/9d4baf460f2d7c2bf0bc6a5c9b64fd9967836dd6a0b90a3bf71e7fff731c9a52.json": "9d4baf460f2d7c2bf0bc6a5c9b64fd9967836dd6a0b90a3bf71e7fff731c9a52",
+    "workspace/state/catalog/objects/9e333e5270850365c70565bbbc3dd85a5914281d3d1e447767441b5176451821.json": "9e333e5270850365c70565bbbc3dd85a5914281d3d1e447767441b5176451821",
+    "workspace/state/catalog/objects/a403af1d6f39d4cbb8548d5feb5457babfd6a4d9e20ca7ba0c02321cff5591f3.json": "a403af1d6f39d4cbb8548d5feb5457babfd6a4d9e20ca7ba0c02321cff5591f3",
+    "workspace/state/catalog/objects/a48130159c42117a2877c9738aa5bca6bf333d838f2d27a14fcdf32fceed6805.json": "a48130159c42117a2877c9738aa5bca6bf333d838f2d27a14fcdf32fceed6805",
+    "workspace/state/catalog/objects/a4a6e1a1add6084c0b02cf9d8d8da0a1d325d1b1fd2aee7074200a8632719574.json": "a4a6e1a1add6084c0b02cf9d8d8da0a1d325d1b1fd2aee7074200a8632719574",
+    "workspace/state/catalog/objects/a55aad1d8dea6d37856c48ebe823b68b4e96cb69133293c402ae8aef70d15142.json": "a55aad1d8dea6d37856c48ebe823b68b4e96cb69133293c402ae8aef70d15142",
+    "workspace/state/catalog/objects/a75f2465a62ecc8731fad7b6b5a2b15c266b7f784d7e413caf89fedb55124ff4.json": "a75f2465a62ecc8731fad7b6b5a2b15c266b7f784d7e413caf89fedb55124ff4",
+    "workspace/state/catalog/objects/b559630d159e0193928e2c571649b2e3a4e73373cc3d14d9957b33d169851b74.json": "b559630d159e0193928e2c571649b2e3a4e73373cc3d14d9957b33d169851b74",
+    "workspace/state/catalog/objects/ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148.json": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+    "workspace/state/catalog/objects/c4a474e68330a5502dc94b3f2ce41dfbe67b6a86334dee4554b5f30d1c2baca4.json": "c4a474e68330a5502dc94b3f2ce41dfbe67b6a86334dee4554b5f30d1c2baca4",
+    "workspace/state/catalog/objects/cfe7e566f9192f0b8bd5a9e6de5699601b04d031685d2552e17ca036987848eb.json": "cfe7e566f9192f0b8bd5a9e6de5699601b04d031685d2552e17ca036987848eb",
+    "workspace/state/catalog/objects/d8a900d6009f92ff9005e676abc174b7eb88104390c5f5ab3a4a2d386cacd54c.json": "d8a900d6009f92ff9005e676abc174b7eb88104390c5f5ab3a4a2d386cacd54c",
+    "workspace/state/catalog/objects/d902524835e97c62d000dab7b2bbc12e57701d826f50ccd6950f5628b618c770.json": "d902524835e97c62d000dab7b2bbc12e57701d826f50ccd6950f5628b618c770",
+    "workspace/state/catalog/objects/dc30f40ca61b6156aed18f3a99f361cacd762673f97671704f00ba2162e6cb23.json": "dc30f40ca61b6156aed18f3a99f361cacd762673f97671704f00ba2162e6cb23",
+    "workspace/state/catalog/objects/eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d.json": "eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d",
+    "workspace/state/catalog/objects/f576b27814b88b42de2ec49b485986c85f22ff516a00f10bb114ad17c496e5ad.json": "f576b27814b88b42de2ec49b485986c85f22ff516a00f10bb114ad17c496e5ad",
+    "workspace/state/catalog/objects/ffc199c2f2e3730cb23c55a2cc3eda1bb391393186d722bd7aef378d29b1b91b.json": "ffc199c2f2e3730cb23c55a2cc3eda1bb391393186d722bd7aef378d29b1b91b",
+    "docs/evidence/stage-11-before-text-output-verification-20260921.json": "f008997a83311a179305464974ece33127e59815e9c7956ef88cf261a97a91fb",
+    "docs/evidence/stage-11-comfy-export-20260921.json": "2af72da55b90867df8b59520a94cafba7c94740f5df71af5a04ffe75d2d7da26",
+    "docs/evidence/stage-11-comfy-export-qualified-20260921.json": "e160dec3ec2857b684a2768d43aa56e916c4202298f83c565fc82adeadbecf60",
+    "docs/evidence/stage-11-comfy-export-transport-20260921.json": "2e396493847e2297f98bed5b6a44c9dc00995156712293a0d59d373b22cbdf99",
+    "docs/evidence/stage-11-comfy-mapping-20260921.json": "046198f14ee9c4a0b7d0da821127d58da347ca2157ff79e9f849a6f24667135c",
+    "docs/evidence/stage-11-training-attempt-01-20260921.json": "f07a78097d99623fb3dff7c7286dfd8fdfede821a29a54fdbc2e09b42c587b76",
+    "docs/evidence/stage-11-training-attempt-02-20260921.json": "6eeed7577551148b3b5baf9a947d0a62b9e284936e22597d48f7a80d9b747911",
+    "docs/evidence/stage-11-training-attempt-03-20260921.json": "3701f0d2044b9dc279728a0bbc3682902cd62f38160a922efb6a2529d3a2daf7",
+    "docs/evidence/stage-11-training-attempt-04-20260921.json": "379beaa5c5b13bca84e0ad99f4590ec4c05e1a147c3ff3a97c83ce9bae7cfa43",
+    "docs/evidence/stage-11-verification-20260921.json": "3a8847ec22a575acf50c2551affc9d9d3b50066aa9150966af67b710403dad16",
+    "docs/evidence/stage-11-visual-review-20260921.json": "1a9e69b5acd27745635298b5671e67227ad2efe444bfb1730c34da87fe619679",
+    "docs/evidence/stage-11b-assistant-observations-20260922.json": "0a2801aa0232ea3ca5a7a83d151c2da10497574284041da8c4a0e8d416917086",
+    "docs/evidence/stage-11b-cache-release-20260922.json": "925b329d858a431132b0c711738a3511169a6beebbc88f481fa637d1723ed81f",
+    "docs/evidence/stage-11b-comfy-export-20260922.json": "e071fec654c5d3d3988d9a07a81ccee5e80ee9eb38c21fd583dd455068969471",
+    "docs/evidence/stage-11b-curation-20260922.json": "4b50f361fbe48200a5dc55208d8fcf740046a0c6436ecfb372424e7db0b581a0",
+    "docs/evidence/stage-11b-development-findings-20260922.json": "f69a96b492d27d3c88fac6b91f85de735d9a9a5c20646776ed070898cf1842f1",
+    "docs/evidence/stage-11b-heldout-decode-20260922.json": "f36982443b92a88d0a7515ea8a1c294064f6ace17adb5025f6947107e3b1905d",
+    "docs/evidence/stage-11b-images-20260922.json": "422c9f33e4d57ecc635cd06da7676801a0399e812531bbde53b952aaafdaa9c9",
+    "docs/evidence/stage-11b-training-attempt-01-20260922.json": "bdf14678619e4645ae5c030b26180599cd69457603cc8b1133a7d9ba9d2e3962",
+    "docs/evidence/stage-11b-training-attempt-02-20260922.json": "de36515332abace6e78d67b7e7cdfa60f30d1eb8d37bc2342da268555f24753d",
+    "docs/evidence/stage-11b-training-attempt-03-20260922.json": "57376ea401def4f430e404a205bc14ce3304205ae797849c1cfbfe93ddd0966e",
+    "docs/evidence/stage-11b-verification-20260922.json": "c9ebdd9dd50f512ebac08244a1ab110d120dbab8d10182fbba228ed32c3b3207",
+    "docs/evidence/review-policy-reassessment-20260922.json": "de4c9bcfad3af60808af2fc592e6d015960ee06797442e55dee27a8c71bc9c64",
+    "docs/evidence/review-policy-verification-20260922.json": "cfb21aacb6c61b7f498b6f9aebe1ca27a6d972b7cc5356a288efc24b1383725d"
+  },
+  "native_process_checks": [
+    "Owned Windows fixture workers publish valid, PNG, truncated and incomplete results; no automatic second attempt",
+    "Injected final record replacement failure leaves validating state; recovery checks valid, partial, stale and uncertain-owner cases",
+    "Actual controller process killed after durable validating record; recovery confirms dead identity, reuses same result/worker identity and releases abandoned lease",
+    "Ctrl+C during weights inspection records weights boundary and stops owned process/releases lease"
+  ],
+  "earlier_failures_retained": [
+    "Initial .test-tmp/a01-initial run: 1 passed, 116 setup errors caused by access denied. Used fresh workspace-local basetemp and cache; no deletion or permission override.",
+    "First runnable focused pass: 116 passed, 1 failed. Old success fixture published arbitrary non-weight bytes; now publishes finite synthetic safetensors and complete diagnostic records. Invalid weight fixtures remain explicit failures.",
+    "Whole-directory Ruff scan includes pre-existing .cipher-review-temp invalid/binary fixture .py files. Retained those files; final lint/format scope is src, tests, scripts and pyproject.toml.",
+    "First real controller-kill test confused Windows venv launcher PID with interpreter PID. Revised harness uses base interpreter plus explicit inherited test import paths; subsequent missing worker test imports also corrected.",
+    "Initial replay helper wrongly required the smoke v2 assessment to have been saved. That assessment was previously only replayed; final helper checks deterministic unsaved smoke replay and exact saved curated assessment/candidate/promotion identity.",
+    "Initial README parity helper normalized source newlines but not wheel bytes. Exact byte comparison passes; neither README nor package needed a content fix.",
+    "Final interruption-boundary regression added after 911 source/148 wheel tests passed. Final suites pass 912 source/149 wheel tests."
+  ],
+  "limits": [
+    "Native protocol tests use synthetic result artifacts and mocked GPU/HTTP/memory probes; they are not new ML trials.",
+    "Actual model evidence is read-only replay of retained attempts. No new training, rendering, quality measurement, promotion or runtime deployment qualification.",
+    "Preview and quality matrix checks validate coverage and file hashes, not full image decoding or semantic quality.",
+    "Candidate remains rejected; Phase A and the application remain incomplete. A-02 and later tasks remain open.",
+    "Publication is not a cross-file atomic transaction; missing/malformed current run record is refused for explicit inspection.",
+    "Installed-wheel coverage is the 149 affected tests, not a second run of all 912 tests."
+  ],
+  "local_evidence_directory": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a01"
+}

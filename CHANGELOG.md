@@ -4,6 +4,15 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-22 — A-01 training result validation and recovery
+
+- Extracted a shared read-only result validator for training execution, status and technical assessment. The controller now requires finite supported safetensors, complete optimizer/held-out/preview/quality evidence and fresh execution inputs before recording `artifacts_validated`. Worker completion and candidate assessment have separate meanings.
+- Added version 2 run states, named failure boundaries, relevant artifact paths and next actions in text/JSON output. Historical `succeeded` records are inspected without rewriting them. The actual Stage 11B PNG-as-weights result now reports `failed` at `weights`, preserving its original saved status and evidence.
+- Retained controller transitions before current-record replacement. Explicit recovery verifies dead controller/worker/native-job ownership; interrupted validation can finalize existing valid artifacts, while invalid/stale evidence fails at its boundary. Interrupted execution remains failed. Recovery never relaunches training.
+- Verified corrupt weights, incomplete diagnostic matrices, stale inputs, partial publication, uncertainty refusal, Ctrl+C boundary reporting, and an actual killed Windows controller followed by lease recovery. Native tests use synthetic artifacts and mocked GPU/runtime probes; actual model evidence is read-only replay, with no new training or quality claim.
+- Passed 912 source tests and 149 affected tests against the installed Python 3.11 wheel, scoped lint/format, source/wheel/installed parity for 43 modules, exact README packaging and actual text/JSON replay. Preserved 103 snapshotted historical files, existing candidate/rejection identities and SCM 0.5.0. The [verification receipt](docs/evidence/phase-a01-verification-20260922.json) retains earlier failures and precise limits; whole-directory lint still encounters pre-existing generated cipher fixtures.
+- Documented [states, validation scope and recovery](docs/training-result-states.md), and moved A-01 out of the active TODO. A-02 is next. Phase A and ITOV remain incomplete; the curated candidate remains rejected for its recorded quality failures.
+
 ### 2026-09-22 — Scope correction, autonomous review and development-plan reset
 
 - Corrected the completion narrative: ITOV is an incomplete application with low-level foundations and bounded prototype trials. Earlier stage-level completion labels overstated readiness. The [source audit](docs/development-audit-20260922.md) identifies result-validation gaps, disconnected candidate/runtime integration, separate ownership paths, fixed dataset/training helpers, missing checkpoint/resume methods and inadequate evaluation coverage.
