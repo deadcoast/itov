@@ -1,0 +1,172 @@
+{
+  "observed_at": "2026-09-22T05:09:38.748520+00:00",
+  "package_version": "0.11.0",
+  "platform": "Windows",
+  "checks": [
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.046,
+      "stdout": "65 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage10-final-source"
+      ],
+      "exit_code": 0,
+      "seconds": 210.243,
+      "stdout": "........................................................................ [  9%]\n........................................................................ [ 18%]\n........................................................................ [ 28%]\n........................................................................ [ 37%]\n........................................................................ [ 47%]\n........................................................................ [ 56%]\n........................................................................ [ 66%]\n........................................................................ [ 75%]\n........................................................................ [ 84%]\n........................................................................ [ 94%]\n...........................................                              [100%]\n763 passed in 209.90s (0:03:29)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_import",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov,importlib.metadata; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.11.0'; assert importlib.metadata.version('scm-dev-tools')=='0.5.0'; print('Preserved SCM 0.5.0')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.152,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py\nPreserved SCM 0.5.0\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.103,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.11.0.tar.gz\nSuccessfully built dist\\itov-0.11.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "installed_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8f6dc8ea8febff6a088bc6f72f205ab1555ef9f0ba7a4ff0fa96a3e085de0937\\itov-0.11.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.11.0'; assert all((root/p.name).read_bytes()==p.read_bytes() for p in files); print(sys.version); print(root); print(len(files),'modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.987,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\Tg9qJVb4tTHQvxsVhjPI4\\Lib\\site-packages\\itov\n36 modules match source\n",
+      "stderr": "Installed 9 packages in 460ms\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8f6dc8ea8febff6a088bc6f72f205ab1555ef9f0ba7a4ff0fa96a3e085de0937\\itov-0.11.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage10-final-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 233.124,
+      "stdout": "........................................................................ [  9%]\n........................................................................ [ 18%]\n........................................................................ [ 28%]\n........................................................................ [ 37%]\n........................................................................ [ 47%]\n........................................................................ [ 56%]\n........................................................................ [ 66%]\n........................................................................ [ 75%]\n........................................................................ [ 84%]\n........................................................................ [ 94%]\n...........................................                              [100%]\n763 passed in 231.68s (0:03:51)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_offline_cli_and_prior_completed_replays",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "\nimport io,json,sys\nfrom pathlib import Path\nfrom contextlib import redirect_stdout\nfrom itov.cli import main\nfrom itov.comfyui import ComfyUIClient\nfrom itov.catalog import sha256\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\ne=json.loads(Path('docs/evidence/stage-10-offline-20260921.json').read_bytes())\nassert e['passed']\ndef forbidden(*args,**kwargs): raise AssertionError('Offline CLI attempted runtime HTTP')\nComfyUIClient._json=forbidden\ndef check(command,expected=0):\n    out=io.StringIO()\n    with redirect_stdout(out): code=main(command)\n    assert code==expected,(command,code,out.getvalue())\n    result=json.loads(out.getvalue())\n    if 'report_id' in result:\n        assert result['ok']==(expected==0)\n        print(command[:2],result['report_id'],result['normalization'],result['counts'])\n    else: print(command[:2],'completed offline replay')\n    return result\ncheck(['trigger','lint','examples/trigger.rules.json','--json'])\nfor kind in ('image','audio'):\n    plan=e['plans'][kind]['path']\n    check(['trigger','lint','examples/trigger.rules.json','--plan',plan,'--json'])\n    first=check(['scene','lint',f'examples/neutral-{kind}.scene.json','--plan',plan,'--save','--json'])\n    again=check(['scene','lint',f'examples/neutral-{kind}.scene.json','--plan',plan,'--save','--json'])\n    assert first==again\n    assert first['findings']==e['reports'][kind+'_scene']['findings']\nfailed=check(['scene','lint',e['rejected_constraints_path'],'--plan',e['plans']['image']['path'],'--json'],1)\nassert failed['findings']==e['reports']['rejected_scene']['findings']\nfor name,command,key,extra in [\n    ('stage-09b-parallel-20260921.json','parallel','plan_path',[]),\n    ('stage-09-admission-20260921.json','batch','guarded_plan_path',['--config','workspace/itov-vram.toml']),\n    ('stage-08-audio-20260921.json','batch','plan_path',[]),\n    ('stage-07-video-20260921.json','batch','plan_path',[]),\n]:\n    prior=json.loads((Path('docs/evidence')/name).read_bytes())\n    check([command,'resume',prior[key],*extra,'--json'])\nassert all(sha256((config.root/p).read_bytes())==digest for p,digest in e['preserved_file_sha256'].items())\nprint('Passed actual offline CLI policies and prior completed replays; zero HTTP; preserved 146 prior files')\n"
+      ],
+      "exit_code": 1,
+      "seconds": 3.033,
+      "stdout": "['trigger', 'lint'] e00a87a587ecae51e2f85045b5e6440d96e0064f494385477d97adf68314f254 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['trigger', 'lint'] 1e07f87f7991ece4a9c4384427e57b40b1eb6ee7a5e681d6fe835a07fa4ca783 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] e74a0d3a321b9b8299aaf26fe41e6af6dab3190a8314d7c55fcd0b32af5ea368 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] e74a0d3a321b9b8299aaf26fe41e6af6dab3190a8314d7c55fcd0b32af5ea368 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['trigger', 'lint'] dc5d693086f8b7452ad1d551afb2f3409990b2e54548b5aefe33b51fca770a48 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] c5e6debe2656c5663622ab1f4f3542242812f18e6f35b5bc4b51608fe13e32f4 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] c5e6debe2656c5663622ab1f4f3542242812f18e6f35b5bc4b51608fe13e32f4 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] 57bc00cc2cef40d207d31e4d5dfd94d1fc4d0039b09fa886fc418c3521a280e2 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 4, 'warning': 0}\n['parallel', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 42, in <module>\n    assert all(sha256((config.root/p).read_bytes())==digest for p,digest in e['preserved_file_sha256'].items())\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "retained_initial_failures": [
+    {
+      "scope": "Initial Stage 10 fixture suite",
+      "result": "32 passed, 2 failed, 29 setup errors",
+      "cause": "Fixtures attempted to change pinned inference metadata before inference planning, left an invalid cross-model pairing, and reimported a deliberately altered asset.",
+      "correction": "Build the initial pinned request before importing explicit fixture metadata, use generic catalog planning afterward, remove the now-invalid fixture pairing, and restore deliberately tampered bytes before the independent stale-head check. Production checks were unchanged.",
+      "local_detail": "workspace/state/verification/stage10-initial-focused.txt"
+    },
+    {
+      "scope": "Added unselected-LoRA regression",
+      "result": "69 passed, 1 failed",
+      "cause": "New fixture reused a catalog asset path, correctly rejected by catalog validation.",
+      "correction": "Use a distinct pinned plain-byte fixture asset; the targeted regression passed."
+    }
+  ],
+  "limits": [
+    "New tests qualify offline lexical and metadata behavior with plain-byte model fixtures, not trained activation, tokenization, inference, or media quality.",
+    "Actual current-catalog/plan exercise is separately recorded in stage-10-offline-20260921.json; its LCM entry has no declared triggers.",
+    "Unicode table identity is bound in reports; Python 3.11/3.13 may produce different report IDs.",
+    "Previous completed media/parallel resume is offline regression evidence, not a new execution trial."
+  ]
+}

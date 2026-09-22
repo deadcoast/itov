@@ -1,0 +1,304 @@
+{
+  "observed_at": "2026-09-22T05:09:38.748520+00:00",
+  "package_version": "0.11.0",
+  "platform": "Windows",
+  "checks": [
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.046,
+      "stdout": "65 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage10-final-source"
+      ],
+      "exit_code": 0,
+      "seconds": 210.243,
+      "stdout": "........................................................................ [  9%]\n........................................................................ [ 18%]\n........................................................................ [ 28%]\n........................................................................ [ 37%]\n........................................................................ [ 47%]\n........................................................................ [ 56%]\n........................................................................ [ 66%]\n........................................................................ [ 75%]\n........................................................................ [ 84%]\n........................................................................ [ 94%]\n...........................................                              [100%]\n763 passed in 209.90s (0:03:29)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_import",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov,importlib.metadata; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.11.0'; assert importlib.metadata.version('scm-dev-tools')=='0.5.0'; print('Preserved SCM 0.5.0')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.152,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py\nPreserved SCM 0.5.0\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.103,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.11.0.tar.gz\nSuccessfully built dist\\itov-0.11.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "installed_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8f6dc8ea8febff6a088bc6f72f205ab1555ef9f0ba7a4ff0fa96a3e085de0937\\itov-0.11.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.11.0'; assert all((root/p.name).read_bytes()==p.read_bytes() for p in files); print(sys.version); print(root); print(len(files),'modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.987,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\Tg9qJVb4tTHQvxsVhjPI4\\Lib\\site-packages\\itov\n36 modules match source\n",
+      "stderr": "Installed 9 packages in 460ms\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8f6dc8ea8febff6a088bc6f72f205ab1555ef9f0ba7a4ff0fa96a3e085de0937\\itov-0.11.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage10-final-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 233.124,
+      "stdout": "........................................................................ [  9%]\n........................................................................ [ 18%]\n........................................................................ [ 28%]\n........................................................................ [ 37%]\n........................................................................ [ 47%]\n........................................................................ [ 56%]\n........................................................................ [ 66%]\n........................................................................ [ 75%]\n........................................................................ [ 84%]\n........................................................................ [ 94%]\n...........................................                              [100%]\n763 passed in 231.68s (0:03:51)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_offline_cli_and_prior_completed_replays",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "\nimport io,json,sqlite3\nfrom pathlib import Path\nfrom contextlib import redirect_stdout\nfrom itov.cli import main\nfrom itov.comfyui import ComfyUIClient\nfrom itov.catalog import sha256\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\ne=json.loads(Path('docs/evidence/stage-10-offline-20260921.json').read_bytes())\nassert e['passed']\ndatabase=config.root/'state/batches/execution.sqlite3'\nbefore_lint=sha256(database.read_bytes())\ndef forbidden(*args,**kwargs): raise AssertionError('Offline CLI attempted runtime HTTP')\nComfyUIClient._json=forbidden\ndef check(command,expected=0):\n    out=io.StringIO()\n    with redirect_stdout(out): code=main(command)\n    assert code==expected,(command,code,out.getvalue())\n    result=json.loads(out.getvalue())\n    if 'report_id' in result:\n        assert result['ok']==(expected==0)\n        print(command[:2],result['report_id'],result['normalization'],result['counts'])\n    else: print(command[:2],'completed offline replay')\n    return result\ncheck(['trigger','lint','examples/trigger.rules.json','--json'])\nfor kind in ('image','audio'):\n    plan=e['plans'][kind]['path']\n    check(['trigger','lint','examples/trigger.rules.json','--plan',plan,'--json'])\n    first=check(['scene','lint',f'examples/neutral-{kind}.scene.json','--plan',plan,'--save','--json'])\n    again=check(['scene','lint',f'examples/neutral-{kind}.scene.json','--plan',plan,'--save','--json'])\n    assert first==again\n    assert first['findings']==e['reports'][kind+'_scene']['findings']\nfailed=check(['scene','lint',e['rejected_constraints_path'],'--plan',e['plans']['image']['path'],'--json'],1)\nassert failed['findings']==e['reports']['rejected_scene']['findings']\nassert sha256(database.read_bytes())==before_lint,'Lint changed execution database'\nassert all(sha256((config.root/p).read_bytes())==digest for p,digest in e['preserved_file_sha256'].items() if Path(p)!=Path('state/batches/execution.sqlite3'))\nprint('Stage 10 lint: unchanged execution database and 145 other prior files; zero HTTP')\ndef state():\n    with sqlite3.connect(database.as_uri()+'?mode=ro',uri=True) as db:\n        return {table:db.execute('SELECT * FROM '+table+' ORDER BY '+order).fetchall() for table,order in [('runs','plan_id'),('jobs','plan_id,job_index'),('seeds','seed'),('events','sequence')]}\nbefore=state()\nreplayed=[]\nfor name,command,key,extra in [\n    ('stage-09b-parallel-20260921.json','parallel','plan_path',[]),\n    ('stage-09-admission-20260921.json','batch','guarded_plan_path',['--config','workspace/itov-vram.toml']),\n    ('stage-08-audio-20260921.json','batch','plan_path',[]),\n    ('stage-07-video-20260921.json','batch','plan_path',[]),\n]:\n    prior=json.loads((Path('docs/evidence')/name).read_bytes())\n    result=check([command,'resume',prior[key],*extra,'--json'])\n    if command=='batch': replayed.append(json.loads(Path(prior[key]).read_bytes()))\nafter=state()\nassert all(before[table]==after[table] for table in ('runs','jobs','seeds'))\nassert after['events'][:len(before['events'])]==before['events']\ntail=after['events'][len(before['events']):]\nexpected=[]\nfor plan in replayed:\n    expected.append((plan['plan_id'],None,'running'))\n    expected.extend((plan['plan_id'],job['index'],'succeeded') for job in plan['jobs'])\n    expected.append((plan['plan_id'],None,'succeeded'))\nassert [(row[1],row[2],row[3]) for row in tail]==expected,tail\nassert all(sha256((config.root/p).read_bytes())==digest for p,digest in e['preserved_file_sha256'].items() if Path(p)!=Path('state/batches/execution.sqlite3'))\nprint(json.dumps({'completed_replay_http_calls':0,'runs_jobs_seeds_unchanged':True,'audit_prefix_unchanged':True,'expected_audit_events_appended':len(tail),'non_database_files_unchanged':145}))\n"
+      ],
+      "exit_code": 0,
+      "seconds": 3.096,
+      "stdout": "['trigger', 'lint'] e00a87a587ecae51e2f85045b5e6440d96e0064f494385477d97adf68314f254 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['trigger', 'lint'] 1e07f87f7991ece4a9c4384427e57b40b1eb6ee7a5e681d6fe835a07fa4ca783 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] e74a0d3a321b9b8299aaf26fe41e6af6dab3190a8314d7c55fcd0b32af5ea368 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] e74a0d3a321b9b8299aaf26fe41e6af6dab3190a8314d7c55fcd0b32af5ea368 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['trigger', 'lint'] dc5d693086f8b7452ad1d551afb2f3409990b2e54548b5aefe33b51fca770a48 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] c5e6debe2656c5663622ab1f4f3542242812f18e6f35b5bc4b51608fe13e32f4 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] c5e6debe2656c5663622ab1f4f3542242812f18e6f35b5bc4b51608fe13e32f4 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] 57bc00cc2cef40d207d31e4d5dfd94d1fc4d0039b09fa886fc418c3521a280e2 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '15.1.0'} {'error': 4, 'warning': 0}\nStage 10 lint: unchanged execution database and 145 other prior files; zero HTTP\n['parallel', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n{\"completed_replay_http_calls\": 0, \"runs_jobs_seeds_unchanged\": true, \"audit_prefix_unchanged\": true, \"expected_audit_events_appended\": 12, \"non_database_files_unchanged\": 145}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_offline_cli_and_prior_completed_replays",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8f6dc8ea8febff6a088bc6f72f205ab1555ef9f0ba7a4ff0fa96a3e085de0937\\itov-0.11.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "\nimport io,json,sqlite3\nfrom pathlib import Path\nfrom contextlib import redirect_stdout\nfrom itov.cli import main\nfrom itov.comfyui import ComfyUIClient\nfrom itov.catalog import sha256\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\ne=json.loads(Path('docs/evidence/stage-10-offline-20260921.json').read_bytes())\nassert e['passed']\ndatabase=config.root/'state/batches/execution.sqlite3'\nbefore_lint=sha256(database.read_bytes())\ndef forbidden(*args,**kwargs): raise AssertionError('Offline CLI attempted runtime HTTP')\nComfyUIClient._json=forbidden\ndef check(command,expected=0):\n    out=io.StringIO()\n    with redirect_stdout(out): code=main(command)\n    assert code==expected,(command,code,out.getvalue())\n    result=json.loads(out.getvalue())\n    if 'report_id' in result:\n        assert result['ok']==(expected==0)\n        print(command[:2],result['report_id'],result['normalization'],result['counts'])\n    else: print(command[:2],'completed offline replay')\n    return result\ncheck(['trigger','lint','examples/trigger.rules.json','--json'])\nfor kind in ('image','audio'):\n    plan=e['plans'][kind]['path']\n    check(['trigger','lint','examples/trigger.rules.json','--plan',plan,'--json'])\n    first=check(['scene','lint',f'examples/neutral-{kind}.scene.json','--plan',plan,'--save','--json'])\n    again=check(['scene','lint',f'examples/neutral-{kind}.scene.json','--plan',plan,'--save','--json'])\n    assert first==again\n    assert first['findings']==e['reports'][kind+'_scene']['findings']\nfailed=check(['scene','lint',e['rejected_constraints_path'],'--plan',e['plans']['image']['path'],'--json'],1)\nassert failed['findings']==e['reports']['rejected_scene']['findings']\nassert sha256(database.read_bytes())==before_lint,'Lint changed execution database'\nassert all(sha256((config.root/p).read_bytes())==digest for p,digest in e['preserved_file_sha256'].items() if Path(p)!=Path('state/batches/execution.sqlite3'))\nprint('Stage 10 lint: unchanged execution database and 145 other prior files; zero HTTP')\ndef state():\n    with sqlite3.connect(database.as_uri()+'?mode=ro',uri=True) as db:\n        return {table:db.execute('SELECT * FROM '+table+' ORDER BY '+order).fetchall() for table,order in [('runs','plan_id'),('jobs','plan_id,job_index'),('seeds','seed'),('events','sequence')]}\nbefore=state()\nreplayed=[]\nfor name,command,key,extra in [\n    ('stage-09b-parallel-20260921.json','parallel','plan_path',[]),\n    ('stage-09-admission-20260921.json','batch','guarded_plan_path',['--config','workspace/itov-vram.toml']),\n    ('stage-08-audio-20260921.json','batch','plan_path',[]),\n    ('stage-07-video-20260921.json','batch','plan_path',[]),\n]:\n    prior=json.loads((Path('docs/evidence')/name).read_bytes())\n    result=check([command,'resume',prior[key],*extra,'--json'])\n    if command=='batch': replayed.append(json.loads(Path(prior[key]).read_bytes()))\nafter=state()\nassert all(before[table]==after[table] for table in ('runs','jobs','seeds'))\nassert after['events'][:len(before['events'])]==before['events']\ntail=after['events'][len(before['events']):]\nexpected=[]\nfor plan in replayed:\n    expected.append((plan['plan_id'],None,'running'))\n    expected.extend((plan['plan_id'],job['index'],'succeeded') for job in plan['jobs'])\n    expected.append((plan['plan_id'],None,'succeeded'))\nassert [(row[1],row[2],row[3]) for row in tail]==expected,tail\nassert all(sha256((config.root/p).read_bytes())==digest for p,digest in e['preserved_file_sha256'].items() if Path(p)!=Path('state/batches/execution.sqlite3'))\nprint(json.dumps({'completed_replay_http_calls':0,'runs_jobs_seeds_unchanged':True,'audit_prefix_unchanged':True,'expected_audit_events_appended':len(tail),'non_database_files_unchanged':145}))\n"
+      ],
+      "exit_code": 0,
+      "seconds": 3.268,
+      "stdout": "['trigger', 'lint'] 56930dcae2a5938f3286679088dba559bd87ecf846ec952f4873c7d4e01ae8a7 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '14.0.0'} {'error': 0, 'warning': 0}\n['trigger', 'lint'] ff3dc4d8336951421558cad2dce9d6fc1a16ead8f970a404af0a9dcc70bbddcb {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '14.0.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] 7a6fbcc331521c05acdbbcf4847c286a0107be40949944bc0102f154109dff9e {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '14.0.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] 7a6fbcc331521c05acdbbcf4847c286a0107be40949944bc0102f154109dff9e {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '14.0.0'} {'error': 0, 'warning': 0}\n['trigger', 'lint'] 337ffc2d7cfde02924fd83ef7e31c90449befdc8fa955f7a98ddc8cdca5d3a19 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '14.0.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] 4e5d2f07bdf7b10ac4d4ad54c33d0f5a9550143b8b1f81b384b6127163b7e0d2 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '14.0.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] 4e5d2f07bdf7b10ac4d4ad54c33d0f5a9550143b8b1f81b384b6127163b7e0d2 {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '14.0.0'} {'error': 0, 'warning': 0}\n['scene', 'lint'] c5cfac02aae804ceb368d9ac9e1d6e50ea8f9740fcfe773d75474762c5fc57bd {'algorithm': 'nfc-casefold-whitespace-v1', 'unicode': '14.0.0'} {'error': 4, 'warning': 0}\nStage 10 lint: unchanged execution database and 145 other prior files; zero HTTP\n['parallel', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n['batch', 'resume'] completed offline replay\n{\"completed_replay_http_calls\": 0, \"runs_jobs_seeds_unchanged\": true, \"audit_prefix_unchanged\": true, \"expected_audit_events_appended\": 12, \"non_database_files_unchanged\": 145}\n",
+      "stderr": ""
+    },
+    {
+      "name": "final_documentation_package_refresh",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.11.0.tar.gz\nSuccessfully built dist\\itov-0.11.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "final_documentation_wheel_install_and_offline_cli",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\eab6c42d6bb3d725e07c015a932fbae7f0f134ef28c731e2cd3e54723ca19fac\\itov-0.11.0-py3-none-any.whl",
+        "python",
+        "-c",
+        "\nimport email,io,json,tarfile,zipfile\nfrom pathlib import Path\nfrom contextlib import redirect_stdout\nimport itov\nfrom itov.cli import main\nfrom itov.comfyui import ComfyUIClient\nroot=Path(itov.__file__).parent\nfiles=list(Path('src/itov').glob('*.py'))\nassert 'site-packages' in str(root)\nassert itov.__version__=='0.11.0'\nassert all((root/p.name).read_bytes()==p.read_bytes() for p in files)\nwith zipfile.ZipFile('dist/itov-0.11.0-py3-none-any.whl') as z:\n    meta=email.message_from_bytes(z.read('itov-0.11.0.dist-info/METADATA'))\n    assert meta.get_payload(decode=True)==Path('README.md').read_bytes()\nwith tarfile.open('dist/itov-0.11.0.tar.gz') as tar:\n    assert tar.extractfile('itov-0.11.0/README.md').read()==Path('README.md').read_bytes()\ndef forbidden(*args,**kwargs): raise AssertionError('Offline lint attempted HTTP')\nComfyUIClient.__init__=forbidden\ne=json.loads(Path('docs/evidence/stage-10-offline-20260921.json').read_bytes())\nfor command in [['trigger','lint','examples/trigger.rules.json','--json'],['scene','lint','examples/neutral-image.scene.json','--plan',e['plans']['image']['path'],'--json']]:\n    out=io.StringIO()\n    with redirect_stdout(out): result=main(command)\n    assert result==0 and json.loads(out.getvalue())['ok']\nprint('Final README matches wheel/sdist; installed Python 3.11 CLI passed without HTTP; all 36 tested modules unchanged')\n"
+      ],
+      "exit_code": 0,
+      "seconds": 0.947,
+      "stdout": "Final README matches wheel/sdist; installed Python 3.11 CLI passed without HTTP; all 36 tested modules unchanged\n",
+      "stderr": ""
+    }
+  ],
+  "retained_initial_failures": [
+    {
+      "scope": "Initial Stage 10 fixture suite",
+      "result": "32 passed, 2 failed, 29 setup errors",
+      "cause": "Fixtures attempted to change pinned inference metadata before inference planning, left an invalid cross-model pairing, and reimported a deliberately altered asset.",
+      "correction": "Build the initial pinned request before importing explicit fixture metadata, use generic catalog planning afterward, remove the now-invalid fixture pairing, and restore deliberately tampered bytes before the independent stale-head check. Production checks were unchanged.",
+      "local_detail": "workspace/state/verification/stage10-initial-focused.txt"
+    },
+    {
+      "scope": "Added unselected-LoRA regression",
+      "result": "69 passed, 1 failed",
+      "cause": "New fixture reused a catalog asset path, correctly rejected by catalog validation.",
+      "correction": "Use a distinct pinned plain-byte fixture asset; the targeted regression passed."
+    },
+    {
+      "scope": "Initial final offline/replay verification",
+      "evidence": "stage-10-initial-verification-20260921.json",
+      "cause": "After all 763 source and wheel tests and all offline CLI commands passed, the harness incorrectly required byte-identical execution.sqlite3 after legacy batch resume. Existing resume appends running/job-success/run-success audit events.",
+      "correction": "Assert exact database bytes around Stage 10 lint only. For existing completed replay separately assert unchanged runs/jobs/seeds and an unchanged audit prefix plus only the expected successful replay events. Preserve all 145 non-database files. No product code or tests changed; reuse the completed suites and verify source bytes against the same built wheel."
+    },
+    {
+      "scope": "Final documentation package comparison",
+      "evidence": "stage-10-initial-package-check-20260921.json",
+      "cause": "The harness compared preserved CRLF metadata against newline-translated read_text output. Wheel and source README bytes actually matched exactly.",
+      "correction": "Compare decoded metadata bytes directly with README bytes; retain the unchanged product and package."
+    }
+  ],
+  "limits": [
+    "New tests qualify offline lexical and metadata behavior with plain-byte model fixtures, not trained activation, tokenization, inference, or media quality.",
+    "Actual current-catalog/plan exercise is separately recorded in stage-10-offline-20260921.json; its LCM entry has no declared triggers.",
+    "Unicode table identity is bound in reports; Python 3.11/3.13 may produce different report IDs.",
+    "Previous completed media/parallel resume is offline regression evidence, not a new execution trial."
+  ],
+  "completed_at": "2026-09-22T05:19:15.094235+00:00",
+  "source_sha256": {
+    "src/itov/__init__.py": "b2ebfdd11c4bc6cd00369180a41a9e991e40e6f68cafe3571ed132bed651fddf",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+    "src/itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+    "src/itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+    "src/itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+    "src/itov/batch_execution.py": "cde37a4566b175409a66945114e81e83c9b9582e46129d50209e666060117cd7",
+    "src/itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+    "src/itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+    "src/itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+    "src/itov/cli.py": "9ad97eca62e0958efda7d5c8d0d17425db9052944cb90e5f3b220856024758b2",
+    "src/itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+    "src/itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+    "src/itov/device.py": "91a07bcdad002a9b8a4f0bcc19232f0863bf7dadf39a8d8f2d48b9de774938a5",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/execution_store.py": "83d653dbd032595e8b4689aeb4bd18e9113d3020c918030df8fa61fe7e60f362",
+    "src/itov/inference.py": "ac08d4ecb954745da0781be1ecd4cf1fc5ed03833e97bdad2163859760dc6abf",
+    "src/itov/jobs.py": "0d7702175f0fca7f812f0e4fede137690cfe9b468b08b85d114e5db3be3b551d",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+    "src/itov/owned_jobs.py": "5eb31fc19bdf9fc1cd1f366e30cf66979df2f5ddf5c12920230b222c1ab97dd0",
+    "src/itov/parallel.py": "07559a6355e2cc8c729b4425fc4eadae0a56ec667d4d3f03a4db3c89d4b8e556",
+    "src/itov/qualification.py": "80d19c5eff4902b172d0e5be45f6214b7c7261b453356b403ebbebaa6bfc1279",
+    "src/itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+    "src/itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+    "src/itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+    "src/itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+    "src/itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+    "src/itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+    "src/itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+    "src/itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+    "src/itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+    "src/itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+    "src/itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+  },
+  "wheel_source_byte_parity": 36,
+  "artifact_sha256": {
+    "dist/itov-0.11.0-py3-none-any.whl": "eab6c42d6bb3d725e07c015a932fbae7f0f134ef28c731e2cd3e54723ca19fac",
+    "dist/itov-0.11.0.tar.gz": "e1bc84499bef7170f83da536c84629c17d6630dbcd3a07d0d1f73eda5bb8fbcf"
+  },
+  "example_sha256": {
+    "examples/neutral-audio.scene.json": "5b306db18467debbd0f8f9817a68defa5c8d97c7d1e93929a8606d70dff00519",
+    "examples/neutral-image.scene.json": "cd8f6ab1f0a2fc5c4073e9ab23e77ca191a772839cc725dd997d34776363e6c8",
+    "examples/trigger-base-vocab.json": "b8b705f2a7a1335867864527fa233986486b028cc2dca29bacfe3fc6ae1ba226",
+    "examples/trigger-reserved-vocab.json": "eb0635b1fe3a6686f1de3906176e6ddd479661baab967ce6dcc32bc7c4de18f5",
+    "examples/trigger.rules.json": "09541849ffaaf853984a67f3d6ea1611e2c6ea55ca067bb578316461f53a21bd"
+  },
+  "passed": true,
+  "tested_artifact_sha256": {
+    "dist/itov-0.11.0-py3-none-any.whl": "8f6dc8ea8febff6a088bc6f72f205ab1555ef9f0ba7a4ff0fa96a3e085de0937",
+    "dist/itov-0.11.0.tar.gz": "9697394264d79b7b0eaa7f9dab40887f741954e25883b3f896557abf562515d1"
+  },
+  "documentation_only_rebuild": {
+    "reason": "Include the final README correction linking the already completed parallel path.",
+    "changed_wheel_entries": [
+      "itov-0.11.0.dist-info/METADATA",
+      "itov-0.11.0.dist-info/RECORD"
+    ],
+    "all_tested_module_bytes_unchanged": true
+  }
+}

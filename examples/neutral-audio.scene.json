@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "id": "neutral-audio",
+  "origin": {
+    "title": "ITOV neutral operator demonstration",
+    "reference": "docs/triggers-and-scenes.md; example policy, not an upstream tokenizer vocabulary"
+  },
+  "presets": [
+    {
+      "preset": "audio-3e1964382ed7efb31ab4b227ceadf1317259f19858bd5e234aa32a85218dc65d",
+      "sampler": "7",
+      "required_positive": [
+        "quiet indoor room ambience",
+        "rain outside a window"
+      ],
+      "forbidden_positive": [],
+      "required_negative": [
+        "speech",
+        "music"
+      ],
+      "forbidden_negative": [],
+      "required_loras": [],
+      "forbidden_loras": [],
+      "max_loras": 0,
+      "max_words": {
+        "positive": 100,
+        "negative": 100
+      },
+      "triggers": "all_declared"
+    }
+  ]
+}

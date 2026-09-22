@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "origin": {
+    "title": "ITOV neutral operator demonstration",
+    "reference": "docs/triggers-and-scenes.md; example policy, not an upstream tokenizer vocabulary"
+  },
+  "near_distance": 2,
+  "vocabularies": [
+    {
+      "path": "trigger-base-vocab.json",
+      "sha256": "b8b705f2a7a1335867864527fa233986486b028cc2dca29bacfe3fc6ae1ba226"
+    },
+    {
+      "path": "trigger-reserved-vocab.json",
+      "sha256": "eb0635b1fe3a6686f1de3906176e6ddd479661baab967ce6dcc32bc7c4de18f5"
+    }
+  ]
+}

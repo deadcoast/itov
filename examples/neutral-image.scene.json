@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "id": "neutral-image",
+  "origin": {
+    "title": "ITOV neutral operator demonstration",
+    "reference": "docs/triggers-and-scenes.md; example policy, not an upstream tokenizer vocabulary"
+  },
+  "presets": [
+    {
+      "preset": "inference-ef1b965adc30c9c916a8d113a22d4eb46625970fd02c0fcea285566fd0455318",
+      "sampler": "6",
+      "required_positive": [
+        "red ceramic teapot",
+        "two green pears",
+        "pale wooden table"
+      ],
+      "forbidden_positive": [
+        "hand",
+        "person"
+      ],
+      "required_negative": [],
+      "forbidden_negative": [],
+      "required_loras": [
+        "inference-lcm-a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141"
+      ],
+      "forbidden_loras": [],
+      "max_loras": 1,
+      "max_words": {
+        "positive": 100,
+        "negative": 100
+      },
+      "triggers": "all_declared"
+    }
+  ]
+}

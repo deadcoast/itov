@@ -4,6 +4,15 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Stage 10 offline trigger and scene validation
+
+- Advanced ITOV to 0.11.0 with `trigger lint` and `scene lint`. Strict version-one contracts bind supplied vocabulary/constraint bytes, catalog and ledger heads, replayed plans and Unicode normalization identity. Optional saved reports are immutable and deterministic; schema, stale-input and resource-bound failures are explicit.
+- Added normalized exact/near trigger collisions, single-holder reserved-word errors, declared base-vocabulary warnings, explicit uncovered-model diagnostics and per-job selected-stack scope. Aliases are report labels only; prompts and learned activation tokens are never rewritten. Severity counts do not claim a quality score.
+- Added independent positive/negative phrase, word-count, selected-LoRA and explicit declared-trigger checks on stock image/audio conditioning paths. Unknown or ambiguous graphs are refused. Reconciled conflicting Part 12 implementations and deferred the separate Part 12.2 corpus-balancing solver to Stage 12.
+- Exercised the actual local catalog and two image/two audio planned jobs with zero runtime HTTP. Retained a deliberately rejected scene policy with four errors; all 146 prior catalog/workflow/job/database files remained unchanged. The real LCM has no declared triggers; metadata fixtures establish collision coverage, not trained activation. [Offline evidence](docs/evidence/stage-10-offline-20260921.json).
+- Added [contracts and examples](docs/triggers-and-scenes.md), retained initial test-fixture failures and their corrections, and recorded Stage 11 trainer/dataset/evaluation requirements in [TODO](TODO.md). Prior rendered-media defects and quality gates remain open.
+- Passed 763 source tests on Python 3.13.9 and 763 installed-wheel tests on Python 3.11.14; lint, formatting, both builds and 36-module parity passed. Actual offline CLI checks and completed parallel/guarded/audio/video replays passed in both environments with zero HTTP. Corrected a verification-harness assumption about legacy resume's expected audit writes: lint preserves database bytes; replay preserves runs/jobs/seeds and appends exactly 12 expected events. Product code was unchanged by that correction. [Final verification](docs/evidence/stage-10-verification-20260921.json) and [initial failure](docs/evidence/stage-10-initial-verification-20260921.json). Stage 10 is complete for this bounded offline scope; SCM 0.5.0 remains installed.
+
 ### 2026-09-21 — Stage 9B live parallel qualification
 
 - After the user freed host memory, admitted the previously unclaimed two-job audio plan using the same calibration, source and policy margins. Available commit after worker startup was 30,357,254,144 bytes against the 23,702,423,143-byte requirement; retained the earlier refusal.

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "origin": {
+    "title": "ITOV neutral operator demonstration",
+    "reference": "docs/triggers-and-scenes.md; example policy, not an upstream tokenizer vocabulary"
+  },
+  "base_models": [
+    "sdxl-1.0",
+    "stable-audio-open-1.0"
+  ],
+  "kind": "reserved",
+  "terms": [
+    "itov_reserved_camera"
+  ]
+}

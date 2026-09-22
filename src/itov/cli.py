@@ -230,6 +230,17 @@ def parser() -> argparse.ArgumentParser:
         item.add_argument("--gpu", required=True, help="Exact NVIDIA GPU UUID")
         if action == "recover":
             item.add_argument("--lease", required=True, help="Exact abandoned lease UUID")
+    for name in ("trigger", "scene"):
+        lint_group = commands.add_parser(name, help="Offline catalog/plan lint without rewrites")
+        lint_actions = lint_group.add_subparsers(dest="action", required=True)
+        lint = lint_actions.add_parser("lint")
+        lint.add_argument("file", type=Path, help="Trigger rules or scene constraints JSON")
+        lint.add_argument("--plan", type=Path, required=name == "scene")
+        lint.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        lint.add_argument("--save", action="store_true", help="Save an immutable lint report")
+        lint.add_argument("--json", action="store_true")
+        if name == "trigger":
+            lint.add_argument("--strict", action="store_true", help="Treat warnings as failure")
     return root
 
 
@@ -326,6 +337,29 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1
+        elif args.command in {"trigger", "scene"}:
+            from itov import scene, trigger
+
+            config = load_config(args.config)
+            if args.command == "trigger":
+                result = trigger.lint(
+                    config, args.file, plan_path=args.plan, strict=args.strict, save=args.save
+                )
+            else:
+                result = scene.lint(config, args.file, args.plan, save=args.save)
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print(
+                    f"{'PASS' if result['ok'] else 'FAIL'} {args.command} lint: "
+                    f"{result['counts']['error']} errors, {result['counts']['warning']} warnings"
+                )
+                for finding in result["findings"]:
+                    print(json.dumps(finding, ensure_ascii=False))
+                if result["saved_path"]:
+                    print("Saved report:", result["saved_path"])
+                print(result["limits"])
+            return 0 if result["ok"] else 1
         elif args.command == "device":
             from itov import device
 

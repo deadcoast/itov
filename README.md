@@ -1,6 +1,6 @@
 # ITOV
 
-ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, versioned preset/LoRA catalogs, deterministic batch planning, qualified sequential execution, and Windows device ownership for measured two-worker audio trials. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
+ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, versioned preset/LoRA catalogs, deterministic batch planning, qualified sequential execution, Windows device ownership for measured two-worker audio trials, and offline trigger/scene validation. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
 
 To combine a directory of Markdown specifications into one searchable PDF, run
 `.\markdown-to-pdf.ps1` (prompts for a path) or `.\markdown-to-pdf.ps1 "C:\path\to\specs"`.
@@ -171,7 +171,7 @@ The mux example references the completed jobs in this qualification workspace. F
 
 Version 0.9.0 adds `vram server`, `vram capture` and `vram check`, plus optional `batch run --vram-profile` guards. The observer measures memory inside ComfyUI and keeps allocator peaks separate from sampled whole-device usage. Admission requires repeated cold/warm evidence for the exact workload and runtime, with conservative margins and fresh checks before each submission. Missing, stale or mismatched evidence is refused; resume retains its guard.
 
-See [VRAM setup, commands, policy and evidence](docs/vram-profiling.md). Execution remains sequential. Parallel workers require the next ownership and qualification gate.
+See [VRAM setup, commands, policy and evidence](docs/vram-profiling.md). These VRAM commands support sequential execution. Managed parallel workers use the separate [ownership and qualification path](docs/parallel-execution.md).
 
 ## Development
 
@@ -192,3 +192,14 @@ Automated tests use temporary workspaces, a local HTTP fixture, and owned child 
 ITOV 0.10.0 adds `parallel calibrate`, `parallel qualify`, `parallel resume/recover` and `device status/recover`. Two isolated Windows workers share one workspace seed registry and a same-user GPU lease. Repeated exact-workload calibration feeds aggregate GPU and host-memory admission. See the [commands, ownership scope, recovery and evidence](docs/parallel-execution.md).
 
 Eight real calibration jobs passed. The first parallel trial refused insufficient host commit before submission; after memory was freed, two audio jobs passed unchanged admission and overlapped for 4.087 seconds. Distinct decoded FLACs, zero-HTTP completed replay and confirmed worker shutdown passed. [Live qualification and completion evidence](docs/parallel-execution.md#evidence) establish this bounded Windows/audio path; GPU-kernel overlap, speedup and media quality remain unqualified.
+
+## Trigger and scene validation
+
+ITOV 0.11.0 adds offline catalog/plan trigger collision review and explicit scene constraints:
+
+```powershell
+uv run --locked itov trigger lint examples/trigger.rules.json --json
+uv run --locked itov scene lint examples/neutral-image.scene.json --plan PATH_TO_SAVED_PLAN --save --json
+```
+
+Rules bind supplied vocabulary bytes; scene constraints check the actual selected LoRAs and positive/negative text in replayed plans. Reports preserve provenance and use aliases only as labels; activation tokens and prompts are never rewritten. The included vocabularies are demonstration operator policy. See [contracts, examples, limits and evidence](docs/triggers-and-scenes.md). Passing lexical checks does not prove trigger activation or rendered-media quality; the current real LCM entry has no declared triggers.

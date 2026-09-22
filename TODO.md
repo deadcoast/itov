@@ -2,7 +2,7 @@
 
 Updated 2026-09-21. This is the working task list for continued development. The [build plan](docs/development-review.md) records design decisions and acceptance evidence; [CHANGELOG.md](CHANGELOG.md) records delivered increments. Original documents under `docs/design_spec/` are design inputs, not proof that their examples work.
 
-Current checkpoint: stages 9A and 9B are complete for the documented Windows baseline. Two real audio jobs passed admission and overlapped for 4.087 seconds after host memory was freed; distinct artifacts, offline replay and confirmed worker shutdown passed. Next is Stage 10 trigger and scene constraints. Image/video defects, human listening and semantic synchronization remain open.
+Current checkpoint: Stage 10 is complete for offline trigger and scene validation. The actual local catalog/plan exercise, 763 source tests, 763 installed-wheel tests and zero-HTTP CLI/replay checks passed. Next is Stage 11 training, evaluation and explicit promotion. Image/video defects, trained-trigger activation, human listening and semantic synchronization remain open.
 
 ## Working rules
 
@@ -25,7 +25,7 @@ Current checkpoint: stages 9A and 9B are complete for the documented Windows bas
 | 7. Image-to-video | Complete for the bounded baseline | Two real Wan 2.2 TI2V 5B clips, pinned input/model files, sequential execution, full media validation, resume and resource observations; [evidence](docs/evidence/stage-07-video-20260921.json). General quality remains open. |
 | 8. Audio and audiovisual output | Complete for the bounded baseline | Two real Stable Audio Open stereo FLACs and two owned H.264/AAC pairs; full decode, trim/pad, timing, source-frame preservation and repeat verification. [Evidence](docs/evidence/stage-08-audio-20260921.json). Listening and semantic synchronization remain open. |
 | 9. Measured VRAM and parallel admission | **Complete for the bounded Windows/audio path** | Eight real calibration jobs and two overlapping audio jobs; managed same-user GPU leases, isolated workers, native recovery, aggregate admission and offline replay verified. Initial host-memory refusal retained. [Ownership and evidence](docs/parallel-execution.md). |
-| 10. Trigger and scene constraints | Planned | Reconcile Part 12 aliases, scoring and phrase/template schemas against the real catalogs; retain source provenance and explicit constraints. |
+| 10. Trigger and scene constraints | Complete for bounded offline validation | Versioned lexical contracts, deterministic collision/scene reports, report-only aliases, source provenance and actual catalog/plan checks. [Scope/evidence](docs/triggers-and-scenes.md). Model activation and quality remain open. |
 | 11. Training, evaluation and promotion | Planned | Replace design skeletons with selected upstream APIs, dataset provenance, independent acceptance and explicit catalog promotion. |
 | 12. Discovery, lookup, scheduling and curation | Planned | Reconcile Parts 7/8 and 12.1–12.4; build on accepted media contracts and durable ownership rather than filename guesses. |
 
@@ -80,12 +80,21 @@ Current checkpoint: stages 9A and 9B are complete for the documented Windows bas
 - [x] After the user freed memory, admit the prepared two-job plan with 30,357,254,144 bytes of available host commit against the unchanged 23,702,423,143-byte requirement. Preserve the original refusal; no margin changes.
 - [x] Qualify two real audio jobs with 4.087163999 seconds of prompt execution overlap, distinct fully decoded FLACs and zero-HTTP completed replay from both source and installed wheel. Confirm owned workers dead, lease idle and prior jobs/original server history unchanged. [Runtime](docs/evidence/stage-09b-parallel-20260921.json) and [completion](docs/evidence/stage-09b-completion-20260921.json).
 
-## Next: Stage 10 trigger and scene constraints
+## Stage 10 completed tasks
 
-- [ ] Reconcile Part 12 trigger aliases, Part 12.2 constraints and scene-template definitions against the existing catalog and plan schemas; record source provenance and unresolved requirements.
-- [ ] Define explicit, versioned validation contracts and deterministic diagnostics before implementing scoring or automatic behavior.
-- [ ] Implement the bounded offline validation path and exercise accepted/rejected examples. Keep prompt linting separate from rendered-media quality acceptance.
-- [ ] Verify source/package commands and update evidence, this stage map and the changelog before advancing to training or promotion.
+- [x] Reconcile Part 12 trigger aliases, Part 12.2 constraints and scene-template definitions against the existing catalog and plan schemas. The source has incompatible schemas/classes/exit codes, incomplete helpers, unreachable reserved-pair blocking and unproved activation-token rewriting. Part 12.2 is a later phrase-bank solver, not an existing scene schema.
+- [x] Define explicit, versioned validation contracts and deterministic diagnostics before implementing scoring or automatic behavior. No activation rewriting, automatic scoring, relaxation or promotion; supplied vocabulary hashes and normalization identity remain bound.
+- [x] Implement the bounded offline validation path and exercise accepted/rejected examples. Two image and two audio planned jobs passed; a deliberate scene violation produced four errors. Zero HTTP; 146 catalog/workflow/database/job files preserved. [Evidence](docs/evidence/stage-10-offline-20260921.json). The current LCM entry has no declared triggers; collision behavior is covered by metadata fixtures.
+- [x] Verify source/package commands and update evidence, this stage map and the changelog before advancing to training or promotion. Passed 763 source and 763 installed-wheel tests, lint/format/build and 36-module parity. Source/installed CLI checks passed with zero HTTP; completed replay retained jobs/seeds and appended only 12 expected audit events. Preserve the initial harness assumption failure separately. [Verification](docs/evidence/stage-10-verification-20260921.json).
+
+## Next: Stage 11 training, evaluation and promotion
+
+- [ ] Reconcile the training/evaluation/promotion design skeletons with the implemented catalog, source pins, managed ownership and current upstream APIs before selecting a bounded training baseline.
+- [ ] Define an explicit dataset manifest: source authority, permissions, intended use, byte hashes, preprocessing and independent train/validation split. No training data has been selected or approved for this stage.
+- [ ] Specify neutral reference scenes, trigger/LoRA acceptance criteria, retained failure cases and independent evaluation before claiming model quality or activation.
+- [ ] Select and pin a compatible trainer/version and resource requirements; prepare a reproducible dry run before actual training qualification.
+- [ ] Keep trained outputs as candidates with immutable lineage. Require explicit reviewed catalog promotion after separate evaluation; a passing linter or training process is insufficient.
+- [ ] Verify source/package and actual training/evaluation evidence separately, then update this TODO, the build plan and changelog.
 
 ## Required inputs and dependencies
 
@@ -105,6 +114,9 @@ Current checkpoint: stages 9A and 9B are complete for the documented Windows bas
 | REQ-12 | Parallel ownership and host memory | Qualified for two same-user managed Windows audio workers: native contention/crash recovery, repeated calibration, real refusal/admission, overlapping inference and offline replay. Broader concurrency remains unqualified. [Evidence/scope](docs/parallel-execution.md). |
 | REQ-13 | Cross-process schema stability | Corrected for the observed stock VAE choice-order defect; available choices/defaults and selected model bytes remain bound. Other runtime/schema changes still require new profiles. |
 | REQ-14 | Parallel trial host capacity | Satisfied for the retained trial after the user freed memory. Both physical/commit checks passed with unchanged margins; worker host peaks stayed within calibration. Fresh checks remain mandatory for future runs. |
+| REQ-15 | Trigger vocabulary and activation authority | Open: Stage 10 examples are operator demonstration policy; the real LCM declares no triggers. Obtain authoritative per-model vocabulary/trigger declarations and independent activation evidence before claiming trained-token coverage or allowing any activation rewrite. |
+| REQ-16 | Training baseline and dataset lineage | Open for Stage 11: select the upstream trainer, bounded neutral task, dataset authority/splits, resource budget and acceptance criteria before downloading data or training. |
+| REQ-17 | Phrase-bank balancing contract | Deferred to Stage 12: reconcile Part 12.2 axis names and count/for-each grammar before implementing corpus solving, soft relaxation or scoring. Scene lint does not implement that solver. |
 
 ## Follow-up requirements and known limits
 
