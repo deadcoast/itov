@@ -1,0 +1,225 @@
+{
+  "version": "0.13.1",
+  "scope": "Review-policy correction, source/package regressions and actual offline disposition; not application completion",
+  "checks": [
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.047,
+      "stdout": "77 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.13.1.tar.gz\nSuccessfully built dist\\itov-0.13.1-py3-none-any.whl\n"
+    },
+    {
+      "name": "source_tests",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/review-policy-source"
+      ],
+      "exit_code": 0,
+      "seconds": 264.854,
+      "stdout": "........................................................................ [  8%]\n........................................................................ [ 16%]\n........................................................................ [ 24%]\n........................................................................ [ 32%]\n........................................................................ [ 40%]\n........................................................................ [ 49%]\n........................................................................ [ 57%]\n........................................................................ [ 65%]\n........................................................................ [ 73%]\n........................................................................ [ 81%]\n........................................................................ [ 90%]\n........................................................................ [ 98%]\n................                                                         [100%]\n880 passed in 264.35s (0:04:24)\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_wheel_tests",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\2c45436fb05f24f62f2b795e17d697c666af8f3ed2e7316fb9366ca06ee2b4f7\\itov-0.13.1-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/review-policy-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 263.778,
+      "stdout": "........................................................................ [  8%]\n........................................................................ [ 16%]\n........................................................................ [ 24%]\n........................................................................ [ 32%]\n........................................................................ [ 40%]\n........................................................................ [ 49%]\n........................................................................ [ 57%]\n........................................................................ [ 65%]\n........................................................................ [ 73%]\n........................................................................ [ 81%]\n........................................................................ [ 90%]\n........................................................................ [ 98%]\n................                                                         [100%]\n880 passed in 261.65s (0:04:21)\n",
+      "stderr": "Installed 9 packages in 379ms\n"
+    },
+    {
+      "name": "source_actual_policy_cli",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "\nimport io,json,socket,sys\nfrom contextlib import redirect_stdout\nfrom pathlib import Path\nfrom itov import evaluation,quality,training\nfrom itov.catalog import sha256\nfrom itov.catalog_store import CatalogStore\nfrom itov.cli import main\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\nreceipt=json.loads(Path('docs/evidence/review-policy-reassessment-20260922.json').read_bytes())\nprior=json.loads(Path('docs/evidence/stage-11b-training-attempt-03-20260922.json').read_bytes())\npaths={p:sha256((config.root/p).read_bytes()) for p in prior['prior_file_sha256']}\nold_receipts={p:sha256(p.read_bytes()) for p in Path('docs/evidence').glob('stage-11*.json')}\nhead=CatalogStore(config.root).snapshot(require_clean=True).head\ndef forbidden(*args,**kwargs): raise AssertionError('Unexpected network')\nsocket.socket.connect=forbidden\nplan=Path(receipt['plan_path'])\nreview=Path(receipt['review_path'])\nassert quality.packet(config,plan)==receipt['packet']\nassert evaluation.candidate(config,plan)==receipt['candidate']\nassert receipt['candidate']['entry']['asset']==prior['candidate']['entry']['asset']\nfor command,expected in [(['evaluation','packet',str(plan),'--save'],0),\n (['evaluation','assess',str(plan)],0),(['training','candidate',str(plan)],0),\n (['promotion','prepare',str(plan),'--review',str(review)],1)]:\n    for as_json in (True,False):\n        out=io.StringIO()\n        with redirect_stdout(out): result=main(command+(['--json'] if as_json else []))\n        assert result==expected,(command,out.getvalue())\n        if as_json and command[0]=='promotion':\n            value=json.loads(out.getvalue())\n            assert value==receipt['promotion']\n            assert not any('human' in item.lower() for item in value['blockers'])\nold=json.loads(Path('docs/evidence/stage-11-training-attempt-04-20260921.json').read_bytes())\nassert training.status(config,Path(old['plan_path']))['status']=='succeeded'\nassert evaluation.assess(config,Path(old['plan_path']))['technical_pass']\nassert not evaluation.promotion(config,Path(old['plan_path']))['ok']\nassert all(sha256((config.root/p).read_bytes())==h for p,h in paths.items())\nassert all(sha256(p.read_bytes())==h for p,h in old_receipts.items())\nassert CatalogStore(config.root).snapshot(require_clean=True).head==head\nassert not any(name in sys.modules for name in ('torch','diffusers','PIL','peft'))\nprint('Actual v3 assistant rejection and JSON/text commands validated offline; same model bytes, unchanged catalog,',len(paths),'prior workspace files and',len(old_receipts),'historical JSON receipts preserved; no ML imports')\n"
+      ],
+      "exit_code": 0,
+      "seconds": 17.218,
+      "stdout": "Actual v3 assistant rejection and JSON/text commands validated offline; same model bytes, unchanged catalog, 146 prior workspace files and 22 historical JSON receipts preserved; no ML imports\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_actual_policy_cli",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\2c45436fb05f24f62f2b795e17d697c666af8f3ed2e7316fb9366ca06ee2b4f7\\itov-0.13.1-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "\nimport io,json,socket,sys\nfrom contextlib import redirect_stdout\nfrom pathlib import Path\nfrom itov import evaluation,quality,training\nfrom itov.catalog import sha256\nfrom itov.catalog_store import CatalogStore\nfrom itov.cli import main\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\nreceipt=json.loads(Path('docs/evidence/review-policy-reassessment-20260922.json').read_bytes())\nprior=json.loads(Path('docs/evidence/stage-11b-training-attempt-03-20260922.json').read_bytes())\npaths={p:sha256((config.root/p).read_bytes()) for p in prior['prior_file_sha256']}\nold_receipts={p:sha256(p.read_bytes()) for p in Path('docs/evidence').glob('stage-11*.json')}\nhead=CatalogStore(config.root).snapshot(require_clean=True).head\ndef forbidden(*args,**kwargs): raise AssertionError('Unexpected network')\nsocket.socket.connect=forbidden\nplan=Path(receipt['plan_path'])\nreview=Path(receipt['review_path'])\nassert quality.packet(config,plan)==receipt['packet']\nassert evaluation.candidate(config,plan)==receipt['candidate']\nassert receipt['candidate']['entry']['asset']==prior['candidate']['entry']['asset']\nfor command,expected in [(['evaluation','packet',str(plan),'--save'],0),\n (['evaluation','assess',str(plan)],0),(['training','candidate',str(plan)],0),\n (['promotion','prepare',str(plan),'--review',str(review)],1)]:\n    for as_json in (True,False):\n        out=io.StringIO()\n        with redirect_stdout(out): result=main(command+(['--json'] if as_json else []))\n        assert result==expected,(command,out.getvalue())\n        if as_json and command[0]=='promotion':\n            value=json.loads(out.getvalue())\n            assert value==receipt['promotion']\n            assert not any('human' in item.lower() for item in value['blockers'])\nold=json.loads(Path('docs/evidence/stage-11-training-attempt-04-20260921.json').read_bytes())\nassert training.status(config,Path(old['plan_path']))['status']=='succeeded'\nassert evaluation.assess(config,Path(old['plan_path']))['technical_pass']\nassert not evaluation.promotion(config,Path(old['plan_path']))['ok']\nassert all(sha256((config.root/p).read_bytes())==h for p,h in paths.items())\nassert all(sha256(p.read_bytes())==h for p,h in old_receipts.items())\nassert CatalogStore(config.root).snapshot(require_clean=True).head==head\nassert not any(name in sys.modules for name in ('torch','diffusers','PIL','peft'))\nprint('Actual v3 assistant rejection and JSON/text commands validated offline; same model bytes, unchanged catalog,',len(paths),'prior workspace files and',len(old_receipts),'historical JSON receipts preserved; no ML imports')\n"
+      ],
+      "exit_code": 0,
+      "seconds": 16.915,
+      "stdout": "Actual v3 assistant rejection and JSON/text commands validated offline; same model bytes, unchanged catalog, 146 prior workspace files and 22 historical JSON receipts preserved; no ML imports\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_source_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\2c45436fb05f24f62f2b795e17d697c666af8f3ed2e7316fb9366ca06ee2b4f7\\itov-0.13.1-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import itov,sys; from pathlib import Path; root=Path(itov.__file__).parent; assert 'site-packages' in str(root); assert itov.__version__=='0.13.1'; assert sys.version_info[:2]==(3,11); ps=list(Path('src/itov').glob('*.py')); assert all((root/p.name).read_bytes()==p.read_bytes() for p in ps); print(len(ps),'installed modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.224,
+      "stdout": "42 installed modules match source\n",
+      "stderr": ""
+    },
+    {
+      "name": "scm_preserved",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import importlib.metadata as m; assert m.version('scm-dev-tools')=='0.5.0'; print('SCM 0.5.0 preserved')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.139,
+      "stdout": "SCM 0.5.0 preserved\n",
+      "stderr": ""
+    }
+  ],
+  "source_sha256": {
+    "src/itov/__init__.py": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+    "src/itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+    "src/itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+    "src/itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+    "src/itov/batch_execution.py": "cde37a4566b175409a66945114e81e83c9b9582e46129d50209e666060117cd7",
+    "src/itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+    "src/itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+    "src/itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+    "src/itov/cli.py": "973449a635b453925c75086d1115a62e81f0647bcf4bb1e643be161cc18235a5",
+    "src/itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+    "src/itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+    "src/itov/curation.py": "36262325466b3f8055f029acbec6db7c8f7626d08ef3e4420994b4256afdc835",
+    "src/itov/device.py": "91a07bcdad002a9b8a4f0bcc19232f0863bf7dadf39a8d8f2d48b9de774938a5",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/evaluation.py": "a96efce17593179c1b7b15fe22451dcec50ddedaedb517f519b8c0b52d32f4f2",
+    "src/itov/execution_store.py": "83d653dbd032595e8b4689aeb4bd18e9113d3020c918030df8fa61fe7e60f362",
+    "src/itov/inference.py": "ac08d4ecb954745da0781be1ecd4cf1fc5ed03833e97bdad2163859760dc6abf",
+    "src/itov/jobs.py": "0d7702175f0fca7f812f0e4fede137690cfe9b468b08b85d114e5db3be3b551d",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+    "src/itov/owned_jobs.py": "5eb31fc19bdf9fc1cd1f366e30cf66979df2f5ddf5c12920230b222c1ab97dd0",
+    "src/itov/parallel.py": "07559a6355e2cc8c729b4425fc4eadae0a56ec667d4d3f03a4db3c89d4b8e556",
+    "src/itov/qualification.py": "80d19c5eff4902b172d0e5be45f6214b7c7261b453356b403ebbebaa6bfc1279",
+    "src/itov/quality.py": "4a8603dd444fd4393d70bc42c739a03b29062385507ce590db8d9eb7da8c50e5",
+    "src/itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+    "src/itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+    "src/itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+    "src/itov/training.py": "065d4604a08941e2f3ecedd289ff0714666118b148cb1d00ac09c3b70299b630",
+    "src/itov/training_data.py": "b1fea5581261d396381e809f83bbde030f0ed2ebc7487761a543619b6f24daa7",
+    "src/itov/training_worker.py": "7e422a1ab493df1282987d60bdb2fdf7722c80a4d0c3bc8bbb1f3bf3a7a6d495",
+    "src/itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+    "src/itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+    "src/itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+    "src/itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+    "src/itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+    "src/itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+    "src/itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+    "src/itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+  },
+  "passed": true,
+  "retained_helper_failure": "The reassessment helper initially tried to canonicalize a runtime receipt containing floats. It was corrected to preserve the original receipt bytes; model state and catalog were unaffected.",
+  "module_parity": 42,
+  "exact_readme_packaging": true,
+  "artifact_sha256": {
+    "dist/itov-0.13.1-py3-none-any.whl": "2c45436fb05f24f62f2b795e17d697c666af8f3ed2e7316fb9366ca06ee2b4f7",
+    "dist/itov-0.13.1.tar.gz": "13343189514b15fe61391f5428a35dedb50b0b8e8a3e4400fedadb7b0f2eb722"
+  }
+}

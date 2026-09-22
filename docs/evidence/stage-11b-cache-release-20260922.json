@@ -1,0 +1,69 @@
+{
+  "before_history_sha256": "f9b0af296f7b4999e44a552ac65362188fcaa5ce15134d116c4a02b39324488f",
+  "before_host": {
+    "total_physical": 66095271936,
+    "available_physical": 40727347200,
+    "total_commit": 70256021504,
+    "available_commit": 25451307008
+  },
+  "before_gpu": {
+    "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver": "616.64",
+    "total_bytes": 34190917632,
+    "used_bytes": 9453961216,
+    "free_bytes": 24297603072
+  },
+  "request": {
+    "unload_models": true,
+    "free_memory": true
+  },
+  "scope": "Supported idle-server cache release only",
+  "http_status": 200,
+  "samples": [
+    {
+      "total_physical": 66095271936,
+      "available_physical": 40838455296,
+      "total_commit": 70256021504,
+      "available_commit": 32281853952
+    },
+    {
+      "total_physical": 66095271936,
+      "available_physical": 40922980352,
+      "total_commit": 70256021504,
+      "available_commit": 32292151296
+    },
+    {
+      "total_physical": 66095271936,
+      "available_physical": 40979763200,
+      "total_commit": 70256021504,
+      "available_commit": 32296820736
+    },
+    {
+      "total_physical": 66095271936,
+      "available_physical": 40961761280,
+      "total_commit": 70256021504,
+      "available_commit": 32491569152
+    },
+    {
+      "total_physical": 66095271936,
+      "available_physical": 40975511552,
+      "total_commit": 70256021504,
+      "available_commit": 32468729856
+    }
+  ],
+  "after_history_sha256": "f9b0af296f7b4999e44a552ac65362188fcaa5ce15134d116c4a02b39324488f",
+  "after_gpu": {
+    "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver": "616.64",
+    "total_bytes": 34190917632,
+    "used_bytes": 2489319424,
+    "free_bytes": 31262244864
+  },
+  "after_queue": {
+    "queue_running": [],
+    "queue_pending": []
+  },
+  "passed": true
+}

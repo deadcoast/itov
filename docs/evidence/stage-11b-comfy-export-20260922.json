@@ -1,0 +1,741 @@
+{
+  "observed_at": "2026-09-22T07:30:57.686315+00:00",
+  "scope": "Two sequential existing-server ComfyUI export checks; not model-quality acceptance or a managed parallel trial",
+  "training_plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+  "candidate_id": "b1eeb9951d2a880b0573a12d4cf5679469b70f72f032b521d9021189cc28b96a",
+  "candidate": {
+    "version": 1,
+    "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+    "assessment_id": "6ec9a2b09cf0100bcc223862386b8082f7a799af488d909973b4df4a1046a3ac",
+    "result_id": "fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0",
+    "entry": {
+      "id": "trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+      "asset": {
+        "path": "models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+        "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+      },
+      "category": "style",
+      "slot": "style",
+      "base_models": [
+        "sdxl-1.0"
+      ],
+      "strength_milli": {
+        "min": 500,
+        "recommended": 1000,
+        "max": 1000
+      },
+      "rotation_weight_milli": 1000,
+      "trigger_words": [
+        "itovstill"
+      ],
+      "status": "candidate"
+    },
+    "purpose": "training",
+    "export": {
+      "format": "comfy-unet-lora-v1",
+      "source_sha256": "e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a",
+      "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+      "bytes": 23396192,
+      "tensors": 1120,
+      "tensor_payload_sha256": "4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0",
+      "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+      "alpha_scale_milli": 1000,
+      "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate."
+    },
+    "candidate_id": "b1eeb9951d2a880b0573a12d4cf5679469b70f72f032b521d9021189cc28b96a"
+  },
+  "lora": {
+    "loader_name": "itov_curated_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+    "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+  },
+  "catalog_head_before": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+  "gpu_before": {
+    "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver": "616.64",
+    "total_bytes": 34190917632,
+    "used_bytes": 2478833664,
+    "free_bytes": 31272730624
+  },
+  "runtime": {
+    "system": {
+      "os": "win32",
+      "ram_total": 66095271936,
+      "ram_free": 41524473856,
+      "comfyui_version": "0.37.0",
+      "required_frontend_version": "1.52.7",
+      "installed_templates_version": "0.11.66",
+      "required_templates_version": "0.11.66",
+      "comfy_package_versions": [
+        {
+          "name": "comfyui-frontend-package",
+          "installed": "1.52.7",
+          "required": "1.52.7"
+        },
+        {
+          "name": "comfyui-workflow-templates",
+          "installed": "0.11.66",
+          "required": "0.11.66"
+        },
+        {
+          "name": "comfyui-embedded-docs",
+          "installed": "0.5.12",
+          "required": "0.5.12"
+        },
+        {
+          "name": "comfy-kitchen",
+          "installed": "0.2.35",
+          "required": "0.2.35"
+        },
+        {
+          "name": "comfy-aimdo",
+          "installed": "0.5.5",
+          "required": "0.5.5"
+        }
+      ],
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130",
+      "embedded_python": true,
+      "deploy_environment": "local-portable",
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8188",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes"
+      ]
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0,
+        "vram_total": 34162016256,
+        "vram_free": 32230080512,
+        "torch_vram_total": 67108864,
+        "torch_vram_free": 33554432
+      }
+    ]
+  },
+  "jobs": [
+    {
+      "role": "baseline",
+      "record": {
+        "version": 1,
+        "request_id": "afc6d5f6-6c5b-416a-a505-f1f48a8e2a0f",
+        "server": "http://127.0.0.1:8188",
+        "workflow_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\comfy-curated-baseline.api.json",
+        "workflow_sha256": "2c3b110c8e788fc730496ebefb960fb8173900502f2aacdd79cf400ff2995b70",
+        "workflow": {
+          "1": {
+            "_meta": {
+              "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+            },
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting"
+            }
+          },
+          "4": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "text, watermark, signature, frame"
+            }
+          },
+          "5": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "batch_size": 1,
+              "height": 512,
+              "width": 512
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "cfg": 7,
+              "denoise": 1,
+              "latent_image": [
+                "5",
+                0
+              ],
+              "model": [
+                "1",
+                0
+              ],
+              "negative": [
+                "4",
+                0
+              ],
+              "positive": [
+                "3",
+                0
+              ],
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "karras",
+              "seed": 11760922,
+              "steps": 20
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "itov/stage11b/curated-baseline",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          }
+        },
+        "validation": {
+          "valid": true,
+          "scope": "node_schema",
+          "node_count": 7,
+          "issues": [],
+          "limits": "Static checks only; custom node validation and rendering were not executed."
+        },
+        "created_at": "2026-09-22T07:30:57.817809+00:00",
+        "status": "succeeded",
+        "prompt_id": "3834d55c-6694-4280-ac6f-cdb0ba351094",
+        "artifacts": [
+          {
+            "node_id": "8",
+            "category": "images",
+            "filename": "curated-baseline_00001_.png",
+            "subfolder": "itov\\stage11b",
+            "type": "output",
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\afc6d5f6-6c5b-416a-a505-f1f48a8e2a0f\\artifact-0000.png",
+            "bytes": 354592,
+            "sha256": "057bbea95faf08e4bdae57e951c9309b1d410847103324ac05f851ce7c9fe659"
+          }
+        ],
+        "updated_at": "2026-09-22T07:31:01.599805+00:00",
+        "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\afc6d5f6-6c5b-416a-a505-f1f48a8e2a0f.json",
+        "acknowledgement": {
+          "prompt_id": "3834d55c-6694-4280-ac6f-cdb0ba351094",
+          "number": 22,
+          "node_errors": {}
+        },
+        "execution": {
+          "prompt": [
+            22,
+            "3834d55c-6694-4280-ac6f-cdb0ba351094",
+            {
+              "1": {
+                "_meta": {
+                  "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+                },
+                "class_type": "CheckpointLoaderSimple",
+                "inputs": {
+                  "ckpt_name": "sd_xl_base_1.0.safetensors"
+                }
+              },
+              "3": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                  "clip": [
+                    "1",
+                    1
+                  ],
+                  "text": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting"
+                }
+              },
+              "4": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                  "clip": [
+                    "1",
+                    1
+                  ],
+                  "text": "text, watermark, signature, frame"
+                }
+              },
+              "5": {
+                "class_type": "EmptyLatentImage",
+                "inputs": {
+                  "batch_size": 1,
+                  "height": 512,
+                  "width": 512
+                }
+              },
+              "6": {
+                "class_type": "KSampler",
+                "inputs": {
+                  "cfg": 7.0,
+                  "denoise": 1.0,
+                  "latent_image": [
+                    "5",
+                    0
+                  ],
+                  "model": [
+                    "1",
+                    0
+                  ],
+                  "negative": [
+                    "4",
+                    0
+                  ],
+                  "positive": [
+                    "3",
+                    0
+                  ],
+                  "sampler_name": "dpmpp_2m",
+                  "scheduler": "karras",
+                  "seed": 11760922,
+                  "steps": 20
+                }
+              },
+              "7": {
+                "class_type": "VAEDecode",
+                "inputs": {
+                  "samples": [
+                    "6",
+                    0
+                  ],
+                  "vae": [
+                    "1",
+                    2
+                  ]
+                }
+              },
+              "8": {
+                "class_type": "SaveImage",
+                "inputs": {
+                  "filename_prefix": "itov/stage11b/curated-baseline",
+                  "images": [
+                    "7",
+                    0
+                  ]
+                }
+              }
+            },
+            {
+              "itov_request_id": "afc6d5f6-6c5b-416a-a505-f1f48a8e2a0f",
+              "client_id": "afc6d5f6-6c5b-416a-a505-f1f48a8e2a0f",
+              "create_time": 1790062257823
+            },
+            [
+              "8"
+            ]
+          ],
+          "outputs": {
+            "8": {
+              "images": [
+                {
+                  "filename": "curated-baseline_00001_.png",
+                  "subfolder": "itov\\stage11b",
+                  "type": "output"
+                }
+              ]
+            }
+          },
+          "status": {
+            "status_str": "success",
+            "completed": true,
+            "messages": [
+              [
+                "execution_start",
+                {
+                  "prompt_id": "3834d55c-6694-4280-ac6f-cdb0ba351094",
+                  "timestamp": 1790062257824
+                }
+              ],
+              [
+                "execution_cached",
+                {
+                  "nodes": [],
+                  "prompt_id": "3834d55c-6694-4280-ac6f-cdb0ba351094",
+                  "timestamp": 1790062257825
+                }
+              ],
+              [
+                "execution_success",
+                {
+                  "prompt_id": "3834d55c-6694-4280-ac6f-cdb0ba351094",
+                  "timestamp": 1790062261276
+                }
+              ]
+            ]
+          },
+          "meta": {
+            "8": {
+              "node_id": "8",
+              "display_node": "8",
+              "parent_node": null,
+              "real_node_id": "8"
+            }
+          }
+        }
+      }
+    },
+    {
+      "role": "candidate",
+      "record": {
+        "version": 1,
+        "request_id": "fbfd2fd9-142e-4bdf-9bb3-958da202e499",
+        "server": "http://127.0.0.1:8188",
+        "workflow_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\comfy-curated-candidate.api.json",
+        "workflow_sha256": "0c834061cb5decf035b0334784543e802465dc31413d84ea5a6f796175e343af",
+        "workflow": {
+          "1": {
+            "_meta": {
+              "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+            },
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting"
+            }
+          },
+          "4": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "text, watermark, signature, frame"
+            }
+          },
+          "5": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "batch_size": 1,
+              "height": 512,
+              "width": 512
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "cfg": 7,
+              "denoise": 1,
+              "latent_image": [
+                "5",
+                0
+              ],
+              "model": [
+                "2",
+                0
+              ],
+              "negative": [
+                "4",
+                0
+              ],
+              "positive": [
+                "3",
+                0
+              ],
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "karras",
+              "seed": 11760922,
+              "steps": 20
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "itov/stage11b/curated-candidate",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          },
+          "2": {
+            "class_type": "LoraLoaderModelOnly",
+            "inputs": {
+              "model": [
+                "1",
+                0
+              ],
+              "lora_name": "itov_curated_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+              "strength_model": 1
+            },
+            "_meta": {
+              "itov_asset_sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+            }
+          }
+        },
+        "validation": {
+          "valid": true,
+          "scope": "node_schema",
+          "node_count": 8,
+          "issues": [],
+          "limits": "Static checks only; custom node validation and rendering were not executed."
+        },
+        "created_at": "2026-09-22T07:31:01.736105+00:00",
+        "status": "succeeded",
+        "prompt_id": "1a529359-571c-47f6-bc70-38227e6e7ed1",
+        "artifacts": [
+          {
+            "node_id": "8",
+            "category": "images",
+            "filename": "curated-candidate_00001_.png",
+            "subfolder": "itov\\stage11b",
+            "type": "output",
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\fbfd2fd9-142e-4bdf-9bb3-958da202e499\\artifact-0000.png",
+            "bytes": 334737,
+            "sha256": "9da26a3cfebd435313604155751e3dd43554aac86c642e7ffc4fc61dcf544f07"
+          }
+        ],
+        "updated_at": "2026-09-22T07:31:05.312574+00:00",
+        "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\fbfd2fd9-142e-4bdf-9bb3-958da202e499.json",
+        "acknowledgement": {
+          "prompt_id": "1a529359-571c-47f6-bc70-38227e6e7ed1",
+          "number": 23,
+          "node_errors": {}
+        },
+        "execution": {
+          "prompt": [
+            23,
+            "1a529359-571c-47f6-bc70-38227e6e7ed1",
+            {
+              "1": {
+                "_meta": {
+                  "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+                },
+                "class_type": "CheckpointLoaderSimple",
+                "inputs": {
+                  "ckpt_name": "sd_xl_base_1.0.safetensors"
+                }
+              },
+              "3": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                  "clip": [
+                    "1",
+                    1
+                  ],
+                  "text": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting"
+                }
+              },
+              "4": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                  "clip": [
+                    "1",
+                    1
+                  ],
+                  "text": "text, watermark, signature, frame"
+                }
+              },
+              "5": {
+                "class_type": "EmptyLatentImage",
+                "inputs": {
+                  "batch_size": 1,
+                  "height": 512,
+                  "width": 512
+                }
+              },
+              "6": {
+                "class_type": "KSampler",
+                "inputs": {
+                  "cfg": 7.0,
+                  "denoise": 1.0,
+                  "latent_image": [
+                    "5",
+                    0
+                  ],
+                  "model": [
+                    "2",
+                    0
+                  ],
+                  "negative": [
+                    "4",
+                    0
+                  ],
+                  "positive": [
+                    "3",
+                    0
+                  ],
+                  "sampler_name": "dpmpp_2m",
+                  "scheduler": "karras",
+                  "seed": 11760922,
+                  "steps": 20
+                }
+              },
+              "7": {
+                "class_type": "VAEDecode",
+                "inputs": {
+                  "samples": [
+                    "6",
+                    0
+                  ],
+                  "vae": [
+                    "1",
+                    2
+                  ]
+                }
+              },
+              "8": {
+                "class_type": "SaveImage",
+                "inputs": {
+                  "filename_prefix": "itov/stage11b/curated-candidate",
+                  "images": [
+                    "7",
+                    0
+                  ]
+                }
+              },
+              "2": {
+                "class_type": "LoraLoaderModelOnly",
+                "inputs": {
+                  "model": [
+                    "1",
+                    0
+                  ],
+                  "lora_name": "itov_curated_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+                  "strength_model": 1.0
+                },
+                "_meta": {
+                  "itov_asset_sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+                }
+              }
+            },
+            {
+              "itov_request_id": "fbfd2fd9-142e-4bdf-9bb3-958da202e499",
+              "client_id": "fbfd2fd9-142e-4bdf-9bb3-958da202e499",
+              "create_time": 1790062261741
+            },
+            [
+              "8"
+            ]
+          ],
+          "outputs": {
+            "8": {
+              "images": [
+                {
+                  "filename": "curated-candidate_00001_.png",
+                  "subfolder": "itov\\stage11b",
+                  "type": "output"
+                }
+              ]
+            }
+          },
+          "status": {
+            "status_str": "success",
+            "completed": true,
+            "messages": [
+              [
+                "execution_start",
+                {
+                  "prompt_id": "1a529359-571c-47f6-bc70-38227e6e7ed1",
+                  "timestamp": 1790062261742
+                }
+              ],
+              [
+                "execution_cached",
+                {
+                  "nodes": [
+                    "1",
+                    "3",
+                    "4",
+                    "5"
+                  ],
+                  "prompt_id": "1a529359-571c-47f6-bc70-38227e6e7ed1",
+                  "timestamp": 1790062261743
+                }
+              ],
+              [
+                "execution_success",
+                {
+                  "prompt_id": "1a529359-571c-47f6-bc70-38227e6e7ed1",
+                  "timestamp": 1790062264820
+                }
+              ]
+            ]
+          },
+          "meta": {
+            "8": {
+              "node_id": "8",
+              "display_node": "8",
+              "parent_node": null,
+              "real_node_id": "8"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "prior_server_history_preserved": true,
+  "catalog_head_after": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+  "gpu_after": {
+    "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver": "616.64",
+    "total_bytes": 34190917632,
+    "used_bytes": 9465495552,
+    "free_bytes": 24286068736
+  },
+  "pixel_checks": {
+    "decoded_rgb_sha256": [
+      "c73ecfee6c78b8a2b9f2611a28e513859458f092978ca3ad3675bf756c7c73fb",
+      "72b6a91c81e9a7e91680fcb77611c31cb66eb9f6c202b6a7d3e4a0779adb34b0"
+    ],
+    "pixels_differ": true,
+    "difference_bbox": [
+      0,
+      0,
+      512,
+      512
+    ]
+  }
+}

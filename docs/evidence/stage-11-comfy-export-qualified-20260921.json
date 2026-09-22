@@ -1,0 +1,746 @@
+{
+  "observed_at": "2026-09-22T06:33:31.594007+00:00",
+  "scope": "Two sequential existing-server ComfyUI export checks; not model-quality acceptance or a managed parallel trial",
+  "training_plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+  "candidate_id": "9515cbd760f74ba2fe9a9a4c3f1d4f24888fe88e35ec5e8320d48d5ff3fc01eb",
+  "candidate": {
+    "version": 1,
+    "plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+    "assessment_id": "9dd708fd9ce15fff187578479611c67229a9b7f198817fd281f80b4fcc6ddb6e",
+    "result_id": "b91d6a2d997bc7c43d1a9f21568a987e2194ecd70f46f36dc4d80bc6453fc0db",
+    "entry": {
+      "id": "trained-2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a",
+      "asset": {
+        "path": "models_shared/trained/2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a.safetensors",
+        "sha256": "2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a"
+      },
+      "category": "style",
+      "slot": "style",
+      "base_models": [
+        "sdxl-1.0"
+      ],
+      "strength_milli": {
+        "min": 500,
+        "recommended": 1000,
+        "max": 1000
+      },
+      "rotation_weight_milli": 1000,
+      "trigger_words": [
+        "itovgeom"
+      ],
+      "status": "candidate"
+    },
+    "purpose": "smoke",
+    "export": {
+      "format": "comfy-unet-lora-v1",
+      "source_sha256": "6479dafbb1c285c1a6ee14bc33bdf55ba69b5af28a6d512ec50f5e14220228ac",
+      "sha256": "2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a",
+      "bytes": 23396192,
+      "tensors": 1120,
+      "tensor_payload_sha256": "4d83a19dcfba2269a16d8b8a7a5a8c1cd3b705ac4d57e2588f73911524fd570e",
+      "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+      "alpha_scale_milli": 1000,
+      "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate."
+    },
+    "candidate_id": "9515cbd760f74ba2fe9a9a4c3f1d4f24888fe88e35ec5e8320d48d5ff3fc01eb"
+  },
+  "lora": {
+    "loader_name": "itov_smoke_2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a.safetensors",
+    "sha256": "2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a"
+  },
+  "catalog_head_before": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+  "gpu_before": {
+    "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver": "616.64",
+    "total_bytes": 34190917632,
+    "used_bytes": 9456058368,
+    "free_bytes": 24295505920
+  },
+  "runtime": {
+    "system": {
+      "os": "win32",
+      "ram_total": 66095271936,
+      "ram_free": 38610464768,
+      "comfyui_version": "0.37.0",
+      "required_frontend_version": "1.52.7",
+      "installed_templates_version": "0.11.66",
+      "required_templates_version": "0.11.66",
+      "comfy_package_versions": [
+        {
+          "name": "comfyui-frontend-package",
+          "installed": "1.52.7",
+          "required": "1.52.7"
+        },
+        {
+          "name": "comfyui-workflow-templates",
+          "installed": "0.11.66",
+          "required": "0.11.66"
+        },
+        {
+          "name": "comfyui-embedded-docs",
+          "installed": "0.5.12",
+          "required": "0.5.12"
+        },
+        {
+          "name": "comfy-kitchen",
+          "installed": "0.2.35",
+          "required": "0.2.35"
+        },
+        {
+          "name": "comfy-aimdo",
+          "installed": "0.5.5",
+          "required": "0.5.5"
+        }
+      ],
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130",
+      "embedded_python": true,
+      "deploy_environment": "local-portable",
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8188",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes"
+      ]
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0,
+        "vram_total": 34162016256,
+        "vram_free": 25282583290,
+        "torch_vram_total": 67108864,
+        "torch_vram_free": 31824634
+      }
+    ]
+  },
+  "jobs": [
+    {
+      "role": "baseline",
+      "record": {
+        "version": 1,
+        "request_id": "e9dd063a-b4e1-4642-8425-ab90d4c0925f",
+        "server": "http://127.0.0.1:8188",
+        "workflow_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\comfy-converted-baseline.api.json",
+        "workflow_sha256": "bb90d5e06f60faa5b1c85566019163a46a0382642aed6e1e9faf5ce1749a141b",
+        "workflow": {
+          "1": {
+            "_meta": {
+              "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+            },
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "itovgeom flat geometric composition, a red disk and a blue square on an ivory background"
+            }
+          },
+          "4": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": ""
+            }
+          },
+          "5": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "batch_size": 1,
+              "height": 512,
+              "width": 512
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "cfg": 7,
+              "denoise": 1,
+              "latent_image": [
+                "5",
+                0
+              ],
+              "model": [
+                "1",
+                0
+              ],
+              "negative": [
+                "4",
+                0
+              ],
+              "positive": [
+                "3",
+                0
+              ],
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "karras",
+              "seed": 11660921,
+              "steps": 20
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "itov/stage11/converted-baseline",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          }
+        },
+        "validation": {
+          "valid": true,
+          "scope": "node_schema",
+          "node_count": 7,
+          "issues": [],
+          "limits": "Static checks only; custom node validation and rendering were not executed."
+        },
+        "created_at": "2026-09-22T06:33:31.739198+00:00",
+        "status": "succeeded",
+        "prompt_id": "4d8bb2a2-45f1-4e74-86bb-2344c2e75432",
+        "artifacts": [
+          {
+            "node_id": "8",
+            "category": "images",
+            "filename": "converted-baseline_00001_.png",
+            "subfolder": "itov\\stage11",
+            "type": "output",
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\e9dd063a-b4e1-4642-8425-ab90d4c0925f\\artifact-0000.png",
+            "bytes": 295338,
+            "sha256": "b31047d1cb4bcd64b679545d2a930c291f528f6c5e0453b3e78e782d074f2145"
+          }
+        ],
+        "updated_at": "2026-09-22T06:33:34.897864+00:00",
+        "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\e9dd063a-b4e1-4642-8425-ab90d4c0925f.json",
+        "acknowledgement": {
+          "prompt_id": "4d8bb2a2-45f1-4e74-86bb-2344c2e75432",
+          "number": 20,
+          "node_errors": {}
+        },
+        "execution": {
+          "prompt": [
+            20,
+            "4d8bb2a2-45f1-4e74-86bb-2344c2e75432",
+            {
+              "1": {
+                "_meta": {
+                  "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+                },
+                "class_type": "CheckpointLoaderSimple",
+                "inputs": {
+                  "ckpt_name": "sd_xl_base_1.0.safetensors"
+                }
+              },
+              "3": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                  "clip": [
+                    "1",
+                    1
+                  ],
+                  "text": "itovgeom flat geometric composition, a red disk and a blue square on an ivory background"
+                }
+              },
+              "4": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                  "clip": [
+                    "1",
+                    1
+                  ],
+                  "text": ""
+                }
+              },
+              "5": {
+                "class_type": "EmptyLatentImage",
+                "inputs": {
+                  "batch_size": 1,
+                  "height": 512,
+                  "width": 512
+                }
+              },
+              "6": {
+                "class_type": "KSampler",
+                "inputs": {
+                  "cfg": 7.0,
+                  "denoise": 1.0,
+                  "latent_image": [
+                    "5",
+                    0
+                  ],
+                  "model": [
+                    "1",
+                    0
+                  ],
+                  "negative": [
+                    "4",
+                    0
+                  ],
+                  "positive": [
+                    "3",
+                    0
+                  ],
+                  "sampler_name": "dpmpp_2m",
+                  "scheduler": "karras",
+                  "seed": 11660921,
+                  "steps": 20
+                }
+              },
+              "7": {
+                "class_type": "VAEDecode",
+                "inputs": {
+                  "samples": [
+                    "6",
+                    0
+                  ],
+                  "vae": [
+                    "1",
+                    2
+                  ]
+                }
+              },
+              "8": {
+                "class_type": "SaveImage",
+                "inputs": {
+                  "filename_prefix": "itov/stage11/converted-baseline",
+                  "images": [
+                    "7",
+                    0
+                  ]
+                }
+              }
+            },
+            {
+              "itov_request_id": "e9dd063a-b4e1-4642-8425-ab90d4c0925f",
+              "client_id": "e9dd063a-b4e1-4642-8425-ab90d4c0925f",
+              "create_time": 1790058811744
+            },
+            [
+              "8"
+            ]
+          ],
+          "outputs": {
+            "8": {
+              "images": [
+                {
+                  "filename": "converted-baseline_00001_.png",
+                  "subfolder": "itov\\stage11",
+                  "type": "output"
+                }
+              ]
+            }
+          },
+          "status": {
+            "status_str": "success",
+            "completed": true,
+            "messages": [
+              [
+                "execution_start",
+                {
+                  "prompt_id": "4d8bb2a2-45f1-4e74-86bb-2344c2e75432",
+                  "timestamp": 1790058811745
+                }
+              ],
+              [
+                "execution_cached",
+                {
+                  "nodes": [
+                    "1",
+                    "3",
+                    "4",
+                    "5"
+                  ],
+                  "prompt_id": "4d8bb2a2-45f1-4e74-86bb-2344c2e75432",
+                  "timestamp": 1790058811747
+                }
+              ],
+              [
+                "execution_success",
+                {
+                  "prompt_id": "4d8bb2a2-45f1-4e74-86bb-2344c2e75432",
+                  "timestamp": 1790058814564
+                }
+              ]
+            ]
+          },
+          "meta": {
+            "8": {
+              "node_id": "8",
+              "display_node": "8",
+              "parent_node": null,
+              "real_node_id": "8"
+            }
+          }
+        }
+      }
+    },
+    {
+      "role": "candidate",
+      "record": {
+        "version": 1,
+        "request_id": "e3b34bc7-cbe1-4f4e-9f50-275b4269c31a",
+        "server": "http://127.0.0.1:8188",
+        "workflow_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\comfy-converted-candidate.api.json",
+        "workflow_sha256": "4a66e4076867746f86674595a0dc81f664f32ada869a2681c41d288388437e8a",
+        "workflow": {
+          "1": {
+            "_meta": {
+              "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+            },
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "itovgeom flat geometric composition, a red disk and a blue square on an ivory background"
+            }
+          },
+          "4": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": ""
+            }
+          },
+          "5": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "batch_size": 1,
+              "height": 512,
+              "width": 512
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "cfg": 7,
+              "denoise": 1,
+              "latent_image": [
+                "5",
+                0
+              ],
+              "model": [
+                "2",
+                0
+              ],
+              "negative": [
+                "4",
+                0
+              ],
+              "positive": [
+                "3",
+                0
+              ],
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "karras",
+              "seed": 11660921,
+              "steps": 20
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "itov/stage11/converted-candidate",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          },
+          "2": {
+            "class_type": "LoraLoaderModelOnly",
+            "inputs": {
+              "model": [
+                "1",
+                0
+              ],
+              "lora_name": "itov_smoke_2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a.safetensors",
+              "strength_model": 1
+            },
+            "_meta": {
+              "itov_asset_sha256": "2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a"
+            }
+          }
+        },
+        "validation": {
+          "valid": true,
+          "scope": "node_schema",
+          "node_count": 8,
+          "issues": [],
+          "limits": "Static checks only; custom node validation and rendering were not executed."
+        },
+        "created_at": "2026-09-22T06:33:35.043074+00:00",
+        "status": "succeeded",
+        "prompt_id": "4b289fcf-e9ed-4926-b8ec-d21a66f10ced",
+        "artifacts": [
+          {
+            "node_id": "8",
+            "category": "images",
+            "filename": "converted-candidate_00001_.png",
+            "subfolder": "itov\\stage11",
+            "type": "output",
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\e3b34bc7-cbe1-4f4e-9f50-275b4269c31a\\artifact-0000.png",
+            "bytes": 284763,
+            "sha256": "31b456bf5c3566b8fb0fd1c7fdcaf05a996591f4c3f47b9d4d03e335d93dd0f8"
+          }
+        ],
+        "updated_at": "2026-09-22T06:33:38.669319+00:00",
+        "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\e3b34bc7-cbe1-4f4e-9f50-275b4269c31a.json",
+        "acknowledgement": {
+          "prompt_id": "4b289fcf-e9ed-4926-b8ec-d21a66f10ced",
+          "number": 21,
+          "node_errors": {}
+        },
+        "execution": {
+          "prompt": [
+            21,
+            "4b289fcf-e9ed-4926-b8ec-d21a66f10ced",
+            {
+              "1": {
+                "_meta": {
+                  "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+                },
+                "class_type": "CheckpointLoaderSimple",
+                "inputs": {
+                  "ckpt_name": "sd_xl_base_1.0.safetensors"
+                }
+              },
+              "3": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                  "clip": [
+                    "1",
+                    1
+                  ],
+                  "text": "itovgeom flat geometric composition, a red disk and a blue square on an ivory background"
+                }
+              },
+              "4": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                  "clip": [
+                    "1",
+                    1
+                  ],
+                  "text": ""
+                }
+              },
+              "5": {
+                "class_type": "EmptyLatentImage",
+                "inputs": {
+                  "batch_size": 1,
+                  "height": 512,
+                  "width": 512
+                }
+              },
+              "6": {
+                "class_type": "KSampler",
+                "inputs": {
+                  "cfg": 7.0,
+                  "denoise": 1.0,
+                  "latent_image": [
+                    "5",
+                    0
+                  ],
+                  "model": [
+                    "2",
+                    0
+                  ],
+                  "negative": [
+                    "4",
+                    0
+                  ],
+                  "positive": [
+                    "3",
+                    0
+                  ],
+                  "sampler_name": "dpmpp_2m",
+                  "scheduler": "karras",
+                  "seed": 11660921,
+                  "steps": 20
+                }
+              },
+              "7": {
+                "class_type": "VAEDecode",
+                "inputs": {
+                  "samples": [
+                    "6",
+                    0
+                  ],
+                  "vae": [
+                    "1",
+                    2
+                  ]
+                }
+              },
+              "8": {
+                "class_type": "SaveImage",
+                "inputs": {
+                  "filename_prefix": "itov/stage11/converted-candidate",
+                  "images": [
+                    "7",
+                    0
+                  ]
+                }
+              },
+              "2": {
+                "class_type": "LoraLoaderModelOnly",
+                "inputs": {
+                  "model": [
+                    "1",
+                    0
+                  ],
+                  "lora_name": "itov_smoke_2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a.safetensors",
+                  "strength_model": 1.0
+                },
+                "_meta": {
+                  "itov_asset_sha256": "2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a"
+                }
+              }
+            },
+            {
+              "itov_request_id": "e3b34bc7-cbe1-4f4e-9f50-275b4269c31a",
+              "client_id": "e3b34bc7-cbe1-4f4e-9f50-275b4269c31a",
+              "create_time": 1790058815056
+            },
+            [
+              "8"
+            ]
+          ],
+          "outputs": {
+            "8": {
+              "images": [
+                {
+                  "filename": "converted-candidate_00001_.png",
+                  "subfolder": "itov\\stage11",
+                  "type": "output"
+                }
+              ]
+            }
+          },
+          "status": {
+            "status_str": "success",
+            "completed": true,
+            "messages": [
+              [
+                "execution_start",
+                {
+                  "prompt_id": "4b289fcf-e9ed-4926-b8ec-d21a66f10ced",
+                  "timestamp": 1790058815057
+                }
+              ],
+              [
+                "execution_cached",
+                {
+                  "nodes": [
+                    "1",
+                    "3",
+                    "4",
+                    "5"
+                  ],
+                  "prompt_id": "4b289fcf-e9ed-4926-b8ec-d21a66f10ced",
+                  "timestamp": 1790058815057
+                }
+              ],
+              [
+                "execution_success",
+                {
+                  "prompt_id": "4b289fcf-e9ed-4926-b8ec-d21a66f10ced",
+                  "timestamp": 1790058818463
+                }
+              ]
+            ]
+          },
+          "meta": {
+            "8": {
+              "node_id": "8",
+              "display_node": "8",
+              "parent_node": null,
+              "real_node_id": "8"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "prior_server_history_preserved": true,
+  "catalog_head_after": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+  "gpu_after": {
+    "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver": "616.64",
+    "total_bytes": 34190917632,
+    "used_bytes": 9439281152,
+    "free_bytes": 24312283136
+  },
+  "pixel_checks": {
+    "decoded_rgb_sha256": [
+      "05cf8e5ebdc3331ecc74acabb8a81bff08d15b877f5883d2376b4d9fc4fd8db7",
+      "189b2e787844d4172e7949e4c6b74c50cc2eb3dede463e88de5b5acfbf3c77a2"
+    ],
+    "pixels_differ": true,
+    "difference_bbox": [
+      0,
+      0,
+      512,
+      512
+    ]
+  }
+}

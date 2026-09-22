@@ -1,0 +1,1220 @@
+{
+  "dataset": {
+    "id": "met-still-life-pilot-v1",
+    "origin": {
+      "reference": "https://www.metmuseum.org/hubs/open-access",
+      "title": "Eight-work Met still-life pilot"
+    },
+    "preprocessing": "prepared-square-rgb-png-v1",
+    "purpose": "training",
+    "rights": {
+      "basis": "Met Open Access CC0 declaration and isPublicDomain metadata",
+      "reference": "https://www.metmuseum.org/hubs/open-access",
+      "training_permitted": true
+    },
+    "samples": [
+      {
+        "caption": {
+          "path": "training/data/met-still-life-v1/prepared/11737.txt",
+          "sha256": "bad87da19539185dac8518c5b3002720aee3b53b6770fd472edeefea785fc502"
+        },
+        "group": "met-11737",
+        "id": "met-11737",
+        "image": {
+          "path": "training/data/met-still-life-v1/prepared/11737.png",
+          "sha256": "c5ec37bd21a689698c49fb1b689401b4bcb6534e35f8182e7ae009654d2d4bbd"
+        },
+        "source": {
+          "path": "training/data/met-still-life-v1/sources/11737.jpg",
+          "sha256": "22af7b5eb7f942a99574ba118201f77c7fd436c480c40979efb0ebf557104fbb"
+        },
+        "split": "validation"
+      },
+      {
+        "caption": {
+          "path": "training/data/met-still-life-v1/prepared/11939.txt",
+          "sha256": "b127370de146fac20f2081b2ba37e1fe8d6dcbd1efad12da251e0d1a750bac87"
+        },
+        "group": "met-11939",
+        "id": "met-11939",
+        "image": {
+          "path": "training/data/met-still-life-v1/prepared/11939.png",
+          "sha256": "5c1316d1e25c658a6b712e84ec29cfb498b07127760cef28ae960c9b61a78ae8"
+        },
+        "source": {
+          "path": "training/data/met-still-life-v1/sources/11939.jpg",
+          "sha256": "e3b55e0f6c9951197b5ae40935ef5347eda066455bc564720d29d95d804c526d"
+        },
+        "split": "train"
+      },
+      {
+        "caption": {
+          "path": "training/data/met-still-life-v1/prepared/16590.txt",
+          "sha256": "5a7e57fc652f12dfc435368cc3392120705ea75f7b17d13caa49ac95e86db3f4"
+        },
+        "group": "met-16590",
+        "id": "met-16590",
+        "image": {
+          "path": "training/data/met-still-life-v1/prepared/16590.png",
+          "sha256": "2f9f97d16d97cca1617ffda4f5be033e63641dd196693a2b7a71c53d66accffd"
+        },
+        "source": {
+          "path": "training/data/met-still-life-v1/sources/16590.jpg",
+          "sha256": "b9689a5cdaf7de0e19ffc01345c8faab1c88568a42a62fc5fdf4f012a23b0b36"
+        },
+        "split": "train"
+      },
+      {
+        "caption": {
+          "path": "training/data/met-still-life-v1/prepared/16592.txt",
+          "sha256": "2a1c94365190861e4ca961af2d297b684b4eef996813c8d3f463b112c2e9066d"
+        },
+        "group": "met-16592",
+        "id": "met-16592",
+        "image": {
+          "path": "training/data/met-still-life-v1/prepared/16592.png",
+          "sha256": "b198f036950d998ef5bbca581735f8e87991fcab5b7de3e1d0bfd2b001f7b07a"
+        },
+        "source": {
+          "path": "training/data/met-still-life-v1/sources/16592.jpg",
+          "sha256": "48699d3273e9647dc9181c8a71ec657a9e9cf0e23f5541042ac970a7b5587725"
+        },
+        "split": "train"
+      },
+      {
+        "caption": {
+          "path": "training/data/met-still-life-v1/prepared/436305.txt",
+          "sha256": "f3c6a92622a805d2f7b619f6e9a38ce17a6c92a5ce9065f7742d4bccf3ab5af5"
+        },
+        "group": "met-436305",
+        "id": "met-436305",
+        "image": {
+          "path": "training/data/met-still-life-v1/prepared/436305.png",
+          "sha256": "7b18c47e90363e0881a93ad65508838470f6917000447ba01a59a36dd49cb043"
+        },
+        "source": {
+          "path": "training/data/met-still-life-v1/sources/436305.jpg",
+          "sha256": "b4bda435e9242d01ef50f9fe2e3c5be7e722b35d4e0fa528f7c3d02fe1472e2b"
+        },
+        "split": "train"
+      },
+      {
+        "caption": {
+          "path": "training/data/met-still-life-v1/prepared/436450.txt",
+          "sha256": "735bb4dee2d6850a4e76c12a2a20d8ea2bea77e66e484818fa9b6f336070e6a7"
+        },
+        "group": "met-436450",
+        "id": "met-436450",
+        "image": {
+          "path": "training/data/met-still-life-v1/prepared/436450.png",
+          "sha256": "aac96cac7a579c50225d44599e125ac6f839564f04b55c30294688c277bc23ff"
+        },
+        "source": {
+          "path": "training/data/met-still-life-v1/sources/436450.jpg",
+          "sha256": "59aa7a895db0588a51b98e7542200a9d7c3b3746fde4e9bd60221b725bf959b2"
+        },
+        "split": "validation"
+      },
+      {
+        "caption": {
+          "path": "training/data/met-still-life-v1/prepared/488147.txt",
+          "sha256": "8d615cfad743e24004c7b69f8c43170ae912ab0d73f668fd0165477bbea564cc"
+        },
+        "group": "met-488147",
+        "id": "met-488147",
+        "image": {
+          "path": "training/data/met-still-life-v1/prepared/488147.png",
+          "sha256": "646ce21ec263a747b3df65dd527f7add8fc7662d2fc3f22db147e88579eaee94"
+        },
+        "source": {
+          "path": "training/data/met-still-life-v1/sources/488147.jpg",
+          "sha256": "f247eb0ff08b8fed9abd932ca541aa1c7c69896ccc74b45ef4281a89c19ceb0e"
+        },
+        "split": "train"
+      },
+      {
+        "caption": {
+          "path": "training/data/met-still-life-v1/prepared/898372.txt",
+          "sha256": "59c3175a72110e6992006ae0c94fa1946f3af4824e66f1aa062a590f9d434320"
+        },
+        "group": "met-898372",
+        "id": "met-898372",
+        "image": {
+          "path": "training/data/met-still-life-v1/prepared/898372.png",
+          "sha256": "4c0577395f544fba1e2463bdf09712f9c04996c8f78ab0b108c1d5d24c51eee8"
+        },
+        "source": {
+          "path": "training/data/met-still-life-v1/sources/898372.jpg",
+          "sha256": "dbc1ef78393e17a9f12ff13cf46694cbdd42d280f6ed277d7b0c673bb0b22693"
+        },
+        "split": "train"
+      }
+    ],
+    "version": 1
+  },
+  "curation": {
+    "curator": "Codex assistant",
+    "dataset": {
+      "path": "state/training/datasets/877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751.json",
+      "sha256": "36d5ef75a604711d9d8e47d32cd51a495ffe721fc47e633a725027cfb37fec98"
+    },
+    "rights": {
+      "policy_snapshot": {
+        "path": "training/data/met-still-life-v1/policy-observation.json",
+        "sha256": "a170cfa8290f9840f8e0cc47b65aa6a1baa70dba10ffe916f857887a227af17b"
+      },
+      "policy_url": "https://www.metmuseum.org/hubs/open-access",
+      "provider": "met-open-access"
+    },
+    "selection_policy": "Bounded color oil still-life pilot, six train/two validation works, artist-disjoint locally. Excluded monochrome reproduction 10895 and fish/vanitas/trompe-l'oeil subjects. Provider access limits prevented expanding the pilot; no population claim.",
+    "transform": "rgb-fit-pad-512-lanczos-ivory-v1",
+    "version": 1,
+    "works": [
+      {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DT64.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/11737.json",
+          "sha256": "c24074b2c3a85fe268c991b77cdf66e2162aaf2b7f399981e9ec62a0c8571678"
+        },
+        "object_id": 11737,
+        "sample": "met-11737",
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      },
+      {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/APS628.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/11939.json",
+          "sha256": "3328531ed6901ab791d2504a44030fdba08b56d3dabbbc05efcfeef1c1dc5c56"
+        },
+        "object_id": 11939,
+        "sample": "met-11939",
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      },
+      {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/ap1999.298.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/16590.json",
+          "sha256": "a0f76c8bdb079052f127f7acff79d6c8471332545d2e5bd19ca45c0ec71f1db9"
+        },
+        "object_id": 16590,
+        "sample": "met-16590",
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      },
+      {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DT4432.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/16592.json",
+          "sha256": "406187e39ff28e4d6471682c5f7ab4f2e49fb5bdebccf0f0572f3a4103fd1bd3"
+        },
+        "object_id": 16592,
+        "sample": "met-16592",
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      },
+      {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25893-001.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/436305.json",
+          "sha256": "b158706c51a621f00e461334ffb9e9e88bd2ed24f724bf1eea6a080ae16c6f40"
+        },
+        "object_id": 436305,
+        "sample": "met-436305",
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      },
+      {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1501.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/436450.json",
+          "sha256": "df590fcfa0b338debfd51d4162d39aa6f01b6146b9324925d77d89c2a0356a97"
+        },
+        "object_id": 436450,
+        "sample": "met-436450",
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      },
+      {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ma/web-large/43.47.7 - color.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/488147.json",
+          "sha256": "e733b6861bae7cadf623c7d0357c2c43e72156b59464d89abc8ce6bd22c9bfd4"
+        },
+        "object_id": 488147,
+        "sample": "met-488147",
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      },
+      {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-29793-001.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/898372.json",
+          "sha256": "eddca84a36ae04116d5a0ad1aaf4838df3276b10dd8714c82a51999075e4ad7b"
+        },
+        "object_id": 898372,
+        "sample": "met-898372",
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    ]
+  },
+  "provider_metadata": {
+    "11737": {
+      "objectID": 11737,
+      "isHighlight": false,
+      "accessionNumber": "59.166",
+      "accessionYear": "1959",
+      "isPublicDomain": true,
+      "primaryImage": "https://images.metmuseum.org/CRDImages/ad/original/DT64.jpg",
+      "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ad/web-large/DT64.jpg",
+      "additionalImages": [],
+      "constituents": [
+        {
+          "constituentID": 2783,
+          "role": "Artist",
+          "name": "Raphaelle Peale",
+          "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500004821",
+          "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q1374536",
+          "gender": ""
+        }
+      ],
+      "department": "The American Wing",
+      "objectName": "Painting",
+      "title": "Still Life with Cake",
+      "culture": "American",
+      "period": "",
+      "dynasty": "",
+      "reign": "",
+      "portfolio": "",
+      "artistRole": "Artist",
+      "artistPrefix": "",
+      "artistDisplayName": "Raphaelle Peale",
+      "artistDisplayBio": "1774\u20131825",
+      "artistSuffix": "",
+      "artistAlphaSort": "Peale, Raphaelle",
+      "artistNationality": "American",
+      "artistBeginDate": "1774",
+      "artistEndDate": "1825",
+      "artistGender": "",
+      "artistWikidata_URL": "https://www.wikidata.org/wiki/Q1374536",
+      "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500004821",
+      "objectDate": "1818",
+      "objectBeginDate": 1818,
+      "objectEndDate": 1818,
+      "medium": "Oil on wood",
+      "dimensions": "10 3/4 x 15 1/4 in. (27.3 x 38.7 cm)",
+      "measurements": [
+        {
+          "elementName": "Framed",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Depth": 5.7,
+            "Height": 39.2,
+            "Width": 48.8
+          }
+        },
+        {
+          "elementName": "Overall",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 27.3,
+            "Width": 38.7
+          }
+        }
+      ],
+      "creditLine": "Maria DeWitt Jesup Fund, 1959",
+      "geographyType": "",
+      "city": "",
+      "state": "",
+      "county": "",
+      "country": "",
+      "region": "",
+      "subregion": "",
+      "locale": "",
+      "locus": "",
+      "excavation": "",
+      "river": "",
+      "classification": "",
+      "rightsAndReproduction": "",
+      "linkResource": "",
+      "metadataDate": "2025-10-03T04:51:20.327Z",
+      "repository": "Metropolitan Museum of Art, New York, NY",
+      "objectURL": "https://www.metmuseum.org/art/collection/search/11737",
+      "tags": [
+        {
+          "term": "Fruit",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300011868",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q1364"
+        },
+        {
+          "term": "Grapes",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300379338",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q10978"
+        },
+        {
+          "term": "Wine",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300379442",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q282"
+        },
+        {
+          "term": "Still Life",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300015638",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q170571"
+        },
+        {
+          "term": "Cakes",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300255019",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q13276"
+        }
+      ],
+      "objectWikidata_URL": "https://www.wikidata.org/wiki/Q19925409",
+      "isTimelineWork": false,
+      "GalleryNumber": "733"
+    },
+    "11939": {
+      "objectID": 11939,
+      "isHighlight": false,
+      "accessionNumber": "63.99",
+      "accessionYear": "1963",
+      "isPublicDomain": true,
+      "primaryImage": "https://images.metmuseum.org/CRDImages/ad/original/APS628.jpg",
+      "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ad/web-large/APS628.jpg",
+      "additionalImages": [
+        "https://images.metmuseum.org/CRDImages/ad/original/DT301875.jpg"
+      ],
+      "constituents": [
+        {
+          "constituentID": 2846,
+          "role": "Artist",
+          "name": "Severin Roesen",
+          "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500030413",
+          "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q88498",
+          "gender": ""
+        }
+      ],
+      "department": "The American Wing",
+      "objectName": "Painting",
+      "title": "Still Life: Fruit",
+      "culture": "American",
+      "period": "",
+      "dynasty": "",
+      "reign": "",
+      "portfolio": "",
+      "artistRole": "Artist",
+      "artistPrefix": "",
+      "artistDisplayName": "Severin Roesen",
+      "artistDisplayBio": "American (born Prussia), Boppard-am-Rhein 1816\u201372?",
+      "artistSuffix": "",
+      "artistAlphaSort": "Roesen, Severin",
+      "artistNationality": "American",
+      "artistBeginDate": "1816",
+      "artistEndDate": "1872",
+      "artistGender": "",
+      "artistWikidata_URL": "https://www.wikidata.org/wiki/Q88498",
+      "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500030413",
+      "objectDate": "1855",
+      "objectBeginDate": 1855,
+      "objectEndDate": 1855,
+      "medium": "Oil on canvas",
+      "dimensions": "36 x 50 in. (91.4 x 127 cm)",
+      "measurements": [
+        {
+          "elementName": "Overall",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 91.4,
+            "Width": 127
+          }
+        },
+        {
+          "elementName": "Framed",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Depth": 12.7,
+            "Height": 123,
+            "Width": 155.7
+          }
+        }
+      ],
+      "creditLine": "Rogers Fund, 1963",
+      "geographyType": "",
+      "city": "",
+      "state": "",
+      "county": "",
+      "country": "",
+      "region": "",
+      "subregion": "",
+      "locale": "",
+      "locus": "",
+      "excavation": "",
+      "river": "",
+      "classification": "",
+      "rightsAndReproduction": "",
+      "linkResource": "",
+      "metadataDate": "2025-01-30T04:54:21.21Z",
+      "repository": "Metropolitan Museum of Art, New York, NY",
+      "objectURL": "https://www.metmuseum.org/art/collection/search/11939",
+      "tags": [
+        {
+          "term": "Fruit",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300011868",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q1364"
+        },
+        {
+          "term": "Grapes",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300379338",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q10978"
+        },
+        {
+          "term": "Peaches",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300266272",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q13202263"
+        },
+        {
+          "term": "Strawberries",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300375414",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q745"
+        },
+        {
+          "term": "Lemons",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300266423",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q1093742"
+        },
+        {
+          "term": "Still Life",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300015638",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q170571"
+        }
+      ],
+      "objectWikidata_URL": "https://www.wikidata.org/wiki/Q20173270",
+      "isTimelineWork": false,
+      "GalleryNumber": ""
+    },
+    "16590": {
+      "objectID": 16590,
+      "isHighlight": false,
+      "accessionNumber": "1999.298",
+      "accessionYear": "1999",
+      "isPublicDomain": true,
+      "primaryImage": "https://images.metmuseum.org/CRDImages/ad/original/ap1999.298.jpg",
+      "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ad/web-large/ap1999.298.jpg",
+      "additionalImages": [],
+      "constituents": [
+        {
+          "constituentID": 3583,
+          "role": "Artist",
+          "name": "Carducius Plantagenet Ream",
+          "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500031601",
+          "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q20892627",
+          "gender": ""
+        }
+      ],
+      "department": "The American Wing",
+      "objectName": "Painting",
+      "title": "Still Life with Fruit",
+      "culture": "American",
+      "period": "",
+      "dynasty": "",
+      "reign": "",
+      "portfolio": "",
+      "artistRole": "Artist",
+      "artistPrefix": "",
+      "artistDisplayName": "Carducius Plantagenet Ream",
+      "artistDisplayBio": "1838\u20131917",
+      "artistSuffix": "",
+      "artistAlphaSort": "Ream, Carducius Plantagenet",
+      "artistNationality": "American",
+      "artistBeginDate": "1838",
+      "artistEndDate": "1917",
+      "artistGender": "",
+      "artistWikidata_URL": "https://www.wikidata.org/wiki/Q20892627",
+      "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500031601",
+      "objectDate": "",
+      "objectBeginDate": 1838,
+      "objectEndDate": 1917,
+      "medium": "Oil on canvas",
+      "dimensions": "18 x 24 in. (45.7 x 61 cm)",
+      "measurements": [
+        {
+          "elementName": "Overall",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 45.7,
+            "Width": 61
+          }
+        }
+      ],
+      "creditLine": "Bequest of S. Allyn Peck, 1996",
+      "geographyType": "",
+      "city": "",
+      "state": "",
+      "county": "",
+      "country": "",
+      "region": "",
+      "subregion": "",
+      "locale": "",
+      "locus": "",
+      "excavation": "",
+      "river": "",
+      "classification": "",
+      "rightsAndReproduction": "",
+      "linkResource": "",
+      "metadataDate": "2026-03-31T09:41:00.23Z",
+      "repository": "Metropolitan Museum of Art, New York, NY",
+      "objectURL": "https://www.metmuseum.org/art/collection/search/16590",
+      "tags": [
+        {
+          "term": "Fruit",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300011868",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q1364"
+        },
+        {
+          "term": "Grapes",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300379338",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q10978"
+        },
+        {
+          "term": "Still Life",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300015638",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q170571"
+        }
+      ],
+      "objectWikidata_URL": "https://www.wikidata.org/wiki/Q19923921",
+      "isTimelineWork": false,
+      "GalleryNumber": ""
+    },
+    "16592": {
+      "objectID": 16592,
+      "isHighlight": false,
+      "accessionNumber": "1999.299.2",
+      "accessionYear": "1999",
+      "isPublicDomain": true,
+      "primaryImage": "https://images.metmuseum.org/CRDImages/ad/original/DT4432.jpg",
+      "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ad/web-large/DT4432.jpg",
+      "additionalImages": [],
+      "constituents": [
+        {
+          "constituentID": 3583,
+          "role": "Artist",
+          "name": "Carducius Plantagenet Ream",
+          "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500031601",
+          "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q20892627",
+          "gender": ""
+        }
+      ],
+      "department": "The American Wing",
+      "objectName": "Painting",
+      "title": "Still Life with Grapes",
+      "culture": "American",
+      "period": "",
+      "dynasty": "",
+      "reign": "",
+      "portfolio": "",
+      "artistRole": "Artist",
+      "artistPrefix": "",
+      "artistDisplayName": "Carducius Plantagenet Ream",
+      "artistDisplayBio": "1838\u20131917",
+      "artistSuffix": "",
+      "artistAlphaSort": "Ream, Carducius Plantagenet",
+      "artistNationality": "American",
+      "artistBeginDate": "1838",
+      "artistEndDate": "1917",
+      "artistGender": "",
+      "artistWikidata_URL": "https://www.wikidata.org/wiki/Q20892627",
+      "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500031601",
+      "objectDate": "",
+      "objectBeginDate": 1838,
+      "objectEndDate": 1917,
+      "medium": "Oil on canvas",
+      "dimensions": "14 x 10 in. (35.6 x 24.4 cm)",
+      "measurements": [
+        {
+          "elementName": "Overall",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 35.6,
+            "Width": 24.4
+          }
+        },
+        {
+          "elementName": "Framed",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Depth": 6,
+            "Height": 33,
+            "Width": 26.5
+          }
+        }
+      ],
+      "creditLine": "Gift of Peck Stacpoole Foundation, 1999",
+      "geographyType": "",
+      "city": "",
+      "state": "",
+      "county": "",
+      "country": "",
+      "region": "",
+      "subregion": "",
+      "locale": "",
+      "locus": "",
+      "excavation": "",
+      "river": "",
+      "classification": "",
+      "rightsAndReproduction": "",
+      "linkResource": "",
+      "metadataDate": "2026-03-31T09:41:00.23Z",
+      "repository": "Metropolitan Museum of Art, New York, NY",
+      "objectURL": "https://www.metmuseum.org/art/collection/search/16592",
+      "tags": [
+        {
+          "term": "Grapes",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300379338",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q10978"
+        },
+        {
+          "term": "Still Life",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300015638",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q170571"
+        }
+      ],
+      "objectWikidata_URL": "https://www.wikidata.org/wiki/Q20172122",
+      "isTimelineWork": false,
+      "GalleryNumber": ""
+    },
+    "436305": {
+      "objectID": 436305,
+      "isHighlight": false,
+      "accessionNumber": "21.152.1",
+      "accessionYear": "1921",
+      "isPublicDomain": true,
+      "primaryImage": "https://images.metmuseum.org/CRDImages/ep/original/DP-25893-001.jpg",
+      "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25893-001.jpg",
+      "additionalImages": [],
+      "constituents": [
+        {
+          "constituentID": 161883,
+          "role": "Artist",
+          "name": "Georg Flegel",
+          "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500006018",
+          "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q472394",
+          "gender": ""
+        }
+      ],
+      "department": "European Paintings",
+      "objectName": "Painting",
+      "title": "Still Life",
+      "culture": "",
+      "period": "",
+      "dynasty": "",
+      "reign": "",
+      "portfolio": "",
+      "artistRole": "Artist",
+      "artistPrefix": "",
+      "artistDisplayName": "Georg Flegel",
+      "artistDisplayBio": "German, Olomouc (Olm\u00fctz) 1566\u20131638 Frankfurt",
+      "artistSuffix": "",
+      "artistAlphaSort": "Flegel, Georg",
+      "artistNationality": "German",
+      "artistBeginDate": "1566",
+      "artistEndDate": "1638",
+      "artistGender": "",
+      "artistWikidata_URL": "https://www.wikidata.org/wiki/Q472394",
+      "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500006018",
+      "objectDate": "probably ca. 1625\u201330",
+      "objectBeginDate": 1625,
+      "objectEndDate": 1630,
+      "medium": "Oil on wood",
+      "dimensions": "10 5/8 x 13 3/8 in. (27 x 34 cm)",
+      "measurements": [
+        {
+          "elementName": "Overall",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 27,
+            "Width": 34
+          }
+        }
+      ],
+      "creditLine": "Gift of Dr. W. Bopp, 1921",
+      "geographyType": "",
+      "city": "",
+      "state": "",
+      "county": "",
+      "country": "",
+      "region": "",
+      "subregion": "",
+      "locale": "",
+      "locus": "",
+      "excavation": "",
+      "river": "",
+      "classification": "Paintings",
+      "rightsAndReproduction": "",
+      "linkResource": "",
+      "metadataDate": "2025-01-30T04:54:21.21Z",
+      "repository": "Metropolitan Museum of Art, New York, NY",
+      "objectURL": "https://www.metmuseum.org/art/collection/search/436305",
+      "tags": [
+        {
+          "term": "Food",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300254496",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q2095"
+        },
+        {
+          "term": "Birds",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300266506",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q5113"
+        },
+        {
+          "term": "Bread",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300262820",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q7802"
+        },
+        {
+          "term": "Lemons",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300266423",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q1093742"
+        },
+        {
+          "term": "Still Life",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300015638",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q170571"
+        },
+        {
+          "term": "Pitchers",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300194765",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q132397"
+        }
+      ],
+      "objectWikidata_URL": "https://www.wikidata.org/wiki/Q19905190",
+      "isTimelineWork": true,
+      "GalleryNumber": "617"
+    },
+    "436450": {
+      "objectID": 436450,
+      "isHighlight": false,
+      "accessionNumber": "67.187.69",
+      "accessionYear": "1967",
+      "isPublicDomain": true,
+      "primaryImage": "https://images.metmuseum.org/CRDImages/ep/original/DT1501.jpg",
+      "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1501.jpg",
+      "additionalImages": [],
+      "constituents": [
+        {
+          "constituentID": 161924,
+          "role": "Artist",
+          "name": "Style of Paul Gauguin",
+          "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500011421",
+          "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q37693",
+          "gender": ""
+        }
+      ],
+      "department": "European Paintings",
+      "objectName": "Painting",
+      "title": "Still Life",
+      "culture": "",
+      "period": "",
+      "dynasty": "",
+      "reign": "",
+      "portfolio": "",
+      "artistRole": "Artist",
+      "artistPrefix": "Style of",
+      "artistDisplayName": "Paul Gauguin",
+      "artistDisplayBio": "French, late 19th century",
+      "artistSuffix": "",
+      "artistAlphaSort": "Gauguin, Paul",
+      "artistNationality": "French",
+      "artistBeginDate": "1848",
+      "artistEndDate": "1903",
+      "artistGender": "",
+      "artistWikidata_URL": "https://www.wikidata.org/wiki/Q37693",
+      "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500011421",
+      "objectDate": "",
+      "objectBeginDate": 1870,
+      "objectEndDate": 1899,
+      "medium": "Oil on canvas",
+      "dimensions": "15 1/8 x 18 1/4 in. (38.4 x 46.4 cm)",
+      "measurements": [
+        {
+          "elementName": "Overall",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 38.4,
+            "Width": 46.4
+          }
+        },
+        {
+          "elementName": "Framed",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Depth": 8.8900175,
+            "Height": 60.32512,
+            "Width": 68.89764
+          }
+        }
+      ],
+      "creditLine": "Bequest of Miss Adelaide Milton de Groot (1876-1967), 1967",
+      "geographyType": "",
+      "city": "",
+      "state": "",
+      "county": "",
+      "country": "",
+      "region": "",
+      "subregion": "",
+      "locale": "",
+      "locus": "",
+      "excavation": "",
+      "river": "",
+      "classification": "Paintings",
+      "rightsAndReproduction": "",
+      "linkResource": "",
+      "metadataDate": "2025-01-30T04:54:21.21Z",
+      "repository": "Metropolitan Museum of Art, New York, NY",
+      "objectURL": "https://www.metmuseum.org/art/collection/search/436450",
+      "tags": [
+        {
+          "term": "Fruit",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300011868",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q1364"
+        },
+        {
+          "term": "Still Life",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300015638",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q170571"
+        },
+        {
+          "term": "Vases",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300132254",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q191851"
+        }
+      ],
+      "objectWikidata_URL": "https://www.wikidata.org/wiki/Q19912494",
+      "isTimelineWork": false,
+      "GalleryNumber": ""
+    },
+    "488147": {
+      "objectID": 488147,
+      "isHighlight": false,
+      "accessionNumber": "43.47.7",
+      "accessionYear": "1943",
+      "isPublicDomain": true,
+      "primaryImage": "https://images.metmuseum.org/CRDImages/ma/original/43.47.7 - color.jpg",
+      "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ma/web-large/43.47.7 - color.jpg",
+      "additionalImages": [],
+      "constituents": [
+        {
+          "constituentID": 142859,
+          "role": "Artist",
+          "name": "Ben Benn",
+          "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500038228",
+          "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q21994030",
+          "gender": ""
+        }
+      ],
+      "department": "Modern and Contemporary Art",
+      "objectName": "Painting",
+      "title": "Still Life",
+      "culture": "",
+      "period": "",
+      "dynasty": "",
+      "reign": "",
+      "portfolio": "",
+      "artistRole": "Artist",
+      "artistPrefix": "",
+      "artistDisplayName": "Ben Benn",
+      "artistDisplayBio": "American (born Ukraine), Kamianets-Podilskyi 1884\u20131983 Bethel, Connecticut",
+      "artistSuffix": "",
+      "artistAlphaSort": "Benn, Ben",
+      "artistNationality": "American, born Ukraine",
+      "artistBeginDate": "1884",
+      "artistEndDate": "1983",
+      "artistGender": "",
+      "artistWikidata_URL": "https://www.wikidata.org/wiki/Q21994030",
+      "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500038228",
+      "objectDate": "1941",
+      "objectBeginDate": 1941,
+      "objectEndDate": 1941,
+      "medium": "Oil on canvas",
+      "dimensions": "24 1/4 x 30 in. (61.6 x 76.2 cm)",
+      "measurements": [
+        {
+          "elementName": "Overall",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 61.6,
+            "Width": 76.2
+          }
+        },
+        {
+          "elementName": "Framed",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Depth": 5.7150116,
+            "Height": 78.105156,
+            "Width": 93.345184
+          }
+        }
+      ],
+      "creditLine": "Gift of New York City W. P. A., 1943",
+      "geographyType": "",
+      "city": "",
+      "state": "",
+      "county": "",
+      "country": "",
+      "region": "",
+      "subregion": "",
+      "locale": "",
+      "locus": "",
+      "excavation": "",
+      "river": "",
+      "classification": "Paintings",
+      "rightsAndReproduction": "",
+      "linkResource": "",
+      "metadataDate": "2023-03-15T04:46:42.1Z",
+      "repository": "Metropolitan Museum of Art, New York, NY",
+      "objectURL": "https://www.metmuseum.org/art/collection/search/488147",
+      "tags": [
+        {
+          "term": "Fruit",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300011868",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q1364"
+        },
+        {
+          "term": "Still Life",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300015638",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q170571"
+        },
+        {
+          "term": "Jugs",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300045685",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q2413314"
+        }
+      ],
+      "objectWikidata_URL": "https://www.wikidata.org/wiki/Q20197802",
+      "isTimelineWork": false,
+      "GalleryNumber": ""
+    },
+    "898372": {
+      "objectID": 898372,
+      "isHighlight": false,
+      "accessionNumber": "2023.263",
+      "accessionYear": "2023",
+      "isPublicDomain": true,
+      "primaryImage": "https://images.metmuseum.org/CRDImages/ad/original/DP-29793-001.jpg",
+      "primaryImageSmall": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-29793-001.jpg",
+      "additionalImages": [],
+      "constituents": [
+        {
+          "constituentID": 3047,
+          "role": "Artist",
+          "name": "Fidelia Bridges",
+          "constituentULAN_URL": "http://vocab.getty.edu/page/ulan/500009974",
+          "constituentWikidata_URL": "https://www.wikidata.org/wiki/Q5446751",
+          "gender": "Female"
+        }
+      ],
+      "department": "The American Wing",
+      "objectName": "",
+      "title": "Still Life",
+      "culture": "American",
+      "period": "",
+      "dynasty": "",
+      "reign": "",
+      "portfolio": "",
+      "artistRole": "Artist",
+      "artistPrefix": "",
+      "artistDisplayName": "Fidelia Bridges",
+      "artistDisplayBio": "(American, Salem, Massachusetts 1834-1923 Canaan, Connecticut)",
+      "artistSuffix": "",
+      "artistAlphaSort": "Bridges, Fidelia",
+      "artistNationality": "American",
+      "artistBeginDate": "1834",
+      "artistEndDate": "1923",
+      "artistGender": "Female",
+      "artistWikidata_URL": "https://www.wikidata.org/wiki/Q5446751",
+      "artistULAN_URL": "http://vocab.getty.edu/page/ulan/500009974",
+      "objectDate": "1870",
+      "objectBeginDate": 1865,
+      "objectEndDate": 1875,
+      "medium": "Oil on canvas",
+      "dimensions": "6 5/8 \u00d7 6 1/4 in. (16.8 \u00d7 15.9 cm)\r\nFramed: 10 1/4 \u00d7 9 7/8 in. (26 \u00d7 25.1 cm)",
+      "measurements": [
+        {
+          "elementName": "Framed",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 26.035051,
+            "Width": 25.08255
+          }
+        },
+        {
+          "elementName": "Overall",
+          "elementDescription": null,
+          "elementMeasurements": {
+            "Height": 16.827534,
+            "Width": 15.875031
+          }
+        }
+      ],
+      "creditLine": "Purchase, John Osgood and Elizabeth Amis Cameron Blanchard Memorial Fund, 2023",
+      "geographyType": "",
+      "city": "",
+      "state": "",
+      "county": "",
+      "country": "",
+      "region": "",
+      "subregion": "",
+      "locale": "",
+      "locus": "",
+      "excavation": "",
+      "river": "",
+      "classification": "",
+      "rightsAndReproduction": "",
+      "linkResource": "",
+      "metadataDate": "2025-10-01T04:51:25.27Z",
+      "repository": "Metropolitan Museum of Art, New York, NY",
+      "objectURL": "https://www.metmuseum.org/art/collection/search/898372",
+      "tags": [
+        {
+          "term": "Flowers",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300132399",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q506"
+        },
+        {
+          "term": "Still Life",
+          "AAT_URL": "http://vocab.getty.edu/page/aat/300015638",
+          "Wikidata_URL": "https://www.wikidata.org/wiki/Q170571"
+        }
+      ],
+      "objectWikidata_URL": "",
+      "isTimelineWork": false,
+      "GalleryNumber": "764"
+    }
+  },
+  "policy_observation": {
+    "observed_on": "2026-09-22",
+    "url": "https://www.metmuseum.org/hubs/open-access",
+    "method": "Web reader observation; excerpt and summary, not a complete HTML capture",
+    "excerpt": "available for unrestricted use under Creative Commons Zero (CC0)",
+    "summary": "The Met states that its Open Access initiative covers images of public-domain artworks and basic collection data. This pilot additionally requires each retained API record to declare isPublicDomain true.",
+    "direct_download_failure": "HTTP 429; no retry. API discovery also encountered HTTP 403 responses and one 404. Existing responses and source images retained.",
+    "limits": "Provider declaration observed by the assistant, not independent legal authentication. Original image/metadata bytes are hashed separately."
+  },
+  "decode_receipt": {
+    "curation_id": "92a6e0e15617b0215a257a4580efc63272932311ff8d3cc25c7fd8f7e64e999a",
+    "dataset_id": "877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751",
+    "images": [
+      {
+        "decoded_rgb_sha256": "d7b66ec3e84840337b8de7213af694feaf08022fe99c2afbf7f75d5c208c1018",
+        "fitted_size": [
+          512,
+          360
+        ],
+        "full_decode": true,
+        "object_id": 11737,
+        "source_size": [
+          600,
+          422
+        ]
+      },
+      {
+        "decoded_rgb_sha256": "12893464d113760224690f113dcae8a93c4688087d7765b1a663b0e934a5b1c2",
+        "fitted_size": [
+          512,
+          368
+        ],
+        "full_decode": true,
+        "object_id": 11939,
+        "source_size": [
+          599,
+          430
+        ]
+      },
+      {
+        "decoded_rgb_sha256": "a4fc8116d04f7c45feb420179ddf0d1ca2c798f68a8b3dd4f434e4640ff06b3c",
+        "fitted_size": [
+          512,
+          382
+        ],
+        "full_decode": true,
+        "object_id": 16590,
+        "source_size": [
+          599,
+          447
+        ]
+      },
+      {
+        "decoded_rgb_sha256": "eee6860512c4986758543df2d60323f6dfbd0121f48d032cff645c0329e3a5eb",
+        "fitted_size": [
+          330,
+          512
+        ],
+        "full_decode": true,
+        "object_id": 16592,
+        "source_size": [
+          402,
+          624
+        ]
+      },
+      {
+        "decoded_rgb_sha256": "ebe15293c5b42fdafe19bc9f7f0eed2d9dc5165374ad916686ed2c23731d46bb",
+        "fitted_size": [
+          512,
+          399
+        ],
+        "full_decode": true,
+        "object_id": 436305,
+        "source_size": [
+          600,
+          468
+        ]
+      },
+      {
+        "decoded_rgb_sha256": "68af8546318d7500b451bddd09d644b5ee002141fccb961f06ab43d611a27b4d",
+        "fitted_size": [
+          512,
+          425
+        ],
+        "full_decode": true,
+        "object_id": 436450,
+        "source_size": [
+          600,
+          498
+        ]
+      },
+      {
+        "decoded_rgb_sha256": "4a0f18102ae24a20b1cc2613641f741197e95540c87fa7661eb920b66948e67b",
+        "fitted_size": [
+          512,
+          394
+        ],
+        "full_decode": true,
+        "object_id": 488147,
+        "source_size": [
+          599,
+          461
+        ]
+      },
+      {
+        "decoded_rgb_sha256": "068476644330e6c91e4c84fe3e001e2730b71783f9f4d7b4c9e1a7d06e730d97",
+        "fitted_size": [
+          479,
+          512
+        ],
+        "full_decode": true,
+        "object_id": 898372,
+        "source_size": [
+          584,
+          624
+        ]
+      }
+    ],
+    "pillow_version": "12.3.0",
+    "scope": "Pillow full decode and deterministic fit-pad observations",
+    "script_sha256": "8b3aa5707d24a5fad8380f690906fbfe71058b32034aaa097f97824ca7a791e8"
+  },
+  "excluded": {
+    "10895": "Monochrome reproduction inspected and retained locally"
+  },
+  "scope": "Eight selected oil paintings, six train/two artist-disjoint validation; assistant curation, human acceptance pending"
+}

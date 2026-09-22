@@ -1,0 +1,25 @@
+{
+  "scope": "PNG verification of four diagnostic held-out previews; independent quality review uses separate fixed cases",
+  "images": [
+    {
+      "sample": "met-11737",
+      "role": "baseline",
+      "sha256": "bc2ca6c1464585109c3cc4f529fff1debf6e998719f73e9100dc2b6dd491aff1"
+    },
+    {
+      "sample": "met-11737",
+      "role": "candidate",
+      "sha256": "c0217ebad4c3fc70d49d558e5e1749fcefc2cea6698d335c5043cca3a14d8cfe"
+    },
+    {
+      "sample": "met-436450",
+      "role": "baseline",
+      "sha256": "ce54e6b37d5f5d3c1917406f1067774ad1aa61c9428b557e619a6856fcd974ff"
+    },
+    {
+      "sample": "met-436450",
+      "role": "candidate",
+      "sha256": "2a62db231cd5b00c543874ac73e5a505cfc41481ee77f0c3ed908da71b27c486"
+    }
+  ]
+}

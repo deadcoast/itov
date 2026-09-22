@@ -1,0 +1,30 @@
+{
+  "scope": "Retained development failures and corrections, separate from qualification",
+  "findings": [
+    {
+      "stage": "public metadata acquisition",
+      "observed": "Discovery retained 13 public-domain oil-painting metadata candidates, then encountered HTTP 403 responses and one HTTP 404. Nine candidate JPEGs downloaded. The direct policy HTML request returned HTTP 429.",
+      "handling": "Stopped acquisition; used eight inspected color paintings and a clearly labeled web-reader policy observation. Kept excluded metadata and the monochrome JPEG locally. No claim of a representative museum sample."
+    },
+    {
+      "stage": "first focused tests",
+      "result": "1 failed, 105 passed in 29.58 seconds",
+      "failure": "test_curation_and_packet_cli_offline_idempotent[False] expected Id: but the existing sentence-case renderer emits id:.",
+      "correction": "Corrected the test's capitalization expectation; product text behavior was already correct.",
+      "subsequent_result": "106 passed in 33.14 seconds. After adding a pending-template preservation test, all 33 quality tests passed in 17.04 seconds."
+    },
+    {
+      "stage": "curated run result binding",
+      "evidence": "stage-11b-training-attempt-02-20260922.json",
+      "failure": "All 128 optimization steps and 20 images completed, but the quality loop reused the variable holding the weights reference. The worker result pointed to the last PNG instead of the safetensors file; assessment refused its header.",
+      "handling": "Retained original run/result/weights/images unchanged. Renamed the weights reference, added a PNG-as-weights assessment rejection case, and created a new source-bound plan for an explicit repeat. No forged correction of the prior result."
+    },
+    {
+      "stage": "first live launch",
+      "evidence": "stage-11b-training-attempt-01-20260922.json",
+      "failure": "Host available commit below unchanged 24 GiB start floor; no worker created.",
+      "handling": "Supported idle ComfyUI cache release freed about 6.5 GiB of host commit, with server history/queue unchanged; original refusal retained."
+    }
+  ],
+  "limits": "Focused tests use synthetic policy evidence. No test fixture or assistant finding is an independent human quality decision."
+}

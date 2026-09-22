@@ -1,0 +1,87 @@
+{
+  "scope": "Assistant visual inspection and full PNG decode, not a human acceptance review",
+  "training_plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+  "candidate_id": "9515cbd760f74ba2fe9a9a4c3f1d4f24888fe88e35ec5e8320d48d5ff3fc01eb",
+  "images": [
+    {
+      "path": "docs/evidence/stage-11-geometry-08-baseline.png",
+      "sha256": "9c5e08b2677f11629aca3eeff953dc9db61b3fbd7be80e349819e4dd53da313e",
+      "bytes": 338421,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "decoded_rgb_sha256": "e6d7c6d25cdd1e9ece815d20c227477dc4c4c764ebcc123f89edb8cbf411d39a",
+      "full_decode": true
+    },
+    {
+      "path": "docs/evidence/stage-11-geometry-08-candidate.png",
+      "sha256": "cf54bdb66cc6f43039b4448307bb32066b8dedb176c6b2766d3011caaa34c6c0",
+      "bytes": 289431,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "decoded_rgb_sha256": "845da5218648b640b19c7251062833ad864c93ccaddc8f60f7c52f94760ec2cb",
+      "full_decode": true
+    },
+    {
+      "path": "docs/evidence/stage-11-geometry-09-baseline.png",
+      "sha256": "cfe420ab115e876d56f415dc966a7515211b0114de979dab869b957367e89620",
+      "bytes": 308463,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "decoded_rgb_sha256": "4f45f4cc40e26256e3987bfdc0c0283f29dcabaa1edce79e20d04d9e2bf8e33b",
+      "full_decode": true
+    },
+    {
+      "path": "docs/evidence/stage-11-geometry-09-candidate.png",
+      "sha256": "d56a8ce897b5de2ac9a87c3a8eeff053f6f6ee35a1e71ee42e9307a1bc9ccc01",
+      "bytes": 214902,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "decoded_rgb_sha256": "d00937782a778e42de655635e8f1f897a40176ae59de66e3c92baf8deb13b126",
+      "full_decode": true
+    },
+    {
+      "path": "docs/evidence/stage-11-comfy-baseline.png",
+      "sha256": "b31047d1cb4bcd64b679545d2a930c291f528f6c5e0453b3e78e782d074f2145",
+      "bytes": 295338,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "decoded_rgb_sha256": "05cf8e5ebdc3331ecc74acabb8a81bff08d15b877f5883d2376b4d9fc4fd8db7",
+      "full_decode": true
+    },
+    {
+      "path": "docs/evidence/stage-11-comfy-candidate.png",
+      "sha256": "31b456bf5c3566b8fb0fd1c7fdcaf05a996591f4c3f47b9d4d03e335d93dd0f8",
+      "bytes": 284763,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "decoded_rgb_sha256": "189b2e787844d4172e7949e4c6b74c50cc2eb3dede463e88de5b5acfbf3c77a2",
+      "full_decode": true
+    }
+  ],
+  "visual_findings": [
+    "Diffusers pair 08: repeated red/blue/black rectangular grid in both images; extra shapes and missing single disk/square composition.",
+    "Diffusers pair 09: baseline has repeated forms; candidate adds an unrequested arrow and multiple squares/lines, failing requested composition.",
+    "ComfyUI corrected pair: visible adapter effect, but both remain multi-shape grid compositions with incorrect object counts."
+  ],
+  "quality_accepted": false,
+  "human_review_recorded": false,
+  "limits": "Two identical held-out captions from one procedural generator cannot establish trigger activation, prompt diversity, natural-data generalization or regression quality."
+}

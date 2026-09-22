@@ -1,0 +1,264 @@
+{
+  "version": "0.13.0",
+  "observed_at": "2026-09-22T07:31:21.222342+00:00",
+  "source_sha256": {
+    "src/itov/__init__.py": "53644f8a9d3d62f2c5d039247b32e7a5d30ec668d6e59f0a8eddcbd1d34966e6",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+    "src/itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+    "src/itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+    "src/itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+    "src/itov/batch_execution.py": "cde37a4566b175409a66945114e81e83c9b9582e46129d50209e666060117cd7",
+    "src/itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+    "src/itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+    "src/itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+    "src/itov/cli.py": "973449a635b453925c75086d1115a62e81f0647bcf4bb1e643be161cc18235a5",
+    "src/itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+    "src/itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+    "src/itov/curation.py": "36262325466b3f8055f029acbec6db7c8f7626d08ef3e4420994b4256afdc835",
+    "src/itov/device.py": "91a07bcdad002a9b8a4f0bcc19232f0863bf7dadf39a8d8f2d48b9de774938a5",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/evaluation.py": "3a70810af5dc4b05182307eba42471cafd91a32cda1e4fe73bb71b8399497899",
+    "src/itov/execution_store.py": "83d653dbd032595e8b4689aeb4bd18e9113d3020c918030df8fa61fe7e60f362",
+    "src/itov/inference.py": "ac08d4ecb954745da0781be1ecd4cf1fc5ed03833e97bdad2163859760dc6abf",
+    "src/itov/jobs.py": "0d7702175f0fca7f812f0e4fede137690cfe9b468b08b85d114e5db3be3b551d",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+    "src/itov/owned_jobs.py": "5eb31fc19bdf9fc1cd1f366e30cf66979df2f5ddf5c12920230b222c1ab97dd0",
+    "src/itov/parallel.py": "07559a6355e2cc8c729b4425fc4eadae0a56ec667d4d3f03a4db3c89d4b8e556",
+    "src/itov/qualification.py": "80d19c5eff4902b172d0e5be45f6214b7c7261b453356b403ebbebaa6bfc1279",
+    "src/itov/quality.py": "c9010f8da2db3848a66b8d002ecac3a26f76e4bff559e095acd249a2c0a32ea6",
+    "src/itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+    "src/itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+    "src/itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+    "src/itov/training.py": "065d4604a08941e2f3ecedd289ff0714666118b148cb1d00ac09c3b70299b630",
+    "src/itov/training_data.py": "b1fea5581261d396381e809f83bbde030f0ed2ebc7487761a543619b6f24daa7",
+    "src/itov/training_worker.py": "7e422a1ab493df1282987d60bdb2fdf7722c80a4d0c3bc8bbb1f3bf3a7a6d495",
+    "src/itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+    "src/itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+    "src/itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+    "src/itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+    "src/itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+    "src/itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+    "src/itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+    "src/itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+  },
+  "scope": "Source/package tests and actual offline revalidation, not human quality acceptance",
+  "retained_findings": "stage-11b-development-findings-20260922.json",
+  "checks": [
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.044,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.041,
+      "stdout": "77 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.085,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.13.0.tar.gz\nSuccessfully built dist\\itov-0.13.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage11b-final-source"
+      ],
+      "exit_code": 0,
+      "seconds": 256.233,
+      "stdout": "........................................................................ [  8%]\n........................................................................ [ 16%]\n........................................................................ [ 24%]\n........................................................................ [ 33%]\n........................................................................ [ 41%]\n........................................................................ [ 49%]\n........................................................................ [ 57%]\n........................................................................ [ 66%]\n........................................................................ [ 74%]\n........................................................................ [ 82%]\n........................................................................ [ 90%]\n........................................................................ [ 99%]\n........                                                                 [100%]\n872 passed in 255.77s (0:04:15)\n",
+      "stderr": ""
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\f338201aab05e3555ce60fb2f5ff3b244e9d457f264b87aed1384dbf53e4fdf3\\itov-0.13.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage11b-final-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 292.797,
+      "stdout": "........................................................................ [  8%]\n........................................................................ [ 16%]\n........................................................................ [ 24%]\n........................................................................ [ 33%]\n........................................................................ [ 41%]\n........................................................................ [ 49%]\n........................................................................ [ 57%]\n........................................................................ [ 66%]\n........................................................................ [ 74%]\n........................................................................ [ 82%]\n........................................................................ [ 90%]\n........................................................................ [ 99%]\n........                                                                 [100%]\n872 passed in 290.22s (0:04:50)\n",
+      "stderr": "Installed 9 packages in 523ms\n"
+    },
+    {
+      "name": "legacy_source_environment",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov,importlib.metadata; print(sys.version); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.13.0'; assert importlib.metadata.version('scm-dev-tools')=='0.5.0'; print('SCM 0.5.0 preserved')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.131,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nSCM 0.5.0 preserved\n",
+      "stderr": ""
+    },
+    {
+      "name": "legacy_installed_source_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\f338201aab05e3555ce60fb2f5ff3b244e9d457f264b87aed1384dbf53e4fdf3\\itov-0.13.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.13.0'; assert all((root/p.name).read_bytes()==p.read_bytes() for p in files); print(sys.version); print(root); print(len(files),'modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.63,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\pGI2z7AWnzZVEC0bJWSAv\\Lib\\site-packages\\itov\n42 modules match source\n",
+      "stderr": ""
+    },
+    {
+      "name": "legacy_source_actual_offline_cli",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "\nimport io,json,socket,sys\nfrom contextlib import redirect_stdout\nfrom pathlib import Path\nfrom itov.catalog import sha256\nfrom itov.catalog_store import CatalogStore\nfrom itov.cli import main\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\ntrial=json.loads(Path('docs/evidence/stage-11-training-attempt-04-20260921.json').read_bytes())\nexport=json.loads(Path('docs/evidence/stage-11-comfy-export-qualified-20260921.json').read_bytes())\npaths={p:sha256((config.root/p).read_bytes()) for p in trial['prior_file_sha256']}\nhead=CatalogStore(config.root).snapshot(require_clean=True).head\ndef forbidden(*args,**kwargs): raise AssertionError('Offline verification attempted network')\nsocket.socket.connect=forbidden\ndef call(command,expected=0):\n out=io.StringIO()\n with redirect_stdout(out): code=main(command+['--json'])\n assert code==expected,(command,code,out.getvalue())\n return json.loads(out.getvalue())\nplan=trial['plan_path']\nassert call(['training','status',plan])['status']=='succeeded'\nassessment=call(['evaluation','assess',plan,'--save'])\nassert assessment==trial['assessment']\ncandidate=call(['training','candidate',plan,'--save'])\nassert candidate==export['candidate']\nassert call(['promotion','prepare',plan],1)['scope']=='promotion_refused'\nassert call(['trigger','lint','examples/trigger.rules.json'])['ok']\nassert all(sha256((config.root/p).read_bytes())==h for p,h in paths.items())\nassert CatalogStore(config.root).snapshot(require_clean=True).head==head\nassert not any(n in sys.modules for n in ('torch','diffusers','peft','PIL'))\nprint('Actual status/assessment/candidate revalidation and promotion refusal passed; zero network; preserved',len(paths),'prior files and main catalog; no ML imports')\n"
+      ],
+      "exit_code": 0,
+      "seconds": 2.811,
+      "stdout": "Actual status/assessment/candidate revalidation and promotion refusal passed; zero network; preserved 146 prior files and main catalog; no ML imports\n",
+      "stderr": ""
+    },
+    {
+      "name": "legacy_installed_actual_offline_cli",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\f338201aab05e3555ce60fb2f5ff3b244e9d457f264b87aed1384dbf53e4fdf3\\itov-0.13.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "\nimport io,json,socket,sys\nfrom contextlib import redirect_stdout\nfrom pathlib import Path\nfrom itov.catalog import sha256\nfrom itov.catalog_store import CatalogStore\nfrom itov.cli import main\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\ntrial=json.loads(Path('docs/evidence/stage-11-training-attempt-04-20260921.json').read_bytes())\nexport=json.loads(Path('docs/evidence/stage-11-comfy-export-qualified-20260921.json').read_bytes())\npaths={p:sha256((config.root/p).read_bytes()) for p in trial['prior_file_sha256']}\nhead=CatalogStore(config.root).snapshot(require_clean=True).head\ndef forbidden(*args,**kwargs): raise AssertionError('Offline verification attempted network')\nsocket.socket.connect=forbidden\ndef call(command,expected=0):\n out=io.StringIO()\n with redirect_stdout(out): code=main(command+['--json'])\n assert code==expected,(command,code,out.getvalue())\n return json.loads(out.getvalue())\nplan=trial['plan_path']\nassert call(['training','status',plan])['status']=='succeeded'\nassessment=call(['evaluation','assess',plan,'--save'])\nassert assessment==trial['assessment']\ncandidate=call(['training','candidate',plan,'--save'])\nassert candidate==export['candidate']\nassert call(['promotion','prepare',plan],1)['scope']=='promotion_refused'\nassert call(['trigger','lint','examples/trigger.rules.json'])['ok']\nassert all(sha256((config.root/p).read_bytes())==h for p,h in paths.items())\nassert CatalogStore(config.root).snapshot(require_clean=True).head==head\nassert not any(n in sys.modules for n in ('torch','diffusers','peft','PIL'))\nprint('Actual status/assessment/candidate revalidation and promotion refusal passed; zero network; preserved',len(paths),'prior files and main catalog; no ML imports')\n"
+      ],
+      "exit_code": 0,
+      "seconds": 2.388,
+      "stdout": "Actual status/assessment/candidate revalidation and promotion refusal passed; zero network; preserved 146 prior files and main catalog; no ML imports\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_curated_offline_cli",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "\nimport io,json,socket,sys\nfrom contextlib import redirect_stdout\nfrom pathlib import Path\nfrom itov.catalog import sha256\nfrom itov.catalog_store import CatalogStore\nfrom itov.cli import main\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\ntrial=json.loads(Path('docs/evidence/stage-11b-training-attempt-03-20260922.json').read_bytes())\nassert trial['passed']\npaths={p:sha256((config.root/p).read_bytes()) for p in trial['prior_file_sha256']}\nhead=CatalogStore(config.root).snapshot(require_clean=True).head\ndef forbidden(*args,**kwargs): raise AssertionError('Offline replay attempted network')\nsocket.socket.connect=forbidden\ncommands=[(['dataset','curate','workspace/training/data/met-still-life-v1/curation.json','--save'],0),\n          (['training','status',trial['plan_path']],0),\n          (['evaluation','assess',trial['plan_path'],'--save'],0),\n          (['training','candidate',trial['plan_path'],'--save'],0),\n          (['evaluation','packet',trial['plan_path'],'--save'],0),\n          (['promotion','prepare',trial['plan_path']],1)]\nfor command,expected in commands:\n    for as_json in (True,False):\n        out=io.StringIO()\n        with redirect_stdout(out): code=main(command+(['--json'] if as_json else []))\n        assert code==expected,(command,out.getvalue())\n        if as_json:\n            value=json.loads(out.getvalue())\n            if command[:2]==['evaluation','packet']: assert value==trial['packet']\n            if command[:2]==['evaluation','assess']: assert value==trial['assessment']\n            if command[:2]==['training','candidate']: assert value==trial['candidate']\n        else: assert out.getvalue().strip() and not out.getvalue().startswith('{')\nassert all(sha256((config.root/p).read_bytes())==h for p,h in paths.items())\nassert CatalogStore(config.root).snapshot(require_clean=True).head==head\nassert not any(n in sys.modules for n in ('torch','diffusers','peft','PIL'))\nprint('Six actual curated CLI commands in JSON and text passed offline; retained',len(paths),'prior files and catalog; no ML imports')\n"
+      ],
+      "exit_code": 0,
+      "seconds": 9.2,
+      "stdout": "Six actual curated CLI commands in JSON and text passed offline; retained 146 prior files and catalog; no ML imports\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_curated_offline_cli",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\f338201aab05e3555ce60fb2f5ff3b244e9d457f264b87aed1384dbf53e4fdf3\\itov-0.13.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "\nimport io,json,socket,sys\nfrom contextlib import redirect_stdout\nfrom pathlib import Path\nfrom itov.catalog import sha256\nfrom itov.catalog_store import CatalogStore\nfrom itov.cli import main\nfrom itov.config import load_config\nconfig=load_config(Path('workspace/itov.toml'))\ntrial=json.loads(Path('docs/evidence/stage-11b-training-attempt-03-20260922.json').read_bytes())\nassert trial['passed']\npaths={p:sha256((config.root/p).read_bytes()) for p in trial['prior_file_sha256']}\nhead=CatalogStore(config.root).snapshot(require_clean=True).head\ndef forbidden(*args,**kwargs): raise AssertionError('Offline replay attempted network')\nsocket.socket.connect=forbidden\ncommands=[(['dataset','curate','workspace/training/data/met-still-life-v1/curation.json','--save'],0),\n          (['training','status',trial['plan_path']],0),\n          (['evaluation','assess',trial['plan_path'],'--save'],0),\n          (['training','candidate',trial['plan_path'],'--save'],0),\n          (['evaluation','packet',trial['plan_path'],'--save'],0),\n          (['promotion','prepare',trial['plan_path']],1)]\nfor command,expected in commands:\n    for as_json in (True,False):\n        out=io.StringIO()\n        with redirect_stdout(out): code=main(command+(['--json'] if as_json else []))\n        assert code==expected,(command,out.getvalue())\n        if as_json:\n            value=json.loads(out.getvalue())\n            if command[:2]==['evaluation','packet']: assert value==trial['packet']\n            if command[:2]==['evaluation','assess']: assert value==trial['assessment']\n            if command[:2]==['training','candidate']: assert value==trial['candidate']\n        else: assert out.getvalue().strip() and not out.getvalue().startswith('{')\nassert all(sha256((config.root/p).read_bytes())==h for p,h in paths.items())\nassert CatalogStore(config.root).snapshot(require_clean=True).head==head\nassert not any(n in sys.modules for n in ('torch','diffusers','peft','PIL'))\nprint('Six actual curated CLI commands in JSON and text passed offline; retained',len(paths),'prior files and catalog; no ML imports')\n"
+      ],
+      "exit_code": 0,
+      "seconds": 8.361,
+      "stdout": "Six actual curated CLI commands in JSON and text passed offline; retained 146 prior files and catalog; no ML imports\n",
+      "stderr": ""
+    }
+  ],
+  "passed": true,
+  "artifact_sha256": {
+    "dist/itov-0.13.0-py3-none-any.whl": "f338201aab05e3555ce60fb2f5ff3b244e9d457f264b87aed1384dbf53e4fdf3",
+    "dist/itov-0.13.0.tar.gz": "bcd7ee98e8916dfd235af857dd81a67abe9fe6c909142f23b335bf963ce5e776"
+  },
+  "module_parity": 42,
+  "exact_readme_packaging": true
+}

@@ -1,0 +1,34 @@
+{
+  "scope": "Assistant inspection of all fixed-condition contact sheets and actual runtime pair; not an independent human review",
+  "packet_id": "b7f6c2f6edb501191c08ac0d3b0313793f7ef93a9247d912b2da71daada781c7",
+  "human_review": false,
+  "production_acceptance": false,
+  "observations": [
+    {
+      "case": "vase-and-pears",
+      "seed": 11760922,
+      "finding": "Both adapter variants visibly contain two yellow pears and a blue vase; the baseline variants show a flat illustrated pear/vase scene with the wrong count. Adapter change is strong even without the trigger; reliable token-specific control is not established."
+    },
+    {
+      "case": "vase-and-pears",
+      "seed": 11760923,
+      "finding": "Both adapter variants visibly contain two pears and a dark blue vase. Baseline variants have pronounced grids and incorrect object arrangements. Target appearance and trigger specificity still need independent judgment."
+    },
+    {
+      "case": "paper-geometry",
+      "seed": 11860922,
+      "finding": "All conditions produce divided panels and extra or incorrect geometry. Adapter without trigger has a red angular form and extra cones; adapter with trigger has a red cube but also an extra red cone in another panel. The one-cube/one-cone composition criterion fails on this seed."
+    },
+    {
+      "case": "paper-geometry",
+      "seed": 11860923,
+      "finding": "Both adapter variants show one red cube and one white paper cone. Baseline variants substitute red conical/angular forms and textured cone-like objects. This successful seed does not erase the other seed's failure or prove general regression safety."
+    },
+    {
+      "case": "stock-comfy-export",
+      "seed": 11760922,
+      "finding": "Both baseline and candidate show a blue vase and only one yellow pear, failing the requested two pears. Candidate pixels differ, so successful loader execution alone is insufficient quality evidence."
+    }
+  ],
+  "next_action": "Retain candidate unpromoted and obtain independent human observations. Do not tune prompts, discard failing seeds or silently substitute new scenes to claim acceptance."
+}

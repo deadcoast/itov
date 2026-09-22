@@ -1,6 +1,8 @@
 # ITOV
 
-ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, versioned preset/LoRA catalogs, deterministic batch planning, qualified sequential execution, Windows device ownership for measured two-worker audio trials, and offline trigger/scene validation. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
+ITOV is an incomplete local ComfyUI application under development. Its current foundations cover workspace diagnostics, workflow validation, job records, catalogs, deterministic batches, a bounded Windows concurrency trial, lexical constraints and a small SDXL training/evaluation prototype. These low-level integrations still need substantial work to form a cohesive application. The core CLI uses the Python standard library; model training uses a separate optional environment.
+
+The [current TODO](TODO.md) and [source audit](docs/development-audit-20260922.md) track the remaining architecture, dataset/training, autonomous evaluation and end-to-end work. The mandatory human-review gate has been shelved by the user. Assistant reviews record methods, limitations and case evidence; the current curated candidate is rejected on observed quality failures. Earlier successful tests and example runs establish only their documented scope.
 
 To combine a directory of Markdown specifications into one searchable PDF, run
 `.\markdown-to-pdf.ps1` (prompts for a path) or `.\markdown-to-pdf.ps1 "C:\path\to\specs"`.
@@ -97,7 +99,7 @@ uv run --locked itov catalog import workspace/templates/neutral.catalog.json --e
 uv run --locked itov catalog verify --check-files --json
 ```
 
-Imports verify asset hashes and reject stale heads. Each revision keeps the catalog and its hash-chained ledger together in an immutable snapshot. Interrupted transactions require explicit `catalog recover`; ordinary reads never repair data. See [catalog schemas, commands, and recovery](docs/catalog-and-ledger.md) for the contract and qualification boundaries. Automated promotion remains a later development stage.
+Imports verify asset hashes and reject stale heads. Each revision keeps the catalog and its hash-chained ledger together in an immutable snapshot. Interrupted transactions require explicit `catalog recover`; ordinary reads never repair data. See [catalog schemas, commands, and recovery](docs/catalog-and-ledger.md) and the separate [reviewed training promotion contract](docs/training-and-promotion.md). Training never automatically activates a candidate.
 
 ## Deterministic batch planning
 
@@ -203,3 +205,20 @@ uv run --locked itov scene lint examples/neutral-image.scene.json --plan PATH_TO
 ```
 
 Rules bind supplied vocabulary bytes; scene constraints check the actual selected LoRAs and positive/negative text in replayed plans. Reports preserve provenance and use aliases only as labels; activation tokens and prompts are never rewritten. The included vocabularies are demonstration operator policy. See [contracts, examples, limits and evidence](docs/triggers-and-scenes.md). Passing lexical checks does not prove trigger activation or rendered-media quality; the current real LCM entry has no declared triggers.
+
+## Bounded SDXL LoRA training
+
+ITOV 0.12.0 adds explicit dataset preparation, pinned training plans, one owned Windows GPU worker, technical evaluation and reviewed promotion:
+
+```powershell
+uv run --locked itov dataset prepare workspace/training/data/neutral-geometry-v1/dataset.json --json
+uv run --locked itov training plan examples/sdxl-neutral.training.json --save --json
+uv run --locked itov training run workspace/state/training/plans/PLAN_ID.json --gpu GPU_UUID --json
+uv run --locked itov evaluation assess workspace/state/training/plans/PLAN_ID.json --save --json
+uv run --locked itov training candidate workspace/state/training/plans/PLAN_ID.json --save --json
+uv run --locked itov promotion prepare workspace/state/training/plans/PLAN_ID.json --json
+```
+
+The local smoke trial completed eight rank-four optimizer steps, exported/reloaded finite weights and produced paired held-out diagnostics. Candidate export preserves tensor payload bytes while converting names for stock ComfyUI; a real fixed-seed comparison and complete loader mapping passed. Images still miss the intended object count/composition. Smoke-data promotion is always refused, and the main catalog is unchanged. See [environment, dataset, commands, failure evidence and next quality gate](docs/training-and-promotion.md). Training dependencies are separate and optional; examples pin this workspace's files, which a fresh checkout must provision and revalidate.
+
+Training now distinguishes worker completion, validated artifacts and separate candidate assessment. `training status` rechecks saved successful artifacts and identifies failed boundaries without rewriting historical records. New attempts use `artifacts_validated` only after shared technical checks pass. See [training states and interrupted-publication recovery](docs/training-result-states.md).

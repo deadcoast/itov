@@ -241,6 +241,47 @@ def parser() -> argparse.ArgumentParser:
         lint.add_argument("--json", action="store_true")
         if name == "trigger":
             lint.add_argument("--strict", action="store_true", help="Treat warnings as failure")
+    datasets = commands.add_parser("dataset", help="Explicit training dataset integrity")
+    dataset_actions = datasets.add_subparsers(dest="action", required=True)
+    for action in ("validate", "prepare", "curate"):
+        item = dataset_actions.add_parser(action)
+        item.add_argument("file", type=Path)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "curate":
+            item.add_argument("--save", action="store_true")
+    training = commands.add_parser("training", help="Pinned, owned SDXL LoRA training")
+    training_actions = training.add_subparsers(dest="action", required=True)
+    for action in ("plan", "run", "status", "recover", "candidate"):
+        item = training_actions.add_parser(action)
+        item.add_argument("file", type=Path)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"plan", "candidate"}:
+            item.add_argument("--save", action="store_true")
+        if action == "run":
+            item.add_argument("--gpu", required=True)
+    evaluation = commands.add_parser("evaluation", help="Technical training assessment")
+    evaluation_actions = evaluation.add_subparsers(dest="action", required=True)
+    for action in ("assess", "packet"):
+        item = evaluation_actions.add_parser(action)
+        item.add_argument("file", type=Path)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        item.add_argument("--save", action="store_true")
+    promotion = commands.add_parser("promotion", help="Explicitly reviewed catalog promotion")
+    promotion_actions = promotion.add_subparsers(dest="action", required=True)
+    for action in ("prepare", "apply"):
+        item = promotion_actions.add_parser(action)
+        item.add_argument("file", type=Path)
+        item.add_argument("--review", type=Path, required=action == "apply")
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "prepare":
+            item.add_argument("--save", action="store_true")
+        else:
+            item.add_argument("--expected-head", required=True)
+            item.add_argument("--decision", required=True)
     return root
 
 
@@ -307,6 +348,55 @@ def _print_result(result: dict, *, as_json: bool):
         print(f"Created workspace: {result['config']}")
 
 
+def _print_training_result(result: dict, *, as_json: bool):
+    if as_json:
+        _print_result(result, as_json=True)
+        return
+    if result.get("ok") is False:
+        print("REFUSED")
+    elif "status" in result:
+        print(result["status"].upper())
+    elif "technical_pass" in result:
+        print("Technical checks passed; model quality requires separate review.")
+    elif "counts" in result:
+        counts = result["counts"]
+        print(f"Verified dataset: {counts['train']} training, {counts['validation']} held-out")
+    else:
+        print("Prepared")
+    details = result.get("decision", result)
+    for key in (
+        "dataset_id",
+        "plan_id",
+        "assessment_id",
+        "candidate_id",
+        "curation_id",
+        "packet_id",
+        "decision_id",
+        "expected_head",
+        "catalog_head",
+        "purpose",
+        "saved_path",
+        "recorded_status",
+        "worker_completion",
+        "artifact_validation",
+        "failure_boundary",
+        "candidate_assessment",
+        "next_action",
+    ):
+        if key in details:
+            print(f"{key.replace('_', ' ').capitalize()}: {details[key]}")
+    if "entry" in result:
+        print(f"Candidate weights: {result['entry']['asset']['path']}")
+    for name, path in result.get("artifacts", {}).items():
+        print(f"{name}: {path}")
+    if result.get("error"):
+        print(result["error"])
+    for reason in result.get("blockers", []):
+        print(f"  {reason}")
+    if result.get("limits"):
+        print(result["limits"])
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
@@ -337,6 +427,49 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1
+        elif args.command in {"dataset", "training", "evaluation", "promotion"}:
+            from itov import evaluation, training, training_data
+
+            config = load_config(args.config)
+            if args.command == "dataset":
+                if args.action == "curate":
+                    from itov import curation
+
+                    result = curation.validate(config.root, args.file, save=args.save)
+                else:
+                    operation = (
+                        training_data.prepare
+                        if args.action == "prepare"
+                        else training_data.validate
+                    )
+                    result = operation(config.root, args.file)
+            elif args.command == "evaluation":
+                if args.action == "packet":
+                    from itov import quality
+
+                    result = quality.packet(config, args.file, save=args.save)
+                else:
+                    result = evaluation.assess(config, args.file, save=args.save)
+            elif args.command == "promotion":
+                if args.action == "apply":
+                    result = evaluation.apply_promotion(
+                        config, args.file, args.review, args.expected_head, args.decision
+                    )
+                else:
+                    result = evaluation.promotion(config, args.file, args.review, save=args.save)
+            elif args.action == "plan":
+                result = training.plan(config, args.file)
+                if args.save:
+                    saved = training.save_plan(config, result)
+                    result = {**result, "saved_path": str(saved)}
+            elif args.action == "candidate":
+                result = evaluation.candidate(config, args.file, save=args.save)
+            elif args.action == "run":
+                result = training.run(config, args.file, args.gpu)
+            else:
+                result = getattr(training, args.action)(config, args.file)
+            _print_training_result(result, as_json=args.json)
+            return 1 if result.get("ok") is False or result.get("status") == "failed" else 0
         elif args.command in {"trigger", "scene"}:
             from itov import scene, trigger
 
@@ -595,10 +728,19 @@ def main(argv: list[str] | None = None) -> int:
             )
         return 2
     except (OSError, ValueError, ComfyUIError, sqlite3.Error) as error:
+        boundary = getattr(error, "boundary", None)
         if getattr(args, "json", False):
-            print(json.dumps({"ok": False, "error": str(error)}))
+            print(
+                json.dumps(
+                    {
+                        "ok": False,
+                        "error": str(error),
+                        **({"failure_boundary": boundary} if boundary else {}),
+                    }
+                )
+            )
         else:
-            print(f"itov: {error}", file=sys.stderr)
+            print(f"itov: {boundary + ': ' if boundary else ''}{error}", file=sys.stderr)
         return 2
     except KeyboardInterrupt:
         return 130

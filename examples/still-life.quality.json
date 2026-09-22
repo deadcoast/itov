@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "still-life-independent-v1",
+  "trigger": "itovstill",
+  "cases": [
+    {
+      "id": "vase-and-pears",
+      "kind": "holdout",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "expectation": "Exactly two yellow pears and one blue vase, intact distinct objects and a coherent table. Adapter with trigger should show oil-painted still-life appearance without adding objects, grids or borders. Compare all four conditions; baseline trigger effects do not prove learned activation.",
+      "seeds": [11760922, 11760923]
+    },
+    {
+      "id": "paper-geometry",
+      "kind": "regression",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "expectation": "One red cube and one white cone remain distinct with coherent shadows. Without trigger the adapter should preserve photographic appearance and prompt adherence. With trigger assess whether painterly change preserves object identity and composition; record unintended fruit, flowers, repetition or distortion.",
+      "seeds": [11860922, 11860923]
+    }
+  ]
+}

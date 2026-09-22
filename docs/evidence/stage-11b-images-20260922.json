@@ -1,0 +1,296 @@
+{
+  "scope": "Full PNG decode and retained condition-labeled review images, no human verdict",
+  "packet_id": "b7f6c2f6edb501191c08ac0d3b0313793f7ef93a9247d912b2da71daada781c7",
+  "images": [
+    {
+      "case_id": "vase-and-pears",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-base_plain.png",
+        "sha256": "6048cb84079c5a5dff63cda2bf8bf7a781a9ad0b501d67949c146539f073ef8a"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "role": "base_plain",
+      "seed": 11760922,
+      "retained": "docs/evidence/stage-11b-review/vase-and-pears-11760922-base_plain.png",
+      "decoded_rgb_sha256": "a31ba4c93ce13624e6ae2b092bcb4ea8ef4867809c5a56e2d464196611222fad",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "vase-and-pears",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-base_trigger.png",
+        "sha256": "795cbe5020faaffa6c8a6a567e4b35c04db04a07ba4f606359145b9f9eee4e42"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "role": "base_trigger",
+      "seed": 11760922,
+      "retained": "docs/evidence/stage-11b-review/vase-and-pears-11760922-base_trigger.png",
+      "decoded_rgb_sha256": "56b6d87985c0f5d1c4c602e42748d79a774d178bb069a0f21cbf0383b6c0a88d",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "vase-and-pears",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-adapter_plain.png",
+        "sha256": "d32e33518fddbedd32f41c3f4be87acb7003c45a06886889fb581ce51548b934"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "role": "adapter_plain",
+      "seed": 11760922,
+      "retained": "docs/evidence/stage-11b-review/vase-and-pears-11760922-adapter_plain.png",
+      "decoded_rgb_sha256": "181276461e9a7256ab4753ae1fafa59c40ee5ee75cee47ab163b82a4cc13010b",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "vase-and-pears",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-adapter_trigger.png",
+        "sha256": "c4c9069b3c1f938f175c70ef109dfeb54eba3c1e3e1f45873a972ef3fdf7e511"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "role": "adapter_trigger",
+      "seed": 11760922,
+      "retained": "docs/evidence/stage-11b-review/vase-and-pears-11760922-adapter_trigger.png",
+      "decoded_rgb_sha256": "0b67af9916a950f7a13882f33e9d3eee5b98ac4eaf25ce8c8e92641bbafa6751",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "vase-and-pears",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-base_plain.png",
+        "sha256": "414b6e18abbb38c31dfa2861382efa08e72af11df6e0b48820a03218b7a50a3d"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "role": "base_plain",
+      "seed": 11760923,
+      "retained": "docs/evidence/stage-11b-review/vase-and-pears-11760923-base_plain.png",
+      "decoded_rgb_sha256": "54b5856fa8efc8160a828b0a27cb6af94bcd203b7fd42d733577def069268e38",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "vase-and-pears",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-base_trigger.png",
+        "sha256": "b7c792719cd60602c1a337709bf367a6b56977f43e3af3cd7ea950094ab3c32c"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "role": "base_trigger",
+      "seed": 11760923,
+      "retained": "docs/evidence/stage-11b-review/vase-and-pears-11760923-base_trigger.png",
+      "decoded_rgb_sha256": "288ee1fddde3d021126f16937a6116be32f425f703d30155a03b8e93826efa49",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "vase-and-pears",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-adapter_plain.png",
+        "sha256": "a450e52052b4ee8ac2a3c7de4345941a57837b3928adefeb4401c9d6fec9274b"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "role": "adapter_plain",
+      "seed": 11760923,
+      "retained": "docs/evidence/stage-11b-review/vase-and-pears-11760923-adapter_plain.png",
+      "decoded_rgb_sha256": "6db531837134e9aab8a96776dbdf7f60fc1c40ec9e0a92b2be58d132b870fe6e",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "vase-and-pears",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-adapter_trigger.png",
+        "sha256": "924cd01da89cf8727632b28cb34f6216a3d323f294432e6d66eedc2c90026649"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "role": "adapter_trigger",
+      "seed": 11760923,
+      "retained": "docs/evidence/stage-11b-review/vase-and-pears-11760923-adapter_trigger.png",
+      "decoded_rgb_sha256": "32ee1d4d3c38cb17877d185368adca83ba60ca4af6316c8e7f80218ac163bbf7",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "paper-geometry",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-base_plain.png",
+        "sha256": "57cb5d09af6e5462ade028da5dfb133d4fd1ee6b841226da66adaadef5d220e3"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "role": "base_plain",
+      "seed": 11860922,
+      "retained": "docs/evidence/stage-11b-review/paper-geometry-11860922-base_plain.png",
+      "decoded_rgb_sha256": "6f41454e3fdecd685a987f877a2da484bf72a51964a2471fa5712281f88c598d",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "paper-geometry",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-base_trigger.png",
+        "sha256": "1111f0529c819b5518ee2bf6382bde073029824ab1f309660c4841e1d15ec796"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "role": "base_trigger",
+      "seed": 11860922,
+      "retained": "docs/evidence/stage-11b-review/paper-geometry-11860922-base_trigger.png",
+      "decoded_rgb_sha256": "d9df0697baaf19306c7d630a807042d35a55d7edbca80476a8c732fed9d2358d",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "paper-geometry",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-adapter_plain.png",
+        "sha256": "213a59273fd0f48bc931579c012e018a2a2f9ddbc33d01eaa8ab7df1d4ec3ef0"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "role": "adapter_plain",
+      "seed": 11860922,
+      "retained": "docs/evidence/stage-11b-review/paper-geometry-11860922-adapter_plain.png",
+      "decoded_rgb_sha256": "2511f8604c51f026bde6da48efd50ec280d3f3d678e6fdcd5b303aa52a3ad7bb",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "paper-geometry",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-adapter_trigger.png",
+        "sha256": "d17e38f4f5db4f959ce197b1c717ec129649d087a2024daaec559bd2e977622b"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "role": "adapter_trigger",
+      "seed": 11860922,
+      "retained": "docs/evidence/stage-11b-review/paper-geometry-11860922-adapter_trigger.png",
+      "decoded_rgb_sha256": "55eb444d886e873c6b352fca07cedb7fc709fb42b38ef47c824ac76b0c00e53f",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "paper-geometry",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-base_plain.png",
+        "sha256": "6df43c23d552ad905205face6f4d419ec91e021e198e67555fc01a5c6cdb236e"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "role": "base_plain",
+      "seed": 11860923,
+      "retained": "docs/evidence/stage-11b-review/paper-geometry-11860923-base_plain.png",
+      "decoded_rgb_sha256": "ea7a9e83aa9c14b975999a93ea1bf23b007577dde282db79a2d63727bd578a18",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "paper-geometry",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-base_trigger.png",
+        "sha256": "39a9334a94fa7671f7bffdaf64b1c03c4dc82c746a330d5a1a3b667329806d13"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "role": "base_trigger",
+      "seed": 11860923,
+      "retained": "docs/evidence/stage-11b-review/paper-geometry-11860923-base_trigger.png",
+      "decoded_rgb_sha256": "6ec8c99ef10564c42997b78d6c5915720086399dad664613b0715dd62a9f76e4",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "paper-geometry",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-adapter_plain.png",
+        "sha256": "11f7a46de782ed50e07f83cedb27221f7b818cc6a14c90ed1e4abc7d8984d3d0"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "role": "adapter_plain",
+      "seed": 11860923,
+      "retained": "docs/evidence/stage-11b-review/paper-geometry-11860923-adapter_plain.png",
+      "decoded_rgb_sha256": "425fd415625b9d4a0d1d44666947f526efd43b3c5d6cc6f5356217d3a49ef0cf",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "case_id": "paper-geometry",
+      "image": {
+        "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-adapter_trigger.png",
+        "sha256": "c6bf759002b73a17cf95f3d404565d10d0428b33775071cf6150a2e249669ca1"
+      },
+      "negative_prompt": "text, watermark, signature, frame",
+      "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "role": "adapter_trigger",
+      "seed": 11860923,
+      "retained": "docs/evidence/stage-11b-review/paper-geometry-11860923-adapter_trigger.png",
+      "decoded_rgb_sha256": "7a7998e1edd66b1bb42f029765d9086091b5bfcc98ac05170730c64e0c656dc8",
+      "full_decode": true,
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "review_status": "pending",
+  "limits": "Decode success and visible differences do not establish learned activation, useful quality or generalization."
+}
