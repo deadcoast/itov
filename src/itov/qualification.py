@@ -231,7 +231,7 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                     not inputs["image"].endswith(("[input]", "[output]", "[temp]")),
                     "Annotated LoadImage paths are outside this qualification profile",
                 )
-                asset = bind(config.root / "input", inputs["image"])
+                asset = bind(config.runtime_root / "input", inputs["image"])
                 _pin(node, asset, "input image", required=video)
             elif kind == "CLIPTextEncode":
                 require(
@@ -274,7 +274,7 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
                     isinstance(prefix, str) and "%" not in prefix,
                     f"{kind} requires a literal relative filename prefix",
                 )
-                safe_path(config.root / "output", prefix)
+                safe_path(config.runtime_root / "output", prefix)
                 if kind == "SaveAudioAdvanced":
                     require(
                         set(inputs) == {"audio", "filename_prefix", "format"}

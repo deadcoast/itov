@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "package_version": "0.10.0",
+  "observed_at": "2026-09-22T04:08:23.213071+00:00",
+  "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947.json",
+  "calibrations": [
+    "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\parallel\\calibrations\\1fbc5fc83fc41f2f6c7999cc9a35d5e9ba49c8e279bab8d6694308064aa0bfdc.json",
+    "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\parallel\\calibrations\\9e71d816fb5acd9d12a5a5d8bd0f28433fe749008aadbe2936de34df09112b49.json"
+  ],
+  "cross_workspace_contention": {
+    "exit_code": 0,
+    "stdout": "{\"refused\": true, \"workspace\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\verification\\\\competing-workspace\", \"error\": \"Another process holds the lock: C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\ITOV\\\\device-leases\\\\e2c115fd-447a-8fe0-3257-b17c51919074\\\\ownership.lock\"}\n",
+    "stderr": "",
+    "held_status": {
+      "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+      "job_name": "Global\\ITOV-owned-109e03d5-54cb-456f-8a72-59dfa6e257bb",
+      "lease_id": "109e03d5-54cb-456f-8a72-59dfa6e257bb",
+      "owner": {
+        "created": 134345237030753668,
+        "pid": 65292
+      },
+      "plan_id": "78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947",
+      "record_id": "f0f9825f802267d77e00d36f679bb64758835696effb5d698cf2c63ff29017a2",
+      "started_at": "2026-09-22T04:08:23.368145+00:00",
+      "status": "held",
+      "version": 1,
+      "workers": [
+        {
+          "created": 134345237035755649,
+          "pid": 41084
+        }
+      ],
+      "workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace",
+      "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+    }
+  },
+  "failure": "ValueError('Parallel admission refused: host_available_commit')",
+  "device_after": {
+    "previous": "109e03d5-54cb-456f-8a72-59dfa6e257bb",
+    "reason": "owned_job_and_all_workers_stopped",
+    "record_id": "6abb49b130203b75cc69a0b9d120cc2d3f6592a492f81ff96a14c2669321ef4b",
+    "released_at": "2026-09-22T04:08:51.065401+00:00",
+    "status": "idle",
+    "version": 1,
+    "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+  },
+  "no_execution_claim": true,
+  "unclaimed_seeds": [
+    1010261041,
+    1010261042
+  ],
+  "decision_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\parallel\\decisions\\5550d59e7da27159a620fe91e30ab7f37d0449aa468cca3323ce6bf390fe26c4.json",
+  "decision": {
+    "admitted": false,
+    "checked_at": "2026-09-22T04:08:50.976017+00:00",
+    "gpu_capacity_bytes": 34162016256,
+    "host": {
+      "available_commit": 22614253568,
+      "available_physical": 36015525888,
+      "total_commit": 70256021504,
+      "total_physical": 66095271936
+    },
+    "host_peak_envelopes": [
+      8096665600,
+      8076214272
+    ],
+    "limits": "Policy margins are not guarantees; unmanaged clients can race.",
+    "policy": {
+      "host_reserve_bytes": 4294967296,
+      "minimum_overlap_ns": 100000000,
+      "uncertainty_percent": 20,
+      "version": 1,
+      "workers": 2
+    },
+    "reasons": [
+      "host_available_commit"
+    ],
+    "record_id": "5550d59e7da27159a620fe91e30ab7f37d0449aa468cca3323ce6bf390fe26c4",
+    "required_gpu_bytes": 15266847130,
+    "required_host_bytes": 23702423143,
+    "scope": "bounded_two_worker_audio_admission",
+    "version": 1,
+    "workers": [
+      {
+        "admitted": true,
+        "checked_at": "2026-09-22T04:08:50.931483+00:00",
+        "current_used_bytes": 5685379072,
+        "estimates": [
+          {
+            "additional_envelope_bytes": 3047161856,
+            "cold_sessions": 2,
+            "headroom_bytes": 22672559308,
+            "observed_device_peak_bytes": 4712759296,
+            "required_total_bytes": 11489456948,
+            "uncertainty_bytes": 609432372,
+            "warm_sessions": 2,
+            "workload_key": "947989cc8a2955bc6efb2991adb7712b1a7a2323002360a55b3f59afa541371d"
+          }
+        ],
+        "gpu": {
+          "driver": "616.64",
+          "free_bytes": 28066185216,
+          "name": "NVIDIA GeForce RTX 5090",
+          "total_bytes": 34190917632,
+          "used_bytes": 5685379072,
+          "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074"
+        },
+        "limits": "A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled.",
+        "ok": true,
+        "plan_id": "78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947",
+        "policy": {
+          "max_age_seconds": 604800,
+          "max_sample_gap_ns": 1000000000,
+          "max_workers": 1,
+          "minimum_cold_sessions": 2,
+          "minimum_samples": 3,
+          "minimum_warm_sessions": 2,
+          "reserve_bytes": 2147483648,
+          "uncertainty_percent": 20,
+          "version": 1
+        },
+        "profile_ids": [
+          "28693cc9b80e089ee07f62a5ed931f9c685ce7344b28f246b2f6b9954150a602",
+          "a17fb0a974873c6a456bc6fb97024ada28e6d25133c3a625c1345631d1211d4f"
+        ],
+        "reasons": [],
+        "runtime_key": "36c48995b2adece59f217b25c96eb384a8d9d89555d761f805763fb38b1eaf46",
+        "scope": "conservative_exact_workload_sequential_admission",
+        "version": 1,
+        "workers": 1
+      },
+      {
+        "admitted": true,
+        "checked_at": "2026-09-22T04:08:50.974435+00:00",
+        "current_used_bytes": 5685379072,
+        "estimates": [
+          {
+            "additional_envelope_bytes": 3147825152,
+            "cold_sessions": 2,
+            "headroom_bytes": 22551763353,
+            "observed_device_peak_bytes": 4813422592,
+            "required_total_bytes": 11610252903,
+            "uncertainty_bytes": 629565031,
+            "warm_sessions": 2,
+            "workload_key": "947989cc8a2955bc6efb2991adb7712b1a7a2323002360a55b3f59afa541371d"
+          }
+        ],
+        "gpu": {
+          "driver": "616.64",
+          "free_bytes": 28066185216,
+          "name": "NVIDIA GeForce RTX 5090",
+          "total_bytes": 34190917632,
+          "used_bytes": 5685379072,
+          "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074"
+        },
+        "limits": "A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled.",
+        "ok": true,
+        "plan_id": "78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947",
+        "policy": {
+          "max_age_seconds": 604800,
+          "max_sample_gap_ns": 1000000000,
+          "max_workers": 1,
+          "minimum_cold_sessions": 2,
+          "minimum_samples": 3,
+          "minimum_warm_sessions": 2,
+          "reserve_bytes": 2147483648,
+          "uncertainty_percent": 20,
+          "version": 1
+        },
+        "profile_ids": [
+          "1d1863d62c5986954b2b42bb413d96568200c46c9ef66e07cb66af0fa662e880",
+          "ca4128130e75beb8f62c2ab128f3fa558faa78cdabc28c6e232d007505806d82"
+        ],
+        "reasons": [],
+        "runtime_key": "d292a8aed652bf4750c74c4e34174aac55b68364e99082dbe46de4cfb94273fb",
+        "scope": "conservative_exact_workload_sequential_admission",
+        "version": 1,
+        "workers": 1
+      }
+    ]
+  },
+  "trial_reservation_count": 0,
+  "trial_job_count": 0,
+  "released_lease": {
+    "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "job_name": "Global\\ITOV-owned-109e03d5-54cb-456f-8a72-59dfa6e257bb",
+    "lease_id": "109e03d5-54cb-456f-8a72-59dfa6e257bb",
+    "owner": {
+      "created": 134345237030753668,
+      "pid": 65292
+    },
+    "plan_id": "78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947",
+    "record_id": "bcc8b78c4aba583e94cfe49af3488c4cfbd612d7fa7657bd219236c3e900d6a3",
+    "started_at": "2026-09-22T04:08:23.368145+00:00",
+    "status": "held",
+    "version": 1,
+    "workers": [
+      {
+        "created": 134345237035755649,
+        "pid": 41084
+      },
+      {
+        "created": 134345237138448755,
+        "pid": 61612
+      }
+    ],
+    "workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace"
+  },
+  "worker_states": [
+    "dead",
+    "dead"
+  ],
+  "active_owned_job_processes": 0,
+  "passed_refusal_and_ownership_checks": true
+}

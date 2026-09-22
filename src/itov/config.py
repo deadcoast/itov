@@ -59,10 +59,15 @@ class Config:
     comfyui_root: Path
     comfyui_python: Path | None
     url: str
+    worker_root: Path | None = None
 
     @property
     def root(self) -> Path:
         return self.file.parent
+
+    @property
+    def runtime_root(self) -> Path:
+        return self.worker_root or self.root
 
     @property
     def python(self) -> Path | None:

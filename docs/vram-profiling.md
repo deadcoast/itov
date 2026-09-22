@@ -70,7 +70,7 @@ uv run --locked itov batch resume workspace/state/plans/NEW_PLAN_ID.json --confi
 
 The first refusal happens before claiming seeds. An admitted batch stores its exact profiles/policy in an immutable guard and records the guard hash in the same database transaction as the batch and seed reservations. Fresh headroom, qualification, cache and queue checks run before each new POST. A used process must retain a successful matching last-execution measurement; failed or missing telemetry cannot establish its cache state. Later refusal pauses the batch with its reservations intact. Omitting the profile options on resume retains the guard; missing or changed guard data fails closed. Already accepted prompts remain owned and observable. Completed resume verifies collected artifacts without runtime HTTP.
 
-This uses the existing whole-workspace dispatcher lock. It cannot exclude another workspace or an external ComfyUI client, so there remains a check-to-submission race outside ITOV's ownership. A device-wide reservation protocol and actual isolated-worker tests are required before parallel admission.
+This uses the existing whole-workspace dispatcher lock. It cannot exclude another workspace or an external ComfyUI client, so there remains a check-to-submission race outside ITOV's ownership. The separate [managed parallel gate](parallel-execution.md) adds same-user device ownership, worker isolation and host-memory checks. These ordinary sequential commands do not acquire its lease.
 
 ## Evidence and remaining gate
 
@@ -78,15 +78,15 @@ The [final measurements](evidence/stage-09-vram-20260921.json), [held-out admiss
 
 The first video admission attempt correctly refused because VAE choice ordering changed between process launches. Five [read-only observer startups](evidence/stage-09-schema-order-20260921.json) isolated that schema difference. The [measurements before this correction](evidence/stage-09-initial-schema-measurements-20260921.json) and initial refusal remain available; both video calibration sessions were repeated after the narrow ordering correction. No capacity margin was reduced to obtain acceptance.
 
-Final RTX 5090 observations below are maxima across four executions per workload. Memory columns use GiB (1024Ã‚Â³ bytes); the device column is sampled usage, not a per-job allocator peak.
+Final RTX 5090 observations below are maxima across four executions per workload. Memory columns use GiB (1024^3 bytes); the device column is sampled usage, not a per-job allocator peak.
 
 | Workload | Allocated peak | Reserved peak | Device sample peak | Samples per job |
 | --- | ---: | ---: | ---: | ---: |
-| audio | 0.555 | 0.656 | 4.577 | 45â€“89 |
-| sdxl-base | 2.175 | 2.750 | 10.920 | 49â€“115 |
-| sdxl-lcm | 2.175 | 2.750 | 10.920 | 18â€“91 |
-| wan22 | 3.824 | 5.281 | 27.404 | 241â€“321 |
+| audio | 0.555 | 0.656 | 4.577 | 45-89 |
+| sdxl-base | 2.175 | 2.750 | 10.920 | 49-115 |
+| sdxl-lcm | 2.175 | 2.750 | 10.920 | 18-91 |
+| wan22 | 3.824 | 5.281 | 27.404 | 241-321 |
 
 Held-out fresh-process checks admitted audio, SDXL base and SDXL+LCM. Two new audio jobs then completed under the persistent guard, and completed replay made zero runtime requests. The final video check had matching repeated profiles but refused headroom: 38.391 GiB required by policy against 31.816 GiB capacity. That conservative refusal is retained despite successful calibration renders; it does not prove the video would OOM.
 
-Stage 9A qualifies the bounded measurement and guarded sequential path. Stage 9B remains open: device-wide ownership, isolated worker state and artifacts, contention/crash recovery, host-memory budgeting, and an explicitly bounded real parallel workload. Image/video quality, human listening and semantic synchronization remain separate open acceptance gates in [TODO.md](../TODO.md).
+Stage 9A qualifies the bounded measurement and guarded sequential path. Stage 9B now implements [managed ownership and the bounded audio trial](parallel-execution.md). Its first actual parallel admission refused insufficient host commit memory before any submission; real overlapping inference remains pending. Image/video quality, human listening and semantic synchronization remain separate open acceptance gates in [TODO.md](../TODO.md).

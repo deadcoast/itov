@@ -2,7 +2,7 @@
 
 Updated 2026-09-21. This is the working task list for continued development. The [build plan](docs/development-review.md) records design decisions and acceptance evidence; [CHANGELOG.md](CHANGELOG.md) records delivered increments. Original documents under `docs/design_spec/` are design inputs, not proof that their examples work.
 
-Current checkpoint: stage 9A is complete for measured exact workloads and guarded sequential admission. Stage 9B device ownership and parallel qualification are next. Image/video defects, human listening and semantic synchronization remain open.
+Current checkpoint: stage 9A is complete. Stage 9B device ownership, isolated workers and repeated calibration are implemented; the first real parallel admission refused insufficient host commit memory before submission. Actual overlapping inference is the remaining active gate. Image/video defects, human listening and semantic synchronization remain open.
 
 ## Working rules
 
@@ -24,7 +24,7 @@ Current checkpoint: stage 9A is complete for measured exact workloads and guarde
 | 6. Pinned image inference | Complete for selected baseline | User-selected official SDXL 1.0 + LCM LoRA; four real 1024×1024 outputs; [evidence](docs/evidence/stage-06-inference-20260921.json). Exact prompt compliance and general quality remain open. |
 | 7. Image-to-video | Complete for the bounded baseline | Two real Wan 2.2 TI2V 5B clips, pinned input/model files, sequential execution, full media validation, resume and resource observations; [evidence](docs/evidence/stage-07-video-20260921.json). General quality remains open. |
 | 8. Audio and audiovisual output | Complete for the bounded baseline | Two real Stable Audio Open stereo FLACs and two owned H.264/AAC pairs; full decode, trim/pad, timing, source-frame preservation and repeat verification. [Evidence](docs/evidence/stage-08-audio-20260921.json). Listening and semantic synchronization remain open. |
-| 9. Measured VRAM and parallel admission | **9A complete; 9B next** | Exact-workload cold/warm profiles and guarded sequential admission verified. Video is conservatively refused for headroom; parallel execution requires separate device ownership and real qualification. [Contract/evidence](docs/vram-profiling.md). |
+| 9. Measured VRAM and parallel admission | **9A complete; 9B live qualification pending** | Managed same-user GPU leases, isolated workers, native failure/recovery tests and eight real audio calibration jobs pass. Parallel admission refused host commit headroom without claiming seeds. [Ownership and evidence](docs/parallel-execution.md). |
 | 10. Trigger and scene constraints | Planned | Reconcile Part 12 aliases, scoring and phrase/template schemas against the real catalogs; retain source provenance and explicit constraints. |
 | 11. Training, evaluation and promotion | Planned | Replace design skeletons with selected upstream APIs, dataset provenance, independent acceptance and explicit catalog promotion. |
 | 12. Discovery, lookup, scheduling and curation | Planned | Reconcile Parts 7/8 and 12.1–12.4; build on accepted media contracts and durable ownership rather than filename guesses. |
@@ -67,14 +67,18 @@ Current checkpoint: stage 9A is complete for measured exact workloads and guarde
 - [x] Finish final video headroom assessment: repeated identities match; admission refuses 38.391 GiB required against 31.816 GiB capacity. No seeds claimed or jobs submitted by that check.
 - [x] Pass 648 source tests and 648 installed-wheel tests, lint/format/build checks, 29-module byte parity, installed guarded resume and prior audio/video/mux regressions. Update evidence, TODO, build plan and changelog. [Verification](docs/evidence/stage-09-verification-20260921.json).
 
-## Next: stage 9B ownership and bounded parallel qualification
+## Active: stage 9B ownership and bounded parallel qualification
 
-- [ ] Define device-wide leases keyed by GPU UUID, including cross-workspace ownership and conservative unknown-owner recovery. Use OS ownership/process handles; never use `os.kill(pid, 0)` on Windows.
-- [ ] Isolate each worker's port, user/database/temp paths, job records and artifacts; retain whole-workspace catalog and seed integrity.
-- [ ] Test simultaneous reservation contention, worker failure, lost acknowledgement, restart and release without duplicate submission or premature reuse.
-- [ ] Add host-RAM and non-ITOV device-pressure checks; define policy for external clients that bypass ITOV ownership.
-- [ ] Use the measured neutral audio workload as the first bounded parallel candidate. Recheck actual headroom and qualify real simultaneous execution only after ownership tests pass.
-- [ ] Retain both admitted and refused cases, verify distinct owned artifacts and recovery, then update this stage map. Do not infer parallel acceptance from stage 9A.
+- [x] Define same-user device leases keyed by GPU UUID, including cross-workspace ownership and conservative unknown-owner recovery. Actual Windows handles bind PID plus creation time; no `os.kill(pid, 0)`.
+- [x] Isolate each worker's port, input/output, user/database/temp and telemetry paths; retain whole-workspace catalog/seed integrity and distinct collected artifact ownership.
+- [x] Test simultaneous contention, atomic job membership, controller death before/after worker registration, confirmed shutdown and sticky lease recovery with actual Windows processes. Test lost acknowledgement and duplicate prevention with concurrent HTTP fixtures; interrupted workers are explicitly retired, never restarted automatically.
+- [x] Add measured host working-set/commit envelopes, available physical/commit checks and aggregate whole-device GPU pressure. Document that other users, unmanaged clients and ordinary sequential commands bypass this managed lease.
+- [x] Execute two fresh four-job serial calibrations of pinned neutral audio, providing two cold/warm sessions per worker. Retain the initial logging failure, confirmed recovery and all four reserved seeds; repeat with fresh seeds after the fix.
+- [x] Exercise actual cross-workspace contention and conservative parallel admission refusal: 23,702,423,143 host bytes required versus 22,614,253,568 available commit. No execution claim or POST; owned workers stopped and shared device lease returned idle.
+- [x] Attempt supported idle-server cache release; retain unchanged history and measured memory. It did not free measurable commit headroom. Do not lower policy margins or stop unrelated applications to force admission.
+- [x] Pass 693 source and 693 installed-wheel tests, lint/format/build, 33-module byte parity, installed calibration validation/replay and prior media regressions. Preserve the initial Windows-label mismatch and its narrow correction. [Verification](docs/evidence/stage-09b-verification-20260921.json).
+- [ ] Free enough host commit for a fresh admission check, then run the prepared two-job plan. At the refused observation, another 1,088,169,575 bytes (about 1.01 GiB) were needed after worker startup. Recheck current usage; availability changes.
+- [ ] Qualify actual overlapping inference, distinct owned outputs and zero-HTTP completed replay. Keep refused evidence alongside any later admitted result. Stage 10 starts after this bounded gate passes.
 
 ## Required inputs and dependencies
 
@@ -91,8 +95,9 @@ Current checkpoint: stage 9A is complete for measured exact workloads and guarde
 | REQ-09 | Audio baseline and timing | Implemented and exercised: two pinned Stable Audio Open generations, exact stereo FLAC samples, two 1.375-second H.264/AAC pairs and completed replay. [Runtime evidence](docs/evidence/stage-08-audio-20260921.json). |
 | REQ-10 | Audio quality and upstream warnings | Open: human listening, loudness and semantic scene alignment are unqualified. Retain TorchSDE boundary warnings from the actual sampler and evaluate them before expanding its acceptance scope. |
 | REQ-11 | Capacity measurement authority | Implemented for stage 9A: fresh-process/warm labels, exact identity, sampling gaps, non-Torch/global usage, seven-day expiry and explicit uncertainty margins. Broader prediction remains unqualified. |
-| REQ-12 | Parallel ownership and host memory | Open for stage 9B: device-wide leases, per-worker storage, host-RAM pressure, external-client handling and actual parallel recovery evidence are required. |
+| REQ-12 | Parallel ownership and host memory | Implemented for same-user managed Windows workers; native contention/crash recovery, actual calibration and refusal verified. Live overlapping inference remains pending host commit headroom. [Evidence/scope](docs/parallel-execution.md). |
 | REQ-13 | Cross-process schema stability | Corrected for the observed stock VAE choice-order defect; available choices/defaults and selected model bytes remain bound. Other runtime/schema changes still require new profiles. |
+| REQ-14 | Parallel trial host capacity | Open: preserve margins and obtain sufficient available physical/commit memory after two fresh workers start. The idle server's supported cache release had no measurable effect; restarting it would discard its in-memory history. |
 
 ## Follow-up requirements and known limits
 
@@ -101,6 +106,7 @@ Current checkpoint: stage 9A is complete for measured exact workloads and guarde
 - [ ] Listen to the retained stage-eight audio and A/V samples against explicit quality criteria; no human listening or semantic/lip-sync acceptance has been recorded.
 - [ ] Reconcile the design documents' named model files, custom nodes, tuning and speed claims with current upstream evidence; do not install their embedded scripts verbatim.
 - [ ] Qualify other model/LoRA combinations individually; one successful baseline does not establish arbitrary compatibility.
+- [ ] Before general concurrency, reconcile ordinary ITOV commands and external clients with managed device ownership; qualify additional users/platforms and larger worker pools separately.
 - [ ] Extend video qualification beyond two 1.375-second clips: longer sequences, representative resolutions and full playback review, with explicit quality criteria.
 - [ ] Design explicit workspace backup/restore and test recovery. Current process-crash checks do not establish power-loss, network-filesystem or partial-backup safety.
 - [ ] Keep the existing user-deleted `.cipher-review-temp/` files outside this increment; any repository hygiene cleanup must preserve that unrelated work.

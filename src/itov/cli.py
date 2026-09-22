@@ -209,6 +209,27 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--profile", type=Path, action="append", default=[])
             item.add_argument("--workers", type=int, default=1)
             item.add_argument("--save", action="store_true")
+    parallel = commands.add_parser("parallel", help="Bounded two-worker audio qualification")
+    actions = parallel.add_subparsers(dest="action", required=True)
+    for action in ("calibrate", "qualify", "resume", "recover"):
+        item = actions.add_parser(action)
+        item.add_argument(
+            "file", type=Path, help="Saved audio plan: four calibration or two trial jobs"
+        )
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"calibrate", "qualify"}:
+            item.add_argument("--ports", nargs=2, type=int, default=[8191, 8192])
+            item.add_argument("--wait-timeout", type=float, default=900)
+        if action == "qualify":
+            item.add_argument("--calibration", action="append", type=Path, required=True)
+    device = commands.add_parser("device", help="Inspect or explicitly recover a managed GPU lease")
+    actions = device.add_subparsers(dest="action", required=True)
+    for action in ("status", "recover"):
+        item = actions.add_parser(action)
+        item.add_argument("--gpu", required=True, help="Exact NVIDIA GPU UUID")
+        if action == "recover":
+            item.add_argument("--lease", required=True, help="Exact abandoned lease UUID")
     return root
 
 
@@ -305,6 +326,35 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1
+        elif args.command == "device":
+            from itov import device
+
+            result = (
+                device.status(args.gpu)
+                if args.action == "status"
+                else device.recover(args.gpu, args.lease)
+            )
+            print(json.dumps(result, indent=2))
+            return 0
+        elif args.command == "parallel":
+            from itov import parallel
+
+            config = load_config(args.config)
+            if args.action == "resume":
+                result = parallel.resume(config, args.file)
+            elif args.action == "recover":
+                result = parallel.recover(config, args.file)
+            else:
+                result = parallel.run(
+                    config,
+                    args.file,
+                    calibrate=args.action == "calibrate",
+                    calibration_paths=getattr(args, "calibration", None),
+                    ports=args.ports,
+                    wait_timeout=args.wait_timeout,
+                )
+            print(json.dumps(result, indent=2))
+            return 0 if result["ok"] else 1
         elif args.command == "vram":
             from itov import vram
 

@@ -1,0 +1,516 @@
+{
+  "observed_at": "2026-09-22T04:22:55.446093+00:00",
+  "package_version": "0.10.0",
+  "platform": "Windows",
+  "checks": [
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage09b-final-source"
+      ],
+      "exit_code": 0,
+      "seconds": 192.45,
+      "stdout": "........................................................................ [ 10%]\n........................................................................ [ 20%]\n........................................................................ [ 31%]\n........................................................................ [ 41%]\n........................................................................ [ 51%]\n........................................................................ [ 62%]\n........................................................................ [ 72%]\n........................................................................ [ 83%]\n........................................................................ [ 93%]\n.............................................                            [100%]\n693 passed in 192.04s (0:03:12)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_import",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov,importlib.metadata; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.10.0'; print('Preserved SCM',importlib.metadata.version('scm-dev-tools'))"
+      ],
+      "exit_code": 0,
+      "seconds": 0.215,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py\nPreserved SCM 0.5.0\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.108,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.093,
+      "stdout": "60 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.107,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.10.0.tar.gz\nSuccessfully built dist\\itov-0.10.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "installed_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.10.0'; assert all((root/p.name).read_bytes()==p.read_bytes() for p in files); print(sys.version); print(root); print(len(files),'modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 1.088,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\fP4svX8lGcaKM8NBb1S17\\Lib\\site-packages\\itov\n33 modules match source\n",
+      "stderr": "Installed 9 packages in 589ms\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage09b-final-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 212.241,
+      "stdout": "........................................................................ [ 10%]\n........................................................................ [ 20%]\n........................................................................ [ 31%]\n........................................................................ [ 41%]\n........................................................................ [ 51%]\n........................................................................ [ 62%]\n........................................................................ [ 72%]\n........................................................................ [ 83%]\n........................................................................ [ 93%]\n.............................................                            [100%]\n693 passed in 211.18s (0:03:31)\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_calibration_validation",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import json; from pathlib import Path; from itov.parallel import load_calibration; evidence=json.loads(Path('docs/evidence/stage-09b-calibration-20260921.json').read_bytes()); values=[load_calibration(Path(x['result']['evidence'])) for x in evidence['runs']]; assert len(values)==2; print('Two immutable calibration documents validated; four fresh worker sessions')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.338,
+      "stdout": "Two immutable calibration documents validated; four fresh worker sessions\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_completed_calibration_resume_0",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "parallel",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\c16c4265fbb73b3e3e313911124a8ddd0277287f0ba7e17ccf855bfff80e87c4.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.101,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"c16c4265fbb73b3e3e313911124a8ddd0277287f0ba7e17ccf855bfff80e87c4\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"c16c4265fbb73b3e3e313911124a8ddd0277287f0ba7e17ccf855bfff80e87c4\",\n      \"job_index\": 0,\n      \"request_id\": \"fd2b8d9e-d749-5f21-bb59-8f83298d6934\",\n      \"workflow_sha256\": \"88fee9394bd62f837a1e5c0e8151c9165643e3800c0003423647b9db7b62f1eb\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"3d39883d-fef0-4c28-9570-71efed550201\"\n    },\n    {\n      \"plan_id\": \"c16c4265fbb73b3e3e313911124a8ddd0277287f0ba7e17ccf855bfff80e87c4\",\n      \"job_index\": 1,\n      \"request_id\": \"5f283f4a-90b3-5ed7-a88c-211bf451be83\",\n      \"workflow_sha256\": \"6dfc1f00af7f8347e5587cd3a3b79bb3531bccb01bd8bb89b66b33ebd68f1dca\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"6b5d42f0-f415-41b8-87fa-704dcc40c75b\"\n    },\n    {\n      \"plan_id\": \"c16c4265fbb73b3e3e313911124a8ddd0277287f0ba7e17ccf855bfff80e87c4\",\n      \"job_index\": 2,\n      \"request_id\": \"e816b361-2885-552c-9c57-ed6453cb6e55\",\n      \"workflow_sha256\": \"31259714cf6bbb888e481f89a9c77b4b96e91101bc9e57d736c942940499dc13\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"f2b8cc18-2a91-4347-9bc4-8636af0a6b12\"\n    },\n    {\n      \"plan_id\": \"c16c4265fbb73b3e3e313911124a8ddd0277287f0ba7e17ccf855bfff80e87c4\",\n      \"job_index\": 3,\n      \"request_id\": \"804bff69-bf25-575d-9e13-1e2d45bed585\",\n      \"workflow_sha256\": \"df1fdbacbcf0c050ccb4defdd9132bd7617610b17fba77eab3650c3a67a3c631\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"3e22be58-bb33-4d65-bc63-168ee3dc157b\"\n    }\n  ],\n  \"succeeded\": 4,\n  \"scope\": \"completed_parallel_artifact_reverification\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_completed_calibration_resume_1",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "parallel",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\0c9d59854d7264ea878264b2b89ef42bedbb07a980f63507d1fca1ddd0ac58bd.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.925,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"0c9d59854d7264ea878264b2b89ef42bedbb07a980f63507d1fca1ddd0ac58bd\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"0c9d59854d7264ea878264b2b89ef42bedbb07a980f63507d1fca1ddd0ac58bd\",\n      \"job_index\": 0,\n      \"request_id\": \"fb6bd1a6-84db-52f5-9575-c227749041bd\",\n      \"workflow_sha256\": \"2dc054516031c1050df48a136645162fe8371dbdfbe4c35c5c5b8b653cc808df\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"712af517-9b3b-4589-be8d-913e333f0b95\"\n    },\n    {\n      \"plan_id\": \"0c9d59854d7264ea878264b2b89ef42bedbb07a980f63507d1fca1ddd0ac58bd\",\n      \"job_index\": 1,\n      \"request_id\": \"20856dce-7928-534e-a5f7-7afdecb11b2a\",\n      \"workflow_sha256\": \"b3750c85fa5536a83d274c551a147f03d2ef4106153c2afabed052234a32abd1\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"f35cfe7c-1d66-464a-82a1-eb2e190b2094\"\n    },\n    {\n      \"plan_id\": \"0c9d59854d7264ea878264b2b89ef42bedbb07a980f63507d1fca1ddd0ac58bd\",\n      \"job_index\": 2,\n      \"request_id\": \"9b9d4076-4676-5ec4-a152-c85bc649e4e1\",\n      \"workflow_sha256\": \"e32aebeedda04a85cf33f9d1ce654e0d55b95eb0fcd39864a012f7dd49d2cffc\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"47d96ef3-3b7d-42ba-b510-defb0c2748c8\"\n    },\n    {\n      \"plan_id\": \"0c9d59854d7264ea878264b2b89ef42bedbb07a980f63507d1fca1ddd0ac58bd\",\n      \"job_index\": 3,\n      \"request_id\": \"28bd1ada-6bbb-575b-9dac-70e1fe2c04ec\",\n      \"workflow_sha256\": \"4632ff624502d62b624211bfda3d4ab9d56135bef91f4b43ba8c6570b908e658\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"1b929d80-cf43-44ca-82f0-4a955d13bb46\"\n    }\n  ],\n  \"succeeded\": 4,\n  \"scope\": \"completed_parallel_artifact_reverification\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_parallel_cli",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "parallel",
+        "qualify",
+        "--help"
+      ],
+      "exit_code": 0,
+      "seconds": 0.292,
+      "stdout": "usage: itov parallel qualify [-h] [--config CONFIG] [--json]\n                             [--ports PORTS PORTS]\n                             [--wait-timeout WAIT_TIMEOUT] --calibration\n                             CALIBRATION\n                             file\n\npositional arguments:\n  file                  Saved audio plan: four calibration or two trial jobs\n\noptions:\n  -h, --help            show this help message and exit\n  --config CONFIG\n  --json\n  --ports PORTS PORTS\n  --wait-timeout WAIT_TIMEOUT\n  --calibration CALIBRATION\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_device_status",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "device",
+        "status",
+        "--gpu",
+        "GPU-e2c115fd-447a-8fe0-3257-b17c51919074"
+      ],
+      "exit_code": 0,
+      "seconds": 0.296,
+      "stdout": "{\n  \"previous\": \"109e03d5-54cb-456f-8a72-59dfa6e257bb\",\n  \"reason\": \"owned_job_and_all_workers_stopped\",\n  \"record_id\": \"6abb49b130203b75cc69a0b9d120cc2d3f6592a492f81ff96a14c2669321ef4b\",\n  \"released_at\": \"2026-09-22T04:08:51.065401+00:00\",\n  \"status\": \"idle\",\n  \"version\": 1,\n  \"directory\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\ITOV\\\\device-leases\\\\e2c115fd-447a-8fe0-3257-b17c51919074\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_completed_guarded_resume",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "batch",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a.json",
+        "--config",
+        "workspace/itov-vram.toml",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.623,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a\",\n      \"job_index\": 0,\n      \"request_id\": \"d894a2df-0d23-5823-8817-125f5630784e\",\n      \"workflow_sha256\": \"ed0cacd92b2136b6028f04b0d6e1818b2d3cdad9730fb6f4c8836d28adcf2392\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"6da51ff4-5bd8-4b23-972e-80c01c431605\"\n    },\n    {\n      \"plan_id\": \"5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a\",\n      \"job_index\": 1,\n      \"request_id\": \"4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd\",\n      \"workflow_sha256\": \"ad216e5d04f1bf15d2b22992fc89eeb189803ec959966ceb786ab0715ea279a8\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"2c95138c-fa3a-45d5-8227-13ac5e7bc05b\"\n    }\n  ],\n  \"succeeded\": 2,\n  \"scope\": \"sequential_batch_observations\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_completed_audio_resume",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "batch",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.633,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf\",\n      \"job_index\": 0,\n      \"request_id\": \"c2f1ecd5-a273-54ba-8496-cd3a6c04e59a\",\n      \"workflow_sha256\": \"2c294a5080b82cfe708134c89847f9574493db4b2c8649f341959b3db8889a18\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"319575d0-1408-42ad-b0e9-5ac6ff7f1732\"\n    },\n    {\n      \"plan_id\": \"cfe7212d704b32b89b891c3a6e7b55cf2ad91936cef99d752ca32ab874ace8bf\",\n      \"job_index\": 1,\n      \"request_id\": \"1c87e283-2fcc-5250-a90b-d0bf24b17057\",\n      \"workflow_sha256\": \"f5d4aa1e56ea323021acefce21d537d5de91d877ed8e6c6f1950dc7d3232ede3\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"5bb37411-08da-4add-8207-b18f1629fc0c\"\n    }\n  ],\n  \"succeeded\": 2,\n  \"scope\": \"sequential_batch_observations\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_audio_verify",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "audio",
+        "verify",
+        "examples/stable-audio.audio.json",
+        "docs/evidence/stage-08-output-01.flac",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.439,
+      "stdout": "{\n  \"ok\": true,\n  \"scope\": \"lossless_audio_full_decode\",\n  \"sha256\": \"22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad\",\n  \"sample_rate\": 44100,\n  \"channels\": 2,\n  \"samples\": 176128,\n  \"peak\": 0.032684326171875,\n  \"rms\": 0.009291575217721188,\n  \"decoded_f32le_sha256\": \"2e465b4bcbe426f1add6461824cbe9163b9a8f10b321724d203426c4e25567d0\",\n  \"duration_seconds\": 3.9938321995464854,\n  \"limits\": \"Finite nonzero samples do not establish quality or prompt compliance.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_mux_replay",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "av",
+        "mux",
+        "examples/stage-08-pair-01.av.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.025,
+      "stdout": "{\n  \"ok\": true,\n  \"status\": \"verified_existing\",\n  \"directory\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\\\\av\\\\c6a05fb08cd3ee328099144e63cb1723c5b197d941546bc28ded5511f6db08f7\",\n  \"receipt\": {\n    \"alignment\": {\n      \"bitrate\": \"192k\",\n      \"channels\": 2,\n      \"codec\": \"aac\",\n      \"normalization\": \"none\",\n      \"offset_samples\": 0,\n      \"pad_samples_estimate\": 0,\n      \"resampled_source_samples_estimate\": 191704,\n      \"sample_format\": \"s16le\",\n      \"sample_rate\": 48000,\n      \"target_samples\": 66000,\n      \"trim_samples_estimate\": 125704\n    },\n    \"operation_id\": \"c6a05fb08cd3ee328099144e63cb1723c5b197d941546bc28ded5511f6db08f7\",\n    \"outputs\": {\n      \"aligned.wav\": {\n        \"bytes\": 264078,\n        \"sha256\": \"69ef33e650bb565da862363fa9fe0958f8ef7ab1e68b91d166ffe496b3c50b25\"\n      },\n      \"output.mp4\": {\n        \"bytes\": 117375,\n        \"sha256\": \"a8a6b98feff5f8fcb489796f233e218ec7ef119b70b2469ef0459a6eeb31d868\"\n      }\n    },\n    \"receipt_sha256\": \"79d09f4d6ddf274bf2962ad4fa5551496405eaa5ee9fc3789c1c6cfa4aca9234\",\n    \"sources\": {\n      \"audio\": {\n        \"contract\": {\n          \"channels\": 2,\n          \"sample_rate\": 44100,\n          \"samples\": 176128\n        },\n        \"node_id\": \"9\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\\\\jobs\\\\c2f1ecd5-a273-54ba-8496-cd3a6c04e59a\\\\artifact-0000.flac\",\n        \"prompt_id\": \"319575d0-1408-42ad-b0e9-5ac6ff7f1732\",\n        \"record_sha256\": \"efdf110bf53ca567d194837e8f5deff4903d43238dd805cd4f6def1590531abd\",\n        \"request_id\": \"c2f1ecd5-a273-54ba-8496-cd3a6c04e59a\",\n        \"sha256\": \"22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad\",\n        \"validation\": {\n          \"channels\": 2,\n          \"decoded_f32le_sha256\": \"2e465b4bcbe426f1add6461824cbe9163b9a8f10b321724d203426c4e25567d0\",\n          \"duration_seconds\": 3.9938321995464854,\n          \"limits\": \"Finite nonzero samples do not establish quality or prompt compliance.\",\n          \"ok\": true,\n          \"peak\": 0.032684326171875,\n          \"rms\": 0.009291575217721188,\n          \"sample_rate\": 44100,\n          \"samples\": 176128,\n          \"scope\": \"lossless_audio_full_decode\",\n          \"sha256\": \"22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad\"\n        }\n      },\n      \"video\": {\n        \"contract\": {\n          \"fps\": 24,\n          \"frames\": 33,\n          \"height\": 640,\n          \"width\": 640\n        },\n        \"node_id\": \"12\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\\\\jobs\\\\914bd070-aea2-52d5-995b-a5419cb1e0b0\\\\artifact-0000.mp4\",\n        \"prompt_id\": \"185c0efa-a86a-459e-b369-dff7ca63d522\",\n        \"record_sha256\": \"a19b8297d74a053877c702f51597485d28d90e8a76bd1e9730fe490d0ca8d002\",\n        \"request_id\": \"914bd070-aea2-52d5-995b-a5419cb1e0b0\",\n        \"sha256\": \"60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e\",\n        \"validation\": {\n          \"constant_frame_timestamps\": true,\n          \"decoded_frame_md5\": [\n            \"a46f14f371b870c23528e86a2cba3d62\",\n            \"cff2291cb143baa097a2bee03a9ceacd\",\n            \"9b6d2f96772bafa0c23a15e8d83b2966\",\n            \"298e2139bb14b3e7bd4e70a73a2f8836\",\n            \"2bf78f2c74acbbbb73444ee9506b1d98\",\n            \"d3e15004c99d4935fa2532c893556fe6\",\n            \"746f8e4a70a3a79ebd88605f68757a98\",\n            \"1c9d81c8c92c6cbea832ca9b009a0d03\",\n            \"8c2a3852fbe5abf8a3ff908f713d4edb\",\n            \"4968e0716c8d51e9c92a470d5ca47902\",\n            \"15046b9193dd51fc3f2347867ad926d6\",\n            \"fe811b951ec07cfb0c6879e128ac9eb6\",\n            \"251af9350c30f39afb801c554453af4b\",\n            \"3ded6df9051042977706960e895c0080\",\n            \"295abdb58c22c5295a22a6455beb2ad3\",\n            \"45013484dc181e1886c173666b7660e2\",\n            \"7ce4545a8f8942a7355e9a66f89bfa4a\",\n            \"ff2bc4d9e136b9a382efcbfb3f5e6ef9\",\n            \"60461dc19f30edec4ba4dfeafa769fbb\",\n            \"8cd7bb2a3759b8b549bc6040a3cec7d4\",\n            \"dffb1a98ec6a285dcdfa13469b8b3e7a\",\n            \"025b54630be03361857d90f832db3076\",\n            \"df5f3cc30dcaa85dbacad677bbc53958\",\n            \"ec9f3c0a38175478afc01de8a27b21db\",\n            \"4a83df530417d953ecb47b8b09bcaa03\",\n            \"b67de454de9d3c4db7ed34c2e9ca7113\",\n            \"88e9b7221b2a91e3427952d571cbbd21\",\n            \"9b036ddfa78a43cb2ca84c7ab5381d18\",\n            \"5a676612ed66ffc04d6b6e1ba157849e\",\n            \"b620c592a7d81665accedca133ebe1ad\",\n            \"7a3536ae3f17c627065d405351645fc6\",\n            \"6f779e95e6fe87796a80c19a5dfb6821\",\n            \"afd15886ebc84d9765b8e680d9ab9a0b\"\n          ],\n          \"distinct_frames\": 33,\n          \"duration_seconds\": 1.375,\n          \"fps\": 24,\n          \"frames\": 33,\n          \"height\": 640,\n          \"limits\": \"Frame variation does not establish quality, fidelity, or human acceptance.\",\n          \"ok\": true,\n          \"scope\": \"silent_h264_full_decode_and_timing\",\n          \"sha256\": \"60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e\",\n          \"tools\": {\n            \"ffmpeg\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n            \"ffprobe\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffprobe.EXE\"\n          },\n          \"width\": 640\n        }\n      }\n    },\n    \"specification\": {\n      \"audio\": {\n        \"node_id\": \"9\",\n        \"record_sha256\": \"efdf110bf53ca567d194837e8f5deff4903d43238dd805cd4f6def1590531abd\",\n        \"request_id\": \"c2f1ecd5-a273-54ba-8496-cd3a6c04e59a\",\n        \"sha256\": \"22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad\"\n      },\n      \"policy\": \"start-zero-trim-or-pad-v1\",\n      \"version\": 1,\n      \"video\": {\n        \"node_id\": \"12\",\n        \"record_sha256\": \"a19b8297d74a053877c702f51597485d28d90e8a76bd1e9730fe490d0ca8d002\",\n        \"request_id\": \"914bd070-aea2-52d5-995b-a5419cb1e0b0\",\n        \"sha256\": \"60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e\"\n      }\n    },\n    \"tools\": {\n      \"ffmpeg\": {\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n        \"sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\",\n        \"version\": \"ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\"\n      },\n      \"ffprobe\": {\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffprobe.EXE\",\n        \"sha256\": \"51e0780cd881f83749b029ed716cbb841c2eac6289f418050f2f2961b158896b\",\n        \"version\": \"ffprobe version 9.0-full_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers\"\n      }\n    },\n    \"validation\": {\n      \"aac_audio\": {\n        \"decoded_f32le_sha256\": \"c34f6e591ac6c7e458b007b26b40efbc5cc11b0f7c813500d6136c32f5621974\",\n        \"peak\": 0.027589891105890274,\n        \"rms\": 0.008901163319857982,\n        \"samples\": 66000\n      },\n      \"aac_terminal_padding_samples\": 0,\n      \"aligned_audio\": {\n        \"decoded_f32le_sha256\": \"8e4fd52d81c0c78a97d9a76ab6e8b4fb0272653af97068032133540d68abb45c\",\n        \"peak\": 0.02825927734375,\n        \"rms\": 0.00897948235594482,\n        \"samples\": 66000\n      },\n      \"contiguous_audio_timestamps\": true,\n      \"limits\": \"Container alignment does not establish semantic synchronization, lip sync, loudness targets, or human acceptance.\",\n      \"ok\": true,\n      \"scope\": \"decoded_av_container_timing\",\n      \"stream_timing\": [\n        {\n          \"codec_name\": \"h264\",\n          \"codec_type\": \"video\",\n          \"duration\": \"1.375000\",\n          \"duration_ts\": 16896,\n          \"start_time\": \"0.000000\",\n          \"time_base\": \"1/12288\"\n        },\n        {\n          \"channels\": 2,\n          \"codec_name\": \"aac\",\n          \"codec_type\": \"audio\",\n          \"duration\": \"1.375000\",\n          \"duration_ts\": 66000,\n          \"sample_rate\": \"48000\",\n          \"start_time\": \"0.000000\",\n          \"time_base\": \"1/48000\"\n        }\n      ],\n      \"video\": {\n        \"constant_frame_timestamps\": true,\n        \"decoded_frame_md5\": [\n          \"a46f14f371b870c23528e86a2cba3d62\",\n          \"cff2291cb143baa097a2bee03a9ceacd\",\n          \"9b6d2f96772bafa0c23a15e8d83b2966\",\n          \"298e2139bb14b3e7bd4e70a73a2f8836\",\n          \"2bf78f2c74acbbbb73444ee9506b1d98\",\n          \"d3e15004c99d4935fa2532c893556fe6\",\n          \"746f8e4a70a3a79ebd88605f68757a98\",\n          \"1c9d81c8c92c6cbea832ca9b009a0d03\",\n          \"8c2a3852fbe5abf8a3ff908f713d4edb\",\n          \"4968e0716c8d51e9c92a470d5ca47902\",\n          \"15046b9193dd51fc3f2347867ad926d6\",\n          \"fe811b951ec07cfb0c6879e128ac9eb6\",\n          \"251af9350c30f39afb801c554453af4b\",\n          \"3ded6df9051042977706960e895c0080\",\n          \"295abdb58c22c5295a22a6455beb2ad3\",\n          \"45013484dc181e1886c173666b7660e2\",\n          \"7ce4545a8f8942a7355e9a66f89bfa4a\",\n          \"ff2bc4d9e136b9a382efcbfb3f5e6ef9\",\n          \"60461dc19f30edec4ba4dfeafa769fbb\",\n          \"8cd7bb2a3759b8b549bc6040a3cec7d4\",\n          \"dffb1a98ec6a285dcdfa13469b8b3e7a\",\n          \"025b54630be03361857d90f832db3076\",\n          \"df5f3cc30dcaa85dbacad677bbc53958\",\n          \"ec9f3c0a38175478afc01de8a27b21db\",\n          \"4a83df530417d953ecb47b8b09bcaa03\",\n          \"b67de454de9d3c4db7ed34c2e9ca7113\",\n          \"88e9b7221b2a91e3427952d571cbbd21\",\n          \"9b036ddfa78a43cb2ca84c7ab5381d18\",\n          \"5a676612ed66ffc04d6b6e1ba157849e\",\n          \"b620c592a7d81665accedca133ebe1ad\",\n          \"7a3536ae3f17c627065d405351645fc6\",\n          \"6f779e95e6fe87796a80c19a5dfb6821\",\n          \"afd15886ebc84d9765b8e680d9ab9a0b\"\n        ],\n        \"distinct_frames\": 33,\n        \"duration_seconds\": 1.375,\n        \"fps\": 24,\n        \"frames\": 33,\n        \"height\": 640,\n        \"limits\": \"Frame variation does not establish quality, fidelity, or human acceptance.\",\n        \"ok\": true,\n        \"scope\": \"mux_h264_full_decode_and_timing\",\n        \"sha256\": \"a8a6b98feff5f8fcb489796f233e218ec7ef119b70b2469ef0459a6eeb31d868\",\n        \"tools\": {\n          \"ffmpeg\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n          \"ffprobe\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffprobe.EXE\"\n        },\n        \"width\": 640\n      }\n    },\n    \"version\": 1\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_prior_video_resume",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "itov",
+        "batch",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.666,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n      \"job_index\": 0,\n      \"request_id\": \"914bd070-aea2-52d5-995b-a5419cb1e0b0\",\n      \"workflow_sha256\": \"55beb74bf4d187555094ca66ea0b367efde492e9fd5dca2111a7f3a8df361a38\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"185c0efa-a86a-459e-b369-dff7ca63d522\"\n    },\n    {\n      \"plan_id\": \"92859bc2e027dcbe169deb7ab20e67a659a40483fdfadad67898b7a3b29e25f9\",\n      \"job_index\": 1,\n      \"request_id\": \"b7433210-997e-5ca5-9907-2eb82958bec8\",\n      \"workflow_sha256\": \"4fce6193695df1f81d70674dd5ae47718ae314ba39fd6294d9d7b8f520efac47\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"9fcef9b8-9331-434e-8fdb-206602b2cc08\"\n    }\n  ],\n  \"succeeded\": 2,\n  \"scope\": \"sequential_batch_observations\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "retained_initial_failures": [
+    {
+      "scope": "Installed calibration host identity",
+      "cause": "Python 3.11 labels the same 10.0.26200 Windows kernel as release 10; Python 3.13 labels it 11.",
+      "correction": "Allow only the Windows 10/11 marketing-name alias when numeric version, service-pack/edition, node and architecture all match. Preserve kernel and runtime bindings and add differing-host/build rejection tests.",
+      "evidence": "stage-09b-initial-verification-20260921.json"
+    },
+    {
+      "scope": "Native worker shutdown smoke",
+      "cause": "Job active count reached zero before the process handle was signaled.",
+      "correction": "Wait on each retained child process handle before releasing ownership."
+    },
+    {
+      "scope": "First focused protocol suite",
+      "result": "1 failed, 29 passed",
+      "cause": "Two artifact collectors raced creation of shared output/jobs parents on Windows.",
+      "correction": "Precreate all owned artifact directories under the dispatcher lock; retain path containment checks."
+    },
+    {
+      "scope": "Initial actual calibration",
+      "cause": "ComfyUI logger replaced sys.stdout without retaining the stream wrapper; garbage collection closed its buffer.",
+      "correction": "Keep the original stream owners alive; native regression covers replacement and collection. Retain failed job records and all four seeds, confirm worker exit, explicitly retire the run, then calibrate with fresh seeds.",
+      "evidence": "stage-09b-initial-calibration-20260921.json"
+    },
+    {
+      "scope": "First actual parallel admission",
+      "cause": "Host available commit 22614253568 bytes was below the 23702423143-byte policy requirement.",
+      "result": "No execution claim or submissions; competing workspace refused; owned workers stopped and device lease released.",
+      "evidence": "stage-09b-initial-parallel-20260921.json"
+    }
+  ],
+  "focused_tests": {
+    "ownership_and_parallel": "39 passed in 25.04 seconds",
+    "earlier_combined_regressions": "107 passed in 84.51 seconds"
+  },
+  "limits": [
+    "Native Windows tests cover actual process/job/lock behavior. HTTP fixtures cover submission races and lost acknowledgements without real model execution.",
+    "Actual pretrained calibration and any parallel trial are recorded separately; source/package tests do not establish GPU parallel qualification.",
+    "Same-user managed ownership does not exclude external clients, other users or legacy commands.",
+    "No hard capacity guarantee, simultaneous GPU kernel proof, speedup benchmark or media quality acceptance."
+  ],
+  "runtime_evidence": [
+    "stage-09b-calibration-20260921.json",
+    "stage-09b-initial-parallel-20260921.json",
+    "stage-09b-cache-release-20260921.json"
+  ],
+  "source_sha256": {
+    "src/itov/__init__.py": "aa29c43f0765729c23e1198552741192782ce857f460c3788c358cb3d9c9b1c0",
+    "src/itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3",
+    "src/itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+    "src/itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+    "src/itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+    "src/itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+    "src/itov/batch_execution.py": "cde37a4566b175409a66945114e81e83c9b9582e46129d50209e666060117cd7",
+    "src/itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+    "src/itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+    "src/itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+    "src/itov/cli.py": "499570386bdeef3340a43aa418404a740b85a3caee482f91373af1e343fd8b09",
+    "src/itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+    "src/itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+    "src/itov/device.py": "91a07bcdad002a9b8a4f0bcc19232f0863bf7dadf39a8d8f2d48b9de774938a5",
+    "src/itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+    "src/itov/execution_store.py": "83d653dbd032595e8b4689aeb4bd18e9113d3020c918030df8fa61fe7e60f362",
+    "src/itov/inference.py": "ac08d4ecb954745da0781be1ecd4cf1fc5ed03833e97bdad2163859760dc6abf",
+    "src/itov/jobs.py": "0d7702175f0fca7f812f0e4fede137690cfe9b468b08b85d114e5db3be3b551d",
+    "src/itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+    "src/itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+    "src/itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+    "src/itov/owned_jobs.py": "5eb31fc19bdf9fc1cd1f366e30cf66979df2f5ddf5c12920230b222c1ab97dd0",
+    "src/itov/parallel.py": "07559a6355e2cc8c729b4425fc4eadae0a56ec667d4d3f03a4db3c89d4b8e556",
+    "src/itov/qualification.py": "80d19c5eff4902b172d0e5be45f6214b7c7261b453356b403ebbebaa6bfc1279",
+    "src/itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+    "src/itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+    "src/itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+    "src/itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+    "src/itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+    "src/itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+    "src/itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+    "src/itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+    "src/itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+  },
+  "wheel_source_byte_parity": 33,
+  "artifact_sha256": {
+    "dist/itov-0.10.0-py3-none-any.whl": "174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b",
+    "dist/itov-0.10.0.tar.gz": "5cec594a36c2631dca39d12a646069e0ceff5dedb066d8b2f344c33c8b5e0eb0"
+  },
+  "passed": true,
+  "final_runtime_audit": {
+    "original_process": {
+      "pid": 69532,
+      "created": 134344520017126699
+    },
+    "original_history_unchanged": true,
+    "prior_jobs_unchanged": true,
+    "calibration_worker_states": [
+      "dead",
+      "dead",
+      "dead",
+      "dead"
+    ],
+    "device": {
+      "previous": "109e03d5-54cb-456f-8a72-59dfa6e257bb",
+      "reason": "owned_job_and_all_workers_stopped",
+      "record_id": "6abb49b130203b75cc69a0b9d120cc2d3f6592a492f81ff96a14c2669321ef4b",
+      "released_at": "2026-09-22T04:08:51.065401+00:00",
+      "status": "idle",
+      "version": 1,
+      "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+    },
+    "original_queue": {
+      "queue_running": [],
+      "queue_pending": []
+    },
+    "host_memory": {
+      "total_physical": 66095271936,
+      "available_physical": 37416828928,
+      "total_commit": 70256021504,
+      "available_commit": 27961733120
+    },
+    "live_parallel_qualified": false,
+    "remaining_gate": "Available host commit before two-worker submission"
+  },
+  "documentation_local_links": {
+    "files": 6,
+    "missing": []
+  },
+  "scoped_diff_check": {
+    "exit_code": 0,
+    "stdout": ""
+  }
+}

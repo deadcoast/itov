@@ -1,0 +1,229 @@
+{
+  "observed_at": "2026-09-22T04:13:29.877838+00:00",
+  "package_version": "0.10.0",
+  "platform": "Windows",
+  "checks": [
+    {
+      "name": "source_tests_python_3_13",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage09b-source"
+      ],
+      "exit_code": 0,
+      "seconds": 191.518,
+      "stdout": "........................................................................ [ 10%]\n........................................................................ [ 20%]\n........................................................................ [ 31%]\n........................................................................ [ 41%]\n........................................................................ [ 52%]\n........................................................................ [ 62%]\n........................................................................ [ 73%]\n........................................................................ [ 83%]\n........................................................................ [ 94%]\n.......................................                                  [100%]\n687 passed in 191.19s (0:03:11)\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_import",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "python",
+        "-c",
+        "import sys,itov,importlib.metadata; print(sys.version); print(itov.__file__); assert sys.version_info[:2]==(3,13); assert itov.__version__=='0.10.0'; print('Preserved SCM',importlib.metadata.version('scm-dev-tools'))"
+      ],
+      "exit_code": 0,
+      "seconds": 0.123,
+      "stdout": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py\nPreserved SCM 0.5.0\n",
+      "stderr": ""
+    },
+    {
+      "name": "lint",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.043,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "format",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04,
+      "stdout": "60 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "name": "build",
+      "command": [
+        "uv",
+        "build",
+        "--offline"
+      ],
+      "exit_code": 0,
+      "seconds": 0.075,
+      "stdout": "",
+      "stderr": "Building source distribution (uv build backend)...\nBuilding wheel from source distribution (uv build backend)...\nSuccessfully built dist\\itov-0.10.0.tar.gz\nSuccessfully built dist\\itov-0.10.0-py3-none-any.whl\n"
+    },
+    {
+      "name": "installed_byte_parity",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8f37b2e836a0f1d4188dbe66baebb8350504bb3641d0d2b5bc5a769b1d5b568f\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import sys,itov; from pathlib import Path; root=Path(itov.__file__).parent; files=list(Path('src/itov').glob('*.py')); assert 'site-packages' in str(root); assert sys.version_info[:2]==(3,11); assert itov.__version__=='0.10.0'; assert all((root/p.name).read_bytes()==p.read_bytes() for p in files); print(sys.version); print(root); print(len(files),'modules match source')"
+      ],
+      "exit_code": 0,
+      "seconds": 1.109,
+      "stdout": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\lCZyHtjQKyCSPr5xhPjJI\\Lib\\site-packages\\itov\n33 modules match source\n",
+      "stderr": "Installed 9 packages in 393ms\n"
+    },
+    {
+      "name": "wheel_tests_python_3_11",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8f37b2e836a0f1d4188dbe66baebb8350504bb3641d0d2b5bc5a769b1d5b568f\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "workspace/state/verification/stage09b-wheel"
+      ],
+      "exit_code": 0,
+      "seconds": 222.201,
+      "stdout": "........................................................................ [ 10%]\n........................................................................ [ 20%]\n........................................................................ [ 31%]\n........................................................................ [ 41%]\n........................................................................ [ 52%]\n........................................................................ [ 62%]\n........................................................................ [ 73%]\n........................................................................ [ 83%]\n........................................................................ [ 94%]\n.......................................                                  [100%]\n687 passed in 220.66s (0:03:40)\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed_calibration_validation",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\8f37b2e836a0f1d4188dbe66baebb8350504bb3641d0d2b5bc5a769b1d5b568f\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "import json; from pathlib import Path; from itov.parallel import load_calibration; evidence=json.loads(Path('docs/evidence/stage-09b-calibration-20260921.json').read_bytes()); values=[load_calibration(Path(x['result']['evidence'])) for x in evidence['runs']]; assert len(values)==2; print('Two immutable calibration documents validated; four fresh worker sessions')"
+      ],
+      "exit_code": 1,
+      "seconds": 0.349,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"<string>\", line 1, in <listcomp>\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\lCZyHtjQKyCSPr5xhPjJI\\Lib\\site-packages\\itov\\parallel.py\", line 96, in load_calibration\n    require(value[\"host_identity\"] == host_identity(), \"Host platform identity differs\")\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\lCZyHtjQKyCSPr5xhPjJI\\Lib\\site-packages\\itov\\catalog.py\", line 20, in require\n    raise ValueError(message)\nValueError: Host platform identity differs\n"
+    }
+  ],
+  "retained_initial_failures": [
+    {
+      "scope": "Native worker shutdown smoke",
+      "cause": "Job active count reached zero before the process handle was signaled.",
+      "correction": "Wait on each retained child process handle before releasing ownership."
+    },
+    {
+      "scope": "First focused protocol suite",
+      "result": "1 failed, 29 passed",
+      "cause": "Two artifact collectors raced creation of shared output/jobs parents on Windows.",
+      "correction": "Precreate all owned artifact directories under the dispatcher lock; retain path containment checks."
+    },
+    {
+      "scope": "Initial actual calibration",
+      "cause": "ComfyUI logger replaced sys.stdout without retaining the stream wrapper; garbage collection closed its buffer.",
+      "correction": "Keep the original stream owners alive; native regression covers replacement and collection. Retain failed job records and all four seeds, confirm worker exit, explicitly retire the run, then calibrate with fresh seeds.",
+      "evidence": "stage-09b-initial-calibration-20260921.json"
+    },
+    {
+      "scope": "First actual parallel admission",
+      "cause": "Host available commit 22614253568 bytes was below the 23702423143-byte policy requirement.",
+      "result": "No execution claim or submissions; competing workspace refused; owned workers stopped and device lease released.",
+      "evidence": "stage-09b-initial-parallel-20260921.json"
+    }
+  ],
+  "focused_tests": {
+    "ownership_and_parallel": "39 passed in 25.04 seconds",
+    "earlier_combined_regressions": "107 passed in 84.51 seconds"
+  },
+  "limits": [
+    "Native Windows tests cover actual process/job/lock behavior. HTTP fixtures cover submission races and lost acknowledgements without real model execution.",
+    "Actual pretrained calibration and any parallel trial are recorded separately; source/package tests do not establish GPU parallel qualification.",
+    "Same-user managed ownership does not exclude external clients, other users or legacy commands.",
+    "No hard capacity guarantee, simultaneous GPU kernel proof, speedup benchmark or media quality acceptance."
+  ],
+  "runtime_evidence": [
+    "stage-09b-calibration-20260921.json",
+    "stage-09b-initial-parallel-20260921.json",
+    "stage-09b-cache-release-20260921.json"
+  ],
+  "host_identity_comparison": {
+    "python_3_13": {
+      "node": "homeone",
+      "machine": "AMD64",
+      "windows": [
+        "11",
+        "10.0.26200",
+        "SP0",
+        "Multiprocessor Free"
+      ]
+    },
+    "python_3_11": {
+      "node": "homeone",
+      "machine": "AMD64",
+      "windows": [
+        "10",
+        "10.0.26200",
+        "SP0",
+        "Multiprocessor Free"
+      ]
+    },
+    "actual_kernel": {
+      "major": 10,
+      "minor": 0,
+      "build": 26200,
+      "platform": 2,
+      "service_pack": ""
+    }
+  },
+  "passed": false
+}

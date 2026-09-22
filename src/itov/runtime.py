@@ -16,7 +16,7 @@ def launch_command(config: Config, *, custom_nodes: bool = False) -> list[str]:
     if python is None or not python.is_file() or not (config.comfyui_root / "main.py").is_file():
         raise ValueError("Configured ComfyUI program or interpreter is missing; run itov doctor")
     for name in ("input", "output"):
-        directory = config.root / name
+        directory = config.runtime_root / name
         if not directory.is_dir() or not directory.resolve().is_relative_to(config.root):
             raise ValueError(f"Missing or redirected workspace directory: {directory}")
     command = [
@@ -29,9 +29,9 @@ def launch_command(config: Config, *, custom_nodes: bool = False) -> list[str]:
         "--port",
         str(url.port or 80),
         "--input-directory",
-        str(config.root / "input"),
+        str(config.runtime_root / "input"),
         "--output-directory",
-        str(config.root / "output"),
+        str(config.runtime_root / "output"),
     ]
     if not custom_nodes:
         command.append("--disable-all-custom-nodes")
@@ -40,7 +40,7 @@ def launch_command(config: Config, *, custom_nodes: bool = False) -> list[str]:
 
 def profile_launch_command(config: Config) -> list[str]:
     command = launch_command(config)
-    directory = config.root / "state/vram/telemetry"
+    directory = config.runtime_root / "state/vram/telemetry"
     if directory.resolve() != directory.absolute():
         raise ValueError("VRAM telemetry directory redirects")
     return (
@@ -51,7 +51,7 @@ def profile_launch_command(config: Config) -> list[str]:
 
 
 def profile_main_argv(config: Config) -> list[str]:
-    directory = config.root / "state/vram"
+    directory = config.runtime_root / "state/vram"
     if directory.resolve() != directory.absolute():
         raise ValueError("VRAM runtime directory redirects")
     for name in (

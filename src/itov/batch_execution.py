@@ -43,6 +43,10 @@ def abandon_batch(config: Config, path: Path) -> dict:
     plan = load_plan(path)
     with _lock(config), closing(open_store(config, create=False)) as db:
         run, rows = check_run(db, config, plan)
+        require(
+            parse_json(run["qualification"]).get("scope") != "managed_two_worker_audio",
+            "Use parallel recover for a managed parallel batch",
+        )
         if run["status"] in {"succeeded", "failed", "abandoned"}:
             return report(db, config, plan)
         for job, row in zip(plan["jobs"], rows, strict=True):
@@ -130,6 +134,10 @@ def run_batch(
                     (plan["plan_id"], "vram_guard:" + guard_id, _now()),
                 )
         run, rows = check_run(db, config, plan)
+        require(
+            parse_json(run["qualification"]).get("scope") != "managed_two_worker_audio",
+            "Use parallel resume or recover for a managed parallel batch",
+        )
         if run["status"] == "abandoned":
             return report(db, config, plan)
         other = db.execute(

@@ -170,7 +170,7 @@ def collect_profile(config: Config, plan: dict, receipt: dict, gpu: dict) -> tup
                 "Missing matching terminal server ownership",
             )
             telemetry = safe_path(
-                config.root,
+                config.runtime_root,
                 f"state/vram/telemetry/{observer['session_id']}/{record['prompt_id']}.json",
             )
             raw = read_document(telemetry)
@@ -444,7 +444,7 @@ def check(config: Config, plan: dict, profiles: list[dict], *, workers=1, receip
     if state["executions"] > 0 and state["active"] is None:
         try:
             session = live["identity"]["session_id"]
-            directory = safe_path(config.root, f"state/vram/telemetry/{session}")
+            directory = safe_path(config.runtime_root, f"state/vram/telemetry/{session}")
             latest = []
             for path in directory.glob("*.json"):
                 metric = parse_json(read_document(safe_path(directory, path.name)))

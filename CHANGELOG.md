@@ -4,6 +4,16 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Managed GPU ownership and bounded audio trials
+
+- Advanced ITOV to 0.10.0 with `parallel calibrate/qualify/resume/recover` and `device status/recover`. Same-user GPU-UUID leases span workspaces; Windows Job Objects own hidden workers from process creation, retain PID/creation identities and require confirmed shutdown before release. Explicit recovery preserves uncertain jobs and seeds.
+- Isolated both workers' ports, input/output, user/database/temp and telemetry paths while retaining one catalog and atomic workspace seed registry. Added repeated per-worker calibration, aggregate GPU admission and measured host working-set/commit requirements, with a fresh check before concurrent POSTs. Completed replay revalidates artifacts without runtime calls.
+- Passed eight real audio calibration jobs across four fresh workers. Retained the initial ComfyUI logging failure and four reserved seeds; fixed redirected stream ownership and repeated calibration with fresh seeds. Native tests cover controller crashes, unknown owners, contention and release; HTTP fixtures cover lost acknowledgement, distinct artifacts and duplicate prevention.
+- The real parallel admission correctly refused insufficient host commit: 23,702,423,143 bytes required versus 22,614,253,568 available. A competing workspace was refused, no trial jobs/seeds were claimed, and owned workers stopped. Supported idle-server cache release preserved history but freed no measurable memory. Actual overlapping inference remains pending; margins were not reduced.
+- Corrected an installed-package calibration mismatch: Python 3.11 and 3.13 label the same Windows 11 kernel differently. Permit only the `10`/`11` marketing-name alias with identical numeric build, service-pack/edition, node and architecture. Retained the initial refusal; unchanged model calibration remains bound to the same runtime and device.
+- Passed 693 tests against source on Python 3.13.9 and 693 against the installed wheel on Python 3.11.14; lint/format, both builds, 33-module byte parity, both calibration validations/completed replays and prior guarded/audio/video/mux regressions passed. Preserved the independently developed SCM 0.5.0 installation.
+- Added [ownership, admission and recovery documentation](docs/parallel-execution.md); kept Stage 9B active in the TODO/build plan. Existing sequential VRAM commands still refuse multiple workers. Other users, unmanaged clients, general concurrency, speedup and media quality remain outside this gate. [Verification evidence](docs/evidence/stage-09b-verification-20260921.json) separates native/protocol/package results from model execution.
+
 ### 2026-09-21 — Measured VRAM and guarded sequential admission
 
 - Advanced ITOV to 0.9.0 with `vram server`, `vram capture`, `vram check`, and optional `batch run/resume --vram-profile` guards. Measure allocator peaks inside ComfyUI and retain distinct global device samples, exact workload/runtime identity and cold/warm session evidence.

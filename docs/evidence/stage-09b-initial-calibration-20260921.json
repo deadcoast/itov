@@ -1,0 +1,891 @@
+{
+  "version": 1,
+  "package_version": "0.10.0",
+  "observed_at": "2026-09-22T02:34:49.556129+00:00",
+  "runs": [
+    {
+      "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8.json",
+      "failure": "ValueError('Calibration job did not complete; preserve and recover')"
+    }
+  ],
+  "recovery": {
+    "ok": true,
+    "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+    "status": "abandoned",
+    "error": "Workers confirmed dead; uncertain outcomes and seeds retained; no resubmission",
+    "jobs": [
+      {
+        "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+        "job_index": 0,
+        "request_id": "c2324cec-464a-5b3f-a52f-44f62e725716",
+        "workflow_sha256": "ee14417d859150a334903a9f340871a3ea8e94a584c26090448cca500b5e535a",
+        "status": "failed",
+        "prompt_id": "876cdf0e-1558-45bd-a5f2-a2c3f98cafd3"
+      },
+      {
+        "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+        "job_index": 1,
+        "request_id": "db6bd208-3734-5529-8168-9e714a4d3666",
+        "workflow_sha256": "a9a9d69f1b1da26c1d458fd5b3b5c486a7f5a53b4ab4b2162ebab30ae0b248bc",
+        "status": "prepared",
+        "prompt_id": null
+      },
+      {
+        "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+        "job_index": 2,
+        "request_id": "1d10859c-082f-5f6b-b789-c0e0a082ae0f",
+        "workflow_sha256": "ba8c3a7666cc64a05b737c1f0bba769a66115edbf42eef2b6487fecd1ae18f2d",
+        "status": "prepared",
+        "prompt_id": null
+      },
+      {
+        "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+        "job_index": 3,
+        "request_id": "34320fd3-f9a4-5075-8646-6cda8273dc6c",
+        "workflow_sha256": "da37d6c0f8c028097aeba8d3f2f3d128bcf36ba2f6aab19bdde8c3b7c6def4d7",
+        "status": "prepared",
+        "prompt_id": null
+      }
+    ],
+    "succeeded": 0,
+    "scope": "confirmed_worker_exit_retirement"
+  },
+  "retained_owned_records": [
+    {
+      "version": 1,
+      "request_id": "c2324cec-464a-5b3f-a52f-44f62e725716",
+      "server": "http://127.0.0.1:8191",
+      "owner": {
+        "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+        "index": 0
+      },
+      "workflow_path": null,
+      "workflow_sha256": "ee14417d859150a334903a9f340871a3ea8e94a584c26090448cca500b5e535a",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "stable-audio-open-1.0.safetensors"
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "t5_base.safetensors",
+            "device": "default",
+            "type": "stable_audio"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "speech, voices, music, distortion"
+          }
+        },
+        "5": {
+          "class_type": "ConditioningStableAudio",
+          "inputs": {
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "seconds_start": 0,
+            "seconds_total": 4
+          }
+        },
+        "6": {
+          "class_type": "EmptyLatentAudio",
+          "inputs": {
+            "batch_size": 1,
+            "seconds": 4
+          }
+        },
+        "7": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 4.98,
+            "denoise": 1,
+            "latent_image": [
+              "6",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "5",
+              1
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "dpmpp_3m_sde_gpu",
+            "scheduler": "exponential",
+            "seed": 1010260921,
+            "steps": 50
+          }
+        },
+        "8": {
+          "class_type": "VAEDecodeAudio",
+          "inputs": {
+            "samples": [
+              "7",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "9": {
+          "_meta": {
+            "itov_audio": {
+              "channels": 2,
+              "sample_rate": 44100,
+              "samples": 176128
+            }
+          },
+          "class_type": "SaveAudioAdvanced",
+          "inputs": {
+            "audio": [
+              "8",
+              0
+            ],
+            "filename_prefix": "itov/audio/01665005aaa976aaeff2b485eb35020d12a3581aaaee6dbed6398ba62d74f6d5",
+            "format": "flac"
+          }
+        }
+      },
+      "created_at": "2026-09-22T02:35:35.449746+00:00",
+      "status": "failed",
+      "prompt_id": "876cdf0e-1558-45bd-a5f2-a2c3f98cafd3",
+      "artifacts": [],
+      "updated_at": "2026-09-22T02:35:40.013715+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\c2324cec-464a-5b3f-a52f-44f62e725716.json",
+      "acknowledgement": {
+        "prompt_id": "876cdf0e-1558-45bd-a5f2-a2c3f98cafd3",
+        "number": 0,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          0,
+          "876cdf0e-1558-45bd-a5f2-a2c3f98cafd3",
+          {
+            "1": {
+              "_meta": {
+                "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+              },
+              "class_type": "CheckpointLoaderSimple",
+              "inputs": {
+                "ckpt_name": "stable-audio-open-1.0.safetensors"
+              }
+            },
+            "2": {
+              "_meta": {
+                "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+              },
+              "class_type": "CLIPLoader",
+              "inputs": {
+                "clip_name": "t5_base.safetensors",
+                "device": "default",
+                "type": "stable_audio"
+              }
+            },
+            "3": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+              }
+            },
+            "4": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "speech, voices, music, distortion"
+              }
+            },
+            "5": {
+              "class_type": "ConditioningStableAudio",
+              "inputs": {
+                "negative": [
+                  "4",
+                  0
+                ],
+                "positive": [
+                  "3",
+                  0
+                ],
+                "seconds_start": 0.0,
+                "seconds_total": 4.0
+              }
+            },
+            "6": {
+              "class_type": "EmptyLatentAudio",
+              "inputs": {
+                "batch_size": 1,
+                "seconds": 4.0
+              }
+            },
+            "7": {
+              "class_type": "KSampler",
+              "inputs": {
+                "cfg": 4.98,
+                "denoise": 1.0,
+                "latent_image": [
+                  "6",
+                  0
+                ],
+                "model": [
+                  "1",
+                  0
+                ],
+                "negative": [
+                  "5",
+                  1
+                ],
+                "positive": [
+                  "5",
+                  0
+                ],
+                "sampler_name": "dpmpp_3m_sde_gpu",
+                "scheduler": "exponential",
+                "seed": 1010260921,
+                "steps": 50
+              }
+            },
+            "8": {
+              "class_type": "VAEDecodeAudio",
+              "inputs": {
+                "samples": [
+                  "7",
+                  0
+                ],
+                "vae": [
+                  "1",
+                  2
+                ]
+              }
+            },
+            "9": {
+              "_meta": {
+                "itov_audio": {
+                  "channels": 2,
+                  "sample_rate": 44100,
+                  "samples": 176128
+                }
+              },
+              "class_type": "SaveAudioAdvanced",
+              "inputs": {
+                "audio": [
+                  "8",
+                  0
+                ],
+                "filename_prefix": "itov/audio/01665005aaa976aaeff2b485eb35020d12a3581aaaee6dbed6398ba62d74f6d5",
+                "format": "flac"
+              }
+            }
+          },
+          {
+            "itov_request_id": "c2324cec-464a-5b3f-a52f-44f62e725716",
+            "client_id": "c2324cec-464a-5b3f-a52f-44f62e725716",
+            "create_time": 1790044538719
+          },
+          [
+            "9"
+          ]
+        ],
+        "outputs": {},
+        "status": {
+          "status_str": "error",
+          "completed": false,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "876cdf0e-1558-45bd-a5f2-a2c3f98cafd3",
+                "timestamp": 1790044538721
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "876cdf0e-1558-45bd-a5f2-a2c3f98cafd3",
+                "timestamp": 1790044538722
+              }
+            ],
+            [
+              "execution_error",
+              {
+                "prompt_id": "876cdf0e-1558-45bd-a5f2-a2c3f98cafd3",
+                "node_id": "7",
+                "node_type": "KSampler",
+                "executed": [
+                  "5",
+                  "2",
+                  "6",
+                  "1",
+                  "4",
+                  "3"
+                ],
+                "exception_message": "I/O operation on closed file.\n",
+                "exception_type": "ValueError",
+                "traceback": [
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 547, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 352, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 326, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 314, in process_inputs\n    result = f(**inputs)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py\", line 1624, in sample\n    return common_ksampler(model, seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise=denoise)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py\", line 1588, in common_ksampler\n    samples = comfy.sample.sample(model, noise, steps, cfg, sampler_name, scheduler, positive, negative, latent_image,\n                                  denoise=denoise, disable_noise=disable_noise, start_step=start_step, last_step=last_step,\n                                  force_full_denoise=force_full_denoise, noise_mask=noise_mask, callback=callback, disable_pbar=disable_pbar, seed=seed)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\sample.py\", line 82, in sample\n    samples = sampler.sample(noise, positive, negative, cfg=cfg, latent_image=latent_image, start_step=start_step, last_step=last_step, force_full_denoise=force_full_denoise, denoise_mask=noise_mask, sigmas=sigmas, callback=callback, disable_pbar=disable_pbar, seed=seed)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1463, in sample\n    return sample(self.model, noise, positive, negative, cfg, self.device, sampler, sigmas, self.model_options, latent_image=latent_image, denoise_mask=denoise_mask, callback=callback, disable_pbar=disable_pbar, seed=seed)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1353, in sample\n    return cfg_guider.sample(noise, latent_image, sampler, sigmas, denoise_mask, callback, disable_pbar, seed)\n           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1335, in sample\n    output = executor.execute(noise, latent_image, sampler, sigmas, denoise_mask, callback, disable_pbar, seed, latent_shapes=latent_shapes)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\patcher_extension.py\", line 113, in execute\n    return self.original(*args, **kwargs)\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1262, in outer_sample\n    output = self.inner_sample(noise, latent_image, device, sampler, sigmas, denoise_mask, callback, disable_pbar, seed, latent_shapes=latent_shapes)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1237, in inner_sample\n    samples = executor.execute(self, sigmas, extra_args, callback, noise, latent_image, denoise_mask, disable_pbar)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\patcher_extension.py\", line 113, in execute\n    return self.original(*args, **kwargs)\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1005, in sample\n    samples = self.sampler_function(model_k, noise, sigmas, extra_args=extra_args, callback=k_callback, disable=disable_pbar, **self.extra_options)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\k_diffusion\\sampling.py\", line 1019, in sample_dpmpp_3m_sde_gpu\n    return sample_dpmpp_3m_sde(model, x, sigmas, extra_args=extra_args, callback=callback, disable=disable, eta=eta, s_noise=s_noise, noise_sampler=noise_sampler)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\k_diffusion\\sampling.py\", line 970, in sample_dpmpp_3m_sde\n    for i in trange(len(sigmas) - 1, disable=disable):\n             ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\utils.py\", line 1270, in model_trange\n    pbar = trange(*args, **kwargs, smoothing=1.0)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\tqdm\\auto.py\", line 37, in trange\n    return tqdm(range(*args), **kwargs)\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\tqdm\\asyncio.py\", line 24, in __init__\n    super().__init__(iterable, *args, **kwargs)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\tqdm\\std.py\", line 1101, in __init__\n    self.sp = self.status_printer(self.fp)\n              ~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\tqdm\\std.py\", line 447, in status_printer\n    getattr(sys.stdout, 'flush', lambda: None)()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n",
+                  "  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\app\\logger.py\", line 73, in flush\n    super().flush()\n    ~~~~~~~~~~~~~^^\n"
+                ],
+                "current_inputs": {
+                  "cfg": [
+                    4.98
+                  ],
+                  "denoise": [
+                    1.0
+                  ],
+                  "latent_image": [
+                    "{'samples': tensor([[[0., 0., 0.,  ..., 0., 0., 0.],\n         [0., 0., 0.,  ..., 0., 0., 0.],\n         [0., 0., 0.,  ..., 0., 0., 0.],\n         ...,\n         [0., 0., 0.,  ..., 0., 0., 0.],\n         [0., 0., 0.,  ..., 0., 0., 0.],\n         [0., 0., 0.,  ..., 0., 0., 0.]]]), 'type': 'audio', 'downscale_ratio_temporal': 2048}"
+                  ],
+                  "model": [
+                    "<comfy.model_patcher.ModelPatcherDynamic object at 0x000001A3014206E0>"
+                  ],
+                  "negative": [
+                    "[[tensor([[[-0.5886, -0.1199,  0.1322,  ...,  0.2111,  0.2823, -0.1148],\n         [ 0.0396, -0.0186, -0.1692,  ..., -0.0548,  0.2707, -0.2387],\n         [ 0.0662, -0.1816,  0.0829,  ..., -0.3269,  0.2476, -0.3245],\n         ...,\n         [-0.0000, -0.0000,  0.0000,  ...,  0.0000, -0.0000, -0.0000],\n         [-0.0000, -0.0000,  0.0000,  ...,  0.0000, -0.0000, -0.0000],\n         [-0.0000, -0.0000,  0.0000,  ...,  0.0000, -0.0000, -0.0000]]]), {'pooled_output': None, 'seconds_start': 0.0, 'seconds_total': 4.0}]]"
+                  ],
+                  "positive": [
+                    "[[tensor([[[-0.1885,  0.0874, -0.0008,  ..., -0.2956,  0.0144, -0.0900],\n         [ 0.1749, -0.0992,  0.1599,  ...,  0.0700, -0.0076,  0.0402],\n         [-0.0295,  0.0040, -0.2114,  ..., -0.0147, -0.0535, -0.0728],\n         ...,\n         [-0.0000,  0.0000, -0.0000,  ...,  0.0000, -0.0000, -0.0000],\n         [-0.0000,  0.0000, -0.0000,  ...,  0.0000, -0.0000, -0.0000],\n         [-0.0000,  0.0000, -0.0000,  ...,  0.0000, -0.0000, -0.0000]]]), {'pooled_output': None, 'seconds_start': 0.0, 'seconds_total': 4.0}]]"
+                  ],
+                  "sampler_name": [
+                    "dpmpp_3m_sde_gpu"
+                  ],
+                  "scheduler": [
+                    "exponential"
+                  ],
+                  "seed": [
+                    1010260921
+                  ],
+                  "steps": [
+                    50
+                  ]
+                },
+                "current_outputs": [
+                  "5",
+                  "2",
+                  "6",
+                  "1",
+                  "7",
+                  "4",
+                  "3",
+                  "8",
+                  "9"
+                ],
+                "timestamp": 1790044539767
+              }
+            ]
+          ]
+        },
+        "meta": {}
+      }
+    },
+    {
+      "version": 1,
+      "request_id": "db6bd208-3734-5529-8168-9e714a4d3666",
+      "server": "http://127.0.0.1:8191",
+      "owner": {
+        "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+        "index": 1
+      },
+      "workflow_path": null,
+      "workflow_sha256": "a9a9d69f1b1da26c1d458fd5b3b5c486a7f5a53b4ab4b2162ebab30ae0b248bc",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "stable-audio-open-1.0.safetensors"
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "t5_base.safetensors",
+            "device": "default",
+            "type": "stable_audio"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "speech, voices, music, distortion"
+          }
+        },
+        "5": {
+          "class_type": "ConditioningStableAudio",
+          "inputs": {
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "seconds_start": 0,
+            "seconds_total": 4
+          }
+        },
+        "6": {
+          "class_type": "EmptyLatentAudio",
+          "inputs": {
+            "batch_size": 1,
+            "seconds": 4
+          }
+        },
+        "7": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 4.98,
+            "denoise": 1,
+            "latent_image": [
+              "6",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "5",
+              1
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "dpmpp_3m_sde_gpu",
+            "scheduler": "exponential",
+            "seed": 1010260922,
+            "steps": 50
+          }
+        },
+        "8": {
+          "class_type": "VAEDecodeAudio",
+          "inputs": {
+            "samples": [
+              "7",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "9": {
+          "_meta": {
+            "itov_audio": {
+              "channels": 2,
+              "sample_rate": 44100,
+              "samples": 176128
+            }
+          },
+          "class_type": "SaveAudioAdvanced",
+          "inputs": {
+            "audio": [
+              "8",
+              0
+            ],
+            "filename_prefix": "itov/audio/01665005aaa976aaeff2b485eb35020d12a3581aaaee6dbed6398ba62d74f6d5",
+            "format": "flac"
+          }
+        }
+      },
+      "created_at": "2026-09-22T02:35:35.456336+00:00",
+      "status": "prepared",
+      "prompt_id": null,
+      "artifacts": [],
+      "updated_at": "2026-09-22T02:35:35.456344+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\db6bd208-3734-5529-8168-9e714a4d3666.json"
+    },
+    {
+      "version": 1,
+      "request_id": "1d10859c-082f-5f6b-b789-c0e0a082ae0f",
+      "server": "http://127.0.0.1:8192",
+      "owner": {
+        "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+        "index": 2
+      },
+      "workflow_path": null,
+      "workflow_sha256": "ba8c3a7666cc64a05b737c1f0bba769a66115edbf42eef2b6487fecd1ae18f2d",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "stable-audio-open-1.0.safetensors"
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "t5_base.safetensors",
+            "device": "default",
+            "type": "stable_audio"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "speech, voices, music, distortion"
+          }
+        },
+        "5": {
+          "class_type": "ConditioningStableAudio",
+          "inputs": {
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "seconds_start": 0,
+            "seconds_total": 4
+          }
+        },
+        "6": {
+          "class_type": "EmptyLatentAudio",
+          "inputs": {
+            "batch_size": 1,
+            "seconds": 4
+          }
+        },
+        "7": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 4.98,
+            "denoise": 1,
+            "latent_image": [
+              "6",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "5",
+              1
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "dpmpp_3m_sde_gpu",
+            "scheduler": "exponential",
+            "seed": 1010260923,
+            "steps": 50
+          }
+        },
+        "8": {
+          "class_type": "VAEDecodeAudio",
+          "inputs": {
+            "samples": [
+              "7",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "9": {
+          "_meta": {
+            "itov_audio": {
+              "channels": 2,
+              "sample_rate": 44100,
+              "samples": 176128
+            }
+          },
+          "class_type": "SaveAudioAdvanced",
+          "inputs": {
+            "audio": [
+              "8",
+              0
+            ],
+            "filename_prefix": "itov/audio/01665005aaa976aaeff2b485eb35020d12a3581aaaee6dbed6398ba62d74f6d5",
+            "format": "flac"
+          }
+        }
+      },
+      "created_at": "2026-09-22T02:35:35.462929+00:00",
+      "status": "prepared",
+      "prompt_id": null,
+      "artifacts": [],
+      "updated_at": "2026-09-22T02:35:35.462935+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\1d10859c-082f-5f6b-b789-c0e0a082ae0f.json"
+    },
+    {
+      "version": 1,
+      "request_id": "34320fd3-f9a4-5075-8646-6cda8273dc6c",
+      "server": "http://127.0.0.1:8192",
+      "owner": {
+        "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+        "index": 3
+      },
+      "workflow_path": null,
+      "workflow_sha256": "da37d6c0f8c028097aeba8d3f2f3d128bcf36ba2f6aab19bdde8c3b7c6def4d7",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "stable-audio-open-1.0.safetensors"
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "t5_base.safetensors",
+            "device": "default",
+            "type": "stable_audio"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "speech, voices, music, distortion"
+          }
+        },
+        "5": {
+          "class_type": "ConditioningStableAudio",
+          "inputs": {
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "seconds_start": 0,
+            "seconds_total": 4
+          }
+        },
+        "6": {
+          "class_type": "EmptyLatentAudio",
+          "inputs": {
+            "batch_size": 1,
+            "seconds": 4
+          }
+        },
+        "7": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 4.98,
+            "denoise": 1,
+            "latent_image": [
+              "6",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "5",
+              1
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "dpmpp_3m_sde_gpu",
+            "scheduler": "exponential",
+            "seed": 1010260924,
+            "steps": 50
+          }
+        },
+        "8": {
+          "class_type": "VAEDecodeAudio",
+          "inputs": {
+            "samples": [
+              "7",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "9": {
+          "_meta": {
+            "itov_audio": {
+              "channels": 2,
+              "sample_rate": 44100,
+              "samples": 176128
+            }
+          },
+          "class_type": "SaveAudioAdvanced",
+          "inputs": {
+            "audio": [
+              "8",
+              0
+            ],
+            "filename_prefix": "itov/audio/01665005aaa976aaeff2b485eb35020d12a3581aaaee6dbed6398ba62d74f6d5",
+            "format": "flac"
+          }
+        }
+      },
+      "created_at": "2026-09-22T02:35:35.469086+00:00",
+      "status": "prepared",
+      "prompt_id": null,
+      "artifacts": [],
+      "updated_at": "2026-09-22T02:35:35.469092+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\34320fd3-f9a4-5075-8646-6cda8273dc6c.json"
+    }
+  ],
+  "retained_reservations": [
+    {
+      "seed": "1010260921",
+      "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+      "job_index": 0
+    },
+    {
+      "seed": "1010260922",
+      "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+      "job_index": 1
+    },
+    {
+      "seed": "1010260923",
+      "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+      "job_index": 2
+    },
+    {
+      "seed": "1010260924",
+      "plan_id": "efec5935ebd122f83ecada3d37003400557be3483a0a55bd03166507f19582b8",
+      "job_index": 3
+    }
+  ],
+  "failure_log": {
+    "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\parallel\\logs\\42e89cb2-1aa7-48df-829a-cfdf1b40a889\\worker-0.log",
+    "sha256": "8cac99079269cdb205576e9f32876aea0032531890e24c43f1d6b052ea7744a3",
+    "tail": "ses: None\nCreate Date: 2025-12-10 00:00:00\n\u001b[32m[INFO]\u001b[0m Running upgrade 0001_assets -> 0002_merge_to_asset_references, Merge AssetInfo and AssetCacheState into unified asset_references table.\n\u001b[32m[INFO]\u001b[0m Running upgrade 0002_merge_to_asset_references -> 0003_add_metadata_job_id, Add system_metadata and job_id columns to asset_references.\nChange preview_id FK from assets.id to asset_references.id.\n\u001b[32m[INFO]\u001b[0m Running upgrade 0003_add_metadata_job_id -> 0004_drop_tag_type, Drop the vestigial tags.tag_type column.\n\u001b[32m[INFO]\u001b[0m Running upgrade 0004_drop_tag_type -> 0005_allow_case_sensitive_tags, Allow case-sensitive tag names.\n\u001b[32m[INFO]\u001b[0m Running upgrade 0005_allow_case_sensitive_tags -> 0006_add_loader_path, Add loader_path column to asset_references.\n\u001b[32m[INFO]\u001b[0m Running upgrade 0006_add_loader_path -> 0007_record_content_split, Record/content split.\n\u001b[32m[INFO]\u001b[0m Database upgraded from None to 0007_record_content_split\n\u001b[32m[INFO]\u001b[0m Using RAM pressure cache.\n\u001b[32m[INFO]\u001b[0m Starting server\n\n\u001b[32m[INFO]\u001b[0m To see the GUI go to: http://127.0.0.1:8191\n\u001b[32m[INFO]\u001b[0m got prompt\n\u001b[32m[INFO]\u001b[0m model weight dtype torch.float16, manual cast: None\n\u001b[32m[INFO]\u001b[0m model_type V_PREDICTION_CONTINUOUS\n\u001b[32m[INFO]\u001b[0m Model storage policy: fast_disk=True paths=['C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\stable-audio-open-1.0.safetensors']\n\u001b[32m[INFO]\u001b[0m Model storage policy: fast_disk=True paths=['C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\stable-audio-open-1.0.safetensors']\n\u001b[32m[INFO]\u001b[0m VAE load device: cuda:0, offload device: cpu, dtype: torch.float16\n\u001b[1m\u001b[33m[WARNING]\u001b[0m no CLIP/text encoder weights in checkpoint, the text encoder model will not be loaded.\n\u001b[32m[INFO]\u001b[0m Model storage policy: fast_disk=True paths=['C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\text_encoders\\\\t5_base.safetensors']\n\u001b[32m[INFO]\u001b[0m CLIP/text encoder model load device: cuda:0, offload device: cpu, current: cpu, dtype: torch.float16\n\u001b[32m[INFO]\u001b[0m Requested to load SAT5Model\n\u001b[32m[INFO]\u001b[0m Model SAT5Model prepared for dynamic VRAM loading. 209MB Staged. 0 patches attached. Force pre-loaded 26 weights: 39 KB.\n\u001b[32m[INFO]\u001b[0m Model SAT5Model prepared for dynamic VRAM loading. 209MB Staged. 0 patches attached. Force pre-loaded 26 weights: 39 KB.\n\u001b[32m[INFO]\u001b[0m Requested to load StableAudio1\n\u001b[32m[INFO]\u001b[0m Model StableAudio1 prepared for dynamic VRAM loading. 2017MB Staged. 0 patches attached. Force pre-loaded 77 weights: 257 KB.\n\u001b[1m\u001b[31m[ERROR]\u001b[0m !!! Exception during processing !!! I/O operation on closed file.\n\u001b[1m\u001b[31m[ERROR]\u001b[0m Traceback (most recent call last):\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 547, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 352, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 326, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py\", line 314, in process_inputs\n    result = f(**inputs)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py\", line 1624, in sample\n    return common_ksampler(model, seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise=denoise)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py\", line 1588, in common_ksampler\n    samples = comfy.sample.sample(model, noise, steps, cfg, sampler_name, scheduler, positive, negative, latent_image,\n                                  denoise=denoise, disable_noise=disable_noise, start_step=start_step, last_step=last_step,\n                                  force_full_denoise=force_full_denoise, noise_mask=noise_mask, callback=callback, disable_pbar=disable_pbar, seed=seed)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\sample.py\", line 82, in sample\n    samples = sampler.sample(noise, positive, negative, cfg=cfg, latent_image=latent_image, start_step=start_step, last_step=last_step, force_full_denoise=force_full_denoise, denoise_mask=noise_mask, sigmas=sigmas, callback=callback, disable_pbar=disable_pbar, seed=seed)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1463, in sample\n    return sample(self.model, noise, positive, negative, cfg, self.device, sampler, sigmas, self.model_options, latent_image=latent_image, denoise_mask=denoise_mask, callback=callback, disable_pbar=disable_pbar, seed=seed)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1353, in sample\n    return cfg_guider.sample(noise, latent_image, sampler, sigmas, denoise_mask, callback, disable_pbar, seed)\n           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1335, in sample\n    output = executor.execute(noise, latent_image, sampler, sigmas, denoise_mask, callback, disable_pbar, seed, latent_shapes=latent_shapes)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\patcher_extension.py\", line 113, in execute\n    return self.original(*args, **kwargs)\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1262, in outer_sample\n    output = self.inner_sample(noise, latent_image, device, sampler, sigmas, denoise_mask, callback, disable_pbar, seed, latent_shapes=latent_shapes)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1237, in inner_sample\n    samples = executor.execute(self, sigmas, extra_args, callback, noise, latent_image, denoise_mask, disable_pbar)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\patcher_extension.py\", line 113, in execute\n    return self.original(*args, **kwargs)\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py\", line 1005, in sample\n    samples = self.sampler_function(model_k, noise, sigmas, extra_args=extra_args, callback=k_callback, disable=disable_pbar, **self.extra_options)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\k_diffusion\\sampling.py\", line 1019, in sample_dpmpp_3m_sde_gpu\n    return sample_dpmpp_3m_sde(model, x, sigmas, extra_args=extra_args, callback=callback, disable=disable, eta=eta, s_noise=s_noise, noise_sampler=noise_sampler)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\k_diffusion\\sampling.py\", line 970, in sample_dpmpp_3m_sde\n    for i in trange(len(sigmas) - 1, disable=disable):\n             ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\utils.py\", line 1270, in model_trange\n    pbar = trange(*args, **kwargs, smoothing=1.0)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\tqdm\\auto.py\", line 37, in trange\n    return tqdm(range(*args), **kwargs)\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\tqdm\\asyncio.py\", line 24, in __init__\n    super().__init__(iterable, *args, **kwargs)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\tqdm\\std.py\", line 1101, in __init__\n    self.sp = self.status_printer(self.fp)\n              ~~~~~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\tqdm\\std.py\", line 447, in status_printer\n    getattr(sys.stdout, 'flush', lambda: None)()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\app\\logger.py\", line 73, in flush\n    super().flush()\n    ~~~~~~~~~~~~~^^\nValueError: I/O operation on closed file.\n\n\u001b[32m[INFO]\u001b[0m \u001b[32mPrompt executed in 1.05 seconds\u001b[0m\n"
+  }
+}

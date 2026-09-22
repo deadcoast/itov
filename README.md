@@ -1,6 +1,6 @@
 # ITOV
 
-ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, versioned preset/LoRA catalogs, deterministic batch planning, and qualified sequential execution. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
+ITOV is a local ComfyUI tooling project. It provides workspace setup, environment diagnostics, exported API workflow validation, local server startup, single-workflow execution with verified output downloads, versioned preset/LoRA catalogs, deterministic batch planning, qualified sequential execution, and Windows device ownership for measured two-worker audio trials. Runtime code uses the Python standard library and does not require installing Torch into the development environment.
 
 To combine a directory of Markdown specifications into one searchable PDF, run
 `.\markdown-to-pdf.ps1` (prompts for a path) or `.\markdown-to-pdf.ps1 "C:\path\to\specs"`.
@@ -186,3 +186,9 @@ uv build
 ```
 
 Automated tests use temporary workspaces, a local HTTP fixture, and owned child processes for lock contention and crash recovery. Real runtime qualification is recorded separately. The [development review](docs/development-review.md) records completed gates, acceptance limits, and the next stage.
+
+## Managed parallel audio trials
+
+ITOV 0.10.0 adds `parallel calibrate`, `parallel qualify`, `parallel resume/recover` and `device status/recover`. Two isolated Windows workers share one workspace seed registry and a same-user GPU lease. Repeated exact-workload calibration feeds aggregate GPU and host-memory admission. See the [commands, ownership scope, recovery and evidence](docs/parallel-execution.md).
+
+Eight real calibration jobs passed. The first parallel trial was refused before submission because available host commit was below the measured requirement. Live overlapping inference remains pending; synthetic concurrency and native ownership tests do not establish that gate.

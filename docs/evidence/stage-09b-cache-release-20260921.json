@@ -1,0 +1,250 @@
+{
+  "observed_at": "2026-09-22T04:11:20.628001+00:00",
+  "original_process": {
+    "pid": 69532,
+    "created": 134344520017126699
+  },
+  "before_host": {
+    "total_physical": 66095271936,
+    "available_physical": 37762621440,
+    "total_commit": 70256021504,
+    "available_commit": 28113084416
+  },
+  "before_process": {
+    "peak_working": 2535776256,
+    "working": 1442738176,
+    "peak_commit": 27493408768,
+    "private": 5715607552
+  },
+  "before_history_sha256": "2a02b27905ff70b7ea64fa33062c1ca8af411168a30db5b45930581b79c2c8aa",
+  "request": {
+    "unload_models": true,
+    "free_memory": true
+  },
+  "samples": [
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37749321728,
+        "total_commit": 70256021504,
+        "available_commit": 28087279616
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37869420544,
+        "total_commit": 70256021504,
+        "available_commit": 28206768128
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37842399232,
+        "total_commit": 70256021504,
+        "available_commit": 28184895488
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37847461888,
+        "total_commit": 70256021504,
+        "available_commit": 28197535744
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37827223552,
+        "total_commit": 70256021504,
+        "available_commit": 28180586496
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37825069056,
+        "total_commit": 70256021504,
+        "available_commit": 28176179200
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37823143936,
+        "total_commit": 70256021504,
+        "available_commit": 28183146496
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37846704128,
+        "total_commit": 70256021504,
+        "available_commit": 28202725376
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37814067200,
+        "total_commit": 70256021504,
+        "available_commit": 28172849152
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37848088576,
+        "total_commit": 70256021504,
+        "available_commit": 28207038464
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37839962112,
+        "total_commit": 70256021504,
+        "available_commit": 28199911424
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37862436864,
+        "total_commit": 70256021504,
+        "available_commit": 28221714432
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37840531456,
+        "total_commit": 70256021504,
+        "available_commit": 28200214528
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37847941120,
+        "total_commit": 70256021504,
+        "available_commit": 28204793856
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    },
+    {
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 37836038144,
+        "total_commit": 70256021504,
+        "available_commit": 28193738752
+      },
+      "process": {
+        "peak_working": 2535776256,
+        "working": 1442738176,
+        "peak_commit": 27493408768,
+        "private": 5715607552
+      }
+    }
+  ],
+  "after_history_sha256": "2a02b27905ff70b7ea64fa33062c1ca8af411168a30db5b45930581b79c2c8aa",
+  "after_queue": {
+    "queue_running": [],
+    "queue_pending": []
+  },
+  "after_gpu": {
+    "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver": "616.64",
+    "total_bytes": 34190917632,
+    "used_bytes": 5167382528,
+    "free_bytes": 28584181760
+  },
+  "passed": true
+}
