@@ -54,13 +54,22 @@ def profile_main_argv(config: Config) -> list[str]:
     directory = config.root / "state/vram"
     if directory.resolve() != directory.absolute():
         raise ValueError("VRAM runtime directory redirects")
-    for name in ("user", "asset-index.sqlite", "asset-index.sqlite-wal", "asset-index.sqlite-shm"):
+    for name in (
+        "user",
+        "scratch",
+        "scratch/temp",
+        "asset-index.sqlite",
+        "asset-index.sqlite-wal",
+        "asset-index.sqlite-shm",
+    ):
         path = directory / name
         if path.resolve() != path.absolute() or path.is_symlink():
             raise ValueError("VRAM runtime data path redirects")
     return launch_command(config)[2:] + [
         "--user-directory",
         str(directory / "user"),
+        "--temp-directory",
+        str(directory / "scratch"),
         "--database-url",
         "sqlite:///" + (directory / "asset-index.sqlite").as_posix(),
     ]

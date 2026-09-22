@@ -2,7 +2,7 @@
 
 Updated 2026-09-21. This is the working task list for continued development. The [build plan](docs/development-review.md) records design decisions and acceptance evidence; [CHANGELOG.md](CHANGELOG.md) records delivered increments. Original documents under `docs/design_spec/` are design inputs, not proof that their examples work.
 
-Current checkpoint: stage 9 is active: measured VRAM profiles and conservative admission. Image/video defects, human listening and semantic synchronization remain open.
+Current checkpoint: stage 9A is complete for measured exact workloads and guarded sequential admission. Stage 9B device ownership and parallel qualification are next. Image/video defects, human listening and semantic synchronization remain open.
 
 ## Working rules
 
@@ -24,7 +24,7 @@ Current checkpoint: stage 9 is active: measured VRAM profiles and conservative a
 | 6. Pinned image inference | Complete for selected baseline | User-selected official SDXL 1.0 + LCM LoRA; four real 1024×1024 outputs; [evidence](docs/evidence/stage-06-inference-20260921.json). Exact prompt compliance and general quality remain open. |
 | 7. Image-to-video | Complete for the bounded baseline | Two real Wan 2.2 TI2V 5B clips, pinned input/model files, sequential execution, full media validation, resume and resource observations; [evidence](docs/evidence/stage-07-video-20260921.json). General quality remains open. |
 | 8. Audio and audiovisual output | Complete for the bounded baseline | Two real Stable Audio Open stereo FLACs and two owned H.264/AAC pairs; full decode, trim/pad, timing, source-frame preservation and repeat verification. [Evidence](docs/evidence/stage-08-audio-20260921.json). Listening and semantic synchronization remain open. |
-| 9. Measured VRAM and parallel admission | **Active** | Exact-workload cold/warm profiles, in-process allocator telemetry, conservative guarded sequential admission; parallel execution remains a separate qualification gate. |
+| 9. Measured VRAM and parallel admission | **9A complete; 9B next** | Exact-workload cold/warm profiles and guarded sequential admission verified. Video is conservatively refused for headroom; parallel execution requires separate device ownership and real qualification. [Contract/evidence](docs/vram-profiling.md). |
 | 10. Trigger and scene constraints | Planned | Reconcile Part 12 aliases, scoring and phrase/template schemas against the real catalogs; retain source provenance and explicit constraints. |
 | 11. Training, evaluation and promotion | Planned | Replace design skeletons with selected upstream APIs, dataset provenance, independent acceptance and explicit catalog promotion. |
 | 12. Discovery, lookup, scheduling and curation | Planned | Reconcile Parts 7/8 and 12.1–12.4; build on accepted media contracts and durable ownership rather than filename guesses. |
@@ -54,14 +54,27 @@ Current checkpoint: stage 9 is active: measured VRAM profiles and conservative a
 - [x] Exercise real audio generation, paired video/audio output and completed replay. Synthetic failure-injection tests cover collection pause/resume and retained mux attempts. Keep those boundaries explicit in the separate runtime and source/package evidence.
 - [x] Pass 543 tests against source and the installed wheel, lint/format/build checks, 26-module byte parity, installed audio verification/mux replay and prior-video resume. Update this TODO, development review and changelog before advancing to stage 9.
 
-## Active stage 9 tasks
+## Stage 9A measurement and admission
 
-- [ ] Reconcile Part 11's fixed reserves, LoRA-strength exponent, attention ratios and block-swap savings with the installed stock loaders. Treat unsupported constants as unverified.
-- [ ] Define versioned measurement records keyed by model/workflow hashes, dimensions/duration, precision, runtime/driver, cache state and device identity.
-- [ ] Capture representative isolated cold/warm image, video and audio workloads; distinguish sampled whole-device memory from per-process allocator peaks and record uncertainty.
-- [ ] Implement conservative refusal for missing, stale or out-of-range profiles before any admission decision; retain the current sequential default.
-- [ ] Test dispatcher ownership and reservation isolation before a separately bounded parallel execution qualification.
-- [ ] Update task status, requirements, build plan, changelog and evidence before marking capacity or concurrency qualified.
+- [x] Reconcile Part 11's fixed reserves, LoRA-strength exponent, attention ratios and block-swap savings with installed stock loaders. Unsupported formulas remain unused and unverified.
+- [x] Define immutable measurement records keyed by exact graph/model/source hashes, dimensions/duration, precision selections, runtime/driver, allocator, cache state and device identity.
+- [x] Capture cold/warm image, video and audio workloads in repeated fresh processes. Keep allocator peaks separate from sampled global device memory; retain uncertainty and failed evidence.
+- [x] Isolate observer user data, asset database and temp cleanup. Preserve the initial measurements and repeat them after the identity change.
+- [x] Reproduce stock VAE choice-order instability across fresh processes; normalize only the explicitly selected VAE filename choices and repeat video calibration. Preserve the original refusal.
+- [x] Refuse missing, stale, failed, mismatched or insufficient evidence; require a successful last-execution measurement for a used process. Keep policy margins explicit and execution sequential.
+- [x] Bind profile guards atomically with seed reservations. Test pre-claim refusal, resume persistence, missing bindings, queue/cache pressure and changed evidence.
+- [x] Execute two fresh guarded audio jobs and verify completed resume with zero runtime requests. Refuse incomplete evidence without claiming seeds and refuse two-worker admission.
+- [x] Finish final video headroom assessment: repeated identities match; admission refuses 38.391 GiB required against 31.816 GiB capacity. No seeds claimed or jobs submitted by that check.
+- [x] Pass 648 source tests and 648 installed-wheel tests, lint/format/build checks, 29-module byte parity, installed guarded resume and prior audio/video/mux regressions. Update evidence, TODO, build plan and changelog. [Verification](docs/evidence/stage-09-verification-20260921.json).
+
+## Next: stage 9B ownership and bounded parallel qualification
+
+- [ ] Define device-wide leases keyed by GPU UUID, including cross-workspace ownership and conservative unknown-owner recovery. Use OS ownership/process handles; never use `os.kill(pid, 0)` on Windows.
+- [ ] Isolate each worker's port, user/database/temp paths, job records and artifacts; retain whole-workspace catalog and seed integrity.
+- [ ] Test simultaneous reservation contention, worker failure, lost acknowledgement, restart and release without duplicate submission or premature reuse.
+- [ ] Add host-RAM and non-ITOV device-pressure checks; define policy for external clients that bypass ITOV ownership.
+- [ ] Use the measured neutral audio workload as the first bounded parallel candidate. Recheck actual headroom and qualify real simultaneous execution only after ownership tests pass.
+- [ ] Retain both admitted and refused cases, verify distinct owned artifacts and recovery, then update this stage map. Do not infer parallel acceptance from stage 9A.
 
 ## Required inputs and dependencies
 
@@ -73,11 +86,13 @@ Current checkpoint: stage 9 is active: measured VRAM profiles and conservative a
 | REQ-04 | Neutral source image | Satisfied: pinned stage-six still life copied immutably to a top-level workspace input filename. |
 | REQ-05 | Disk capacity | Complete-baseline capacity plus reserve checked before download. About 106.9 GB was free before the stage-eight 5.746 GB download. Recheck before future assets. |
 | REQ-06 | Video decoding tools | FFmpeg/ffprobe used for bounded full-decode checks; versions and results retained in stage-seven evidence. |
-| REQ-07 | GPU capacity evidence | Two actual video runs sampled; maximum observed whole-device usage was 31,507 MiB of 32,607 MiB. This includes caches/other allocations and can miss peaks; it does not calibrate a predictor or authorize concurrency. Stage 9 remains open. |
+| REQ-07 | GPU capacity evidence | Stage 9A adds repeated in-process observations for four exact workloads and guarded sequential checks. [Measurements](docs/evidence/stage-09-vram-20260921.json). Sampled peaks and explicit margins do not guarantee capacity or authorize concurrency. |
 | REQ-08 | Media quality acceptance | Open: stage-six count/shape errors; stage-seven clip 1 adds an unrequested hand. Preserve examples and define independent quality acceptance. |
 | REQ-09 | Audio baseline and timing | Implemented and exercised: two pinned Stable Audio Open generations, exact stereo FLAC samples, two 1.375-second H.264/AAC pairs and completed replay. [Runtime evidence](docs/evidence/stage-08-audio-20260921.json). |
 | REQ-10 | Audio quality and upstream warnings | Open: human listening, loudness and semantic scene alignment are unqualified. Retain TorchSDE boundary warnings from the actual sampler and evaluate them before expanding its acceptance scope. |
-| REQ-11 | Capacity measurement authority | Open for stage 9: cold/warm state, model caches, non-ITOV allocations and measurement uncertainty must be explicit; sampled maxima cannot be used directly as per-job predictions. |
+| REQ-11 | Capacity measurement authority | Implemented for stage 9A: fresh-process/warm labels, exact identity, sampling gaps, non-Torch/global usage, seven-day expiry and explicit uncertainty margins. Broader prediction remains unqualified. |
+| REQ-12 | Parallel ownership and host memory | Open for stage 9B: device-wide leases, per-worker storage, host-RAM pressure, external-client handling and actual parallel recovery evidence are required. |
+| REQ-13 | Cross-process schema stability | Corrected for the observed stock VAE choice-order defect; available choices/defaults and selected model bytes remain bound. Other runtime/schema changes still require new profiles. |
 
 ## Follow-up requirements and known limits
 

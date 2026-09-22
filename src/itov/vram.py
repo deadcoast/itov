@@ -281,9 +281,14 @@ def _observation(item: dict, now: datetime) -> tuple[str, str, int, int]:
         ):
             integer(sample[field], field)
         require(
-            0 <= sample["global_free_bytes"] <= sample["global_total_bytes"],
+            0 <= sample["global_free_bytes"] <= sample["global_total_bytes"]
+            and sample["global_total_bytes"] > 0,
             "invalid_device_memory",
         )
+    require(
+        len({sample["global_total_bytes"] for sample in samples}) == 1,
+        "device_capacity_changed",
+    )
     times = [sample["elapsed_ns"] for sample in samples]
     require(times == sorted(set(times)), "invalid_sample_timestamps")
     gaps = [b - a for a, b in zip(times, times[1:], strict=False)]
@@ -291,7 +296,8 @@ def _observation(item: dict, now: datetime) -> tuple[str, str, int, int]:
     for field in ("peak_allocated_bytes", "peak_reserved_bytes", "sequence", "duration_ns"):
         integer(metric[field], field)
     require(
-        metric["peak_reserved_bytes"] >= max(sample["reserved_bytes"] for sample in samples),
+        metric["peak_reserved_bytes"] >= max(sample["reserved_bytes"] for sample in samples)
+        and metric["peak_allocated_bytes"] >= max(sample["allocated_bytes"] for sample in samples),
         "invalid_allocator_peak",
     )
     require(
@@ -335,6 +341,21 @@ def assess(
     runtime_key = fingerprint(receipt, gpu)
     require(live.get("identity") == receipt["vram_observer"], "Live observer identity changed")
     memory, state = live["memory"], live["state"]
+    for counters, fields in (
+        (gpu, ("total_bytes", "used_bytes", "free_bytes")),
+        (memory, ("global_total_bytes", "global_free_bytes", "allocated_bytes", "reserved_bytes")),
+    ):
+        for field in fields:
+            integer(counters[field], field)
+    require(
+        gpu["total_bytes"] > 0
+        and gpu["used_bytes"] <= gpu["total_bytes"]
+        and gpu["free_bytes"] <= gpu["total_bytes"]
+        and memory["global_total_bytes"] > 0
+        and memory["global_free_bytes"] <= memory["global_total_bytes"],
+        "Invalid live memory counters",
+    )
+    integer(state["executions"], "observer executions")
     if state["active"] is not None or state["errors"]:
         reasons.append("observer_busy_or_failed")
     current_used = max(
@@ -419,6 +440,33 @@ def check(config: Config, plan: dict, profiles: list[dict], *, workers=1, receip
     client = ComfyUIClient(config.url)
     live = client._json("/itov/vram")
     result = assess(plan, receipt, profiles, gpu_snapshot(), live, workers=workers)
+    state = live["state"]
+    if state["executions"] > 0 and state["active"] is None:
+        try:
+            session = live["identity"]["session_id"]
+            directory = safe_path(config.root, f"state/vram/telemetry/{session}")
+            latest = []
+            for path in directory.glob("*.json"):
+                metric = parse_json(read_document(safe_path(directory, path.name)))
+                if metric.get("sequence") == state["executions"] - 1:
+                    latest.append(metric)
+            require(len(latest) == 1, "Missing unique last-execution measurement")
+            metric = latest[0]
+            require(
+                metric["session_id"] == session
+                and metric["workload_key"] == state["last_workload"],
+                "Last-execution measurement differs from observer state",
+            )
+            _observation(
+                {
+                    "measurement": metric,
+                    "cache_state": "cold_process" if metric["sequence"] == 0 else "warm_exact",
+                },
+                datetime.now(UTC),
+            )
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            result["reasons"] = sorted(set(result["reasons"] + ["unqualified_live_cache_evidence"]))
+            result.update(ok=False, admitted=False, cache_error=str(error))
     queue = client.queue()
     if queue["queue_running"] or queue["queue_pending"]:
         result["reasons"] = sorted(set(result["reasons"] + ["server_queue_busy"]))

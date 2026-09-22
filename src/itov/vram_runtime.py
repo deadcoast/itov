@@ -179,10 +179,12 @@ def main():
         raise ValueError("Expected telemetry directory followed by -- and stock main.py arguments")
     main_path = Path(sys.argv[3]).resolve()
     directory.mkdir(parents=True, exist_ok=True)
-    user_directory = directory.parent / "user"
-    if user_directory.resolve() != user_directory or user_directory.is_symlink():
-        raise ValueError("VRAM user directory redirects")
-    user_directory.mkdir(exist_ok=True)
+    for name in ("user", "scratch", "scratch/temp"):
+        owned = directory.parent / name
+        if owned.resolve() != owned or owned.is_symlink():
+            raise ValueError("VRAM runtime data directory redirects")
+        if name != "scratch/temp":
+            owned.mkdir(exist_ok=True)
     helpers = runpy.run_path(str(Path(__file__).with_name("vram_identity.py")))
     sys.argv = sys.argv[3:]
     sys.path.insert(0, str(main_path.parent))

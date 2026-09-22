@@ -856,3 +856,212 @@ def test_diff_context_controls_only_surrounding_lines():
     expanded = cipher.preview_diff(original, result, "before", "after", context=1)
     assert " second\n" in expanded and " fourth\n" in expanded
     assert "first" not in expanded
+
+
+@pytest.mark.parametrize("field", ["result", "output_path", "keep_ledger"])
+def test_prepared_conversion_inputs_are_read_only(tmp_path, field):
+    source = tmp_path / "source.py"
+    source.write_bytes(b"nude")
+    plan = cipher.prepare_conversion("forward", source)
+    with pytest.raises(TypeError):
+        plan[field] = "changed"
+    with pytest.raises(TypeError):
+        plan["snapshot"][source] = "changed"
+
+
+def test_report_and_ledger_view_edits_cannot_change_publication(tmp_path):
+    source = tmp_path / "source.py"
+    source.write_bytes(b"nude base_topology")
+    plan = cipher.prepare_conversion("forward", source)
+    plan["ledger_data"]["dictionary"]["nude"] = "unreviewed"
+    plan["report"].update(mode="reverse", output="another.py", status="saved")
+    plan["report"]["counts"]["terms"]["nude"] = 999
+    cipher.apply_conversion(plan, overwrite=False)
+    assert plan["output_path"].read_bytes() == b"base_topology __SCM_LIT_base_topology__"
+    assert plan["report"]["mode"] == "forward"
+    assert plan["report"]["output"] == str(plan["output_path"])
+    assert plan["report"]["counts"]["terms"]["nude"] == 1
+    assert (
+        cipher.prepare_conversion("verify", plan["output_path"])["report"]["status"] == "verified"
+    )
+    plan["report"]["status"] = "preview"
+    with pytest.raises(ValueError, match="unsaved"):
+        cipher.apply_conversion(plan)
+
+
+@pytest.fixture
+def recoverable_pair(tmp_path):
+    original = tmp_path / "original.py"
+    encoded = tmp_path / "encoded.py"
+    dictionary = tmp_path / "mapping.json"
+    text = "\ufeffalpha = 'fluid_sim'\r\nalpha\u0301 = 1\rtail\n"
+    original.write_bytes(text.encode("utf-8"))
+    encoded.write_bytes(cipher.process_forward(text, MAPPING).encode("utf-8"))
+    dictionary.write_text(json.dumps(MAPPING), encoding="utf-8")
+    return original, encoded, dictionary
+
+
+def test_recovery_previews_then_creates_only_a_verifiable_ledger(recoverable_pair):
+    original, encoded, dictionary = recoverable_pair
+    before = file_snapshot(original.parent)
+    times = {path: path.stat().st_mtime_ns for path in (original, encoded, dictionary)}
+    plan = cipher.prepare_recovery(encoded, original, dictionary)
+    assert file_snapshot(original.parent) == before
+    assert plan["report"]["status"] == "recovery_preview"
+    assert plan["report"]["integrity"] == "original_pair_checked"
+    assert plan["report"]["original_sha256"] == hashlib.sha256(original.read_bytes()).hexdigest()
+    assert plan["report"]["encoded_sha256"] == hashlib.sha256(encoded.read_bytes()).hexdigest()
+    cipher.apply_recovery(plan)
+    assert plan["report"]["status"] == "recovered"
+    assert plan["report"]["output_saved"] is False
+    assert plan["report"]["ledger_saved"] is True
+    assert cipher.load_json(plan["ledger_path"])["recovered"] is True
+    assert {path: path.stat().st_mtime_ns for path in times} == times
+    assert {path: path.read_bytes() for path in times} == {
+        path: before[path.relative_to(original.parent)] for path in times
+    }
+    assert cipher.prepare_conversion("verify", encoded)["report"]["status"] == "verified"
+    restored = cipher.prepare_conversion("reverse", encoded, strict=True, keep_ledger=True)
+    cipher.apply_conversion(restored, overwrite=False)
+    assert restored["output_path"].read_bytes() == original.read_bytes()
+    plan["report"]["status"] = "recovery_preview"
+    with pytest.raises(ValueError, match="unsaved"):
+        cipher.apply_recovery(plan)
+
+
+@pytest.mark.parametrize(
+    "problem",
+    [
+        "edited_original",
+        "edited_encoded",
+        "dictionary",
+        "ledger",
+        "missing_original",
+        "missing_encoded",
+    ],
+)
+def test_recovery_rejects_unproven_pairs_and_existing_metadata(recoverable_pair, problem):
+    original, encoded, dictionary = recoverable_pair
+    if problem == "edited_original":
+        original.write_bytes(b"different original")
+    elif problem == "edited_encoded":
+        encoded.write_bytes(encoded.read_bytes() + b"edited")
+    elif problem == "dictionary":
+        dictionary.write_text('{"alpha": "other_term"}', encoding="utf-8")
+    elif problem == "ledger":
+        cipher.ledger_path_for(encoded).write_bytes(b"damaged but preserved ledger")
+    elif problem == "missing_original":
+        original.unlink()
+    else:
+        encoded.unlink()
+    before = file_snapshot(encoded.parent)
+    with pytest.raises((ValueError, OSError)):
+        cipher.prepare_recovery(encoded, original, dictionary)
+    assert file_snapshot(encoded.parent) == before
+
+
+def test_recovery_requires_a_separate_original(recoverable_pair):
+    original, encoded, dictionary = recoverable_pair
+    before = file_snapshot(original.parent)
+    with pytest.raises(ValueError, match="separate"):
+        cipher.prepare_recovery(encoded, encoded, dictionary)
+    assert file_snapshot(original.parent) == before
+
+
+@pytest.mark.parametrize("changed", ["original", "encoded", "dictionary", "ledger"])
+def test_recovery_rechecks_every_dependency_before_publication(recoverable_pair, changed):
+    original, encoded, dictionary = recoverable_pair
+    plan = cipher.prepare_recovery(encoded, original, dictionary)
+    paths = {
+        "original": original,
+        "encoded": encoded,
+        "dictionary": dictionary,
+        "ledger": plan["ledger_path"],
+    }
+    paths[changed].write_bytes(b"changed after review")
+    before = file_snapshot(original.parent)
+    with pytest.raises(ValueError, match="changed since preview"):
+        cipher.apply_recovery(plan)
+    assert plan["report"]["ledger_saved"] is False
+    assert file_snapshot(original.parent) == before
+
+
+def test_recovery_preserves_a_ledger_created_during_publication(recoverable_pair, monkeypatch):
+    original, encoded, dictionary = recoverable_pair
+    plan = cipher.prepare_recovery(encoded, original, dictionary)
+    link = cipher.os.link
+
+    def race(source, destination):
+        Path(destination).write_bytes(b"another operation's ledger")
+        return link(source, destination)
+
+    monkeypatch.setattr(cipher.os, "link", race)
+    with pytest.raises(FileExistsError):
+        cipher.apply_recovery(plan)
+    assert plan["ledger_path"].read_bytes() == b"another operation's ledger"
+    assert plan["report"]["ledger_saved"] is False
+
+
+def test_recovery_reports_ledger_saved_after_cleanup_failure(recoverable_pair, monkeypatch):
+    original, encoded, dictionary = recoverable_pair
+    plan = cipher.prepare_recovery(encoded, original, dictionary)
+    unlink = Path.unlink
+
+    def deny_cleanup(path, *args, **kwargs):
+        if path.suffix == ".tmp":
+            raise PermissionError("cleanup denied")
+        return unlink(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "unlink", deny_cleanup)
+    with pytest.raises(cipher.PublishedWriteError):
+        cipher.apply_recovery(plan)
+    assert plan["report"]["ledger_saved"] is True
+    assert plan["report"]["output_saved"] is False
+    assert plan["report"]["status"] == "finalizing"
+    assert cipher.prepare_conversion("verify", encoded)["report"]["status"] == "verified"
+    with pytest.raises(ValueError, match="unsaved"):
+        cipher.apply_recovery(plan)
+
+
+def test_recovery_detects_source_changes_during_publication(recoverable_pair, monkeypatch):
+    original, encoded, dictionary = recoverable_pair
+    plan = cipher.prepare_recovery(encoded, original, dictionary)
+    save = cipher.save_json
+
+    def save_then_edit(*args, **kwargs):
+        save(*args, **kwargs)
+        encoded.write_bytes(b"another operation's content")
+
+    monkeypatch.setattr(cipher, "save_json", save_then_edit)
+    with pytest.raises(ValueError, match="changed since preview"):
+        cipher.apply_recovery(plan)
+    assert plan["report"]["ledger_saved"] is True
+    assert plan["report"]["status"] == "finalizing"
+    assert encoded.read_bytes() == b"another operation's content"
+    assert plan["ledger_path"].exists()
+
+
+def test_recovery_report_and_ledger_edits_do_not_change_saved_metadata(recoverable_pair):
+    original, encoded, dictionary = recoverable_pair
+    plan = cipher.prepare_recovery(encoded, original, dictionary)
+    plan["ledger_data"]["encoded_sha256"] = "0" * 64
+    plan["report"].update(ledger="wrong.json", mode="forward")
+    cipher.apply_recovery(plan)
+    assert plan["report"]["ledger"] == str(cipher.ledger_path_for(encoded))
+    assert cipher.prepare_conversion("verify", encoded)["report"]["status"] == "verified"
+
+
+def test_apply_requires_the_corresponding_prepared_operation(recoverable_pair):
+    original, encoded, dictionary = recoverable_pair
+    recovery = cipher.prepare_recovery(encoded, original, dictionary)
+    conversion = cipher.prepare_conversion("forward", original, dict_path=dictionary)
+    before = file_snapshot(original.parent)
+    for apply, plan in [
+        (cipher.apply_recovery, conversion),
+        (cipher.apply_conversion, recovery),
+        (cipher.apply_recovery, dict(recovery)),
+        (cipher.apply_conversion, dict(conversion)),
+    ]:
+        with pytest.raises(ValueError):
+            apply(plan)
+    assert file_snapshot(original.parent) == before

@@ -24,3 +24,5 @@ From the repository root, run `.\AI\dev_tools\bamboozle.ps1` for the guided term
    Add `--context 0` to Preview to show only changed lines. In the terminal menu, **Refresh** reloads the source and shows a fresh preview before saving. Add `--strict` to Decode when you require the unchanged encoded file. Add `--keep-ledger` when restoring to a separate output if you want repeated verification/restoration. Existing outputs are protected unless you explicitly use `--force` or confirm OVERWRITE in the interactive workflow. A separate destination with its own cipher ledger requires another output path.
 
 4. Review and test the restored file before using it. See the [complete usage guide](README.md) for dictionary rules, integrity reports, and compatibility.
+
+If a forward operation saved the encoded file but its ledger is missing, retain both files. Run `bamboozle recover node_safe.py --original node.py` to check the exact pair without writes; add the same `--dict` if a custom mapping was used. Repeat with `--apply` to create only the missing ledger, then run Verify. Recovery refuses edited pairs and existing ledgers and needs a separate original file.

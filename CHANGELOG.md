@@ -4,6 +4,24 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-21 — Measured VRAM and guarded sequential admission
+
+- Advanced ITOV to 0.9.0 with `vram server`, `vram capture`, `vram check`, and optional `batch run/resume --vram-profile` guards. Measure allocator peaks inside ComfyUI and retain distinct global device samples, exact workload/runtime identity and cold/warm session evidence.
+- Require repeated recent successful profiles, explicit uncertainty/reserve margins, idle queues and a proved cache state. Missing, stale, failed or mismatched evidence is refused. Part 11's unsupported memory formulas and fallback costs remain unused; all parallel-worker requests are refused.
+- Bind immutable guards in the seed-reservation transaction, recheck before each new submission, retain guards on resume, and refuse missing/replaced bindings. Actual guarded audio execution completed two fresh jobs; incomplete evidence claimed no seeds, and completed replay made zero runtime requests.
+- Isolated observer user data, SQLite index and temp cleanup. Retained the initial startup failure and preliminary measurements, then repeated captures. Fixed a stock VAE choice-order mismatch for explicitly selected, pinned VAE files; retained the original refusal and repeated both video sessions.
+- Final profiles contain 16 real cold/warm jobs across audio, SDXL base, SDXL+LCM and Wan video. Fresh image/audio admission passed; the final video check refused headroom at 38.391 GiB required against 31.816 GiB capacity. Successful calibration does not override conservative admission or establish a capacity guarantee.
+- Passed 648 tests against source on Python 3.13.9 and 648 against the installed wheel on Python 3.11.14, plus lint/format, both package builds, 29-module byte parity, all eight final profile validations, completed guarded resume and prior audio/video/mux checks. [Verification evidence](docs/evidence/stage-09-verification-20260921.json) retains failures and corrections; the separately developed SCM 0.5.0 installation was preserved.
+- Added [VRAM commands, measurement policy and evidence](docs/vram-profiling.md), and updated the TODO/build plan with stage 9B device ownership, worker isolation, host-memory and parallel recovery tasks. Current acceptance is bounded measurement and guarded sequential execution; general prediction, parallel GPU work and media-quality acceptance remain open.
+
+### 2026-09-21 — Bamboozle missing-ledger recovery and prepared-operation integrity
+
+- Advanced SCM dev tools to 0.5.0. Added `bamboozle recover ENCODED --original ORIGINAL`, which previews by default and creates only the missing ledger with `--apply`. Recovery requires the supplied original and dictionary to reproduce the encoded bytes exactly, rejects existing metadata and edited pairs, and rechecks file fingerprints around publication.
+- Added recovery publication reporting with `ledger_saved`, a retained `recovered: true` ledger flag, and missing-ledger guidance. Recovery establishes consistency with the supplied original; it does not authenticate historical provenance or recover an original lost during an in-place operation.
+- Reproduced and fixed mutable prepared conversions saving unreviewed text with a mismatching ledger. Prepared operations now expose read-only inputs and snapshots, return detached ledger data, and track lifecycle independently of the report. Report edits cannot redirect publication or make a completed plan reusable. Normal mapping access and legacy conversion commands remain available.
+- Passed all 201 focused tests, including 32 new recovery and plan-integrity regressions, plus Ruff lint/format and whitespace checks. Built source and wheel packages, verified seven packaged/installed files against source, and passed 14 installed command exercises beginning with an injected ledger-write failure after encoding.
+- Operated the live Windows terminal through recovery preview, ledger creation, verification, decode preview/save, and quit. Recovery preserved the original and encoded bytes and modification times; strict restoration and terminal restoration matched the original bytes. Restored the editable installation and retained [verification evidence](docs/evidence/bamboozle-recovery-20260921.json), including the corrected test-key and terminal-fixture-path mistakes. Cross-process transactions, crash durability, and generated-code correctness remain outside this qualification.
+
 ### 2026-09-21 — Bamboozle restoration and preview improvements
 
 - Advanced SCM dev tools to 0.4.0. Decode, Verify, and reverse Preview now use the dictionary saved in a valid ledger by default, allowing restoration after a custom dictionary is changed or removed. Explicit dictionaries must still match; malformed ledgers never silently fall back. Terminal and JSON reports identify the selected dictionary source and hash.

@@ -1,0 +1,1284 @@
+{
+  "version": 1,
+  "package_version": "0.9.0",
+  "observed_at": "2026-09-21T22:12:16.467069+00:00",
+  "checks": [
+    {
+      "family": "audio",
+      "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a.json",
+      "decision": {
+        "version": 1,
+        "ok": true,
+        "admitted": true,
+        "scope": "conservative_exact_workload_sequential_admission",
+        "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+        "checked_at": "2026-09-21T22:13:12.413888+00:00",
+        "workers": 1,
+        "policy": {
+          "version": 1,
+          "max_age_seconds": 604800,
+          "minimum_cold_sessions": 2,
+          "minimum_warm_sessions": 2,
+          "reserve_bytes": 2147483648,
+          "uncertainty_percent": 20,
+          "max_sample_gap_ns": 1000000000,
+          "minimum_samples": 3,
+          "max_workers": 1
+        },
+        "profile_ids": [
+          "96590df2110ab846973e7847f91ae60139433efabb5c6feb3b0cb3820e1303b1",
+          "e42207803ae359e062a5e8636f6cc550587ef7177769607d53013f6ff15a0aa4"
+        ],
+        "runtime_key": "06e0db765c14cdb4ae9768e3221e4e7dddbce63f3708c60dfaa7a39ef9989384",
+        "gpu": {
+          "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+          "name": "NVIDIA GeForce RTX 5090",
+          "driver": "616.64",
+          "total_bytes": 34190917632,
+          "used_bytes": 5789188096,
+          "free_bytes": 27962376192
+        },
+        "current_used_bytes": 5789188096,
+        "estimates": [
+          {
+            "workload_key": "947989cc8a2955bc6efb2991adb7712b1a7a2323002360a55b3f59afa541371d",
+            "cold_sessions": 2,
+            "warm_sessions": 2,
+            "additional_envelope_bytes": 3248488448,
+            "uncertainty_bytes": 649697690,
+            "observed_device_peak_bytes": 4914085888,
+            "required_total_bytes": 11834857882,
+            "headroom_bytes": 22327158374
+          }
+        ],
+        "reasons": [],
+        "limits": "A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled.",
+        "decision_id": "f834796770de6a334c6487064ad373c1f4b25be440898713500478099f216601"
+      },
+      "decision_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\decisions\\f834796770de6a334c6487064ad373c1f4b25be440898713500478099f216601.json"
+    },
+    {
+      "family": "sdxl-base",
+      "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\95a54ed6590d5034cdcabaa5faef4fd9813db5c67d91c7094876eea38474ad2b.json",
+      "decision": {
+        "version": 1,
+        "ok": true,
+        "admitted": true,
+        "scope": "conservative_exact_workload_sequential_admission",
+        "plan_id": "95a54ed6590d5034cdcabaa5faef4fd9813db5c67d91c7094876eea38474ad2b",
+        "checked_at": "2026-09-21T22:13:16.270505+00:00",
+        "workers": 1,
+        "policy": {
+          "version": 1,
+          "max_age_seconds": 604800,
+          "minimum_cold_sessions": 2,
+          "minimum_warm_sessions": 2,
+          "reserve_bytes": 2147483648,
+          "uncertainty_percent": 20,
+          "max_sample_gap_ns": 1000000000,
+          "minimum_samples": 3,
+          "max_workers": 1
+        },
+        "profile_ids": [
+          "4d15bc18d8558a39e3a99c24f3de820c35510e19521e6c386a0f8b8477f99915",
+          "7cd5bc9c6ba93b1fd0b2378b0a9a23f0cad80bc4cb73b1bcd715afb91255a1f3"
+        ],
+        "runtime_key": "81ca23aa1f154588e89bb7f4c65cc7111da0cd4bc945b9354b0b23e281e72e5b",
+        "gpu": {
+          "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+          "name": "NVIDIA GeForce RTX 5090",
+          "driver": "616.64",
+          "total_bytes": 34190917632,
+          "used_bytes": 5801771008,
+          "free_bytes": 27949793280
+        },
+        "current_used_bytes": 5801771008,
+        "estimates": [
+          {
+            "workload_key": "cf3ef345b807098009ed9c961cbcf2b088270a7a9f07bd060d4a929ea923880c",
+            "cold_sessions": 2,
+            "warm_sessions": 2,
+            "additional_envelope_bytes": 9825157120,
+            "uncertainty_bytes": 1965031424,
+            "observed_device_peak_bytes": 11725635584,
+            "required_total_bytes": 19739443200,
+            "headroom_bytes": 14422573056
+          }
+        ],
+        "reasons": [],
+        "limits": "A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled.",
+        "decision_id": "8b7dbc119ecce295dbe250e3ef13f03af7fdcb5ed2fb78c45ebacb4429995e59"
+      },
+      "decision_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\decisions\\8b7dbc119ecce295dbe250e3ef13f03af7fdcb5ed2fb78c45ebacb4429995e59.json"
+    },
+    {
+      "family": "sdxl-lcm",
+      "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\e67f7674099ad4c2354319789408ecbd4333a6c5c8d7cd5b110e80717bb8cd51.json",
+      "decision": {
+        "version": 1,
+        "ok": true,
+        "admitted": true,
+        "scope": "conservative_exact_workload_sequential_admission",
+        "plan_id": "e67f7674099ad4c2354319789408ecbd4333a6c5c8d7cd5b110e80717bb8cd51",
+        "checked_at": "2026-09-21T22:13:20.504122+00:00",
+        "workers": 1,
+        "policy": {
+          "version": 1,
+          "max_age_seconds": 604800,
+          "minimum_cold_sessions": 2,
+          "minimum_warm_sessions": 2,
+          "reserve_bytes": 2147483648,
+          "uncertainty_percent": 20,
+          "max_sample_gap_ns": 1000000000,
+          "minimum_samples": 3,
+          "max_workers": 1
+        },
+        "profile_ids": [
+          "7b1eda98f96cdc3a62b6c8facd8a57cbd5192f93729606c8fdec28f96af56165",
+          "abc2b218bfda9d729f67be81525a7d16c97bc1e909dbc88cc7ddc48cee874484"
+        ],
+        "runtime_key": "3d1202bc29b544611c7d0920f04112816be166eca5f4b7440ff2ef914c174c40",
+        "gpu": {
+          "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+          "name": "NVIDIA GeForce RTX 5090",
+          "driver": "616.64",
+          "total_bytes": 34190917632,
+          "used_bytes": 5281677312,
+          "free_bytes": 28469886976
+        },
+        "current_used_bytes": 5281677312,
+        "estimates": [
+          {
+            "workload_key": "c1b2bc2bb34481914bcaf8de131ea83080d42d3d21340a378ae4ecde37d41dc2",
+            "cold_sessions": 2,
+            "warm_sessions": 2,
+            "additional_envelope_bytes": 9825157120,
+            "uncertainty_bytes": 1965031424,
+            "observed_device_peak_bytes": 11725635584,
+            "required_total_bytes": 19219349504,
+            "headroom_bytes": 14942666752
+          }
+        ],
+        "reasons": [],
+        "limits": "A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled.",
+        "decision_id": "7a1f23a9b477859994f3f2947e856cc531c6a24ae310084ab8ee9a4d6b968191"
+      },
+      "decision_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\decisions\\7a1f23a9b477859994f3f2947e856cc531c6a24ae310084ab8ee9a4d6b968191.json"
+    },
+    {
+      "family": "wan22",
+      "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\f48b93cf3e4d9e166bad8f81f8129c115f25fa3d97d94b32a2c7095935b776f2.json",
+      "decision": {
+        "version": 1,
+        "ok": false,
+        "admitted": false,
+        "scope": "conservative_exact_workload_sequential_admission",
+        "plan_id": "f48b93cf3e4d9e166bad8f81f8129c115f25fa3d97d94b32a2c7095935b776f2",
+        "checked_at": "2026-09-21T22:13:30.492227+00:00",
+        "workers": 1,
+        "policy": {
+          "version": 1,
+          "max_age_seconds": 604800,
+          "minimum_cold_sessions": 2,
+          "minimum_warm_sessions": 2,
+          "reserve_bytes": 2147483648,
+          "uncertainty_percent": 20,
+          "max_sample_gap_ns": 1000000000,
+          "minimum_samples": 3,
+          "max_workers": 1
+        },
+        "profile_ids": [
+          "6b790e79b9a56909885db7f9f29c03c9f5483445fb70d2a3332e52c193d3967a",
+          "cc34a836eec7cc4b1375eaf5b6e2bd64581a43521e7b56a9194772bb7ba7663d"
+        ],
+        "runtime_key": "c2bde4365e4fa5ceeb8f324c004fcefcddafd2ca97d95319db56a27453d718e9",
+        "gpu": {
+          "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+          "name": "NVIDIA GeForce RTX 5090",
+          "driver": "616.64",
+          "total_bytes": 34190917632,
+          "used_bytes": 5536481280,
+          "free_bytes": 28215083008
+        },
+        "current_used_bytes": 5536481280,
+        "estimates": [
+          {
+            "workload_key": "aaff45f39e7e89c46950f26576d659d0981f44057fde6a27f976e55603dc3b01",
+            "cold_sessions": 1,
+            "warm_sessions": 1
+          }
+        ],
+        "reasons": [
+          "missing_repeated_cold_warm_evidence",
+          "runtime_device_or_asset_mismatch"
+        ],
+        "limits": "A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled.",
+        "decision_id": "ded18441d2beba56bfa5fc6ae2edcc04afea86cb6d010a90957c23e805289d87"
+      },
+      "decision_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\decisions\\ded18441d2beba56bfa5fc6ae2edcc04afea86cb6d010a90957c23e805289d87.json"
+    }
+  ],
+  "limits": [
+    "Admission checks measure current headroom, not a device reservation or guaranteed peak.",
+    "Actual guarded execution exercised only the exact neutral audio workload; parallel execution is refused."
+  ],
+  "owned_pid": 60564,
+  "initial_observer": {
+    "identity": {
+      "version": 1,
+      "session_id": "41f0a482-f7ab-41c5-b081-e483b0c9bf7f",
+      "pid": 60564,
+      "started_at": "2026-09-21T22:13:07.200986+00:00",
+      "bootstrap_sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+      "identity_sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+      "device": {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5090",
+        "uuid": "e2c115fd-447a-8fe0-3257-b17c51919074",
+        "total_bytes": 34162016256
+      },
+      "allocator_backend": "cudaMallocAsync",
+      "cuda_version": "13.0",
+      "cudnn_version": 92000,
+      "packages": {
+        "torch": "2.13.0+cu130",
+        "comfy-aimdo": "0.5.5",
+        "comfy-kitchen": "0.2.35"
+      },
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0",
+        "PYTORCH_CUDA_ALLOC_CONF": "backend:cudaMallocAsync",
+        "PYTORCH_ALLOC_CONF": null,
+        "CUBLAS_WORKSPACE_CONFIG": null,
+        "CUDA_MODULE_LOADING": null
+      }
+    },
+    "state": {
+      "executions": 0,
+      "active": null,
+      "last_workload": null,
+      "errors": []
+    },
+    "memory": {
+      "global_free_bytes": 32496418816,
+      "global_total_bytes": 34162016256,
+      "allocated_bytes": 0,
+      "reserved_bytes": 0
+    }
+  },
+  "guarded_plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a.json",
+  "qualification": {
+    "version": 1,
+    "profile": "stock-stable-audio-v1",
+    "scope": "runtime_schema_and_asset_binding",
+    "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+    "server": "http://127.0.0.1:8190",
+    "runtime": {
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8190",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes",
+        "--user-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\user",
+        "--temp-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\scratch",
+        "--database-url",
+        "sqlite:///C:/Users/ryanf/github/_active/itov/workspace/state/vram/asset-index.sqlite",
+        "--itov-vram-observer-v1"
+      ],
+      "comfyui_version": "0.37.0",
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130"
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0
+      }
+    ],
+    "node_schema_sha256": "3803b184f7e7a1b239d4b91c1069139d78bbaac355da99d4ba5b9ba38cb9fd81",
+    "files": [
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\memory_management.py",
+        "bytes": 7220,
+        "sha256": "6497cd57ffb15356824b82ca88f60dc1a4b054361e2e2f2c98b84b42d8765fac"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_management.py",
+        "bytes": 75009,
+        "sha256": "28812661915b7081d554f8ed14c7a33a2fe744776281eb5b5760bedd30a38408"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_patcher.py",
+        "bytes": 105135,
+        "sha256": "097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy_extras\\nodes_audio.py",
+        "bytes": 34429,
+        "sha256": "12697959683e88024e0dfe339973d2413f62bf2ff59a0571ea84acd948793643"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py",
+        "bytes": 64869,
+        "sha256": "dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\folder_paths.py",
+        "bytes": 23745,
+        "sha256": "a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "bytes": 25024,
+        "sha256": "5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\stable-audio-open-1.0.safetensors",
+        "bytes": 4853889016,
+        "sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\t5_base.safetensors",
+        "bytes": 891646390,
+        "sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py",
+        "bytes": 111280,
+        "sha256": "4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891"
+      }
+    ],
+    "jobs": 2,
+    "vram_observer": {
+      "version": 1,
+      "session_id": "41f0a482-f7ab-41c5-b081-e483b0c9bf7f",
+      "pid": 60564,
+      "started_at": "2026-09-21T22:13:07.200986+00:00",
+      "bootstrap_sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+      "identity_sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+      "device": {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5090",
+        "uuid": "e2c115fd-447a-8fe0-3257-b17c51919074",
+        "total_bytes": 34162016256
+      },
+      "allocator_backend": "cudaMallocAsync",
+      "cuda_version": "13.0",
+      "cudnn_version": 92000,
+      "packages": {
+        "torch": "2.13.0+cu130",
+        "comfy-aimdo": "0.5.5",
+        "comfy-kitchen": "0.2.35"
+      },
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0",
+        "PYTORCH_CUDA_ALLOC_CONF": "backend:cudaMallocAsync",
+        "PYTORCH_ALLOC_CONF": null,
+        "CUBLAS_WORKSPACE_CONFIG": null,
+        "CUDA_MODULE_LOADING": null
+      }
+    },
+    "qualification_id": "2b37fe9c06dae0761d4090ea37fe4348a9eaf03bf4d4644ff858860dde859fb4"
+  },
+  "incomplete_evidence_refusal": "VRAM admission refused: missing_repeated_cold_warm_evidence",
+  "refusal_preserved_reservations": true,
+  "parallel_refusal": {
+    "version": 1,
+    "ok": false,
+    "admitted": false,
+    "scope": "conservative_exact_workload_sequential_admission",
+    "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+    "checked_at": "2026-09-21T22:13:40.617565+00:00",
+    "workers": 2,
+    "policy": {
+      "version": 1,
+      "max_age_seconds": 604800,
+      "minimum_cold_sessions": 2,
+      "minimum_warm_sessions": 2,
+      "reserve_bytes": 2147483648,
+      "uncertainty_percent": 20,
+      "max_sample_gap_ns": 1000000000,
+      "minimum_samples": 3,
+      "max_workers": 1
+    },
+    "profile_ids": [
+      "96590df2110ab846973e7847f91ae60139433efabb5c6feb3b0cb3820e1303b1",
+      "e42207803ae359e062a5e8636f6cc550587ef7177769607d53013f6ff15a0aa4"
+    ],
+    "runtime_key": "06e0db765c14cdb4ae9768e3221e4e7dddbce63f3708c60dfaa7a39ef9989384",
+    "gpu": {
+      "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+      "name": "NVIDIA GeForce RTX 5090",
+      "driver": "616.64",
+      "total_bytes": 34190917632,
+      "used_bytes": 5659164672,
+      "free_bytes": 28092399616
+    },
+    "current_used_bytes": 5659164672,
+    "estimates": [
+      {
+        "workload_key": "947989cc8a2955bc6efb2991adb7712b1a7a2323002360a55b3f59afa541371d",
+        "cold_sessions": 2,
+        "warm_sessions": 2,
+        "additional_envelope_bytes": 3248488448,
+        "uncertainty_bytes": 649697690,
+        "observed_device_peak_bytes": 4914085888,
+        "required_total_bytes": 11704834458,
+        "headroom_bytes": 22457181798
+      }
+    ],
+    "reasons": [
+      "parallel_execution_not_qualified"
+    ],
+    "limits": "A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled."
+  },
+  "cli_parallel_check": {
+    "command": [
+      "uv",
+      "run",
+      "--locked",
+      "itov",
+      "vram",
+      "check",
+      "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a.json",
+      "--config",
+      "workspace/itov-vram.toml",
+      "--workers",
+      "2",
+      "--json",
+      "--profile",
+      "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\profiles\\e42207803ae359e062a5e8636f6cc550587ef7177769607d53013f6ff15a0aa4.json",
+      "--profile",
+      "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\profiles\\96590df2110ab846973e7847f91ae60139433efabb5c6feb3b0cb3820e1303b1.json"
+    ],
+    "exit_code": 1,
+    "stdout": "{\n  \"version\": 1,\n  \"ok\": false,\n  \"admitted\": false,\n  \"scope\": \"conservative_exact_workload_sequential_admission\",\n  \"plan_id\": \"5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a\",\n  \"checked_at\": \"2026-09-21T22:13:44.050969+00:00\",\n  \"workers\": 2,\n  \"policy\": {\n    \"version\": 1,\n    \"max_age_seconds\": 604800,\n    \"minimum_cold_sessions\": 2,\n    \"minimum_warm_sessions\": 2,\n    \"reserve_bytes\": 2147483648,\n    \"uncertainty_percent\": 20,\n    \"max_sample_gap_ns\": 1000000000,\n    \"minimum_samples\": 3,\n    \"max_workers\": 1\n  },\n  \"profile_ids\": [\n    \"96590df2110ab846973e7847f91ae60139433efabb5c6feb3b0cb3820e1303b1\",\n    \"e42207803ae359e062a5e8636f6cc550587ef7177769607d53013f6ff15a0aa4\"\n  ],\n  \"runtime_key\": \"06e0db765c14cdb4ae9768e3221e4e7dddbce63f3708c60dfaa7a39ef9989384\",\n  \"gpu\": {\n    \"uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\",\n    \"name\": \"NVIDIA GeForce RTX 5090\",\n    \"driver\": \"616.64\",\n    \"total_bytes\": 34190917632,\n    \"used_bytes\": 5728370688,\n    \"free_bytes\": 28023193600\n  },\n  \"current_used_bytes\": 5728370688,\n  \"estimates\": [\n    {\n      \"workload_key\": \"947989cc8a2955bc6efb2991adb7712b1a7a2323002360a55b3f59afa541371d\",\n      \"cold_sessions\": 2,\n      \"warm_sessions\": 2,\n      \"additional_envelope_bytes\": 3248488448,\n      \"uncertainty_bytes\": 649697690,\n      \"observed_device_peak_bytes\": 4914085888,\n      \"required_total_bytes\": 11774040474,\n      \"headroom_bytes\": 22387975782\n    }\n  ],\n  \"reasons\": [\n    \"parallel_execution_not_qualified\"\n  ],\n  \"limits\": \"A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled.\"\n}\n",
+    "stderr": ""
+  },
+  "guarded_result": {
+    "ok": true,
+    "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+    "status": "succeeded",
+    "error": null,
+    "jobs": [
+      {
+        "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+        "job_index": 0,
+        "request_id": "d894a2df-0d23-5823-8817-125f5630784e",
+        "workflow_sha256": "ed0cacd92b2136b6028f04b0d6e1818b2d3cdad9730fb6f4c8836d28adcf2392",
+        "status": "succeeded",
+        "prompt_id": "6da51ff4-5bd8-4b23-972e-80c01c431605"
+      },
+      {
+        "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+        "job_index": 1,
+        "request_id": "4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd",
+        "workflow_sha256": "ad216e5d04f1bf15d2b22992fc89eeb189803ec959966ceb786ab0715ea279a8",
+        "status": "succeeded",
+        "prompt_id": "2c95138c-fa3a-45d5-8227-13ac5e7bc05b"
+      }
+    ],
+    "succeeded": 2,
+    "scope": "sequential_batch_observations"
+  },
+  "guarded_job_records": [
+    {
+      "version": 1,
+      "request_id": "d894a2df-0d23-5823-8817-125f5630784e",
+      "server": "http://127.0.0.1:8190",
+      "owner": {
+        "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+        "index": 0
+      },
+      "workflow_path": null,
+      "workflow_sha256": "ed0cacd92b2136b6028f04b0d6e1818b2d3cdad9730fb6f4c8836d28adcf2392",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "stable-audio-open-1.0.safetensors"
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "t5_base.safetensors",
+            "device": "default",
+            "type": "stable_audio"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "speech, voices, music, distortion"
+          }
+        },
+        "5": {
+          "class_type": "ConditioningStableAudio",
+          "inputs": {
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "seconds_start": 0,
+            "seconds_total": 4
+          }
+        },
+        "6": {
+          "class_type": "EmptyLatentAudio",
+          "inputs": {
+            "batch_size": 1,
+            "seconds": 4
+          }
+        },
+        "7": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 4.98,
+            "denoise": 1,
+            "latent_image": [
+              "6",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "5",
+              1
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "dpmpp_3m_sde_gpu",
+            "scheduler": "exponential",
+            "seed": 940260921,
+            "steps": 50
+          }
+        },
+        "8": {
+          "class_type": "VAEDecodeAudio",
+          "inputs": {
+            "samples": [
+              "7",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "9": {
+          "_meta": {
+            "itov_audio": {
+              "channels": 2,
+              "sample_rate": 44100,
+              "samples": 176128
+            }
+          },
+          "class_type": "SaveAudioAdvanced",
+          "inputs": {
+            "audio": [
+              "8",
+              0
+            ],
+            "filename_prefix": "itov/audio/32017360dcf419fe7d2d8674a6e3e025279d95fd502f1ec074e4ed19828f0e2f",
+            "format": "flac"
+          }
+        }
+      },
+      "created_at": "2026-09-21T22:13:50.643813+00:00",
+      "status": "succeeded",
+      "prompt_id": "6da51ff4-5bd8-4b23-972e-80c01c431605",
+      "artifacts": [
+        {
+          "node_id": "9",
+          "category": "audio",
+          "filename": "32017360dcf419fe7d2d8674a6e3e025279d95fd502f1ec074e4ed19828f0e2f_00001.flac",
+          "subfolder": "itov\\audio",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\d894a2df-0d23-5823-8817-125f5630784e\\artifact-0000.flac",
+          "bytes": 236231,
+          "sha256": "09e2533142ec25a0d451d05c3dde0d9ac72a5f55c830121642b4aba08eaab42d",
+          "audio_validation": {
+            "ok": true,
+            "scope": "lossless_audio_full_decode",
+            "sha256": "09e2533142ec25a0d451d05c3dde0d9ac72a5f55c830121642b4aba08eaab42d",
+            "channels": 2,
+            "sample_rate": 44100,
+            "samples": 176128,
+            "peak": 0.0682373046875,
+            "rms": 0.00947851146605367,
+            "decoded_f32le_sha256": "c074ec7b5a575548a8fb9c034728f979f55bb7e2d80a269b006df0b0ce7cdb32",
+            "duration_seconds": 3.9938321995464854,
+            "limits": "Finite nonzero samples do not establish quality or prompt compliance."
+          }
+        }
+      ],
+      "updated_at": "2026-09-21T22:13:59.161868+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\d894a2df-0d23-5823-8817-125f5630784e.json",
+      "acknowledgement": {
+        "prompt_id": "6da51ff4-5bd8-4b23-972e-80c01c431605",
+        "number": 0,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          0,
+          "6da51ff4-5bd8-4b23-972e-80c01c431605",
+          {
+            "1": {
+              "_meta": {
+                "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+              },
+              "class_type": "CheckpointLoaderSimple",
+              "inputs": {
+                "ckpt_name": "stable-audio-open-1.0.safetensors"
+              }
+            },
+            "2": {
+              "_meta": {
+                "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+              },
+              "class_type": "CLIPLoader",
+              "inputs": {
+                "clip_name": "t5_base.safetensors",
+                "device": "default",
+                "type": "stable_audio"
+              }
+            },
+            "3": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+              }
+            },
+            "4": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "speech, voices, music, distortion"
+              }
+            },
+            "5": {
+              "class_type": "ConditioningStableAudio",
+              "inputs": {
+                "negative": [
+                  "4",
+                  0
+                ],
+                "positive": [
+                  "3",
+                  0
+                ],
+                "seconds_start": 0.0,
+                "seconds_total": 4.0
+              }
+            },
+            "6": {
+              "class_type": "EmptyLatentAudio",
+              "inputs": {
+                "batch_size": 1,
+                "seconds": 4.0
+              }
+            },
+            "7": {
+              "class_type": "KSampler",
+              "inputs": {
+                "cfg": 4.98,
+                "denoise": 1.0,
+                "latent_image": [
+                  "6",
+                  0
+                ],
+                "model": [
+                  "1",
+                  0
+                ],
+                "negative": [
+                  "5",
+                  1
+                ],
+                "positive": [
+                  "5",
+                  0
+                ],
+                "sampler_name": "dpmpp_3m_sde_gpu",
+                "scheduler": "exponential",
+                "seed": 940260921,
+                "steps": 50
+              }
+            },
+            "8": {
+              "class_type": "VAEDecodeAudio",
+              "inputs": {
+                "samples": [
+                  "7",
+                  0
+                ],
+                "vae": [
+                  "1",
+                  2
+                ]
+              }
+            },
+            "9": {
+              "_meta": {
+                "itov_audio": {
+                  "channels": 2,
+                  "sample_rate": 44100,
+                  "samples": 176128
+                }
+              },
+              "class_type": "SaveAudioAdvanced",
+              "inputs": {
+                "audio": [
+                  "8",
+                  0
+                ],
+                "filename_prefix": "itov/audio/32017360dcf419fe7d2d8674a6e3e025279d95fd502f1ec074e4ed19828f0e2f",
+                "format": "flac"
+              }
+            }
+          },
+          {
+            "itov_request_id": "d894a2df-0d23-5823-8817-125f5630784e",
+            "client_id": "d894a2df-0d23-5823-8817-125f5630784e",
+            "create_time": 1790028833982
+          },
+          [
+            "9"
+          ]
+        ],
+        "outputs": {
+          "9": {
+            "audio": [
+              {
+                "filename": "32017360dcf419fe7d2d8674a6e3e025279d95fd502f1ec074e4ed19828f0e2f_00001.flac",
+                "subfolder": "itov\\audio",
+                "type": "output"
+              }
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "6da51ff4-5bd8-4b23-972e-80c01c431605",
+                "timestamp": 1790028833985
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "6da51ff4-5bd8-4b23-972e-80c01c431605",
+                "timestamp": 1790028833986
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "6da51ff4-5bd8-4b23-972e-80c01c431605",
+                "timestamp": 1790028838188
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "9": {
+            "node_id": "9",
+            "display_node": "9",
+            "parent_node": null,
+            "real_node_id": "9"
+          }
+        }
+      }
+    },
+    {
+      "version": 1,
+      "request_id": "4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd",
+      "server": "http://127.0.0.1:8190",
+      "owner": {
+        "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+        "index": 1
+      },
+      "workflow_path": null,
+      "workflow_sha256": "ad216e5d04f1bf15d2b22992fc89eeb189803ec959966ceb786ab0715ea279a8",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "stable-audio-open-1.0.safetensors"
+          }
+        },
+        "2": {
+          "_meta": {
+            "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+          },
+          "class_type": "CLIPLoader",
+          "inputs": {
+            "clip_name": "t5_base.safetensors",
+            "device": "default",
+            "type": "stable_audio"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "2",
+              0
+            ],
+            "text": "speech, voices, music, distortion"
+          }
+        },
+        "5": {
+          "class_type": "ConditioningStableAudio",
+          "inputs": {
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "seconds_start": 0,
+            "seconds_total": 4
+          }
+        },
+        "6": {
+          "class_type": "EmptyLatentAudio",
+          "inputs": {
+            "batch_size": 1,
+            "seconds": 4
+          }
+        },
+        "7": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 4.98,
+            "denoise": 1,
+            "latent_image": [
+              "6",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "5",
+              1
+            ],
+            "positive": [
+              "5",
+              0
+            ],
+            "sampler_name": "dpmpp_3m_sde_gpu",
+            "scheduler": "exponential",
+            "seed": 940260922,
+            "steps": 50
+          }
+        },
+        "8": {
+          "class_type": "VAEDecodeAudio",
+          "inputs": {
+            "samples": [
+              "7",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "9": {
+          "_meta": {
+            "itov_audio": {
+              "channels": 2,
+              "sample_rate": 44100,
+              "samples": 176128
+            }
+          },
+          "class_type": "SaveAudioAdvanced",
+          "inputs": {
+            "audio": [
+              "8",
+              0
+            ],
+            "filename_prefix": "itov/audio/32017360dcf419fe7d2d8674a6e3e025279d95fd502f1ec074e4ed19828f0e2f",
+            "format": "flac"
+          }
+        }
+      },
+      "created_at": "2026-09-21T22:13:59.168722+00:00",
+      "status": "succeeded",
+      "prompt_id": "2c95138c-fa3a-45d5-8227-13ac5e7bc05b",
+      "artifacts": [
+        {
+          "node_id": "9",
+          "category": "audio",
+          "filename": "32017360dcf419fe7d2d8674a6e3e025279d95fd502f1ec074e4ed19828f0e2f_00002.flac",
+          "subfolder": "itov\\audio",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd\\artifact-0000.flac",
+          "bytes": 445206,
+          "sha256": "f640bdb2f12fa6f96355c5a01841a9e433e01753923f982c46ef7c28ea2e74b6",
+          "audio_validation": {
+            "ok": true,
+            "scope": "lossless_audio_full_decode",
+            "sha256": "f640bdb2f12fa6f96355c5a01841a9e433e01753923f982c46ef7c28ea2e74b6",
+            "channels": 2,
+            "sample_rate": 44100,
+            "samples": 176128,
+            "peak": 0.492431640625,
+            "rms": 0.0690730922503201,
+            "decoded_f32le_sha256": "be6ed4c9024813568d76a4cc53d0e01e722c0f5e2be1ae4bfabdf51e9986db63",
+            "duration_seconds": 3.9938321995464854,
+            "limits": "Finite nonzero samples do not establish quality or prompt compliance."
+          }
+        }
+      ],
+      "updated_at": "2026-09-21T22:14:05.661464+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd.json",
+      "acknowledgement": {
+        "prompt_id": "2c95138c-fa3a-45d5-8227-13ac5e7bc05b",
+        "number": 1,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          1,
+          "2c95138c-fa3a-45d5-8227-13ac5e7bc05b",
+          {
+            "1": {
+              "_meta": {
+                "itov_asset_sha256": "7b20458a071231aaf32613b6fbc7945f28f34dbba4f295bb49bad56f5f66b57e"
+              },
+              "class_type": "CheckpointLoaderSimple",
+              "inputs": {
+                "ckpt_name": "stable-audio-open-1.0.safetensors"
+              }
+            },
+            "2": {
+              "_meta": {
+                "itov_asset_sha256": "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+              },
+              "class_type": "CLIPLoader",
+              "inputs": {
+                "clip_name": "t5_base.safetensors",
+                "device": "default",
+                "type": "stable_audio"
+              }
+            },
+            "3": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "Quiet indoor room ambience, gentle steady rain outside a window, natural field recording, no speech, no music."
+              }
+            },
+            "4": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "2",
+                  0
+                ],
+                "text": "speech, voices, music, distortion"
+              }
+            },
+            "5": {
+              "class_type": "ConditioningStableAudio",
+              "inputs": {
+                "negative": [
+                  "4",
+                  0
+                ],
+                "positive": [
+                  "3",
+                  0
+                ],
+                "seconds_start": 0.0,
+                "seconds_total": 4.0
+              }
+            },
+            "6": {
+              "class_type": "EmptyLatentAudio",
+              "inputs": {
+                "batch_size": 1,
+                "seconds": 4.0
+              }
+            },
+            "7": {
+              "class_type": "KSampler",
+              "inputs": {
+                "cfg": 4.98,
+                "denoise": 1.0,
+                "latent_image": [
+                  "6",
+                  0
+                ],
+                "model": [
+                  "1",
+                  0
+                ],
+                "negative": [
+                  "5",
+                  1
+                ],
+                "positive": [
+                  "5",
+                  0
+                ],
+                "sampler_name": "dpmpp_3m_sde_gpu",
+                "scheduler": "exponential",
+                "seed": 940260922,
+                "steps": 50
+              }
+            },
+            "8": {
+              "class_type": "VAEDecodeAudio",
+              "inputs": {
+                "samples": [
+                  "7",
+                  0
+                ],
+                "vae": [
+                  "1",
+                  2
+                ]
+              }
+            },
+            "9": {
+              "_meta": {
+                "itov_audio": {
+                  "channels": 2,
+                  "sample_rate": 44100,
+                  "samples": 176128
+                }
+              },
+              "class_type": "SaveAudioAdvanced",
+              "inputs": {
+                "audio": [
+                  "8",
+                  0
+                ],
+                "filename_prefix": "itov/audio/32017360dcf419fe7d2d8674a6e3e025279d95fd502f1ec074e4ed19828f0e2f",
+                "format": "flac"
+              }
+            }
+          },
+          {
+            "itov_request_id": "4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd",
+            "client_id": "4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd",
+            "create_time": 1790028842455
+          },
+          [
+            "9"
+          ]
+        ],
+        "outputs": {
+          "9": {
+            "audio": [
+              {
+                "filename": "32017360dcf419fe7d2d8674a6e3e025279d95fd502f1ec074e4ed19828f0e2f_00002.flac",
+                "subfolder": "itov\\audio",
+                "type": "output"
+              }
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "2c95138c-fa3a-45d5-8227-13ac5e7bc05b",
+                "timestamp": 1790028842457
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6"
+                ],
+                "prompt_id": "2c95138c-fa3a-45d5-8227-13ac5e7bc05b",
+                "timestamp": 1790028842458
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "2c95138c-fa3a-45d5-8227-13ac5e7bc05b",
+                "timestamp": 1790028844713
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "9": {
+            "node_id": "9",
+            "display_node": "9",
+            "parent_node": null,
+            "real_node_id": "9"
+          }
+        }
+      }
+    }
+  ],
+  "completed_resume": {
+    "ok": true,
+    "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+    "status": "succeeded",
+    "error": null,
+    "jobs": [
+      {
+        "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+        "job_index": 0,
+        "request_id": "d894a2df-0d23-5823-8817-125f5630784e",
+        "workflow_sha256": "ed0cacd92b2136b6028f04b0d6e1818b2d3cdad9730fb6f4c8836d28adcf2392",
+        "status": "succeeded",
+        "prompt_id": "6da51ff4-5bd8-4b23-972e-80c01c431605"
+      },
+      {
+        "plan_id": "5c0c36931a08b9c43adb4563be272d7ddef6c3d83720af2a1901e80e4fe96f3a",
+        "job_index": 1,
+        "request_id": "4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd",
+        "workflow_sha256": "ad216e5d04f1bf15d2b22992fc89eeb189803ec959966ceb786ab0715ea279a8",
+        "status": "succeeded",
+        "prompt_id": "2c95138c-fa3a-45d5-8227-13ac5e7bc05b"
+      }
+    ],
+    "succeeded": 2,
+    "scope": "sequential_batch_observations"
+  },
+  "completed_resume_runtime_http_requests": 0,
+  "final_observer": {
+    "identity": {
+      "version": 1,
+      "session_id": "41f0a482-f7ab-41c5-b081-e483b0c9bf7f",
+      "pid": 60564,
+      "started_at": "2026-09-21T22:13:07.200986+00:00",
+      "bootstrap_sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+      "identity_sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+      "device": {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5090",
+        "uuid": "e2c115fd-447a-8fe0-3257-b17c51919074",
+        "total_bytes": 34162016256
+      },
+      "allocator_backend": "cudaMallocAsync",
+      "cuda_version": "13.0",
+      "cudnn_version": 92000,
+      "packages": {
+        "torch": "2.13.0+cu130",
+        "comfy-aimdo": "0.5.5",
+        "comfy-kitchen": "0.2.35"
+      },
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0",
+        "PYTORCH_CUDA_ALLOC_CONF": "backend:cudaMallocAsync",
+        "PYTORCH_ALLOC_CONF": null,
+        "CUBLAS_WORKSPACE_CONFIG": null,
+        "CUDA_MODULE_LOADING": null
+      }
+    },
+    "state": {
+      "executions": 2,
+      "active": null,
+      "last_workload": "947989cc8a2955bc6efb2991adb7712b1a7a2323002360a55b3f59afa541371d",
+      "errors": []
+    },
+    "memory": {
+      "global_free_bytes": 29583474688,
+      "global_total_bytes": 34162016256,
+      "allocated_bytes": 346082664,
+      "reserved_bytes": 369098752
+    }
+  },
+  "prior_jobs_unchanged": true,
+  "passed": true,
+  "owned_process_stopped": true,
+  "log": "workspace\\state\\verification\\stage09\\guarded-admission.log",
+  "log_sha256": "b2ce92f137b282db2d76e3289226600936ecc421e79367cee53e747ba8d7593d",
+  "original_queue": {
+    "queue_running": [],
+    "queue_pending": []
+  }
+}

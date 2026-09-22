@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -77,6 +78,20 @@ def _pin(node: dict, asset: dict, label: str, *, required: bool = False):
 
 def json_text(value) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
+
+
+def node_schema_hash(registry: dict, used: set[str], *, instrumented: bool) -> str:
+    schemas = {key: copy.deepcopy(registry[key]) for key in sorted(used)}
+    if instrumented and "VAELoader" in schemas:
+        # Stock VAELoader appends built-in names from a set. Every qualified graph
+        # explicitly selects and pins vae_name, so choice order cannot change it.
+        options = schemas["VAELoader"]["input"]["required"]["vae_name"][0]
+        require(
+            isinstance(options, list) and all(isinstance(item, str) for item in options),
+            "Invalid stock VAE choice schema",
+        )
+        options.sort()
+    return sha256(json_text(schemas).encode())
 
 
 def safe_path(root: Path, name: str) -> Path:
@@ -324,9 +339,7 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
         "devices": [
             {key: item.get(key) for key in ("name", "type", "index")} for item in stats["devices"]
         ],
-        "node_schema_sha256": sha256(
-            json_text({key: registry[key] for key in sorted(used)}).encode()
-        ),
+        "node_schema_sha256": node_schema_hash(registry, used, instrumented=instrumented),
         "files": [files[key] for key in sorted(files)],
         "jobs": len(plan["jobs"]),
     }

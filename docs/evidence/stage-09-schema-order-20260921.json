@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "observed_at": "2026-09-21T22:24:17.664097+00:00",
+  "scope": "read-only schema comparison across five fresh owned observer processes",
+  "source": "AI/ComfyUI/ComfyUI_windows_portable/ComfyUI/nodes.py",
+  "difference": "VAELoader.input.required.vae_name filename-choice order only",
+  "checks": [
+    {
+      "path": "workspace\\state\\verification\\stage09\\schema-inspect-0.json",
+      "file_sha256": "5541923fa2b60b9799f575e79e1d3a5f8354e4fa1b88828237121955b964e9b0",
+      "raw_node_schema_sha256": "a26380dc22d15e409d83c650dd22842a71f82a73e90a9aa93485a5a60a3da6d8",
+      "normalized_node_schema_sha256": "1fefbf532365c19ccdfcfa48d20f0750224d8f8ca2688623b3d8b37b05df2911",
+      "vae_choices": [
+        "wan2.2_vae.safetensors",
+        "taef1",
+        "taesd",
+        "taesdxl",
+        "pixel_space"
+      ]
+    },
+    {
+      "path": "workspace\\state\\verification\\stage09\\schema-inspect-1.json",
+      "file_sha256": "5541923fa2b60b9799f575e79e1d3a5f8354e4fa1b88828237121955b964e9b0",
+      "raw_node_schema_sha256": "a26380dc22d15e409d83c650dd22842a71f82a73e90a9aa93485a5a60a3da6d8",
+      "normalized_node_schema_sha256": "1fefbf532365c19ccdfcfa48d20f0750224d8f8ca2688623b3d8b37b05df2911",
+      "vae_choices": [
+        "wan2.2_vae.safetensors",
+        "taef1",
+        "taesd",
+        "taesdxl",
+        "pixel_space"
+      ]
+    },
+    {
+      "path": "workspace\\state\\verification\\stage09\\schema-inspect-2.json",
+      "file_sha256": "149e8c1e4119e758a9063f6c8ae05effbfb2673dc06a5f8e350a4e080c4111d1",
+      "raw_node_schema_sha256": "8341f60dace7f9fbc5ae7a81d0b697e6bf933d26d99edb77f968784fd980475c",
+      "normalized_node_schema_sha256": "1fefbf532365c19ccdfcfa48d20f0750224d8f8ca2688623b3d8b37b05df2911",
+      "vae_choices": [
+        "wan2.2_vae.safetensors",
+        "taesd",
+        "taesdxl",
+        "taef1",
+        "pixel_space"
+      ]
+    },
+    {
+      "path": "workspace\\state\\verification\\stage09\\schema-inspect-3.json",
+      "file_sha256": "d0539b68b4f522c86554802100e517614b4efd619387430640be65115f3f468c",
+      "raw_node_schema_sha256": "ef09576a3e78507ca5b786effd887fcea606bf605f8b359c9e22026d9ed8bb53",
+      "normalized_node_schema_sha256": "1fefbf532365c19ccdfcfa48d20f0750224d8f8ca2688623b3d8b37b05df2911",
+      "vae_choices": [
+        "wan2.2_vae.safetensors",
+        "taef1",
+        "taesdxl",
+        "taesd",
+        "pixel_space"
+      ]
+    },
+    {
+      "path": "workspace\\state\\verification\\stage09\\schema-inspect-4.json",
+      "file_sha256": "d0539b68b4f522c86554802100e517614b4efd619387430640be65115f3f468c",
+      "raw_node_schema_sha256": "ef09576a3e78507ca5b786effd887fcea606bf605f8b359c9e22026d9ed8bb53",
+      "normalized_node_schema_sha256": "1fefbf532365c19ccdfcfa48d20f0750224d8f8ca2688623b3d8b37b05df2911",
+      "vae_choices": [
+        "wan2.2_vae.safetensors",
+        "taef1",
+        "taesdxl",
+        "taesd",
+        "pixel_space"
+      ]
+    }
+  ],
+  "passed": true
+}

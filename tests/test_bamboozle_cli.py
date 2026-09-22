@@ -106,7 +106,7 @@ def test_cli_reports_saved_output_when_temporary_cleanup_fails(files, monkeypatc
 
 
 @pytest.mark.parametrize(
-    "command", ["preview", "encode", "decode", "verify", "validate", "interactive"]
+    "command", ["preview", "encode", "decode", "verify", "recover", "validate", "interactive"]
 )
 def test_subcommands_have_help(command, tmp_path):
     result = run_cli([command, "--help"], tmp_path)
@@ -483,3 +483,114 @@ def test_interactive_preview_preserves_unicode_separators_in_diff_lines(files, c
     cipher.add_preview_diff(plan)
     cli.show_preview(plan)
     assert "-alpha\u2028tail\n+fluid_sim\u2028tail\n" in capsys.readouterr().out
+
+
+def make_recoverable(files):
+    source, mapping = files
+    encoded = source.with_name("orphaned encoded.py")
+    encoded.write_bytes(
+        cipher.process_forward(source.read_bytes().decode(), cipher.load_json(mapping)).encode()
+    )
+    return source, mapping, encoded
+
+
+@pytest.mark.parametrize("global_first", [True, False])
+def test_recover_defaults_to_read_only_json_preview(files, global_first):
+    source, mapping, encoded = make_recoverable(files)
+    before = snapshot(source.parent)
+    flags = ["--json", "--dict", mapping]
+    command = ["recover", encoded, "--original", source]
+    result = run_cli(flags + command if global_first else command + flags, source.parent)
+    assert result.returncode == 0, result.stderr
+    report = json.loads(result.stdout)
+    assert report["status"] == "recovery_preview"
+    assert report["ledger_saved"] is False and report["output_saved"] is False
+    assert snapshot(source.parent) == before
+
+
+def test_recover_apply_creates_metadata_then_verifies_without_custom_dictionary(files):
+    source, mapping, encoded = make_recoverable(files)
+    result = run_cli(
+        ["recover", encoded, "--original", source, "--dict", mapping, "--apply", "--json"],
+        source.parent,
+    )
+    assert result.returncode == 0, result.stderr
+    report = json.loads(result.stdout)
+    assert report["status"] == "recovered" and report["ledger_saved"] is True
+    mapping.unlink()
+    verify = run_cli(["verify", encoded, "--json"], source.parent)
+    assert verify.returncode == 0, verify.stderr
+    assert json.loads(verify.stdout)["dictionary_source"] == "ledger"
+
+
+def test_recovery_plain_preview_explains_what_will_be_created(files):
+    source, mapping, encoded = make_recoverable(files)
+    result = run_cli(
+        ["recover", encoded, "--original", source, "--dict", mapping, "--dry-run"], source.parent
+    )
+    assert result.returncode == 0, result.stderr
+    assert "RECOVERY PREVIEW" in result.stdout and "--apply" in result.stdout
+    assert "Original:" in result.stdout and "Encoded:" in result.stdout
+    assert not cipher.ledger_path_for(encoded).exists()
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        ["recover", "file.py"],
+        ["recover", "file.py", "--original", "original.py", "--force"],
+        ["recover", "file.py", "--original", "original.py", "--apply", "--dry-run"],
+    ],
+)
+def test_invalid_recovery_arguments_are_rejected(arguments):
+    with pytest.raises(SystemExit) as error:
+        cli.main(arguments)
+    assert error.value.code == 2
+
+
+def test_recovery_mismatch_json_failure_never_writes(files, capsys):
+    source, mapping, encoded = make_recoverable(files)
+    encoded.write_bytes(b"edited")
+    before = snapshot(source.parent)
+    assert (
+        cli.main(
+            [
+                "recover",
+                str(encoded),
+                "--original",
+                str(source),
+                "--dict",
+                str(mapping),
+                "--apply",
+                "--json",
+            ]
+        )
+        == 1
+    )
+    report = json.loads(capsys.readouterr().out)
+    assert "exactly match" in report["error"]
+    assert report["ledger_saved"] is False and report["output_saved"] is False
+    assert snapshot(source.parent) == before
+
+
+@pytest.mark.parametrize("as_json", [False, True])
+def test_recovery_failure_after_publication_reports_saved_ledger(
+    files, monkeypatch, capsys, as_json
+):
+    source, mapping, encoded = make_recoverable(files)
+    save = cipher.save_json
+
+    def publish_then_fail(data, path, **kwargs):
+        save(data, path, **kwargs)
+        raise cipher.PublishedWriteError(path, OSError("temporary cleanup denied"))
+
+    monkeypatch.setattr(cipher, "save_json", publish_then_fail)
+    args = ["recover", str(encoded), "--original", str(source), "--dict", str(mapping), "--apply"]
+    assert cli.main(args + (["--json"] if as_json else [])) == 1
+    captured = capsys.readouterr()
+    if as_json:
+        report = json.loads(captured.out)
+        assert report["ledger_saved"] is True and report["output_saved"] is False
+    else:
+        assert "Ledger saved" in captured.err and "finalization failed" in captured.err
+    assert cipher.ledger_path_for(encoded).exists()

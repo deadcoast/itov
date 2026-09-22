@@ -167,6 +167,12 @@ uv run --locked itov av mux examples/stage-08-pair-01.av.json --json
 
 The mux example references the completed jobs in this qualification workspace. For new work, bind your own completed job IDs, record hashes and artifact hashes. Audio is validated by full decode; composition retains a precisely aligned WAV, copies all video frames, and verifies both streams' timing. Repeating `av mux` verifies its immutable output. See [setup, contracts, commands and retained audio/A/V samples](docs/audio-and-av.md). Functional media checks pass for two neutral pairs; listening quality and semantic/lip synchronization remain open.
 
+## Measured VRAM admission
+
+Version 0.9.0 adds `vram server`, `vram capture` and `vram check`, plus optional `batch run --vram-profile` guards. The observer measures memory inside ComfyUI and keeps allocator peaks separate from sampled whole-device usage. Admission requires repeated cold/warm evidence for the exact workload and runtime, with conservative margins and fresh checks before each submission. Missing, stale or mismatched evidence is refused; resume retains its guard.
+
+See [VRAM setup, commands, policy and evidence](docs/vram-profiling.md). Execution remains sequential. Parallel workers require the next ownership and qualification gate.
+
 ## Development
 
 Use [TODO.md](TODO.md) as the working task list, including current stages, dependencies, newly discovered requirements, and evidence needed for completion. Follow the gates in the [development review](docs/development-review.md) and update [CHANGELOG.md](CHANGELOG.md) with each completed increment. Record passing checks and any unfulfilled runtime or rendering acceptance separately.

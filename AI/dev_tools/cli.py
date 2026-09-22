@@ -29,6 +29,7 @@ def build_parser():
         ("decode", "Restore an encoded or edited file"),
         ("preview", "Show a diff without writing files"),
         ("verify", "Check the encoded and restored hashes without writes"),
+        ("recover", "Recreate a missing ledger from matching original and encoded files"),
         ("validate", "Check the dictionary without reading source files"),
         ("interactive", "Open the guided terminal menu"),
     ):
@@ -79,15 +80,33 @@ def build_parser():
             command.add_argument(
                 "--keep-ledger", action="store_true", help="Retain the encoded ledger"
             )
+        if name == "recover":
+            command.add_argument(
+                "--original", type=Path, required=True, help="Matching unencoded original file"
+            )
+            action = command.add_mutually_exclusive_group()
+            action.add_argument(
+                "--apply", action="store_true", help="Create only the missing ledger after checks"
+            )
+            action.add_argument(
+                "--dry-run", action="store_true", help="Preview recovery without writes (default)"
+            )
     return parser
 
 
 def report_error(error, report, as_json=False):
+    if report.get("mode") == "recover":
+        report.setdefault("ledger_saved", False)
     if as_json:
         report.update(
             status="error", error=str(error), output_saved=report.get("output_saved", False)
         )
         cipher.emit_report(report, True)
+    elif report.get("ledger_saved"):
+        print(
+            f"[!] Ledger saved to {report['ledger']}, but finalization failed: {error}",
+            file=sys.stderr,
+        )
     elif report.get("output_saved"):
         print(
             f"[!] Output saved to {report['output']}, but finalization failed: {error}",
@@ -247,6 +266,13 @@ def main(argv=None):
     try:
         if args.command == "interactive":
             return interactive(args.dict)
+        if args.command == "recover":
+            plan = cipher.prepare_recovery(args.file, args.original, args.dict)
+            report = plan["report"]
+            if args.apply:
+                cipher.apply_recovery(plan)
+            cipher.emit_report(report, args.json)
+            return 0
         mode = {"encode": "forward", "decode": "reverse"}.get(args.command, args.command)
         if mode == "preview":
             mode = "reverse" if args.reverse else "forward"

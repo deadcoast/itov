@@ -14,7 +14,7 @@ from itov.batch_execution import run_batch
 from itov.catalog import canonical_bytes, sha256
 from itov.comfyui import parse_json
 from itov.execution_store import open_store
-from itov.qualification import qualify, save_qualification
+from itov.qualification import node_schema_hash, qualify, save_qualification
 from itov.runtime import profile_launch_command, profile_main_argv
 from itov.vram_identity import MARKER, workload_key
 
@@ -226,6 +226,21 @@ def test_observer_source_and_session_are_bound(measured):
         qualify(config, plan)
 
 
+def test_only_explicit_stock_vae_choice_order_is_normalized():
+    registry = {"VAELoader": {"input": {"required": {"vae_name": [["model", "taesd", "taef1"]]}}}}
+    original = copy.deepcopy(registry)
+    selected = {"VAELoader"}
+    before = node_schema_hash(registry, selected, instrumented=True)
+    assert registry == original
+    registry["VAELoader"]["input"]["required"]["vae_name"][0].reverse()
+    assert node_schema_hash(registry, selected, instrumented=True) == before
+    assert node_schema_hash(registry, selected, instrumented=False) != node_schema_hash(
+        original, selected, instrumented=False
+    )
+    registry["VAELoader"]["input"]["required"]["vae_name"][0].append("new-model")
+    assert node_schema_hash(registry, selected, instrumented=True) != before
+
+
 def test_profile_hash_tampering_is_refused(measured):
     config, _, _, profiles, *_ = measured
     path = config.root / "state/vram/profiles" / (profiles[0]["profile_id"] + ".json")
@@ -287,6 +302,22 @@ def test_profile_launcher_is_explicit_and_does_not_modify_stock_command(measured
     command = profile_launch_command(config)
     assert Path(command[2]).name == "vram_runtime.py" and command[4] == "--"
     assert "--disable-all-custom-nodes" in command and "--database-url" in command
+    assert command[command.index("--temp-directory") + 1] == str(config.root / "state/vram/scratch")
+
+
+def test_observer_rejects_redirected_cleanup_directory(measured, monkeypatch):
+    config = measured[0]
+    cleanup = config.root / "state/vram/scratch/temp"
+    original = Path.resolve
+
+    def redirected(self, *args, **kwargs):
+        if self == cleanup:
+            return config.comfyui_root / "temp"
+        return original(self, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "resolve", redirected)
+    with pytest.raises(ValueError, match="runtime data path redirects"):
+        profile_launch_command(config)
 
 
 @pytest.mark.parametrize("counter", [None, True, -1, "10"])
@@ -304,6 +335,58 @@ def test_busy_queue_refuses_even_when_memory_fits(measured, monkeypatch):
     routes["/queue"] = (200, {"queue_running": [[1, "foreign-job"]], "queue_pending": []})
     result = vram.check(config, plan, profiles, receipt=receipt)
     assert not result["admitted"] and result["reasons"] == ["server_queue_busy"]
+
+
+@pytest.mark.parametrize("damage", ["negative", "unavailable", "free_exceeds_total", "zero_total"])
+def test_invalid_live_capacity_cannot_admit(measured, damage):
+    memory = measured[5]["memory"]
+    if damage == "negative":
+        memory["global_free_bytes"] = -1
+    elif damage == "unavailable":
+        memory["global_total_bytes"] = None
+    elif damage == "free_exceeds_total":
+        memory["global_free_bytes"] = 33 * GIB
+    else:
+        memory.update(global_total_bytes=0, global_free_bytes=0)
+    with pytest.raises(ValueError):
+        assess(measured)
+
+
+@pytest.mark.parametrize("damage", ["capacity_changed", "allocated_peak"])
+def test_inconsistent_measurement_is_refused(measured, damage):
+    for profile in measured[3]:
+        for item in profile["observations"]:
+            metric = item["measurement"]
+            if damage == "capacity_changed":
+                metric["samples"][1]["global_total_bytes"] += GIB
+            else:
+                metric["peak_allocated_bytes"] = 0
+    assert not assess(measured)["admitted"]
+
+
+@pytest.mark.parametrize("damage", ["missing", "failed", "different_workload", "valid"])
+def test_previous_execution_must_prove_a_successful_cache_state(measured, monkeypatch, damage):
+    config, plan, receipt, profiles, _, live, _, _ = measured
+    metric = copy.deepcopy(profiles[0]["observations"][0]["measurement"])
+    metric.update(
+        session_id=live["identity"]["session_id"], finished_at=datetime.now(UTC).isoformat()
+    )
+    live["state"].update(executions=1, last_workload=metric["workload_key"])
+    if damage == "failed":
+        metric.update(execution_success=False, errors=["out of memory"])
+    if damage == "different_workload":
+        metric["workload_key"] = "a" * 64
+    directory = config.root / "state/vram/telemetry" / live["identity"]["session_id"]
+    directory.mkdir(parents=True)
+    if damage != "missing":
+        (directory / "last.json").write_bytes(canonical_bytes(metric))
+    monkeypatch.setattr(
+        vram, "assess", lambda *args, **kwargs: {"ok": True, "admitted": True, "reasons": []}
+    )
+    result = vram.check(config, plan, profiles, receipt=receipt)
+    assert result["admitted"] is (damage == "valid")
+    if damage != "valid":
+        assert result["reasons"] == ["unqualified_live_cache_evidence"]
 
 
 def test_claim_commits_guard_and_seeds_in_one_transaction(measured):

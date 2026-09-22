@@ -7,6 +7,8 @@ import json
 import os
 import re
 import sys
+from collections.abc import Mapping
+from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 from tempfile import NamedTemporaryFile
@@ -24,6 +26,42 @@ class PublishedWriteError(OSError):
     def __init__(self, file_path, cleanup_error):
         super().__init__(f"Temporary cleanup failed after saving {file_path}: {cleanup_error}")
         self.published_path = Path(file_path)
+
+
+class PreparedOperation(Mapping):
+    """Read-only operation inputs, detached ledger data, and a separate reporting view."""
+
+    def __init__(self, **data):
+        self._report = data["report"]
+        self._initial_report = deepcopy(self._report)
+        self._status = self._report["status"]
+        data["mode"] = self._report["mode"]
+        data["snapshot"] = MappingProxyType(dict(data["snapshot"]))
+        if "ledger_data" in data:
+            data["ledger_data"] = json.dumps(data["ledger_data"])
+        self._data = MappingProxyType(data)
+
+    def __getitem__(self, key):
+        value = self._data[key]
+        return json.loads(value) if key == "ledger_data" else value
+
+    def __iter__(self):
+        return iter(self._data)
+
+    def __len__(self):
+        return len(self._data)
+
+    def _require_ready(self, expected):
+        if self._status != expected:
+            raise ValueError("Only an unsaved preview of the matching operation can be applied.")
+        # Report decoration must never change publication paths, contents, or lifecycle.
+        for key in ("error", "output_saved", "ledger_saved"):
+            self._report.pop(key, None)
+        self._report.update(deepcopy(self._initial_report))
+
+    def _set_status(self, status, **fields):
+        self._status = status
+        self._report.update(status=status, **fields)
 
 
 def _unique_pairs(pairs):
@@ -318,7 +356,15 @@ def validate_ledger(ledger, cipher_dict, input_path):
 def reverse_integrity(text, result, ledger, strict=False):
     if ledger is None or ledger["version"] == 1:
         if strict:
-            raise ValueError("Verification requires a version-2 ledger with integrity hashes.")
+            detail = (
+                " If you have the original file and matching dictionary, "
+                "use bamboozle recover ENCODED --original ORIGINAL to preview ledger recovery."
+                if ledger is None
+                else ""
+            )
+            raise ValueError(
+                "Verification requires a version-2 ledger with integrity hashes." + detail
+            )
         return "missing_ledger" if ledger is None else "legacy_ledger"
     if text_hash(text) != ledger["encoded_sha256"]:
         if strict:
@@ -389,6 +435,16 @@ def emit_report(report, as_json):
         return
     if "dictionary_source" in report:
         print(f"[*] {describe_dictionary(report)}")
+    if report["mode"] == "recover":
+        print(f"[*] Original: {report['original']}")
+        print(f"[*] Encoded:  {report['input']}")
+        print(f"[*] Exact encoded/original pair checked ({describe_counts(report['counts'])}).")
+        if status == "recovered":
+            print(f"[*] RECOVERED: Created {report['ledger']}. Source files were not rewritten.")
+        else:
+            print(f"[*] RECOVERY PREVIEW: Would create {report['ledger']}. No files written.")
+            print("[*] Run recover again with --apply to create the missing ledger.")
+        return
     if status == "verified":
         print(f"[*] VERIFIED: {report['input']}; encoded and restored hashes match the ledger.")
         return
@@ -399,6 +455,8 @@ def emit_report(report, as_json):
         print(f"[*] {report['mode'].upper()} PASS: Saved {report['output']} ({summary}).")
     if report.get("integrity") == "edited":
         print("[*] Input differs from the forward pass; restored edited text requires review.")
+    elif report.get("integrity") in ("missing_ledger", "legacy_ledger"):
+        print("[*] No version-2 integrity record: original byte hashes cannot be checked.")
     if report.get("diff"):
         print(report["diff"], end="")
 
@@ -451,7 +509,7 @@ def prepare_conversion(
             entries=len(cipher_dict),
             dictionary_sha256=dictionary_hash(cipher_dict),
         )
-        return {"report": report, "snapshot": snapshot}
+        return PreparedOperation(report=report, snapshot=snapshot)
 
     input_path = Path(input_path).resolve()
     suffix = "_safe" if mode == "forward" else "_ready"
@@ -530,16 +588,84 @@ def prepare_conversion(
     )
     if mode != "verify":
         report["output"] = str(output_path)
-    return {
-        "report": report,
-        "snapshot": snapshot,
-        "input_text": text,
-        "result": result,
-        "output_path": output_path,
-        "ledger_path": ledger_path,
-        "ledger_data": ledger_data,
-        "keep_ledger": keep_ledger,
+    return PreparedOperation(
+        report=report,
+        snapshot=snapshot,
+        input_text=text,
+        result=result,
+        output_path=output_path,
+        ledger_path=ledger_path,
+        ledger_data=ledger_data,
+        keep_ledger=keep_ledger,
+    )
+
+
+def prepare_recovery(encoded_path, original_path, dict_path=None):
+    """Prove a supplied original reproduces the encoded bytes before recreating metadata."""
+    encoded_path = Path(encoded_path).resolve()
+    original_path = Path(original_path).resolve()
+    if encoded_path == original_path:
+        raise ValueError("Recovery requires separate original and encoded files.")
+    conversion = prepare_conversion("forward", original_path, encoded_path, dict_path)
+    ledger_path = conversion["ledger_path"]
+    if conversion["snapshot"][ledger_path] is not None:
+        raise FileExistsError(f"Ledger already exists: {ledger_path}. Recovery never replaces it.")
+    if conversion["snapshot"][encoded_path] is None:
+        raise FileNotFoundError(f"Encoded file does not exist: {encoded_path}")
+    forward_report = conversion["report"]
+    if conversion["snapshot"][encoded_path] != forward_report["output_sha256"]:
+        raise ValueError(
+            "Encoded file does not exactly match encoding the supplied original with this "
+            "dictionary. Recovery requires the matching unedited pair; no files written."
+        )
+    ledger_data = conversion["ledger_data"]
+    ledger_data["recovered"] = True
+    report = {
+        "schema_version": 1,
+        "mode": "recover",
+        "status": "recovery_preview",
+        "input": str(encoded_path),
+        "original": str(original_path),
+        "ledger": str(ledger_path),
+        "dictionary": forward_report["dictionary"],
+        "dictionary_source": forward_report["dictionary_source"],
+        "dictionary_sha256": forward_report["dictionary_sha256"],
+        "original_sha256": forward_report["input_sha256"],
+        "encoded_sha256": forward_report["output_sha256"],
+        "original_bytes": forward_report["input_bytes"],
+        "encoded_bytes": forward_report["output_bytes"],
+        "counts": forward_report["counts"],
+        "integrity": "original_pair_checked",
+        "output_saved": False,
+        "ledger_saved": False,
     }
+    return PreparedOperation(
+        report=report,
+        snapshot=conversion["snapshot"],
+        ledger_path=ledger_path,
+        ledger_data=ledger_data,
+    )
+
+
+def apply_recovery(plan):
+    """Publish only a missing ledger, preserving files and metadata created concurrently."""
+    if not isinstance(plan, PreparedOperation):
+        raise ValueError("Prepare a recovery preview before applying it.")
+    plan._require_ready("recovery_preview")
+    check_snapshot(plan["snapshot"])
+    ledger_path = plan["ledger_path"]
+    ledger_data = plan["ledger_data"]
+    try:
+        save_json(ledger_data, ledger_path, overwrite=False)
+    except PublishedWriteError:
+        plan._set_status("finalizing", ledger_saved=True)
+        raise
+    plan._set_status("finalizing", ledger_saved=True)
+    # Detect changes during publication without deleting either party's files.
+    final_snapshot = dict(plan["snapshot"])
+    final_snapshot[ledger_path] = text_hash(json.dumps(ledger_data, indent=2) + "\n")
+    check_snapshot(final_snapshot)
+    plan._set_status("recovered")
 
 
 def add_preview_diff(plan, context=3):
@@ -552,15 +678,16 @@ def add_preview_diff(plan, context=3):
 
 def apply_conversion(plan, *, overwrite=True):
     """Save exactly the prepared text, rejecting stale source, mapping, ledger, or output."""
-    report = plan["report"]
-    if report["status"] != "preview":
-        raise ValueError("Only an unsaved conversion preview can be applied.")
+    if not isinstance(plan, PreparedOperation):
+        raise ValueError("Prepare a conversion preview before applying it.")
+    plan._require_ready("preview")
+    mode = plan["mode"]
     check_snapshot(plan["snapshot"])
     output_path = plan["output_path"]
     ledger_path = plan["ledger_path"]
     if not overwrite:
         destinations = [output_path]
-        if report["mode"] == "forward":
+        if mode == "forward":
             destinations.append(ledger_path)
         for path in destinations:
             if plan["snapshot"][path] is not None:
@@ -573,21 +700,20 @@ def apply_conversion(plan, *, overwrite=True):
         else:
             write_text_atomic(plan["result"], output_path, overwrite=False)
     except PublishedWriteError:
-        report.update(output_saved=True, status="finalizing")
+        plan._set_status("finalizing", output_saved=True)
         raise
-    report["output_saved"] = True
     # An interrupted finalization must not let this plan be applied a second time.
-    report["status"] = "finalizing"
-    if report["mode"] == "forward" or (plan["ledger_data"] is not None and not plan["keep_ledger"]):
+    plan._set_status("finalizing", output_saved=True)
+    if mode == "forward" or (plan["ledger_data"] is not None and not plan["keep_ledger"]):
         check_snapshot({ledger_path: plan["snapshot"][ledger_path]})
-    if report["mode"] == "forward":
+    if mode == "forward":
         if overwrite:
             save_json(plan["ledger_data"], ledger_path)
         else:
             save_json(plan["ledger_data"], ledger_path, overwrite=False)
     elif plan["ledger_data"] is not None and not plan["keep_ledger"]:
         ledger_path.unlink()
-    report["status"] = "saved"
+    plan._set_status("saved")
 
 
 def main(argv=None):

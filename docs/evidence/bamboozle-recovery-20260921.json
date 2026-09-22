@@ -1,0 +1,320 @@
+{
+  "date": "2026-09-21",
+  "python": "3.13.9",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "pre_fix_findings": {
+    "mutable_preview": {
+      "saved": "unreviewed replacement",
+      "expected": "base_topology __SCM_LIT_base_topology__\r\n",
+      "verification_error": "Encoded file has changed since the forward pass; verification failed."
+    }
+  },
+  "focused_tests": {
+    "passed": 201,
+    "new_regressions": 32,
+    "command": "uv run --locked pytest tests/test_cipher.py tests/test_bamboozle_cli.py -q -p no:cacheprovider --basetemp AI/dev_tools/.test-tmp/recovery-release",
+    "coverage": [
+      "read-only conversion inputs and snapshots",
+      "detached ledger data and report-independent publication",
+      "completed plan reuse rejection",
+      "exact-pair recovery preview and metadata-only application",
+      "mismatched and missing pairs and existing ledger refusal",
+      "stale original, encoded file, dictionary and ledger checks",
+      "competing ledger creation during publication",
+      "saved-ledger reporting after cleanup failure",
+      "post-publication source-change detection",
+      "recovery CLI preview/apply and argument errors",
+      "legacy verification and byte-identical restoration"
+    ]
+  },
+  "development_checks": {
+    "initial_focused_tests": {
+      "passed": 200,
+      "failed": 1
+    },
+    "initial_failure": "New test indexed a Path-keyed snapshot using a string, raising KeyError original.py; corrected the assertion to use the relative Path and reran successfully."
+  },
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "package": {
+    "version": "0.5.0",
+    "wheel_sha256": "fe3b288ddbd0c1bdc49aba7ae8b8cea2657b6238f1183587cd07266a6e7fd05c",
+    "sdist_sha256": "8dd9db48678418ad1c7b9d552b02666fc144727b99b46a0a4d0744e9841b7507",
+    "source_parity": [
+      "__init__.py",
+      "__main__.py",
+      "cipher.py",
+      "cli.py",
+      "cipher_dict.json",
+      "README.md",
+      "development_loop.md"
+    ],
+    "setup_excluded": true
+  },
+  "installed_wheel_checks": {
+    "python": "3.13.9",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "working_directory": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-recovery-su4uo5ja",
+    "installed_path": "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Lib\\site-packages\\bamboozle",
+    "installed_version": "0.5.0",
+    "installed_source_parity": [
+      "__init__.py",
+      "__main__.py",
+      "cipher.py",
+      "cli.py",
+      "cipher_dict.json",
+      "README.md",
+      "development_loop.md"
+    ],
+    "simulated_initial_failure": {
+      "error": "simulated ledger publication failure",
+      "output_saved": true,
+      "ledger_exists": false
+    },
+    "commands": [
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Bamboozle 0.5.0",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "validate",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "dictionary_valid"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "verify",
+          "original file_safe.py",
+          "--dict",
+          "custom mapping.json",
+          "--json"
+        ],
+        "exit_code": 1,
+        "status": "error",
+        "output_saved": false,
+        "error": "Verification requires a version-2 ledger with integrity hashes. If you have the original file and matching dictionary, use bamboozle recover ENCODED --original ORIGINAL to preview ledger recovery."
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "recover",
+          "original file_safe.py",
+          "--original",
+          "original file.py",
+          "--dict",
+          "custom mapping.json",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "recovery_preview",
+        "dictionary_source": "explicit",
+        "integrity": "original_pair_checked",
+        "ledger_saved": false,
+        "output_saved": false
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "recover",
+          "original file_safe.py",
+          "--original",
+          "original file.py",
+          "--dict",
+          "custom mapping.json",
+          "--dry-run"
+        ],
+        "exit_code": 0,
+        "stdout": "[*] Dictionary: explicit (C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-recovery-su4uo5ja\\custom mapping.json)\n[*] Original: C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-recovery-su4uo5ja\\original file.py\n[*] Encoded:  C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-recovery-su4uo5ja\\original file_safe.py\n[*] Exact encoded/original pair checked (1 substitution, 1 native literal).\n[*] RECOVERY PREVIEW: Would create C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-recovery-su4uo5ja\\.original file_safe.py.scm_ledger.json. No files written.\n[*] Run recover again with --apply to create the missing ledger.",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "recover",
+          "original file_safe.py",
+          "--original",
+          "original file.py",
+          "--dict",
+          "custom mapping.json",
+          "--apply",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "recovered",
+        "dictionary_source": "explicit",
+        "integrity": "original_pair_checked",
+        "ledger_saved": true,
+        "output_saved": false
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "verify",
+          "original file_safe.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "verified",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\scm-cipher.exe",
+          "--mode",
+          "verify",
+          "--input",
+          "original file_safe.py",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "verified",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "bamboozle",
+          "preview",
+          "original file_safe.py",
+          "--reverse",
+          "--context",
+          "0",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "recover",
+          "original file_safe.py",
+          "--original",
+          "original file.py",
+          "--dict",
+          "custom mapping.json",
+          "--apply",
+          "--json"
+        ],
+        "exit_code": 1,
+        "status": "error",
+        "ledger_saved": false,
+        "output_saved": false,
+        "error": "Ledger already exists: C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\installed-recovery-su4uo5ja\\.original file_safe.py.scm_ledger.json. Recovery never replaces it."
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "decode",
+          "original file_safe.py",
+          "-o",
+          "restored file.py",
+          "--strict",
+          "--keep-ledger",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "saved",
+        "dictionary_source": "ledger",
+        "integrity": "unchanged",
+        "output_saved": true
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "preview",
+          "original file.py",
+          "--dict",
+          "custom mapping.json",
+          "--context",
+          "0",
+          "--json"
+        ],
+        "exit_code": 0,
+        "status": "preview",
+        "dictionary_source": "explicit",
+        "integrity": "round_trip_checked"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "recover",
+          "original file_safe.py",
+          "--original",
+          "original file.py",
+          "--dict",
+          "custom mapping.json",
+          "--apply",
+          "--dry-run"
+        ],
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "usage: bamboozle recover [-h] [--dict DICT] [--json] --original ORIGINAL\n                         [--apply | --dry-run]\n                         file\nbamboozle recover: error: argument --dry-run: not allowed with argument --apply"
+      },
+      {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\bamboozle.exe",
+          "recover",
+          "edited encoded.py",
+          "--original",
+          "original file.py",
+          "--dict",
+          "custom mapping.json",
+          "--apply",
+          "--json"
+        ],
+        "exit_code": 1,
+        "status": "error",
+        "ledger_saved": false,
+        "output_saved": false,
+        "error": "Encoded file does not exactly match encoding the supplied original with this dictionary. Recovery requires the matching unedited pair; no files written."
+      }
+    ],
+    "source_and_encoded_bytes_and_mtimes_preserved_by_recovery": true,
+    "bom_mixed_newlines_unicode_round_trip": true,
+    "existing_ledger_preserved": true,
+    "edited_pair_rejected": true,
+    "prepared_result_assignment_rejected": true
+  },
+  "live_terminal": {
+    "tty": true,
+    "working_directory": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\.test-tmp\\terminal-recovery-8940onye",
+    "operations": [
+      "PowerShell launcher recovery preview",
+      "installed recovery apply",
+      "installed automatic menu",
+      "verify recovered ledger",
+      "decode preview",
+      "save",
+      "quit"
+    ],
+    "preview_created_no_files": true,
+    "restored_bytes_identical": true,
+    "ledger_removed_after_decode": true,
+    "exit_code": 0,
+    "initial_invocation_error": "First preview invocation accidentally used a placeholder fixture path; returned file-not-found with no writes. Corrected the test path and reran successfully."
+  },
+  "final_installation": {
+    "version": "0.5.0",
+    "mode": "editable",
+    "package_path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\dev_tools\\__init__.py",
+    "validation_status": "dictionary_valid"
+  },
+  "scope": "Local Windows conversion, missing-ledger recovery, plan input/lifecycle protection, terminal operations and installed package. Recovery verifies consistency with the supplied original and dictionary, not independent historical authenticity. Prepared plans are for sequential use, not cross-thread locks. Output/ledger transactions, power-loss durability and generated-code correctness are not qualified."
+}

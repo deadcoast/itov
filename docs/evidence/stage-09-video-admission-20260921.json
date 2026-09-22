@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "observed_at": "2026-09-21T22:23:34.883985+00:00",
+  "package_version": "0.9.0",
+  "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\plans\\74c89745228461190eac67f2258e653c68c3d58fdebf6a5571bbf83ca404119c.json",
+  "previous_refusal": "stage-09-admission-20260921.json",
+  "schema_inspection": "Stock VAELoader input.required.vae_name choice ordering changes across processes; explicit pinned selection is unchanged.",
+  "owned_pid": 38560,
+  "qualification": {
+    "version": 1,
+    "profile": "stock-wan22-v1",
+    "scope": "runtime_schema_and_asset_binding",
+    "plan_id": "74c89745228461190eac67f2258e653c68c3d58fdebf6a5571bbf83ca404119c",
+    "server": "http://127.0.0.1:8190",
+    "runtime": {
+      "argv": [
+        "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "--disable-auto-launch",
+        "--listen",
+        "127.0.0.1",
+        "--port",
+        "8190",
+        "--input-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+        "--output-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+        "--disable-all-custom-nodes",
+        "--user-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\user",
+        "--temp-directory",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\scratch",
+        "--database-url",
+        "sqlite:///C:/Users/ryanf/github/_active/itov/workspace/state/vram/asset-index.sqlite",
+        "--itov-vram-observer-v1"
+      ],
+      "comfyui_version": "0.37.0",
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130"
+    },
+    "devices": [
+      {
+        "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+        "type": "cuda",
+        "index": 0
+      }
+    ],
+    "node_schema_sha256": "1fefbf532365c19ccdfcfa48d20f0750224d8f8ca2688623b3d8b37b05df2911",
+    "files": [
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\memory_management.py",
+        "bytes": 7220,
+        "sha256": "6497cd57ffb15356824b82ca88f60dc1a4b054361e2e2f2c98b84b42d8765fac"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_management.py",
+        "bytes": 75009,
+        "sha256": "28812661915b7081d554f8ed14c7a33a2fe744776281eb5b5760bedd30a38408"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_patcher.py",
+        "bytes": 105135,
+        "sha256": "097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy_extras\\nodes_model_advanced.py",
+        "bytes": 17422,
+        "sha256": "5ec2f231a8c1b5cc6220b5ec3b725bb11fada6cdab4e97d07a52863040687402"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy_extras\\nodes_video.py",
+        "bytes": 24222,
+        "sha256": "0d4b52774965c84f6ce8ba5bc37eb8eb7a5028a31a315ccb7aefc1cda30914ae"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy_extras\\nodes_wan.py",
+        "bytes": 89359,
+        "sha256": "39ff111cc45c8d2a75cab1aa3b97ad9bf9037868178af2468bc52b34dbd0d96d"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py",
+        "bytes": 64869,
+        "sha256": "dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\folder_paths.py",
+        "bytes": 23745,
+        "sha256": "a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+        "bytes": 25024,
+        "sha256": "5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\diffusion_models\\wan2.2_ti2v_5B_fp16.safetensors",
+        "bytes": 9999658848,
+        "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\text_encoders\\umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "bytes": 6735906897,
+        "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\vae\\wan2.2_vae.safetensors",
+        "bytes": 1409400960,
+        "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py",
+        "bytes": 111280,
+        "sha256": "4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891"
+      },
+      {
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input\\itov-video-still-life.png",
+        "bytes": 1258916,
+        "sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+      }
+    ],
+    "jobs": 2,
+    "vram_observer": {
+      "version": 1,
+      "session_id": "449bfacc-9f4c-457e-ac3c-0225dc1c0f49",
+      "pid": 38560,
+      "started_at": "2026-09-21T22:23:43.780228+00:00",
+      "bootstrap_sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+      "identity_sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+      "device": {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5090",
+        "uuid": "e2c115fd-447a-8fe0-3257-b17c51919074",
+        "total_bytes": 34162016256
+      },
+      "allocator_backend": "cudaMallocAsync",
+      "cuda_version": "13.0",
+      "cudnn_version": 92000,
+      "packages": {
+        "torch": "2.13.0+cu130",
+        "comfy-aimdo": "0.5.5",
+        "comfy-kitchen": "0.2.35"
+      },
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0",
+        "PYTORCH_CUDA_ALLOC_CONF": "backend:cudaMallocAsync",
+        "PYTORCH_ALLOC_CONF": null,
+        "CUBLAS_WORKSPACE_CONFIG": null,
+        "CUDA_MODULE_LOADING": null
+      }
+    },
+    "qualification_id": "9352d22180e5c5c40f6829f69c7020652c4228878175790d89932c9c71e52824"
+  },
+  "qualification_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\qualifications\\9352d22180e5c5c40f6829f69c7020652c4228878175790d89932c9c71e52824.json",
+  "decision": {
+    "version": 1,
+    "ok": false,
+    "admitted": false,
+    "scope": "conservative_exact_workload_sequential_admission",
+    "plan_id": "74c89745228461190eac67f2258e653c68c3d58fdebf6a5571bbf83ca404119c",
+    "checked_at": "2026-09-21T22:23:56.076906+00:00",
+    "workers": 1,
+    "policy": {
+      "version": 1,
+      "max_age_seconds": 604800,
+      "minimum_cold_sessions": 2,
+      "minimum_warm_sessions": 2,
+      "reserve_bytes": 2147483648,
+      "uncertainty_percent": 20,
+      "max_sample_gap_ns": 1000000000,
+      "minimum_samples": 3,
+      "max_workers": 1
+    },
+    "profile_ids": [
+      "6a3bf96273259a7ae3a767e3af6ccad67d722bda741e74e74a75cfc6bde2396a",
+      "83aa20adfccd0331c37eb0b28b8496be8ea162db4b29e5f16c4fb0e6bc97bab3"
+    ],
+    "runtime_key": "e50e0bb330aa0bb6e639f598242359c4a4c9229418fc1032c46aaced7a9ed835",
+    "gpu": {
+      "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+      "name": "NVIDIA GeForce RTX 5090",
+      "driver": "616.64",
+      "total_bytes": 34190917632,
+      "used_bytes": 5762973696,
+      "free_bytes": 27988590592
+    },
+    "current_used_bytes": 5762973696,
+    "estimates": [
+      {
+        "workload_key": "aaff45f39e7e89c46950f26576d659d0981f44057fde6a27f976e55603dc3b01",
+        "cold_sessions": 2,
+        "warm_sessions": 2,
+        "additional_envelope_bytes": 27759214592,
+        "uncertainty_bytes": 5551842919,
+        "observed_device_peak_bytes": 29424812032,
+        "required_total_bytes": 41221514855,
+        "headroom_bytes": -7059498599
+      }
+    ],
+    "reasons": [
+      "insufficient_headroom"
+    ],
+    "limits": "A measured envelope with policy margins is not a peak guarantee. External clients can race; parallel execution remains disabled.",
+    "decision_id": "4393e3e96568dc8b1a827a15ced012e425c05104a676269161ada95691c84be5"
+  },
+  "decision_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\decisions\\4393e3e96568dc8b1a827a15ced012e425c05104a676269161ada95691c84be5.json",
+  "identity_matches_repeated_profiles": true,
+  "no_submission_or_reservation": true,
+  "passed": true,
+  "owned_process_stopped": true
+}
