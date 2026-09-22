@@ -1,0 +1,117 @@
+{
+  "observed_at": "2026-09-22T04:40:22.758701+00:00",
+  "package_version": "0.10.0",
+  "source_matches_693_source_and_693_wheel_tested_modules": true,
+  "runtime_evidence": "stage-09b-parallel-20260921.json",
+  "prior_refusal_evidence": "stage-09b-initial-parallel-20260921.json",
+  "checks": [
+    {
+      "name": "installed_completed_parallel_cli_without_http",
+      "command": [
+        "uv",
+        "run",
+        "--offline",
+        "--no-project",
+        "--isolated",
+        "--python",
+        "3.11",
+        "--with",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\wheels\\174cd5cd615bb5f0bb009f3dfd6f2bde93ab5a98bfe5ff25289cf6f9664c639b\\itov-0.10.0-py3-none-any.whl",
+        "--with",
+        "pytest==8.4.2",
+        "python",
+        "-c",
+        "\nimport hashlib,json,sys\nfrom pathlib import Path\nimport itov\nfrom itov.cli import main\nfrom itov.comfyui import ComfyUIClient\nr=json.loads(Path('docs/evidence/stage-09b-parallel-20260921.json').read_bytes())\nv=json.loads(Path('docs/evidence/stage-09b-verification-20260921.json').read_bytes())\nroot=Path(itov.__file__).parent\nassert 'site-packages' in str(root) and sys.version_info[:2]==(3,11)\nassert all(hashlib.sha256((root/Path(p).name).read_bytes()).hexdigest()==h for p,h in v['source_sha256'].items())\ncalls=[]\ndef forbidden(*args,**kwargs):\n    calls.append(str(args));raise AssertionError('Completed replay attempted HTTP')\nComfyUIClient._json=forbidden\nassert main(['parallel','resume',r['plan_path'],'--json'])==0\nassert not calls\nprint('Installed Python 3.11 CLI: completed two-worker replay, zero HTTP, 33-module parity')\n"
+      ],
+      "exit_code": 0,
+      "seconds": 0.607,
+      "stdout": "{\n  \"ok\": true,\n  \"plan_id\": \"78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"jobs\": [\n    {\n      \"plan_id\": \"78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947\",\n      \"job_index\": 0,\n      \"request_id\": \"ef7ccd88-038d-5da9-a015-f17cb2845cc4\",\n      \"workflow_sha256\": \"367e6eb186dc47cb54cd75240db6d8f7d4672c89b952c98aec1073a2218795de\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"64435502-493e-438d-a761-56147ff80cc6\"\n    },\n    {\n      \"plan_id\": \"78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947\",\n      \"job_index\": 1,\n      \"request_id\": \"b3284f22-69d2-552e-bea5-4663ec816c56\",\n      \"workflow_sha256\": \"36aa3680b0a197eace4c5b15bf33f29c7bec85c2d4d67a64c715c27367f64344\",\n      \"status\": \"succeeded\",\n      \"prompt_id\": \"99e0d8e2-efb3-4a16-9025-fb6b96e90f1d\"\n    }\n  ],\n  \"succeeded\": 2,\n  \"scope\": \"completed_parallel_artifact_reverification\"\n}\nInstalled Python 3.11 CLI: completed two-worker replay, zero HTTP, 33-module parity\n",
+      "stderr": ""
+    }
+  ],
+  "portable_outputs": [
+    {
+      "path": "docs/evidence/stage-09b-output-01.flac",
+      "bytes": 295046,
+      "sha256": "2df54351c829bb96f20880b694b5bb22c972ecbd9384a066008b7e337ed0379c",
+      "audio_validation": {
+        "ok": true,
+        "scope": "lossless_audio_full_decode",
+        "sha256": "2df54351c829bb96f20880b694b5bb22c972ecbd9384a066008b7e337ed0379c",
+        "channels": 2,
+        "sample_rate": 44100,
+        "samples": 176128,
+        "peak": 0.0921630859375,
+        "rms": 0.01828020167798787,
+        "decoded_f32le_sha256": "c4ff967f0b399398a47a43de3746cfac4fc686023f00643b49e68758dcaf27bb",
+        "duration_seconds": 3.9938321995464854,
+        "limits": "Finite nonzero samples do not establish quality or prompt compliance."
+      }
+    },
+    {
+      "path": "docs/evidence/stage-09b-output-02.flac",
+      "bytes": 398236,
+      "sha256": "9f12db6320ef07f3e561a7be5b3382da12964689db6418d1098e258453d6f29f",
+      "audio_validation": {
+        "ok": true,
+        "scope": "lossless_audio_full_decode",
+        "sha256": "9f12db6320ef07f3e561a7be5b3382da12964689db6418d1098e258453d6f29f",
+        "channels": 2,
+        "sample_rate": 44100,
+        "samples": 176128,
+        "peak": 0.154052734375,
+        "rms": 0.014326631637269436,
+        "decoded_f32le_sha256": "df8b8c542e7227a6e6d1a1494a67085a1e7dcd8effa6171667fd09ca37bba4f1",
+        "duration_seconds": 3.9938321995464854,
+        "limits": "Finite nonzero samples do not establish quality or prompt compliance."
+      }
+    }
+  ],
+  "limits": [
+    "Two pinned stock audio jobs on this Windows/RTX 5090 runtime only.",
+    "Prompt wall-clock overlap does not prove overlapping GPU kernels or speedup.",
+    "Human listening and semantic media quality remain unqualified."
+  ],
+  "original_process_and_history_unchanged": true,
+  "original_queue": {
+    "queue_running": [],
+    "queue_pending": []
+  },
+  "device_after": {
+    "previous": "a727a377-6d00-46bb-9f61-2daaad9fb85b",
+    "reason": "owned_job_and_all_workers_stopped",
+    "record_id": "dbc5f5f84b4c7c0ce921e97a81f96fe28f19e24730b492eb77e6d4d12595645b",
+    "released_at": "2026-09-22T04:38:48.932305+00:00",
+    "status": "idle",
+    "version": 1,
+    "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+  },
+  "reserved_seeds": [
+    {
+      "seed": "1010261041",
+      "plan_id": "78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947",
+      "job_index": 0
+    },
+    {
+      "seed": "1010261042",
+      "plan_id": "78aa4b046fa7c4e376f6294f841d8600cae07b20d51b6d622a50042e738bc947",
+      "job_index": 1
+    }
+  ],
+  "observed_host_peaks_within_calibration": true,
+  "overlap_ns": 4087163999,
+  "passed": true,
+  "documentation_checks": {
+    "local_links_checked": 6,
+    "missing": [],
+    "diff_check_exit_code": 0
+  },
+  "documentation_sha256": {
+    "README.md": "26ce1f9d664400e4d528e099978d4a6d4a716a1c368901db3788b7698e7967d0",
+    "TODO.md": "e434d413433e3bde823fd6a261d1ba0aa1d06e1d14a40726d2168d606f43dece",
+    "CHANGELOG.md": "6967a5db20b0e6ad631833d9749099a931d6618b1cfeff8edc1607e342d5c430",
+    "docs\\development-review.md": "cf6bda84749bc1b63c13f90ada9d2a6ecf1e540d0bae74ea831955cc513ed001",
+    "docs\\parallel-execution.md": "1600f37c6d06d474ae030f56124e25d9cf4df0178df3a58038c6171692a09cc2",
+    "docs\\vram-profiling.md": "c2ad2a6c5c05f040999d1f0d4b3634ef8649a7f1b3d1dff23ea28a14e6e5715a"
+  }
+}

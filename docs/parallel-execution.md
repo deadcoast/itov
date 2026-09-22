@@ -87,16 +87,19 @@ The [initial failed calibration](evidence/stage-09b-initial-calibration-20260921
 
 The [corrected calibration](evidence/stage-09b-calibration-20260921.json) records eight real pretrained audio jobs across four fresh workers. Maximum committed host memory was 8,096,665,600 bytes for worker 0 and 8,076,214,272 for worker 1. These produce a 23,702,423,143-byte host requirement under the unchanged policy.
 
-The [first actual parallel admission](evidence/stage-09b-initial-parallel-20260921.json) correctly refused: available commit was 22,614,253,568 bytes, a shortfall of 1,088,169,575 bytes (about 1.01 GiB). GPU admission had headroom. A real competing process using a different workspace was refused by the shared device lock. The trial made no execution claim or POST, stopped both owned workers and released the lease. The prepared plan's seeds remain unused.
+The [first actual parallel admission](evidence/stage-09b-initial-parallel-20260921.json) correctly refused: available commit was 22,614,253,568 bytes, a shortfall of 1,088,169,575 bytes (about 1.01 GiB). GPU admission had headroom. A real competing process using a different workspace was refused by the shared device lock. The trial made no execution claim or POST, stopped both owned workers and released the lease. The prepared plan's seeds remained unused at that refusal.
 
-A supported [idle-server cache-release request](evidence/stage-09b-cache-release-20260921.json) preserved the existing server process, queue and history but did not free measurable commit memory. Real overlapping inference remains pending sufficient headroom; the implementation's overlap decision is currently exercised by fixtures. [Source/package verification](evidence/stage-09b-verification-20260921.json) records its separate results. Native ownership/crash tests, HTTP lost-acknowledgement fixtures and real GPU inference provide different evidence scopes; none substitutes for the others.
+A supported [idle-server cache-release request](evidence/stage-09b-cache-release-20260921.json) preserved the existing server process, queue and history but did not free measurable commit memory. After the user freed memory, the [actual parallel trial](evidence/stage-09b-parallel-20260921.json) passed both admission checks with unchanged calibration and policy. Final available host commit was 30,357,254,144 bytes against the 23,702,423,143-byte requirement; GPU policy required 12,800,596,378 bytes against 34,162,016,256 bytes of capacity.
 
-For this existing checkout, the refused plan remains unclaimed and can be tried after headroom improves. Its exact local paths are retained in evidence:
+Both cold-process audio jobs completed with **4.087163999 seconds of observed prompt execution overlap**. Each distinct FLAC fully decoded to 176128 stereo samples at 44.1 kHz. Retained samples: [worker 0](evidence/stage-09b-output-01.flac) and [worker 1](evidence/stage-09b-output-02.flac). Measured host peaks stayed below the calibration envelopes. Both owned workers were confirmed dead, the shared lease returned idle, and original job records/server history remained unchanged. Source and installed Python 3.11 CLI replay made zero runtime HTTP requests; [completion evidence](evidence/stage-09b-completion-20260921.json) records these checks.
+
+The unchanged implementation already passed [693 source and 693 installed-wheel tests](evidence/stage-09b-verification-20260921.json); the live follow-up verifies the remaining bounded model gate. Native ownership/crash tests, HTTP lost-acknowledgement fixtures and real GPU inference provide different evidence scopes; none substitutes for the others. Prompt overlap does not prove simultaneous GPU kernels or a speedup. Human listening, semantic quality, arbitrary models and broader concurrency remain unqualified.
+
+The completed plan now owns its seeds and must not be submitted again. Reverify its artifacts in this existing checkout:
 
 ```powershell
 $prepared = Get-Content docs/evidence/stage-09b-preflight-20260921.json -Raw | ConvertFrom-Json
-$measured = Get-Content docs/evidence/stage-09b-calibration-20260921.json -Raw | ConvertFrom-Json
-uv run --locked itov parallel qualify ($prepared.plans[2].path) --calibration ($measured.runs[0].result.evidence) --calibration ($measured.runs[1].result.evidence) --json
+uv run --locked itov parallel resume ($prepared.plans[2].path) --json
 ```
 
-This requires the retained local workspace and runtime. Expired calibration, changed identity, a new catalog head or already claimed seeds will still refuse; prepare fresh evidence/plans when those bindings change.
+Replay requires the retained local workspace and artifacts. New trials require a new plan with unused seeds and fresh matching admission; recalibrate when evidence expires or its exact bindings change.
