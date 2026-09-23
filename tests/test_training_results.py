@@ -69,8 +69,8 @@ def test_status_reports_failed_boundary_without_rewriting_legacy_success(
     if as_json:
         assert json.loads(output)["failure_boundary"] == boundary
     else:
-        assert "FAILED" in output and f"Failure boundary: {boundary}" in output
-        assert "Next action:" in output and "run.json:" in output
+        assert "FAILED" in output and f"Cause (failure_boundary): {boundary}" in output
+        assert "Next:" in output and "Artifact (run.json):" in output
     with pytest.raises(training_results.ResultValidationError) as caught:
         evaluation.assess(item.config, item.plan_path, save=True)
     assert caught.value.boundary == boundary

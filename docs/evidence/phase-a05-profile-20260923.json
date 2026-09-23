@@ -1,0 +1,4121 @@
+{
+  "scope": "A-05 public evaluation packet cost; no model execution",
+  "date": "2026-09-23",
+  "source_python": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]",
+  "source_before": {
+    "arguments": [
+      "evaluation",
+      "packet",
+      "workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+      "--config",
+      "workspace\\itov.toml",
+      "--json"
+    ],
+    "repeats": 3,
+    "wall_ns": [
+      1459474700,
+      1413833600,
+      1558761800
+    ],
+    "median_wall_ns": 1459474700,
+    "output_sha256": "cc42dc8a66b301a81cbeeec465e4ad421cee0924482d0f9cc757f6b351b9fd30",
+    "profile_functions": [
+      {
+        "module": "profile_training_reads.py",
+        "line": 23,
+        "function": "invoke",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5.17e-05,
+        "cumulative_seconds": 3.6008569
+      },
+      {
+        "module": "cli.py",
+        "line": 442,
+        "function": "main",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 6.86e-05,
+        "cumulative_seconds": 3.6001875
+      },
+      {
+        "module": "quality.py",
+        "line": 125,
+        "function": "packet",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0009555000000000001,
+        "cumulative_seconds": 3.5736547
+      },
+      {
+        "module": "training_results.py",
+        "line": 56,
+        "function": "inspect_weights",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.0376101,
+        "cumulative_seconds": 2.990387
+      },
+      {
+        "module": "evaluation.py",
+        "line": 32,
+        "function": "assess",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 4.1700000000000004e-05,
+        "cumulative_seconds": 2.2955916000000003
+      },
+      {
+        "module": "training_results.py",
+        "line": 125,
+        "function": "validate",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 0.0006477000000000001,
+        "cumulative_seconds": 2.2691445000000003
+      },
+      {
+        "module": "evaluation.py",
+        "line": 77,
+        "function": "candidate",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0017608,
+        "cumulative_seconds": 2.212321
+      },
+      {
+        "module": "training_results.py",
+        "line": 118,
+        "function": "<genexpr>",
+        "calls": 17421600,
+        "primitive_calls": 17421600,
+        "own_seconds": 1.5648362,
+        "cumulative_seconds": 1.5648362
+      },
+      {
+        "module": "evaluation.py",
+        "line": 123,
+        "function": "comfy_export",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0056981,
+        "cumulative_seconds": 1.0586197000000002
+      },
+      {
+        "module": "quality.py",
+        "line": 80,
+        "function": "qualification",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 0.0001128,
+        "cumulative_seconds": 0.3548065
+      },
+      {
+        "module": "quality.py",
+        "line": 109,
+        "function": "validate_matrix",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.0003996,
+        "cumulative_seconds": 0.30092850000000004
+      },
+      {
+        "module": "training_data.py",
+        "line": 27,
+        "function": "file_ref",
+        "calls": 353,
+        "primitive_calls": 353,
+        "own_seconds": 0.0032824,
+        "cumulative_seconds": 0.24788410000000002
+      },
+      {
+        "module": "curation.py",
+        "line": 14,
+        "function": "validate",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 0.0045304,
+        "cumulative_seconds": 0.24781820000000002
+      },
+      {
+        "module": "catalog.py",
+        "line": 85,
+        "function": "read_document",
+        "calls": 61,
+        "primitive_calls": 61,
+        "own_seconds": 0.0003914,
+        "cumulative_seconds": 0.22434800000000002
+      },
+      {
+        "module": "training_data.py",
+        "line": 180,
+        "function": "load_dataset",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 0.0012251,
+        "cumulative_seconds": 0.2019098
+      },
+      {
+        "module": "training_data.py",
+        "line": 74,
+        "function": "validate_value",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 0.0023425,
+        "cumulative_seconds": 0.1601923
+      },
+      {
+        "module": "profile_training_reads.py",
+        "line": 37,
+        "function": "observed",
+        "calls": 353,
+        "primitive_calls": 353,
+        "own_seconds": 0.0023507000000000003,
+        "cumulative_seconds": 0.09868400000000001
+      },
+      {
+        "module": "qualification.py",
+        "line": 97,
+        "function": "safe_path",
+        "calls": 359,
+        "primitive_calls": 359,
+        "own_seconds": 0.0017056,
+        "cumulative_seconds": 0.09280150000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 81,
+        "function": "sha256",
+        "calls": 44,
+        "primitive_calls": 44,
+        "own_seconds": 4.5400000000000006e-05,
+        "cumulative_seconds": 0.0286111
+      },
+      {
+        "module": "catalog.py",
+        "line": 100,
+        "function": "relative_path",
+        "calls": 724,
+        "primitive_calls": 724,
+        "own_seconds": 0.0046570000000000005,
+        "cumulative_seconds": 0.0263187
+      },
+      {
+        "module": "cli.py",
+        "line": 43,
+        "function": "parser",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0002435,
+        "cumulative_seconds": 0.025343200000000003
+      },
+      {
+        "module": "training.py",
+        "line": 275,
+        "function": "load_plan",
+        "calls": 6,
+        "primitive_calls": 6,
+        "own_seconds": 0.0006353,
+        "cumulative_seconds": 0.0252413
+      },
+      {
+        "module": "catalog.py",
+        "line": 33,
+        "function": "text",
+        "calls": 1228,
+        "primitive_calls": 1228,
+        "own_seconds": 0.0022902,
+        "cumulative_seconds": 0.0224659
+      },
+      {
+        "module": "catalog.py",
+        "line": 59,
+        "function": "canonical_bytes",
+        "calls": 42,
+        "primitive_calls": 42,
+        "own_seconds": 0.00011630000000000001,
+        "cumulative_seconds": 0.0221534
+      },
+      {
+        "module": "quality.py",
+        "line": 25,
+        "function": "suite",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 0.0006322000000000001,
+        "cumulative_seconds": 0.0190028
+      },
+      {
+        "module": "catalog.py",
+        "line": 62,
+        "function": "check",
+        "calls": 16216,
+        "primitive_calls": 42,
+        "own_seconds": 0.011415600000000001,
+        "cumulative_seconds": 0.018582500000000002
+      },
+      {
+        "module": "training.py",
+        "line": 316,
+        "function": "read_record",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 0.0002298,
+        "cumulative_seconds": 0.017439
+      },
+      {
+        "module": "catalog.py",
+        "line": 36,
+        "function": "<genexpr>",
+        "calls": 66338,
+        "primitive_calls": 66338,
+        "own_seconds": 0.0094445,
+        "cumulative_seconds": 0.013508800000000001
+      },
+      {
+        "module": "comfyui.py",
+        "line": 54,
+        "function": "parse_json",
+        "calls": 65,
+        "primitive_calls": 65,
+        "own_seconds": 0.0002841,
+        "cumulative_seconds": 0.0095829
+      },
+      {
+        "module": "training_results.py",
+        "line": 38,
+        "function": "read_result",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 0.00024690000000000004,
+        "cumulative_seconds": 0.008794900000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 23,
+        "function": "object_fields",
+        "calls": 4003,
+        "primitive_calls": 4003,
+        "own_seconds": 0.005019,
+        "cumulative_seconds": 0.007596
+      },
+      {
+        "module": "training_data.py",
+        "line": 45,
+        "function": "check_seal",
+        "calls": 21,
+        "primitive_calls": 21,
+        "own_seconds": 0.0001248,
+        "cumulative_seconds": 0.006065900000000001
+      },
+      {
+        "module": "training_data.py",
+        "line": 41,
+        "function": "seal",
+        "calls": 18,
+        "primitive_calls": 18,
+        "own_seconds": 4.61e-05,
+        "cumulative_seconds": 0.0051048000000000005
+      },
+      {
+        "module": "catalog.py",
+        "line": 18,
+        "function": "require",
+        "calls": 60710,
+        "primitive_calls": 60710,
+        "own_seconds": 0.0040626,
+        "cumulative_seconds": 0.0040626
+      },
+      {
+        "module": "catalog.py",
+        "line": 64,
+        "function": "<genexpr>",
+        "calls": 13298,
+        "primitive_calls": 13298,
+        "own_seconds": 0.0017701000000000001,
+        "cumulative_seconds": 0.0025847
+      },
+      {
+        "module": "catalog.py",
+        "line": 114,
+        "function": "<genexpr>",
+        "calls": 3794,
+        "primitive_calls": 3794,
+        "own_seconds": 0.0013991000000000001,
+        "cumulative_seconds": 0.0023373
+      },
+      {
+        "module": "comfyui.py",
+        "line": 34,
+        "function": "_unique_object",
+        "calls": 5652,
+        "primitive_calls": 5652,
+        "own_seconds": 0.0022617,
+        "cumulative_seconds": 0.0022617
+      },
+      {
+        "module": "catalog.py",
+        "line": 40,
+        "function": "identifier",
+        "calls": 188,
+        "primitive_calls": 188,
+        "own_seconds": 0.0002165,
+        "cumulative_seconds": 0.0019045000000000002
+      },
+      {
+        "module": "catalog.py",
+        "line": 46,
+        "function": "digest",
+        "calls": 414,
+        "primitive_calls": 414,
+        "own_seconds": 0.0004801,
+        "cumulative_seconds": 0.0018325000000000001
+      },
+      {
+        "module": "training.py",
+        "line": 312,
+        "function": "run_folder",
+        "calls": 6,
+        "primitive_calls": 6,
+        "own_seconds": 1.09e-05,
+        "cumulative_seconds": 0.0016221
+      },
+      {
+        "module": "training_results.py",
+        "line": 72,
+        "function": "<genexpr>",
+        "calls": 3360,
+        "primitive_calls": 3360,
+        "own_seconds": 0.000867,
+        "cumulative_seconds": 0.0014208
+      },
+      {
+        "module": "training_results.py",
+        "line": 86,
+        "function": "<genexpr>",
+        "calls": 10080,
+        "primitive_calls": 10080,
+        "own_seconds": 0.0013817,
+        "cumulative_seconds": 0.0013817
+      },
+      {
+        "module": "catalog.py",
+        "line": 113,
+        "function": "<genexpr>",
+        "calls": 3794,
+        "primitive_calls": 3794,
+        "own_seconds": 0.0009602,
+        "cumulative_seconds": 0.0013477
+      },
+      {
+        "module": "training_results.py",
+        "line": 95,
+        "function": "<genexpr>",
+        "calls": 10080,
+        "primitive_calls": 10080,
+        "own_seconds": 0.0012127000000000001,
+        "cumulative_seconds": 0.0012127000000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 108,
+        "function": "<genexpr>",
+        "calls": 7240,
+        "primitive_calls": 7240,
+        "own_seconds": 0.0010971000000000002,
+        "cumulative_seconds": 0.0010971000000000002
+      },
+      {
+        "module": "training.py",
+        "line": 113,
+        "function": "validate_spec",
+        "calls": 6,
+        "primitive_calls": 6,
+        "own_seconds": 0.0001004,
+        "cumulative_seconds": 0.0008806
+      },
+      {
+        "module": "catalog.py",
+        "line": 109,
+        "function": "<genexpr>",
+        "calls": 7240,
+        "primitive_calls": 7240,
+        "own_seconds": 0.0008638000000000001,
+        "cumulative_seconds": 0.0008638000000000001
+      },
+      {
+        "module": "config.py",
+        "line": 80,
+        "function": "load_config",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 2.5200000000000003e-05,
+        "cumulative_seconds": 0.0008636000000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 112,
+        "function": "<genexpr>",
+        "calls": 6516,
+        "primitive_calls": 6516,
+        "own_seconds": 0.0006292,
+        "cumulative_seconds": 0.0006292
+      },
+      {
+        "module": "cli.py",
+        "line": 36,
+        "function": "_connection_arguments",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 2.0700000000000002e-05,
+        "cumulative_seconds": 0.0005532
+      },
+      {
+        "module": "linting.py",
+        "line": 57,
+        "function": "origin",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 2.85e-05,
+        "cumulative_seconds": 0.00030940000000000004
+      },
+      {
+        "module": "config.py",
+        "line": 64,
+        "function": "root",
+        "calls": 34,
+        "primitive_calls": 34,
+        "own_seconds": 1.62e-05,
+        "cumulative_seconds": 0.00030020000000000003
+      },
+      {
+        "module": "config.py",
+        "line": 41,
+        "function": "_resolve",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 6.1e-06,
+        "cumulative_seconds": 0.0001762
+      },
+      {
+        "module": "training_results.py",
+        "line": 102,
+        "function": "<genexpr>",
+        "calls": 1683,
+        "primitive_calls": 1683,
+        "own_seconds": 0.0001662,
+        "cumulative_seconds": 0.0001662
+      },
+      {
+        "module": "config.py",
+        "line": 48,
+        "function": "normalize_comfyui_root",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.7e-06,
+        "cumulative_seconds": 0.0001572
+      },
+      {
+        "module": "linting.py",
+        "line": 32,
+        "function": "normalize",
+        "calls": 72,
+        "primitive_calls": 72,
+        "own_seconds": 6.53e-05,
+        "cumulative_seconds": 0.0001563
+      },
+      {
+        "module": "catalog.py",
+        "line": 54,
+        "function": "integer",
+        "calls": 400,
+        "primitive_calls": 400,
+        "own_seconds": 0.0001351,
+        "cumulative_seconds": 0.0001553
+      },
+      {
+        "module": "comfyui.py",
+        "line": 47,
+        "function": "_finite_float",
+        "calls": 104,
+        "primitive_calls": 104,
+        "own_seconds": 8.5e-05,
+        "cumulative_seconds": 0.0001017
+      },
+      {
+        "module": "cli.py",
+        "line": 382,
+        "function": "_print_training_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.1000000000000006e-06,
+        "cumulative_seconds": 7.53e-05
+      },
+      {
+        "module": "cli.py",
+        "line": 353,
+        "function": "_print_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.4e-06,
+        "cumulative_seconds": 7.120000000000001e-05
+      },
+      {
+        "module": "linting.py",
+        "line": 79,
+        "function": "contains",
+        "calls": 16,
+        "primitive_calls": 16,
+        "own_seconds": 1.5100000000000001e-05,
+        "cumulative_seconds": 6.59e-05
+      },
+      {
+        "module": "config.py",
+        "line": 17,
+        "function": "validate_url",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 9.100000000000001e-06,
+        "cumulative_seconds": 4.05e-05
+      },
+      {
+        "module": "catalog.py",
+        "line": 28,
+        "function": "array",
+        "calls": 39,
+        "primitive_calls": 39,
+        "own_seconds": 2.43e-05,
+        "cumulative_seconds": 3.09e-05
+      },
+      {
+        "module": "quality.py",
+        "line": 93,
+        "function": "expected",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 2.4100000000000003e-05,
+        "cumulative_seconds": 3.0100000000000003e-05
+      },
+      {
+        "module": "config.py",
+        "line": 18,
+        "function": "<genexpr>",
+        "calls": 22,
+        "primitive_calls": 22,
+        "own_seconds": 9.100000000000001e-06,
+        "cumulative_seconds": 1.41e-05
+      },
+      {
+        "module": "training_data.py",
+        "line": 161,
+        "function": "<lambda>",
+        "calls": 80,
+        "primitive_calls": 80,
+        "own_seconds": 8.900000000000001e-06,
+        "cumulative_seconds": 8.900000000000001e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 233,
+        "function": "<genexpr>",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 5e-06,
+        "cumulative_seconds": 5e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 203,
+        "function": "<genexpr>",
+        "calls": 6,
+        "primitive_calls": 6,
+        "own_seconds": 4.6e-06,
+        "cumulative_seconds": 4.6e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 25,
+        "function": "boundary",
+        "calls": 40,
+        "primitive_calls": 40,
+        "own_seconds": 4.5e-06,
+        "cumulative_seconds": 4.5e-06
+      }
+    ],
+    "file_digest": {
+      "calls": 353,
+      "bytes": 122288965,
+      "files": {
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\datasets\\877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751.json": {
+          "calls": 10,
+          "bytes": 55680
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\11737.jpg": {
+          "calls": 10,
+          "bytes": 580430
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11737.png": {
+          "calls": 10,
+          "bytes": 2554620
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11737.txt": {
+          "calls": 10,
+          "bytes": 1040
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\11939.jpg": {
+          "calls": 10,
+          "bytes": 867620
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11939.png": {
+          "calls": 10,
+          "bytes": 3207000
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11939.txt": {
+          "calls": 10,
+          "bytes": 1350
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\16590.jpg": {
+          "calls": 10,
+          "bytes": 506700
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16590.png": {
+          "calls": 10,
+          "bytes": 2502700
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16590.txt": {
+          "calls": 10,
+          "bytes": 1320
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\16592.jpg": {
+          "calls": 10,
+          "bytes": 688530
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16592.png": {
+          "calls": 10,
+          "bytes": 2757570
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16592.txt": {
+          "calls": 10,
+          "bytes": 920
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\436305.jpg": {
+          "calls": 10,
+          "bytes": 932190
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436305.png": {
+          "calls": 10,
+          "bytes": 3078130
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436305.txt": {
+          "calls": 10,
+          "bytes": 1340
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\436450.jpg": {
+          "calls": 10,
+          "bytes": 1248130
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436450.png": {
+          "calls": 10,
+          "bytes": 4511270
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436450.txt": {
+          "calls": 10,
+          "bytes": 1030
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\488147.jpg": {
+          "calls": 10,
+          "bytes": 3345820
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\488147.png": {
+          "calls": 10,
+          "bytes": 3993540
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\488147.txt": {
+          "calls": 10,
+          "bytes": 1160
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\898372.jpg": {
+          "calls": 10,
+          "bytes": 1305770
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\898372.png": {
+          "calls": 10,
+          "bytes": 3833930
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\898372.txt": {
+          "calls": 10,
+          "bytes": 940
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\pytorch_lora_weights.safetensors": {
+          "calls": 3,
+          "bytes": 70171272
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-11737-baseline.png": {
+          "calls": 2,
+          "bytes": 774560
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-11737-candidate.png": {
+          "calls": 2,
+          "bytes": 856226
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-436450-baseline.png": {
+          "calls": 2,
+          "bytes": 682850
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-436450-candidate.png": {
+          "calls": 2,
+          "bytes": 789700
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\curation.json": {
+          "calls": 4,
+          "bytes": 21108
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\policy-observation.json": {
+          "calls": 4,
+          "bytes": 3176
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\11737.json": {
+          "calls": 4,
+          "bytes": 10412
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\11939.json": {
+          "calls": 4,
+          "bytes": 11280
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\16590.json": {
+          "calls": 4,
+          "bytes": 9100
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\16592.json": {
+          "calls": 4,
+          "bytes": 9076
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\436305.json": {
+          "calls": 4,
+          "bytes": 10644
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\436450.json": {
+          "calls": 4,
+          "bytes": 9648
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\488147.json": {
+          "calls": 4,
+          "bytes": 9840
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\898372.json": {
+          "calls": 4,
+          "bytes": 9444
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\still-life.quality.json": {
+          "calls": 4,
+          "bytes": 4956
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-base_plain.png": {
+          "calls": 3,
+          "bytes": 657078
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-base_trigger.png": {
+          "calls": 3,
+          "bytes": 681564
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-adapter_plain.png": {
+          "calls": 3,
+          "bytes": 1095975
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-adapter_trigger.png": {
+          "calls": 3,
+          "bytes": 1150431
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-base_plain.png": {
+          "calls": 3,
+          "bytes": 1040034
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-base_trigger.png": {
+          "calls": 3,
+          "bytes": 863766
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-adapter_plain.png": {
+          "calls": 3,
+          "bytes": 993363
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-adapter_trigger.png": {
+          "calls": 3,
+          "bytes": 997566
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-base_plain.png": {
+          "calls": 3,
+          "bytes": 772488
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-base_trigger.png": {
+          "calls": 3,
+          "bytes": 716166
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-adapter_plain.png": {
+          "calls": 3,
+          "bytes": 700026
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-adapter_trigger.png": {
+          "calls": 3,
+          "bytes": 664119
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-base_plain.png": {
+          "calls": 3,
+          "bytes": 775296
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-base_trigger.png": {
+          "calls": 3,
+          "bytes": 728319
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-adapter_plain.png": {
+          "calls": 3,
+          "bytes": 539745
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-adapter_trigger.png": {
+          "calls": 3,
+          "bytes": 551007
+        }
+      }
+    },
+    "limits": "Warm local files; wall samples exclude profiling. file_digest counts are only those hash reads, not all I/O. Profiling adds overhead. No model render."
+  },
+  "source_after": {
+    "arguments": [
+      "evaluation",
+      "packet",
+      "workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+      "--config",
+      "workspace\\itov.toml",
+      "--json"
+    ],
+    "repeats": 3,
+    "wall_ns": [
+      596475700,
+      572289900,
+      570475500
+    ],
+    "median_wall_ns": 572289900,
+    "output_sha256": "cc42dc8a66b301a81cbeeec465e4ad421cee0924482d0f9cc757f6b351b9fd30",
+    "profile_functions": [
+      {
+        "module": "profile_training_reads.py",
+        "line": 23,
+        "function": "invoke",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.66e-05,
+        "cumulative_seconds": 1.3309788
+      },
+      {
+        "module": "cli.py",
+        "line": 442,
+        "function": "main",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0013590000000000002,
+        "cumulative_seconds": 1.330608
+      },
+      {
+        "module": "quality.py",
+        "line": 123,
+        "function": "packet",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 8.75e-05,
+        "cumulative_seconds": 1.2985925
+      },
+      {
+        "module": "assessment_context.py",
+        "line": 22,
+        "function": "assessment_context",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 2.9400000000000003e-05,
+        "cumulative_seconds": 1.2578426
+      },
+      {
+        "module": "training_results.py",
+        "line": 146,
+        "function": "validate_record",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 1.77e-05,
+        "cumulative_seconds": 1.2021344
+      },
+      {
+        "module": "training_results.py",
+        "line": 151,
+        "function": "_validate",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0001599,
+        "cumulative_seconds": 1.2021167000000001
+      },
+      {
+        "module": "training_results.py",
+        "line": 67,
+        "function": "weight_snapshot",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.00016140000000000002,
+        "cumulative_seconds": 1.0276461000000001
+      },
+      {
+        "module": "training_results.py",
+        "line": 80,
+        "function": "_inspect_weights",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.013470500000000002,
+        "cumulative_seconds": 1.011879
+      },
+      {
+        "module": "training_results.py",
+        "line": 135,
+        "function": "<genexpr>",
+        "calls": 5807200,
+        "primitive_calls": 5807200,
+        "own_seconds": 0.5398176,
+        "cumulative_seconds": 0.5398176
+      },
+      {
+        "module": "quality.py",
+        "line": 103,
+        "function": "matrix_evidence",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.00014010000000000002,
+        "cumulative_seconds": 0.1226156
+      },
+      {
+        "module": "quality.py",
+        "line": 82,
+        "function": "qualification",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.88e-05,
+        "cumulative_seconds": 0.1082647
+      },
+      {
+        "module": "training_data.py",
+        "line": 27,
+        "function": "file_ref",
+        "calls": 107,
+        "primitive_calls": 107,
+        "own_seconds": 0.001049,
+        "cumulative_seconds": 0.10072350000000001
+      },
+      {
+        "module": "training_data.py",
+        "line": 181,
+        "function": "load_dataset",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.0004896000000000001,
+        "cumulative_seconds": 0.0796477
+      },
+      {
+        "module": "curation.py",
+        "line": 15,
+        "function": "validate",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0012133,
+        "cumulative_seconds": 0.07214670000000001
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 80,
+        "function": "read_document",
+        "calls": 17,
+        "primitive_calls": 17,
+        "own_seconds": 6.74e-05,
+        "cumulative_seconds": 0.0703026
+      },
+      {
+        "module": "catalog.py",
+        "line": 85,
+        "function": "read_document",
+        "calls": 17,
+        "primitive_calls": 17,
+        "own_seconds": 0.0001329,
+        "cumulative_seconds": 0.0658156
+      },
+      {
+        "module": "training_data.py",
+        "line": 75,
+        "function": "validate_value",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.0007433,
+        "cumulative_seconds": 0.0654406
+      },
+      {
+        "module": "profile_training_reads.py",
+        "line": 37,
+        "function": "observed",
+        "calls": 167,
+        "primitive_calls": 167,
+        "own_seconds": 0.0010954,
+        "cumulative_seconds": 0.056256900000000006
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 69,
+        "function": "verify",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0001009,
+        "cumulative_seconds": 0.040010300000000006
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 21,
+        "function": "verify",
+        "calls": 60,
+        "primitive_calls": 60,
+        "own_seconds": 0.00039420000000000004,
+        "cumulative_seconds": 0.0399069
+      },
+      {
+        "module": "evaluation.py",
+        "line": 83,
+        "function": "_candidate",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0008472000000000001,
+        "cumulative_seconds": 0.0386306
+      },
+      {
+        "module": "evaluation.py",
+        "line": 127,
+        "function": "_export",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0054191000000000005,
+        "cumulative_seconds": 0.037675
+      },
+      {
+        "module": "cli.py",
+        "line": 43,
+        "function": "parser",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0002752,
+        "cumulative_seconds": 0.0292198
+      },
+      {
+        "module": "qualification.py",
+        "line": 97,
+        "function": "safe_path",
+        "calls": 109,
+        "primitive_calls": 109,
+        "own_seconds": 0.0004930000000000001,
+        "cumulative_seconds": 0.029024400000000002
+      },
+      {
+        "module": "catalog.py",
+        "line": 81,
+        "function": "sha256",
+        "calls": 19,
+        "primitive_calls": 19,
+        "own_seconds": 2.36e-05,
+        "cumulative_seconds": 0.0289558
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 74,
+        "function": "observe",
+        "calls": 125,
+        "primitive_calls": 125,
+        "own_seconds": 0.00017350000000000002,
+        "cumulative_seconds": 0.025322300000000002
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 56,
+        "function": "add",
+        "calls": 125,
+        "primitive_calls": 125,
+        "own_seconds": 0.0005494,
+        "cumulative_seconds": 0.025116000000000003
+      },
+      {
+        "module": "catalog.py",
+        "line": 59,
+        "function": "canonical_bytes",
+        "calls": 40,
+        "primitive_calls": 40,
+        "own_seconds": 8.32e-05,
+        "cumulative_seconds": 0.0167793
+      },
+      {
+        "module": "catalog.py",
+        "line": 62,
+        "function": "check",
+        "calls": 13203,
+        "primitive_calls": 40,
+        "own_seconds": 0.0087668,
+        "cumulative_seconds": 0.014063500000000001
+      },
+      {
+        "module": "training.py",
+        "line": 280,
+        "function": "load_plan",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 0.00024890000000000003,
+        "cumulative_seconds": 0.0103067
+      },
+      {
+        "module": "training.py",
+        "line": 321,
+        "function": "read_record",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 8.520000000000001e-05,
+        "cumulative_seconds": 0.0100944
+      },
+      {
+        "module": "catalog.py",
+        "line": 100,
+        "function": "relative_path",
+        "calls": 220,
+        "primitive_calls": 220,
+        "own_seconds": 0.0014357,
+        "cumulative_seconds": 0.0081721
+      },
+      {
+        "module": "catalog.py",
+        "line": 33,
+        "function": "text",
+        "calls": 362,
+        "primitive_calls": 362,
+        "own_seconds": 0.0007161,
+        "cumulative_seconds": 0.006785
+      },
+      {
+        "module": "quality.py",
+        "line": 27,
+        "function": "suite",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.00019820000000000002,
+        "cumulative_seconds": 0.0056
+      },
+      {
+        "module": "training_results.py",
+        "line": 42,
+        "function": "read_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 9.350000000000001e-05,
+        "cumulative_seconds": 0.0048231
+      },
+      {
+        "module": "comfyui.py",
+        "line": 54,
+        "function": "parse_json",
+        "calls": 45,
+        "primitive_calls": 45,
+        "own_seconds": 4.32e-05,
+        "cumulative_seconds": 0.004497200000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 36,
+        "function": "<genexpr>",
+        "calls": 19196,
+        "primitive_calls": 19196,
+        "own_seconds": 0.0028761000000000004,
+        "cumulative_seconds": 0.0040539
+      },
+      {
+        "module": "catalog.py",
+        "line": 23,
+        "function": "object_fields",
+        "calls": 1317,
+        "primitive_calls": 1317,
+        "own_seconds": 0.0015830000000000002,
+        "cumulative_seconds": 0.0024122
+      },
+      {
+        "module": "training_data.py",
+        "line": 46,
+        "function": "check_seal",
+        "calls": 7,
+        "primitive_calls": 7,
+        "own_seconds": 4.13e-05,
+        "cumulative_seconds": 0.0021458000000000002
+      },
+      {
+        "module": "catalog.py",
+        "line": 64,
+        "function": "<genexpr>",
+        "calls": 9956,
+        "primitive_calls": 9956,
+        "own_seconds": 0.0012982,
+        "cumulative_seconds": 0.0017693000000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 18,
+        "function": "require",
+        "calls": 27055,
+        "primitive_calls": 27055,
+        "own_seconds": 0.0016932000000000002,
+        "cumulative_seconds": 0.0016932000000000002
+      },
+      {
+        "module": "training_data.py",
+        "line": 42,
+        "function": "seal",
+        "calls": 7,
+        "primitive_calls": 7,
+        "own_seconds": 1.69e-05,
+        "cumulative_seconds": 0.0015673000000000002
+      },
+      {
+        "module": "records.py",
+        "line": 15,
+        "function": "capture",
+        "calls": 23,
+        "primitive_calls": 23,
+        "own_seconds": 1.76e-05,
+        "cumulative_seconds": 0.0013662000000000001
+      },
+      {
+        "module": "comfyui.py",
+        "line": 34,
+        "function": "_unique_object",
+        "calls": 2821,
+        "primitive_calls": 2821,
+        "own_seconds": 0.001216,
+        "cumulative_seconds": 0.001216
+      },
+      {
+        "module": "config.py",
+        "line": 80,
+        "function": "load_config",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 2.7300000000000003e-05,
+        "cumulative_seconds": 0.0011055000000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 46,
+        "function": "digest",
+        "calls": 127,
+        "primitive_calls": 127,
+        "own_seconds": 0.0001641,
+        "cumulative_seconds": 0.0007564000000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 114,
+        "function": "<genexpr>",
+        "calls": 1130,
+        "primitive_calls": 1130,
+        "own_seconds": 0.00043840000000000003,
+        "cumulative_seconds": 0.0007285000000000001
+      },
+      {
+        "module": "training.py",
+        "line": 317,
+        "function": "run_folder",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 4.000000000000001e-06,
+        "cumulative_seconds": 0.0006146000000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 40,
+        "function": "identifier",
+        "calls": 56,
+        "primitive_calls": 56,
+        "own_seconds": 6.98e-05,
+        "cumulative_seconds": 0.0005838
+      },
+      {
+        "module": "cli.py",
+        "line": 36,
+        "function": "_connection_arguments",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 2e-05,
+        "cumulative_seconds": 0.0005077
+      },
+      {
+        "module": "training_results.py",
+        "line": 91,
+        "function": "<genexpr>",
+        "calls": 1120,
+        "primitive_calls": 1120,
+        "own_seconds": 0.0002969,
+        "cumulative_seconds": 0.000473
+      },
+      {
+        "module": "training_results.py",
+        "line": 105,
+        "function": "<genexpr>",
+        "calls": 3360,
+        "primitive_calls": 3360,
+        "own_seconds": 0.00042520000000000004,
+        "cumulative_seconds": 0.00042520000000000004
+      },
+      {
+        "module": "training_results.py",
+        "line": 114,
+        "function": "<genexpr>",
+        "calls": 3360,
+        "primitive_calls": 3360,
+        "own_seconds": 0.00041840000000000003,
+        "cumulative_seconds": 0.00041840000000000003
+      },
+      {
+        "module": "records.py",
+        "line": 19,
+        "function": "to_dict",
+        "calls": 26,
+        "primitive_calls": 26,
+        "own_seconds": 7.6e-06,
+        "cumulative_seconds": 0.0004151
+      },
+      {
+        "module": "catalog.py",
+        "line": 113,
+        "function": "<genexpr>",
+        "calls": 1130,
+        "primitive_calls": 1130,
+        "own_seconds": 0.0002918,
+        "cumulative_seconds": 0.0004067
+      },
+      {
+        "module": "training.py",
+        "line": 118,
+        "function": "validate_spec",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 4.32e-05,
+        "cumulative_seconds": 0.0003841
+      },
+      {
+        "module": "catalog.py",
+        "line": 112,
+        "function": "<genexpr>",
+        "calls": 1980,
+        "primitive_calls": 1980,
+        "own_seconds": 0.00034950000000000004,
+        "cumulative_seconds": 0.00034950000000000004
+      },
+      {
+        "module": "catalog.py",
+        "line": 108,
+        "function": "<genexpr>",
+        "calls": 2200,
+        "primitive_calls": 2200,
+        "own_seconds": 0.0003151,
+        "cumulative_seconds": 0.0003151
+      },
+      {
+        "module": "config.py",
+        "line": 48,
+        "function": "normalize_comfyui_root",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5.3e-06,
+        "cumulative_seconds": 0.0003144
+      },
+      {
+        "module": "catalog.py",
+        "line": 109,
+        "function": "<genexpr>",
+        "calls": 2200,
+        "primitive_calls": 2200,
+        "own_seconds": 0.0002708,
+        "cumulative_seconds": 0.0002708
+      },
+      {
+        "module": "quality.py",
+        "line": 119,
+        "function": "<genexpr>",
+        "calls": 17,
+        "primitive_calls": 17,
+        "own_seconds": 5.3e-06,
+        "cumulative_seconds": 0.0002517
+      },
+      {
+        "module": "evaluation.py",
+        "line": 35,
+        "function": "_assessment",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.000000000000001e-06,
+        "cumulative_seconds": 0.00021730000000000002
+      },
+      {
+        "module": "config.py",
+        "line": 41,
+        "function": "_resolve",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5.7000000000000005e-06,
+        "cumulative_seconds": 0.00017130000000000002
+      },
+      {
+        "module": "config.py",
+        "line": 64,
+        "function": "root",
+        "calls": 23,
+        "primitive_calls": 23,
+        "own_seconds": 9.5e-06,
+        "cumulative_seconds": 0.0001539
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 71,
+        "function": "rows",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.2000000000000003e-06,
+        "cumulative_seconds": 0.00012240000000000002
+      },
+      {
+        "module": "linting.py",
+        "line": 57,
+        "function": "origin",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 1.7500000000000002e-05,
+        "cumulative_seconds": 0.0001167
+      },
+      {
+        "module": "training_records.py",
+        "line": 26,
+        "function": "to_dict",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 1.2000000000000002e-06,
+        "cumulative_seconds": 9.640000000000001e-05
+      },
+      {
+        "module": "config.py",
+        "line": 17,
+        "function": "validate_url",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 1.59e-05,
+        "cumulative_seconds": 7.450000000000001e-05
+      },
+      {
+        "module": "quality.py",
+        "line": 95,
+        "function": "expected",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5.7000000000000005e-06,
+        "cumulative_seconds": 7.41e-05
+      },
+      {
+        "module": "catalog.py",
+        "line": 54,
+        "function": "integer",
+        "calls": 182,
+        "primitive_calls": 182,
+        "own_seconds": 6.120000000000001e-05,
+        "cumulative_seconds": 7.08e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 55,
+        "function": "conditions",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.9000000000000005e-06,
+        "cumulative_seconds": 6.43e-05
+      },
+      {
+        "module": "cli.py",
+        "line": 382,
+        "function": "_print_training_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.3e-06,
+        "cumulative_seconds": 6e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 56,
+        "function": "<genexpr>",
+        "calls": 17,
+        "primitive_calls": 17,
+        "own_seconds": 9e-06,
+        "cumulative_seconds": 5.94e-05
+      },
+      {
+        "module": "cli.py",
+        "line": 353,
+        "function": "_print_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.9e-06,
+        "cumulative_seconds": 5.67e-05
+      },
+      {
+        "module": "training_results.py",
+        "line": 120,
+        "function": "<genexpr>",
+        "calls": 561,
+        "primitive_calls": 561,
+        "own_seconds": 5.47e-05,
+        "cumulative_seconds": 5.47e-05
+      },
+      {
+        "module": "comfyui.py",
+        "line": 47,
+        "function": "_finite_float",
+        "calls": 26,
+        "primitive_calls": 26,
+        "own_seconds": 4.91e-05,
+        "cumulative_seconds": 5.3700000000000004e-05
+      },
+      {
+        "module": "linting.py",
+        "line": 32,
+        "function": "normalize",
+        "calls": 18,
+        "primitive_calls": 18,
+        "own_seconds": 2.2000000000000003e-05,
+        "cumulative_seconds": 4.92e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 23,
+        "function": "conditions",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 5.4e-06,
+        "cumulative_seconds": 3.8900000000000004e-05
+      },
+      {
+        "module": "config.py",
+        "line": 18,
+        "function": "<genexpr>",
+        "calls": 22,
+        "primitive_calls": 22,
+        "own_seconds": 1.2800000000000001e-05,
+        "cumulative_seconds": 3.7000000000000005e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 24,
+        "function": "<genexpr>",
+        "calls": 18,
+        "primitive_calls": 18,
+        "own_seconds": 1.65e-05,
+        "cumulative_seconds": 3.35e-05
+      },
+      {
+        "module": "linting.py",
+        "line": 79,
+        "function": "contains",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 4.6e-06,
+        "cumulative_seconds": 2.1300000000000003e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 19,
+        "function": "from_validated",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 8.3e-06,
+        "cumulative_seconds": 1.15e-05
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 46,
+        "function": "capture",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 6.4000000000000006e-06,
+        "cumulative_seconds": 1.13e-05
+      },
+      {
+        "module": "catalog.py",
+        "line": 28,
+        "function": "array",
+        "calls": 13,
+        "primitive_calls": 13,
+        "own_seconds": 7.6e-06,
+        "cumulative_seconds": 1.01e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 45,
+        "function": "to_dict",
+        "calls": 16,
+        "primitive_calls": 16,
+        "own_seconds": 4.1000000000000006e-06,
+        "cumulative_seconds": 4.1000000000000006e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 266,
+        "function": "<genexpr>",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 3.5000000000000004e-06,
+        "cumulative_seconds": 3.5000000000000004e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 236,
+        "function": "<genexpr>",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 3e-06,
+        "cumulative_seconds": 3e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 29,
+        "function": "boundary",
+        "calls": 22,
+        "primitive_calls": 22,
+        "own_seconds": 2.9e-06,
+        "cumulative_seconds": 2.9e-06
+      },
+      {
+        "module": "training_data.py",
+        "line": 162,
+        "function": "<lambda>",
+        "calls": 24,
+        "primitive_calls": 24,
+        "own_seconds": 2.8000000000000003e-06,
+        "cumulative_seconds": 2.8000000000000003e-06
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 65,
+        "function": "observations",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 2.4000000000000003e-06,
+        "cumulative_seconds": 2.5e-06
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 42,
+        "function": "__init__",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 2.0000000000000002e-07,
+        "cumulative_seconds": 2.0000000000000002e-07
+      }
+    ],
+    "file_digest": {
+      "calls": 167,
+      "bytes": 72963330,
+      "files": {
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\datasets\\877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751.json": {
+          "calls": 4,
+          "bytes": 22272
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\11737.jpg": {
+          "calls": 4,
+          "bytes": 232172
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11737.png": {
+          "calls": 4,
+          "bytes": 1021848
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11737.txt": {
+          "calls": 4,
+          "bytes": 416
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\11939.jpg": {
+          "calls": 4,
+          "bytes": 347048
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11939.png": {
+          "calls": 4,
+          "bytes": 1282800
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11939.txt": {
+          "calls": 4,
+          "bytes": 540
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\16590.jpg": {
+          "calls": 4,
+          "bytes": 202680
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16590.png": {
+          "calls": 4,
+          "bytes": 1001080
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16590.txt": {
+          "calls": 4,
+          "bytes": 528
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\16592.jpg": {
+          "calls": 4,
+          "bytes": 275412
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16592.png": {
+          "calls": 4,
+          "bytes": 1103028
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16592.txt": {
+          "calls": 4,
+          "bytes": 368
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\436305.jpg": {
+          "calls": 4,
+          "bytes": 372876
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436305.png": {
+          "calls": 4,
+          "bytes": 1231252
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436305.txt": {
+          "calls": 4,
+          "bytes": 536
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\436450.jpg": {
+          "calls": 4,
+          "bytes": 499252
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436450.png": {
+          "calls": 4,
+          "bytes": 1804508
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436450.txt": {
+          "calls": 4,
+          "bytes": 412
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\488147.jpg": {
+          "calls": 4,
+          "bytes": 1338328
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\488147.png": {
+          "calls": 4,
+          "bytes": 1597416
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\488147.txt": {
+          "calls": 4,
+          "bytes": 464
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\898372.jpg": {
+          "calls": 4,
+          "bytes": 522308
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\898372.png": {
+          "calls": 4,
+          "bytes": 1533572
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\898372.txt": {
+          "calls": 4,
+          "bytes": 376
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\pytorch_lora_weights.safetensors": {
+          "calls": 2,
+          "bytes": 46780848
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-11737-baseline.png": {
+          "calls": 2,
+          "bytes": 774560
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-11737-candidate.png": {
+          "calls": 2,
+          "bytes": 856226
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-436450-baseline.png": {
+          "calls": 2,
+          "bytes": 682850
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-436450-candidate.png": {
+          "calls": 2,
+          "bytes": 789700
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\curation.json": {
+          "calls": 2,
+          "bytes": 10554
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\policy-observation.json": {
+          "calls": 2,
+          "bytes": 1588
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\11737.json": {
+          "calls": 2,
+          "bytes": 5206
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\11939.json": {
+          "calls": 2,
+          "bytes": 5640
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\16590.json": {
+          "calls": 2,
+          "bytes": 4550
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\16592.json": {
+          "calls": 2,
+          "bytes": 4538
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\436305.json": {
+          "calls": 2,
+          "bytes": 5322
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\436450.json": {
+          "calls": 2,
+          "bytes": 4824
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\488147.json": {
+          "calls": 2,
+          "bytes": 4920
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\898372.json": {
+          "calls": 2,
+          "bytes": 4722
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\still-life.quality.json": {
+          "calls": 2,
+          "bytes": 2478
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-base_plain.png": {
+          "calls": 2,
+          "bytes": 438052
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-base_trigger.png": {
+          "calls": 2,
+          "bytes": 454376
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-adapter_plain.png": {
+          "calls": 2,
+          "bytes": 730650
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-adapter_trigger.png": {
+          "calls": 2,
+          "bytes": 766954
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-base_plain.png": {
+          "calls": 2,
+          "bytes": 693356
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-base_trigger.png": {
+          "calls": 2,
+          "bytes": 575844
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-adapter_plain.png": {
+          "calls": 2,
+          "bytes": 662242
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-adapter_trigger.png": {
+          "calls": 2,
+          "bytes": 665044
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-base_plain.png": {
+          "calls": 2,
+          "bytes": 514992
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-base_trigger.png": {
+          "calls": 2,
+          "bytes": 477444
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-adapter_plain.png": {
+          "calls": 2,
+          "bytes": 466684
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-adapter_trigger.png": {
+          "calls": 2,
+          "bytes": 442746
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-base_plain.png": {
+          "calls": 2,
+          "bytes": 516864
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-base_trigger.png": {
+          "calls": 2,
+          "bytes": 485546
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-adapter_plain.png": {
+          "calls": 2,
+          "bytes": 359830
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-adapter_trigger.png": {
+          "calls": 2,
+          "bytes": 367338
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json": {
+          "calls": 1,
+          "bytes": 4185
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\run.json": {
+          "calls": 1,
+          "bytes": 1382
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\result.json": {
+          "calls": 1,
+          "bytes": 9783
+        }
+      }
+    },
+    "limits": "Warm local files; wall samples exclude profiling. file_digest counts are only those hash reads, not all I/O. Profiling adds overhead. No model render."
+  },
+  "installed_python": "3.11.14",
+  "installed_before": {
+    "arguments": [
+      "evaluation",
+      "packet",
+      "workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+      "--config",
+      "workspace\\itov.toml",
+      "--json"
+    ],
+    "repeats": 3,
+    "wall_ns": [
+      1636305700,
+      1536304000,
+      2559575900
+    ],
+    "median_wall_ns": 1636305700,
+    "output_sha256": "cc42dc8a66b301a81cbeeec465e4ad421cee0924482d0f9cc757f6b351b9fd30",
+    "profile_functions": [
+      {
+        "module": "profile_training_reads.py",
+        "line": 23,
+        "function": "invoke",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 8.840000000000001e-05,
+        "cumulative_seconds": 4.190157500000001
+      },
+      {
+        "module": "cli.py",
+        "line": 442,
+        "function": "main",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 9.850000000000001e-05,
+        "cumulative_seconds": 4.1893073
+      },
+      {
+        "module": "quality.py",
+        "line": 125,
+        "function": "packet",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0018815000000000001,
+        "cumulative_seconds": 4.1342062
+      },
+      {
+        "module": "training_results.py",
+        "line": 56,
+        "function": "inspect_weights",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.054129800000000006,
+        "cumulative_seconds": 3.3496401000000002
+      },
+      {
+        "module": "evaluation.py",
+        "line": 32,
+        "function": "assess",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 7.03e-05,
+        "cumulative_seconds": 2.7529487
+      },
+      {
+        "module": "training_results.py",
+        "line": 125,
+        "function": "validate",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 0.0008446,
+        "cumulative_seconds": 2.7090635
+      },
+      {
+        "module": "evaluation.py",
+        "line": 77,
+        "function": "candidate",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0040066,
+        "cumulative_seconds": 2.5282987
+      },
+      {
+        "module": "training_results.py",
+        "line": 118,
+        "function": "<genexpr>",
+        "calls": 17421600,
+        "primitive_calls": 17421600,
+        "own_seconds": 1.9682451,
+        "cumulative_seconds": 1.9682451
+      },
+      {
+        "module": "evaluation.py",
+        "line": 123,
+        "function": "comfy_export",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.009533,
+        "cumulative_seconds": 1.0802052
+      },
+      {
+        "module": "quality.py",
+        "line": 80,
+        "function": "qualification",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 0.0001677,
+        "cumulative_seconds": 0.47682460000000004
+      },
+      {
+        "module": "quality.py",
+        "line": 109,
+        "function": "validate_matrix",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.0004516,
+        "cumulative_seconds": 0.39255320000000005
+      },
+      {
+        "module": "catalog.py",
+        "line": 85,
+        "function": "read_document",
+        "calls": 61,
+        "primitive_calls": 61,
+        "own_seconds": 0.0005578,
+        "cumulative_seconds": 0.3440878
+      },
+      {
+        "module": "curation.py",
+        "line": 14,
+        "function": "validate",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 0.0055705,
+        "cumulative_seconds": 0.3379633
+      },
+      {
+        "module": "training_data.py",
+        "line": 27,
+        "function": "file_ref",
+        "calls": 353,
+        "primitive_calls": 353,
+        "own_seconds": 0.0042137,
+        "cumulative_seconds": 0.30303640000000004
+      },
+      {
+        "module": "training_data.py",
+        "line": 180,
+        "function": "load_dataset",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 0.0021999000000000003,
+        "cumulative_seconds": 0.2629289
+      },
+      {
+        "module": "training_data.py",
+        "line": 74,
+        "function": "validate_value",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 0.0027960000000000003,
+        "cumulative_seconds": 0.19643390000000002
+      },
+      {
+        "module": "qualification.py",
+        "line": 97,
+        "function": "safe_path",
+        "calls": 359,
+        "primitive_calls": 359,
+        "own_seconds": 0.001994,
+        "cumulative_seconds": 0.12482670000000001
+      },
+      {
+        "module": "profile_training_reads.py",
+        "line": 37,
+        "function": "observed",
+        "calls": 353,
+        "primitive_calls": 353,
+        "own_seconds": 0.0025743000000000003,
+        "cumulative_seconds": 0.11632410000000001
+      },
+      {
+        "module": "cli.py",
+        "line": 43,
+        "function": "parser",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.00029570000000000003,
+        "cumulative_seconds": 0.0528932
+      },
+      {
+        "module": "training.py",
+        "line": 275,
+        "function": "load_plan",
+        "calls": 6,
+        "primitive_calls": 6,
+        "own_seconds": 0.0007689000000000001,
+        "cumulative_seconds": 0.039811200000000005
+      },
+      {
+        "module": "catalog.py",
+        "line": 81,
+        "function": "sha256",
+        "calls": 44,
+        "primitive_calls": 44,
+        "own_seconds": 8.180000000000001e-05,
+        "cumulative_seconds": 0.029926800000000003
+      },
+      {
+        "module": "catalog.py",
+        "line": 100,
+        "function": "relative_path",
+        "calls": 724,
+        "primitive_calls": 724,
+        "own_seconds": 0.005208900000000001,
+        "cumulative_seconds": 0.0288767
+      },
+      {
+        "module": "catalog.py",
+        "line": 59,
+        "function": "canonical_bytes",
+        "calls": 42,
+        "primitive_calls": 42,
+        "own_seconds": 0.0001807,
+        "cumulative_seconds": 0.028457100000000003
+      },
+      {
+        "module": "training.py",
+        "line": 316,
+        "function": "read_record",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 0.00029600000000000004,
+        "cumulative_seconds": 0.0281391
+      },
+      {
+        "module": "quality.py",
+        "line": 25,
+        "function": "suite",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 0.0007477,
+        "cumulative_seconds": 0.0261842
+      },
+      {
+        "module": "catalog.py",
+        "line": 33,
+        "function": "text",
+        "calls": 1228,
+        "primitive_calls": 1228,
+        "own_seconds": 0.0026166,
+        "cumulative_seconds": 0.0232237
+      },
+      {
+        "module": "catalog.py",
+        "line": 62,
+        "function": "check",
+        "calls": 16216,
+        "primitive_calls": 42,
+        "own_seconds": 0.014085100000000001,
+        "cumulative_seconds": 0.022620300000000003
+      },
+      {
+        "module": "comfyui.py",
+        "line": 54,
+        "function": "parse_json",
+        "calls": 65,
+        "primitive_calls": 65,
+        "own_seconds": 0.00021040000000000002,
+        "cumulative_seconds": 0.016971200000000002
+      },
+      {
+        "module": "catalog.py",
+        "line": 36,
+        "function": "<genexpr>",
+        "calls": 66338,
+        "primitive_calls": 66338,
+        "own_seconds": 0.011060200000000001,
+        "cumulative_seconds": 0.014664600000000002
+      },
+      {
+        "module": "training_results.py",
+        "line": 38,
+        "function": "read_result",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 0.00037380000000000003,
+        "cumulative_seconds": 0.014635100000000002
+      },
+      {
+        "module": "catalog.py",
+        "line": 23,
+        "function": "object_fields",
+        "calls": 4003,
+        "primitive_calls": 4003,
+        "own_seconds": 0.0063838,
+        "cumulative_seconds": 0.0091448
+      },
+      {
+        "module": "training_data.py",
+        "line": 45,
+        "function": "check_seal",
+        "calls": 21,
+        "primitive_calls": 21,
+        "own_seconds": 0.00019490000000000002,
+        "cumulative_seconds": 0.0077904
+      },
+      {
+        "module": "comfyui.py",
+        "line": 34,
+        "function": "_unique_object",
+        "calls": 5652,
+        "primitive_calls": 5652,
+        "own_seconds": 0.007600900000000001,
+        "cumulative_seconds": 0.007600900000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 18,
+        "function": "require",
+        "calls": 60710,
+        "primitive_calls": 60710,
+        "own_seconds": 0.005674500000000001,
+        "cumulative_seconds": 0.005674500000000001
+      },
+      {
+        "module": "training_data.py",
+        "line": 41,
+        "function": "seal",
+        "calls": 18,
+        "primitive_calls": 18,
+        "own_seconds": 6.75e-05,
+        "cumulative_seconds": 0.0054758
+      },
+      {
+        "module": "catalog.py",
+        "line": 114,
+        "function": "<genexpr>",
+        "calls": 3794,
+        "primitive_calls": 3794,
+        "own_seconds": 0.0025941000000000002,
+        "cumulative_seconds": 0.0033421
+      },
+      {
+        "module": "catalog.py",
+        "line": 64,
+        "function": "<genexpr>",
+        "calls": 13298,
+        "primitive_calls": 13298,
+        "own_seconds": 0.0026768,
+        "cumulative_seconds": 0.0033298000000000004
+      },
+      {
+        "module": "quality.py",
+        "line": 33,
+        "function": "<setcomp>",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 0.0001225,
+        "cumulative_seconds": 0.0032817000000000002
+      },
+      {
+        "module": "training.py",
+        "line": 312,
+        "function": "run_folder",
+        "calls": 6,
+        "primitive_calls": 6,
+        "own_seconds": 2e-05,
+        "cumulative_seconds": 0.0028682
+      },
+      {
+        "module": "training_results.py",
+        "line": 72,
+        "function": "<genexpr>",
+        "calls": 6720,
+        "primitive_calls": 6720,
+        "own_seconds": 0.0018083,
+        "cumulative_seconds": 0.0025008
+      },
+      {
+        "module": "catalog.py",
+        "line": 46,
+        "function": "digest",
+        "calls": 414,
+        "primitive_calls": 414,
+        "own_seconds": 0.0006276000000000001,
+        "cumulative_seconds": 0.0022223
+      },
+      {
+        "module": "catalog.py",
+        "line": 40,
+        "function": "identifier",
+        "calls": 188,
+        "primitive_calls": 188,
+        "own_seconds": 0.000275,
+        "cumulative_seconds": 0.0020599
+      },
+      {
+        "module": "training_results.py",
+        "line": 86,
+        "function": "<genexpr>",
+        "calls": 10080,
+        "primitive_calls": 10080,
+        "own_seconds": 0.0019021,
+        "cumulative_seconds": 0.0019021
+      },
+      {
+        "module": "catalog.py",
+        "line": 113,
+        "function": "<genexpr>",
+        "calls": 3794,
+        "primitive_calls": 3794,
+        "own_seconds": 0.0011877,
+        "cumulative_seconds": 0.0017271
+      },
+      {
+        "module": "training_results.py",
+        "line": 95,
+        "function": "<genexpr>",
+        "calls": 10080,
+        "primitive_calls": 10080,
+        "own_seconds": 0.0016868,
+        "cumulative_seconds": 0.0016868
+      },
+      {
+        "module": "catalog.py",
+        "line": 108,
+        "function": "<genexpr>",
+        "calls": 7240,
+        "primitive_calls": 7240,
+        "own_seconds": 0.0012212,
+        "cumulative_seconds": 0.0012212
+      },
+      {
+        "module": "training.py",
+        "line": 113,
+        "function": "validate_spec",
+        "calls": 6,
+        "primitive_calls": 6,
+        "own_seconds": 0.0001149,
+        "cumulative_seconds": 0.001088
+      },
+      {
+        "module": "catalog.py",
+        "line": 109,
+        "function": "<genexpr>",
+        "calls": 7240,
+        "primitive_calls": 7240,
+        "own_seconds": 0.0010461000000000001,
+        "cumulative_seconds": 0.0010461000000000001
+      },
+      {
+        "module": "config.py",
+        "line": 80,
+        "function": "load_config",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 2.7000000000000002e-05,
+        "cumulative_seconds": 0.0009554
+      },
+      {
+        "module": "catalog.py",
+        "line": 112,
+        "function": "<genexpr>",
+        "calls": 6516,
+        "primitive_calls": 6516,
+        "own_seconds": 0.0008035000000000001,
+        "cumulative_seconds": 0.0008035000000000001
+      },
+      {
+        "module": "cli.py",
+        "line": 382,
+        "function": "_print_training_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 6.1e-06,
+        "cumulative_seconds": 0.0008003000000000001
+      },
+      {
+        "module": "cli.py",
+        "line": 353,
+        "function": "_print_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.4e-06,
+        "cumulative_seconds": 0.0007942
+      },
+      {
+        "module": "cli.py",
+        "line": 36,
+        "function": "_connection_arguments",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 1.7e-05,
+        "cumulative_seconds": 0.0005945000000000001
+      },
+      {
+        "module": "quality.py",
+        "line": 136,
+        "function": "<listcomp>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.16e-05,
+        "cumulative_seconds": 0.0005139000000000001
+      },
+      {
+        "module": "linting.py",
+        "line": 57,
+        "function": "origin",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 3.8900000000000004e-05,
+        "cumulative_seconds": 0.00032690000000000003
+      },
+      {
+        "module": "training_results.py",
+        "line": 66,
+        "function": "<dictcomp>",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.0003064,
+        "cumulative_seconds": 0.0003064
+      },
+      {
+        "module": "training_results.py",
+        "line": 102,
+        "function": "<genexpr>",
+        "calls": 1683,
+        "primitive_calls": 1683,
+        "own_seconds": 0.00022250000000000001,
+        "cumulative_seconds": 0.00022250000000000001
+      },
+      {
+        "module": "linting.py",
+        "line": 32,
+        "function": "normalize",
+        "calls": 72,
+        "primitive_calls": 72,
+        "own_seconds": 9.98e-05,
+        "cumulative_seconds": 0.0002007
+      },
+      {
+        "module": "config.py",
+        "line": 41,
+        "function": "_resolve",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 7.5e-06,
+        "cumulative_seconds": 0.0001818
+      },
+      {
+        "module": "catalog.py",
+        "line": 54,
+        "function": "integer",
+        "calls": 400,
+        "primitive_calls": 400,
+        "own_seconds": 0.0001385,
+        "cumulative_seconds": 0.0001641
+      },
+      {
+        "module": "config.py",
+        "line": 64,
+        "function": "root",
+        "calls": 34,
+        "primitive_calls": 34,
+        "own_seconds": 3.76e-05,
+        "cumulative_seconds": 0.0001522
+      },
+      {
+        "module": "config.py",
+        "line": 48,
+        "function": "normalize_comfyui_root",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.3e-06,
+        "cumulative_seconds": 0.0001454
+      },
+      {
+        "module": "comfyui.py",
+        "line": 47,
+        "function": "_finite_float",
+        "calls": 104,
+        "primitive_calls": 104,
+        "own_seconds": 0.000116,
+        "cumulative_seconds": 0.00013690000000000002
+      },
+      {
+        "module": "linting.py",
+        "line": 79,
+        "function": "contains",
+        "calls": 16,
+        "primitive_calls": 16,
+        "own_seconds": 2.02e-05,
+        "cumulative_seconds": 9.300000000000001e-05
+      },
+      {
+        "module": "quality.py",
+        "line": 117,
+        "function": "<dictcomp>",
+        "calls": 48,
+        "primitive_calls": 48,
+        "own_seconds": 5.9900000000000006e-05,
+        "cumulative_seconds": 5.9900000000000006e-05
+      },
+      {
+        "module": "training_data.py",
+        "line": 49,
+        "function": "<dictcomp>",
+        "calls": 21,
+        "primitive_calls": 21,
+        "own_seconds": 5.2400000000000007e-05,
+        "cumulative_seconds": 5.2400000000000007e-05
+      },
+      {
+        "module": "catalog.py",
+        "line": 28,
+        "function": "array",
+        "calls": 39,
+        "primitive_calls": 39,
+        "own_seconds": 3.26e-05,
+        "cumulative_seconds": 4.0300000000000004e-05
+      },
+      {
+        "module": "config.py",
+        "line": 17,
+        "function": "validate_url",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 9.9e-06,
+        "cumulative_seconds": 3.8e-05
+      },
+      {
+        "module": "quality.py",
+        "line": 93,
+        "function": "expected",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 6.300000000000001e-06,
+        "cumulative_seconds": 3.7000000000000005e-05
+      },
+      {
+        "module": "quality.py",
+        "line": 94,
+        "function": "<listcomp>",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 2.43e-05,
+        "cumulative_seconds": 3.07e-05
+      },
+      {
+        "module": "training_data.py",
+        "line": 161,
+        "function": "<lambda>",
+        "calls": 80,
+        "primitive_calls": 80,
+        "own_seconds": 1.3100000000000002e-05,
+        "cumulative_seconds": 1.3100000000000002e-05
+      },
+      {
+        "module": "config.py",
+        "line": 18,
+        "function": "<genexpr>",
+        "calls": 22,
+        "primitive_calls": 22,
+        "own_seconds": 7.4e-06,
+        "cumulative_seconds": 9.800000000000001e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 208,
+        "function": "<listcomp>",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 5.600000000000001e-06,
+        "cumulative_seconds": 9e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 233,
+        "function": "<genexpr>",
+        "calls": 8,
+        "primitive_calls": 8,
+        "own_seconds": 7.2000000000000005e-06,
+        "cumulative_seconds": 7.2000000000000005e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 203,
+        "function": "<genexpr>",
+        "calls": 6,
+        "primitive_calls": 6,
+        "own_seconds": 5.7000000000000005e-06,
+        "cumulative_seconds": 5.7000000000000005e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 25,
+        "function": "boundary",
+        "calls": 40,
+        "primitive_calls": 40,
+        "own_seconds": 5.500000000000001e-06,
+        "cumulative_seconds": 5.500000000000001e-06
+      },
+      {
+        "module": "curation.py",
+        "line": 38,
+        "function": "<dictcomp>",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 5.4e-06,
+        "cumulative_seconds": 5.4e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 222,
+        "function": "<listcomp>",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 1.5e-06,
+        "cumulative_seconds": 2.8000000000000003e-06
+      }
+    ],
+    "file_digest": {
+      "calls": 353,
+      "bytes": 122288965,
+      "files": {
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\datasets\\877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751.json": {
+          "calls": 10,
+          "bytes": 55680
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\11737.jpg": {
+          "calls": 10,
+          "bytes": 580430
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11737.png": {
+          "calls": 10,
+          "bytes": 2554620
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11737.txt": {
+          "calls": 10,
+          "bytes": 1040
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\11939.jpg": {
+          "calls": 10,
+          "bytes": 867620
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11939.png": {
+          "calls": 10,
+          "bytes": 3207000
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11939.txt": {
+          "calls": 10,
+          "bytes": 1350
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\16590.jpg": {
+          "calls": 10,
+          "bytes": 506700
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16590.png": {
+          "calls": 10,
+          "bytes": 2502700
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16590.txt": {
+          "calls": 10,
+          "bytes": 1320
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\16592.jpg": {
+          "calls": 10,
+          "bytes": 688530
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16592.png": {
+          "calls": 10,
+          "bytes": 2757570
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16592.txt": {
+          "calls": 10,
+          "bytes": 920
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\436305.jpg": {
+          "calls": 10,
+          "bytes": 932190
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436305.png": {
+          "calls": 10,
+          "bytes": 3078130
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436305.txt": {
+          "calls": 10,
+          "bytes": 1340
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\436450.jpg": {
+          "calls": 10,
+          "bytes": 1248130
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436450.png": {
+          "calls": 10,
+          "bytes": 4511270
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436450.txt": {
+          "calls": 10,
+          "bytes": 1030
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\488147.jpg": {
+          "calls": 10,
+          "bytes": 3345820
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\488147.png": {
+          "calls": 10,
+          "bytes": 3993540
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\488147.txt": {
+          "calls": 10,
+          "bytes": 1160
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\898372.jpg": {
+          "calls": 10,
+          "bytes": 1305770
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\898372.png": {
+          "calls": 10,
+          "bytes": 3833930
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\898372.txt": {
+          "calls": 10,
+          "bytes": 940
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\pytorch_lora_weights.safetensors": {
+          "calls": 3,
+          "bytes": 70171272
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-11737-baseline.png": {
+          "calls": 2,
+          "bytes": 774560
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-11737-candidate.png": {
+          "calls": 2,
+          "bytes": 856226
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-436450-baseline.png": {
+          "calls": 2,
+          "bytes": 682850
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-436450-candidate.png": {
+          "calls": 2,
+          "bytes": 789700
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\curation.json": {
+          "calls": 4,
+          "bytes": 21108
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\policy-observation.json": {
+          "calls": 4,
+          "bytes": 3176
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\11737.json": {
+          "calls": 4,
+          "bytes": 10412
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\11939.json": {
+          "calls": 4,
+          "bytes": 11280
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\16590.json": {
+          "calls": 4,
+          "bytes": 9100
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\16592.json": {
+          "calls": 4,
+          "bytes": 9076
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\436305.json": {
+          "calls": 4,
+          "bytes": 10644
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\436450.json": {
+          "calls": 4,
+          "bytes": 9648
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\488147.json": {
+          "calls": 4,
+          "bytes": 9840
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\898372.json": {
+          "calls": 4,
+          "bytes": 9444
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\still-life.quality.json": {
+          "calls": 4,
+          "bytes": 4956
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-base_plain.png": {
+          "calls": 3,
+          "bytes": 657078
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-base_trigger.png": {
+          "calls": 3,
+          "bytes": 681564
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-adapter_plain.png": {
+          "calls": 3,
+          "bytes": 1095975
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-adapter_trigger.png": {
+          "calls": 3,
+          "bytes": 1150431
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-base_plain.png": {
+          "calls": 3,
+          "bytes": 1040034
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-base_trigger.png": {
+          "calls": 3,
+          "bytes": 863766
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-adapter_plain.png": {
+          "calls": 3,
+          "bytes": 993363
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-adapter_trigger.png": {
+          "calls": 3,
+          "bytes": 997566
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-base_plain.png": {
+          "calls": 3,
+          "bytes": 772488
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-base_trigger.png": {
+          "calls": 3,
+          "bytes": 716166
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-adapter_plain.png": {
+          "calls": 3,
+          "bytes": 700026
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-adapter_trigger.png": {
+          "calls": 3,
+          "bytes": 664119
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-base_plain.png": {
+          "calls": 3,
+          "bytes": 775296
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-base_trigger.png": {
+          "calls": 3,
+          "bytes": 728319
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-adapter_plain.png": {
+          "calls": 3,
+          "bytes": 539745
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-adapter_trigger.png": {
+          "calls": 3,
+          "bytes": 551007
+        }
+      }
+    },
+    "limits": "Warm local files; wall samples exclude profiling. file_digest counts are only those hash reads, not all I/O. Profiling adds overhead. No model render."
+  },
+  "installed_after": {
+    "arguments": [
+      "evaluation",
+      "packet",
+      "workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+      "--config",
+      "workspace\\itov.toml",
+      "--json"
+    ],
+    "repeats": 3,
+    "wall_ns": [
+      690191700,
+      595449000,
+      586134800
+    ],
+    "median_wall_ns": 595449000,
+    "output_sha256": "cc42dc8a66b301a81cbeeec465e4ad421cee0924482d0f9cc757f6b351b9fd30",
+    "profile_functions": [
+      {
+        "module": "profile_training_reads.py",
+        "line": 23,
+        "function": "invoke",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 7.99e-05,
+        "cumulative_seconds": 1.4638602
+      },
+      {
+        "module": "cli.py",
+        "line": 442,
+        "function": "main",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.003461,
+        "cumulative_seconds": 1.4633772
+      },
+      {
+        "module": "quality.py",
+        "line": 123,
+        "function": "packet",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5e-05,
+        "cumulative_seconds": 1.4041269
+      },
+      {
+        "module": "assessment_context.py",
+        "line": 22,
+        "function": "assessment_context",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 4.2000000000000004e-05,
+        "cumulative_seconds": 1.3595752
+      },
+      {
+        "module": "training_results.py",
+        "line": 146,
+        "function": "validate_record",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 2.6900000000000003e-05,
+        "cumulative_seconds": 1.2870159
+      },
+      {
+        "module": "training_results.py",
+        "line": 151,
+        "function": "_validate",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.00021290000000000002,
+        "cumulative_seconds": 1.2869890000000002
+      },
+      {
+        "module": "training_results.py",
+        "line": 67,
+        "function": "weight_snapshot",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0004892000000000001,
+        "cumulative_seconds": 1.0751295
+      },
+      {
+        "module": "training_results.py",
+        "line": 80,
+        "function": "_inspect_weights",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0165396,
+        "cumulative_seconds": 1.0561636
+      },
+      {
+        "module": "training_results.py",
+        "line": 135,
+        "function": "<genexpr>",
+        "calls": 5807200,
+        "primitive_calls": 5807200,
+        "own_seconds": 0.6333540000000001,
+        "cumulative_seconds": 0.6333540000000001
+      },
+      {
+        "module": "quality.py",
+        "line": 103,
+        "function": "matrix_evidence",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.00017160000000000002,
+        "cumulative_seconds": 0.15083570000000002
+      },
+      {
+        "module": "quality.py",
+        "line": 82,
+        "function": "qualification",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 6.29e-05,
+        "cumulative_seconds": 0.1312529
+      },
+      {
+        "module": "training_data.py",
+        "line": 27,
+        "function": "file_ref",
+        "calls": 107,
+        "primitive_calls": 107,
+        "own_seconds": 0.00134,
+        "cumulative_seconds": 0.12791460000000002
+      },
+      {
+        "module": "training_data.py",
+        "line": 181,
+        "function": "load_dataset",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.0004536,
+        "cumulative_seconds": 0.09791680000000001
+      },
+      {
+        "module": "curation.py",
+        "line": 15,
+        "function": "validate",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0013285,
+        "cumulative_seconds": 0.0887668
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 80,
+        "function": "read_document",
+        "calls": 17,
+        "primitive_calls": 17,
+        "own_seconds": 0.0001094,
+        "cumulative_seconds": 0.08374150000000001
+      },
+      {
+        "module": "training_data.py",
+        "line": 75,
+        "function": "validate_value",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 0.000911,
+        "cumulative_seconds": 0.0813413
+      },
+      {
+        "module": "catalog.py",
+        "line": 85,
+        "function": "read_document",
+        "calls": 17,
+        "primitive_calls": 17,
+        "own_seconds": 0.00015560000000000001,
+        "cumulative_seconds": 0.07741100000000001
+      },
+      {
+        "module": "profile_training_reads.py",
+        "line": 37,
+        "function": "observed",
+        "calls": 167,
+        "primitive_calls": 167,
+        "own_seconds": 0.0012322000000000001,
+        "cumulative_seconds": 0.0617593
+      },
+      {
+        "module": "cli.py",
+        "line": 43,
+        "function": "parser",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0002808,
+        "cumulative_seconds": 0.0533278
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 69,
+        "function": "verify",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0001742,
+        "cumulative_seconds": 0.051621
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 21,
+        "function": "verify",
+        "calls": 60,
+        "primitive_calls": 60,
+        "own_seconds": 0.0006142000000000001,
+        "cumulative_seconds": 0.051441
+      },
+      {
+        "module": "evaluation.py",
+        "line": 83,
+        "function": "_candidate",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0009586000000000001,
+        "cumulative_seconds": 0.0427791
+      },
+      {
+        "module": "evaluation.py",
+        "line": 127,
+        "function": "_export",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0060244,
+        "cumulative_seconds": 0.041646100000000005
+      },
+      {
+        "module": "qualification.py",
+        "line": 97,
+        "function": "safe_path",
+        "calls": 109,
+        "primitive_calls": 109,
+        "own_seconds": 0.0006407,
+        "cumulative_seconds": 0.0397819
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 74,
+        "function": "observe",
+        "calls": 125,
+        "primitive_calls": 125,
+        "own_seconds": 0.00023060000000000002,
+        "cumulative_seconds": 0.0389147
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 56,
+        "function": "add",
+        "calls": 125,
+        "primitive_calls": 125,
+        "own_seconds": 0.0006705000000000001,
+        "cumulative_seconds": 0.038659700000000005
+      },
+      {
+        "module": "catalog.py",
+        "line": 81,
+        "function": "sha256",
+        "calls": 19,
+        "primitive_calls": 19,
+        "own_seconds": 4.1200000000000005e-05,
+        "cumulative_seconds": 0.0297397
+      },
+      {
+        "module": "catalog.py",
+        "line": 59,
+        "function": "canonical_bytes",
+        "calls": 40,
+        "primitive_calls": 40,
+        "own_seconds": 0.00011140000000000001,
+        "cumulative_seconds": 0.020322800000000002
+      },
+      {
+        "module": "catalog.py",
+        "line": 62,
+        "function": "check",
+        "calls": 13203,
+        "primitive_calls": 40,
+        "own_seconds": 0.010057,
+        "cumulative_seconds": 0.0159053
+      },
+      {
+        "module": "training.py",
+        "line": 280,
+        "function": "load_plan",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 0.00024890000000000003,
+        "cumulative_seconds": 0.0132729
+      },
+      {
+        "module": "training.py",
+        "line": 321,
+        "function": "read_record",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0001451,
+        "cumulative_seconds": 0.0131283
+      },
+      {
+        "module": "catalog.py",
+        "line": 100,
+        "function": "relative_path",
+        "calls": 220,
+        "primitive_calls": 220,
+        "own_seconds": 0.0015500000000000002,
+        "cumulative_seconds": 0.0086247
+      },
+      {
+        "module": "training_results.py",
+        "line": 42,
+        "function": "read_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0001168,
+        "cumulative_seconds": 0.006965600000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 33,
+        "function": "text",
+        "calls": 362,
+        "primitive_calls": 362,
+        "own_seconds": 0.0007776,
+        "cumulative_seconds": 0.0068460000000000005
+      },
+      {
+        "module": "comfyui.py",
+        "line": 54,
+        "function": "parse_json",
+        "calls": 45,
+        "primitive_calls": 45,
+        "own_seconds": 8.070000000000001e-05,
+        "cumulative_seconds": 0.0060769000000000005
+      },
+      {
+        "module": "quality.py",
+        "line": 27,
+        "function": "suite",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 0.0001875,
+        "cumulative_seconds": 0.0054054
+      },
+      {
+        "module": "catalog.py",
+        "line": 36,
+        "function": "<genexpr>",
+        "calls": 19196,
+        "primitive_calls": 19196,
+        "own_seconds": 0.0032812,
+        "cumulative_seconds": 0.0043185
+      },
+      {
+        "module": "catalog.py",
+        "line": 23,
+        "function": "object_fields",
+        "calls": 1317,
+        "primitive_calls": 1317,
+        "own_seconds": 0.0020439,
+        "cumulative_seconds": 0.0029138000000000002
+      },
+      {
+        "module": "comfyui.py",
+        "line": 34,
+        "function": "_unique_object",
+        "calls": 2821,
+        "primitive_calls": 2821,
+        "own_seconds": 0.0024326,
+        "cumulative_seconds": 0.0024326
+      },
+      {
+        "module": "training_data.py",
+        "line": 46,
+        "function": "check_seal",
+        "calls": 7,
+        "primitive_calls": 7,
+        "own_seconds": 6.0200000000000006e-05,
+        "cumulative_seconds": 0.0023815
+      },
+      {
+        "module": "catalog.py",
+        "line": 18,
+        "function": "require",
+        "calls": 27055,
+        "primitive_calls": 27055,
+        "own_seconds": 0.0022531,
+        "cumulative_seconds": 0.0022531
+      },
+      {
+        "module": "catalog.py",
+        "line": 64,
+        "function": "<genexpr>",
+        "calls": 9956,
+        "primitive_calls": 9956,
+        "own_seconds": 0.0017772,
+        "cumulative_seconds": 0.00223
+      },
+      {
+        "module": "training_data.py",
+        "line": 42,
+        "function": "seal",
+        "calls": 7,
+        "primitive_calls": 7,
+        "own_seconds": 2.32e-05,
+        "cumulative_seconds": 0.0021175
+      },
+      {
+        "module": "records.py",
+        "line": 15,
+        "function": "capture",
+        "calls": 23,
+        "primitive_calls": 23,
+        "own_seconds": 2.2800000000000002e-05,
+        "cumulative_seconds": 0.002
+      },
+      {
+        "module": "config.py",
+        "line": 80,
+        "function": "load_config",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.63e-05,
+        "cumulative_seconds": 0.0011580000000000002
+      },
+      {
+        "module": "cli.py",
+        "line": 382,
+        "function": "_print_training_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 8.6e-06,
+        "cumulative_seconds": 0.0009706000000000001
+      },
+      {
+        "module": "cli.py",
+        "line": 353,
+        "function": "_print_result",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.5e-06,
+        "cumulative_seconds": 0.0009620000000000001
+      },
+      {
+        "module": "training.py",
+        "line": 317,
+        "function": "run_folder",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 8.900000000000001e-06,
+        "cumulative_seconds": 0.0008356
+      },
+      {
+        "module": "catalog.py",
+        "line": 114,
+        "function": "<genexpr>",
+        "calls": 1130,
+        "primitive_calls": 1130,
+        "own_seconds": 0.0005054,
+        "cumulative_seconds": 0.0007750000000000001
+      },
+      {
+        "module": "training_results.py",
+        "line": 91,
+        "function": "<genexpr>",
+        "calls": 2240,
+        "primitive_calls": 2240,
+        "own_seconds": 0.0005211,
+        "cumulative_seconds": 0.0007384000000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 46,
+        "function": "digest",
+        "calls": 127,
+        "primitive_calls": 127,
+        "own_seconds": 0.00019470000000000002,
+        "cumulative_seconds": 0.0006853
+      },
+      {
+        "module": "cli.py",
+        "line": 36,
+        "function": "_connection_arguments",
+        "calls": 10,
+        "primitive_calls": 10,
+        "own_seconds": 1.93e-05,
+        "cumulative_seconds": 0.0006687
+      },
+      {
+        "module": "quality.py",
+        "line": 35,
+        "function": "<setcomp>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 2.8700000000000003e-05,
+        "cumulative_seconds": 0.000657
+      },
+      {
+        "module": "records.py",
+        "line": 19,
+        "function": "to_dict",
+        "calls": 26,
+        "primitive_calls": 26,
+        "own_seconds": 1.08e-05,
+        "cumulative_seconds": 0.0006465
+      },
+      {
+        "module": "catalog.py",
+        "line": 40,
+        "function": "identifier",
+        "calls": 56,
+        "primitive_calls": 56,
+        "own_seconds": 7.25e-05,
+        "cumulative_seconds": 0.000634
+      },
+      {
+        "module": "training_results.py",
+        "line": 105,
+        "function": "<genexpr>",
+        "calls": 3360,
+        "primitive_calls": 3360,
+        "own_seconds": 0.0005543000000000001,
+        "cumulative_seconds": 0.0005543000000000001
+      },
+      {
+        "module": "quality.py",
+        "line": 135,
+        "function": "<listcomp>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.5600000000000004e-05,
+        "cumulative_seconds": 0.0005469
+      },
+      {
+        "module": "catalog.py",
+        "line": 113,
+        "function": "<genexpr>",
+        "calls": 1130,
+        "primitive_calls": 1130,
+        "own_seconds": 0.0003599,
+        "cumulative_seconds": 0.0005379
+      },
+      {
+        "module": "training_results.py",
+        "line": 114,
+        "function": "<genexpr>",
+        "calls": 3360,
+        "primitive_calls": 3360,
+        "own_seconds": 0.0004953000000000001,
+        "cumulative_seconds": 0.0004953000000000001
+      },
+      {
+        "module": "catalog.py",
+        "line": 109,
+        "function": "<genexpr>",
+        "calls": 2200,
+        "primitive_calls": 2200,
+        "own_seconds": 0.00038780000000000005,
+        "cumulative_seconds": 0.00038780000000000005
+      },
+      {
+        "module": "catalog.py",
+        "line": 108,
+        "function": "<genexpr>",
+        "calls": 2200,
+        "primitive_calls": 2200,
+        "own_seconds": 0.0003802,
+        "cumulative_seconds": 0.0003802
+      },
+      {
+        "module": "training.py",
+        "line": 118,
+        "function": "validate_spec",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 4.8700000000000005e-05,
+        "cumulative_seconds": 0.0003798
+      },
+      {
+        "module": "quality.py",
+        "line": 119,
+        "function": "<genexpr>",
+        "calls": 17,
+        "primitive_calls": 17,
+        "own_seconds": 7.3e-06,
+        "cumulative_seconds": 0.00037660000000000005
+      },
+      {
+        "module": "evaluation.py",
+        "line": 35,
+        "function": "_assessment",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5.2e-06,
+        "cumulative_seconds": 0.0003487
+      },
+      {
+        "module": "config.py",
+        "line": 48,
+        "function": "normalize_comfyui_root",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5.2e-06,
+        "cumulative_seconds": 0.0002796
+      },
+      {
+        "module": "config.py",
+        "line": 41,
+        "function": "_resolve",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 9.100000000000001e-06,
+        "cumulative_seconds": 0.0002345
+      },
+      {
+        "module": "catalog.py",
+        "line": 112,
+        "function": "<genexpr>",
+        "calls": 1980,
+        "primitive_calls": 1980,
+        "own_seconds": 0.00023400000000000002,
+        "cumulative_seconds": 0.00023400000000000002
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 71,
+        "function": "rows",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 1.8000000000000001e-06,
+        "cumulative_seconds": 0.0001677
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 72,
+        "function": "<listcomp>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.7e-06,
+        "cumulative_seconds": 0.00016590000000000002
+      },
+      {
+        "module": "training_records.py",
+        "line": 26,
+        "function": "to_dict",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 2.0000000000000003e-06,
+        "cumulative_seconds": 0.00016350000000000002
+      },
+      {
+        "module": "linting.py",
+        "line": 57,
+        "function": "origin",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 9.4e-06,
+        "cumulative_seconds": 0.0001101
+      },
+      {
+        "module": "catalog.py",
+        "line": 54,
+        "function": "integer",
+        "calls": 182,
+        "primitive_calls": 182,
+        "own_seconds": 8.36e-05,
+        "cumulative_seconds": 0.0001
+      },
+      {
+        "module": "training_results.py",
+        "line": 120,
+        "function": "<genexpr>",
+        "calls": 561,
+        "primitive_calls": 561,
+        "own_seconds": 9.48e-05,
+        "cumulative_seconds": 9.48e-05
+      },
+      {
+        "module": "quality.py",
+        "line": 95,
+        "function": "expected",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 3.2000000000000003e-06,
+        "cumulative_seconds": 7.43e-05
+      },
+      {
+        "module": "training_results.py",
+        "line": 85,
+        "function": "<dictcomp>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 7.38e-05,
+        "cumulative_seconds": 7.38e-05
+      },
+      {
+        "module": "config.py",
+        "line": 64,
+        "function": "root",
+        "calls": 23,
+        "primitive_calls": 23,
+        "own_seconds": 1.69e-05,
+        "cumulative_seconds": 6.99e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 55,
+        "function": "conditions",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 6.200000000000001e-06,
+        "cumulative_seconds": 6.09e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 56,
+        "function": "<genexpr>",
+        "calls": 17,
+        "primitive_calls": 17,
+        "own_seconds": 6.5000000000000004e-06,
+        "cumulative_seconds": 5.47e-05
+      },
+      {
+        "module": "linting.py",
+        "line": 32,
+        "function": "normalize",
+        "calls": 18,
+        "primitive_calls": 18,
+        "own_seconds": 2.3500000000000002e-05,
+        "cumulative_seconds": 4.99e-05
+      },
+      {
+        "module": "config.py",
+        "line": 17,
+        "function": "validate_url",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 1.2e-05,
+        "cumulative_seconds": 4.13e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 23,
+        "function": "conditions",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 6.300000000000001e-06,
+        "cumulative_seconds": 3.7000000000000005e-05
+      },
+      {
+        "module": "comfyui.py",
+        "line": 47,
+        "function": "_finite_float",
+        "calls": 26,
+        "primitive_calls": 26,
+        "own_seconds": 2.85e-05,
+        "cumulative_seconds": 3.33e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 24,
+        "function": "<genexpr>",
+        "calls": 18,
+        "primitive_calls": 18,
+        "own_seconds": 1.7100000000000002e-05,
+        "cumulative_seconds": 3.07e-05
+      },
+      {
+        "module": "quality.py",
+        "line": 111,
+        "function": "<dictcomp>",
+        "calls": 16,
+        "primitive_calls": 16,
+        "own_seconds": 2.11e-05,
+        "cumulative_seconds": 2.11e-05
+      },
+      {
+        "module": "linting.py",
+        "line": 79,
+        "function": "contains",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 4.9000000000000005e-06,
+        "cumulative_seconds": 2.0300000000000002e-05
+      },
+      {
+        "module": "training_data.py",
+        "line": 50,
+        "function": "<dictcomp>",
+        "calls": 7,
+        "primitive_calls": 7,
+        "own_seconds": 1.79e-05,
+        "cumulative_seconds": 1.79e-05
+      },
+      {
+        "module": "catalog.py",
+        "line": 28,
+        "function": "array",
+        "calls": 13,
+        "primitive_calls": 13,
+        "own_seconds": 1.0700000000000001e-05,
+        "cumulative_seconds": 1.3700000000000001e-05
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 19,
+        "function": "from_validated",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 8.1e-06,
+        "cumulative_seconds": 1.1200000000000001e-05
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 46,
+        "function": "capture",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 7.4e-06,
+        "cumulative_seconds": 1.08e-05
+      },
+      {
+        "module": "quality.py",
+        "line": 96,
+        "function": "<listcomp>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5.500000000000001e-06,
+        "cumulative_seconds": 1.02e-05
+      },
+      {
+        "module": "config.py",
+        "line": 18,
+        "function": "<genexpr>",
+        "calls": 22,
+        "primitive_calls": 22,
+        "own_seconds": 7.6e-06,
+        "cumulative_seconds": 1e-05
+      },
+      {
+        "module": "training_results.py",
+        "line": 241,
+        "function": "<listcomp>",
+        "calls": 2,
+        "primitive_calls": 2,
+        "own_seconds": 4.1000000000000006e-06,
+        "cumulative_seconds": 6.1e-06
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 65,
+        "function": "observations",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 5.600000000000001e-06,
+        "cumulative_seconds": 5.8e-06
+      },
+      {
+        "module": "evaluation_cases.py",
+        "line": 45,
+        "function": "to_dict",
+        "calls": 16,
+        "primitive_calls": 16,
+        "own_seconds": 4.7e-06,
+        "cumulative_seconds": 4.7e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 29,
+        "function": "boundary",
+        "calls": 22,
+        "primitive_calls": 22,
+        "own_seconds": 4.3e-06,
+        "cumulative_seconds": 4.3e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 236,
+        "function": "<genexpr>",
+        "calls": 3,
+        "primitive_calls": 3,
+        "own_seconds": 4.2000000000000004e-06,
+        "cumulative_seconds": 4.2000000000000004e-06
+      },
+      {
+        "module": "training_data.py",
+        "line": 162,
+        "function": "<lambda>",
+        "calls": 24,
+        "primitive_calls": 24,
+        "own_seconds": 3.6000000000000003e-06,
+        "cumulative_seconds": 3.6000000000000003e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 266,
+        "function": "<genexpr>",
+        "calls": 4,
+        "primitive_calls": 4,
+        "own_seconds": 3.5000000000000004e-06,
+        "cumulative_seconds": 3.5000000000000004e-06
+      },
+      {
+        "module": "training_results.py",
+        "line": 255,
+        "function": "<listcomp>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 1.1e-06,
+        "cumulative_seconds": 1.7e-06
+      },
+      {
+        "module": "curation.py",
+        "line": 39,
+        "function": "<dictcomp>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 1.5e-06,
+        "cumulative_seconds": 1.5e-06
+      },
+      {
+        "module": "evidence_reads.py",
+        "line": 42,
+        "function": "__init__",
+        "calls": 1,
+        "primitive_calls": 1,
+        "own_seconds": 4.0000000000000003e-07,
+        "cumulative_seconds": 4.0000000000000003e-07
+      }
+    ],
+    "file_digest": {
+      "calls": 167,
+      "bytes": 72963330,
+      "files": {
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\datasets\\877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751.json": {
+          "calls": 4,
+          "bytes": 22272
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\11737.jpg": {
+          "calls": 4,
+          "bytes": 232172
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11737.png": {
+          "calls": 4,
+          "bytes": 1021848
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11737.txt": {
+          "calls": 4,
+          "bytes": 416
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\11939.jpg": {
+          "calls": 4,
+          "bytes": 347048
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11939.png": {
+          "calls": 4,
+          "bytes": 1282800
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\11939.txt": {
+          "calls": 4,
+          "bytes": 540
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\16590.jpg": {
+          "calls": 4,
+          "bytes": 202680
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16590.png": {
+          "calls": 4,
+          "bytes": 1001080
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16590.txt": {
+          "calls": 4,
+          "bytes": 528
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\16592.jpg": {
+          "calls": 4,
+          "bytes": 275412
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16592.png": {
+          "calls": 4,
+          "bytes": 1103028
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\16592.txt": {
+          "calls": 4,
+          "bytes": 368
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\436305.jpg": {
+          "calls": 4,
+          "bytes": 372876
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436305.png": {
+          "calls": 4,
+          "bytes": 1231252
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436305.txt": {
+          "calls": 4,
+          "bytes": 536
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\436450.jpg": {
+          "calls": 4,
+          "bytes": 499252
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436450.png": {
+          "calls": 4,
+          "bytes": 1804508
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\436450.txt": {
+          "calls": 4,
+          "bytes": 412
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\488147.jpg": {
+          "calls": 4,
+          "bytes": 1338328
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\488147.png": {
+          "calls": 4,
+          "bytes": 1597416
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\488147.txt": {
+          "calls": 4,
+          "bytes": 464
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\sources\\898372.jpg": {
+          "calls": 4,
+          "bytes": 522308
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\898372.png": {
+          "calls": 4,
+          "bytes": 1533572
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\prepared\\898372.txt": {
+          "calls": 4,
+          "bytes": 376
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\pytorch_lora_weights.safetensors": {
+          "calls": 2,
+          "bytes": 46780848
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-11737-baseline.png": {
+          "calls": 2,
+          "bytes": 774560
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-11737-candidate.png": {
+          "calls": 2,
+          "bytes": 856226
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-436450-baseline.png": {
+          "calls": 2,
+          "bytes": 682850
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\met-436450-candidate.png": {
+          "calls": 2,
+          "bytes": 789700
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\curation.json": {
+          "calls": 2,
+          "bytes": 10554
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\policy-observation.json": {
+          "calls": 2,
+          "bytes": 1588
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\11737.json": {
+          "calls": 2,
+          "bytes": 5206
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\11939.json": {
+          "calls": 2,
+          "bytes": 5640
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\16590.json": {
+          "calls": 2,
+          "bytes": 4550
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\16592.json": {
+          "calls": 2,
+          "bytes": 4538
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\436305.json": {
+          "calls": 2,
+          "bytes": 5322
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\436450.json": {
+          "calls": 2,
+          "bytes": 4824
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\488147.json": {
+          "calls": 2,
+          "bytes": 4920
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\data\\met-still-life-v1\\metadata\\898372.json": {
+          "calls": 2,
+          "bytes": 4722
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\training\\still-life.quality.json": {
+          "calls": 2,
+          "bytes": 2478
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-base_plain.png": {
+          "calls": 2,
+          "bytes": 438052
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-base_trigger.png": {
+          "calls": 2,
+          "bytes": 454376
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-adapter_plain.png": {
+          "calls": 2,
+          "bytes": 730650
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760922-adapter_trigger.png": {
+          "calls": 2,
+          "bytes": 766954
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-base_plain.png": {
+          "calls": 2,
+          "bytes": 693356
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-base_trigger.png": {
+          "calls": 2,
+          "bytes": 575844
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-adapter_plain.png": {
+          "calls": 2,
+          "bytes": 662242
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-vase-and-pears-11760923-adapter_trigger.png": {
+          "calls": 2,
+          "bytes": 665044
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-base_plain.png": {
+          "calls": 2,
+          "bytes": 514992
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-base_trigger.png": {
+          "calls": 2,
+          "bytes": 477444
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-adapter_plain.png": {
+          "calls": 2,
+          "bytes": 466684
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860922-adapter_trigger.png": {
+          "calls": 2,
+          "bytes": 442746
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-base_plain.png": {
+          "calls": 2,
+          "bytes": 516864
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-base_trigger.png": {
+          "calls": 2,
+          "bytes": 485546
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-adapter_plain.png": {
+          "calls": 2,
+          "bytes": 359830
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\quality-paper-geometry-11860923-adapter_trigger.png": {
+          "calls": 2,
+          "bytes": 367338
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json": {
+          "calls": 1,
+          "bytes": 4185
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\run.json": {
+          "calls": 1,
+          "bytes": 1382
+        },
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\result.json": {
+          "calls": 1,
+          "bytes": 9783
+        }
+      }
+    },
+    "limits": "Warm local files; wall samples exclude profiling. file_digest counts are only those hash reads, not all I/O. Profiling adds overhead. No model render."
+  },
+  "installed_before_wheel": {
+    "path": "workspace/state/verification/phase-a04/dist/itov-0.13.1-py3-none-any.whl",
+    "sha256": "3825eeaa07d336451cfdfa6d88844afebed44a11cd118a31ddccdfe7d3458ac2"
+  },
+  "installed_after_wheel": {
+    "path": "workspace/state/verification/phase-a05/dist/itov-0.13.1-py3-none-any.whl",
+    "sha256": "adc2c9648dacafdde8d84b65a3276cf7e637d9b79354c714ccb8531e0f4a9464"
+  },
+  "helper": {
+    "path": "scripts/profile_training_reads.py",
+    "sha256": "13e521c1670be6b987f20bdbbb4debf17b1a7d4dc2e6bc10e7c9ee9c66dfa701"
+  },
+  "limits": [
+    "Three warm-file wall samples per condition; separate instrumented samples are not included in wall medians.",
+    "Development/test processes were active during some samples; host scheduling and cache state are not controlled.",
+    "Hash-read counts cover file_digest only, not all I/O or in-memory hashing.",
+    "One real curated packet; no inference/training throughput or universal speedup claim."
+  ],
+  "source_median_reduction_percent": 60.78795336431663,
+  "installed_median_reduction_percent": 63.61016159755478
+}

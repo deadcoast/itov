@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from itov.catalog import array, integer, object_fields, read_document, require, text
+from itov.catalog import array, integer, object_fields, require, text
 from itov.comfyui import parse_json
+from itov.evidence_reads import read_document
 from itov.qualification import safe_path
 from itov.training_data import file_ref, load_dataset, publish, seal
 

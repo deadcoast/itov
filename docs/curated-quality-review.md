@@ -1,5 +1,7 @@
 # Curated data and evidence-backed quality review
 
+A-05 factors cases and review decisions into immutable internal records and reuses one validated snapshot when building a packet. It retains the existing review versions and policy. The [record/freshness contract](assessment-records.md) documents compatibility, measured cost and final input checks.
+
 Version 0.13.0 introduced prototype curation and comparison records. Version 0.13.1 removes the mandatory independent-human gate at the user's instruction and supports explicit assistant reviews. The [source audit](development-audit-20260922.md) and [new TODO](../TODO.md) supersede earlier stage-completion claims. The data/training/evaluation methods remain partial. The prior synthetic candidate remains smoke-purpose evidence.
 
 ## Curated pilot

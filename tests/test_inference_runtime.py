@@ -111,6 +111,8 @@ def test_public_pipeline_exact_bindings_and_offline_replay(
     assert main(["inference", "plan", *args, "--save"]) == 0
     result = json.loads(capsys.readouterr().out)
     path, value = Path(result["saved_path"]), result["plan"]
+    assert result["_cli"]["actions"][0]["argv"][1:4] == ["inference", "run", str(path)]
+    assert "_cli" not in json.loads(path.read_bytes())
     assert runtime.plan(item.config, item.inference) == value
     assert not item.routes.get("_posted")
     assert (
@@ -140,7 +142,7 @@ def test_public_pipeline_exact_bindings_and_offline_replay(
     assert execute(item, path, resume=True)["ok"]
     for action in ("status", "replay"):
         assert main(["inference", action, str(path), "--config", str(item.config.file)]) == 0
-        assert "Inference:" in capsys.readouterr().out
+        assert f"OK inference {action} (exit 0)" in capsys.readouterr().out
     report = runtime.replay(item.config, path, save=True)
     assert report == runtime.replay(item.config, path, save=True)
     assert report["technical_pass"] and report["quality_acceptance"] == "not_established"

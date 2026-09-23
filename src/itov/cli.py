@@ -1,4 +1,4 @@
-"""The initial operator interface for workspace and workflow preflight."""
+"""Public command dispatch with a shared operator response contract."""
 
 from __future__ import annotations
 
@@ -19,6 +19,7 @@ from itov.batch import create_plan, load_plan, load_request, save_plan, verify_p
 from itov.batch_execution import abandon_batch, batch_status, run_batch
 from itov.catalog import load_catalog, verify_assets
 from itov.catalog_store import CatalogStore
+from itov.cli_output import present
 from itov.comfyui import ComfyUIClient, ComfyUIError
 from itov.config import DEFAULT_URL, initialize, load_config, validate_timeout
 from itov.doctor import diagnose
@@ -40,8 +41,17 @@ def _connection_arguments(parser: argparse.ArgumentParser):
     )
 
 
+class ArgumentError(ValueError):
+    pass
+
+
+class ArgumentParser(argparse.ArgumentParser):
+    def error(self, message):
+        raise ArgumentError(message)
+
+
 def parser() -> argparse.ArgumentParser:
-    root = argparse.ArgumentParser(description="Local ComfyUI workspace and workflow preflight")
+    root = ArgumentParser(description="Owned media generation, training and evaluation")
     root.add_argument("--version", action="version", version=f"itov {__version__}")
     commands = root.add_subparsers(dest="command", required=True)
     init = commands.add_parser("init", help="Create a workspace without overwriting existing files")
@@ -251,6 +261,7 @@ def parser() -> argparse.ArgumentParser:
     for action in ("status", "recover"):
         item = actions.add_parser(action)
         item.add_argument("--gpu", required=True, help="Exact NVIDIA GPU UUID")
+        item.add_argument("--json", action="store_true")
         if action == "recover":
             item.add_argument("--lease", required=True, help="Exact abandoned lease UUID")
     for name in ("trigger", "scene"):
@@ -350,354 +361,65 @@ def _catalog_command(args) -> dict:
     return result
 
 
-def _print_result(result: dict, *, as_json: bool):
-    if as_json:
-        print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
-    elif "request_id" in result:
-        print(f"{result['status'].upper()} prompt={result.get('prompt_id') or 'unknown'}")
-        print(f"Record: {result['record_path']}")
-        if result.get("error"):
-            print(result["error"])
-        for artifact in result["artifacts"]:
-            print(f"Output: {artifact['path']} (SHA-256 {artifact['sha256']})")
-    elif "checks" in result:
-        for check in result["checks"]:
-            print(f"{check['status'].upper():4} {check['name']}: {check['detail']}")
-        print(result["limits"])
-    elif "valid" in result:
-        print(
-            f"{'PASS' if result['valid'] else 'FAIL'} {result['scope']}: "
-            f"{result['node_count']} nodes"
+def _execute(args):
+    if hasattr(args, "timeout"):
+        validate_timeout(args.timeout)
+    if args.command == "init":
+        config = initialize(
+            args.directory, args.comfyui_root, python=args.comfyui_python, url=args.url
         )
-        for issue in result["issues"]:
-            location = ":".join(
-                str(issue[key]) for key in ("node_id", "input_name") if issue[key] is not None
-            )
-            print(f"  {issue['code']} {location}: {issue['message']}")
-        print(result["limits"])
-    else:
-        print(f"Created workspace: {result['config']}")
+        result = {"ok": True, "config": str(config.file)}
+    elif args.command == "doctor":
+        result = diagnose(load_config(args.config), offline=args.offline, timeout=args.timeout)
+    elif args.command == "server":
+        config = load_config(args.config)
+        command = launch_command(config, custom_nodes=args.custom_nodes)
+        if args.print_command:
+            print(json.dumps(command))
+            return 0
+        return subprocess.call(command, cwd=config.comfyui_root)
+    elif args.command == "job":
+        operation = run_job if args.action == "run" else wait_job
+        result = operation(
+            load_config(args.config),
+            args.file,
+            timeout=args.timeout,
+            wait_timeout=args.wait_timeout,
+            poll_interval=args.poll_interval,
+            **{"prompt_id": args.prompt_id} if args.action == "wait" else {},
+        )
+        return result
+    elif args.command in {"dataset", "training", "evaluation", "promotion"}:
+        from itov import evaluation, training, training_data
 
+        config = load_config(args.config)
+        if args.command == "dataset":
+            if args.action == "curate":
+                from itov import curation
 
-def _print_training_result(result: dict, *, as_json: bool):
-    if as_json:
-        _print_result(result, as_json=True)
-        return
-    if result.get("ok") is False:
-        print("REFUSED")
-    elif "status" in result:
-        print(result["status"].upper())
-    elif "technical_pass" in result:
-        print("Technical checks passed; model quality requires separate review.")
-    elif "counts" in result:
-        counts = result["counts"]
-        print(f"Verified dataset: {counts['train']} training, {counts['validation']} held-out")
-    else:
-        print("Prepared")
-    details = result.get("decision", result)
-    for key in (
-        "dataset_id",
-        "plan_id",
-        "assessment_id",
-        "report_id",
-        "candidate_id",
-        "curation_id",
-        "packet_id",
-        "decision_id",
-        "expected_head",
-        "catalog_head",
-        "purpose",
-        "saved_path",
-        "recorded_status",
-        "worker_completion",
-        "artifact_validation",
-        "failure_boundary",
-        "candidate_assessment",
-        "next_action",
-    ):
-        if key in details:
-            print(f"{key.replace('_', ' ').capitalize()}: {details[key]}")
-    if "entry" in result:
-        print(f"Candidate weights: {result['entry']['asset']['path']}")
-    for name, path in result.get("artifacts", {}).items():
-        print(f"{name}: {path}")
-    if "matrix" in result:
-        count = len(result["matrix"])
-        print(f"Evaluation images: {result.get('succeeded', count)}/{count}")
-        for row in result["matrix"]:
-            print(f"  {row['case_id']} seed={row['seed']} {row['role']}: {row['status']}")
-            if row.get("error"):
-                print(f"    {row['error']}")
-    if result.get("scope") == "deployed_evaluation_plan":
-        print(f"Planned evaluation images: {len(result['jobs'])}")
-        print(f"Deployed candidate: {result['deployment']['loader_name']}")
-    if result.get("error"):
-        print(result["error"])
-    for reason in result.get("blockers", []):
-        print(f"  {reason}")
-    if result.get("limits"):
-        print(result["limits"])
+                result = curation.validate(config.root, args.file, save=args.save)
+            else:
+                operation = (
+                    training_data.prepare if args.action == "prepare" else training_data.validate
+                )
+                result = operation(config.root, args.file)
+        elif args.command == "evaluation":
+            if args.action in {"plan", "run", "status", "resume", "replay", "abandon"}:
+                from itov import evaluation_runtime
 
-
-def main(argv: list[str] | None = None) -> int:
-    args = parser().parse_args(argv)
-    try:
-        if hasattr(args, "timeout"):
-            validate_timeout(args.timeout)
-        if args.command == "init":
-            config = initialize(
-                args.directory, args.comfyui_root, python=args.comfyui_python, url=args.url
-            )
-            result = {"ok": True, "config": str(config.file)}
-        elif args.command == "doctor":
-            result = diagnose(load_config(args.config), offline=args.offline, timeout=args.timeout)
-        elif args.command == "server":
-            config = load_config(args.config)
-            command = launch_command(config, custom_nodes=args.custom_nodes)
-            if args.print_command:
-                print(json.dumps(command))
-                return 0
-            return subprocess.call(command, cwd=config.comfyui_root)
-        elif args.command == "job":
-            operation = run_job if args.action == "run" else wait_job
-            result = operation(
-                load_config(args.config),
-                args.file,
-                timeout=args.timeout,
-                wait_timeout=args.wait_timeout,
-                poll_interval=args.poll_interval,
-                **({"prompt_id": args.prompt_id} if args.action == "wait" else {}),
-            )
-            _print_result(result, as_json=args.json)
-            return 0 if result["status"] == "succeeded" else 1
-        elif args.command in {"dataset", "training", "evaluation", "promotion"}:
-            from itov import evaluation, training, training_data
-
-            config = load_config(args.config)
-            if args.command == "dataset":
-                if args.action == "curate":
-                    from itov import curation
-
-                    result = curation.validate(config.root, args.file, save=args.save)
-                else:
-                    operation = (
-                        training_data.prepare
-                        if args.action == "prepare"
-                        else training_data.validate
+                if args.action == "plan":
+                    result = evaluation_runtime.plan(
+                        config, args.file, save=args.save, timeout=args.timeout
                     )
-                    result = operation(config.root, args.file)
-            elif args.command == "evaluation":
-                if args.action in {"plan", "run", "status", "resume", "replay", "abandon"}:
-                    from itov import evaluation_runtime
-
-                    if args.action == "plan":
-                        result = evaluation_runtime.plan(
-                            config, args.file, save=args.save, timeout=args.timeout
-                        )
-                        if args.save:
-                            result = {
-                                **result,
-                                "saved_path": str(
-                                    config.root / f"state/evaluation/plans/{result['plan_id']}.json"
-                                ),
-                            }
-                    elif args.action in {"run", "resume"}:
-                        result = evaluation_runtime.run(
-                            config,
-                            args.file,
-                            resume=args.action == "resume",
-                            prompt_id=getattr(args, "prompt_id", None),
-                            timeout=args.timeout,
-                            wait_timeout=args.wait_timeout,
-                            poll_interval=args.poll_interval,
-                        )
-                    elif args.action == "replay":
-                        result = evaluation_runtime.replay(config, args.file, save=args.save)
-                    else:
-                        result = getattr(evaluation_runtime, args.action)(config, args.file)
-                elif args.action == "packet":
-                    from itov import quality
-
-                    result = quality.packet(config, args.file, save=args.save)
-                else:
-                    result = evaluation.assess(config, args.file, save=args.save)
-            elif args.command == "promotion":
-                if args.action == "apply":
-                    result = evaluation.apply_promotion(
-                        config, args.file, args.review, args.expected_head, args.decision
-                    )
-                else:
-                    result = evaluation.promotion(config, args.file, args.review, save=args.save)
-            elif args.action == "plan":
-                result = training.plan(config, args.file)
-                if args.save:
-                    saved = training.save_plan(config, result)
-                    result = {**result, "saved_path": str(saved)}
-            elif args.action == "candidate":
-                result = evaluation.candidate(config, args.file, save=args.save)
-            elif args.action == "run":
-                result = training.run(config, args.file, args.gpu)
-            else:
-                result = getattr(training, args.action)(config, args.file)
-            _print_training_result(result, as_json=args.json)
-            return 1 if result.get("ok") is False or result.get("status") == "failed" else 0
-        elif args.command in {"trigger", "scene"}:
-            from itov import scene, trigger
-
-            config = load_config(args.config)
-            if args.command == "trigger":
-                result = trigger.lint(
-                    config, args.file, plan_path=args.plan, strict=args.strict, save=args.save
-                )
-            else:
-                result = scene.lint(config, args.file, args.plan, save=args.save)
-            if args.json:
-                print(json.dumps(result, indent=2, ensure_ascii=False))
-            else:
-                print(
-                    f"{'PASS' if result['ok'] else 'FAIL'} {args.command} lint: "
-                    f"{result['counts']['error']} errors, {result['counts']['warning']} warnings"
-                )
-                for finding in result["findings"]:
-                    print(json.dumps(finding, ensure_ascii=False))
-                if result["saved_path"]:
-                    print("Saved report:", result["saved_path"])
-                print(result["limits"])
-            return 0 if result["ok"] else 1
-        elif args.command == "device":
-            from itov import device
-
-            result = (
-                device.status(args.gpu)
-                if args.action == "status"
-                else device.recover(args.gpu, args.lease)
-            )
-            print(json.dumps(result, indent=2))
-            return 0
-        elif args.command == "parallel":
-            from itov import parallel
-
-            config = load_config(args.config)
-            if args.action == "resume":
-                result = parallel.resume(config, args.file)
-            elif args.action == "recover":
-                result = parallel.recover(config, args.file)
-            else:
-                result = parallel.run(
-                    config,
-                    args.file,
-                    calibrate=args.action == "calibrate",
-                    calibration_paths=getattr(args, "calibration", None),
-                    ports=args.ports,
-                    wait_timeout=args.wait_timeout,
-                )
-            print(json.dumps(result, indent=2))
-            return 0 if result["ok"] else 1
-        elif args.command == "vram":
-            from itov import vram
-
-            config = load_config(args.config)
-            if args.action == "server":
-                command = profile_launch_command(config)
-                if args.print_command:
-                    print(json.dumps(command))
-                    return 0
-                return subprocess.run(command, cwd=config.comfyui_root).returncode
-            if args.action == "capture":
-                result = vram.capture(
-                    config, args.file, args.qualification, wait_timeout=args.wait_timeout
-                )
-            else:
-                result = vram.check(
-                    config,
-                    load_plan(args.file),
-                    [vram.load_profile(path) for path in args.profile],
-                    workers=args.workers,
-                )
-                if args.save:
-                    result, path = vram._save(config, "decisions", result, "decision_id")
-                    result = {**result, "path": str(path)}
-            print(json.dumps(result, indent=2))
-            return 0 if result["ok"] else 1
-        elif args.command == "av":
-            result = mux(load_config(args.config), load_av_spec(args.file))
-            print(json.dumps(result, indent=2))
-            return 0
-        elif args.command == "audio":
-            spec = load_audio_spec(args.file)
-            if args.action == "verify":
-                result = verify_audio(args.artifact, output_contract(spec))
-            elif args.action == "prepare":
-                result = prepare_audio(load_config(args.config), spec)
-            else:
-                config = load_config(args.config)
-                plan = plan_audio(config, spec)
-                path = save_plan(config.root, plan) if args.save else None
-                result = {
-                    "ok": True,
-                    "plan": plan,
-                    "path": str(path) if path else None,
-                    "limits": "No jobs submitted; qualify before execution.",
-                }
-            print(json.dumps(result, indent=2))
-            return 0
-        elif args.command == "video":
-            spec = load_video_spec(args.file)
-            if args.action == "verify":
-                result = verify_video(
-                    args.artifact, {key: spec[key] for key in ("width", "height", "frames", "fps")}
-                )
-            else:
-                config = load_config(args.config)
-                if args.action == "prepare":
-                    result = prepare_video(config, spec, image_source=args.image_source)
-                else:
-                    plan = plan_video(config, spec)
-                    path = save_plan(config.root, plan) if args.save else None
-                    result = {
-                        "ok": True,
-                        "plan": plan,
-                        "path": str(path) if path else None,
-                        "limits": "No jobs submitted; qualify before execution.",
-                    }
-            print(json.dumps(result, indent=2))
-            return 0
-        elif args.command == "inference":
-            from itov import inference_runtime
-            from itov.inference_capabilities import capabilities
-
-            if args.action == "capabilities":
-                result = capabilities()
-                if args.json:
-                    print(json.dumps(result, indent=2))
-                else:
-                    print(result["capability"])
-                    print("Adapter order: " + " -> ".join(result["adapter_order"]))
-                    print(result["limits"])
-                return 0
-            config = load_config(args.config)
-            spec = load_spec(args.file) if args.action in {"prepare", "plan"} else None
-            if spec is None or spec["version"] == 2:
-                if args.action == "prepare":
-                    result = inference_runtime.prepare(config, spec)
-                elif args.action == "plan":
-                    result = inference_runtime.plan(
-                        config, spec, save=args.save, timeout=args.timeout
-                    )
-                    result = {
-                        "ok": True,
-                        "scope": result["scope"],
-                        "plan": result,
-                        "plan_id": result["plan_id"],
-                        "saved_path": str(
-                            config.root / f"state/inference/plans/{result['plan_id']}.json"
-                        )
-                        if args.save
-                        else None,
-                        "next_action": "Run inference run with the saved plan.",
-                    }
+                    if args.save:
+                        result = {
+                            **result,
+                            "saved_path": str(
+                                config.root / f"state/evaluation/plans/{result['plan_id']}.json"
+                            ),
+                        }
                 elif args.action in {"run", "resume"}:
-                    result = inference_runtime.run(
+                    result = evaluation_runtime.run(
                         config,
                         args.file,
                         resume=args.action == "resume",
@@ -707,173 +429,262 @@ def main(argv: list[str] | None = None) -> int:
                         poll_interval=args.poll_interval,
                     )
                 elif args.action == "replay":
-                    result = inference_runtime.replay(config, args.file, save=args.save)
+                    result = evaluation_runtime.replay(config, args.file, save=args.save)
                 else:
-                    result = getattr(inference_runtime, args.action)(config, args.file)
-                if args.json:
-                    print(json.dumps(result, indent=2))
-                else:
-                    print(f"Inference: {result.get('status', result['scope'])}")
-                    for key in ("plan_id", "report_id", "saved_path", "next_action", "limits"):
-                        if result.get(key):
-                            print(f"{key.replace('_', ' ').capitalize()}: {result[key]}")
-                    for row in result.get("images", []):
-                        print(f"  Seed {row['seed']}: {row['status']}")
-                        if row.get("image"):
-                            print(f"    {row['image']['path']}")
-                        if row.get("error"):
-                            print(f"    {row['error']}")
-                return 0 if result.get("ok", result.get("technical_pass", True)) else 1
-            if args.action == "prepare":
-                result = prepare_inference(config, spec)
-                if not args.json:
-                    print(f"Prepared preset: {result['preset_id']}")
-                    print(f"Catalog candidate: {result['catalog']}")
-                    print(f"Import with --expected-head {result['expected_head']}")
-                    print(result["limits"])
+                    result = getattr(evaluation_runtime, args.action)(config, args.file)
+            elif args.action == "packet":
+                from itov import quality
+
+                result = quality.packet(config, args.file, save=args.save)
             else:
-                plan = plan_inference(config, spec)
-                path = save_plan(config.root, plan) if args.save else None
-                result = {"ok": True, "plan": plan, "path": str(path) if path else None}
-                if not args.json:
-                    print(f"Planned {len(plan['jobs'])} inference jobs: {plan['plan_id']}")
-                    if path:
-                        print(f"Plan: {path}")
-                    print("Qualify the saved plan before running; no jobs were submitted.")
-            if args.json:
-                print(json.dumps(result, indent=2))
-            return 0
-        elif args.command == "catalog":
-            result = _catalog_command(args)
-            if args.json:
-                print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
-            else:
-                print(
-                    f"{'PASS' if result['ok'] else 'FAIL'} catalog {args.action}: "
-                    f"{result['presets']} presets, {result['loras']} LoRAs"
+                result = evaluation.assess(config, args.file, save=args.save)
+        elif args.command == "promotion":
+            if args.action == "apply":
+                result = evaluation.apply_promotion(
+                    config, args.file, args.review, args.expected_head, args.decision
                 )
-                if "head" in result:
-                    print(f"Head: {result['head']} ({result['events']} ledger events)")
-                if result.get("recovery_required"):
-                    print("Pending transaction: run catalog recover")
-                if "recovery" in result:
-                    print(f"Recovery: {result['recovery']}")
-            return 0 if result["ok"] else 1
-        elif args.command == "batch":
-            workspace = load_config(args.config).root
-            if args.action == "plan":
-                plan = create_plan(workspace, load_request(args.file))
-                path = save_plan(workspace, plan) if args.save else None
-                result = {"ok": True, "plan": plan, "path": str(path) if path else None}
-                if args.json:
-                    print(json.dumps(result, indent=2, ensure_ascii=True, allow_nan=False))
-                else:
-                    print(f"Planned {len(plan['jobs'])} jobs: {plan['plan_id']}")
-                    for job in plan["jobs"][:10]:
-                        stack = ", ".join(
-                            f"{item['id']}@{item['strength_milli']}/1000" for item in job["loras"]
-                        )
-                        print(
-                            f"  {job['index'] + 1}: {job['preset']} seed={job['seed']} "
-                            f"LoRAs={stack or 'none'}"
-                        )
-                    if len(plan["jobs"]) > 10:
-                        print("  Use --json to inspect all jobs.")
-                    if path:
-                        print(f"Plan: {path}")
-                    print("Planning only; no jobs submitted or render history changed.")
-            elif args.action == "verify":
-                result = verify_plan(workspace, args.file)
-                print(
-                    json.dumps(result, indent=2)
-                    if args.json
-                    else f"PASS {result['jobs']} jobs reproduced: {result['plan_id']}"
-                )
-            elif args.action == "qualify":
-                config = load_config(args.config)
-                receipt = qualify(config, load_plan(args.file), timeout=args.timeout)
-                path = save_qualification(config, receipt) if args.save else None
-                result = {"ok": True, "qualification": receipt, "path": str(path) if path else None}
-                if args.json:
-                    print(json.dumps(result, indent=2))
-                else:
-                    print(f"PASS {receipt['scope']}: {receipt['jobs']} jobs")
-                    print(f"Qualification: {path or receipt['qualification_id']}")
-                    print("Preflight only; model inference and output quality require execution.")
             else:
-                config = load_config(args.config)
-                if args.action in {"status", "abandon"}:
-                    operation = batch_status if args.action == "status" else abandon_batch
-                    result = operation(config, args.file)
-                else:
-                    result = run_batch(
-                        config,
-                        args.file,
-                        qualification=getattr(args, "qualification", None),
-                        resume=args.action == "resume",
-                        vram_profiles=args.vram_profile,
-                        prompt_id=getattr(args, "prompt_id", None),
-                        timeout=args.timeout,
-                        wait_timeout=args.wait_timeout,
-                        poll_interval=args.poll_interval,
-                    )
-                if args.json:
-                    print(json.dumps(result, indent=2))
-                else:
-                    print(
-                        f"{result['status'].upper()} "
-                        f"{result['succeeded']}/{len(result['jobs'])} jobs"
-                    )
-                    print(f"Plan: {result['plan_id']}")
-                    if result.get("error"):
-                        print(result["error"])
-                    for job in result["jobs"]:
-                        print(
-                            f"  {job['job_index'] + 1}: {job['status']} "
-                            f"request={job['request_id']} "
-                            f"prompt={job['prompt_id'] or 'unknown'}"
-                        )
-                return 0 if result["ok"] or args.action in {"status", "abandon"} else 1
-            return 0
+                result = evaluation.promotion(config, args.file, args.review, save=args.save)
+        elif args.action == "plan":
+            result = training.plan(config, args.file)
+            if args.save:
+                saved = training.save_plan(config, result)
+                result = {**result, "saved_path": str(saved)}
+        elif args.action == "candidate":
+            result = evaluation.candidate(config, args.file, save=args.save)
+        elif args.action == "run":
+            result = training.run(config, args.file, args.gpu)
         else:
-            graph = load_json(args.file)
-            registry = None
-            if args.object_info:
-                registry = load_json(args.object_info)
-                if not isinstance(registry, dict) or not registry:
-                    raise ValueError("Object info must contain a nonempty node registry")
-            elif args.live:
-                config = load_config(args.config)
-                registry = ComfyUIClient(config.url, timeout=args.timeout).object_info()
-            result = validate_workflow(graph, registry).to_dict()
-        _print_result(result, as_json=args.json)
-        return 0 if result.get("ok", result.get("valid", False)) else 1
-    except PlanningError as error:
-        if getattr(args, "json", False):
-            print(json.dumps(error.to_dict()))
-        else:
-            print(
-                f"itov: {error.code} at job index {error.index}: {error}; {error.details}",
-                file=sys.stderr,
+            result = getattr(training, args.action)(config, args.file)
+        return result
+    elif args.command in {"trigger", "scene"}:
+        from itov import scene, trigger
+
+        config = load_config(args.config)
+        if args.command == "trigger":
+            result = trigger.lint(
+                config, args.file, plan_path=args.plan, strict=args.strict, save=args.save
             )
-        return 2
+        else:
+            result = scene.lint(config, args.file, args.plan, save=args.save)
+        return result
+    elif args.command == "device":
+        from itov import device
+
+        result = (
+            device.status(args.gpu)
+            if args.action == "status"
+            else device.recover(args.gpu, args.lease)
+        )
+        return result
+    elif args.command == "parallel":
+        from itov import parallel
+
+        config = load_config(args.config)
+        if args.action == "resume":
+            result = parallel.resume(config, args.file)
+        elif args.action == "recover":
+            result = parallel.recover(config, args.file)
+        else:
+            result = parallel.run(
+                config,
+                args.file,
+                calibrate=args.action == "calibrate",
+                calibration_paths=getattr(args, "calibration", None),
+                ports=args.ports,
+                wait_timeout=args.wait_timeout,
+            )
+        return result
+    elif args.command == "vram":
+        from itov import vram
+
+        config = load_config(args.config)
+        if args.action == "server":
+            command = profile_launch_command(config)
+            if args.print_command:
+                print(json.dumps(command))
+                return 0
+            return subprocess.run(command, cwd=config.comfyui_root).returncode
+        if args.action == "capture":
+            result = vram.capture(
+                config, args.file, args.qualification, wait_timeout=args.wait_timeout
+            )
+        else:
+            result = vram.check(
+                config,
+                load_plan(args.file),
+                [vram.load_profile(path) for path in args.profile],
+                workers=args.workers,
+            )
+            if args.save:
+                result, path = vram._save(config, "decisions", result, "decision_id")
+                result = {**result, "path": str(path)}
+        return result
+    elif args.command == "av":
+        result = mux(load_config(args.config), load_av_spec(args.file))
+        return result
+    elif args.command == "audio":
+        spec = load_audio_spec(args.file)
+        if args.action == "verify":
+            result = verify_audio(args.artifact, output_contract(spec))
+        elif args.action == "prepare":
+            result = prepare_audio(load_config(args.config), spec)
+        else:
+            config = load_config(args.config)
+            plan = plan_audio(config, spec)
+            path = save_plan(config.root, plan) if args.save else None
+            result = {
+                "ok": True,
+                "plan": plan,
+                "path": str(path) if path else None,
+                "limits": "No jobs submitted; qualify before execution.",
+            }
+        return result
+    elif args.command == "video":
+        spec = load_video_spec(args.file)
+        if args.action == "verify":
+            result = verify_video(
+                args.artifact, {key: spec[key] for key in ("width", "height", "frames", "fps")}
+            )
+        else:
+            config = load_config(args.config)
+            if args.action == "prepare":
+                result = prepare_video(config, spec, image_source=args.image_source)
+            else:
+                plan = plan_video(config, spec)
+                path = save_plan(config.root, plan) if args.save else None
+                result = {
+                    "ok": True,
+                    "plan": plan,
+                    "path": str(path) if path else None,
+                    "limits": "No jobs submitted; qualify before execution.",
+                }
+        return result
+    elif args.command == "inference":
+        from itov import inference_runtime
+        from itov.inference_capabilities import capabilities
+
+        if args.action == "capabilities":
+            result = capabilities()
+            return result
+        config = load_config(args.config)
+        spec = load_spec(args.file) if args.action in {"prepare", "plan"} else None
+        if spec is None or spec["version"] == 2:
+            if args.action == "prepare":
+                result = inference_runtime.prepare(config, spec)
+            elif args.action == "plan":
+                result = inference_runtime.plan(config, spec, save=args.save, timeout=args.timeout)
+                result = {
+                    "ok": True,
+                    "scope": result["scope"],
+                    "plan": result,
+                    "plan_id": result["plan_id"],
+                    "saved_path": str(
+                        config.root / f"state/inference/plans/{result['plan_id']}.json"
+                    )
+                    if args.save
+                    else None,
+                    "next_action": "Run inference run with the saved plan.",
+                }
+            elif args.action in {"run", "resume"}:
+                result = inference_runtime.run(
+                    config,
+                    args.file,
+                    resume=args.action == "resume",
+                    prompt_id=getattr(args, "prompt_id", None),
+                    timeout=args.timeout,
+                    wait_timeout=args.wait_timeout,
+                    poll_interval=args.poll_interval,
+                )
+            elif args.action == "replay":
+                result = inference_runtime.replay(config, args.file, save=args.save)
+            else:
+                result = getattr(inference_runtime, args.action)(config, args.file)
+            return result
+        if args.action == "prepare":
+            result = prepare_inference(config, spec)
+        else:
+            plan = plan_inference(config, spec)
+            path = save_plan(config.root, plan) if args.save else None
+            result = {"ok": True, "plan": plan, "path": str(path) if path else None}
+        return result
+    elif args.command == "catalog":
+        result = _catalog_command(args)
+        return result
+    elif args.command == "batch":
+        workspace = load_config(args.config).root
+        if args.action == "plan":
+            plan = create_plan(workspace, load_request(args.file))
+            path = save_plan(workspace, plan) if args.save else None
+            result = {"ok": True, "plan": plan, "path": str(path) if path else None}
+        elif args.action == "verify":
+            result = verify_plan(workspace, args.file)
+        elif args.action == "qualify":
+            config = load_config(args.config)
+            receipt = qualify(config, load_plan(args.file), timeout=args.timeout)
+            path = save_qualification(config, receipt) if args.save else None
+            result = {"ok": True, "qualification": receipt, "path": str(path) if path else None}
+        else:
+            config = load_config(args.config)
+            if args.action in {"status", "abandon"}:
+                operation = batch_status if args.action == "status" else abandon_batch
+                result = operation(config, args.file)
+            else:
+                result = run_batch(
+                    config,
+                    args.file,
+                    qualification=getattr(args, "qualification", None),
+                    resume=args.action == "resume",
+                    vram_profiles=args.vram_profile,
+                    prompt_id=getattr(args, "prompt_id", None),
+                    timeout=args.timeout,
+                    wait_timeout=args.wait_timeout,
+                    poll_interval=args.poll_interval,
+                )
+            return result
+        return result
+    else:
+        graph = load_json(args.file)
+        registry = None
+        if args.object_info:
+            registry = load_json(args.object_info)
+            if not isinstance(registry, dict) or not registry:
+                raise ValueError("Object info must contain a nonempty node registry")
+        elif args.live:
+            config = load_config(args.config)
+            registry = ComfyUIClient(config.url, timeout=args.timeout).object_info()
+        result = validate_workflow(graph, registry).to_dict()
+    return result
+
+
+def main(argv: list[str] | None = None) -> int:
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    args = argparse.Namespace(command="arguments", json="--json" in arguments)
+    try:
+        args = parser().parse_args(arguments)
+        result = _execute(args)
+        # Foreground servers retain their child exit status and stream output.
+        return result if isinstance(result, int) else present(args, result)
+    except PlanningError as error:
+        return present(args, error.to_dict(), exception=True)
     except (OSError, ValueError, ComfyUIError, sqlite3.Error) as error:
         boundary = getattr(error, "boundary", None)
-        if getattr(args, "json", False):
-            print(
-                json.dumps(
-                    {
-                        "ok": False,
-                        "error": str(error),
-                        **({"failure_boundary": boundary} if boundary else {}),
-                    }
-                )
-            )
-        else:
-            print(f"itov: {boundary + ': ' if boundary else ''}{error}", file=sys.stderr)
-        return 2
+        return present(
+            args,
+            {
+                "ok": False,
+                "error": str(error),
+                "error_type": type(error).__name__,
+                **({"failure_boundary": boundary} if boundary else {}),
+            },
+            exception=True,
+        )
     except KeyboardInterrupt:
-        return 130
+        return present(
+            args,
+            {"ok": False, "error": "Observation interrupted; execution may still be active."},
+            interrupted=True,
+        )
 
 
 if __name__ == "__main__":

@@ -19,7 +19,6 @@ from itov.catalog import (
     identifier,
     integer,
     object_fields,
-    read_document,
     relative_path,
     require,
     sha256,
@@ -27,6 +26,7 @@ from itov.catalog import (
 )
 from itov.catalog_store import _atomic_write
 from itov.comfyui import ComfyUIClient, parse_json
+from itov.evidence_reads import read_document
 from itov.jobs import _now
 from itov.locking import file_lock
 from itov.qualification import model_path, safe_path
@@ -101,6 +101,11 @@ def worker_sources():
         "training_results.py",
         "curation.py",
         "quality.py",
+        "records.py",
+        "training_records.py",
+        "evaluation_cases.py",
+        "review_records.py",
+        "evidence_reads.py",
     )
     return {name: sha256(Path(__file__).with_name(name).read_bytes()) for name in names}
 

@@ -368,8 +368,10 @@ def test_audio_cli(audio_case, encoded_audio, capsys):
     file = config.root / "audio.json"
     file.write_text(json.dumps(spec))
     assert main(["audio", "prepare", str(file), "--config", str(config.root / "itov.toml")]) == 0
-    assert json.loads(capsys.readouterr().out)["scope"] == "prepared_audio_candidates"
+    assert "Scope: prepared_audio_candidates" in capsys.readouterr().out
     assert main(["audio", "verify", str(file), str(encoded_audio[0])]) == 0
+    assert "Samples: 176128" in capsys.readouterr().out
+    assert main(["audio", "verify", str(file), str(encoded_audio[0]), "--json"]) == 0
     assert json.loads(capsys.readouterr().out)["samples"] == 176128
 
 

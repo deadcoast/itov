@@ -169,7 +169,7 @@ def test_complete_matrix_deployment_public_commands_and_offline_replay(runtime_c
     assert execute(item, path, resume=True)["succeeded"] == 16
     for action in ("status", "replay"):
         assert main(["evaluation", action, str(path), "--config", str(item.config.file)]) == 0
-        assert "Evaluation images: 16/16" in capsys.readouterr().out
+        assert "Progress: 16/16 completed" in capsys.readouterr().out
     assert item.requests == before
     assert CatalogStore(item.config.root).snapshot().head == head
     assert (item.folder / "run.json").read_bytes() == old_run

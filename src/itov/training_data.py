@@ -12,7 +12,6 @@ from itov.catalog import (
     digest,
     identifier,
     object_fields,
-    read_document,
     relative_path,
     require,
     sha256,
@@ -20,6 +19,7 @@ from itov.catalog import (
 )
 from itov.catalog_store import _atomic_write
 from itov.comfyui import parse_json
+from itov.evidence_reads import observe, read_document
 from itov.linting import document, origin
 from itov.qualification import safe_path
 
@@ -35,6 +35,7 @@ def file_ref(root: Path, value, *, maximum=None):
     with path.open("rb") as source:
         observed = hashlib.file_digest(source, "sha256").hexdigest()
     require(observed == value["sha256"], f"File SHA-256 mismatch: {value['path']}")
+    observe(path, observed, size)
     return path, size
 
 

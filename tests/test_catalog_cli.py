@@ -42,7 +42,7 @@ def test_schema_validation_does_not_require_config_or_write_state(catalog_assets
     source = root / "catalog.json"
     source.write_bytes(canonical_bytes(catalog))
     assert main(["catalog", "validate", str(source), "--config", "absent.toml"]) == 0
-    assert "PASS catalog validate" in capsys.readouterr().out
+    assert "OK catalog validate (exit 0)" in capsys.readouterr().out
     assert not (root / "state").exists()
     source.write_text('{"version":99}')
     assert main(["catalog", "validate", str(source), "--json"]) == 2

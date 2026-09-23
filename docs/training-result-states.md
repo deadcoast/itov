@@ -2,6 +2,8 @@
 
 The controller and `evaluation assess` share the read-only validator in `src/itov/training_results.py`. A stopped worker or a hash-matching file does not by itself establish a valid training result. Candidate quality decisions remain separate from execution and technical validation.
 
+A-05 adds an immutable result-record path for assessment/export/packet reuse, while the controller/status dictionary API retains its validation behavior. Assessment operations rehash their observed files before returning or publishing. See [record boundaries and compatibility](assessment-records.md); stored result and controller versions remain unchanged.
+
 ## Supported commands
 
 ```powershell

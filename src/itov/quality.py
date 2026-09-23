@@ -8,18 +8,20 @@ from itov.catalog import (
     identifier,
     integer,
     object_fields,
-    read_document,
     require,
     sha256,
     text,
 )
 from itov.comfyui import parse_json
+from itov.evaluation_cases import ROLES as ROLES
+from itov.evaluation_cases import EvaluationEvidence, conditions
+from itov.evidence_reads import read_document
 from itov.linting import contains, normalize
 from itov.qualification import safe_path
-from itov.training_data import check_seal, file_ref, load_dataset, publish, seal
-
-ROLES = ("base_plain", "base_trigger", "adapter_plain", "adapter_trigger")
-CASE_CRITERIA = {"activation", "prompt_adherence", "image_quality", "regression"}
+from itov.records import Document
+from itov.review_records import CASE_CRITERIA as CASE_CRITERIA
+from itov.review_records import review_coverage as coverage_verdict
+from itov.training_data import file_ref, load_dataset, publish, seal
 
 
 def suite(root, path, dataset, trigger):
@@ -91,23 +93,15 @@ def qualification(root, spec):
 
 
 def expected(suite_value):
-    return [
-        {
-            "case_id": case["id"],
-            "seed": seed,
-            "role": role,
-            "prompt": ((suite_value["trigger"] + " ") if role.endswith("trigger") else "")
-            + case["prompt"],
-            "negative_prompt": case["negative_prompt"],
-        }
-        for case in suite_value["cases"]
-        for seed in case["seeds"]
-        for role in ROLES
-    ]
+    return [condition.to_dict() for condition in conditions(suite_value)]
 
 
 def validate_matrix(root, spec, result, folder):
-    _, suite_value = qualification(root, spec)
+    return matrix_evidence(root, spec, result, folder).rows()
+
+
+def matrix_evidence(root, spec, result, folder):
+    curated, suite_value = qualification(root, spec)
     rows = array(result.get("quality_matrix"), "quality matrix")
     wanted = expected(suite_value)
     require(len(rows) == len(wanted), "Incomplete quality matrix")
@@ -119,20 +113,25 @@ def validate_matrix(root, spec, result, folder):
         key = row["image"]["path"].casefold()
         require(key not in paths, "Quality matrix reuses an image path")
         paths.add(key)
-    return rows
+    return EvaluationEvidence(
+        Document.capture(curated),
+        Document.capture(suite_value),
+        tuple(Document.capture(row) for row in rows),
+    )
 
 
 def packet(config, plan_path, *, save=False):
-    from itov import evaluation, training
+    from itov import evaluation
+    from itov.assessment_context import assessment_context
 
-    plan = training.load_plan(plan_path)
-    require(plan["specification"]["version"] == 2, "Review packet requires curated training v2")
-    report = evaluation.assess(config, plan_path)
-    candidate = evaluation.candidate(config, plan_path)
-    curated, suite_value = qualification(config.root, plan["specification"])
-    folder = training.run_folder(config, plan)
-    result = check_seal(parse_json(read_document(folder / "result.json")), "result_id")
-    rows = validate_matrix(config.root, plan["specification"], result, folder)
+    with assessment_context(config, plan_path) as context:
+        plan = context.plan.to_dict()
+        require(plan["specification"]["version"] == 2, "Review packet requires curated training v2")
+        report = evaluation._assessment(context)
+        candidate, _ = evaluation._candidate(context, assessment=report)
+        evidence = context.validated.evaluation
+        curated, suite_value = evidence.curation.to_dict(), evidence.suite.to_dict()
+        folder, rows = context.folder, evidence.rows()
     images = [
         {
             **row,
@@ -243,37 +242,4 @@ def review_coverage(config, plan_path, value):
     require(
         parse_json(read_document(packet_path)) == current, "Review packet is stale or incomplete"
     )
-    if value["version"] == 2:
-        # Historical v2 attestations retain their declared meaning. New v3 reviews
-        # implement the user's removal of the mandatory independent-human gate.
-        require(
-            value["reviewer_kind"] == "human" and value["independent_of_training"] is True,
-            "Legacy v2 attestation is invalid; use v3 for evidence-backed assistant review",
-        )
-        require(
-            value["reviewer"].strip().casefold() != current["curator"].strip().casefold(),
-            "Legacy v2 independence declaration conflicts with curator identity",
-        )
-    else:
-        require(value["reviewer_kind"] in ("assistant", "human"), "Unsupported reviewer kind")
-        for key in ("method", "limitations"):
-            text(value[key], "review " + key)
-            require(len(value[key]) <= 4096, "Review method/limitations exceed supported bounds")
-    wanted = [(c["id"], s) for c in current["suite"]["cases"] for s in c["seeds"]]
-    rows = array(value["cases"], "case reviews")
-    observed = []
-    for row in rows:
-        object_fields(row, {"case_id", "seed", "verdicts", "notes"}, "case review")
-        identifier(row["case_id"], "reviewed case")
-        integer(row["seed"], "reviewed seed")
-        observed.append((row["case_id"], row["seed"]))
-        object_fields(row["verdicts"], CASE_CRITERIA, "case verdicts")
-        require(
-            all(type(v) is bool for v in row["verdicts"].values()),
-            "Every case criterion needs a boolean verdict",
-        )
-        text(row["notes"], "case review notes")
-    require(
-        sorted(observed) == sorted(wanted), "Review must cover every case and seed exactly once"
-    )
-    return all(all(row["verdicts"].values()) for row in rows)
+    return coverage_verdict(value, current)

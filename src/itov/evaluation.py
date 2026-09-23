@@ -4,43 +4,37 @@ from __future__ import annotations
 
 import struct
 
-from itov import training, training_results
-from itov.catalog import array as json_array
+from itov import training_results
+from itov.assessment_context import assessment_context
 from itov.catalog import (
     canonical_bytes,
-    object_fields,
     read_document,
     require,
     sha256,
-    text,
 )
 from itov.catalog_store import CatalogStore, _atomic_write
 from itov.comfyui import parse_json
 from itov.qualification import safe_path
+from itov.review_records import CRITERIA as CRITERIA
+from itov.review_records import ReviewDecision
 from itov.training_data import file_ref, publish, seal
 from itov.training_results import inspect_weights as inspect_weights
 
-CRITERIA = {
-    "activation",
-    "prompt_adherence",
-    "image_quality",
-    "regression",
-    "runtime_compatibility",
-}
-
 
 def assess(config, plan_path, *, save=False):
-    plan = training.load_plan(plan_path)
-    record = training.read_record(config, plan_path)
-    require(
-        record["status"] in ("succeeded", "artifacts_validated"),
-        "A successful owned training attempt with validated artifacts is required",
-    )
-    require(record.get("result_id"), "Training record has no bound result")
-    folder = training.run_folder(config, plan)
-    validated = training_results.validate(
-        config, plan, folder, expected_result_id=record.get("result_id")
-    )
+    with assessment_context(config, plan_path) as context:
+        report = _assessment(context)
+    if save:
+        publish(
+            safe_path(config.root, f"state/training/assessments/{report['assessment_id']}.json"),
+            report,
+        )
+    return report
+
+
+def _assessment(context):
+    plan = context.plan.to_dict()
+    validated = context.validated.to_dict()
     result, dataset, integrity = (validated["result"], validated["dataset"], validated["integrity"])
     previews = result["previews"]
     report = seal(
@@ -66,20 +60,31 @@ def assess(config, plan_path, *, save=False):
         },
         "assessment_id",
     )
-    if save:
-        publish(
-            safe_path(config.root, f"state/training/assessments/{report['assessment_id']}.json"),
-            report,
-        )
     return report
 
 
 def candidate(config, plan_path, *, save=False):
-    report = assess(config, plan_path)
-    plan = training.load_plan(plan_path)
+    with assessment_context(config, plan_path) as context:
+        value, raw = _candidate(context)
+    if save:
+        asset = value["entry"]["asset"]
+        destination = safe_path(config.root, asset["path"])
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            _atomic_write(destination, raw, exclusive=True)
+        except FileExistsError:
+            file_ref(config.root, asset)
+        publish(
+            safe_path(config.root, f"state/training/candidates/{value['candidate_id']}.json"), value
+        )
+    return value
+
+
+def _candidate(context, *, assessment=None):
+    report = _assessment(context) if assessment is None else assessment
+    plan = context.plan.to_dict()
     spec = plan["specification"]
-    source, _ = file_ref(training.run_folder(config, plan), report["weights"])
-    raw, export = comfy_export(source, spec["parameters"]["rank"], report["weights"]["sha256"])
+    raw, export = _export(context.validated.weights)
     asset = {
         "path": f"models_shared/trained/{export['sha256']}.safetensors",
         "sha256": export["sha256"],
@@ -107,17 +112,7 @@ def candidate(config, plan_path, *, save=False):
         },
         "candidate_id",
     )
-    if save:
-        destination = safe_path(config.root, asset["path"])
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            _atomic_write(destination, raw, exclusive=True)
-        except FileExistsError:
-            file_ref(config.root, asset)
-        publish(
-            safe_path(config.root, f"state/training/candidates/{value['candidate_id']}.json"), value
-        )
-    return value
+    return value, raw
 
 
 def comfy_export(path, rank, expected_sha256):
@@ -126,9 +121,12 @@ def comfy_export(path, rank, expected_sha256):
     The worker fixes lora_alpha == rank. ComfyUI's absent-alpha scale is 1, so
     this format needs no additional scaling tensors. No quantization/conversion occurs.
     """
-    integrity = inspect_weights(path, rank)
-    raw = path.read_bytes()
-    require(sha256(raw) == expected_sha256, "Source LoRA changed during export")
+    return _export(training_results.weight_snapshot(path, rank, expected_sha256))
+
+
+def _export(snapshot):
+    integrity = snapshot.integrity.to_dict()
+    raw, expected_sha256 = snapshot.raw, snapshot.sha256
     size = struct.unpack("<Q", raw[:8])[0]
     original = parse_json(raw[8 : 8 + size])
     header, mapping = {}, {}
@@ -166,49 +164,10 @@ def comfy_export(path, rank, expected_sha256):
 def review(config, report, path, candidate_id, plan_path=None):
     raw = read_document(path)
     value = parse_json(raw)
-    object_fields(
-        value,
-        {"version", "assessment_id", "candidate_id", "reviewer", "decision", "checks", "notes"}
-        | (
-            {"packet", "reviewer_kind", "cases"}
-            if isinstance(value, dict) and value.get("version") in (2, 3)
-            else set()
-        )
-        | (
-            {"independent_of_training"}
-            if isinstance(value, dict) and value.get("version") == 2
-            else set()
-        )
-        | (
-            {"method", "limitations"}
-            if isinstance(value, dict) and value.get("version") == 3
-            else set()
-        ),
-        "quality review",
-    )
-    require(
-        type(value["version"]) is int
-        and value["version"] in (1, 2, 3)
-        and value["assessment_id"] == report["assessment_id"],
-        "Quality review is stale or unsupported",
-    )
-    require(value["candidate_id"] == candidate_id, "Quality review candidate export differs")
-    text(value["reviewer"], "reviewer")
-    text(value["notes"], "review notes")
-    require(value["decision"] in ("approve", "reject"), "Invalid review decision")
-    checks = json_array(value["checks"], "review checks")
-    for check in checks:
-        object_fields(check, {"criterion", "passed", "evidence"}, "review check")
-        text(check["criterion"], "review criterion")
-        require(type(check["passed"]) is bool, "Review verdict must be boolean")
-        refs = json_array(check["evidence"], "review evidence")
-        require(1 <= len(refs) <= 16, "Each review criterion needs evidence")
-        for ref in refs:
-            file_ref(config.root, ref, maximum=32 * 1024 * 1024)
-    require(
-        len(checks) == len(CRITERIA) and {r["criterion"] for r in checks} == CRITERIA,
-        "Review must cover every acceptance criterion exactly once",
-    )
+    decision = ReviewDecision.parse(value, report["assessment_id"], candidate_id)
+    for check in decision.checks:
+        for ref in check.evidence:
+            file_ref(config.root, ref.to_dict(), maximum=32 * 1024 * 1024)
     coverage = False
     if value["version"] in (2, 3):
         from itov.quality import review_coverage
@@ -218,7 +177,7 @@ def review(config, report, path, candidate_id, plan_path=None):
     return {
         "sha256": sha256(raw),
         "document": value,
-        "approved": value["decision"] == "approve" and all(c["passed"] for c in checks),
+        "approved": decision.approved,
         "coverage_passed": coverage,
     }
 

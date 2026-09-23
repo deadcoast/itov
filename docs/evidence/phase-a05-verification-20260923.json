@@ -1,0 +1,1220 @@
+{
+  "scope": "A-05 internal records, public-command profiling and historical compatibility",
+  "date": "2026-09-23",
+  "source_environment": {
+    "python": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]",
+    "scm_dev_tools": "0.5.0"
+  },
+  "test_runs": [
+    {
+      "label": "focused-first",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "97",
+      "time": "39.169",
+      "timestamp": "2026-09-23T12:47:59.476856-07:00",
+      "hostname": "homeone",
+      "xml": {
+        "path": "workspace/state/verification/phase-a05/focused-first.xml",
+        "sha256": "b251cece289a6990d9dfa2f236a14c6d4a2192d0c1226978340911a9f550dbaf",
+        "bytes": 13340
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-a05/focused-first.log",
+        "sha256": "c176a71399c734d7f50ab25248fc75304ce0ce781e4f1ccd122fe6cac01315de",
+        "bytes": 300
+      },
+      "log_text": "........................................................................ [ 74%]\n.........................                                                [100%]\n- generated xml file: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a05\\focused-first.xml -\n97 passed in 39.21s\n"
+    },
+    {
+      "label": "records-first",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "26",
+      "time": "11.578",
+      "timestamp": "2026-09-23T12:51:40.873244-07:00",
+      "hostname": "homeone",
+      "xml": {
+        "path": "workspace/state/verification/phase-a05/records-first.xml",
+        "sha256": "35f61a79b7dc6bbf38f3ec677e115c3ccee6862c30d6e8bdafdb2fbf4de4c051",
+        "bytes": 3869
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-a05/records-first.log",
+        "sha256": "cd6d3174aea8afa1d34b2115441b2d5c367b858cf0ac0ec9875f2a345e775fe2",
+        "bytes": 219
+      },
+      "log_text": "..........................                                               [100%]\n- generated xml file: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a05\\records-first.xml -\n26 passed in 11.62s\n"
+    },
+    {
+      "label": "full",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1048",
+      "time": "524.310",
+      "timestamp": "2026-09-23T12:53:00.422449-07:00",
+      "hostname": "homeone",
+      "xml": {
+        "path": "workspace/state/verification/phase-a05/full.xml",
+        "sha256": "f9cce71a9b3d7bbc415f1f05f706f38d6389c715eb69e70660512ecf66789cf0",
+        "bytes": 143756
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-a05/full.log",
+        "sha256": "5bc25a6e9db57821e1a35ddd2acc8a6d2cfbc83aa86101cdf3b12a12ceafa99c",
+        "bytes": 1357
+      },
+      "log_text": "........................................................................ [  6%]\n........................................................................ [ 13%]\n........................................................................ [ 20%]\n........................................................................ [ 27%]\n........................................................................ [ 34%]\n........................................................................ [ 41%]\n........................................................................ [ 48%]\n........................................................................ [ 54%]\n........................................................................ [ 61%]\n........................................................................ [ 68%]\n........................................................................ [ 75%]\n........................................................................ [ 82%]\n........................................................................ [ 89%]\n........................................................................ [ 96%]\n........................................                                 [100%]\n- generated xml file: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a05\\full.xml -\n1048 passed in 524.35s (0:08:44)\n"
+    },
+    {
+      "label": "installed",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "236",
+      "time": "262.088",
+      "timestamp": "2026-09-23T12:55:45.201843-07:00",
+      "hostname": "homeone",
+      "xml": {
+        "path": "workspace/state/verification/phase-a05/installed.xml",
+        "sha256": "1f5ec287a391a7fe2640143cd0e4860e7dd3650ec71246f3a4155d67edde3a79",
+        "bytes": 31535
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-a05/installed.log",
+        "sha256": "4554f033fb9a4441aa95e0a57646db8b58439910c0a3311db77185c4a6f19f51",
+        "bytes": 501
+      },
+      "log_text": "Installed 9 packages in 574ms\n........................................................................ [ 30%]\n........................................................................ [ 61%]\n........................................................................ [ 91%]\n....................                                                     [100%]\n- generated xml file: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a05\\installed.xml -\n236 passed in 262.12s (0:04:22)\n"
+    }
+  ],
+  "installed_commands_and_package": {
+    "scope": "Installed public commands with network forbidden; no new model rendering/training",
+    "python": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]",
+    "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\D98mcNuarqfSxCEFkGck9\\Lib\\site-packages\\itov\\__init__.py",
+    "commands": [
+      {
+        "label": "installed-0-status",
+        "arguments": [
+          "training",
+          "status",
+          "workspace/state/training/plans/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+          "--json"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"error\": null,\n  \"finished_at\": \"2026-09-22T06:24:55.109517+00:00\",\n  \"gpu\": {\n    \"driver\": \"616.64\",\n    \"free_bytes\": 31420579840,\n    \"name\": \"NVIDIA GeForce RTX 5090\",\n    \"total_bytes\": 34190917632,\n    \"used_bytes\": 2330984448,\n    \"uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\"\n  },\n  \"host\": {\n    \"available_commit\": 35794399232,\n    \"available_physical\": 41424478208,\n    \"total_commit\": 70256021504,\n    \"total_physical\": 66095271936\n  },\n  \"lease\": {\n    \"gpu_uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\",\n    \"job_name\": \"Global\\\\ITOV-owned-7f044b33-637b-49da-a0ef-14f19af79387\",\n    \"lease_id\": \"7f044b33-637b-49da-a0ef-14f19af79387\",\n    \"owner\": {\n      \"created\": 134345318584748637,\n      \"pid\": 50716\n    },\n    \"plan_id\": \"3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\",\n    \"record_id\": \"83f34e049ff3ea15fc1cb8e2f64ae456f25c42d8626424e74e46ce9f20e4c156\",\n    \"started_at\": \"2026-09-22T06:24:22.318930+00:00\",\n    \"status\": \"held\",\n    \"version\": 1,\n    \"workers\": [\n      {\n        \"created\": 134345318623274027,\n        \"pid\": 53380\n      }\n    ],\n    \"workspace\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\"\n  },\n  \"owner\": {\n    \"created\": 134345318584748637,\n    \"pid\": 50716\n  },\n  \"plan_id\": \"3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\",\n  \"record_id\": \"a4bea7f10dde8cbfc2c5bb4d095e5890ac1aa79f37a3569d363382956388c34a\",\n  \"result_id\": \"b91d6a2d997bc7c43d1a9f21568a987e2194ecd70f46f36dc4d80bc6453fc0db\",\n  \"started_at\": \"2026-09-22T06:24:22.321562+00:00\",\n  \"status\": \"artifacts_validated\",\n  \"version\": 1,\n  \"worker\": {\n    \"created\": 134345318623274027,\n    \"pid\": 53380\n  },\n  \"scope\": \"training_status_observation\",\n  \"recorded_status\": \"succeeded\",\n  \"worker_completion\": \"completed\",\n  \"artifact_validation\": \"passed\",\n  \"failure_boundary\": null,\n  \"candidate_assessment\": \"not_performed_by_training\",\n  \"artifacts\": {\n    \"run.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\\\run.json\",\n    \"result.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\\\result.json\",\n    \"worker.log\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\\\worker.log\"\n  },\n  \"next_action\": \"Run evaluation assess; technical validation does not accept a candidate.\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-0-assessment",
+        "arguments": [
+          "evaluation",
+          "assess",
+          "workspace/state/training/plans/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+          "--json",
+          "--save"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"version\": 2,\n  \"scope\": \"training_technical_assessment\",\n  \"plan_id\": \"3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\",\n  \"result_id\": \"b91d6a2d997bc7c43d1a9f21568a987e2194ecd70f46f36dc4d80bc6453fc0db\",\n  \"dataset_id\": \"0c8453f3f0c36a8e033696b32679ca8bea24a21bd5600f141cd4fbedacf56992\",\n  \"weights\": {\n    \"path\": \"pytorch_lora_weights.safetensors\",\n    \"sha256\": \"6479dafbb1c285c1a6ee14bc33bdf55ba69b5af28a6d512ec50f5e14220228ac\"\n  },\n  \"integrity\": {\n    \"all_finite\": true,\n    \"bytes\": 23390424,\n    \"pairs\": 560,\n    \"tensors\": 1120\n  },\n  \"technical_pass\": true,\n  \"heldout_before\": [\n    {\n      \"loss_billionths\": 2440360,\n      \"noise_seed\": 11360921,\n      \"sample\": \"geometry-08\"\n    },\n    {\n      \"loss_billionths\": 3842753,\n      \"noise_seed\": 11360922,\n      \"sample\": \"geometry-09\"\n    }\n  ],\n  \"heldout_after\": [\n    {\n      \"loss_billionths\": 2062644,\n      \"noise_seed\": 11360921,\n      \"sample\": \"geometry-08\"\n    },\n    {\n      \"loss_billionths\": 3004410,\n      \"noise_seed\": 11360922,\n      \"sample\": \"geometry-09\"\n    }\n  ],\n  \"previews\": [\n    {\n      \"baseline\": {\n        \"path\": \"geometry-08-baseline.png\",\n        \"sha256\": \"9c5e08b2677f11629aca3eeff953dc9db61b3fbd7be80e349819e4dd53da313e\"\n      },\n      \"candidate\": {\n        \"path\": \"geometry-08-candidate.png\",\n        \"sha256\": \"cf54bdb66cc6f43039b4448307bb32066b8dedb176c6b2766d3011caaa34c6c0\"\n      },\n      \"prompt\": \"itovgeom flat geometric composition, a red disk and a blue square on an ivory background\",\n      \"sample\": \"geometry-08\",\n      \"seed\": 11460921\n    },\n    {\n      \"baseline\": {\n        \"path\": \"geometry-09-baseline.png\",\n        \"sha256\": \"cfe420ab115e876d56f415dc966a7515211b0114de979dab869b957367e89620\"\n      },\n      \"candidate\": {\n        \"path\": \"geometry-09-candidate.png\",\n        \"sha256\": \"d56a8ce897b5de2ac9a87c3a8eeff053f6f6ee35a1e71ee42e9307a1bc9ccc01\"\n      },\n      \"prompt\": \"itovgeom flat geometric composition, a red disk and a blue square on an ivory background\",\n      \"sample\": \"geometry-09\",\n      \"seed\": 11460922\n    }\n  ],\n  \"purpose\": \"smoke\",\n  \"quality_acceptance\": \"evidence_review_required\",\n  \"promotion_eligible\": false,\n  \"limits\": \"Successful optimization, finite weights and paired diagnostics do not establish quality, activation or runtime compatibility. Smoke datasets cannot be promoted.\",\n  \"assessment_id\": \"c28cddad813d39ab9db11f589095fa85761a5a39b0c2157d477780b4f0b6843e\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-0-candidate",
+        "arguments": [
+          "training",
+          "candidate",
+          "workspace/state/training/plans/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json",
+          "--json",
+          "--save"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"version\": 1,\n  \"plan_id\": \"3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\",\n  \"assessment_id\": \"c28cddad813d39ab9db11f589095fa85761a5a39b0c2157d477780b4f0b6843e\",\n  \"result_id\": \"b91d6a2d997bc7c43d1a9f21568a987e2194ecd70f46f36dc4d80bc6453fc0db\",\n  \"entry\": {\n    \"id\": \"trained-2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a\",\n    \"asset\": {\n      \"path\": \"models_shared/trained/2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a.safetensors\",\n      \"sha256\": \"2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a\"\n    },\n    \"category\": \"style\",\n    \"slot\": \"style\",\n    \"base_models\": [\n      \"sdxl-1.0\"\n    ],\n    \"strength_milli\": {\n      \"min\": 500,\n      \"recommended\": 1000,\n      \"max\": 1000\n    },\n    \"rotation_weight_milli\": 1000,\n    \"trigger_words\": [\n      \"itovgeom\"\n    ],\n    \"status\": \"candidate\"\n  },\n  \"purpose\": \"smoke\",\n  \"export\": {\n    \"format\": \"comfy-unet-lora-v1\",\n    \"source_sha256\": \"6479dafbb1c285c1a6ee14bc33bdf55ba69b5af28a6d512ec50f5e14220228ac\",\n    \"sha256\": \"2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a\",\n    \"bytes\": 23396192,\n    \"tensors\": 1120,\n    \"tensor_payload_sha256\": \"4d83a19dcfba2269a16d8b8a7a5a8c1cd3b705ac4d57e2588f73911524fd570e\",\n    \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n    \"alpha_scale_milli\": 1000,\n    \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\"\n  },\n  \"candidate_id\": \"dac0e695fe6f3ef786661d019d36dce5868d6f0f3a1d037438c4670000301b68\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-0-status-text",
+        "arguments": [
+          "training",
+          "status",
+          "workspace/state/training/plans/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json"
+        ],
+        "exit_code": 0,
+        "stdout": "ARTIFACTS_VALIDATED\nPlan id: 3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\nRecorded status: succeeded\nWorker completion: completed\nArtifact validation: passed\nFailure boundary: None\nCandidate assessment: not_performed_by_training\nNext action: Run evaluation assess; technical validation does not accept a candidate.\nrun.json: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\run.json\nresult.json: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\result.json\nworker.log: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\worker.log\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-1-status",
+        "arguments": [
+          "training",
+          "status",
+          "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+          "--json"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"error\": null,\n  \"finished_at\": \"2026-09-22T07:29:49.060778+00:00\",\n  \"gpu\": {\n    \"driver\": \"616.64\",\n    \"free_bytes\": 31332499456,\n    \"name\": \"NVIDIA GeForce RTX 5090\",\n    \"total_bytes\": 34190917632,\n    \"used_bytes\": 2419064832,\n    \"uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\"\n  },\n  \"host\": {\n    \"available_commit\": 33506873344,\n    \"available_physical\": 41572347904,\n    \"total_commit\": 70256021504,\n    \"total_physical\": 66095271936\n  },\n  \"lease\": {\n    \"gpu_uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\",\n    \"job_name\": \"Global\\\\ITOV-owned-93d0bed0-fcc9-48bd-b8bf-429f25298427\",\n    \"lease_id\": \"93d0bed0-fcc9-48bd-b8bf-429f25298427\",\n    \"owner\": {\n      \"created\": 134345356353007846,\n      \"pid\": 51796\n    },\n    \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n    \"record_id\": \"9117d7dd87a6032115c791500c424829c6638f7561cd1fec40d036ab8237dcab\",\n    \"started_at\": \"2026-09-22T07:27:19.310693+00:00\",\n    \"status\": \"held\",\n    \"version\": 1,\n    \"workers\": [\n      {\n        \"created\": 134345356393203204,\n        \"pid\": 29652\n      }\n    ],\n    \"workspace\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\"\n  },\n  \"owner\": {\n    \"created\": 134345356353007846,\n    \"pid\": 51796\n  },\n  \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n  \"record_id\": \"42edbc9f7a3df2b9ee5f5345611490c22989592d1e315d66ef4a2f01f43ca9c5\",\n  \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n  \"started_at\": \"2026-09-22T07:27:19.313948+00:00\",\n  \"status\": \"artifacts_validated\",\n  \"version\": 1,\n  \"worker\": {\n    \"created\": 134345356393203204,\n    \"pid\": 29652\n  },\n  \"scope\": \"training_status_observation\",\n  \"recorded_status\": \"succeeded\",\n  \"worker_completion\": \"completed\",\n  \"artifact_validation\": \"passed\",\n  \"failure_boundary\": null,\n  \"candidate_assessment\": \"not_performed_by_training\",\n  \"artifacts\": {\n    \"run.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\\\run.json\",\n    \"result.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\\\result.json\",\n    \"worker.log\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\\\worker.log\"\n  },\n  \"next_action\": \"Run evaluation assess; technical validation does not accept a candidate.\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-1-assessment",
+        "arguments": [
+          "evaluation",
+          "assess",
+          "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+          "--json",
+          "--save"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"version\": 2,\n  \"scope\": \"training_technical_assessment\",\n  \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n  \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n  \"dataset_id\": \"877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751\",\n  \"weights\": {\n    \"path\": \"pytorch_lora_weights.safetensors\",\n    \"sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\"\n  },\n  \"integrity\": {\n    \"all_finite\": true,\n    \"bytes\": 23390424,\n    \"pairs\": 560,\n    \"tensors\": 1120\n  },\n  \"technical_pass\": true,\n  \"heldout_before\": [\n    {\n      \"loss_billionths\": 11254031,\n      \"noise_seed\": 11360922,\n      \"sample\": \"met-11737\"\n    },\n    {\n      \"loss_billionths\": 197922140,\n      \"noise_seed\": 11360923,\n      \"sample\": \"met-436450\"\n    }\n  ],\n  \"heldout_after\": [\n    {\n      \"loss_billionths\": 10980256,\n      \"noise_seed\": 11360922,\n      \"sample\": \"met-11737\"\n    },\n    {\n      \"loss_billionths\": 186335206,\n      \"noise_seed\": 11360923,\n      \"sample\": \"met-436450\"\n    }\n  ],\n  \"previews\": [\n    {\n      \"baseline\": {\n        \"path\": \"met-11737-baseline.png\",\n        \"sha256\": \"bc2ca6c1464585109c3cc4f529fff1debf6e998719f73e9100dc2b6dd491aff1\"\n      },\n      \"candidate\": {\n        \"path\": \"met-11737-candidate.png\",\n        \"sha256\": \"c0217ebad4c3fc70d49d558e5e1749fcefc2cea6698d335c5043cca3a14d8cfe\"\n      },\n      \"prompt\": \"itovstill oil painting of a plate of sliced cake, grapes and a glass on a table, dark brown background\",\n      \"sample\": \"met-11737\",\n      \"seed\": 11460922\n    },\n    {\n      \"baseline\": {\n        \"path\": \"met-436450-baseline.png\",\n        \"sha256\": \"ce54e6b37d5f5d3c1917406f1067774ad1aa61c9428b557e619a6856fcd974ff\"\n      },\n      \"candidate\": {\n        \"path\": \"met-436450-candidate.png\",\n        \"sha256\": \"2a62db231cd5b00c543874ac73e5a505cfc41481ee77f0c3ed908da71b27c486\"\n      },\n      \"prompt\": \"itovstill oil painting of several pears and a green bottle on a white cloth, warm textured background\",\n      \"sample\": \"met-436450\",\n      \"seed\": 11460923\n    }\n  ],\n  \"purpose\": \"training\",\n  \"quality_acceptance\": \"evidence_review_required\",\n  \"promotion_eligible\": false,\n  \"limits\": \"Successful optimization, finite weights and paired diagnostics do not establish quality, activation or runtime compatibility. Smoke datasets cannot be promoted.\",\n  \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-1-candidate",
+        "arguments": [
+          "training",
+          "candidate",
+          "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+          "--json",
+          "--save"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"version\": 1,\n  \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n  \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n  \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n  \"entry\": {\n    \"id\": \"trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n    \"asset\": {\n      \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n      \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n    },\n    \"category\": \"style\",\n    \"slot\": \"style\",\n    \"base_models\": [\n      \"sdxl-1.0\"\n    ],\n    \"strength_milli\": {\n      \"min\": 500,\n      \"recommended\": 1000,\n      \"max\": 1000\n    },\n    \"rotation_weight_milli\": 1000,\n    \"trigger_words\": [\n      \"itovstill\"\n    ],\n    \"status\": \"candidate\"\n  },\n  \"purpose\": \"training\",\n  \"export\": {\n    \"format\": \"comfy-unet-lora-v1\",\n    \"source_sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\",\n    \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n    \"bytes\": 23396192,\n    \"tensors\": 1120,\n    \"tensor_payload_sha256\": \"4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0\",\n    \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n    \"alpha_scale_milli\": 1000,\n    \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\"\n  },\n  \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-1-packet",
+        "arguments": [
+          "evaluation",
+          "packet",
+          "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+          "--json",
+          "--save"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"version\": 2,\n  \"scope\": \"quality_review_pending\",\n  \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n  \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n  \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n  \"curation_id\": \"92a6e0e15617b0215a257a4580efc63272932311ff8d3cc25c7fd8f7e64e999a\",\n  \"curator\": \"Codex assistant\",\n  \"suite\": {\n    \"cases\": [\n      {\n        \"expectation\": \"Exactly two yellow pears and one blue vase, intact distinct objects and a coherent table. Adapter with trigger should show oil-painted still-life appearance without adding objects, grids or borders. Compare all four conditions; baseline trigger effects do not prove learned activation.\",\n        \"id\": \"vase-and-pears\",\n        \"kind\": \"holdout\",\n        \"negative_prompt\": \"text, watermark, signature, frame\",\n        \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n        \"seeds\": [\n          11760922,\n          11760923\n        ]\n      },\n      {\n        \"expectation\": \"One red cube and one white cone remain distinct with coherent shadows. Without trigger the adapter should preserve photographic appearance and prompt adherence. With trigger assess whether painterly change preserves object identity and composition; record unintended fruit, flowers, repetition or distortion.\",\n        \"id\": \"paper-geometry\",\n        \"kind\": \"regression\",\n        \"negative_prompt\": \"text, watermark, signature, frame\",\n        \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n        \"seeds\": [\n          11860922,\n          11860923\n        ]\n      }\n    ],\n    \"id\": \"still-life-independent-v1\",\n    \"trigger\": \"itovstill\",\n    \"version\": 1\n  },\n  \"images\": [\n    {\n      \"case_id\": \"vase-and-pears\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-base_plain.png\",\n        \"sha256\": \"6048cb84079c5a5dff63cda2bf8bf7a781a9ad0b501d67949c146539f073ef8a\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"role\": \"base_plain\",\n      \"seed\": 11760922\n    },\n    {\n      \"case_id\": \"vase-and-pears\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-base_trigger.png\",\n        \"sha256\": \"795cbe5020faaffa6c8a6a567e4b35c04db04a07ba4f606359145b9f9eee4e42\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"role\": \"base_trigger\",\n      \"seed\": 11760922\n    },\n    {\n      \"case_id\": \"vase-and-pears\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-adapter_plain.png\",\n        \"sha256\": \"d32e33518fddbedd32f41c3f4be87acb7003c45a06886889fb581ce51548b934\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"role\": \"adapter_plain\",\n      \"seed\": 11760922\n    },\n    {\n      \"case_id\": \"vase-and-pears\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-adapter_trigger.png\",\n        \"sha256\": \"c4c9069b3c1f938f175c70ef109dfeb54eba3c1e3e1f45873a972ef3fdf7e511\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"role\": \"adapter_trigger\",\n      \"seed\": 11760922\n    },\n    {\n      \"case_id\": \"vase-and-pears\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-base_plain.png\",\n        \"sha256\": \"414b6e18abbb38c31dfa2861382efa08e72af11df6e0b48820a03218b7a50a3d\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"role\": \"base_plain\",\n      \"seed\": 11760923\n    },\n    {\n      \"case_id\": \"vase-and-pears\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-base_trigger.png\",\n        \"sha256\": \"b7c792719cd60602c1a337709bf367a6b56977f43e3af3cd7ea950094ab3c32c\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"role\": \"base_trigger\",\n      \"seed\": 11760923\n    },\n    {\n      \"case_id\": \"vase-and-pears\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-adapter_plain.png\",\n        \"sha256\": \"a450e52052b4ee8ac2a3c7de4345941a57837b3928adefeb4401c9d6fec9274b\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"role\": \"adapter_plain\",\n      \"seed\": 11760923\n    },\n    {\n      \"case_id\": \"vase-and-pears\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-adapter_trigger.png\",\n        \"sha256\": \"924cd01da89cf8727632b28cb34f6216a3d323f294432e6d66eedc2c90026649\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"role\": \"adapter_trigger\",\n      \"seed\": 11760923\n    },\n    {\n      \"case_id\": \"paper-geometry\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-base_plain.png\",\n        \"sha256\": \"57cb5d09af6e5462ade028da5dfb133d4fd1ee6b841226da66adaadef5d220e3\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"role\": \"base_plain\",\n      \"seed\": 11860922\n    },\n    {\n      \"case_id\": \"paper-geometry\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-base_trigger.png\",\n        \"sha256\": \"1111f0529c819b5518ee2bf6382bde073029824ab1f309660c4841e1d15ec796\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"role\": \"base_trigger\",\n      \"seed\": 11860922\n    },\n    {\n      \"case_id\": \"paper-geometry\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-adapter_plain.png\",\n        \"sha256\": \"213a59273fd0f48bc931579c012e018a2a2f9ddbc33d01eaa8ab7df1d4ec3ef0\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"role\": \"adapter_plain\",\n      \"seed\": 11860922\n    },\n    {\n      \"case_id\": \"paper-geometry\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-adapter_trigger.png\",\n        \"sha256\": \"d17e38f4f5db4f959ce197b1c717ec129649d087a2024daaec559bd2e977622b\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"role\": \"adapter_trigger\",\n      \"seed\": 11860922\n    },\n    {\n      \"case_id\": \"paper-geometry\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-base_plain.png\",\n        \"sha256\": \"6df43c23d552ad905205face6f4d419ec91e021e198e67555fc01a5c6cdb236e\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"role\": \"base_plain\",\n      \"seed\": 11860923\n    },\n    {\n      \"case_id\": \"paper-geometry\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-base_trigger.png\",\n        \"sha256\": \"39a9334a94fa7671f7bffdaf64b1c03c4dc82c746a330d5a1a3b667329806d13\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"role\": \"base_trigger\",\n      \"seed\": 11860923\n    },\n    {\n      \"case_id\": \"paper-geometry\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-adapter_plain.png\",\n        \"sha256\": \"11f7a46de782ed50e07f83cedb27221f7b818cc6a14c90ed1e4abc7d8984d3d0\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"role\": \"adapter_plain\",\n      \"seed\": 11860923\n    },\n    {\n      \"case_id\": \"paper-geometry\",\n      \"image\": {\n        \"path\": \"state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-adapter_trigger.png\",\n        \"sha256\": \"c6bf759002b73a17cf95f3d404565d10d0428b33775071cf6150a2e249669ca1\"\n      },\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"prompt\": \"itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"role\": \"adapter_trigger\",\n      \"seed\": 11860923\n    }\n  ],\n  \"limits\": \"Complete fixed-seed Diffusers comparisons, not a quality verdict. Human or assistant review must state its method and limitations; reviewer identity alone is not quality evidence. Labels disclose conditions; runtime compatibility evidence is also required.\",\n  \"packet_id\": \"49da619516f080c8a6da4f5806b122b8221170690e5e935cd72c51c01653c600\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-1-status-text",
+        "arguments": [
+          "training",
+          "status",
+          "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json"
+        ],
+        "exit_code": 0,
+        "stdout": "ARTIFACTS_VALIDATED\nPlan id: 5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\nRecorded status: succeeded\nWorker completion: completed\nArtifact validation: passed\nFailure boundary: None\nCandidate assessment: not_performed_by_training\nNext action: Run evaluation assess; technical validation does not accept a candidate.\nrun.json: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\run.json\nresult.json: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\result.json\nworker.log: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\worker.log\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-rejected-promotion",
+        "arguments": [
+          "promotion",
+          "prepare",
+          "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+          "--review",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\reviews\\stage11b-assistant-rejection-20260922.json",
+          "--json"
+        ],
+        "exit_code": 1,
+        "stdout": "{\n  \"ok\": false,\n  \"scope\": \"promotion_refused\",\n  \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n  \"blockers\": [\n    \"A complete, evidence-backed approving review is required\",\n    \"Curated training v2 and passing review of every case and seed are required\"\n  ]\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-a02-replay",
+        "arguments": [
+          "evaluation",
+          "replay",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\evaluation\\plans\\6d4a57ac60bec4ae889950658492ab5f23e6f325be08f74678c361c450c2a48c.json",
+          "--json"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"version\": 1,\n  \"scope\": \"deployed_evaluation_technical_report\",\n  \"plan_id\": \"6d4a57ac60bec4ae889950658492ab5f23e6f325be08f74678c361c450c2a48c\",\n  \"candidate\": {\n    \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n    \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n    \"entry\": {\n      \"asset\": {\n        \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n      },\n      \"base_models\": [\n        \"sdxl-1.0\"\n      ],\n      \"category\": \"style\",\n      \"id\": \"trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n      \"rotation_weight_milli\": 1000,\n      \"slot\": \"style\",\n      \"status\": \"candidate\",\n      \"strength_milli\": {\n        \"max\": 1000,\n        \"min\": 500,\n        \"recommended\": 1000\n      },\n      \"trigger_words\": [\n        \"itovstill\"\n      ]\n    },\n    \"export\": {\n      \"alpha_scale_milli\": 1000,\n      \"bytes\": 23396192,\n      \"format\": \"comfy-unet-lora-v1\",\n      \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\",\n      \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n      \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n      \"source_sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\",\n      \"tensor_payload_sha256\": \"4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0\",\n      \"tensors\": 1120\n    },\n    \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n    \"purpose\": \"training\",\n    \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n    \"version\": 1\n  },\n  \"deployment\": {\n    \"asset\": {\n      \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n      \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n    },\n    \"loader_name\": \"itov_evaluation_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\"\n  },\n  \"suite\": {\n    \"cases\": [\n      {\n        \"expectation\": \"Exactly two yellow pears and one blue vase, intact distinct objects and a coherent table. Adapter with trigger should show oil-painted still-life appearance without adding objects, grids or borders. Compare all four conditions; baseline trigger effects do not prove learned activation.\",\n        \"id\": \"vase-and-pears\",\n        \"kind\": \"holdout\",\n        \"negative_prompt\": \"text, watermark, signature, frame\",\n        \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n        \"seeds\": [\n          11760922,\n          11760923\n        ]\n      },\n      {\n        \"expectation\": \"One red cube and one white cone remain distinct with coherent shadows. Without trigger the adapter should preserve photographic appearance and prompt adherence. With trigger assess whether painterly change preserves object identity and composition; record unintended fruit, flowers, repetition or distortion.\",\n        \"id\": \"paper-geometry\",\n        \"kind\": \"regression\",\n        \"negative_prompt\": \"text, watermark, signature, frame\",\n        \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n        \"seeds\": [\n          11860922,\n          11860923\n        ]\n      }\n    ],\n    \"id\": \"still-life-independent-v1\",\n    \"trigger\": \"itovstill\",\n    \"version\": 1\n  },\n  \"runtime\": {\n    \"devices\": [\n      {\n        \"index\": 0,\n        \"name\": \"cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync\",\n        \"type\": \"cuda\"\n      }\n    ],\n    \"files\": [\n      {\n        \"bytes\": 95082,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\k_diffusion\\\\sampling.py\",\n        \"sha256\": \"a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f\"\n      },\n      {\n        \"bytes\": 26117,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora.py\",\n        \"sha256\": \"fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc\"\n      },\n      {\n        \"bytes\": 1970,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora_convert.py\",\n        \"sha256\": \"6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245\"\n      },\n      {\n        \"bytes\": 105135,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\model_patcher.py\",\n        \"sha256\": \"097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c\"\n      },\n      {\n        \"bytes\": 5096,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sample.py\",\n        \"sha256\": \"d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee\"\n      },\n      {\n        \"bytes\": 65846,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\samplers.py\",\n        \"sha256\": \"2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae\"\n      },\n      {\n        \"bytes\": 146916,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sd.py\",\n        \"sha256\": \"e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec\"\n      },\n      {\n        \"bytes\": 64869,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\",\n        \"sha256\": \"dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b\"\n      },\n      {\n        \"bytes\": 23745,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\folder_paths.py\",\n        \"sha256\": \"a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66\"\n      },\n      {\n        \"bytes\": 25024,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"sha256\": \"5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96\"\n      },\n      {\n        \"bytes\": 6938078334,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      {\n        \"bytes\": 23396192,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\itov_evaluation_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n      },\n      {\n        \"bytes\": 111280,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\nodes.py\",\n        \"sha256\": \"4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891\"\n      }\n    ],\n    \"image_decoder\": {\n      \"bytes\": 222248960,\n      \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n      \"sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n    },\n    \"jobs\": 16,\n    \"node_schema_sha256\": \"e0454ab12a694571448470cae2fd1ac63b60090108464f1c15a68d0c29da9c95\",\n    \"profile\": \"stock-sdxl-evaluation-v1\",\n    \"runtime\": {\n      \"argv\": [\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"--disable-auto-launch\",\n        \"--listen\",\n        \"127.0.0.1\",\n        \"--port\",\n        \"8188\",\n        \"--input-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\input\",\n        \"--output-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\",\n        \"--disable-all-custom-nodes\"\n      ],\n      \"comfyui_version\": \"0.37.0\",\n      \"python_version\": \"3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]\",\n      \"pytorch_version\": \"2.13.0+cu130\"\n    },\n    \"scope\": \"runtime_schema_and_asset_binding\",\n    \"server\": \"http://127.0.0.1:8188\",\n    \"version\": 1\n  },\n  \"sampler\": {\n    \"cfg_milli\": 7000,\n    \"sampler_name\": \"dpmpp_2m\",\n    \"scheduler\": \"karras\",\n    \"steps\": 20\n  },\n  \"strength_milli\": 1000,\n  \"matrix\": [\n    {\n      \"index\": 0,\n      \"case_id\": \"vase-and-pears\",\n      \"seed\": 11760922,\n      \"role\": \"base_plain\",\n      \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\8bca9e37-aed3-5fa2-8c76-2adc462970fa.json\",\n      \"request_id\": \"8bca9e37-aed3-5fa2-8c76-2adc462970fa\",\n      \"prompt_id\": \"c0642dfd-161a-4652-88a2-533790a1631e\",\n      \"error\": null,\n      \"record_sha256\": \"132e4607cee9801dead0a1f8355b8959c09a7dcfd2e89efe640118d72aeef873\",\n      \"image\": {\n        \"path\": \"output/jobs/8bca9e37-aed3-5fa2-8c76-2adc462970fa/artifact-0000.png\",\n        \"sha256\": \"a6166199c27446cb30841f513aeba1a2f632751df3acfdfe480bffa348f7d7d1\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 350909,\n        \"sha256\": \"a6166199c27446cb30841f513aeba1a2f632751df3acfdfe480bffa348f7d7d1\",\n        \"decoded_rgb_sha256\": \"782f7ba110cbe0d6a003fc1a9df38de009f982421aa263992580ab5813383ec1\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 1,\n      \"case_id\": \"vase-and-pears\",\n      \"seed\": 11760922,\n      \"role\": \"base_trigger\",\n      \"prompt\": \"itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\4f2edcc2-a7f1-5fed-9b50-a1d0aed83d0f.json\",\n      \"request_id\": \"4f2edcc2-a7f1-5fed-9b50-a1d0aed83d0f\",\n      \"prompt_id\": \"074512a4-4c5c-4be1-b4ec-7617b3d022fa\",\n      \"error\": null,\n      \"record_sha256\": \"59f554f71020949742b87f6fa4f2ab6057302e8131eb9d9249024fae46466fbd\",\n      \"image\": {\n        \"path\": \"output/jobs/4f2edcc2-a7f1-5fed-9b50-a1d0aed83d0f/artifact-0000.png\",\n        \"sha256\": \"5d6b49b9f5410c97102edde6ac4a1bd260028cc8391a7b756634ab2f6ab866f6\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 354702,\n        \"sha256\": \"5d6b49b9f5410c97102edde6ac4a1bd260028cc8391a7b756634ab2f6ab866f6\",\n        \"decoded_rgb_sha256\": \"c73ecfee6c78b8a2b9f2611a28e513859458f092978ca3ad3675bf756c7c73fb\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 2,\n      \"case_id\": \"vase-and-pears\",\n      \"seed\": 11760922,\n      \"role\": \"adapter_plain\",\n      \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\2269394d-cb38-537a-aac7-492f53e9bc38.json\",\n      \"request_id\": \"2269394d-cb38-537a-aac7-492f53e9bc38\",\n      \"prompt_id\": \"3976748f-768c-404a-b259-08713525cf88\",\n      \"error\": null,\n      \"record_sha256\": \"43b9285bcc2ff26b5a2ec11ed82a3f0287ea03781d88c16f5864ab3d9c1f2e6d\",\n      \"image\": {\n        \"path\": \"output/jobs/2269394d-cb38-537a-aac7-492f53e9bc38/artifact-0000.png\",\n        \"sha256\": \"48e84a2053a8aba491fa416a35869cdc6e8aebab72a9e0d3b9191e5eb7dcab5f\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 333558,\n        \"sha256\": \"48e84a2053a8aba491fa416a35869cdc6e8aebab72a9e0d3b9191e5eb7dcab5f\",\n        \"decoded_rgb_sha256\": \"b036bab8ccc4b7e90e86eb1e1358a1fd3fc9ad7123247ed63b0da1518123c5af\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 3,\n      \"case_id\": \"vase-and-pears\",\n      \"seed\": 11760922,\n      \"role\": \"adapter_trigger\",\n      \"prompt\": \"itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\0be384f0-de37-5a27-b0ac-e59aa7543875.json\",\n      \"request_id\": \"0be384f0-de37-5a27-b0ac-e59aa7543875\",\n      \"prompt_id\": \"8936ac92-da8d-4b68-ac9a-9c9b12d0068a\",\n      \"error\": null,\n      \"record_sha256\": \"8f644aa158b8d982ac427eeb1b2ed486ceb05b309cb58b52b0e6813c1831f7f8\",\n      \"image\": {\n        \"path\": \"output/jobs/0be384f0-de37-5a27-b0ac-e59aa7543875/artifact-0000.png\",\n        \"sha256\": \"c0a2d5455d026bb725e95d4d1cd55e7a55c2abd18d57de9baccd9247e1213170\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 334849,\n        \"sha256\": \"c0a2d5455d026bb725e95d4d1cd55e7a55c2abd18d57de9baccd9247e1213170\",\n        \"decoded_rgb_sha256\": \"72b6a91c81e9a7e91680fcb77611c31cb66eb9f6c202b6a7d3e4a0779adb34b0\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 4,\n      \"case_id\": \"vase-and-pears\",\n      \"seed\": 11760923,\n      \"role\": \"base_plain\",\n      \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\e5129278-c34d-5385-8719-4a26f8fefbef.json\",\n      \"request_id\": \"e5129278-c34d-5385-8719-4a26f8fefbef\",\n      \"prompt_id\": \"c6e43255-eede-4c30-9fd8-58f0a6b55d0d\",\n      \"error\": null,\n      \"record_sha256\": \"7ebd269dc1169cd2c5105c1a3b2d33afca0fdca13abe8cb3ceed0a807eedc1f6\",\n      \"image\": {\n        \"path\": \"output/jobs/e5129278-c34d-5385-8719-4a26f8fefbef/artifact-0000.png\",\n        \"sha256\": \"38e27e1a5301681f64ba6c7aadb34bc0d146072e5c7c71f644e782fb8b068113\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 358091,\n        \"sha256\": \"38e27e1a5301681f64ba6c7aadb34bc0d146072e5c7c71f644e782fb8b068113\",\n        \"decoded_rgb_sha256\": \"50ed92b35e3690c866786423bdfde75954e12c176fa66885a18749d7c500e084\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 5,\n      \"case_id\": \"vase-and-pears\",\n      \"seed\": 11760923,\n      \"role\": \"base_trigger\",\n      \"prompt\": \"itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\d817835c-6d56-5d82-8db3-90e35cfebd71.json\",\n      \"request_id\": \"d817835c-6d56-5d82-8db3-90e35cfebd71\",\n      \"prompt_id\": \"beb8cc2f-beec-4bf9-b435-7ac63bc8c945\",\n      \"error\": null,\n      \"record_sha256\": \"99e4eb76dfc4aa678ea5219fcb48f0bcbee7d99566912e16b9120177e5f2cc26\",\n      \"image\": {\n        \"path\": \"output/jobs/d817835c-6d56-5d82-8db3-90e35cfebd71/artifact-0000.png\",\n        \"sha256\": \"c81354bd18344bf4381773fc4b15af2012892cab657dc96ebd47e3a97120523d\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 352407,\n        \"sha256\": \"c81354bd18344bf4381773fc4b15af2012892cab657dc96ebd47e3a97120523d\",\n        \"decoded_rgb_sha256\": \"16b30bc8df317508b1c3ca448615339bf5d53885b7e8d8f93fc95c3ca2bc6a79\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 6,\n      \"case_id\": \"vase-and-pears\",\n      \"seed\": 11760923,\n      \"role\": \"adapter_plain\",\n      \"prompt\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\3ed98063-4367-58b8-98f2-91a8e1aea119.json\",\n      \"request_id\": \"3ed98063-4367-58b8-98f2-91a8e1aea119\",\n      \"prompt_id\": \"c0f2980c-daf3-4f01-a9c1-43f1e3602d15\",\n      \"error\": null,\n      \"record_sha256\": \"0cd7545f5f1ebc383c2dc11f56133b17f90877a277e888f92e96ba5f4ee37d19\",\n      \"image\": {\n        \"path\": \"output/jobs/3ed98063-4367-58b8-98f2-91a8e1aea119/artifact-0000.png\",\n        \"sha256\": \"539ed37be7ba6cd38c75c2876604cfe36cf77c5dc8e0bc59875fc7b9109643a1\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 368702,\n        \"sha256\": \"539ed37be7ba6cd38c75c2876604cfe36cf77c5dc8e0bc59875fc7b9109643a1\",\n        \"decoded_rgb_sha256\": \"4a479e17b290962ad28adb85aba49877950135dac476a07659e69f396100c5f6\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 7,\n      \"case_id\": \"vase-and-pears\",\n      \"seed\": 11760923,\n      \"role\": \"adapter_trigger\",\n      \"prompt\": \"itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\213ebc08-e801-5308-a408-1c57d755294e.json\",\n      \"request_id\": \"213ebc08-e801-5308-a408-1c57d755294e\",\n      \"prompt_id\": \"b1d7c4a5-7081-4708-b0b2-ce7145975b1f\",\n      \"error\": null,\n      \"record_sha256\": \"00ab7bc29e735840a0d828efa423a0557fdad5bfebb24e73a11e73f2409acccb\",\n      \"image\": {\n        \"path\": \"output/jobs/213ebc08-e801-5308-a408-1c57d755294e/artifact-0000.png\",\n        \"sha256\": \"51889489b6024cbe2864afdb502f494e4716b3090dc51001d3fc30714379a861\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 394188,\n        \"sha256\": \"51889489b6024cbe2864afdb502f494e4716b3090dc51001d3fc30714379a861\",\n        \"decoded_rgb_sha256\": \"6203b80a8ee4ae4b1659729602349d6975e3b3d808a49b10975741c2f748712d\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 8,\n      \"case_id\": \"paper-geometry\",\n      \"seed\": 11860922,\n      \"role\": \"base_plain\",\n      \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\6b7f03e3-5ede-57b1-9292-cb4210f8be26.json\",\n      \"request_id\": \"6b7f03e3-5ede-57b1-9292-cb4210f8be26\",\n      \"prompt_id\": \"d218ed01-1176-446f-b44c-4be0853f7823\",\n      \"error\": null,\n      \"record_sha256\": \"00ff2d512034562091e759a06db8ce9784b89fa436a2401bc4f48fca81fccfff\",\n      \"image\": {\n        \"path\": \"output/jobs/6b7f03e3-5ede-57b1-9292-cb4210f8be26/artifact-0000.png\",\n        \"sha256\": \"39ec765ae6c894d8dbb73d1c2c3f28db4fee7a34b58244af2137f33f967d1600\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 268321,\n        \"sha256\": \"39ec765ae6c894d8dbb73d1c2c3f28db4fee7a34b58244af2137f33f967d1600\",\n        \"decoded_rgb_sha256\": \"6d1e6a47f2c17cb96aac1c4f6ff241e2a60c2e61d46cedeaed6c87b31a9bfb91\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 9,\n      \"case_id\": \"paper-geometry\",\n      \"seed\": 11860922,\n      \"role\": \"base_trigger\",\n      \"prompt\": \"itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\515f5ff5-bc54-5606-ac4b-d35eb62641c2.json\",\n      \"request_id\": \"515f5ff5-bc54-5606-ac4b-d35eb62641c2\",\n      \"prompt_id\": \"b0a50aad-5f85-4909-b505-86e4f7123aef\",\n      \"error\": null,\n      \"record_sha256\": \"d1ba8d5159c0047e04f60e5f474e7184a16e439753999c0f310254088fddb797\",\n      \"image\": {\n        \"path\": \"output/jobs/515f5ff5-bc54-5606-ac4b-d35eb62641c2/artifact-0000.png\",\n        \"sha256\": \"f042fb624def39a941b889946d15e92fe5f75ad28621a642feaaad60277c77be\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 269741,\n        \"sha256\": \"f042fb624def39a941b889946d15e92fe5f75ad28621a642feaaad60277c77be\",\n        \"decoded_rgb_sha256\": \"61ba751dc75e08156eef91a199c9008ce91cb68897e05608915c98e460312b69\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 10,\n      \"case_id\": \"paper-geometry\",\n      \"seed\": 11860922,\n      \"role\": \"adapter_plain\",\n      \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\61181237-7b9a-5662-bde4-ec67acdc76ec.json\",\n      \"request_id\": \"61181237-7b9a-5662-bde4-ec67acdc76ec\",\n      \"prompt_id\": \"11f67428-3c37-46b1-8a80-59323fb60091\",\n      \"error\": null,\n      \"record_sha256\": \"c0a68fd328076c4df0d41b142f5d5daa86a872626656e1f9bf20b9ad4874328d\",\n      \"image\": {\n        \"path\": \"output/jobs/61181237-7b9a-5662-bde4-ec67acdc76ec/artifact-0000.png\",\n        \"sha256\": \"421a41b8505916f3e977aedb39a41f5e4bb5d8162f326a808784da64027507ff\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 230156,\n        \"sha256\": \"421a41b8505916f3e977aedb39a41f5e4bb5d8162f326a808784da64027507ff\",\n        \"decoded_rgb_sha256\": \"0cee168836861d0545ebecb82a0fcf13091edb958449eb84fbf00e5fcb51f00c\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 11,\n      \"case_id\": \"paper-geometry\",\n      \"seed\": 11860922,\n      \"role\": \"adapter_trigger\",\n      \"prompt\": \"itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\ff011fab-88de-5be8-a0c2-8efe150ddd23.json\",\n      \"request_id\": \"ff011fab-88de-5be8-a0c2-8efe150ddd23\",\n      \"prompt_id\": \"05214184-a131-4962-8992-c9ab2181ab07\",\n      \"error\": null,\n      \"record_sha256\": \"64f88a2ec5be8b3fcab160dc709f36207236dcb55c5224effc3851b791a98baa\",\n      \"image\": {\n        \"path\": \"output/jobs/ff011fab-88de-5be8-a0c2-8efe150ddd23/artifact-0000.png\",\n        \"sha256\": \"0d32b4624611cfe81a355cb928fa07cc89953a3b8a652ba7fc33ab3ca58b7635\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 225348,\n        \"sha256\": \"0d32b4624611cfe81a355cb928fa07cc89953a3b8a652ba7fc33ab3ca58b7635\",\n        \"decoded_rgb_sha256\": \"0814c38f829c88d0ea2daa37084d0e545fa3dc05c10e99ff02b23e5afa50a058\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 12,\n      \"case_id\": \"paper-geometry\",\n      \"seed\": 11860923,\n      \"role\": \"base_plain\",\n      \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\cf9b5671-ffd7-5901-ac69-1b32bcb4badf.json\",\n      \"request_id\": \"cf9b5671-ffd7-5901-ac69-1b32bcb4badf\",\n      \"prompt_id\": \"9b862161-1d33-466d-8d0e-059d856cd5d1\",\n      \"error\": null,\n      \"record_sha256\": \"218f922e37d0263cf5c34a2a103fd4543aa6e2d48a0c864b307c7fb08674280d\",\n      \"image\": {\n        \"path\": \"output/jobs/cf9b5671-ffd7-5901-ac69-1b32bcb4badf/artifact-0000.png\",\n        \"sha256\": \"b6ee3f91796f9a2913ad4171aa7b9b44ca85c926513ceaf5ea596b1aab27839f\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 264883,\n        \"sha256\": \"b6ee3f91796f9a2913ad4171aa7b9b44ca85c926513ceaf5ea596b1aab27839f\",\n        \"decoded_rgb_sha256\": \"167bc418f297cd4a06c1836157d881c72afeb8edfa6736ba04e2bc90efc85801\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 13,\n      \"case_id\": \"paper-geometry\",\n      \"seed\": 11860923,\n      \"role\": \"base_trigger\",\n      \"prompt\": \"itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\cbaf1f96-cde7-56c1-a375-ae6c518009b4.json\",\n      \"request_id\": \"cbaf1f96-cde7-56c1-a375-ae6c518009b4\",\n      \"prompt_id\": \"3086a641-1df9-4fc0-b831-645e273481e8\",\n      \"error\": null,\n      \"record_sha256\": \"c029742404d27141760d0a27c181236874678b4cfe1780a96cc02f735604ee5a\",\n      \"image\": {\n        \"path\": \"output/jobs/cbaf1f96-cde7-56c1-a375-ae6c518009b4/artifact-0000.png\",\n        \"sha256\": \"786cbd069fa525e0e2e5d833a94f1512ad08616630716e35b4dbdf6ccbbddc02\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 252966,\n        \"sha256\": \"786cbd069fa525e0e2e5d833a94f1512ad08616630716e35b4dbdf6ccbbddc02\",\n        \"decoded_rgb_sha256\": \"8c07834a7ab9a6914fc649b2807111fd39f951496d8dd36098560f049859c9e0\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 14,\n      \"case_id\": \"paper-geometry\",\n      \"seed\": 11860923,\n      \"role\": \"adapter_plain\",\n      \"prompt\": \"A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\1f35f6bc-a40a-58d3-b759-2fdec2658eba.json\",\n      \"request_id\": \"1f35f6bc-a40a-58d3-b759-2fdec2658eba\",\n      \"prompt_id\": \"5ab5b2b7-2eab-4c12-82a0-954eb0f4e2f5\",\n      \"error\": null,\n      \"record_sha256\": \"a0359a9b1945b293d523f2636d08717da4941d98124ab5882862343cf6362b0f\",\n      \"image\": {\n        \"path\": \"output/jobs/1f35f6bc-a40a-58d3-b759-2fdec2658eba/artifact-0000.png\",\n        \"sha256\": \"f644c0f94a6a125b069651d409afcf2f39d8559dd2f8550a4c5360607e5b9150\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 227437,\n        \"sha256\": \"f644c0f94a6a125b069651d409afcf2f39d8559dd2f8550a4c5360607e5b9150\",\n        \"decoded_rgb_sha256\": \"d621be4e5c2f908a37611184363b0f20f370e79f013fd4843b0c1bf922d98ec1\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    {\n      \"index\": 15,\n      \"case_id\": \"paper-geometry\",\n      \"seed\": 11860923,\n      \"role\": \"adapter_trigger\",\n      \"prompt\": \"itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects\",\n      \"negative_prompt\": \"text, watermark, signature, frame\",\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\7db2f084-5b3e-5b4b-a483-bd4434116c01.json\",\n      \"request_id\": \"7db2f084-5b3e-5b4b-a483-bd4434116c01\",\n      \"prompt_id\": \"a482801a-d199-49e7-b176-c9171b437474\",\n      \"error\": null,\n      \"record_sha256\": \"63aa2785c22716cc32a76d4f784ffae55b99181928ca14f92aab2148c5400fc0\",\n      \"image\": {\n        \"path\": \"output/jobs/7db2f084-5b3e-5b4b-a483-bd4434116c01/artifact-0000.png\",\n        \"sha256\": \"22ce468d8815bc3600dd7aae7a5fcf91f6bfd3d146f6fd6b8b70d7e8968dcb29\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 222720,\n        \"sha256\": \"22ce468d8815bc3600dd7aae7a5fcf91f6bfd3d146f6fd6b8b70d7e8968dcb29\",\n        \"decoded_rgb_sha256\": \"1893f2cd60c3f6e7ebd602a3f561db1fe3858b41ffef2cb9747429a7d3918f80\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    }\n  ],\n  \"technical_pass\": true,\n  \"quality_acceptance\": \"not_established\",\n  \"limits\": \"Complete owned runtime matrix and decoded PNGs; no quality verdict, promotion, loader-target mapping certificate or Diffusers sampler parity claim.\",\n  \"report_id\": \"930348fa8d3a369c8df707b41914c5242df0ee055d60eba984cc85137a0f686c\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-a04-candidate",
+        "arguments": [
+          "inference",
+          "replay",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e.json",
+          "--json"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"version\": 1,\n  \"scope\": \"inference_technical_report\",\n  \"plan_id\": \"24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e\",\n  \"deployment\": {\n    \"adapters\": [\n      {\n        \"asset\": {\n          \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n        },\n        \"candidate\": {\n          \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"entry\": {\n            \"asset\": {\n              \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n              \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n            },\n            \"base_models\": [\n              \"sdxl-1.0\"\n            ],\n            \"category\": \"style\",\n            \"id\": \"trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"rotation_weight_milli\": 1000,\n            \"slot\": \"style\",\n            \"status\": \"candidate\",\n            \"strength_milli\": {\n              \"max\": 1000,\n              \"min\": 500,\n              \"recommended\": 1000\n            },\n            \"trigger_words\": [\n              \"itovstill\"\n            ]\n          },\n          \"export\": {\n            \"alpha_scale_milli\": 1000,\n            \"bytes\": 23396192,\n            \"format\": \"comfy-unet-lora-v1\",\n            \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\",\n            \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n            \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"source_sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\",\n            \"tensor_payload_sha256\": \"4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0\",\n            \"tensors\": 1120\n          },\n          \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n          \"purpose\": \"training\",\n          \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n          \"version\": 1\n        },\n        \"kind\": \"trained_candidate\",\n        \"loader_name\": \"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"strength_milli\": 750\n      }\n    ],\n    \"capabilities\": {\n      \"adapter_order\": [\n        \"lcm (optional)\",\n        \"trained_candidate (optional)\"\n      ],\n      \"adapter_target\": \"UNet only; checkpoint CLIP and VAE remain bound\",\n      \"candidate_strength_milli\": {\n        \"max\": 1000,\n        \"min\": 1\n      },\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint_sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\",\n      \"lcm_sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n      \"lcm_strength_milli\": 1000,\n      \"limits\": \"Pinned SDXL base and LCM bytes, plus technically validated ITOV UNet exports. Compatibility permits experiments; it does not establish stack quality, candidate acceptance, promotion or Diffusers/ComfyUI parity.\",\n      \"ok\": true,\n      \"samplers\": {\n        \"with_lcm\": {\n          \"cfg_milli\": [\n            1000,\n            1000\n          ],\n          \"sampler_name\": \"lcm\",\n          \"scheduler\": \"sgm_uniform\",\n          \"steps\": [\n            4,\n            8\n          ]\n        },\n        \"without_lcm\": {\n          \"cfg_milli\": [\n            1,\n            15000\n          ],\n          \"sampler_name\": \"dpmpp_2m\",\n          \"scheduler\": \"karras\",\n          \"steps\": [\n            1,\n            50\n          ]\n        }\n      },\n      \"scope\": \"inference_capabilities\"\n    },\n    \"catalog_activation\": false,\n    \"deployment_id\": \"e04281d7b4b2c150c772fecc49b45cf801f18d5db535df8ff3d264cfe7ed46db\",\n    \"quality_acceptance\": \"not_established\",\n    \"scope\": \"inference_deployment\",\n    \"specification\": {\n      \"adapters\": [\n        {\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"kind\": \"trained_candidate\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n          \"strength_milli\": 750,\n          \"training_plan\": {\n            \"path\": \"state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json\",\n            \"sha256\": \"ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764\"\n          }\n        }\n      ],\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint\": {\n        \"loader_name\": \"sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      \"count\": 1,\n      \"height\": 512,\n      \"negative_prompt\": \"text, watermark, collage, divided panels\",\n      \"prompt\": \"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\",\n      \"sampler\": {\n        \"cfg_milli\": 7000,\n        \"sampler_name\": \"dpmpp_2m\",\n        \"scheduler\": \"karras\",\n        \"steps\": 20\n      },\n      \"seed\": 420260923,\n      \"version\": 2,\n      \"width\": 512\n    },\n    \"version\": 1\n  },\n  \"runtime\": {\n    \"devices\": [\n      {\n        \"index\": 0,\n        \"name\": \"cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync\",\n        \"type\": \"cuda\"\n      }\n    ],\n    \"files\": [\n      {\n        \"bytes\": 95082,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\k_diffusion\\\\sampling.py\",\n        \"sha256\": \"a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f\"\n      },\n      {\n        \"bytes\": 26117,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora.py\",\n        \"sha256\": \"fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc\"\n      },\n      {\n        \"bytes\": 1970,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora_convert.py\",\n        \"sha256\": \"6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245\"\n      },\n      {\n        \"bytes\": 105135,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\model_patcher.py\",\n        \"sha256\": \"097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c\"\n      },\n      {\n        \"bytes\": 5096,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sample.py\",\n        \"sha256\": \"d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee\"\n      },\n      {\n        \"bytes\": 65846,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\samplers.py\",\n        \"sha256\": \"2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae\"\n      },\n      {\n        \"bytes\": 146916,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sd.py\",\n        \"sha256\": \"e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec\"\n      },\n      {\n        \"bytes\": 64869,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\",\n        \"sha256\": \"dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b\"\n      },\n      {\n        \"bytes\": 23745,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\folder_paths.py\",\n        \"sha256\": \"a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66\"\n      },\n      {\n        \"bytes\": 25024,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"sha256\": \"5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96\"\n      },\n      {\n        \"bytes\": 6938078334,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      {\n        \"bytes\": 23396192,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n      },\n      {\n        \"bytes\": 111280,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\nodes.py\",\n        \"sha256\": \"4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891\"\n      }\n    ],\n    \"image_decoder\": {\n      \"bytes\": 222248960,\n      \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n      \"sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n    },\n    \"jobs\": 1,\n    \"node_schema_sha256\": \"1dcedb5bbc84daee5949207216e8494c8f30b5d6908f537251ec81d05f7f479b\",\n    \"profile\": \"stock-sdxl-inference-v2\",\n    \"runtime\": {\n      \"argv\": [\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"--disable-auto-launch\",\n        \"--listen\",\n        \"127.0.0.1\",\n        \"--port\",\n        \"8188\",\n        \"--input-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\input\",\n        \"--output-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\",\n        \"--disable-all-custom-nodes\"\n      ],\n      \"comfyui_version\": \"0.37.0\",\n      \"python_version\": \"3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]\",\n      \"pytorch_version\": \"2.13.0+cu130\"\n    },\n    \"scope\": \"runtime_schema_and_asset_binding\",\n    \"server\": \"http://127.0.0.1:8188\",\n    \"version\": 1\n  },\n  \"images\": [\n    {\n      \"index\": 0,\n      \"seed\": 420260923,\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\af36ecfb-6cea-5322-b92c-8776f16bcea2.json\",\n      \"request_id\": \"af36ecfb-6cea-5322-b92c-8776f16bcea2\",\n      \"prompt_id\": \"3514d06c-f0c9-49df-bc0d-b295a3adeb1b\",\n      \"error\": null,\n      \"record_sha256\": \"41cabbe6389c5bedab8083090de5da2c3e0b80e0a8c0771ec1857d04755c4018\",\n      \"image\": {\n        \"path\": \"output/jobs/af36ecfb-6cea-5322-b92c-8776f16bcea2/artifact-0000.png\",\n        \"sha256\": \"afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 335111,\n        \"sha256\": \"afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223\",\n        \"decoded_rgb_sha256\": \"2053e5fec7f4a90d301e5c573a2fbf208e8c43afffff52f8974b0fa61eb96d0c\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    }\n  ],\n  \"technical_pass\": true,\n  \"quality_acceptance\": \"not_established\",\n  \"catalog_activation\": false,\n  \"limits\": \"Exact owned graph, asset and decoded image evidence; no quality acceptance, adapter target coverage or cross-runtime parity claim.\",\n  \"report_id\": \"52fa34a781ec5bd5aafe9317d400bcaf730d31f9ec8d07abcb75fca05ad81438\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-a04-stack",
+        "arguments": [
+          "inference",
+          "replay",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d.json",
+          "--json"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"version\": 1,\n  \"scope\": \"inference_technical_report\",\n  \"plan_id\": \"d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d\",\n  \"deployment\": {\n    \"adapters\": [\n      {\n        \"asset\": {\n          \"path\": \"models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors\",\n          \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n        },\n        \"candidate\": null,\n        \"kind\": \"lcm\",\n        \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n        \"strength_milli\": 1000\n      },\n      {\n        \"asset\": {\n          \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n        },\n        \"candidate\": {\n          \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"entry\": {\n            \"asset\": {\n              \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n              \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n            },\n            \"base_models\": [\n              \"sdxl-1.0\"\n            ],\n            \"category\": \"style\",\n            \"id\": \"trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"rotation_weight_milli\": 1000,\n            \"slot\": \"style\",\n            \"status\": \"candidate\",\n            \"strength_milli\": {\n              \"max\": 1000,\n              \"min\": 500,\n              \"recommended\": 1000\n            },\n            \"trigger_words\": [\n              \"itovstill\"\n            ]\n          },\n          \"export\": {\n            \"alpha_scale_milli\": 1000,\n            \"bytes\": 23396192,\n            \"format\": \"comfy-unet-lora-v1\",\n            \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\",\n            \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n            \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"source_sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\",\n            \"tensor_payload_sha256\": \"4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0\",\n            \"tensors\": 1120\n          },\n          \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n          \"purpose\": \"training\",\n          \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n          \"version\": 1\n        },\n        \"kind\": \"trained_candidate\",\n        \"loader_name\": \"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"strength_milli\": 750\n      }\n    ],\n    \"capabilities\": {\n      \"adapter_order\": [\n        \"lcm (optional)\",\n        \"trained_candidate (optional)\"\n      ],\n      \"adapter_target\": \"UNet only; checkpoint CLIP and VAE remain bound\",\n      \"candidate_strength_milli\": {\n        \"max\": 1000,\n        \"min\": 1\n      },\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint_sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\",\n      \"lcm_sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n      \"lcm_strength_milli\": 1000,\n      \"limits\": \"Pinned SDXL base and LCM bytes, plus technically validated ITOV UNet exports. Compatibility permits experiments; it does not establish stack quality, candidate acceptance, promotion or Diffusers/ComfyUI parity.\",\n      \"ok\": true,\n      \"samplers\": {\n        \"with_lcm\": {\n          \"cfg_milli\": [\n            1000,\n            1000\n          ],\n          \"sampler_name\": \"lcm\",\n          \"scheduler\": \"sgm_uniform\",\n          \"steps\": [\n            4,\n            8\n          ]\n        },\n        \"without_lcm\": {\n          \"cfg_milli\": [\n            1,\n            15000\n          ],\n          \"sampler_name\": \"dpmpp_2m\",\n          \"scheduler\": \"karras\",\n          \"steps\": [\n            1,\n            50\n          ]\n        }\n      },\n      \"scope\": \"inference_capabilities\"\n    },\n    \"catalog_activation\": false,\n    \"deployment_id\": \"3ec15796b7fc7d3efd5d9d7cde96ed0b8174f723b52386c5c47e3fb19333f25f\",\n    \"quality_acceptance\": \"not_established\",\n    \"scope\": \"inference_deployment\",\n    \"specification\": {\n      \"adapters\": [\n        {\n          \"kind\": \"lcm\",\n          \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n          \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n          \"strength_milli\": 1000\n        },\n        {\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"kind\": \"trained_candidate\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n          \"strength_milli\": 750,\n          \"training_plan\": {\n            \"path\": \"state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json\",\n            \"sha256\": \"ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764\"\n          }\n        }\n      ],\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint\": {\n        \"loader_name\": \"sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      \"count\": 1,\n      \"height\": 512,\n      \"negative_prompt\": \"text, watermark, collage, divided panels\",\n      \"prompt\": \"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\",\n      \"sampler\": {\n        \"cfg_milli\": 1000,\n        \"sampler_name\": \"lcm\",\n        \"scheduler\": \"sgm_uniform\",\n        \"steps\": 4\n      },\n      \"seed\": 420260924,\n      \"version\": 2,\n      \"width\": 512\n    },\n    \"version\": 1\n  },\n  \"runtime\": {\n    \"devices\": [\n      {\n        \"index\": 0,\n        \"name\": \"cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync\",\n        \"type\": \"cuda\"\n      }\n    ],\n    \"files\": [\n      {\n        \"bytes\": 95082,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\k_diffusion\\\\sampling.py\",\n        \"sha256\": \"a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f\"\n      },\n      {\n        \"bytes\": 26117,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora.py\",\n        \"sha256\": \"fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc\"\n      },\n      {\n        \"bytes\": 1970,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora_convert.py\",\n        \"sha256\": \"6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245\"\n      },\n      {\n        \"bytes\": 105135,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\model_patcher.py\",\n        \"sha256\": \"097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c\"\n      },\n      {\n        \"bytes\": 5096,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sample.py\",\n        \"sha256\": \"d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee\"\n      },\n      {\n        \"bytes\": 65846,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\samplers.py\",\n        \"sha256\": \"2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae\"\n      },\n      {\n        \"bytes\": 146916,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sd.py\",\n        \"sha256\": \"e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec\"\n      },\n      {\n        \"bytes\": 64869,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\",\n        \"sha256\": \"dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b\"\n      },\n      {\n        \"bytes\": 23745,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\folder_paths.py\",\n        \"sha256\": \"a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66\"\n      },\n      {\n        \"bytes\": 25024,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"sha256\": \"5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96\"\n      },\n      {\n        \"bytes\": 6938078334,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      {\n        \"bytes\": 23396192,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n      },\n      {\n        \"bytes\": 393855224,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\lcm_lora_sdxl.safetensors\",\n        \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n      },\n      {\n        \"bytes\": 111280,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\nodes.py\",\n        \"sha256\": \"4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891\"\n      }\n    ],\n    \"image_decoder\": {\n      \"bytes\": 222248960,\n      \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n      \"sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n    },\n    \"jobs\": 1,\n    \"node_schema_sha256\": \"1dcedb5bbc84daee5949207216e8494c8f30b5d6908f537251ec81d05f7f479b\",\n    \"profile\": \"stock-sdxl-inference-v2\",\n    \"runtime\": {\n      \"argv\": [\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"--disable-auto-launch\",\n        \"--listen\",\n        \"127.0.0.1\",\n        \"--port\",\n        \"8188\",\n        \"--input-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\input\",\n        \"--output-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\",\n        \"--disable-all-custom-nodes\"\n      ],\n      \"comfyui_version\": \"0.37.0\",\n      \"python_version\": \"3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]\",\n      \"pytorch_version\": \"2.13.0+cu130\"\n    },\n    \"scope\": \"runtime_schema_and_asset_binding\",\n    \"server\": \"http://127.0.0.1:8188\",\n    \"version\": 1\n  },\n  \"images\": [\n    {\n      \"index\": 0,\n      \"seed\": 420260924,\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\18425694-9f81-5e03-b7df-9bb47e2395f9.json\",\n      \"request_id\": \"18425694-9f81-5e03-b7df-9bb47e2395f9\",\n      \"prompt_id\": \"36dc43e7-6e6f-4865-aaa0-fe42f716939d\",\n      \"error\": null,\n      \"record_sha256\": \"da04162b0084aad1e9be1ae80d791217a414e749b9cf0624f54ad5581bebcdbd\",\n      \"image\": {\n        \"path\": \"output/jobs/18425694-9f81-5e03-b7df-9bb47e2395f9/artifact-0000.png\",\n        \"sha256\": \"6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 347262,\n        \"sha256\": \"6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e\",\n        \"decoded_rgb_sha256\": \"947bcdec90743c19ef2ed0d5f70754f0d3f673731500705ddd55ba86b6866532\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    }\n  ],\n  \"technical_pass\": true,\n  \"quality_acceptance\": \"not_established\",\n  \"catalog_activation\": false,\n  \"limits\": \"Exact owned graph, asset and decoded image evidence; no quality acceptance, adapter target coverage or cross-runtime parity claim.\",\n  \"report_id\": \"388f60e7d524afc2c071cfc7601f13cf79f6fda362befa50b1566a4987e09640\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      },
+      {
+        "label": "installed-retained-failed-training",
+        "arguments": [
+          "training",
+          "status",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\plans\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json",
+          "--json"
+        ],
+        "exit_code": 1,
+        "stdout": "{\n  \"error\": \"Invalid safetensors header size\",\n  \"finished_at\": \"2026-09-22T07:23:51.150735+00:00\",\n  \"gpu\": {\n    \"driver\": \"616.64\",\n    \"free_bytes\": 31230787584,\n    \"name\": \"NVIDIA GeForce RTX 5090\",\n    \"total_bytes\": 34190917632,\n    \"used_bytes\": 2520776704,\n    \"uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\"\n  },\n  \"host\": {\n    \"available_commit\": 31889518592,\n    \"available_physical\": 40374304768,\n    \"total_commit\": 70256021504,\n    \"total_physical\": 66095271936\n  },\n  \"lease\": {\n    \"gpu_uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\",\n    \"job_name\": \"Global\\\\ITOV-owned-11048292-fb25-44e0-baa3-ca8cdeb3c0db\",\n    \"lease_id\": \"11048292-fb25-44e0-baa3-ca8cdeb3c0db\",\n    \"owner\": {\n      \"created\": 134345352560819482,\n      \"pid\": 72160\n    },\n    \"plan_id\": \"a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\",\n    \"record_id\": \"a7857bb27ae2b57cd4f66fc7cf9c5cb9d0ae1748746121e19c5d278a6429b5a0\",\n    \"started_at\": \"2026-09-22T07:21:00.318957+00:00\",\n    \"status\": \"held\",\n    \"version\": 1,\n    \"workers\": [\n      {\n        \"created\": 134345352603341660,\n        \"pid\": 61476\n      }\n    ],\n    \"workspace\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\"\n  },\n  \"owner\": {\n    \"created\": 134345352560819482,\n    \"pid\": 72160\n  },\n  \"plan_id\": \"a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\",\n  \"record_id\": \"a93e931a29bf6f53003b29075fb10f9148e5f04fb2004930b86433cf870a4319\",\n  \"result_id\": \"c2cb79832917f6506fe431a2bfc1552e153dcdbaaee33f7135c383c29ba675f7\",\n  \"started_at\": \"2026-09-22T07:21:00.324845+00:00\",\n  \"status\": \"failed\",\n  \"version\": 1,\n  \"worker\": {\n    \"created\": 134345352603341660,\n    \"pid\": 61476\n  },\n  \"scope\": \"training_status_observation\",\n  \"recorded_status\": \"succeeded\",\n  \"worker_completion\": \"completed\",\n  \"artifact_validation\": \"failed\",\n  \"failure_boundary\": \"weights\",\n  \"candidate_assessment\": \"not_performed_by_training\",\n  \"artifacts\": {\n    \"run.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\run.json\",\n    \"result.json\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\result.json\",\n    \"worker.log\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\training\\\\runs\\\\a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d\\\\worker.log\"\n  },\n  \"next_action\": \"Inspect result.json and worker.log; preserve this attempt and create a new plan.\"\n}\n",
+        "stderr": "",
+        "network_connections_forbidden": true
+      }
+    ],
+    "source_sdist_wheel_installed_module_count": 56,
+    "module_hashes": {
+      "itov/assessment_context.py": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1",
+      "itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+      "itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+      "itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+      "itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+      "itov/batch_execution.py": "e1c1788e485c6649d48b2996035d169ff240eb8fcdfd1577700d52719b0a8230",
+      "itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+      "itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+      "itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+      "itov/cli.py": "a71855651b9ed12dca1c19ac1fe591151de5fc71973530b0ff97b88c8f0a927b",
+      "itov/client_ownership.py": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73",
+      "itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+      "itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+      "itov/curation.py": "e732856cff75f97d3a15d3ebdaf5a2182304550cbaaca4994f5238c2786c133d",
+      "itov/device.py": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51",
+      "itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+      "itov/evaluation.py": "762bd926d589d7af0551157c5a0d6aa109535bdfeae60cc41bd9777c7632d5b6",
+      "itov/evaluation_cases.py": "16f142b1c0e806e3b5be0253fa7bb68aab98d2b4095ac26da90f370015e934d6",
+      "itov/evaluation_runtime.py": "c46ac81baf0fada69362cb81431052521766cfb34595b535daae2cb9ce3e25e4",
+      "itov/evidence_reads.py": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e",
+      "itov/execution_ownership.py": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33",
+      "itov/execution_store.py": "fb1a2031751b5bbd23c1eadb9cb6e500faf9b5b9d094af675072f288b782eceb",
+      "itov/image_media.py": "40d8a10fbfb67bc22c64881d44e969617ccb9bb54b19f88a0937707fc9d7b595",
+      "itov/inference.py": "abed4f457ee81a40297af7f2d13892b5f7bd29e557bc55aedce1fadd5c724721",
+      "itov/inference_capabilities.py": "fa441ce471d2378e5a829d7b97ec7681cb610ac6dd54b9d510bd2e65e0c5cf4e",
+      "itov/inference_graph.py": "c8265a6caf5fccedb77fe332ac0dcbaec63f82e27de62fc49afee45487109c62",
+      "itov/inference_runtime.py": "c9000ce8e07eb6c7325970de8f1194466f503d9785add9770b2ace34f9e63501",
+      "itov/jobs.py": "d997d0e6a35c4ff6c4c2b42f8877946c1a95d43a6cd6914a256583ea940c63eb",
+      "itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+      "itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+      "itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+      "itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+      "itov/owned_jobs.py": "e7ffd20657852bc3895a723acb4c4f214784bcf43ce44f53b1d172e887774b27",
+      "itov/parallel.py": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84",
+      "itov/qualification.py": "73c06b7fe05f1c598658ada6522173f03e874a8e82737c201d65ce9feb748e68",
+      "itov/quality.py": "07683b3b72ec3582b900f53a89d434aab3730698244f22234fa6c7492e6c0f25",
+      "itov/records.py": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164",
+      "itov/review_records.py": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506",
+      "itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+      "itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+      "itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+      "itov/training.py": "6995565bd36f18ff615dd58dabbe6ea486609c8dee3b9f2ec3705fe69746b326",
+      "itov/training_data.py": "d84cea21e68b7c43c38dca6a568c4a7c53fef154836d3003bfa58d249fab0de8",
+      "itov/training_records.py": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30",
+      "itov/training_results.py": "739e899287a8eaca24a594c324098facfb482320325b88a4f9274fad3b5debef",
+      "itov/training_worker.py": "7e422a1ab493df1282987d60bdb2fdf7722c80a4d0c3bc8bbb1f3bf3a7a6d495",
+      "itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+      "itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+      "itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+      "itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+      "itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+      "itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+      "itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+      "itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85",
+      "itov/__init__.py": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a",
+      "itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+    },
+    "wheel_sha256": "adc2c9648dacafdde8d84b65a3276cf7e637d9b79354c714ccb8531e0f4a9464",
+    "sdist_sha256": "d4bc6accdfc6615ac1b0d203bd3ab74b464b8e1b023b2a4f540afbf6bcc8d366",
+    "readme_exact": true,
+    "historical_files_preserved": 225,
+    "catalog_head_preserved": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+    "device": {
+      "previous": "503dd548-b1ca-4a7c-9d74-6cb992f2f59d",
+      "reason": "external_requests_confirmed_terminal",
+      "record_id": "a828e73a73eb4edeb491d705e51694c056b6e0b9f3743680a6cb79c8a98585cd",
+      "released_at": "2026-09-23T19:26:59.862928+00:00",
+      "status": "idle",
+      "version": 1,
+      "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+    },
+    "historical_output_hashes": {
+      "workspace/state/training/plans/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json": "02ac706b2e9d5ec5f1e6568e21e37a7b624f5fb5325b8c3eafafd267caee007f",
+      "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json": "1bfd3798f7699dbe4330d53303a992e8f2e7c86ac29aaa56d08f97da85735a6a"
+    }
+  },
+  "historical_before": {
+    "files": {
+      "docs/evidence/phase-a01-verification-20260922.json": "ee912f821bf96831db0d0a8b0b0f64da21ce002a9ab0e326210cbe110670fdad",
+      "docs/evidence/phase-a02-deployed-plan-20260923.json": "8ef5efa041e729bba222d48dfc4eb39572925b30e8630381d5e81597939bb051",
+      "docs/evidence/phase-a02-deployed-report-20260923.json": "4db2ff624b596c454cf53d6eadd2274684735b2b2ad34816b32b98d603618581",
+      "docs/evidence/phase-a02-images/paper-geometry-11860922-adapter_plain.png": "421a41b8505916f3e977aedb39a41f5e4bb5d8162f326a808784da64027507ff",
+      "docs/evidence/phase-a02-images/paper-geometry-11860922-adapter_trigger.png": "0d32b4624611cfe81a355cb928fa07cc89953a3b8a652ba7fc33ab3ca58b7635",
+      "docs/evidence/phase-a02-images/paper-geometry-11860922-base_plain.png": "39ec765ae6c894d8dbb73d1c2c3f28db4fee7a34b58244af2137f33f967d1600",
+      "docs/evidence/phase-a02-images/paper-geometry-11860922-base_trigger.png": "f042fb624def39a941b889946d15e92fe5f75ad28621a642feaaad60277c77be",
+      "docs/evidence/phase-a02-images/paper-geometry-11860923-adapter_plain.png": "f644c0f94a6a125b069651d409afcf2f39d8559dd2f8550a4c5360607e5b9150",
+      "docs/evidence/phase-a02-images/paper-geometry-11860923-adapter_trigger.png": "22ce468d8815bc3600dd7aae7a5fcf91f6bfd3d146f6fd6b8b70d7e8968dcb29",
+      "docs/evidence/phase-a02-images/paper-geometry-11860923-base_plain.png": "b6ee3f91796f9a2913ad4171aa7b9b44ca85c926513ceaf5ea596b1aab27839f",
+      "docs/evidence/phase-a02-images/paper-geometry-11860923-base_trigger.png": "786cbd069fa525e0e2e5d833a94f1512ad08616630716e35b4dbdf6ccbbddc02",
+      "docs/evidence/phase-a02-images/vase-and-pears-11760922-adapter_plain.png": "48e84a2053a8aba491fa416a35869cdc6e8aebab72a9e0d3b9191e5eb7dcab5f",
+      "docs/evidence/phase-a02-images/vase-and-pears-11760922-adapter_trigger.png": "c0a2d5455d026bb725e95d4d1cd55e7a55c2abd18d57de9baccd9247e1213170",
+      "docs/evidence/phase-a02-images/vase-and-pears-11760922-base_plain.png": "a6166199c27446cb30841f513aeba1a2f632751df3acfdfe480bffa348f7d7d1",
+      "docs/evidence/phase-a02-images/vase-and-pears-11760922-base_trigger.png": "5d6b49b9f5410c97102edde6ac4a1bd260028cc8391a7b756634ab2f6ab866f6",
+      "docs/evidence/phase-a02-images/vase-and-pears-11760923-adapter_plain.png": "539ed37be7ba6cd38c75c2876604cfe36cf77c5dc8e0bc59875fc7b9109643a1",
+      "docs/evidence/phase-a02-images/vase-and-pears-11760923-adapter_trigger.png": "51889489b6024cbe2864afdb502f494e4716b3090dc51001d3fc30714379a861",
+      "docs/evidence/phase-a02-images/vase-and-pears-11760923-base_plain.png": "38e27e1a5301681f64ba6c7aadb34bc0d146072e5c7c71f644e782fb8b068113",
+      "docs/evidence/phase-a02-images/vase-and-pears-11760923-base_trigger.png": "c81354bd18344bf4381773fc4b15af2012892cab657dc96ebd47e3a97120523d",
+      "docs/evidence/phase-a02-verification-20260923.json": "025f395bd44089846e6de53cff0990f24568296449dd0f85ec01b3c9a0ebe06f",
+      "docs/evidence/phase-a02-visual-review-20260923.json": "df1534510dc2282df2bdd019452224481de3054f3af71688df0af3ab948b055b",
+      "docs/evidence/stage-11-before-text-output-verification-20260921.json": "f008997a83311a179305464974ece33127e59815e9c7956ef88cf261a97a91fb",
+      "docs/evidence/stage-11-comfy-export-20260921.json": "2af72da55b90867df8b59520a94cafba7c94740f5df71af5a04ffe75d2d7da26",
+      "docs/evidence/stage-11-comfy-export-qualified-20260921.json": "e160dec3ec2857b684a2768d43aa56e916c4202298f83c565fc82adeadbecf60",
+      "docs/evidence/stage-11-comfy-export-transport-20260921.json": "2e396493847e2297f98bed5b6a44c9dc00995156712293a0d59d373b22cbdf99",
+      "docs/evidence/stage-11-comfy-mapping-20260921.json": "046198f14ee9c4a0b7d0da821127d58da347ca2157ff79e9f849a6f24667135c",
+      "docs/evidence/stage-11-training-attempt-01-20260921.json": "f07a78097d99623fb3dff7c7286dfd8fdfede821a29a54fdbc2e09b42c587b76",
+      "docs/evidence/stage-11-training-attempt-02-20260921.json": "6eeed7577551148b3b5baf9a947d0a62b9e284936e22597d48f7a80d9b747911",
+      "docs/evidence/stage-11-training-attempt-03-20260921.json": "3701f0d2044b9dc279728a0bbc3682902cd62f38160a922efb6a2529d3a2daf7",
+      "docs/evidence/stage-11-training-attempt-04-20260921.json": "379beaa5c5b13bca84e0ad99f4590ec4c05e1a147c3ff3a97c83ce9bae7cfa43",
+      "docs/evidence/stage-11-verification-20260921.json": "3a8847ec22a575acf50c2551affc9d9d3b50066aa9150966af67b710403dad16",
+      "docs/evidence/stage-11-visual-review-20260921.json": "1a9e69b5acd27745635298b5671e67227ad2efe444bfb1730c34da87fe619679",
+      "docs/evidence/stage-11b-assistant-observations-20260922.json": "0a2801aa0232ea3ca5a7a83d151c2da10497574284041da8c4a0e8d416917086",
+      "docs/evidence/stage-11b-cache-release-20260922.json": "925b329d858a431132b0c711738a3511169a6beebbc88f481fa637d1723ed81f",
+      "docs/evidence/stage-11b-comfy-export-20260922.json": "e071fec654c5d3d3988d9a07a81ccee5e80ee9eb38c21fd583dd455068969471",
+      "docs/evidence/stage-11b-curation-20260922.json": "4b50f361fbe48200a5dc55208d8fcf740046a0c6436ecfb372424e7db0b581a0",
+      "docs/evidence/stage-11b-development-findings-20260922.json": "f69a96b492d27d3c88fac6b91f85de735d9a9a5c20646776ed070898cf1842f1",
+      "docs/evidence/stage-11b-heldout-decode-20260922.json": "f36982443b92a88d0a7515ea8a1c294064f6ace17adb5025f6947107e3b1905d",
+      "docs/evidence/stage-11b-images-20260922.json": "422c9f33e4d57ecc635cd06da7676801a0399e812531bbde53b952aaafdaa9c9",
+      "docs/evidence/stage-11b-training-attempt-01-20260922.json": "bdf14678619e4645ae5c030b26180599cd69457603cc8b1133a7d9ba9d2e3962",
+      "docs/evidence/stage-11b-training-attempt-02-20260922.json": "de36515332abace6e78d67b7e7cdfa60f30d1eb8d37bc2342da268555f24753d",
+      "docs/evidence/stage-11b-training-attempt-03-20260922.json": "57376ea401def4f430e404a205bc14ce3304205ae797849c1cfbfe93ddd0966e",
+      "docs/evidence/stage-11b-verification-20260922.json": "c9ebdd9dd50f512ebac08244a1ab110d120dbab8d10182fbba228ed32c3b3207",
+      "workspace/state/catalog/catalog.lock": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "workspace/state/catalog/HEAD": "8ea47fb63367b466a4883e1a3c5d4f91ef60cd28c62cbf4f6b1f117e736ac0b5",
+      "workspace/state/catalog/objects/0a886430f3bb35a6317ee34adda0fc528cc0a76d7311f517883a9c3918f024f4.json": "0a886430f3bb35a6317ee34adda0fc528cc0a76d7311f517883a9c3918f024f4",
+      "workspace/state/catalog/objects/1ebdfc01d9fa9a2075b1a944c50eb8f8feebd80ae8f457e564f6e82886ecef0c.json": "1ebdfc01d9fa9a2075b1a944c50eb8f8feebd80ae8f457e564f6e82886ecef0c",
+      "workspace/state/catalog/objects/1fe3d939fbadbc4915ee434b5c7247ba35c47e561012f918ce8e901af352caa0.json": "1fe3d939fbadbc4915ee434b5c7247ba35c47e561012f918ce8e901af352caa0",
+      "workspace/state/catalog/objects/252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810.json": "252894f388a793a592319127b8984620d85c171610501887fed9e02c8dddf810",
+      "workspace/state/catalog/objects/278110548aabf9fdddb586627384bd986b3ff7ca9ec98ce8ea142ed8289cb5f2.json": "278110548aabf9fdddb586627384bd986b3ff7ca9ec98ce8ea142ed8289cb5f2",
+      "workspace/state/catalog/objects/31425f338b6178ad47f9030cbad972fcba4f91f53cc52449590ebd0a68a9cddb.json": "31425f338b6178ad47f9030cbad972fcba4f91f53cc52449590ebd0a68a9cddb",
+      "workspace/state/catalog/objects/3307da8655a36aefe7b80b483ded8eac8300bc51cb635117489af03f2808c67b.json": "3307da8655a36aefe7b80b483ded8eac8300bc51cb635117489af03f2808c67b",
+      "workspace/state/catalog/objects/33fe637c8299e19a1d299ce8f43b36c94b1aac8d820b080dfae3424cdd667d28.json": "33fe637c8299e19a1d299ce8f43b36c94b1aac8d820b080dfae3424cdd667d28",
+      "workspace/state/catalog/objects/393204bf88ed3f3c23490113241b808ce6478339dbb17727fc10c7a507aa06d1.json": "393204bf88ed3f3c23490113241b808ce6478339dbb17727fc10c7a507aa06d1",
+      "workspace/state/catalog/objects/5c52e92c36383c3b23cd1dac31adf9d88c0559d0688f61871d0882633b7608ca.json": "5c52e92c36383c3b23cd1dac31adf9d88c0559d0688f61871d0882633b7608ca",
+      "workspace/state/catalog/objects/5cddeda02eb3ba4c5a0e2a2536809192385ee62257a07317b987618a57c5e99b.json": "5cddeda02eb3ba4c5a0e2a2536809192385ee62257a07317b987618a57c5e99b",
+      "workspace/state/catalog/objects/619b363946fdb5833557d6855b2bfb77fd3781cba6f6f8ea9d3c01cac64d2c94.json": "619b363946fdb5833557d6855b2bfb77fd3781cba6f6f8ea9d3c01cac64d2c94",
+      "workspace/state/catalog/objects/6711b684e65ee14b13c5b13c6e1a8b6c25447321b36d998327d9849e442f6646.json": "6711b684e65ee14b13c5b13c6e1a8b6c25447321b36d998327d9849e442f6646",
+      "workspace/state/catalog/objects/7a533214262d4f41b58e8de9889f3645c527f898d8394305535dfddb0500b5f6.json": "7a533214262d4f41b58e8de9889f3645c527f898d8394305535dfddb0500b5f6",
+      "workspace/state/catalog/objects/7f0c103962aafba17c36fa0f0f4f5d7d417fa12c3e5cc4c9b8d6a28eb0288bae.json": "7f0c103962aafba17c36fa0f0f4f5d7d417fa12c3e5cc4c9b8d6a28eb0288bae",
+      "workspace/state/catalog/objects/834338ce7b067a98e834365e214c487311fe4893e8b1ac677a8f978395e7e8a6.json": "834338ce7b067a98e834365e214c487311fe4893e8b1ac677a8f978395e7e8a6",
+      "workspace/state/catalog/objects/8e78d64e25b1c99efe16329334459cfd9d682f6d9ba72e5f563ae0b9a7fe3eb5.json": "8e78d64e25b1c99efe16329334459cfd9d682f6d9ba72e5f563ae0b9a7fe3eb5",
+      "workspace/state/catalog/objects/90d66e96a1f4c51c9f5a0b0125cda7eaac729ea1e41cde6f0c6f12abf210be0d.json": "90d66e96a1f4c51c9f5a0b0125cda7eaac729ea1e41cde6f0c6f12abf210be0d",
+      "workspace/state/catalog/objects/9171d95d8653783dba11fb620e10e7a430ce48ba9308c7dce27e58c7ba8aae7c.json": "9171d95d8653783dba11fb620e10e7a430ce48ba9308c7dce27e58c7ba8aae7c",
+      "workspace/state/catalog/objects/9249a19de6c4a83b00a6e7f7afa49ce57a1157255d960860817711248020a4ec.json": "9249a19de6c4a83b00a6e7f7afa49ce57a1157255d960860817711248020a4ec",
+      "workspace/state/catalog/objects/9d4baf460f2d7c2bf0bc6a5c9b64fd9967836dd6a0b90a3bf71e7fff731c9a52.json": "9d4baf460f2d7c2bf0bc6a5c9b64fd9967836dd6a0b90a3bf71e7fff731c9a52",
+      "workspace/state/catalog/objects/9e333e5270850365c70565bbbc3dd85a5914281d3d1e447767441b5176451821.json": "9e333e5270850365c70565bbbc3dd85a5914281d3d1e447767441b5176451821",
+      "workspace/state/catalog/objects/a403af1d6f39d4cbb8548d5feb5457babfd6a4d9e20ca7ba0c02321cff5591f3.json": "a403af1d6f39d4cbb8548d5feb5457babfd6a4d9e20ca7ba0c02321cff5591f3",
+      "workspace/state/catalog/objects/a48130159c42117a2877c9738aa5bca6bf333d838f2d27a14fcdf32fceed6805.json": "a48130159c42117a2877c9738aa5bca6bf333d838f2d27a14fcdf32fceed6805",
+      "workspace/state/catalog/objects/a4a6e1a1add6084c0b02cf9d8d8da0a1d325d1b1fd2aee7074200a8632719574.json": "a4a6e1a1add6084c0b02cf9d8d8da0a1d325d1b1fd2aee7074200a8632719574",
+      "workspace/state/catalog/objects/a55aad1d8dea6d37856c48ebe823b68b4e96cb69133293c402ae8aef70d15142.json": "a55aad1d8dea6d37856c48ebe823b68b4e96cb69133293c402ae8aef70d15142",
+      "workspace/state/catalog/objects/a75f2465a62ecc8731fad7b6b5a2b15c266b7f784d7e413caf89fedb55124ff4.json": "a75f2465a62ecc8731fad7b6b5a2b15c266b7f784d7e413caf89fedb55124ff4",
+      "workspace/state/catalog/objects/b559630d159e0193928e2c571649b2e3a4e73373cc3d14d9957b33d169851b74.json": "b559630d159e0193928e2c571649b2e3a4e73373cc3d14d9957b33d169851b74",
+      "workspace/state/catalog/objects/ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148.json": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+      "workspace/state/catalog/objects/c4a474e68330a5502dc94b3f2ce41dfbe67b6a86334dee4554b5f30d1c2baca4.json": "c4a474e68330a5502dc94b3f2ce41dfbe67b6a86334dee4554b5f30d1c2baca4",
+      "workspace/state/catalog/objects/cfe7e566f9192f0b8bd5a9e6de5699601b04d031685d2552e17ca036987848eb.json": "cfe7e566f9192f0b8bd5a9e6de5699601b04d031685d2552e17ca036987848eb",
+      "workspace/state/catalog/objects/d8a900d6009f92ff9005e676abc174b7eb88104390c5f5ab3a4a2d386cacd54c.json": "d8a900d6009f92ff9005e676abc174b7eb88104390c5f5ab3a4a2d386cacd54c",
+      "workspace/state/catalog/objects/d902524835e97c62d000dab7b2bbc12e57701d826f50ccd6950f5628b618c770.json": "d902524835e97c62d000dab7b2bbc12e57701d826f50ccd6950f5628b618c770",
+      "workspace/state/catalog/objects/dc30f40ca61b6156aed18f3a99f361cacd762673f97671704f00ba2162e6cb23.json": "dc30f40ca61b6156aed18f3a99f361cacd762673f97671704f00ba2162e6cb23",
+      "workspace/state/catalog/objects/eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d.json": "eaf6ed07a26e930fc9b9a44a4c17faaea0fcdd4d37662f84119648f8e6a0a91d",
+      "workspace/state/catalog/objects/f576b27814b88b42de2ec49b485986c85f22ff516a00f10bb114ad17c496e5ad.json": "f576b27814b88b42de2ec49b485986c85f22ff516a00f10bb114ad17c496e5ad",
+      "workspace/state/catalog/objects/ffc199c2f2e3730cb23c55a2cc3eda1bb391393186d722bd7aef378d29b1b91b.json": "ffc199c2f2e3730cb23c55a2cc3eda1bb391393186d722bd7aef378d29b1b91b",
+      "workspace/state/evaluation/plans/6d4a57ac60bec4ae889950658492ab5f23e6f325be08f74678c361c450c2a48c.json": "8ef5efa041e729bba222d48dfc4eb39572925b30e8630381d5e81597939bb051",
+      "workspace/state/evaluation/reports/930348fa8d3a369c8df707b41914c5242df0ee055d60eba984cc85137a0f686c.json": "4db2ff624b596c454cf53d6eadd2274684735b2b2ad34816b32b98d603618581",
+      "workspace/state/inference/deployments/3ec15796b7fc7d3efd5d9d7cde96ed0b8174f723b52386c5c47e3fb19333f25f.json": "2581919570830671433edbff51d013ca98bb03bd1c7758746f83676d2528bde8",
+      "workspace/state/inference/deployments/e04281d7b4b2c150c772fecc49b45cf801f18d5db535df8ff3d264cfe7ed46db.json": "4ec146c11e6d569151ff251b553e6f1fa658658f348dcd9384ec230fc7ff71be",
+      "workspace/state/inference/plans/24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e.json": "25bb26dc7994ea7beb30cc85d3dc886cc46d1c124f5700b1224807e226de705a",
+      "workspace/state/inference/plans/d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d.json": "6778b849f693ff3ab4f376104fa6501436875e38f15eae9bcea649908ffd5995",
+      "workspace/state/inference/reports/388f60e7d524afc2c071cfc7601f13cf79f6fda362befa50b1566a4987e09640.json": "bfa10b7a8be960f39830c0d9a77e7283a9f7fe0e03944c6b9917d2916a8dc0b9",
+      "workspace/state/inference/reports/52fa34a781ec5bd5aafe9317d400bcaf730d31f9ec8d07abcb75fca05ad81438.json": "9b5bccb765353805fbe5a9f9d89085d1a009efeed721fb7de8b42e700a8e75aa",
+      "workspace/state/jobs/0279350e-e770-51d1-a78d-06c829db5337.json": "2a8095b30c2a3d39249188e0e7c52e73c47d2e5c92acdbf8b639986423d1a301",
+      "workspace/state/jobs/02c85abe-80b4-5c46-9c74-d300bd7e6d4d.json": "65c96d0f2c7ee1fe74ea619b7b54cb45bdeee407ff525fa6986d95377b0057b2",
+      "workspace/state/jobs/0468300b-4b51-5f66-8000-e633060c6367.json": "5b81d1819b6e4cef44bea3ae57bc2fa7de178f650a2284f8b5020b41e6368e9e",
+      "workspace/state/jobs/0bae97fa-9a42-5efc-a5e4-0b25f215f7e9.json": "22482fe8cdc2edb2967c4fa1cdc462c5e56e29be08bcb01d4003b20e1aa13b43",
+      "workspace/state/jobs/0be384f0-de37-5a27-b0ac-e59aa7543875.json": "8f644aa158b8d982ac427eeb1b2ed486ceb05b309cb58b52b0e6813c1831f7f8",
+      "workspace/state/jobs/0d6dfdba-31f3-5ec8-9e3b-faa563005731.json": "ba65bc3ddec072e32878150ffdfec54032dcc3b4a9ba098ef65ce29cf6a8dfe0",
+      "workspace/state/jobs/18425694-9f81-5e03-b7df-9bb47e2395f9.json": "da04162b0084aad1e9be1ae80d791217a414e749b9cf0624f54ad5581bebcdbd",
+      "workspace/state/jobs/18a335ce-7143-5afe-a1e5-13ebb3931175.json": "6c7ec34bc647c1685a03635a858a44e080654a4765f2af4faef45a3277b2028d",
+      "workspace/state/jobs/1c87e283-2fcc-5250-a90b-d0bf24b17057.json": "04e2c852742081124744df17b9e488b0c5744c727039f0464086e0aef14f7e30",
+      "workspace/state/jobs/1c8be7e3-30ff-51ea-924c-50c002fa2529.json": "9a136fba50881cba944b9fbba19111a31514addb9de93cf61980801c6fab2e0c",
+      "workspace/state/jobs/1cc9b983-163e-536f-b642-3d212322eca7.json": "773dd3f09795f4e7613bbbd7a9608d6254f423d240bb8f43a3e6698bc945d9fc",
+      "workspace/state/jobs/1d10859c-082f-5f6b-b789-c0e0a082ae0f.json": "d322faf7813aaaf816be2c5fd15f80f46cf75726853322a167a4146c66c285ba",
+      "workspace/state/jobs/1f35f6bc-a40a-58d3-b759-2fdec2658eba.json": "a0359a9b1945b293d523f2636d08717da4941d98124ab5882862343cf6362b0f",
+      "workspace/state/jobs/20856dce-7928-534e-a5f7-7afdecb11b2a.json": "41a45c2bb63cb95c587eb5167e2db1224d6e02d51dbc65eaec59292d173b1377",
+      "workspace/state/jobs/213ebc08-e801-5308-a408-1c57d755294e.json": "00ab7bc29e735840a0d828efa423a0557fdad5bfebb24e73a11e73f2409acccb",
+      "workspace/state/jobs/2269394d-cb38-537a-aac7-492f53e9bc38.json": "43b9285bcc2ff26b5a2ec11ed82a3f0287ea03781d88c16f5864ab3d9c1f2e6d",
+      "workspace/state/jobs/22757d1a-569b-5b18-b880-d786780dcd20.json": "44bbb6c2ca26b1a8c7984bbf7022a616e61b4021bc01f5d568e749229974ddaf",
+      "workspace/state/jobs/245a304c-d381-5398-81fa-12204a19664b.json": "0d267ae76ba5ca15b0e3496c6af52ce03dfdd8fa993b71bdcaf8aad6ff04d87f",
+      "workspace/state/jobs/270dc665-1c0e-5d83-a413-1ed6a6b9cf19.json": "f2ed21bccd643ff4c47935bf1175910a771c75d614efe66b38aee79156403138",
+      "workspace/state/jobs/2754e373-24ae-5c2a-a659-2e6ec71214ec.json": "b40ec6e94b00da712147b7992d72ae432b2987fd9e41521fbf9338c65bd00eeb",
+      "workspace/state/jobs/28bd1ada-6bbb-575b-9dac-70e1fe2c04ec.json": "6e621f9537224ec315ba5e357c0f8de42efa78acf7d65a3f4d54c35449e7820c",
+      "workspace/state/jobs/2a688a0c-938b-56c1-97bd-de8f50a6ff65.json": "6aceca46d46cb9cbd9375ffbd6c12d5f6c9761a683eff7057ffa16c21007d81c",
+      "workspace/state/jobs/2c1ccfc2-3057-5a71-a2a6-827ad07a4229.json": "d59b1e8291db1eb919710ebe2fd7300b5b40059daf218c90578155fba54277d6",
+      "workspace/state/jobs/2c984936-344f-42af-aec4-ada4d9a663dd.json": "d7989b456a979355e0cfae3a7fb4f3ead2b78fa39eeee8b40ed21d331cb3a7ee",
+      "workspace/state/jobs/2f980ff8-65a1-5a31-a57a-b5dcd0ad2cbd.json": "1cf51005c3e10f94b3eb9422d219b88008a725c01f01d455e420b61887cfabcd",
+      "workspace/state/jobs/31a66c50-2ba1-586b-bc0e-e596dfbdbe86.json": "87e98732d18fbac539e8ede821059deb81f7e8bcb9fdd38016b8ff5311bd7c98",
+      "workspace/state/jobs/32065d48-8a4a-50fd-9db0-a6393d7ff011.json": "fde477c80bc1930b7abad6ff966da2cd800d4f2e92b3a73bef207ec7a48a8ebf",
+      "workspace/state/jobs/34320fd3-f9a4-5075-8646-6cda8273dc6c.json": "444e27e4bdcdd5ccda9ecbc5c22c3905a5ec505749eab9b9f995bb999e467211",
+      "workspace/state/jobs/3946d6dc-e9d2-5e1e-a7db-585f3f7bc3a2.json": "c9c564b4dd92b42ad24cb6c45a5600bbe19660852e873d7a9deec541a9ad8fda",
+      "workspace/state/jobs/3ed98063-4367-58b8-98f2-91a8e1aea119.json": "0cd7545f5f1ebc383c2dc11f56133b17f90877a277e888f92e96ba5f4ee37d19",
+      "workspace/state/jobs/4288ec35-6b5e-5a16-8a70-6921477b695a.json": "f3774e3b124642f2dc5a277d4aac20c5bf095775a2c7e2a93d31b52d7bf3f530",
+      "workspace/state/jobs/45a19ed9-8e4a-5df0-9ef0-43ad2a664274.json": "f7c6596534105c5f18b8142296d82dc3c359b1bc6a2a9c5a1351109f2cff0b49",
+      "workspace/state/jobs/47351816-d4cb-570b-969c-49a4ae395484.json": "da9d6159fb521140d31db6fa383d276ed70d977c75c08e07356b41f01dbf2039",
+      "workspace/state/jobs/4e7e472d-fb6f-52f3-8c6c-6fec9478e4dd.json": "19342acd62010db1792957354584aa4751647b27b3b8c23401f4f7f1c9d00f43",
+      "workspace/state/jobs/4f2edcc2-a7f1-5fed-9b50-a1d0aed83d0f.json": "59f554f71020949742b87f6fa4f2ab6057302e8131eb9d9249024fae46466fbd",
+      "workspace/state/jobs/515f5ff5-bc54-5606-ac4b-d35eb62641c2.json": "d1ba8d5159c0047e04f60e5f474e7184a16e439753999c0f310254088fddb797",
+      "workspace/state/jobs/59683292-0c3f-59c2-85bc-3ec8059b5bdc.json": "40362130a84e7654bc6f6f028fcf4cbf458cd2f99231726d50462cca025b42f6",
+      "workspace/state/jobs/59dd7ea2-4151-5767-924a-35e14e1f80ba.json": "a36a298d618475aaa41e851da4db4b5db0c3b664b996192568fe05f3586cf620",
+      "workspace/state/jobs/5ae3dcff-258f-5560-87a9-ce76f6033572.json": "c1cb7b5f964150db0310b7965230aa57895e3fa83c1bcafb416fb15bbdae0232",
+      "workspace/state/jobs/5f283f4a-90b3-5ed7-a88c-211bf451be83.json": "e93ab4f0d0b54c57478a2a20afece4a0b9ea16110dd59ca0f2c1d8d9e8eeb4db",
+      "workspace/state/jobs/61181237-7b9a-5662-bde4-ec67acdc76ec.json": "c0a68fd328076c4df0d41b142f5d5daa86a872626656e1f9bf20b9ad4874328d",
+      "workspace/state/jobs/651c587a-4715-5f13-a90b-db54dc0ce253.json": "6ce3035942c898df6c7a4d6d2259b3542e794268562b3fe49159247e1779d7e4",
+      "workspace/state/jobs/671a5167-4b68-565e-806b-dd3c878e9039.json": "95d185e095a494c2bbd06ab3aea860383905e33c47a5f19141c29b4001067172",
+      "workspace/state/jobs/6775bfff-52bb-5b4d-8f8e-0c853d6513bc.json": "eb39ea5ce30ed76a64666cbcfce9ca02181054ed4a2acdd65699580fc765f08f",
+      "workspace/state/jobs/699a9a03-8fdc-59c6-90dc-81e507112f6f.json": "fc933c7f60f3455f2abbd9aec2d97da6a3300db0a60f230ee2bb07b6d6b5d1f0",
+      "workspace/state/jobs/6b7f03e3-5ede-57b1-9292-cb4210f8be26.json": "00ff2d512034562091e759a06db8ce9784b89fa436a2401bc4f48fca81fccfff",
+      "workspace/state/jobs/7ae0066f-96d3-5480-96e9-fd42f592c273.json": "fd21e98224bbae5840853461cd0993f1b1a6e70a4224d2dc9aad647ad14aa676",
+      "workspace/state/jobs/7db2f084-5b3e-5b4b-a483-bd4434116c01.json": "63aa2785c22716cc32a76d4f784ffae55b99181928ca14f92aab2148c5400fc0",
+      "workspace/state/jobs/804bff69-bf25-575d-9e13-1e2d45bed585.json": "0b3f8232fda9eea9d57329a9e7c826d573293343d68c43f39dd889e72f7d5f15",
+      "workspace/state/jobs/87128584-281d-4bb3-af72-c0963c9a7c21.json": "73b387317673e1dfecd87b5b88f97ff8fb565c3b13fd110c731d8e0fb2eaae87",
+      "workspace/state/jobs/8772315a-48ff-4411-b98b-3d76953a13f8.json": "10725b3612676aa4d6ec5152a2e4f8dac5bdb72302d2fb9474d5f2b332a7d379",
+      "workspace/state/jobs/8bca9e37-aed3-5fa2-8c76-2adc462970fa.json": "132e4607cee9801dead0a1f8355b8959c09a7dcfd2e89efe640118d72aeef873",
+      "workspace/state/jobs/914bd070-aea2-52d5-995b-a5419cb1e0b0.json": "a19b8297d74a053877c702f51597485d28d90e8a76bd1e9730fe490d0ca8d002",
+      "workspace/state/jobs/9b9d4076-4676-5ec4-a152-c85bc649e4e1.json": "b053231397b40615bd18794fa6ab30d768c362a98347f5d5bc9765368cc3f77a",
+      "workspace/state/jobs/9e21cd80-072f-437e-aa10-06d1df78fdb0.json": "a7fbfdaeaa6d43cacd32a3acce7392ad50ee3719644e95300c2be43e1fa366f0",
+      "workspace/state/jobs/9e33af2b-c80e-5ae4-bdb0-841e7389e19f.json": "ad87f4f823579e99029c39b04631119604475ac516516e5d750c0f77967aa31b",
+      "workspace/state/jobs/abd34552-b985-5324-bcc2-72483dede503.json": "3c494246e00b91edeef5dc539ee1624aab4ac709759b7508f1a0a5437ae5e98e",
+      "workspace/state/jobs/ae35377e-ab38-56a2-ae49-32d9740132d6.json": "0c329f12a289eb4b3702e6bf28af2f9f0ec45893e0d4fcd65af202fdc98c28b5",
+      "workspace/state/jobs/af36ecfb-6cea-5322-b92c-8776f16bcea2.json": "41cabbe6389c5bedab8083090de5da2c3e0b80e0a8c0771ec1857d04755c4018",
+      "workspace/state/jobs/afc6d5f6-6c5b-416a-a505-f1f48a8e2a0f.json": "81a5462854ae5dc6e241977e122546f95f32c41a3d4496a66885f7f2577f0d74",
+      "workspace/state/jobs/b3284f22-69d2-552e-bea5-4663ec816c56.json": "2f1cbe7acc5de864242ac62279513ba63dac64e458ab7627d724fcd47dda7214",
+      "workspace/state/jobs/b6121452-2898-5811-828e-ad773eecae13.json": "bd480a00008ab45ad9777780c9d3a87e974c071775baf8fab2b450d40fe4b042",
+      "workspace/state/jobs/b7433210-997e-5ca5-9907-2eb82958bec8.json": "180780e7a02b9bf1ff7c4bc8b68dc5ec345e60ae4f9e8c4d85f3f9c4b142c03e",
+      "workspace/state/jobs/b97c0f5a-4160-51a0-811b-0c8e184d3672.json": "8b75bb7c77711f7bd2fd5a1f0e7c0a135ac81dfc676151ae17cb6334a4a264b5",
+      "workspace/state/jobs/ba8994bc-43d3-56d8-9a01-cabc5de1c2b1.json": "12de16821e69b30adf259ebe678639f4cff54e0ae904fac4ad86722edc888028",
+      "workspace/state/jobs/bce1de56-728d-50fd-8d53-7fd2e6a54c56.json": "4b2985386994514ae6cd6d31584edad56e069242857d7726e36277b862cdd6fd",
+      "workspace/state/jobs/c2324cec-464a-5b3f-a52f-44f62e725716.json": "b74072a237d207e929d78d148d030ff4310121d6c9a10d2011b4865f226897a7",
+      "workspace/state/jobs/c2f1ecd5-a273-54ba-8496-cd3a6c04e59a.json": "efdf110bf53ca567d194837e8f5deff4903d43238dd805cd4f6def1590531abd",
+      "workspace/state/jobs/c8c012af-fbad-512b-bd53-57f7627a35ba.json": "1688a328befa1ba4a091d8ca9804fae3c3b1d3674ab7c51006cfe4125333e98e",
+      "workspace/state/jobs/c9aad4ab-6b64-5f33-84e9-86f5faa892f0.json": "eba5e67dd8d0d51d6d7dbb225853c0d81eb1ca231016d021ed8dee969e87a671",
+      "workspace/state/jobs/cbaf1f96-cde7-56c1-a375-ae6c518009b4.json": "c029742404d27141760d0a27c181236874678b4cfe1780a96cc02f735604ee5a",
+      "workspace/state/jobs/cbcd091e-f429-5f66-b97a-c996f869bef3.json": "0a977bb4f814a3c1a0eca30390229b931c81247d89126a914bfd1124539e8908",
+      "workspace/state/jobs/cf9b5671-ffd7-5901-ac69-1b32bcb4badf.json": "218f922e37d0263cf5c34a2a103fd4543aa6e2d48a0c864b307c7fb08674280d",
+      "workspace/state/jobs/d164e7ca-595a-5a9e-bb43-9ba9b12a33c2.json": "46ba02f9aba044f5a372275720bd4b75b4956f143ebc1973ca13b6d1e625d498",
+      "workspace/state/jobs/d817835c-6d56-5d82-8db3-90e35cfebd71.json": "99e4eb76dfc4aa678ea5219fcb48f0bcbee7d99566912e16b9120177e5f2cc26",
+      "workspace/state/jobs/d894a2df-0d23-5823-8817-125f5630784e.json": "9b89da833245412481c6a6d0f9a257817317a432e4c1b9eb4ff2640ba5f59b5b",
+      "workspace/state/jobs/db6bd208-3734-5529-8168-9e714a4d3666.json": "ac4b3114d2ea07c00ca672e9781fecf68b67350ea4bb181a602911d30b003152",
+      "workspace/state/jobs/dc15337f-74f0-5c00-9662-62c047b269d4.json": "2fdec3265e4da50ff14cb1afd5bc2e6743c6e962b69e81ef779a51b094242da9",
+      "workspace/state/jobs/e3b34bc7-cbe1-4f4e-9f50-275b4269c31a.json": "286c0f21bf5ad108ec84623c9bc074090904961e07a5ac4dc1ac74e0cdd2f646",
+      "workspace/state/jobs/e5129278-c34d-5385-8719-4a26f8fefbef.json": "7ebd269dc1169cd2c5105c1a3b2d33afca0fdca13abe8cb3ceed0a807eedc1f6",
+      "workspace/state/jobs/e816b361-2885-552c-9c57-ed6453cb6e55.json": "dd3327af17d0c46da2cfe529d40cb518f4b90249fe47b2448a1e558c5079367c",
+      "workspace/state/jobs/e8ab6ee9-e674-574f-bc67-42df03548d5e.json": "4b3e33930f952d6e36c467424bf131820dc73b0474dc4a37dcd926732dee6726",
+      "workspace/state/jobs/e9dd063a-b4e1-4642-8425-ab90d4c0925f.json": "c7be7a267b5dc2efd15e80c8e67337ababeefcbd2c7a46a2e5e41682794428e8",
+      "workspace/state/jobs/ee416183-a0f6-4161-9190-7d6c9e3fab8c.json": "047d103ae3ed6caa06580c1c31560cec62a68abb182a7bf90acb7f5c5e93a7e1",
+      "workspace/state/jobs/ef7ccd88-038d-5da9-a015-f17cb2845cc4.json": "b814ce0e12ee9c40a0fdcf05f3da06841efb72bfa7adec8ae76369efb574a234",
+      "workspace/state/jobs/f0fd5069-70b1-40a8-b442-941374b5755a.json": "63faa73090cc2ddf4cb7b9cf93645979accf0714f4f2df3b1c16953132906bf5",
+      "workspace/state/jobs/f481dc40-d1ee-582a-95c3-f0d94f04fbbe.json": "ebe23c58ec4750a526e0698c3e9d8f5f2cda9bdd8fe3c527f08f4233d483c7cd",
+      "workspace/state/jobs/f7036cd1-2db9-5385-a349-869bc6a2f39f.json": "6a327c8602c1b83f7f0c14fc764c0cb5045b17ae1621990cce7fa0bcdfad2229",
+      "workspace/state/jobs/fb6bd1a6-84db-52f5-9575-c227749041bd.json": "ac5685287f4392f513dd251e20e3f763f0e241851ae8249b0b912f9c994449b7",
+      "workspace/state/jobs/fbfd2fd9-142e-4bdf-9bb3-958da202e499.json": "3479cfac4af41d051152a625699e5330e4823092f25d2ad292fcb4410bfd2d03",
+      "workspace/state/jobs/fc5e073b-6d51-5fdc-9e4c-b5aa3c3f067b.json": "a5e4af906c6dc36b0ad17c7364db7878233b1b0a5611b5d868944868fe02e503",
+      "workspace/state/jobs/fd2b8d9e-d749-5f21-bb59-8f83298d6934.json": "8d3d31350c38f2c0dd1d8c2c202349a4b3f68b3daee2ad766c06cc44433245d6",
+      "workspace/state/jobs/fecc6e3e-0cfa-5a99-bde0-053bd3b67baf.json": "2e00accc7563cffda68edb5ae2b2adb0962b7cec18bc19696a37cc274b9539a2",
+      "workspace/state/jobs/ff011fab-88de-5be8-a0c2-8efe150ddd23.json": "64f88a2ec5be8b3fcab160dc709f36207236dcb55c5224effc3851b791a98baa",
+      "workspace/state/jobs/ff358194-79f4-5d6e-80e5-415cc56c1349.json": "afcee9c8ec6249da9e1e86d353c06332100df27511ecb34a161d88c080ff6e03",
+      "workspace/state/training/assessments/6ec9a2b09cf0100bcc223862386b8082f7a799af488d909973b4df4a1046a3ac.json": "ead041ef0ac0352a799dd511b2c88936eec3ca35fdccc5e06166f01563fe9b7b",
+      "workspace/state/training/assessments/9dd708fd9ce15fff187578479611c67229a9b7f198817fd281f80b4fcc6ddb6e.json": "ff99e6455cad275dc6a39ffc4f435750688cd87d0dd0417e7fd0d41168652bc7",
+      "workspace/state/training/assessments/ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a.json": "1c1b7106445db58ddf5c7cd253ce0c81503bb3960c27fd511a429e2480edcb2a",
+      "workspace/state/training/candidates/2c212dec3f32a2d2144a1a4528628e212f89bc57a1ec681c7137308d260334d9.json": "b59f2a9653ec6a4d5b8c1cb86a4745d97b0343e32a1ec81eaeaa27aab1302055",
+      "workspace/state/training/candidates/9515cbd760f74ba2fe9a9a4c3f1d4f24888fe88e35ec5e8320d48d5ff3fc01eb.json": "b6920a5b0ef8d7a3b483915ff7e0eefd8d1f6e95c69f2d4340b71da8af46e07d",
+      "workspace/state/training/candidates/b1eeb9951d2a880b0573a12d4cf5679469b70f72f032b521d9021189cc28b96a.json": "728643faa1c0e64e4a5ed213c60da7b006d72500eb2198186e092c712ead9cf7",
+      "workspace/state/training/candidates/e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada.json": "5c5bea44cc6128ac9d09148ef795e41d85667ba89a8506cf9cd14e70835cb79b",
+      "workspace/state/training/curation/92a6e0e15617b0215a257a4580efc63272932311ff8d3cc25c7fd8f7e64e999a.json": "56e82262dfb7f8fceb1033ac9f2beb708a2f0e82605abcb102d3bb6e239814dd",
+      "workspace/state/training/datasets/0c8453f3f0c36a8e033696b32679ca8bea24a21bd5600f141cd4fbedacf56992.json": "aa552df1942ab288bd1092c61d578fa0af894f7b56343b5c6f3419e687670c8c",
+      "workspace/state/training/datasets/877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751.json": "36d5ef75a604711d9d8e47d32cd51a495ffe721fc47e633a725027cfb37fec98",
+      "workspace/state/training/plans/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json": "95f84804c94af24bbdb9481f0e062e21f1dfd7b7a6724c7fb8ae254c438a674b",
+      "workspace/state/training/plans/5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59.json": "fd7f8170bf2fecec099413a92c25b3ff874f28e52dd9cac9f8e321c75d488615",
+      "workspace/state/training/plans/5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734.json": "692ace62addb9d0bc90e0f014a8ad721f39ac90bf21fa3e59df50cebc0567328",
+      "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json": "ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764",
+      "workspace/state/training/plans/7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9.json": "93f0f4d55849aaea3ee6d29651a631c04d56cab64fb6aec13fe495b120170a65",
+      "workspace/state/training/plans/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d.json": "61bb1508cbcd7bbc7b75f25521f901eb5556ec2ff83003dfdf8fc10972b6a8ce",
+      "workspace/state/training/review-evidence/20260922/comfy-export.json": "e071fec654c5d3d3988d9a07a81ccee5e80ee9eb38c21fd583dd455068969471",
+      "workspace/state/training/reviews/49da619516f080c8a6da4f5806b122b8221170690e5e935cd72c51c01653c600.json": "d02e0347acdbad90a1c7b1752b1f1563485becd64d6e3929feff73b6a77c5320",
+      "workspace/state/training/reviews/49da619516f080c8a6da4f5806b122b8221170690e5e935cd72c51c01653c600.review.json": "ee024aff7de6c34fde3a67d105c7fe5001baea7d84018bc3fed462e6f022f257",
+      "workspace/state/training/reviews/b7f6c2f6edb501191c08ac0d3b0313793f7ef93a9247d912b2da71daada781c7.json": "6ce415e52b84bd74011cf6045f00191a49cbe7ebdae676844160a7f6212160dc",
+      "workspace/state/training/reviews/b7f6c2f6edb501191c08ac0d3b0313793f7ef93a9247d912b2da71daada781c7.review.json": "6d5083f61bc2ed5460b831b9f9391da2d0764db14758878645a596902f82c0e9",
+      "workspace/state/training/reviews/stage11b-assistant-rejection-20260922.json": "f2808b2288327ae2f5121309c91c8334f808b1ba977b6146187a792ab92597a4",
+      "workspace/state/training/runs/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb/request.json": "a623308a97fba97d8c737a8013aaebd49925b8badd19e3084cec4f3be6d58548",
+      "workspace/state/training/runs/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb/result.json": "9096d81b24e9607eab49307847cb702e573a643b6abcb1c192d176242d6b3ac1",
+      "workspace/state/training/runs/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb/run.json": "5deb161d3183e1a8857eea62ae32e2b887b4049936757b25c327f94bda2f10ea",
+      "workspace/state/training/runs/5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59/request.json": "e8a0442b91f6935bcf270834f3b8e5a37cb3b67a41bc1120936bbabdb3bfe26b",
+      "workspace/state/training/runs/5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59/result.json": "0d9771db10f28daf79fd63ca25082c2b661df18b61c2e5c586e7a0bdb3cb9115",
+      "workspace/state/training/runs/5874f49b9e8335c4ec0e6dc59dd9b6bdc693fb93e61974d716938bf3d596bd59/run.json": "79fa3656876de53f697a90d3e0e4c606e50662c329df990fea99ee7b9db9773f",
+      "workspace/state/training/runs/5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734/request.json": "c42815f6d24dad12da0e4b2c5021b5728fc6f7c97b2fbe6b26e80b1ce8d6ee1a",
+      "workspace/state/training/runs/5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734/result.json": "62f09714eec565d71ff905a2aa9e6225c71a24f9d6cc76313092bba1ac5f39b6",
+      "workspace/state/training/runs/5bc90b360ad3e87fe63361a604b1a6f15e5c8a06f1e3c92e6a3e6a660cd7a734/run.json": "6f52e65e49a84be87f3aa65cdf556918aacf30f166e87715be3f2fb13dc62d3b",
+      "workspace/state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/request.json": "5ee60d61a413f7a274f2cbddebefe32425f7926e7fc9ab206109b3d109ffb81b",
+      "workspace/state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/result.json": "799b5c0af6e373a08bbb64cb00ada3b2fd7c1a688b9c3eadaca1290716c31a4d",
+      "workspace/state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/run.json": "7ab18b54f0aa580de3dfe9d0eee908a6329162fa6124d0ab0b697da7c4bd35d1",
+      "workspace/state/training/runs/7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9/request.json": "5687ca0f8e7a8622a7b804f487d835efa69858d50d04f50c005b599b5ab15f1f",
+      "workspace/state/training/runs/7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9/result.json": "e1b241ce489b60c3d121f5761f59fa9d92e0d66779daf51b21dd60da4079a899",
+      "workspace/state/training/runs/7c971ce1fbd745c5ef199dfcce04743d206d0c9d013d9c124dcecd576d8d4ca9/run.json": "2068aeb44c1cd6a0a9b7d6d0a4607db5949a79792f355cb3c360c03ee6145f5b",
+      "workspace/state/training/runs/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d/request.json": "9e74aa51a2f6f4c742d4ac15037e7a3999d85c0dadd7d9a1e009eb383953e12b",
+      "workspace/state/training/runs/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d/result.json": "f089cd228d104feb4353880c182388680943edb1f6cf29085058bbf4e8dfc910",
+      "workspace/state/training/runs/a0a56da93c29eb34383495f5d281f806f84973b3d531051afb52922e9578941d/run.json": "868867699b2754899b06ad5e8815a431240d140e0319c4486a71f3b37b7c6f70"
+    },
+    "catalog_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+    "outputs": {
+      "workspace/state/training/plans/3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb.json": {
+        "assessment": {
+          "version": 2,
+          "scope": "training_technical_assessment",
+          "plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+          "result_id": "b91d6a2d997bc7c43d1a9f21568a987e2194ecd70f46f36dc4d80bc6453fc0db",
+          "dataset_id": "0c8453f3f0c36a8e033696b32679ca8bea24a21bd5600f141cd4fbedacf56992",
+          "weights": {
+            "path": "pytorch_lora_weights.safetensors",
+            "sha256": "6479dafbb1c285c1a6ee14bc33bdf55ba69b5af28a6d512ec50f5e14220228ac"
+          },
+          "integrity": {
+            "bytes": 23390424,
+            "tensors": 1120,
+            "pairs": 560,
+            "all_finite": true
+          },
+          "technical_pass": true,
+          "heldout_before": [
+            {
+              "loss_billionths": 2440360,
+              "noise_seed": 11360921,
+              "sample": "geometry-08"
+            },
+            {
+              "loss_billionths": 3842753,
+              "noise_seed": 11360922,
+              "sample": "geometry-09"
+            }
+          ],
+          "heldout_after": [
+            {
+              "loss_billionths": 2062644,
+              "noise_seed": 11360921,
+              "sample": "geometry-08"
+            },
+            {
+              "loss_billionths": 3004410,
+              "noise_seed": 11360922,
+              "sample": "geometry-09"
+            }
+          ],
+          "previews": [
+            {
+              "baseline": {
+                "path": "geometry-08-baseline.png",
+                "sha256": "9c5e08b2677f11629aca3eeff953dc9db61b3fbd7be80e349819e4dd53da313e"
+              },
+              "candidate": {
+                "path": "geometry-08-candidate.png",
+                "sha256": "cf54bdb66cc6f43039b4448307bb32066b8dedb176c6b2766d3011caaa34c6c0"
+              },
+              "prompt": "itovgeom flat geometric composition, a red disk and a blue square on an ivory background",
+              "sample": "geometry-08",
+              "seed": 11460921
+            },
+            {
+              "baseline": {
+                "path": "geometry-09-baseline.png",
+                "sha256": "cfe420ab115e876d56f415dc966a7515211b0114de979dab869b957367e89620"
+              },
+              "candidate": {
+                "path": "geometry-09-candidate.png",
+                "sha256": "d56a8ce897b5de2ac9a87c3a8eeff053f6f6ee35a1e71ee42e9307a1bc9ccc01"
+              },
+              "prompt": "itovgeom flat geometric composition, a red disk and a blue square on an ivory background",
+              "sample": "geometry-09",
+              "seed": 11460922
+            }
+          ],
+          "purpose": "smoke",
+          "quality_acceptance": "evidence_review_required",
+          "promotion_eligible": false,
+          "limits": "Successful optimization, finite weights and paired diagnostics do not establish quality, activation or runtime compatibility. Smoke datasets cannot be promoted.",
+          "assessment_id": "c28cddad813d39ab9db11f589095fa85761a5a39b0c2157d477780b4f0b6843e"
+        },
+        "candidate": {
+          "version": 1,
+          "plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+          "assessment_id": "c28cddad813d39ab9db11f589095fa85761a5a39b0c2157d477780b4f0b6843e",
+          "result_id": "b91d6a2d997bc7c43d1a9f21568a987e2194ecd70f46f36dc4d80bc6453fc0db",
+          "entry": {
+            "id": "trained-2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a",
+            "asset": {
+              "path": "models_shared/trained/2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a.safetensors",
+              "sha256": "2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a"
+            },
+            "category": "style",
+            "slot": "style",
+            "base_models": [
+              "sdxl-1.0"
+            ],
+            "strength_milli": {
+              "min": 500,
+              "recommended": 1000,
+              "max": 1000
+            },
+            "rotation_weight_milli": 1000,
+            "trigger_words": [
+              "itovgeom"
+            ],
+            "status": "candidate"
+          },
+          "purpose": "smoke",
+          "export": {
+            "format": "comfy-unet-lora-v1",
+            "source_sha256": "6479dafbb1c285c1a6ee14bc33bdf55ba69b5af28a6d512ec50f5e14220228ac",
+            "sha256": "2a0baf641a527e4145e72cbb155d867b55ea226d457da5c5f786b8af6249663a",
+            "bytes": 23396192,
+            "tensors": 1120,
+            "tensor_payload_sha256": "4d83a19dcfba2269a16d8b8a7a5a8c1cd3b705ac4d57e2588f73911524fd570e",
+            "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+            "alpha_scale_milli": 1000,
+            "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate."
+          },
+          "candidate_id": "dac0e695fe6f3ef786661d019d36dce5868d6f0f3a1d037438c4670000301b68"
+        },
+        "status": {
+          "error": null,
+          "finished_at": "2026-09-22T06:24:55.109517+00:00",
+          "gpu": {
+            "driver": "616.64",
+            "free_bytes": 31420579840,
+            "name": "NVIDIA GeForce RTX 5090",
+            "total_bytes": 34190917632,
+            "used_bytes": 2330984448,
+            "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074"
+          },
+          "host": {
+            "available_commit": 35794399232,
+            "available_physical": 41424478208,
+            "total_commit": 70256021504,
+            "total_physical": 66095271936
+          },
+          "lease": {
+            "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+            "job_name": "Global\\ITOV-owned-7f044b33-637b-49da-a0ef-14f19af79387",
+            "lease_id": "7f044b33-637b-49da-a0ef-14f19af79387",
+            "owner": {
+              "created": 134345318584748637,
+              "pid": 50716
+            },
+            "plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+            "record_id": "83f34e049ff3ea15fc1cb8e2f64ae456f25c42d8626424e74e46ce9f20e4c156",
+            "started_at": "2026-09-22T06:24:22.318930+00:00",
+            "status": "held",
+            "version": 1,
+            "workers": [
+              {
+                "created": 134345318623274027,
+                "pid": 53380
+              }
+            ],
+            "workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace"
+          },
+          "owner": {
+            "created": 134345318584748637,
+            "pid": 50716
+          },
+          "plan_id": "3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb",
+          "record_id": "a4bea7f10dde8cbfc2c5bb4d095e5890ac1aa79f37a3569d363382956388c34a",
+          "result_id": "b91d6a2d997bc7c43d1a9f21568a987e2194ecd70f46f36dc4d80bc6453fc0db",
+          "started_at": "2026-09-22T06:24:22.321562+00:00",
+          "status": "artifacts_validated",
+          "version": 1,
+          "worker": {
+            "created": 134345318623274027,
+            "pid": 53380
+          },
+          "scope": "training_status_observation",
+          "recorded_status": "succeeded",
+          "worker_completion": "completed",
+          "artifact_validation": "passed",
+          "failure_boundary": null,
+          "candidate_assessment": "not_performed_by_training",
+          "artifacts": {
+            "run.json": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\run.json",
+            "result.json": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\result.json",
+            "worker.log": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\3701ccfc5e896e5e63a618b3f03f3c1e477a9961ca07ec8ca0bd67b7e2a0bdbb\\worker.log"
+          },
+          "next_action": "Run evaluation assess; technical validation does not accept a candidate."
+        }
+      },
+      "workspace/state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json": {
+        "assessment": {
+          "version": 2,
+          "scope": "training_technical_assessment",
+          "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+          "result_id": "fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0",
+          "dataset_id": "877371a7cde7f46362a27221304e0f8ced8a8696c1042cb290b5ca9ec99e4751",
+          "weights": {
+            "path": "pytorch_lora_weights.safetensors",
+            "sha256": "e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a"
+          },
+          "integrity": {
+            "bytes": 23390424,
+            "tensors": 1120,
+            "pairs": 560,
+            "all_finite": true
+          },
+          "technical_pass": true,
+          "heldout_before": [
+            {
+              "loss_billionths": 11254031,
+              "noise_seed": 11360922,
+              "sample": "met-11737"
+            },
+            {
+              "loss_billionths": 197922140,
+              "noise_seed": 11360923,
+              "sample": "met-436450"
+            }
+          ],
+          "heldout_after": [
+            {
+              "loss_billionths": 10980256,
+              "noise_seed": 11360922,
+              "sample": "met-11737"
+            },
+            {
+              "loss_billionths": 186335206,
+              "noise_seed": 11360923,
+              "sample": "met-436450"
+            }
+          ],
+          "previews": [
+            {
+              "baseline": {
+                "path": "met-11737-baseline.png",
+                "sha256": "bc2ca6c1464585109c3cc4f529fff1debf6e998719f73e9100dc2b6dd491aff1"
+              },
+              "candidate": {
+                "path": "met-11737-candidate.png",
+                "sha256": "c0217ebad4c3fc70d49d558e5e1749fcefc2cea6698d335c5043cca3a14d8cfe"
+              },
+              "prompt": "itovstill oil painting of a plate of sliced cake, grapes and a glass on a table, dark brown background",
+              "sample": "met-11737",
+              "seed": 11460922
+            },
+            {
+              "baseline": {
+                "path": "met-436450-baseline.png",
+                "sha256": "ce54e6b37d5f5d3c1917406f1067774ad1aa61c9428b557e619a6856fcd974ff"
+              },
+              "candidate": {
+                "path": "met-436450-candidate.png",
+                "sha256": "2a62db231cd5b00c543874ac73e5a505cfc41481ee77f0c3ed908da71b27c486"
+              },
+              "prompt": "itovstill oil painting of several pears and a green bottle on a white cloth, warm textured background",
+              "sample": "met-436450",
+              "seed": 11460923
+            }
+          ],
+          "purpose": "training",
+          "quality_acceptance": "evidence_review_required",
+          "promotion_eligible": false,
+          "limits": "Successful optimization, finite weights and paired diagnostics do not establish quality, activation or runtime compatibility. Smoke datasets cannot be promoted.",
+          "assessment_id": "ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a"
+        },
+        "candidate": {
+          "version": 1,
+          "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+          "assessment_id": "ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a",
+          "result_id": "fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0",
+          "entry": {
+            "id": "trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+            "asset": {
+              "path": "models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+              "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+            },
+            "category": "style",
+            "slot": "style",
+            "base_models": [
+              "sdxl-1.0"
+            ],
+            "strength_milli": {
+              "min": 500,
+              "recommended": 1000,
+              "max": 1000
+            },
+            "rotation_weight_milli": 1000,
+            "trigger_words": [
+              "itovstill"
+            ],
+            "status": "candidate"
+          },
+          "purpose": "training",
+          "export": {
+            "format": "comfy-unet-lora-v1",
+            "source_sha256": "e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a",
+            "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+            "bytes": 23396192,
+            "tensors": 1120,
+            "tensor_payload_sha256": "4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0",
+            "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+            "alpha_scale_milli": 1000,
+            "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate."
+          },
+          "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada"
+        },
+        "status": {
+          "error": null,
+          "finished_at": "2026-09-22T07:29:49.060778+00:00",
+          "gpu": {
+            "driver": "616.64",
+            "free_bytes": 31332499456,
+            "name": "NVIDIA GeForce RTX 5090",
+            "total_bytes": 34190917632,
+            "used_bytes": 2419064832,
+            "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074"
+          },
+          "host": {
+            "available_commit": 33506873344,
+            "available_physical": 41572347904,
+            "total_commit": 70256021504,
+            "total_physical": 66095271936
+          },
+          "lease": {
+            "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+            "job_name": "Global\\ITOV-owned-93d0bed0-fcc9-48bd-b8bf-429f25298427",
+            "lease_id": "93d0bed0-fcc9-48bd-b8bf-429f25298427",
+            "owner": {
+              "created": 134345356353007846,
+              "pid": 51796
+            },
+            "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+            "record_id": "9117d7dd87a6032115c791500c424829c6638f7561cd1fec40d036ab8237dcab",
+            "started_at": "2026-09-22T07:27:19.310693+00:00",
+            "status": "held",
+            "version": 1,
+            "workers": [
+              {
+                "created": 134345356393203204,
+                "pid": 29652
+              }
+            ],
+            "workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace"
+          },
+          "owner": {
+            "created": 134345356353007846,
+            "pid": 51796
+          },
+          "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+          "record_id": "42edbc9f7a3df2b9ee5f5345611490c22989592d1e315d66ef4a2f01f43ca9c5",
+          "result_id": "fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0",
+          "started_at": "2026-09-22T07:27:19.313948+00:00",
+          "status": "artifacts_validated",
+          "version": 1,
+          "worker": {
+            "created": 134345356393203204,
+            "pid": 29652
+          },
+          "scope": "training_status_observation",
+          "recorded_status": "succeeded",
+          "worker_completion": "completed",
+          "artifact_validation": "passed",
+          "failure_boundary": null,
+          "candidate_assessment": "not_performed_by_training",
+          "artifacts": {
+            "run.json": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\run.json",
+            "result.json": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\result.json",
+            "worker.log": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\training\\runs\\5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\\worker.log"
+          },
+          "next_action": "Run evaluation assess; technical validation does not accept a candidate."
+        },
+        "packet": {
+          "version": 2,
+          "scope": "quality_review_pending",
+          "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+          "assessment_id": "ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a",
+          "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada",
+          "curation_id": "92a6e0e15617b0215a257a4580efc63272932311ff8d3cc25c7fd8f7e64e999a",
+          "curator": "Codex assistant",
+          "suite": {
+            "cases": [
+              {
+                "expectation": "Exactly two yellow pears and one blue vase, intact distinct objects and a coherent table. Adapter with trigger should show oil-painted still-life appearance without adding objects, grids or borders. Compare all four conditions; baseline trigger effects do not prove learned activation.",
+                "id": "vase-and-pears",
+                "kind": "holdout",
+                "negative_prompt": "text, watermark, signature, frame",
+                "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+                "seeds": [
+                  11760922,
+                  11760923
+                ]
+              },
+              {
+                "expectation": "One red cube and one white cone remain distinct with coherent shadows. Without trigger the adapter should preserve photographic appearance and prompt adherence. With trigger assess whether painterly change preserves object identity and composition; record unintended fruit, flowers, repetition or distortion.",
+                "id": "paper-geometry",
+                "kind": "regression",
+                "negative_prompt": "text, watermark, signature, frame",
+                "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+                "seeds": [
+                  11860922,
+                  11860923
+                ]
+              }
+            ],
+            "id": "still-life-independent-v1",
+            "trigger": "itovstill",
+            "version": 1
+          },
+          "images": [
+            {
+              "case_id": "vase-and-pears",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-base_plain.png",
+                "sha256": "6048cb84079c5a5dff63cda2bf8bf7a781a9ad0b501d67949c146539f073ef8a"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+              "role": "base_plain",
+              "seed": 11760922
+            },
+            {
+              "case_id": "vase-and-pears",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-base_trigger.png",
+                "sha256": "795cbe5020faaffa6c8a6a567e4b35c04db04a07ba4f606359145b9f9eee4e42"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+              "role": "base_trigger",
+              "seed": 11760922
+            },
+            {
+              "case_id": "vase-and-pears",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-adapter_plain.png",
+                "sha256": "d32e33518fddbedd32f41c3f4be87acb7003c45a06886889fb581ce51548b934"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+              "role": "adapter_plain",
+              "seed": 11760922
+            },
+            {
+              "case_id": "vase-and-pears",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760922-adapter_trigger.png",
+                "sha256": "c4c9069b3c1f938f175c70ef109dfeb54eba3c1e3e1f45873a972ef3fdf7e511"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+              "role": "adapter_trigger",
+              "seed": 11760922
+            },
+            {
+              "case_id": "vase-and-pears",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-base_plain.png",
+                "sha256": "414b6e18abbb38c31dfa2861382efa08e72af11df6e0b48820a03218b7a50a3d"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+              "role": "base_plain",
+              "seed": 11760923
+            },
+            {
+              "case_id": "vase-and-pears",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-base_trigger.png",
+                "sha256": "b7c792719cd60602c1a337709bf367a6b56977f43e3af3cd7ea950094ab3c32c"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+              "role": "base_trigger",
+              "seed": 11760923
+            },
+            {
+              "case_id": "vase-and-pears",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-adapter_plain.png",
+                "sha256": "a450e52052b4ee8ac2a3c7de4345941a57837b3928adefeb4401c9d6fec9274b"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+              "role": "adapter_plain",
+              "seed": 11760923
+            },
+            {
+              "case_id": "vase-and-pears",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-vase-and-pears-11760923-adapter_trigger.png",
+                "sha256": "924cd01da89cf8727632b28cb34f6216a3d323f294432e6d66eedc2c90026649"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+              "role": "adapter_trigger",
+              "seed": 11760923
+            },
+            {
+              "case_id": "paper-geometry",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-base_plain.png",
+                "sha256": "57cb5d09af6e5462ade028da5dfb133d4fd1ee6b841226da66adaadef5d220e3"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+              "role": "base_plain",
+              "seed": 11860922
+            },
+            {
+              "case_id": "paper-geometry",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-base_trigger.png",
+                "sha256": "1111f0529c819b5518ee2bf6382bde073029824ab1f309660c4841e1d15ec796"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+              "role": "base_trigger",
+              "seed": 11860922
+            },
+            {
+              "case_id": "paper-geometry",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-adapter_plain.png",
+                "sha256": "213a59273fd0f48bc931579c012e018a2a2f9ddbc33d01eaa8ab7df1d4ec3ef0"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+              "role": "adapter_plain",
+              "seed": 11860922
+            },
+            {
+              "case_id": "paper-geometry",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860922-adapter_trigger.png",
+                "sha256": "d17e38f4f5db4f959ce197b1c717ec129649d087a2024daaec559bd2e977622b"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+              "role": "adapter_trigger",
+              "seed": 11860922
+            },
+            {
+              "case_id": "paper-geometry",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-base_plain.png",
+                "sha256": "6df43c23d552ad905205face6f4d419ec91e021e198e67555fc01a5c6cdb236e"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+              "role": "base_plain",
+              "seed": 11860923
+            },
+            {
+              "case_id": "paper-geometry",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-base_trigger.png",
+                "sha256": "39a9334a94fa7671f7bffdaf64b1c03c4dc82c746a330d5a1a3b667329806d13"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+              "role": "base_trigger",
+              "seed": 11860923
+            },
+            {
+              "case_id": "paper-geometry",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-adapter_plain.png",
+                "sha256": "11f7a46de782ed50e07f83cedb27221f7b818cc6a14c90ed1e4abc7d8984d3d0"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+              "role": "adapter_plain",
+              "seed": 11860923
+            },
+            {
+              "case_id": "paper-geometry",
+              "image": {
+                "path": "state/training/runs/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67/quality-paper-geometry-11860923-adapter_trigger.png",
+                "sha256": "c6bf759002b73a17cf95f3d404565d10d0428b33775071cf6150a2e249669ca1"
+              },
+              "negative_prompt": "text, watermark, signature, frame",
+              "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+              "role": "adapter_trigger",
+              "seed": 11860923
+            }
+          ],
+          "limits": "Complete fixed-seed Diffusers comparisons, not a quality verdict. Human or assistant review must state its method and limitations; reviewer identity alone is not quality evidence. Labels disclose conditions; runtime compatibility evidence is also required.",
+          "packet_id": "49da619516f080c8a6da4f5806b122b8221170690e5e935cd72c51c01653c600"
+        }
+      }
+    }
+  },
+  "profile": {
+    "path": "docs/evidence/phase-a05-profile-20260923.json",
+    "sha256": "98da171d616aca025609955109d9938636f3aed927640de34be702b85a8c80cc",
+    "bytes": 139082
+  },
+  "checks": {
+    "lint": "All checks passed!\n",
+    "format": "97 files already formatted\n",
+    "scoped_git_diff_check_exit": 0
+  },
+  "new_contract_coverage": [
+    "Immutable values and detached serialization preserve existing contracts.",
+    "Canonical case/seed/role order and v1/v2/v3 review semantics.",
+    "14 late input mutation categories fail before packet publication, including same-size edits with restored timestamps.",
+    "Late weight edits block assessment/candidate publication; subsequent commands reread disk.",
+    "Nested scope cleanup, thread isolation and worker-source dependency bindings."
+  ],
+  "limits": [
+    "No new model training or rendering in A-05; installed checks replay actual historical artifacts offline.",
+    "Current candidate remains rejected; no catalog activation or quality acceptance.",
+    "Final content checks are not a filesystem-wide atomic snapshot or lock against external editors.",
+    "Weight capture retains up to the existing 256 MiB cap plus transient export data.",
+    "Timing is a local warm-file sample with background development/test activity; not a universal throughput claim.",
+    "The core uses no persistent hash cache; some nested dataset checks remain repeated.",
+    "Source/installed protocol and native tests have their existing fixture scope; Phase A/product acceptance remains incomplete."
+  ],
+  "installed_test_files": [
+    "tests/test_assessment_records.py",
+    "tests/test_training_results.py",
+    "tests/test_training.py",
+    "tests/test_evaluation.py",
+    "tests/test_quality.py",
+    "tests/test_evaluation_runtime.py",
+    "tests/test_inference_runtime.py"
+  ]
+}

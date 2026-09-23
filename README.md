@@ -4,6 +4,8 @@ ITOV is an incomplete local ComfyUI application under development. Its current f
 
 The [current TODO](TODO.md) and [source audit](docs/development-audit-20260922.md) track the remaining architecture, dataset/training, autonomous evaluation and end-to-end work. The mandatory human-review gate has been shelved by the user. Assistant reviews record methods, limitations and case evidence; the current curated candidate is rejected on observed quality failures. Earlier successful tests and example runs establish only their documented scope.
 
+Start with the [operator runbook](docs/operator-runbook.md) for the supported sequence from setup through execution, recovery and completed replay. Result commands now use consistent text/JSON outcomes, artifact references and suggested next commands. JSON adds `_cli` metadata without changing saved evidence; incomplete status/retirement returns exit 1, including batch status and abandonment.
+
 To combine a directory of Markdown specifications into one searchable PDF, run
 `.\markdown-to-pdf.ps1` (prompts for a path) or `.\markdown-to-pdf.ps1 "C:\path\to\specs"`.
 See the [converter guide](tools/markdown_pdf/README.md) for exclusions and output options.
@@ -224,6 +226,8 @@ uv run --locked itov promotion prepare workspace/state/training/plans/PLAN_ID.js
 The local smoke trial completed eight rank-four optimizer steps, exported/reloaded finite weights and produced paired held-out diagnostics. Candidate export preserves tensor payload bytes while converting names for stock ComfyUI; a real fixed-seed comparison and complete loader mapping passed. Images still miss the intended object count/composition. Smoke-data promotion is always refused, and the main catalog is unchanged. See [environment, dataset, commands, failure evidence and next quality gate](docs/training-and-promotion.md). Training dependencies are separate and optional; examples pin this workspace's files, which a fresh checkout must provision and revalidate.
 
 Training now distinguishes worker completion, validated artifacts and separate candidate assessment. `training status` rechecks saved successful artifacts and identifies failed boundaries without rewriting historical records. New attempts use `artifacts_validated` only after shared technical checks pass. See [training states and interrupted-publication recovery](docs/training-result-states.md).
+
+A-05 adds immutable internal records for validated results, evaluation conditions and review decisions. Review-packet generation shares one validated result and weight snapshot within the command, then rehashes its observed inputs before publication. Saved result, candidate, packet and review formats retain their existing meanings. See [record boundaries, compatibility and measured cost](docs/assessment-records.md).
 
 Deployed evaluation now has supported `evaluation plan/run/status/resume/replay/abandon` commands. Plans stage the validated candidate, freeze runtime and sampler bindings, and cover every case/seed with base/adapter and plain/trigger comparisons. Resume observes owned jobs without duplicate submission; replay verifies the complete PNG matrix offline. See the [deployed evaluation runbook and limits](docs/deployed-evaluation.md). Technical completion does not accept or promote the candidate.
 

@@ -17,7 +17,7 @@ uv run --locked itov batch resume workspace/state/plans/PLAN_ID.json
 
 Use the IDs printed by planning and qualification. Every command accepts `--config` and `--json`. Qualification and execution accept `--timeout` (per HTTP request, at most 60 seconds). Run/resume also accept `--wait-timeout` (per job, at most 86400 seconds) and `--poll-interval` (at most 60 seconds). A wait timeout or Ctrl+C detaches observation; it does not cancel work on ComfyUI. Inspect the printed prompt IDs and `state/jobs/REQUEST_ID.json` records for artifacts and execution errors.
 
-Exit codes: qualification/run/resume return 0 for success, 1 for a paused or failed execution, and 2 for invalid inputs or an operation that could not start. A successful `status` or `abandon` command returns 0 even if the reported batch did not succeed. No package release or automatic Git commit is implied.
+Exit codes: 0 for passed qualification or complete execution, 1 for incomplete/failed/abandoned execution (including `status` and `abandon`), and 2 for invalid inputs or operational exceptions. A-06 aligns these meanings across command families and adds `_cli` metadata to JSON responses. See the [operator runbook](operator-runbook.md) for text/JSON, next actions and recovery.
 
 ## Qualification profile: `stock-local-v1`
 

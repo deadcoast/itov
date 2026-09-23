@@ -3,15 +3,19 @@
 from __future__ import annotations
 
 import array
+import io
 import math
 import struct
 import sys
 from contextlib import contextmanager
 
 from itov.catalog import array as json_array
-from itov.catalog import integer, object_fields, read_document, require
+from itov.catalog import integer, object_fields, require, sha256
 from itov.comfyui import parse_json
+from itov.evidence_reads import observe, read_document
+from itov.records import Document
 from itov.training_data import check_seal, file_ref, load_dataset
+from itov.training_records import ValidatedTrainingResult, WeightSnapshot
 
 
 class ResultValidationError(ValueError):
@@ -57,72 +61,94 @@ def inspect_weights(path, rank):
     size = path.stat().st_size
     require(8 < size <= 256 * 1024 * 1024, "LoRA file size is unsupported")
     with path.open("rb") as handle:
-        header_size = struct.unpack("<Q", handle.read(8))[0]
-        require(
-            2 <= header_size <= min(4 * 1024 * 1024, size - 8), "Invalid safetensors header size"
+        return _inspect_weights(handle, size, rank)
+
+
+def weight_snapshot(path, rank, expected_sha256):
+    size = path.stat().st_size
+    require(8 < size <= 256 * 1024 * 1024, "LoRA file size is unsupported")
+    with path.open("rb") as source:
+        raw = source.read(size + 1)
+    require(
+        len(raw) == size and sha256(raw) == expected_sha256, "Source LoRA changed during export"
+    )
+    observe(path, expected_sha256, size)
+    integrity = _inspect_weights(io.BytesIO(raw), size, rank)
+    return WeightSnapshot(raw, expected_sha256, rank, Document.capture(integrity))
+
+
+def _inspect_weights(handle, size, rank):
+    header_size = struct.unpack("<Q", handle.read(8))[0]
+    require(2 <= header_size <= min(4 * 1024 * 1024, size - 8), "Invalid safetensors header size")
+    header = parse_json(handle.read(header_size))
+    require(isinstance(header, dict), "Invalid safetensors header")
+    tensors = {k: v for k, v in header.items() if k != "__metadata__"}
+    require(0 < len(tensors) <= 4096, "Invalid LoRA tensor count")
+    spans, pairs = [], {}
+    for name, tensor in tensors.items():
+        require(name.startswith("unet."), "Only UNet LoRA tensors are allowed")
+        suffix = next(
+            (
+                suffix
+                for suffix in (".lora.down.weight", ".lora.up.weight")
+                if name.endswith(suffix)
+            ),
+            None,
         )
-        header = parse_json(handle.read(header_size))
-        require(isinstance(header, dict), "Invalid safetensors header")
-        tensors = {k: v for k, v in header.items() if k != "__metadata__"}
-        require(0 < len(tensors) <= 4096, "Invalid LoRA tensor count")
-        spans, pairs = [], {}
-        for name, tensor in tensors.items():
-            require(name.startswith("unet."), "Only UNet LoRA tensors are allowed")
-            suffix = next(
-                (
-                    suffix
-                    for suffix in (".lora.down.weight", ".lora.up.weight")
-                    if name.endswith(suffix)
-                ),
-                None,
-            )
-            require(suffix is not None, "Unexpected LoRA tensor name")
-            object_fields(tensor, {"dtype", "shape", "data_offsets"}, "LoRA tensor")
-            require(tensor["dtype"] in ("F32", "F16", "BF16"), "Unsupported LoRA dtype")
-            shape, offsets = tensor["shape"], tensor["data_offsets"]
-            require(
-                isinstance(shape, list)
-                and len(shape) == 2
-                and all(type(n) is int and 0 < n <= 65536 for n in shape),
-                "Invalid LoRA matrix shape",
-            )
-            down = suffix == ".lora.down.weight"
-            require(shape[0 if down else 1] == rank, "LoRA rank differs from training plan")
-            width = 4 if tensor["dtype"] == "F32" else 2
-            require(
-                isinstance(offsets, list)
-                and len(offsets) == 2
-                and all(type(n) is int and n >= 0 for n in offsets)
-                and offsets[1] - offsets[0] == math.prod(shape) * width,
-                "Invalid LoRA byte offsets",
-            )
-            spans.append((offsets[0], offsets[1], tensor["dtype"]))
-            pairs.setdefault(name[: -len(suffix)], set()).add(down)
+        require(suffix is not None, "Unexpected LoRA tensor name")
+        object_fields(tensor, {"dtype", "shape", "data_offsets"}, "LoRA tensor")
+        require(tensor["dtype"] in ("F32", "F16", "BF16"), "Unsupported LoRA dtype")
+        shape, offsets = tensor["shape"], tensor["data_offsets"]
         require(
-            all(pair == {True, False} for pair in pairs.values()), "Incomplete LoRA matrix pair"
+            isinstance(shape, list)
+            and len(shape) == 2
+            and all(type(n) is int and 0 < n <= 65536 for n in shape),
+            "Invalid LoRA matrix shape",
         )
-        position = 0
-        for start, end, dtype in sorted(spans):
-            require(
-                start == position and end <= size - 8 - header_size,
-                "Overlapping, gapped or truncated LoRA data",
-            )
-            mask = {"F32": 0x7F800000, "F16": 0x7C00, "BF16": 0x7F80}[dtype]
-            remaining = end - start
-            while remaining:
-                raw = handle.read(min(1024 * 1024, remaining))
-                require(bool(raw), "Truncated LoRA tensor")
-                values = array.array("I" if dtype == "F32" else "H", raw)
-                if sys.byteorder != "little":
-                    values.byteswap()
-                require(all(bits & mask != mask for bits in values), "Nonfinite LoRA tensor")
-                remaining -= len(raw)
-            position = end
-        require(position == size - 8 - header_size, "Trailing undeclared LoRA bytes")
+        down = suffix == ".lora.down.weight"
+        require(shape[0 if down else 1] == rank, "LoRA rank differs from training plan")
+        width = 4 if tensor["dtype"] == "F32" else 2
+        require(
+            isinstance(offsets, list)
+            and len(offsets) == 2
+            and all(type(n) is int and n >= 0 for n in offsets)
+            and offsets[1] - offsets[0] == math.prod(shape) * width,
+            "Invalid LoRA byte offsets",
+        )
+        spans.append((offsets[0], offsets[1], tensor["dtype"]))
+        pairs.setdefault(name[: -len(suffix)], set()).add(down)
+    require(all(pair == {True, False} for pair in pairs.values()), "Incomplete LoRA matrix pair")
+    position = 0
+    for start, end, dtype in sorted(spans):
+        require(
+            start == position and end <= size - 8 - header_size,
+            "Overlapping, gapped or truncated LoRA data",
+        )
+        mask = {"F32": 0x7F800000, "F16": 0x7C00, "BF16": 0x7F80}[dtype]
+        remaining = end - start
+        while remaining:
+            raw = handle.read(min(1024 * 1024, remaining))
+            require(bool(raw), "Truncated LoRA tensor")
+            values = array.array("I" if dtype == "F32" else "H", raw)
+            if sys.byteorder != "little":
+                values.byteswap()
+            require(all(bits & mask != mask for bits in values), "Nonfinite LoRA tensor")
+            remaining -= len(raw)
+        position = end
+    require(position == size - 8 - header_size, "Trailing undeclared LoRA bytes")
     return {"bytes": size, "tensors": len(tensors), "pairs": len(pairs), "all_finite": True}
 
 
 def validate(config, plan, folder, *, expected_result_id=None):
+    return _validate(config, plan, folder, expected_result_id=expected_result_id, capture=False)
+
+
+def validate_record(config, plan, folder, *, expected_result_id=None):
+    """Capture owned immutable values for one assessment/export/packet operation."""
+    return _validate(config, plan, folder, expected_result_id=expected_result_id, capture=True)
+
+
+def _validate(config, plan, folder, *, expected_result_id, capture):
     result = read_result(folder, plan, expected_result_id=expected_result_id)
     with boundary("result_schema"):
         object_fields(
@@ -180,7 +206,14 @@ def validate(config, plan, folder, *, expected_result_id=None):
     params = plan["specification"]["parameters"]
     with boundary("weights"):
         weights, _ = file_ref(folder, result["weights"], maximum=256 * 1024**2)
-        integrity = inspect_weights(weights, params["rank"])
+        snapshot = (
+            weight_snapshot(weights, params["rank"], result["weights"]["sha256"])
+            if capture
+            else None
+        )
+        integrity = (
+            snapshot.integrity.to_dict() if snapshot else inspect_weights(weights, params["rank"])
+        )
     with boundary("optimizer_evidence"):
         require(
             result["adapter_only"] is True
@@ -243,11 +276,16 @@ def validate(config, plan, folder, *, expected_result_id=None):
                 "Preview pair paths overlap",
             )
     with boundary("quality_matrix"):
+        evidence = None
         if result["version"] == 2:
-            from itov.quality import validate_matrix
+            from itov.quality import matrix_evidence
 
             for row in json_array(result["quality_matrix"], "quality matrix"):
                 require(isinstance(row, dict), "Quality image must be an object")
                 integer(row.get("seed"), "quality result seed")
-            validate_matrix(config.root, plan["specification"], result, folder)
+            evidence = matrix_evidence(config.root, plan["specification"], result, folder)
+    if capture:
+        return ValidatedTrainingResult(
+            Document.capture(result), Document.capture(dataset), snapshot, evidence
+        )
     return {"result": result, "dataset": dataset, "integrity": integrity}
