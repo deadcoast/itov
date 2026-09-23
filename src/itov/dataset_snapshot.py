@@ -86,7 +86,8 @@ def inventory(folder):
         path = safe_path(folder, name)
         size = path.stat().st_size
         require(0 < size <= 32 * 1024**2, "Dataset bundle file size is unsupported")
-        raw = path.read_bytes()
+        with path.open("rb") as handle:
+            raw = handle.read(32 * 1024**2 + 1)
         require(len(raw) == size, "Dataset bundle changed during inventory")
         total += size
         require(total <= 1024**3, "Dataset bundle exceeds 1 GiB")
@@ -132,6 +133,31 @@ def definition(value, receipt, base):
             "Transform receipt differs from inputs",
         )
         digest(row["decoded_rgb_sha256"], "decoded image hash")
+        digest(row["oriented_rgb_sha256"], "oriented image hash")
+        require(
+            row["format"] in ("JPEG", "PNG") and row["source_mode"] in ("RGB", "L"),
+            "Unsupported transform source",
+        )
+        require(
+            type(row["exif_orientation"]) is int and 1 <= row["exif_orientation"] <= 8,
+            "Invalid transform orientation",
+        )
+        for name in ("source_size", "oriented_size", "fitted_size"):
+            require(
+                isinstance(row[name], list)
+                and len(row[name]) == 2
+                and all(type(n) is int and n > 0 for n in row[name]),
+                "Invalid transform dimensions",
+            )
+        require(
+            row["source_size"][0] * row["source_size"][1] <= 32_000_000
+            and max(row["fitted_size"]) == 512
+            and row["oriented_size"]
+            == (row["source_size"][::-1] if row["exif_orientation"] >= 5 else row["source_size"])
+            and row["offset"] == [(512 - n) // 2 for n in row["fitted_size"]]
+            and row["background"] == [245, 240, 225],
+            "Transform geometry differs",
+        )
         paths = {
             "source": f"sources/{key}.image",
             "caption": f"captions/{key}.txt",
@@ -166,6 +192,12 @@ def snapshot(folder, value, receipt):
     checked = validate_value(
         folder, definition(value, receipt, ""), {"sha256": sha256(raw), "bytes": len(raw)}
     )
+    for row in receipt["images"]:
+        require(
+            type(row["output_bytes"]) is int
+            and row["output_bytes"] == (folder / f"images/{row['sample']}.png").stat().st_size,
+            "Derived image size differs from transform receipt",
+        )
     body = {k: v for k, v in checked.items() if k != "dataset_id"}
     body.update(
         version=2,

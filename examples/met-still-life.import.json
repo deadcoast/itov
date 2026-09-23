@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "id": "met-still-life-pilot-v1",
+  "purpose": "training",
+  "origin": {
+    "reference": "https://www.metmuseum.org/hubs/open-access",
+    "title": "Eight-work Met still-life pilot"
+  },
+  "rights": {
+    "basis": "Met Open Access CC0 declaration and isPublicDomain metadata",
+    "reference": "https://www.metmuseum.org/hubs/open-access",
+    "training_permitted": true
+  },
+  "provider": "met-open-access",
+  "transform": "rgb-fit-pad-512-lanczos-ivory-v1",
+  "curation": {
+    "curator": "Codex assistant",
+    "selection_policy": "Bounded color oil still-life pilot, six train/two validation works, artist-disjoint locally. Excluded monochrome reproduction 10895 and fish/vanitas/trompe-l'oeil subjects. Provider access limits prevented expanding the pilot; no population claim.",
+    "policy_url": "https://www.metmuseum.org/hubs/open-access",
+    "policy_snapshot": {
+      "path": "training/data/met-still-life-v1/policy-observation.json",
+      "sha256": "a170cfa8290f9840f8e0cc47b65aa6a1baa70dba10ffe916f857887a227af17b"
+    }
+  },
+  "samples": [
+    {
+      "id": "met-11737",
+      "split": "validation",
+      "group": "met-11737",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/11737.jpg",
+        "sha256": "22af7b5eb7f942a99574ba118201f77c7fd436c480c40979efb0ebf557104fbb"
+      },
+      "caption": {
+        "path": "training/data/met-still-life-v1/prepared/11737.txt",
+        "sha256": "bad87da19539185dac8518c5b3002720aee3b53b6770fd472edeefea785fc502"
+      },
+      "provenance": {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DT64.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/11737.json",
+          "sha256": "c24074b2c3a85fe268c991b77cdf66e2162aaf2b7f399981e9ec62a0c8571678"
+        },
+        "object_id": 11737,
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    },
+    {
+      "id": "met-11939",
+      "split": "train",
+      "group": "met-11939",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/11939.jpg",
+        "sha256": "e3b55e0f6c9951197b5ae40935ef5347eda066455bc564720d29d95d804c526d"
+      },
+      "caption": {
+        "path": "training/data/met-still-life-v1/prepared/11939.txt",
+        "sha256": "b127370de146fac20f2081b2ba37e1fe8d6dcbd1efad12da251e0d1a750bac87"
+      },
+      "provenance": {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/APS628.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/11939.json",
+          "sha256": "3328531ed6901ab791d2504a44030fdba08b56d3dabbbc05efcfeef1c1dc5c56"
+        },
+        "object_id": 11939,
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    },
+    {
+      "id": "met-16590",
+      "split": "train",
+      "group": "met-16590",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/16590.jpg",
+        "sha256": "b9689a5cdaf7de0e19ffc01345c8faab1c88568a42a62fc5fdf4f012a23b0b36"
+      },
+      "caption": {
+        "path": "training/data/met-still-life-v1/prepared/16590.txt",
+        "sha256": "5a7e57fc652f12dfc435368cc3392120705ea75f7b17d13caa49ac95e86db3f4"
+      },
+      "provenance": {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/ap1999.298.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/16590.json",
+          "sha256": "a0f76c8bdb079052f127f7acff79d6c8471332545d2e5bd19ca45c0ec71f1db9"
+        },
+        "object_id": 16590,
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    },
+    {
+      "id": "met-16592",
+      "split": "train",
+      "group": "met-16592",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/16592.jpg",
+        "sha256": "48699d3273e9647dc9181c8a71ec657a9e9cf0e23f5541042ac970a7b5587725"
+      },
+      "caption": {
+        "path": "training/data/met-still-life-v1/prepared/16592.txt",
+        "sha256": "2a1c94365190861e4ca961af2d297b684b4eef996813c8d3f463b112c2e9066d"
+      },
+      "provenance": {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DT4432.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/16592.json",
+          "sha256": "406187e39ff28e4d6471682c5f7ab4f2e49fb5bdebccf0f0572f3a4103fd1bd3"
+        },
+        "object_id": 16592,
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    },
+    {
+      "id": "met-436305",
+      "split": "train",
+      "group": "met-436305",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/436305.jpg",
+        "sha256": "b4bda435e9242d01ef50f9fe2e3c5be7e722b35d4e0fa528f7c3d02fe1472e2b"
+      },
+      "caption": {
+        "path": "training/data/met-still-life-v1/prepared/436305.txt",
+        "sha256": "f3c6a92622a805d2f7b619f6e9a38ce17a6c92a5ce9065f7742d4bccf3ab5af5"
+      },
+      "provenance": {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25893-001.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/436305.json",
+          "sha256": "b158706c51a621f00e461334ffb9e9e88bd2ed24f724bf1eea6a080ae16c6f40"
+        },
+        "object_id": 436305,
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    },
+    {
+      "id": "met-436450",
+      "split": "validation",
+      "group": "met-436450",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/436450.jpg",
+        "sha256": "59aa7a895db0588a51b98e7542200a9d7c3b3746fde4e9bd60221b725bf959b2"
+      },
+      "caption": {
+        "path": "training/data/met-still-life-v1/prepared/436450.txt",
+        "sha256": "735bb4dee2d6850a4e76c12a2a20d8ea2bea77e66e484818fa9b6f336070e6a7"
+      },
+      "provenance": {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1501.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/436450.json",
+          "sha256": "df590fcfa0b338debfd51d4162d39aa6f01b6146b9324925d77d89c2a0356a97"
+        },
+        "object_id": 436450,
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    },
+    {
+      "id": "met-488147",
+      "split": "train",
+      "group": "met-488147",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/488147.jpg",
+        "sha256": "f247eb0ff08b8fed9abd932ca541aa1c7c69896ccc74b45ef4281a89c19ceb0e"
+      },
+      "caption": {
+        "path": "training/data/met-still-life-v1/prepared/488147.txt",
+        "sha256": "8d615cfad743e24004c7b69f8c43170ae912ab0d73f668fd0165477bbea564cc"
+      },
+      "provenance": {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ma/web-large/43.47.7 - color.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/488147.json",
+          "sha256": "e733b6861bae7cadf623c7d0357c2c43e72156b59464d89abc8ce6bd22c9bfd4"
+        },
+        "object_id": 488147,
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    },
+    {
+      "id": "met-898372",
+      "split": "train",
+      "group": "met-898372",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/898372.jpg",
+        "sha256": "dbc1ef78393e17a9f12ff13cf46694cbdd42d280f6ed277d7b0c673bb0b22693"
+      },
+      "caption": {
+        "path": "training/data/met-still-life-v1/prepared/898372.txt",
+        "sha256": "59c3175a72110e6992006ae0c94fa1946f3af4824e66f1aa062a590f9d434320"
+      },
+      "provenance": {
+        "caption_note": "Assistant description after source contact-sheet inspection; no artist-name trigger or claim of independent human validation.",
+        "image_url": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-29793-001.jpg",
+        "metadata": {
+          "path": "training/data/met-still-life-v1/metadata/898372.json",
+          "sha256": "eddca84a36ae04116d5a0ad1aaf4838df3276b10dd8714c82a51999075e4ad7b"
+        },
+        "object_id": 898372,
+        "selection_note": "Color oil still life; no people. Complete composition preserved by fit and ivory padding. Varied painting styles retained."
+      }
+    }
+  ]
+}

@@ -37,10 +37,12 @@ def _worker(python, arguments):
         raise ValueError(
             "Dataset image worker failed: " + run.stderr.decode(errors="replace")[-2000:]
         ) from error
+    require(isinstance(result, dict), "Dataset image worker returned an invalid result")
     require(
         run.returncode == 0 and result.get("ok") is True,
         "Dataset image worker: " + str(result.get("error", "No successful result")),
     )
+    require(isinstance(result.get("value"), dict), "Dataset image worker omitted its evidence")
     return result["value"]
 
 
@@ -77,6 +79,36 @@ def _latest(folder):
     )
     path = safe_path(folder, f"attempts/{current['attempt_id']}")
     record = check_seal(parse_json(read_document(safe_path(path, "attempt.json"))), "record_id")
+    object_fields(
+        record,
+        {
+            "version",
+            "import_id",
+            "attempt_id",
+            "status",
+            "source_root",
+            "image_python",
+            "completed_images",
+            "error",
+            "failure_boundary",
+            "updated_at",
+            "record_id",
+        },
+        "dataset attempt",
+    )
+    require(
+        type(record["version"]) is int
+        and record["version"] == 1
+        and record["import_id"] == folder.name
+        and record["status"] in ("running", "paused", "failed", "committed")
+        and type(record["completed_images"]) is int
+        and 0 <= record["completed_images"] <= 256
+        and all(
+            isinstance(record[k], str) and record[k]
+            for k in ("source_root", "image_python", "updated_at")
+        ),
+        "Invalid dataset attempt record",
+    )
     require(record.get("attempt_id") == current["attempt_id"], "Attempt record differs")
     return path, record
 
@@ -90,11 +122,7 @@ def status(config, path):
         "ok": False,
         "scope": "dataset_import_status",
         "import_id": value["import_id"],
-        "status": "not_started"
-        if record is None
-        else "failed"
-        if record["status"] == "failed"
-        else "paused",
+        "status": record["status"] if record else "not_started",
         "recorded_status": record["status"] if record else None,
         "error": record.get("error") if record else None,
         "failure_boundary": record.get("failure_boundary") if record else None,
@@ -105,6 +133,12 @@ def status(config, path):
     }
     if attempt:
         result["artifacts"]["attempt record"] = str(attempt / "attempt.json")
+    if not final.exists() and record and record["status"] == "committed":
+        result.update(
+            status="artifact_invalid",
+            error="Committed dataset bundle is missing",
+            failure_boundary="commit",
+        )
     if final.exists():
         try:
             prepared = snapshots.verify_bundle(final, value["import_id"])
@@ -165,7 +199,7 @@ def begin(config, path, *, source_root=None, image_python=None):
             )
             return observed
         # Operation is durable before any copying or transforms. Recovery also handles
-        # a crash between these publications or before the first attempt pointer.
+        # a crash before the first attempt pointer.
         publish(operation_path, value)
         return _build(config, value, Path(source_root or path.absolute().parent).absolute(), python)
 
@@ -279,6 +313,7 @@ def _build(config, value, source_root, python):
                 row["engine"] == value["engine"], "Dataset image engine changed during preparation"
             )
             images.append({"sample": key, **row})
+            publish(safe_path(attempt, f"transforms/{key}.json"), images[-1])
             body["completed_images"] = len(images)
             _event(attempt, body)
         boundary = "bundle_validation"

@@ -132,7 +132,7 @@ This example pins the retained local still-life candidate; it is not portable tr
 
 ## 5. Train, assess and compare the deployed artifact
 
-Training requires declared local source images/captions, prepared dataset, provenance/curation, frozen quality cases, checkpoint/configuration/tokenizer files and the pinned optional training environment. The current eight-image pilot/helper is bounded; transactional acquisition/preparation and checkpoint restart remain Phase B work. Provision using the [training](training-and-promotion.md) and [curation](curated-quality-review.md) contracts, then:
+Training requires declared local source images/captions, prepared dataset, provenance/curation, frozen quality cases, checkpoint/configuration/tokenizer files and the pinned optional training environment. Use [transactional dataset import](dataset-import.md) for new local or retained Met inputs; it preserves failed attempts and publishes a verified complete bundle. Acquisition and training checkpoint restart remain later work. The following commands inspect the historical version-one pilot; provision using the [training](training-and-promotion.md) and [curation](curated-quality-review.md) contracts:
 
 ```powershell
 uv run --inexact --locked itov dataset validate workspace/training/data/met-still-life-v1/dataset.json --config $cfg

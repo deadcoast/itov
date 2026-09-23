@@ -53,7 +53,8 @@ def transform(source, destination, expected):
     Image.MAX_IMAGE_PIXELS = MAX_PIXELS
     ImageFile.LOAD_TRUNCATED_IMAGES = False
     warnings.simplefilter("error", Image.DecompressionBombWarning)
-    raw = source.read_bytes()
+    with source.open("rb") as handle:
+        raw = handle.read(32 * 1024**2 + 1)
     if not 0 < len(raw) <= 32 * 1024**2 or digest(raw) != expected:
         raise ValueError("Source image size/hash changed before decoding")
     with Image.open(io.BytesIO(raw), formats=["JPEG", "PNG"]) as image:

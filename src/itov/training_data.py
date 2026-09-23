@@ -103,6 +103,7 @@ def validate_value(root: Path, value, source):
     seen, paths, images, groups, sources, observations = set(), set(), set(), {}, {}, []
     splits = {"train": 0, "validation": 0}
     total = 0
+    committed = set()
     for sample in samples:
         object_fields(sample, {"id", "split", "group", "source", "image", "caption"}, "sample")
         key = identifier(sample["id"], "sample id")
@@ -112,6 +113,17 @@ def validate_value(root: Path, value, source):
         require(sample["split"] in ("train", "validation"), "Invalid sample split")
         split = sample["split"]
         for field in ("source", "image", "caption"):
+            # Legacy commands cannot downgrade an incomplete managed import into
+            # a prepared dataset. Staging validation uses local projected paths.
+            ref = sample[field]
+            if isinstance(ref, dict) and isinstance(ref.get("path"), str):
+                parts = ref["path"].split("/")
+                if parts[:2] == ["training", "imports"] and len(parts) > 2:
+                    from itov.dataset_snapshot import prefix, verify_bundle
+
+                    if parts[2] not in committed:
+                        verify_bundle(safe_path(root, prefix(parts[2])), parts[2])
+                        committed.add(parts[2])
             asset, size = file_ref(
                 root, sample[field], maximum=65536 if field == "caption" else 32 * 1024 * 1024
             )

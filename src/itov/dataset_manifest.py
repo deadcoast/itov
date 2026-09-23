@@ -43,8 +43,8 @@ def validate(value):
     )
     require(type(value["version"]) is int and value["version"] == 1, "Unsupported import version")
     identifier(value["id"], "dataset id")
-    require(value["provider"] in {"local", "met-open-access"}, "Unsupported import provider")
-    require(value["purpose"] in {"smoke", "training"}, "Invalid dataset purpose")
+    require(value["provider"] in ("local", "met-open-access"), "Unsupported import provider")
+    require(value["purpose"] in ("smoke", "training"), "Invalid dataset purpose")
     origin(value["origin"])
     object_fields(value["rights"], {"basis", "reference", "training_permitted"}, "dataset rights")
     text(value["rights"]["basis"], "rights basis")
@@ -79,7 +79,7 @@ def validate(value):
         ids.add(key)
         group = identifier(sample["group"], "sample group")
         split = sample["split"]
-        require(split in {"train", "validation"}, "Invalid import split")
+        require(split in ("train", "validation"), "Invalid import split")
         splits.add(split)
         for name in ("source", "caption"):
             reference(sample[name])

@@ -259,6 +259,30 @@ def _guidance(args, result, state):
                 "but cannot rerun a terminal failed job. Abandon only after "
                 "outcomes are known."
             )
+    elif command == "dataset" and action in {"import", "status", "recover"}:
+        refs = result.get("artifacts", {})
+        operation = refs.get("operation") or (source if action != "import" else None)
+        if operation:
+            configured("Inspect the import", "dataset", "status", operation)
+            if state != "ok" and status != "artifact_invalid":
+                configured(
+                    "Rebuild in a new retained attempt",
+                    "dataset",
+                    "recover",
+                    operation,
+                    when="With the original pinned inputs and image engine available",
+                )
+        if refs.get("prepared"):
+            configured("Verify the committed dataset", "dataset", "verify", refs["prepared"])
+        message = (
+            "Inspect the retained attempt and causes. Recovery rebuilds in a new attempt; "
+            "it reconciles the journal if publication already completed."
+            if state != "ok"
+            else "Dataset committed and verified. Use prepared.json and its SHA-256 in training "
+            "inputs; inspect captions, splits and visual suitability before training."
+        )
+        if status == "artifact_invalid":
+            message = "Published data failed verification. Preserve the bundle and investigate."
     elif command == "training" and action in {"run", "status", "recover"}:
         configured("Inspect the training attempt", "training", "status", source)
         if state == "ok":
@@ -399,6 +423,7 @@ def _text(result, meta):
         "scope",
         "plan_id",
         "dataset_id",
+        "import_id",
         "candidate_id",
         "assessment_id",
         "packet_id",
@@ -454,6 +479,8 @@ def _text(result, meta):
             f"Dataset: {result['counts']['train']} training, "
             f"{result['counts']['validation']} held-out"
         )
+    if "completed_images" in result:
+        lines.append(f"Progress: {result['completed_images']}/{result['total']} images prepared")
     for row in result.get("checks", []):
         lines.append(f"{row['status'].upper()} {row['name']}: {row['detail']}")
     for row in result.get("findings", []):
