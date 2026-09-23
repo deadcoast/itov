@@ -68,6 +68,8 @@ Recovery marks interrupted execution failed. An interrupted version 2 validation
 
 ## Assessment, candidates and promotion
 
+For version 2 curated training plans, use the [supported deployed evaluation workflow](deployed-evaluation.md) after technical assessment. It stages the candidate and executes the frozen four-condition case/seed matrix through public commands. The old local ComfyUI qualification helper is historical investigation tooling; it is no longer required for this workflow. Quality disposition and promotion remain separate.
+
 ```powershell
 uv run --locked itov evaluation assess workspace/state/training/plans/PLAN_ID.json --save --json
 uv run --locked itov training candidate workspace/state/training/plans/PLAN_ID.json --save --json

@@ -4,6 +4,15 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-23 — A-02 supported deployed evaluation
+
+- Added `evaluation plan/run/status/resume/replay/abandon` for version 2 curated training plans. Public planning exports/stages the validated candidate and freezes the checkpoint, complete case/seed/role graphs, sampler/strength, live schemas, declared runtime files and PNG decoder identity. No catalog activation or helper-edited graph is required.
+- Reused durable sequential ownership and uncertain-submission observation. Evaluation seed reservations permit deliberate paired comparisons without weakening ordinary generation reservations. Accepted work can be collected before stale bindings block the next POST; failed collections, missing proof and unsafe abandonment remain explicit refusals. Status and replay fully decode every owned PNG and never repair historical records.
+- Reproduced the existing full 16-image suite through the installed Python 3.11 wheel on the actual RTX 5090/stock ComfyUI runtime. Intentionally paused after the first accepted prompt, resumed to completion, and verified exactly 16 requests with matching graphs and no duplicated first job. Completed status/resume/replay passed with socket connections prohibited. The trial server exited after identity/idle-queue checks.
+- Passed 934 source tests and 173 affected installed-wheel tests, scoped lint/format, source/wheel/installed parity for 45 modules and exact README packaging. All 178 snapshotted historical files, the main catalog and SCM 0.5.0 were preserved. [Verification evidence](docs/evidence/phase-a02-verification-20260923.json) retains initial fixture/harness failures and separates protocol tests from actual model execution.
+- Retained all 16 deployed images and [assistant inspection](docs/deployed-evaluation-review-20260923.md). Missing pears/vase and merged geometry still fail the frozen expectations; trigger specificity remains unresolved. The candidate remains rejected. This closes A-02's bounded execution integration, not quality acceptance, full dependency attestation, Diffusers parity or cross-family/device exclusion.
+- Added the [deployed evaluation runbook](docs/deployed-evaluation.md) and workspace-specific example. A-03 ownership reconciliation is next; Phase A and the product remain incomplete. Project version remains 0.13.1; this is unreleased repository development.
+
 ### 2026-09-22 — A-01 training result validation and recovery
 
 - Extracted a shared read-only result validator for training execution, status and technical assessment. The controller now requires finite supported safetensors, complete optimizer/held-out/preview/quality evidence and fresh execution inputs before recording `artifacts_validated`. Worker completion and candidate assessment have separate meanings.

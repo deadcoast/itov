@@ -1,0 +1,241 @@
+{
+  "scope": "assistant direct inspection of all 16 actual deployed PNGs at 512x512; bounded pilot, no automatic scoring",
+  "plan_id": "6d4a57ac60bec4ae889950658492ab5f23e6f325be08f74678c361c450c2a48c",
+  "report_id": "930348fa8d3a369c8df707b41914c5242df0ee055d60eba984cc85137a0f686c",
+  "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada",
+  "decision": "reject",
+  "method": "Viewed each original decoded image, four conditions together for each fixed case/seed, and compared visible objects with the predeclared suite expectations. Copies are byte-identical. No blind evaluator or calibrated measurement.",
+  "findings": [
+    "All eight vase-and-pears conditions fail a required object/count: seed 11760922 has one pear; seed 11760923 omits the vase.",
+    "Four geometry conditions at seed 11860922 preserve distinct cube/cone; the other four at 11860923 merge/distort the requested objects.",
+    "Failures occur in both base and adapter conditions; this does not establish that the adapter caused the baseline failures.",
+    "Adapter plain and trigger conditions both alter appearance; reliable trigger-specific learned control is not established.",
+    "No Diffusers parity or generalization claim. Technical matrix completion does not authorize candidate promotion."
+  ],
+  "rows": [
+    {
+      "index": 0,
+      "case_id": "vase-and-pears",
+      "seed": 11760922,
+      "role": "base_plain",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/vase-and-pears-11760922-base_plain.png",
+        "sha256": "a6166199c27446cb30841f513aeba1a2f632751df3acfdfe480bffa348f7d7d1"
+      },
+      "visual_observation": "One yellow pear beside one blue vase; fails the requested two pears.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 1,
+      "case_id": "vase-and-pears",
+      "seed": 11760922,
+      "role": "base_trigger",
+      "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/vase-and-pears-11760922-base_trigger.png",
+        "sha256": "5d6b49b9f5410c97102edde6ac4a1bd260028cc8391a7b756634ab2f6ab866f6"
+      },
+      "visual_observation": "One yellow pear beside one blue vase; fails the requested two pears.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 2,
+      "case_id": "vase-and-pears",
+      "seed": 11760922,
+      "role": "adapter_plain",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/vase-and-pears-11760922-adapter_plain.png",
+        "sha256": "48e84a2053a8aba491fa416a35869cdc6e8aebab72a9e0d3b9191e5eb7dcab5f"
+      },
+      "visual_observation": "One yellow pear beside one blue vase; fails the requested two pears.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 3,
+      "case_id": "vase-and-pears",
+      "seed": 11760922,
+      "role": "adapter_trigger",
+      "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/vase-and-pears-11760922-adapter_trigger.png",
+        "sha256": "c0a2d5455d026bb725e95d4d1cd55e7a55c2abd18d57de9baccd9247e1213170"
+      },
+      "visual_observation": "One yellow pear beside one blue vase; fails the requested two pears.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 4,
+      "case_id": "vase-and-pears",
+      "seed": 11760923,
+      "role": "base_plain",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/vase-and-pears-11760923-base_plain.png",
+        "sha256": "38e27e1a5301681f64ba6c7aadb34bc0d146072e5c7c71f644e782fb8b068113"
+      },
+      "visual_observation": "Two yellow fruits/pears, with no blue vase visible; fails the required vase.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 5,
+      "case_id": "vase-and-pears",
+      "seed": 11760923,
+      "role": "base_trigger",
+      "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/vase-and-pears-11760923-base_trigger.png",
+        "sha256": "c81354bd18344bf4381773fc4b15af2012892cab657dc96ebd47e3a97120523d"
+      },
+      "visual_observation": "Two yellow fruits/pears, with no blue vase visible; fails the required vase.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 6,
+      "case_id": "vase-and-pears",
+      "seed": 11760923,
+      "role": "adapter_plain",
+      "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/vase-and-pears-11760923-adapter_plain.png",
+        "sha256": "539ed37be7ba6cd38c75c2876604cfe36cf77c5dc8e0bc59875fc7b9109643a1"
+      },
+      "visual_observation": "Two yellow fruits/pears, with no blue vase visible; fails the required vase.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 7,
+      "case_id": "vase-and-pears",
+      "seed": 11760923,
+      "role": "adapter_trigger",
+      "prompt": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/vase-and-pears-11760923-adapter_trigger.png",
+        "sha256": "51889489b6024cbe2864afdb502f494e4716b3090dc51001d3fc30714379a861"
+      },
+      "visual_observation": "Two yellow fruits/pears, with no blue vase visible; fails the required vase.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 8,
+      "case_id": "paper-geometry",
+      "seed": 11860922,
+      "role": "base_plain",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/paper-geometry-11860922-base_plain.png",
+        "sha256": "39ec765ae6c894d8dbb73d1c2c3f28db4fee7a34b58244af2137f33f967d1600"
+      },
+      "visual_observation": "One distinct red cube and one white cone on gray; basic object count, color and separation pass visual inspection.",
+      "basic_prompt_adherence": "pass"
+    },
+    {
+      "index": 9,
+      "case_id": "paper-geometry",
+      "seed": 11860922,
+      "role": "base_trigger",
+      "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/paper-geometry-11860922-base_trigger.png",
+        "sha256": "f042fb624def39a941b889946d15e92fe5f75ad28621a642feaaad60277c77be"
+      },
+      "visual_observation": "One distinct red cube and one white cone on gray; basic object count, color and separation pass visual inspection.",
+      "basic_prompt_adherence": "pass"
+    },
+    {
+      "index": 10,
+      "case_id": "paper-geometry",
+      "seed": 11860922,
+      "role": "adapter_plain",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/paper-geometry-11860922-adapter_plain.png",
+        "sha256": "421a41b8505916f3e977aedb39a41f5e4bb5d8162f326a808784da64027507ff"
+      },
+      "visual_observation": "One distinct red cube and one white cone on gray; basic object count, color and separation pass visual inspection.",
+      "basic_prompt_adherence": "pass"
+    },
+    {
+      "index": 11,
+      "case_id": "paper-geometry",
+      "seed": 11860922,
+      "role": "adapter_trigger",
+      "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/paper-geometry-11860922-adapter_trigger.png",
+        "sha256": "0d32b4624611cfe81a355cb928fa07cc89953a3b8a652ba7fc33ab3ca58b7635"
+      },
+      "visual_observation": "One distinct red cube and one white cone on gray; basic object count, color and separation pass visual inspection.",
+      "basic_prompt_adherence": "pass"
+    },
+    {
+      "index": 12,
+      "case_id": "paper-geometry",
+      "seed": 11860923,
+      "role": "base_plain",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/paper-geometry-11860923-base_plain.png",
+        "sha256": "b6ee3f91796f9a2913ad4171aa7b9b44ca85c926513ceaf5ea596b1aab27839f"
+      },
+      "visual_observation": "A merged red/white folded shape replaces the distinct cube and cone; fails object identity and separation.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 13,
+      "case_id": "paper-geometry",
+      "seed": 11860923,
+      "role": "base_trigger",
+      "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/paper-geometry-11860923-base_trigger.png",
+        "sha256": "786cbd069fa525e0e2e5d833a94f1512ad08616630716e35b4dbdf6ccbbddc02"
+      },
+      "visual_observation": "A merged red/white folded shape replaces the distinct cube and cone; fails object identity and separation.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 14,
+      "case_id": "paper-geometry",
+      "seed": 11860923,
+      "role": "adapter_plain",
+      "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/paper-geometry-11860923-adapter_plain.png",
+        "sha256": "f644c0f94a6a125b069651d409afcf2f39d8559dd2f8550a4c5360607e5b9150"
+      },
+      "visual_observation": "A merged red/white folded shape replaces the distinct cube and cone; fails object identity and separation.",
+      "basic_prompt_adherence": "fail"
+    },
+    {
+      "index": 15,
+      "case_id": "paper-geometry",
+      "seed": 11860923,
+      "role": "adapter_trigger",
+      "prompt": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+      "negative_prompt": "text, watermark, signature, frame",
+      "image": {
+        "path": "docs/evidence/phase-a02-images/paper-geometry-11860923-adapter_trigger.png",
+        "sha256": "22ce468d8815bc3600dd7aae7a5fcf91f6bfd3d146f6fd6b8b70d7e8968dcb29"
+      },
+      "visual_observation": "A merged red/white folded shape replaces the distinct cube and cone; fails object identity and separation.",
+      "basic_prompt_adherence": "fail"
+    }
+  ]
+}

@@ -16,6 +16,7 @@ from pathlib import Path, PurePosixPath
 from itov.audio_media import audio_contract, verify_audio
 from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json, submission_matches
 from itov.config import Config, validate_timeout
+from itov.image_media import image_contract, verify_image
 from itov.locking import file_lock
 from itov.media import verify_video, video_contract
 from itov.workflow import validate_workflow
@@ -129,6 +130,13 @@ def _collect(config: Config, client: ComfyUIClient, record: dict, history: dict)
 
 def _verify_media(record: dict):
     for node_id, node in record.get("workflow", {}).items():
+        if node["class_type"] == "SaveImage" and "itov_image" in node.get("_meta", {}):
+            expected = image_contract(node["_meta"]["itov_image"])
+            outputs = [item for item in record["artifacts"] if item["node_id"] == node_id]
+            require_count = len(outputs) == 1 and len(record["artifacts"]) == 1
+            if not require_count:
+                raise ValueError("Expected exactly one collected evaluation image")
+            outputs[0]["image_validation"] = verify_image(Path(outputs[0]["path"]), expected)
         if node["class_type"] == "SaveAudioAdvanced":
             metadata = node.get("_meta", {})
             if not isinstance(metadata, dict):

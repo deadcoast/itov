@@ -123,6 +123,11 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
     Runtime and assets must remain under operator control while execution is active.
     """
     replay_plan(config.root, plan)
+    return qualify_graphs(config, plan, timeout=timeout)
+
+
+def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sources=()) -> dict:
+    """Bind validated plan graphs; callers must first validate their own plan contract."""
     expected_argv = launch_command(config)[2:]
     client = ComfyUIClient(config.url, timeout=timeout)
     stats, registry = client.system_stats(), client.object_info()
@@ -168,7 +173,7 @@ def qualify(config: Config, plan: dict, *, timeout: float = 3) -> dict:
             files[key] = _file(path)
         return files[key]
 
-    for name in ("main.py", "nodes.py", "folder_paths.py"):
+    for name in ("main.py", "nodes.py", "folder_paths.py", *extra_sources):
         bind(config.comfyui_root, name)
     observer = None
     if instrumented:

@@ -263,12 +263,20 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--gpu", required=True)
     evaluation = commands.add_parser("evaluation", help="Technical training assessment")
     evaluation_actions = evaluation.add_subparsers(dest="action", required=True)
-    for action in ("assess", "packet"):
+    for action in ("assess", "packet", "plan", "run", "status", "resume", "replay", "abandon"):
         item = evaluation_actions.add_parser(action)
         item.add_argument("file", type=Path)
         item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
         item.add_argument("--json", action="store_true")
-        item.add_argument("--save", action="store_true")
+        if action in {"assess", "packet", "plan", "replay"}:
+            item.add_argument("--save", action="store_true")
+        if action in {"plan", "run", "resume"}:
+            item.add_argument("--timeout", type=float, default=3)
+        if action in {"run", "resume"}:
+            item.add_argument("--wait-timeout", type=float, default=300)
+            item.add_argument("--poll-interval", type=float, default=1)
+        if action == "resume":
+            item.add_argument("--prompt-id")
     promotion = commands.add_parser("promotion", help="Explicitly reviewed catalog promotion")
     promotion_actions = promotion.add_subparsers(dest="action", required=True)
     for action in ("prepare", "apply"):
@@ -368,6 +376,7 @@ def _print_training_result(result: dict, *, as_json: bool):
         "dataset_id",
         "plan_id",
         "assessment_id",
+        "report_id",
         "candidate_id",
         "curation_id",
         "packet_id",
@@ -389,6 +398,16 @@ def _print_training_result(result: dict, *, as_json: bool):
         print(f"Candidate weights: {result['entry']['asset']['path']}")
     for name, path in result.get("artifacts", {}).items():
         print(f"{name}: {path}")
+    if "matrix" in result:
+        count = len(result["matrix"])
+        print(f"Evaluation images: {result.get('succeeded', count)}/{count}")
+        for row in result["matrix"]:
+            print(f"  {row['case_id']} seed={row['seed']} {row['role']}: {row['status']}")
+            if row.get("error"):
+                print(f"    {row['error']}")
+    if result.get("scope") == "deployed_evaluation_plan":
+        print(f"Planned evaluation images: {len(result['jobs'])}")
+        print(f"Deployed candidate: {result['deployment']['loader_name']}")
     if result.get("error"):
         print(result["error"])
     for reason in result.get("blockers", []):
@@ -444,7 +463,35 @@ def main(argv: list[str] | None = None) -> int:
                     )
                     result = operation(config.root, args.file)
             elif args.command == "evaluation":
-                if args.action == "packet":
+                if args.action in {"plan", "run", "status", "resume", "replay", "abandon"}:
+                    from itov import evaluation_runtime
+
+                    if args.action == "plan":
+                        result = evaluation_runtime.plan(
+                            config, args.file, save=args.save, timeout=args.timeout
+                        )
+                        if args.save:
+                            result = {
+                                **result,
+                                "saved_path": str(
+                                    config.root / f"state/evaluation/plans/{result['plan_id']}.json"
+                                ),
+                            }
+                    elif args.action in {"run", "resume"}:
+                        result = evaluation_runtime.run(
+                            config,
+                            args.file,
+                            resume=args.action == "resume",
+                            prompt_id=getattr(args, "prompt_id", None),
+                            timeout=args.timeout,
+                            wait_timeout=args.wait_timeout,
+                            poll_interval=args.poll_interval,
+                        )
+                    elif args.action == "replay":
+                        result = evaluation_runtime.replay(config, args.file, save=args.save)
+                    else:
+                        result = getattr(evaluation_runtime, args.action)(config, args.file)
+                elif args.action == "packet":
                     from itov import quality
 
                     result = quality.packet(config, args.file, save=args.save)

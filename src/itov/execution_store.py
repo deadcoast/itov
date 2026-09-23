@@ -89,6 +89,23 @@ def open_store(config: Config, *, create: bool) -> sqlite3.Connection:
     return db
 
 
+def seed_reservations(plan):
+    """Evaluation deliberately pairs seeds across conditions in its own namespace."""
+    result = {}
+    for job in plan["jobs"]:
+        if job["seed"] is None:
+            continue
+        key = str(job["seed"])
+        if plan.get("scope") == "deployed_evaluation_plan":
+            key = f"evaluation:{plan['plan_id']}:{job['case_id']}:{key}"
+            result.setdefault(key, job["index"])
+        else:
+            # Keep ordinary batch duplicate rejection inside the claim transaction.
+            require(key not in result, f"Seed {key} is already reserved by another batch")
+            result[key] = job["index"]
+    return result
+
+
 def claim(db, config: Config, plan: dict, receipt: dict, *, vram_guard_id: str | None = None):
     with transaction(db):
         active = db.execute(
@@ -105,13 +122,10 @@ def claim(db, config: Config, plan: dict, receipt: dict, *, vram_guard_id: str |
                 "INSERT INTO jobs VALUES (?, ?, ?, ?, 'reserved', NULL)",
                 (plan["plan_id"], index, identity(plan["plan_id"], index), job["workflow_sha256"]),
             )
-            if job["seed"] is not None:
-                seed = str(job["seed"])
-                previous = db.execute(
-                    "SELECT plan_id FROM seeds WHERE seed = ?", (seed,)
-                ).fetchone()
-                require(previous is None, f"Seed {seed} is already reserved by another batch")
-                db.execute("INSERT INTO seeds VALUES (?, ?, ?)", (seed, plan["plan_id"], index))
+        for seed, index in seed_reservations(plan).items():
+            previous = db.execute("SELECT plan_id FROM seeds WHERE seed = ?", (seed,)).fetchone()
+            require(previous is None, f"Seed {seed} is already reserved by another batch")
+            db.execute("INSERT INTO seeds VALUES (?, ?, ?)", (seed, plan["plan_id"], index))
         db.execute(
             "INSERT INTO events(plan_id, status, observed_at) VALUES (?, 'reserved', ?)",
             (plan["plan_id"], _now()),
@@ -141,7 +155,7 @@ def check_run(db, config: Config, plan: dict):
             and row["workflow_sha256"] == job["workflow_sha256"],
             "Execution job ownership differs from plan",
         )
-    expected = {(str(job["seed"]), job["index"]) for job in plan["jobs"] if job["seed"] is not None}
+    expected = set(seed_reservations(plan).items())
     actual = {
         (row[0], row[1])
         for row in db.execute(

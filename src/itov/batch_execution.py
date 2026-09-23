@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import sqlite3
-from contextlib import closing
+from contextlib import closing, contextmanager
 from pathlib import Path
 
 from itov.batch import load_plan
@@ -40,7 +40,11 @@ def batch_status(config: Config, path: Path) -> dict:
 
 def abandon_batch(config: Config, path: Path) -> dict:
     """Retire remaining picks only when no owned job can still be executing."""
-    plan = load_plan(path)
+    return abandon_reserved_plan(config, load_plan(path))
+
+
+def abandon_reserved_plan(config, plan):
+    """Retire a validated plan only after all submitted jobs have known terminal outcomes."""
     with _lock(config), closing(open_store(config, create=False)) as db:
         run, rows = check_run(db, config, plan)
         require(
@@ -94,9 +98,48 @@ def run_batch(
     poll_interval: float = 1,
     vram_profiles: list[Path] | None = None,
 ) -> dict:
+    plan = load_plan(path)
+    return run_reserved_plan(
+        config,
+        plan,
+        qualification=load_qualification(qualification) if qualification is not None else None,
+        resume=resume,
+        prompt_id=prompt_id,
+        timeout=timeout,
+        wait_timeout=wait_timeout,
+        poll_interval=poll_interval,
+        vram_profiles=vram_profiles,
+        qualify_plan=qualify,
+        submission_guard=_catalog_guard,
+    )
+
+
+@contextmanager
+def _catalog_guard(config, plan):
+    store = CatalogStore(config.root)
+    with file_lock(store._path("catalog.lock")):
+        store._clean()
+        require(store._head() == plan["catalog_head"], "Catalog changed before submission")
+        yield
+
+
+def run_reserved_plan(
+    config,
+    plan,
+    *,
+    qualification=None,
+    resume=False,
+    prompt_id=None,
+    timeout=3,
+    wait_timeout=120,
+    poll_interval=1,
+    vram_profiles=None,
+    qualify_plan,
+    submission_guard,
+):
+    """Shared sequential protocol; callers validate plan semantics before entry."""
     _timing(wait_timeout, poll_interval)
     validate_timeout(timeout)
-    plan = load_plan(path)
     with _lock(config), closing(open_store(config, create=not resume)) as db:
         from itov.vram import enforce, guard
 
@@ -119,9 +162,9 @@ def run_batch(
                 not resume and qualification is not None,
                 "A new batch requires --qualification from batch qualify --save",
             )
-            receipt = load_qualification(qualification)
+            receipt = qualification
             require(
-                receipt == qualify(config, plan, timeout=timeout),
+                receipt == qualify_plan(config, plan, timeout=timeout),
                 "Qualification changed; qualify and inspect the current bindings",
             )
             claim(db, config, plan, receipt, vram_guard_id=guard_id)
@@ -151,7 +194,7 @@ def run_batch(
         receipt = parse_json(run["qualification"])
         if qualification is not None:
             require(
-                load_qualification(qualification) == receipt,
+                qualification == receipt,
                 "Qualification differs from the reserved batch",
             )
         client = ComfyUIClient(config.url, timeout=timeout)
@@ -185,7 +228,7 @@ def run_batch(
                     require(
                         prompt_id is None, "Prompt ID can only reconcile a previously submitted job"
                     )
-                    current = qualify(config, plan, timeout=timeout)
+                    current = qualify_plan(config, plan, timeout=timeout)
                     require(
                         canonical_bytes(current) == canonical_bytes(receipt),
                         "Qualification changed; no further jobs were submitted",
@@ -197,14 +240,7 @@ def run_batch(
                     )
                     if profiles is not None:
                         enforce(config, plan, profiles, current)
-                    # Catalog writers cannot change HEAD between the final check and POST.
-                    store = CatalogStore(config.root)
-                    with file_lock(store._path("catalog.lock")):
-                        store._clean()
-                        require(
-                            store._head() == plan["catalog_head"],
-                            "Catalog changed before submission",
-                        )
+                    with submission_guard(config, plan):
                         record = submit_owned(config, plan, job, client)
                     record_job(db, plan["plan_id"], job["index"], record)
                     if record["status"] == "submission_unknown":
