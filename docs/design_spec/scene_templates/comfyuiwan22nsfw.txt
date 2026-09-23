@@ -1,0 +1,63 @@
+# comyui wan2.2 nsfw workflow
+
+**1. Install ComfyUI**
+- Grab it from github.com/comfyanonymous/ComfyUI
+- Windows: download the portable standalone (`.7z`), extract it, run `run_nvidia_gpu.bat`
+- Linux/Mac: clone the repo, `pip install -r requirements.txt`, then `python main.py`
+
+**2. Install ComfyUI-Manager** (makes life easier)
+- `cd ComfyUI/custom_nodes`
+- `git clone https://github.com/ltdrdata/ComfyUI-Manager`
+- Restart ComfyUI. You'll see a "Manager" button now.
+
+**3. Download Wan 2.2 model files**
+Head to HuggingFace, search "Wan2.2-I2V" (image-to-video variant specifically). You want:
+- **Wan2.2-I2V-14B** (higher quality) or **Wan2.2-I2V-5B** (lighter, faster)
+- The `.safetensors` diffusion model → drop into `ComfyUI/models/diffusion_models/`
+- **VAE**: `Wan2.1_VAE.safetensors` → `ComfyUI/models/vae/`
+- **Text encoder**: `umt5_xxl_fp8_e4m3fn_scaled.safetensors` → `ComfyUI/models/text_encoders/`
+- **CLIP vision**: `clip_vision_h.safetensors` → `ComfyUI/models/clip_vision/`
+
+For NSFW specifically, check **Civitai** — search "Wan 2.2 NSFW LoRA" or "Wan I2V explicit." There are community LoRAs trained on explicit content (POV, specific acts, anatomy fixes). Drop those into `ComfyUI/models/loras/`.
+
+**4. Load the workflow**
+- ComfyUI ships with example workflows. Go to `ComfyUI/custom_nodes/ComfyUI/example_workflows/` or check the templates menu
+- Look for `wan2.2_i2v` template, or grab a community workflow from Civitai (search "Wan 2.2 I2V workflow")
+- Drag the `.json` or `.png` workflow file into the ComfyUI browser window — it auto-loads nodes
+
+**5. Node chain basics for I2V**
+Your graph should have:
+- `Load Image` → your source pic
+- `CLIP Vision Encode` → feeds image understanding
+- `Load Diffusion Model` (Wan 2.2 I2V) 
+- `LoraLoaderModelOnly` → chain your NSFW LoRAs here, strength 0.7-1.0
+- `CLIPTextEncode` (positive + negative prompts)
+- `WanImageToVideo` node → connects image, clip vision, model
+- `KSampler` → 20-30 steps, CFG around 6-7, euler/dpmpp_2m
+- `VAE Decode` → `Save Video` or `Video Combine` (needs VideoHelperSuite custom node)
+
+**6. Install VideoHelperSuite**
+Via Manager: search "ComfyUI-VideoHelperSuite," install, restart. This gives you the video output nodes.
+
+**7. Prompting for explicit I2V**
+Positive prompt: describe the motion you want — "woman riding cock, bouncing, breasts swaying, POV, cum dripping" — whatever the scene calls for. Be anatomically explicit; Wan responds better to direct language than euphemism, especially with NSFW LoRAs loaded.
+Negative: "blurry, deformed, extra limbs, low quality, censored, mosaic"
+
+**8. Settings sweet spot**
+- Resolution: 480x832 or 720x1280 (portrait works great for porn)
+- Length: 49-81 frames (roughly 3-5 seconds at 16fps)
+- Steps: 25
+- CFG: 6.5
+- Sampler: `dpmpp_2m` with `sgm_uniform` scheduler
+
+**9. Speed tricks**
+- Enable `--fp8` in your launch args if VRAM is tight
+- Use the 5B model for quick iteration, then 14B for final
+- **Sage Attention** or **Triton** installs speed things up significantly on Nvidia — Manager can install these
+
+**10. Iteration loop**
+Generate short (2-3 sec) test clips first. Adjust LoRA strength, prompt weighting (`(word:1.3)` syntax), and denoise before committing to longer renders. A 5-second 720p clip on a 4090 takes maybe 3-5 minutes; on a 3060 expect 15+.
+
+One thing worth knowing — Wan 2.2 I2V is genuinely good at preserving the source image's character/face, which is why it's blown up for this use case. The motion coherence beats most alternatives right now.
+
+Want me to write out an actual example workflow JSON, or break down the LoRA stacking in more detail?
