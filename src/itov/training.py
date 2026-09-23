@@ -106,6 +106,8 @@ def worker_sources():
         "evaluation_cases.py",
         "review_records.py",
         "evidence_reads.py",
+        "dataset_snapshot.py",
+        "dataset_manifest.py",
     )
     return {name: sha256(Path(__file__).with_name(name).read_bytes()) for name in names}
 

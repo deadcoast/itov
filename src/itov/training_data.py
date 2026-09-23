@@ -180,6 +180,10 @@ def prepare(root: Path, path: Path):
 
 def load_dataset(root: Path, path: Path):
     value = check_seal(parse_json(read_document(path)), "dataset_id")
+    if value.get("version") == 2:
+        from itov.dataset_snapshot import load
+
+        return load(root, path, value)
     object_fields(
         value,
         {"version", "scope", "source", "dataset", "samples", "counts", "limits", "dataset_id"},

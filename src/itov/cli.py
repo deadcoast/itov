@@ -284,6 +284,26 @@ def parser() -> argparse.ArgumentParser:
         item.add_argument("--json", action="store_true")
         if action == "curate":
             item.add_argument("--save", action="store_true")
+    for action in ("import", "status", "recover", "verify"):
+        item = dataset_actions.add_parser(action)
+        item.add_argument(
+            "file",
+            type=Path,
+            help="Import declaration, saved operation, or prepared snapshot for verify",
+        )
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"import", "recover"}:
+            item.add_argument(
+                "--source-root",
+                type=Path,
+                help="Declared input root; import defaults to declaration directory",
+            )
+            item.add_argument(
+                "--image-python",
+                type=Path,
+                help="Python with the optional pinned Pillow dependency",
+            )
     training = commands.add_parser("training", help="Pinned, owned SDXL LoRA training")
     training_actions = training.add_subparsers(dest="action", required=True)
     for action in ("plan", "run", "status", "recover", "candidate"):
@@ -394,7 +414,24 @@ def _execute(args):
 
         config = load_config(args.config)
         if args.command == "dataset":
-            if args.action == "curate":
+            if args.action in {"import", "status", "recover", "verify"}:
+                from itov import dataset_import
+
+                if args.action == "verify":
+                    result = training_data.load_dataset(config.root, args.file)
+                elif args.action == "status":
+                    result = dataset_import.status(config, args.file)
+                else:
+                    operation = (
+                        dataset_import.begin if args.action == "import" else dataset_import.recover
+                    )
+                    result = operation(
+                        config,
+                        args.file,
+                        source_root=args.source_root,
+                        image_python=args.image_python,
+                    )
+            elif args.action == "curate":
                 from itov import curation
 
                 result = curation.validate(config.root, args.file, save=args.save)

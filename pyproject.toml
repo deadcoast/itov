@@ -9,6 +9,9 @@ dependencies = [
     "types-setuptools>=84.0.0.20260812",
 ]
 
+[project.optional-dependencies]
+dataset = ["Pillow==12.3.0"]
+
 [project.scripts]
 itov = "itov.cli:main"
 
@@ -17,7 +20,7 @@ requires = ["uv_build>=0.9.5,<0.10"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = ["pytest>=8,<9", "ruff>=0.9,<1"]
+dev = ["pytest>=8,<9", "ruff>=0.9,<1", "Pillow==12.3.0"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
