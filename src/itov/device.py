@@ -42,6 +42,7 @@ def _read(path: Path):
     require(
         value.get("version") == 1
         and value.get("status") in {"idle", "held"}
+        and value.get("kind") in {None, "external_server_requests"}
         and value.get("record_id") == sha256(canonical_bytes(body))
         and raw == canonical_bytes(value) + b"\n",
         "Device registry integrity differs; preserve and inspect",
@@ -100,6 +101,11 @@ def recover(gpu_uuid: str, expected_id: str, *, root=None) -> dict:
             "Device lease changed",
         )
         require(process_state(value["owner"]) == "dead", "Device owner is still alive")
+        if value.get("kind") == "external_server_requests":
+            from itov.client_ownership import recover_requests
+
+            recover_requests(value)
+            return _retire(folder, path, value, "explicit_recovery_of_terminal_external_requests")
         require(job_active(value["job_name"]) == 0, "Owned job still has active processes")
         require(
             all(process_state(p) == "dead" for p in value["workers"]),

@@ -8,7 +8,8 @@ from pathlib import Path
 from itov.catalog import require, sha256
 from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json
 from itov.config import Config
-from itov.jobs import _guard, _now, _save, wait_job
+from itov.jobs import _guard, _now, _save
+from itov.jobs import _wait_job as wait_job
 from itov.qualification import json_text, safe_path
 
 
@@ -63,11 +64,19 @@ def prepare_owned(config: Config, plan: dict, job: dict) -> dict:
         return _save(path, record)
 
 
-def submit_owned(config: Config, plan: dict, job: dict, client: ComfyUIClient) -> dict:
+def submit_owned(
+    config: Config, plan: dict, job: dict, client: ComfyUIClient, *, device_owner=None
+) -> dict:
     path = job_path(config, plan["plan_id"], job["index"])
     with _guard(path):
         record = read_owned(config, plan, job)
         require(record["status"] == "prepared", "Only a prepared job may be submitted")
+        if device_owner is not None and not device_owner.begin(record):
+            record.update(
+                status="submission_unknown",
+                error="Prior device intent exists; observe it without resubmitting",
+            )
+            return _save(path, record)
         record["status"] = "submitting"
         _save(path, record)
         try:

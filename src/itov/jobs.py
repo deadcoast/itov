@@ -181,7 +181,7 @@ def _wait(
             client.timeout = min(original_timeout, max(0.001, deadline - time.monotonic()))
             history = client.history(record["prompt_id"])
             if history is not None:
-                if "owner" in record:
+                if "owner" in record or "device_lease" in record:
                     prompt = history.get("prompt")
                     if (
                         not isinstance(prompt, list)
@@ -243,12 +243,33 @@ def run_job(
     wait_timeout: float = 120,
     poll_interval: float = 1,
 ) -> dict:
+    from itov.batch_execution import _lock
+    from itov.client_ownership import ClientLease
+    from itov.execution_ownership import workspace_available
+
+    request_id = str(uuid.uuid4())
+    with _lock(config):
+        workspace_available(config)
+        with ClientLease(config, request_id) as device_owner:
+            result = _run_job(
+                config,
+                workflow,
+                request_id=request_id,
+                device_owner=device_owner,
+                timeout=timeout,
+                wait_timeout=wait_timeout,
+                poll_interval=poll_interval,
+            )
+            device_owner.update(result)
+            return result
+
+
+def _run_job(config, workflow, *, request_id, device_owner, timeout, wait_timeout, poll_interval):
     _timing(wait_timeout, poll_interval)
     client = ComfyUIClient(config.url, timeout=timeout)
     raw = workflow.read_bytes()
     graph = parse_json(raw)
     validation = validate_workflow(graph, client.object_info()).to_dict()
-    request_id = str(uuid.uuid4())
     path = _contained_directory(config, "state/jobs") / f"{request_id}.json"
     record = {
         "version": 1,
@@ -267,6 +288,8 @@ def run_job(
         if not validation["valid"]:
             record["status"] = "validation_failed"
             return _save(path, record)
+        if not device_owner.begin(record):
+            raise ValueError("Prior device intent exists; observe it without resubmitting")
         record["status"] = "submitting"
         _save(path, record)
         try:
@@ -290,6 +313,67 @@ def run_job(
 
 
 def wait_job(
+    config: Config,
+    path: Path,
+    *,
+    timeout: float = 3,
+    wait_timeout: float = 120,
+    poll_interval: float = 1,
+    prompt_id: str | None = None,
+) -> dict:
+    from itov.batch_execution import _lock
+    from itov.client_ownership import ClientLease
+    from itov.execution_ownership import workspace_available
+
+    path = path.resolve()
+    if path.parent != _contained_directory(config, "state/jobs").resolve():
+        raise ValueError("Job record must be in this workspace's state/jobs directory")
+    with _lock(config):
+        with _guard(path):
+            record = parse_json(path.read_bytes())
+            if (
+                not isinstance(record, dict)
+                or record.get("request_id") != path.stem
+                or record.get("server") != config.url
+            ):
+                raise ValueError("Job record does not match the configured workspace/server")
+            if "owner" in record:
+                raise ValueError(
+                    "This is a plan-owned job; resume its batch, evaluation or parallel owner"
+                )
+        workspace_available(config, request_id=path.stem)
+        with ClientLease(config, path.stem) as device_owner:
+            device_owner.attach(record)
+            if record["status"] in {"submitting", "submission_unknown"}:
+                with _guard(path):
+                    match = ComfyUIClient(config.url, timeout=timeout).find_submission(
+                        record["request_id"], record["workflow"], prompt_id=prompt_id
+                    )
+                    if match is None:
+                        raise ValueError(
+                            "Submission acceptance is unknown; do not automatically resubmit"
+                        )
+                    record.update(
+                        status="queued",
+                        prompt_id=match,
+                        reconciled_from="server_request_id_and_exact_workflow",
+                    )
+                    record.pop("error", None)
+                    _save(path, record)
+            elif prompt_id is not None and prompt_id != record.get("prompt_id"):
+                raise ValueError("Prompt ID differs from acknowledged job")
+            result = _wait_job(
+                config,
+                path,
+                timeout=timeout,
+                wait_timeout=wait_timeout,
+                poll_interval=poll_interval,
+            )
+            device_owner.update(result)
+            return result
+
+
+def _wait_job(
     config: Config,
     path: Path,
     *,

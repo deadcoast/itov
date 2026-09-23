@@ -329,6 +329,7 @@ def run(
     wait_timeout=900,
     registry=None,
 ) -> dict:
+    from itov.execution_ownership import workspace_available
     from itov.jobs import _timing
 
     _timing(wait_timeout, 0.1)
@@ -342,6 +343,7 @@ def run(
         not calibrate or not calibrations, "Calibration does not accept prior calibration documents"
     )
     with _lock(config), closing(open_store(config, create=True)) as db:
+        workspace_available(config)
         require(
             db.execute("SELECT 1 FROM runs WHERE plan_id=?", (plan["plan_id"],)).fetchone() is None,
             "Plan already has an execution; use parallel resume or recover",

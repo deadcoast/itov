@@ -41,4 +41,6 @@ The first follow-up, **A-01: training result state and artifact validation**, is
 
 ## Verification of this correction
 
+Follow-up on 2026-09-23: A-02 now supplies the [supported deployed matrix workflow](deployed-evaluation.md), and A-03 supplies [shared workspace/device admission](execution-ownership.md) with positive-proof external-request recovery. Their verification records distinguish actual runtime/native-process evidence from protocol fixtures. The original findings above remain the historical pre-fix audit; these bounded deliveries do not change the application's incomplete status or accept the current candidate.
+
 The reviewer-policy change passed 77 focused tests and 880 source/880 installed-wheel tests. [The verification receipt](evidence/review-policy-verification-20260922.json) also records lint/format/build, 42-module parity, exact README packaging, actual offline v3 rejection, preservation of the catalog/model bytes and retained historical files. [The assistant reassessment](evidence/review-policy-reassessment-20260922.json) is an actual rejection based on inspected images, not a fabricated approval. These results verify this correction; they do not resolve the architectural or model-method gaps listed above.

@@ -138,9 +138,17 @@ def run_reserved_plan(
     submission_guard,
 ):
     """Shared sequential protocol; callers validate plan semantics before entry."""
+    from itov.client_ownership import ClientLease
+    from itov.execution_ownership import workspace_available
+
     _timing(wait_timeout, poll_interval)
     validate_timeout(timeout)
-    with _lock(config), closing(open_store(config, create=not resume)) as db:
+    with (
+        _lock(config),
+        closing(open_store(config, create=not resume)) as db,
+        ClientLease(config, plan["plan_id"]) as device_owner,
+    ):
+        workspace_available(config, plan_id=plan["plan_id"])
         from itov.vram import enforce, guard
 
         guards = db.execute(
@@ -241,12 +249,14 @@ def run_reserved_plan(
                     if profiles is not None:
                         enforce(config, plan, profiles, current)
                     with submission_guard(config, plan):
-                        record = submit_owned(config, plan, job, client)
+                        record = submit_owned(config, plan, job, client, device_owner=device_owner)
+                    device_owner.update(record)
                     record_job(db, plan["plan_id"], job["index"], record)
                     if record["status"] == "submission_unknown":
                         record_run(db, plan["plan_id"], "paused", record.get("error"))
                         return report(db, config, plan)
                 # A prior success is verified again, including every collected artifact.
+                device_owner.attach(record)
                 selected_prompt = (
                     prompt_id if record["status"] in {"submitting", "submission_unknown"} else None
                 )
@@ -259,6 +269,7 @@ def run_reserved_plan(
                     poll_interval=poll_interval,
                     prompt_id=selected_prompt,
                 )
+                device_owner.update(record)
                 if selected_prompt:
                     prompt_id = None
                 record_job(db, plan["plan_id"], job["index"], record)

@@ -104,6 +104,8 @@ def parser() -> argparse.ArgumentParser:
         )
         item.add_argument("--poll-interval", type=float, default=1.0)
         item.add_argument("--json", action="store_true")
+        if action == "wait":
+            item.add_argument("--prompt-id", help="Reconcile an uncertain owned submission")
     catalog = commands.add_parser("catalog", help="Validate and record versioned catalog snapshots")
     catalog_actions = catalog.add_subparsers(dest="action", required=True)
     for action in ("validate", "init", "import", "show", "verify", "recover"):
@@ -443,6 +445,7 @@ def main(argv: list[str] | None = None) -> int:
                 timeout=args.timeout,
                 wait_timeout=args.wait_timeout,
                 poll_interval=args.poll_interval,
+                **({"prompt_id": args.prompt_id} if args.action == "wait" else {}),
             )
             _print_result(result, as_json=args.json)
             return 0 if result["status"] == "succeeded" else 1

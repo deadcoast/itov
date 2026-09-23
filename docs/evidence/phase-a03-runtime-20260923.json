@@ -1,0 +1,733 @@
+{
+  "scope": "Actual installed public CLI against stock ComfyUI/RTX 5090; one SDXL base request and one controlled unrelated-client image-copy request",
+  "command_runner": "uv isolated Python 3.11 installed wheel; its interpreter invokes python -m itov",
+  "commands": [
+    {
+      "name": "installed-run",
+      "arguments": [
+        "job",
+        "run",
+        "workspace\\state\\verification\\phase-a03\\runtime-job.api.json",
+        "--wait-timeout",
+        "0.1",
+        "--poll-interval",
+        "0.05",
+        "--json"
+      ],
+      "exit_code": 2,
+      "stdout": "{\"ok\": false, \"error\": \"[Errno 13] Permission denied: 'C:\\\\\\\\Users\\\\\\\\ryanf\\\\\\\\AppData\\\\\\\\Local\\\\\\\\ITOV\\\\\\\\device-leases\\\\\\\\e2c115fd-447a-8fe0-3257-b17c51919074\\\\\\\\ownership.lock'\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "installed-run-02",
+      "arguments": [
+        "job",
+        "run",
+        "workspace\\state\\verification\\phase-a03\\runtime-job.api.json",
+        "--wait-timeout",
+        "0.1",
+        "--poll-interval",
+        "0.05",
+        "--json"
+      ],
+      "exit_code": 1,
+      "stdout": "{\n  \"version\": 1,\n  \"request_id\": \"8772315a-48ff-4411-b98b-3d76953a13f8\",\n  \"server\": \"http://127.0.0.1:8188\",\n  \"workflow_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\verification\\\\phase-a03\\\\runtime-job.api.json\",\n  \"workflow_sha256\": \"d3a136b9adc8eac9bd5d8b3f7417f9c4e32aa056a7f17da47727f71154a62011\",\n  \"workflow\": {\n    \"1\": {\n      \"_meta\": {\n        \"itov_asset_sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      \"class_type\": \"CheckpointLoaderSimple\",\n      \"inputs\": {\n        \"ckpt_name\": \"sd_xl_base_1.0.safetensors\"\n      }\n    },\n    \"3\": {\n      \"class_type\": \"CLIPTextEncode\",\n      \"inputs\": {\n        \"clip\": [\n          \"1\",\n          1\n        ],\n        \"text\": \"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\"\n      }\n    },\n    \"4\": {\n      \"class_type\": \"CLIPTextEncode\",\n      \"inputs\": {\n        \"clip\": [\n          \"1\",\n          1\n        ],\n        \"text\": \"text, watermark, signature, frame\"\n      }\n    },\n    \"5\": {\n      \"class_type\": \"EmptyLatentImage\",\n      \"inputs\": {\n        \"batch_size\": 1,\n        \"height\": 512,\n        \"width\": 512\n      }\n    },\n    \"6\": {\n      \"class_type\": \"KSampler\",\n      \"inputs\": {\n        \"cfg\": 7.0,\n        \"denoise\": 1,\n        \"latent_image\": [\n          \"5\",\n          0\n        ],\n        \"model\": [\n          \"1\",\n          0\n        ],\n        \"negative\": [\n          \"4\",\n          0\n        ],\n        \"positive\": [\n          \"3\",\n          0\n        ],\n        \"sampler_name\": \"dpmpp_2m\",\n        \"scheduler\": \"karras\",\n        \"seed\": 11760922,\n        \"steps\": 20\n      }\n    },\n    \"7\": {\n      \"class_type\": \"VAEDecode\",\n      \"inputs\": {\n        \"samples\": [\n          \"6\",\n          0\n        ],\n        \"vae\": [\n          \"1\",\n          2\n        ]\n      }\n    },\n    \"8\": {\n      \"_meta\": {\n        \"itov_image\": {\n          \"height\": 512,\n          \"width\": 512\n        }\n      },\n      \"class_type\": \"SaveImage\",\n      \"inputs\": {\n        \"filename_prefix\": \"itov/evaluation/4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b/000\",\n        \"images\": [\n          \"7\",\n          0\n        ]\n      }\n    }\n  },\n  \"validation\": {\n    \"valid\": true,\n    \"scope\": \"node_schema\",\n    \"node_count\": 7,\n    \"issues\": [],\n    \"limits\": \"Static checks only; custom node validation and rendering were not executed.\"\n  },\n  \"created_at\": \"2026-09-23T18:42:45.820405+00:00\",\n  \"status\": \"timed_out\",\n  \"prompt_id\": \"c73bad16-16bb-4b83-9570-0688fa56cc91\",\n  \"artifacts\": [],\n  \"device_lease\": {\n    \"gpu_uuid\": \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\",\n    \"lease_id\": \"20015561-8b3a-4991-8741-2b1f1eb09408\",\n    \"operation_id\": \"8772315a-48ff-4411-b98b-3d76953a13f8\",\n    \"server_control\": \"external\"\n  },\n  \"updated_at\": \"2026-09-23T18:42:45.980030+00:00\",\n  \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\8772315a-48ff-4411-b98b-3d76953a13f8.json\",\n  \"acknowledgement\": {\n    \"prompt_id\": \"c73bad16-16bb-4b83-9570-0688fa56cc91\",\n    \"number\": 1,\n    \"node_errors\": {}\n  },\n  \"error\": \"Stopped waiting; the server job may still run. Resume with job wait.\"\n}\n",
+      "stderr": "",
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\PaN7zPEzftVbXXJr3Qr2X\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "name": "installed-competing-job",
+      "arguments": [
+        "job",
+        "run",
+        "workspace\\state\\verification\\phase-a03\\runtime-job.api.json",
+        "--config",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a03\\other-workspace\\itov.toml",
+        "--json"
+      ],
+      "exit_code": 2,
+      "stdout": "{\"ok\": false, \"error\": \"Unreleased device lease belongs to another operation; inspect its owner\"}\n",
+      "stderr": "",
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\PaN7zPEzftVbXXJr3Qr2X\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "name": "installed-early-recover",
+      "arguments": [
+        "device",
+        "recover",
+        "--gpu",
+        "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+        "--lease",
+        "20015561-8b3a-4991-8741-2b1f1eb09408"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "itov: Terminal server evidence is missing\n",
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\PaN7zPEzftVbXXJr3Qr2X\\Lib\\site-packages\\itov\\__init__.py"
+    }
+  ],
+  "native_primitive_refusal": {
+    "scope": "Installed shared Lease primitive used by training/parallel; no model worker launched",
+    "error": "Unreleased device lease; inspect and explicitly recover"
+  },
+  "wait": {
+    "arguments": [
+      "job",
+      "wait",
+      "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\8772315a-48ff-4411-b98b-3d76953a13f8.json",
+      "--wait-timeout",
+      "90",
+      "--poll-interval",
+      "0.2",
+      "--json"
+    ],
+    "exit_code": 0,
+    "result": {
+      "version": 1,
+      "request_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+      "server": "http://127.0.0.1:8188",
+      "workflow_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-a03\\runtime-job.api.json",
+      "workflow_sha256": "d3a136b9adc8eac9bd5d8b3f7417f9c4e32aa056a7f17da47727f71154a62011",
+      "workflow": {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "sd_xl_base_1.0.safetensors"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "1",
+              1
+            ],
+            "text": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting"
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "1",
+              1
+            ],
+            "text": "text, watermark, signature, frame"
+          }
+        },
+        "5": {
+          "class_type": "EmptyLatentImage",
+          "inputs": {
+            "batch_size": 1,
+            "height": 512,
+            "width": 512
+          }
+        },
+        "6": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 7.0,
+            "denoise": 1,
+            "latent_image": [
+              "5",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
+            "seed": 11760922,
+            "steps": 20
+          }
+        },
+        "7": {
+          "class_type": "VAEDecode",
+          "inputs": {
+            "samples": [
+              "6",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "8": {
+          "_meta": {
+            "itov_image": {
+              "height": 512,
+              "width": 512
+            }
+          },
+          "class_type": "SaveImage",
+          "inputs": {
+            "filename_prefix": "itov/evaluation/4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b/000",
+            "images": [
+              "7",
+              0
+            ]
+          }
+        }
+      },
+      "validation": {
+        "valid": true,
+        "scope": "node_schema",
+        "node_count": 7,
+        "issues": [],
+        "limits": "Static checks only; custom node validation and rendering were not executed."
+      },
+      "created_at": "2026-09-23T18:42:45.820405+00:00",
+      "status": "succeeded",
+      "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+      "artifacts": [
+        {
+          "node_id": "8",
+          "category": "images",
+          "filename": "000_00002_.png",
+          "subfolder": "itov\\evaluation\\4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\\jobs\\8772315a-48ff-4411-b98b-3d76953a13f8\\artifact-0000.png",
+          "bytes": 350909,
+          "sha256": "a6166199c27446cb30841f513aeba1a2f632751df3acfdfe480bffa348f7d7d1",
+          "image_validation": {
+            "scope": "png_full_decode",
+            "height": 512,
+            "width": 512,
+            "bytes": 350909,
+            "sha256": "a6166199c27446cb30841f513aeba1a2f632751df3acfdfe480bffa348f7d7d1",
+            "decoded_rgb_sha256": "782f7ba110cbe0d6a003fc1a9df38de009f982421aa263992580ab5813383ec1",
+            "decoder_sha256": "05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740"
+          }
+        }
+      ],
+      "device_lease": {
+        "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+        "lease_id": "20015561-8b3a-4991-8741-2b1f1eb09408",
+        "operation_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+        "server_control": "external"
+      },
+      "updated_at": "2026-09-23T18:43:26.216903+00:00",
+      "record_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\jobs\\8772315a-48ff-4411-b98b-3d76953a13f8.json",
+      "acknowledgement": {
+        "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+        "number": 1,
+        "node_errors": {}
+      },
+      "execution": {
+        "prompt": [
+          1,
+          "c73bad16-16bb-4b83-9570-0688fa56cc91",
+          {
+            "1": {
+              "_meta": {
+                "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+              },
+              "class_type": "CheckpointLoaderSimple",
+              "inputs": {
+                "ckpt_name": "sd_xl_base_1.0.safetensors"
+              }
+            },
+            "3": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "1",
+                  1
+                ],
+                "text": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting"
+              }
+            },
+            "4": {
+              "class_type": "CLIPTextEncode",
+              "inputs": {
+                "clip": [
+                  "1",
+                  1
+                ],
+                "text": "text, watermark, signature, frame"
+              }
+            },
+            "5": {
+              "class_type": "EmptyLatentImage",
+              "inputs": {
+                "batch_size": 1,
+                "height": 512,
+                "width": 512
+              }
+            },
+            "6": {
+              "class_type": "KSampler",
+              "inputs": {
+                "cfg": 7.0,
+                "denoise": 1.0,
+                "latent_image": [
+                  "5",
+                  0
+                ],
+                "model": [
+                  "1",
+                  0
+                ],
+                "negative": [
+                  "4",
+                  0
+                ],
+                "positive": [
+                  "3",
+                  0
+                ],
+                "sampler_name": "dpmpp_2m",
+                "scheduler": "karras",
+                "seed": 11760922,
+                "steps": 20
+              }
+            },
+            "7": {
+              "class_type": "VAEDecode",
+              "inputs": {
+                "samples": [
+                  "6",
+                  0
+                ],
+                "vae": [
+                  "1",
+                  2
+                ]
+              }
+            },
+            "8": {
+              "_meta": {
+                "itov_image": {
+                  "height": 512,
+                  "width": 512
+                }
+              },
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "itov/evaluation/4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b/000",
+                "images": [
+                  "7",
+                  0
+                ]
+              }
+            }
+          },
+          {
+            "itov_request_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+            "client_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+            "create_time": 1790188965877
+          },
+          [
+            "8"
+          ]
+        ],
+        "outputs": {
+          "8": {
+            "images": [
+              {
+                "filename": "000_00002_.png",
+                "subfolder": "itov\\evaluation\\4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b",
+                "type": "output"
+              }
+            ]
+          }
+        },
+        "status": {
+          "status_str": "success",
+          "completed": true,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+                "timestamp": 1790188965878
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+                "timestamp": 1790188965878
+              }
+            ],
+            [
+              "execution_success",
+              {
+                "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+                "timestamp": 1790188970826
+              }
+            ]
+          ]
+        },
+        "meta": {
+          "8": {
+            "node_id": "8",
+            "display_node": "8",
+            "parent_node": null,
+            "real_node_id": "8"
+          }
+        }
+      }
+    }
+  },
+  "held_lease": {
+    "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "job_name": "Global\\ITOV-owned-20015561-8b3a-4991-8741-2b1f1eb09408",
+    "kind": "external_server_requests",
+    "lease_id": "20015561-8b3a-4991-8741-2b1f1eb09408",
+    "limits": "Cooperative single-GPU ownership; external server/clients are not controlled.",
+    "operation_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+    "owner": {
+      "created": 134346625655585718,
+      "pid": 33488
+    },
+    "plan_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+    "record_id": "3d3122fa41c46b1875e07572bfbef304d082f2cdc2c7f1841f349462813093dc",
+    "requests": {
+      "8772315a-48ff-4411-b98b-3d76953a13f8": {
+        "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+        "request_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+        "status": "timed_out",
+        "terminal": false,
+        "workflow_json": "{\"1\":{\"_meta\":{\"itov_asset_sha256\":\"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"},\"class_type\":\"CheckpointLoaderSimple\",\"inputs\":{\"ckpt_name\":\"sd_xl_base_1.0.safetensors\"}},\"3\":{\"class_type\":\"CLIPTextEncode\",\"inputs\":{\"clip\":[\"1\",1],\"text\":\"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\"}},\"4\":{\"class_type\":\"CLIPTextEncode\",\"inputs\":{\"clip\":[\"1\",1],\"text\":\"text, watermark, signature, frame\"}},\"5\":{\"class_type\":\"EmptyLatentImage\",\"inputs\":{\"batch_size\":1,\"height\":512,\"width\":512}},\"6\":{\"class_type\":\"KSampler\",\"inputs\":{\"cfg\":7.0,\"denoise\":1,\"latent_image\":[\"5\",0],\"model\":[\"1\",0],\"negative\":[\"4\",0],\"positive\":[\"3\",0],\"sampler_name\":\"dpmpp_2m\",\"scheduler\":\"karras\",\"seed\":11760922,\"steps\":20}},\"7\":{\"class_type\":\"VAEDecode\",\"inputs\":{\"samples\":[\"6\",0],\"vae\":[\"1\",2]}},\"8\":{\"_meta\":{\"itov_image\":{\"height\":512,\"width\":512}},\"class_type\":\"SaveImage\",\"inputs\":{\"filename_prefix\":\"itov/evaluation/4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b/000\",\"images\":[\"7\",0]}}}"
+      }
+    },
+    "server": "http://127.0.0.1:8188",
+    "started_at": "2026-09-23T18:42:45.870675+00:00",
+    "status": "held",
+    "version": 1,
+    "workers": [],
+    "workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace",
+    "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+  },
+  "retired_lease": {
+    "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+    "job_name": "Global\\ITOV-owned-20015561-8b3a-4991-8741-2b1f1eb09408",
+    "kind": "external_server_requests",
+    "lease_id": "20015561-8b3a-4991-8741-2b1f1eb09408",
+    "limits": "Cooperative single-GPU ownership; external server/clients are not controlled.",
+    "operation_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+    "owner": {
+      "created": 134346626058218294,
+      "pid": 67436
+    },
+    "plan_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+    "record_id": "14474abcbc91327a74ad3f432f9a743a5d8cb48aa582d4cdb49dee983f1c9038",
+    "requests": {
+      "8772315a-48ff-4411-b98b-3d76953a13f8": {
+        "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+        "request_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+        "status": "succeeded",
+        "terminal": true,
+        "workflow_json": "{\"1\":{\"_meta\":{\"itov_asset_sha256\":\"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"},\"class_type\":\"CheckpointLoaderSimple\",\"inputs\":{\"ckpt_name\":\"sd_xl_base_1.0.safetensors\"}},\"3\":{\"class_type\":\"CLIPTextEncode\",\"inputs\":{\"clip\":[\"1\",1],\"text\":\"A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting\"}},\"4\":{\"class_type\":\"CLIPTextEncode\",\"inputs\":{\"clip\":[\"1\",1],\"text\":\"text, watermark, signature, frame\"}},\"5\":{\"class_type\":\"EmptyLatentImage\",\"inputs\":{\"batch_size\":1,\"height\":512,\"width\":512}},\"6\":{\"class_type\":\"KSampler\",\"inputs\":{\"cfg\":7.0,\"denoise\":1,\"latent_image\":[\"5\",0],\"model\":[\"1\",0],\"negative\":[\"4\",0],\"positive\":[\"3\",0],\"sampler_name\":\"dpmpp_2m\",\"scheduler\":\"karras\",\"seed\":11760922,\"steps\":20}},\"7\":{\"class_type\":\"VAEDecode\",\"inputs\":{\"samples\":[\"6\",0],\"vae\":[\"1\",2]}},\"8\":{\"_meta\":{\"itov_image\":{\"height\":512,\"width\":512}},\"class_type\":\"SaveImage\",\"inputs\":{\"filename_prefix\":\"itov/evaluation/4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b/000\",\"images\":[\"7\",0]}}}"
+      }
+    },
+    "resumed_at": "2026-09-23T18:43:26.013058+00:00",
+    "server": "http://127.0.0.1:8188",
+    "started_at": "2026-09-23T18:42:45.870675+00:00",
+    "status": "held",
+    "version": 1,
+    "workers": [],
+    "workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace"
+  },
+  "retired_lease_file": {
+    "path": "C:/Users/ryanf/AppData/Local/ITOV/device-leases/e2c115fd-447a-8fe0-3257-b17c51919074/20015561-8b3a-4991-8741-2b1f1eb09408.json",
+    "sha256": "00dec4b0358e3325cb9cfbbc8ca3c2819357e8547b484b9372478993b0e9e02c",
+    "bytes": 2216
+  },
+  "unrelated_history_before": {
+    "0f39cbf1-ecf4-44b5-a319-0e533132ca7b": {
+      "prompt": [
+        0,
+        "0f39cbf1-ecf4-44b5-a319-0e533132ca7b",
+        {
+          "1": {
+            "class_type": "LoadImage",
+            "inputs": {
+              "image": "example.png"
+            }
+          },
+          "2": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "images": [
+                "1",
+                0
+              ],
+              "filename_prefix": "itov/preflight"
+            }
+          }
+        },
+        {
+          "itov_request_id": "a03-unrelated-3d3ef6dc-db0e-4cc4-ae0b-c7b60d0774e9",
+          "client_id": "a03-unrelated-3d3ef6dc-db0e-4cc4-ae0b-c7b60d0774e9",
+          "create_time": 1790188904675
+        },
+        [
+          "2"
+        ]
+      ],
+      "outputs": {
+        "2": {
+          "images": [
+            {
+              "filename": "preflight_00003_.png",
+              "subfolder": "itov",
+              "type": "output"
+            }
+          ]
+        }
+      },
+      "status": {
+        "status_str": "success",
+        "completed": true,
+        "messages": [
+          [
+            "execution_start",
+            {
+              "prompt_id": "0f39cbf1-ecf4-44b5-a319-0e533132ca7b",
+              "timestamp": 1790188904676
+            }
+          ],
+          [
+            "execution_cached",
+            {
+              "nodes": [],
+              "prompt_id": "0f39cbf1-ecf4-44b5-a319-0e533132ca7b",
+              "timestamp": 1790188904683
+            }
+          ],
+          [
+            "execution_success",
+            {
+              "prompt_id": "0f39cbf1-ecf4-44b5-a319-0e533132ca7b",
+              "timestamp": 1790188904715
+            }
+          ]
+        ]
+      },
+      "meta": {
+        "2": {
+          "node_id": "2",
+          "display_node": "2",
+          "parent_node": null,
+          "real_node_id": "2"
+        }
+      }
+    }
+  },
+  "unrelated_history_unchanged": true,
+  "owned_history": {
+    "prompt": [
+      1,
+      "c73bad16-16bb-4b83-9570-0688fa56cc91",
+      {
+        "1": {
+          "_meta": {
+            "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "inputs": {
+            "ckpt_name": "sd_xl_base_1.0.safetensors"
+          }
+        },
+        "3": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "1",
+              1
+            ],
+            "text": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting"
+          }
+        },
+        "4": {
+          "class_type": "CLIPTextEncode",
+          "inputs": {
+            "clip": [
+              "1",
+              1
+            ],
+            "text": "text, watermark, signature, frame"
+          }
+        },
+        "5": {
+          "class_type": "EmptyLatentImage",
+          "inputs": {
+            "batch_size": 1,
+            "height": 512,
+            "width": 512
+          }
+        },
+        "6": {
+          "class_type": "KSampler",
+          "inputs": {
+            "cfg": 7.0,
+            "denoise": 1.0,
+            "latent_image": [
+              "5",
+              0
+            ],
+            "model": [
+              "1",
+              0
+            ],
+            "negative": [
+              "4",
+              0
+            ],
+            "positive": [
+              "3",
+              0
+            ],
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
+            "seed": 11760922,
+            "steps": 20
+          }
+        },
+        "7": {
+          "class_type": "VAEDecode",
+          "inputs": {
+            "samples": [
+              "6",
+              0
+            ],
+            "vae": [
+              "1",
+              2
+            ]
+          }
+        },
+        "8": {
+          "_meta": {
+            "itov_image": {
+              "height": 512,
+              "width": 512
+            }
+          },
+          "class_type": "SaveImage",
+          "inputs": {
+            "filename_prefix": "itov/evaluation/4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b/000",
+            "images": [
+              "7",
+              0
+            ]
+          }
+        }
+      },
+      {
+        "itov_request_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+        "client_id": "8772315a-48ff-4411-b98b-3d76953a13f8",
+        "create_time": 1790188965877
+      },
+      [
+        "8"
+      ]
+    ],
+    "outputs": {
+      "8": {
+        "images": [
+          {
+            "filename": "000_00002_.png",
+            "subfolder": "itov\\evaluation\\4ae0f4f077e831ff2d972f3f957b1c142f54422f0c69f52ecc2432d19360489b",
+            "type": "output"
+          }
+        ]
+      }
+    },
+    "status": {
+      "status_str": "success",
+      "completed": true,
+      "messages": [
+        [
+          "execution_start",
+          {
+            "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+            "timestamp": 1790188965878
+          }
+        ],
+        [
+          "execution_cached",
+          {
+            "nodes": [],
+            "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+            "timestamp": 1790188965878
+          }
+        ],
+        [
+          "execution_success",
+          {
+            "prompt_id": "c73bad16-16bb-4b83-9570-0688fa56cc91",
+            "timestamp": 1790188970826
+          }
+        ]
+      ]
+    },
+    "meta": {
+      "8": {
+        "node_id": "8",
+        "display_node": "8",
+        "parent_node": null,
+        "real_node_id": "8"
+      }
+    }
+  },
+  "owned_request_occurrences": 1,
+  "total_server_history": 2,
+  "no_request_cancellation_or_history_deletion": true,
+  "server_cleanup": {
+    "scope": "Only the test server started by this task; unrelated-client history was captured before cleanup",
+    "identity": {
+      "pid": 4204,
+      "created": 134346624115547266
+    },
+    "state": "dead",
+    "gpu": {
+      "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+      "name": "NVIDIA GeForce RTX 5090",
+      "driver": "616.64",
+      "total_bytes": 34190917632,
+      "used_bytes": 1935671296,
+      "free_bytes": 31815892992
+    },
+    "host": {
+      "total_physical": 66095271936,
+      "available_physical": 34710319104,
+      "total_commit": 70256021504,
+      "available_commit": 29341507584
+    },
+    "device": {
+      "previous": "20015561-8b3a-4991-8741-2b1f1eb09408",
+      "reason": "external_requests_confirmed_terminal",
+      "record_id": "3a79f61e9e8d4a3e83f2f6ad28db57eb2034d16a93e1a97c6ab941be6adf104e",
+      "released_at": "2026-09-23T18:43:26.223903+00:00",
+      "status": "idle",
+      "version": 1,
+      "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+    },
+    "scm": "0.5.0"
+  },
+  "limits": [
+    "The unrelated request is a controlled test probe, not a real user-owned job",
+    "Native admission test uses the exact installed Lease primitive shared by training/parallel; no new training or parallel model trial was run",
+    "Early device recovery correctly refused before terminal server history existed; public job wait later collected that same prompt",
+    "The server was started by this task and stopped separately after identity/idle-queue checks; ITOV external-request recovery never stopped it",
+    "No quality, capacity, kernel-concurrency or model improvement claim"
+  ]
+}

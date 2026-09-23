@@ -37,8 +37,18 @@ def registry():
 
 
 @pytest.fixture
-def http_server(registry):
+def http_server(registry, tmp_path, monkeypatch):
+    from itov import client_ownership, device
+
+    # Protocol tests exercise the real lease journal/OS lock in an isolated registry.
+    # GPU/server mapping is qualified separately; fixtures never claim the host GPU.
+    monkeypatch.setattr(device, "registry_root", lambda: tmp_path / "device-registry")
+    monkeypatch.setattr(
+        client_ownership, "target_gpu", lambda _: "GPU-19396af4-e5de-4d99-a258-803d73f4af12"
+    )
     routes = {
+        "/queue": (200, {"queue_running": [], "queue_pending": []}),
+        "/history?max_items=200": (200, {}),
         "/system_stats": (
             200,
             {

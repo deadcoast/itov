@@ -378,12 +378,15 @@ def _record(folder, body):
 
 
 def run(config, path, gpu_uuid, *, registry=None):
+    from itov.execution_ownership import workspace_available
+
     require(os.name == "nt", "Training execution currently requires native Windows ownership")
     value = load_plan(path)
     revalidate(config, value)
     root = safe_path(config.root, "state/training")
     root.mkdir(parents=True, exist_ok=True)
     with file_lock(root / "training.lock"), execution_lock(config):
+        workspace_available(config)
         folder = run_folder(config, value)
         require(
             not folder.exists(),
@@ -534,7 +537,7 @@ def run(config, path, gpu_uuid, *, registry=None):
 def recover(config, path, *, registry=None):
     value = load_plan(path)
     root = safe_path(config.root, "state/training")
-    with file_lock(root / "training.lock"):
+    with file_lock(root / "training.lock"), execution_lock(config):
         result = read_record(config, path)
         require(
             result["status"] in ("running", "validating"),

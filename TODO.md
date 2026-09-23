@@ -1,12 +1,12 @@
 # Development TODO
 
-Updated 2026-09-23 after the supported A-02 deployed evaluation trial.
+Updated 2026-09-23 after A-03 ownership integration and verification.
 
 **Product status: incomplete.** ITOV has useful low-level protocols and narrowly exercised media/training paths. It does not yet provide a cohesive, broadly qualified generation, training, evaluation and discovery application. Earlier stage checkmarks describe prototype increments, not completion of those product capabilities.
 
 The mandatory independent-human review gate is shelved. The assistant owns testing, visual inspection, evidence collection and reasoned quality decisions. Failed or uncertain results remain failed or uncertain. The current curated candidate has object-count/regression failures and unresolved trigger specificity; it is not accepted for production.
 
-Current focus: **Phase A**, with A-03 next. A-01 result validation/recovery and A-02 supported deployed evaluation are delivered and recorded in [CHANGELOG.md](CHANGELOG.md). The installed A-02 commands completed the full existing 16-image suite with pause/resume and offline replay; [verification evidence](docs/evidence/phase-a02-verification-20260923.json) and [direct image inspection](docs/deployed-evaluation-review-20260923.md) keep technical completion separate from the still-rejected candidate. The [source audit](docs/development-audit-20260922.md) explains why the remaining tasks are necessary. The [previous TODO](docs/history/TODO-20260922-stage-prototypes.md) is preserved as a historical snapshot and is no longer the active plan.
+Current focus: **Phase A**, with A-04 next. A-01 result validation/recovery, A-02 deployed evaluation and A-03 shared ownership are delivered and recorded in [CHANGELOG.md](CHANGELOG.md). [A-03 verification](docs/evidence/phase-a03-verification-20260923.json) covers cross-family contention, native process shutdown, conservative external-request recovery and an installed live trial. Its scope is cooperative Windows/single-local-GPU ownership; arbitrary external clients remain outside that exclusion. The [deployed image inspection](docs/deployed-evaluation-review-20260923.md) still rejects the candidate. The [source audit](docs/development-audit-20260922.md) explains why the remaining tasks are necessary. The [previous TODO](docs/history/TODO-20260922-stage-prototypes.md) is preserved as a historical snapshot and is no longer the active plan.
 
 ## How work is tracked
 
@@ -29,12 +29,11 @@ Current focus: **Phase A**, with A-03 next. A-01 result validation/recovery and 
 
 ## Phase A — execution and integration foundations
 
-Delivered A-01 and A-02 have moved to the changelog. The [state/recovery contract](docs/training-result-states.md) separates worker completion, validated artifacts and candidate assessment. The [deployed evaluation runbook](docs/deployed-evaluation.md) covers frozen runtime plans, complete owned case/seed execution, recovery and replay. Historical records remain unchanged. These close bounded integration increments, not Phase A or model-quality acceptance.
+Delivered A-01 through A-03 have moved to the changelog. The [state/recovery contract](docs/training-result-states.md), [deployed evaluation runbook](docs/deployed-evaluation.md) and [shared ownership contract](docs/execution-ownership.md) describe their supported boundaries. Historical records remain unchanged. These close bounded integration increments, not Phase A or model-quality acceptance.
 
 | ID | Status | Work | Acceptance evidence |
 | --- | --- | --- | --- |
-| A-03 | **Next; A-01/A-02 delivered** | Reconcile device/workspace ownership across ordinary jobs, sequential batches, deployed evaluation, training and managed parallel workers. Make unmanaged-server behavior explicit and enforce the supported exclusion rules. | Contention tests spanning command families, actual owned-process shutdown and conservative uncertain-owner recovery; preserve unrelated server work. |
-| A-04 | Open; A-02 | Make trained-candidate deployment and applicable LoRA stacks first-class inference inputs. Separate model capabilities, graph construction and qualification from the two current fixed inference presets. | A trained candidate travels through public commands with verified model/adapter/strength bindings; incompatible stacks fail before submission. Stock nodes may remain where they meet the capability contract. |
+| A-04 | **Next; A-02/A-03 delivered** | Make trained-candidate deployment and applicable LoRA stacks first-class inference inputs. Separate model capabilities, graph construction and qualification from the two current fixed inference presets. | A trained candidate travels through public commands with verified model/adapter/strength bindings; incompatible stacks fail before submission. Stock nodes may remain where they meet the capability contract. |
 | A-05 | Open; A-01/A-02 | Introduce clear internal records and module boundaries for training results, evaluation cases and review decisions. Remove repeated assessment/hash work from one operation after profiling it; retain final freshness checks. | Targeted contract/migration tests and measured repeated-command cost. No silent behavior change in saved artifacts or historical read paths. |
 | A-06 | Open; A-01–A-05 | Align CLI status/error meanings and expose concrete next actions, relevant artifacts and failure causes. Document the supported workflow as one reproducible runbook. | Source and installed CLI exercises cover default text/JSON, partial progress, refusal, recovery and completed replay without hand-edited state. |
 

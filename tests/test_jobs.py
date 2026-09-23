@@ -25,7 +25,13 @@ def job_setup(tmp_path, graph, http_server):
             "2": {"images": [{"filename": "render.png", "subfolder": "run", "type": "output"}]}
         },
     }
-    routes["POST /prompt"] = 200, {"prompt_id": "fixture-prompt", "node_errors": {}}
+
+    def submit(payload):
+        history["prompt"] = [0, "fixture-prompt", payload["prompt"], payload["extra_data"], ["2"]]
+        routes["/history?max_items=200"][1]["fixture-prompt"] = history
+        return {"prompt_id": "fixture-prompt", "node_errors": {}}
+
+    routes["POST /prompt"] = 200, submit
     routes["/history/fixture-prompt"] = 200, {"fixture-prompt": history}
     routes["/view?filename=render.png&subfolder=run&type=output"] = 200, b"fixture image bytes"
     return config, workflow, history, routes, requests

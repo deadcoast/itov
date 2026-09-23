@@ -12,7 +12,7 @@ Workers default to loopback ports 8191 and 8192. Each has separate input/output,
 
 The original workspace owns one catalog, execution database and seed registry. All jobs receive distinct plan/index-derived request IDs and collected artifact directories. A whole-workspace dispatcher lock and catalog check still apply. Worker roots do not create separate seed catalogs. The configured original server must be reachable and idle; its existing process is left running.
 
-**Ownership scope:** this protocol excludes other managed controllers for the same Windows user and GPU UUID. Ordinary ITOV server/job/sequential commands, arbitrary ComfyUI clients, other users and external GPU applications do not acquire this lease. Their existing GPU allocations are included in fresh device-pressure checks, but their future work can race those checks. Do not treat this as operating-system GPU exclusivity or a hard capacity reservation.
+**Ownership scope:** A-03 extends the same device registry to ordinary ITOV jobs, sequential batches and deployed evaluations, and reconciles workspace admission with training/parallel controllers. See [shared ownership and external-server recovery](execution-ownership.md). Arbitrary ComfyUI clients, other users and external GPU applications do not acquire this lease. Their existing GPU allocations are included in fresh device-pressure checks, but their future work can race those checks. `server start` remains a foreground external-server launcher. This is not operating-system GPU exclusivity or a hard capacity reservation.
 
 ## Prepare and calibrate
 

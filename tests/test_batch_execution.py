@@ -370,6 +370,9 @@ from pathlib import Path
 import itov.owned_jobs as owned
 from itov.batch_execution import run_batch
 from itov.config import load_config
+from itov import device, client_ownership
+device.registry_root = lambda: Path(sys.argv[1]).parent.parent / 'device-registry'
+client_ownership.target_gpu = lambda _: 'GPU-19396af4-e5de-4d99-a258-803d73f4af12'
 original = owned._save
 def save(path, record):
     result = original(path, record)
