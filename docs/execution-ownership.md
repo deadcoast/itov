@@ -2,6 +2,8 @@
 
 A-03 makes ordinary jobs, sequential batches, deployed evaluations, training and managed parallel trials participate in the same workspace exclusion rules and same-user device registry. A completed command or an empty server queue does not by itself prove that an uncertain request is safe to retire.
 
+A-04's version-two candidate/stack inference uses this same sequential dispatcher, durable job ownership, device lease and ordinary seed namespace. The inference commands add no ownership bypass.
+
 The supported new-submission profile is Windows, one local NVIDIA GPU, and a loopback HTTP ComfyUI server reporting that GPU as CUDA device 0. The UUID comes from local NVIDIA telemetry; the reported server device name/index/type must match. Remote servers, multiple GPUs, CPU-only servers and other operating systems are refused by this client ownership profile. This is a conservative scope restriction, not a claim that GPU memory is reserved by Windows.
 
 ## Workspace and device boundaries

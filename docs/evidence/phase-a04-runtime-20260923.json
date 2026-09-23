@@ -1,0 +1,1082 @@
+{
+  "scope": "A-04 installed public candidate and LCM-stack inference trial",
+  "date": "2026-09-23",
+  "outcomes": {
+    "outcomes": [
+      {
+        "name": "candidate",
+        "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e.json",
+        "plan_id": "24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e",
+        "report_id": "52fa34a781ec5bd5aafe9317d400bcaf730d31f9ec8d07abcb75fca05ad81438",
+        "first_status": "paused",
+        "request_id": "af36ecfb-6cea-5322-b92c-8776f16bcea2",
+        "prompt_id": "3514d06c-f0c9-49df-bc0d-b295a3adeb1b",
+        "image": {
+          "path": "output/jobs/af36ecfb-6cea-5322-b92c-8776f16bcea2/artifact-0000.png",
+          "sha256": "afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223"
+        }
+      },
+      {
+        "name": "stack",
+        "plan_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d.json",
+        "plan_id": "d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d",
+        "report_id": "388f60e7d524afc2c071cfc7601f13cf79f6fda362befa50b1566a4987e09640",
+        "first_status": "paused",
+        "request_id": "18425694-9f81-5e03-b7df-9bb47e2395f9",
+        "prompt_id": "36dc43e7-6e6f-4865-aaa0-fe42f716939d",
+        "image": {
+          "path": "output/jobs/18425694-9f81-5e03-b7df-9bb47e2395f9/artifact-0000.png",
+          "sha256": "6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e"
+        }
+      }
+    ],
+    "history_entries_before": 0,
+    "history_entries_after": 2,
+    "catalog_activation": false
+  },
+  "commands": [
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-candidate.json",
+        "sha256": "c3ab6534093dcf3cf997aac99705e69c09a1ad37f246c4080e63d9e1d553a67b",
+        "bytes": 1624
+      },
+      "result": {
+        "version": 1,
+        "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+        "assessment_id": "ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a",
+        "result_id": "fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0",
+        "entry": {
+          "id": "trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+          "asset": {
+            "path": "models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+            "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+          },
+          "category": "style",
+          "slot": "style",
+          "base_models": [
+            "sdxl-1.0"
+          ],
+          "strength_milli": {
+            "min": 500,
+            "recommended": 1000,
+            "max": 1000
+          },
+          "rotation_weight_milli": 1000,
+          "trigger_words": [
+            "itovstill"
+          ],
+          "status": "candidate"
+        },
+        "purpose": "training",
+        "export": {
+          "format": "comfy-unet-lora-v1",
+          "source_sha256": "e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a",
+          "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+          "bytes": 23396192,
+          "tensors": 1120,
+          "tensor_payload_sha256": "4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0",
+          "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+          "alpha_scale_milli": 1000,
+          "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate."
+        },
+        "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada"
+      }
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-incompatible.json",
+        "sha256": "e0868a0920e5902d01ae18584ef15ae13bd07a390e20ac052e872c0ee4916ccd",
+        "bytes": 487
+      },
+      "arguments": [
+        "inference",
+        "plan",
+        "workspace\\state\\verification\\phase-a04\\incompatible.inference.json",
+        "--save",
+        "--json"
+      ],
+      "exit_code": 2,
+      "stdout": "{\"ok\": false, \"error\": \"Sampler budget is incompatible with stack\"}\n",
+      "stderr": "",
+      "elapsed_seconds": 0.2190000000409782,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-plan-candidate.json",
+        "sha256": "7443156642c0e6fd5f641ce491e97ccd6cf5128853687ae31557ce8598129823",
+        "bytes": 16858
+      },
+      "arguments": [
+        "inference",
+        "plan",
+        "examples/still-life-candidate.inference.json",
+        "--save",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"scope\": \"capability_inference_plan\",\n  \"plan\": {\n    \"version\": 2,\n    \"scope\": \"capability_inference_plan\",\n    \"specification\": {\n      \"adapters\": [\n        {\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"kind\": \"trained_candidate\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n          \"strength_milli\": 750,\n          \"training_plan\": {\n            \"path\": \"state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json\",\n            \"sha256\": \"ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764\"\n          }\n        }\n      ],\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint\": {\n        \"loader_name\": \"sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      \"count\": 1,\n      \"height\": 512,\n      \"negative_prompt\": \"text, watermark, collage, divided panels\",\n      \"prompt\": \"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\",\n      \"sampler\": {\n        \"cfg_milli\": 7000,\n        \"sampler_name\": \"dpmpp_2m\",\n        \"scheduler\": \"karras\",\n        \"steps\": 20\n      },\n      \"seed\": 420260923,\n      \"version\": 2,\n      \"width\": 512\n    },\n    \"deployment\": {\n      \"version\": 1,\n      \"scope\": \"inference_deployment\",\n      \"specification\": {\n        \"adapters\": [\n          {\n            \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n            \"kind\": \"trained_candidate\",\n            \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"strength_milli\": 750,\n            \"training_plan\": {\n              \"path\": \"state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json\",\n              \"sha256\": \"ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764\"\n            }\n          }\n        ],\n        \"capability\": \"sdxl-1.0-unet-v1\",\n        \"checkpoint\": {\n          \"loader_name\": \"sd_xl_base_1.0.safetensors\",\n          \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n        },\n        \"count\": 1,\n        \"height\": 512,\n        \"negative_prompt\": \"text, watermark, collage, divided panels\",\n        \"prompt\": \"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\",\n        \"sampler\": {\n          \"cfg_milli\": 7000,\n          \"sampler_name\": \"dpmpp_2m\",\n          \"scheduler\": \"karras\",\n          \"steps\": 20\n        },\n        \"seed\": 420260923,\n        \"version\": 2,\n        \"width\": 512\n      },\n      \"capabilities\": {\n        \"ok\": true,\n        \"scope\": \"inference_capabilities\",\n        \"capability\": \"sdxl-1.0-unet-v1\",\n        \"checkpoint_sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\",\n        \"lcm_sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n        \"adapter_order\": [\n          \"lcm (optional)\",\n          \"trained_candidate (optional)\"\n        ],\n        \"adapter_target\": \"UNet only; checkpoint CLIP and VAE remain bound\",\n        \"candidate_strength_milli\": {\n          \"min\": 1,\n          \"max\": 1000\n        },\n        \"lcm_strength_milli\": 1000,\n        \"samplers\": {\n          \"without_lcm\": {\n            \"sampler_name\": \"dpmpp_2m\",\n            \"scheduler\": \"karras\",\n            \"steps\": [\n              1,\n              50\n            ],\n            \"cfg_milli\": [\n              1,\n              15000\n            ]\n          },\n          \"with_lcm\": {\n            \"sampler_name\": \"lcm\",\n            \"scheduler\": \"sgm_uniform\",\n            \"steps\": [\n              4,\n              8\n            ],\n            \"cfg_milli\": [\n              1000,\n              1000\n            ]\n          }\n        },\n        \"limits\": \"Pinned SDXL base and LCM bytes, plus technically validated ITOV UNet exports. Compatibility permits experiments; it does not establish stack quality, candidate acceptance, promotion or Diffusers/ComfyUI parity.\"\n      },\n      \"adapters\": [\n        {\n          \"kind\": \"trained_candidate\",\n          \"loader_name\": \"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n          \"asset\": {\n            \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n            \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n          },\n          \"strength_milli\": 750,\n          \"candidate\": {\n            \"version\": 1,\n            \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n            \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n            \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n            \"entry\": {\n              \"id\": \"trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n              \"asset\": {\n                \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n                \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n              },\n              \"category\": \"style\",\n              \"slot\": \"style\",\n              \"base_models\": [\n                \"sdxl-1.0\"\n              ],\n              \"strength_milli\": {\n                \"min\": 500,\n                \"recommended\": 1000,\n                \"max\": 1000\n              },\n              \"rotation_weight_milli\": 1000,\n              \"trigger_words\": [\n                \"itovstill\"\n              ],\n              \"status\": \"candidate\"\n            },\n            \"purpose\": \"training\",\n            \"export\": {\n              \"format\": \"comfy-unet-lora-v1\",\n              \"source_sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\",\n              \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n              \"bytes\": 23396192,\n              \"tensors\": 1120,\n              \"tensor_payload_sha256\": \"4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0\",\n              \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n              \"alpha_scale_milli\": 1000,\n              \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\"\n            },\n            \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\"\n          }\n        }\n      ],\n      \"quality_acceptance\": \"not_established\",\n      \"catalog_activation\": false,\n      \"deployment_id\": \"e04281d7b4b2c150c772fecc49b45cf801f18d5db535df8ff3d264cfe7ed46db\"\n    },\n    \"jobs\": [\n      {\n        \"index\": 0,\n        \"preset\": \"inference\",\n        \"seed\": 420260923,\n        \"workflow_json\": \"{\\\"1\\\":{\\\"_meta\\\":{\\\"itov_asset_sha256\\\":\\\"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\\\"},\\\"class_type\\\":\\\"CheckpointLoaderSimple\\\",\\\"inputs\\\":{\\\"ckpt_name\\\":\\\"sd_xl_base_1.0.safetensors\\\"}},\\\"10\\\":{\\\"_meta\\\":{\\\"itov_asset_sha256\\\":\\\"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\\\"},\\\"class_type\\\":\\\"LoraLoaderModelOnly\\\",\\\"inputs\\\":{\\\"lora_name\\\":\\\"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\\\",\\\"model\\\":[\\\"1\\\",0],\\\"strength_model\\\":0.75}},\\\"3\\\":{\\\"class_type\\\":\\\"CLIPTextEncode\\\",\\\"inputs\\\":{\\\"clip\\\":[\\\"1\\\",1],\\\"text\\\":\\\"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\\\"}},\\\"4\\\":{\\\"class_type\\\":\\\"CLIPTextEncode\\\",\\\"inputs\\\":{\\\"clip\\\":[\\\"1\\\",1],\\\"text\\\":\\\"text, watermark, collage, divided panels\\\"}},\\\"5\\\":{\\\"class_type\\\":\\\"EmptyLatentImage\\\",\\\"inputs\\\":{\\\"batch_size\\\":1,\\\"height\\\":512,\\\"width\\\":512}},\\\"6\\\":{\\\"class_type\\\":\\\"KSampler\\\",\\\"inputs\\\":{\\\"cfg\\\":7.0,\\\"denoise\\\":1,\\\"latent_image\\\":[\\\"5\\\",0],\\\"model\\\":[\\\"10\\\",0],\\\"negative\\\":[\\\"4\\\",0],\\\"positive\\\":[\\\"3\\\",0],\\\"sampler_name\\\":\\\"dpmpp_2m\\\",\\\"scheduler\\\":\\\"karras\\\",\\\"seed\\\":420260923,\\\"steps\\\":20}},\\\"7\\\":{\\\"class_type\\\":\\\"VAEDecode\\\",\\\"inputs\\\":{\\\"samples\\\":[\\\"6\\\",0],\\\"vae\\\":[\\\"1\\\",2]}},\\\"8\\\":{\\\"_meta\\\":{\\\"itov_image\\\":{\\\"height\\\":512,\\\"width\\\":512}},\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/inference/d02f3259adb874a3074e86982944b3e30740a5943d4014ed1512ac1b371a6dba/000\\\",\\\"images\\\":[\\\"7\\\",0]}}}\",\n        \"workflow_sha256\": \"72883ed53867ef6b4764b12e7f345b8186fdf2ccf82fd97c37484fa52399fc25\",\n        \"loras\": [\n          {\n            \"loader_name\": \"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n            \"asset\": {\n              \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n              \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n            }\n          }\n        ]\n      }\n    ],\n    \"request\": {\n      \"bindings\": {\n        \"inference\": {\n          \"seed_inputs\": [\n            {\n              \"node\": \"6\",\n              \"class_type\": \"KSampler\",\n              \"input\": \"seed\"\n            }\n          ]\n        }\n      }\n    },\n    \"runtime\": {\n      \"version\": 1,\n      \"profile\": \"stock-sdxl-inference-v2\",\n      \"scope\": \"runtime_schema_and_asset_binding\",\n      \"server\": \"http://127.0.0.1:8188\",\n      \"runtime\": {\n        \"argv\": [\n          \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n          \"--disable-auto-launch\",\n          \"--listen\",\n          \"127.0.0.1\",\n          \"--port\",\n          \"8188\",\n          \"--input-directory\",\n          \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\input\",\n          \"--output-directory\",\n          \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\",\n          \"--disable-all-custom-nodes\"\n        ],\n        \"comfyui_version\": \"0.37.0\",\n        \"python_version\": \"3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]\",\n        \"pytorch_version\": \"2.13.0+cu130\"\n      },\n      \"devices\": [\n        {\n          \"name\": \"cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync\",\n          \"type\": \"cuda\",\n          \"index\": 0\n        }\n      ],\n      \"node_schema_sha256\": \"1dcedb5bbc84daee5949207216e8494c8f30b5d6908f537251ec81d05f7f479b\",\n      \"files\": [\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\k_diffusion\\\\sampling.py\",\n          \"bytes\": 95082,\n          \"sha256\": \"a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora.py\",\n          \"bytes\": 26117,\n          \"sha256\": \"fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora_convert.py\",\n          \"bytes\": 1970,\n          \"sha256\": \"6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\model_patcher.py\",\n          \"bytes\": 105135,\n          \"sha256\": \"097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sample.py\",\n          \"bytes\": 5096,\n          \"sha256\": \"d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\samplers.py\",\n          \"bytes\": 65846,\n          \"sha256\": \"2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sd.py\",\n          \"bytes\": 146916,\n          \"sha256\": \"e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\",\n          \"bytes\": 64869,\n          \"sha256\": \"dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\folder_paths.py\",\n          \"bytes\": 23745,\n          \"sha256\": \"a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n          \"bytes\": 25024,\n          \"sha256\": \"5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors\",\n          \"bytes\": 6938078334,\n          \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n          \"bytes\": 23396192,\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\nodes.py\",\n          \"bytes\": 111280,\n          \"sha256\": \"4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891\"\n        }\n      ],\n      \"jobs\": 1,\n      \"image_decoder\": {\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n        \"bytes\": 222248960,\n        \"sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    \"plan_id\": \"24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e\"\n  },\n  \"plan_id\": \"24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e\",\n  \"saved_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\inference\\\\plans\\\\24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e.json\",\n  \"next_action\": \"Run inference run with the saved plan.\"\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 8.98499999998603,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-plan-stack.json",
+        "sha256": "d6eae8d6bd7a906cc576c7795e6f3f19fd912d579e38d9223d6052772c02e178",
+        "bytes": 18770
+      },
+      "arguments": [
+        "inference",
+        "plan",
+        "examples/still-life-stack.inference.json",
+        "--save",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"scope\": \"capability_inference_plan\",\n  \"plan\": {\n    \"version\": 2,\n    \"scope\": \"capability_inference_plan\",\n    \"specification\": {\n      \"adapters\": [\n        {\n          \"kind\": \"lcm\",\n          \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n          \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n          \"strength_milli\": 1000\n        },\n        {\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"kind\": \"trained_candidate\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n          \"strength_milli\": 750,\n          \"training_plan\": {\n            \"path\": \"state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json\",\n            \"sha256\": \"ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764\"\n          }\n        }\n      ],\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint\": {\n        \"loader_name\": \"sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      \"count\": 1,\n      \"height\": 512,\n      \"negative_prompt\": \"text, watermark, collage, divided panels\",\n      \"prompt\": \"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\",\n      \"sampler\": {\n        \"cfg_milli\": 1000,\n        \"sampler_name\": \"lcm\",\n        \"scheduler\": \"sgm_uniform\",\n        \"steps\": 4\n      },\n      \"seed\": 420260924,\n      \"version\": 2,\n      \"width\": 512\n    },\n    \"deployment\": {\n      \"version\": 1,\n      \"scope\": \"inference_deployment\",\n      \"specification\": {\n        \"adapters\": [\n          {\n            \"kind\": \"lcm\",\n            \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n            \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n            \"strength_milli\": 1000\n          },\n          {\n            \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n            \"kind\": \"trained_candidate\",\n            \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"strength_milli\": 750,\n            \"training_plan\": {\n              \"path\": \"state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json\",\n              \"sha256\": \"ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764\"\n            }\n          }\n        ],\n        \"capability\": \"sdxl-1.0-unet-v1\",\n        \"checkpoint\": {\n          \"loader_name\": \"sd_xl_base_1.0.safetensors\",\n          \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n        },\n        \"count\": 1,\n        \"height\": 512,\n        \"negative_prompt\": \"text, watermark, collage, divided panels\",\n        \"prompt\": \"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\",\n        \"sampler\": {\n          \"cfg_milli\": 1000,\n          \"sampler_name\": \"lcm\",\n          \"scheduler\": \"sgm_uniform\",\n          \"steps\": 4\n        },\n        \"seed\": 420260924,\n        \"version\": 2,\n        \"width\": 512\n      },\n      \"capabilities\": {\n        \"ok\": true,\n        \"scope\": \"inference_capabilities\",\n        \"capability\": \"sdxl-1.0-unet-v1\",\n        \"checkpoint_sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\",\n        \"lcm_sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n        \"adapter_order\": [\n          \"lcm (optional)\",\n          \"trained_candidate (optional)\"\n        ],\n        \"adapter_target\": \"UNet only; checkpoint CLIP and VAE remain bound\",\n        \"candidate_strength_milli\": {\n          \"min\": 1,\n          \"max\": 1000\n        },\n        \"lcm_strength_milli\": 1000,\n        \"samplers\": {\n          \"without_lcm\": {\n            \"sampler_name\": \"dpmpp_2m\",\n            \"scheduler\": \"karras\",\n            \"steps\": [\n              1,\n              50\n            ],\n            \"cfg_milli\": [\n              1,\n              15000\n            ]\n          },\n          \"with_lcm\": {\n            \"sampler_name\": \"lcm\",\n            \"scheduler\": \"sgm_uniform\",\n            \"steps\": [\n              4,\n              8\n            ],\n            \"cfg_milli\": [\n              1000,\n              1000\n            ]\n          }\n        },\n        \"limits\": \"Pinned SDXL base and LCM bytes, plus technically validated ITOV UNet exports. Compatibility permits experiments; it does not establish stack quality, candidate acceptance, promotion or Diffusers/ComfyUI parity.\"\n      },\n      \"adapters\": [\n        {\n          \"kind\": \"lcm\",\n          \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n          \"asset\": {\n            \"path\": \"models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors\",\n            \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n          },\n          \"strength_milli\": 1000,\n          \"candidate\": null\n        },\n        {\n          \"kind\": \"trained_candidate\",\n          \"loader_name\": \"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n          \"asset\": {\n            \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n            \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n          },\n          \"strength_milli\": 750,\n          \"candidate\": {\n            \"version\": 1,\n            \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n            \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n            \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n            \"entry\": {\n              \"id\": \"trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n              \"asset\": {\n                \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n                \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n              },\n              \"category\": \"style\",\n              \"slot\": \"style\",\n              \"base_models\": [\n                \"sdxl-1.0\"\n              ],\n              \"strength_milli\": {\n                \"min\": 500,\n                \"recommended\": 1000,\n                \"max\": 1000\n              },\n              \"rotation_weight_milli\": 1000,\n              \"trigger_words\": [\n                \"itovstill\"\n              ],\n              \"status\": \"candidate\"\n            },\n            \"purpose\": \"training\",\n            \"export\": {\n              \"format\": \"comfy-unet-lora-v1\",\n              \"source_sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\",\n              \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n              \"bytes\": 23396192,\n              \"tensors\": 1120,\n              \"tensor_payload_sha256\": \"4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0\",\n              \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n              \"alpha_scale_milli\": 1000,\n              \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\"\n            },\n            \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\"\n          }\n        }\n      ],\n      \"quality_acceptance\": \"not_established\",\n      \"catalog_activation\": false,\n      \"deployment_id\": \"3ec15796b7fc7d3efd5d9d7cde96ed0b8174f723b52386c5c47e3fb19333f25f\"\n    },\n    \"jobs\": [\n      {\n        \"index\": 0,\n        \"preset\": \"inference\",\n        \"seed\": 420260924,\n        \"workflow_json\": \"{\\\"1\\\":{\\\"_meta\\\":{\\\"itov_asset_sha256\\\":\\\"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\\\"},\\\"class_type\\\":\\\"CheckpointLoaderSimple\\\",\\\"inputs\\\":{\\\"ckpt_name\\\":\\\"sd_xl_base_1.0.safetensors\\\"}},\\\"10\\\":{\\\"_meta\\\":{\\\"itov_asset_sha256\\\":\\\"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\\\"},\\\"class_type\\\":\\\"LoraLoaderModelOnly\\\",\\\"inputs\\\":{\\\"lora_name\\\":\\\"lcm_lora_sdxl.safetensors\\\",\\\"model\\\":[\\\"1\\\",0],\\\"strength_model\\\":1.0}},\\\"11\\\":{\\\"_meta\\\":{\\\"itov_asset_sha256\\\":\\\"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\\\"},\\\"class_type\\\":\\\"LoraLoaderModelOnly\\\",\\\"inputs\\\":{\\\"lora_name\\\":\\\"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\\\",\\\"model\\\":[\\\"10\\\",0],\\\"strength_model\\\":0.75}},\\\"3\\\":{\\\"class_type\\\":\\\"CLIPTextEncode\\\",\\\"inputs\\\":{\\\"clip\\\":[\\\"1\\\",1],\\\"text\\\":\\\"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\\\"}},\\\"4\\\":{\\\"class_type\\\":\\\"CLIPTextEncode\\\",\\\"inputs\\\":{\\\"clip\\\":[\\\"1\\\",1],\\\"text\\\":\\\"text, watermark, collage, divided panels\\\"}},\\\"5\\\":{\\\"class_type\\\":\\\"EmptyLatentImage\\\",\\\"inputs\\\":{\\\"batch_size\\\":1,\\\"height\\\":512,\\\"width\\\":512}},\\\"6\\\":{\\\"class_type\\\":\\\"KSampler\\\",\\\"inputs\\\":{\\\"cfg\\\":1.0,\\\"denoise\\\":1,\\\"latent_image\\\":[\\\"5\\\",0],\\\"model\\\":[\\\"11\\\",0],\\\"negative\\\":[\\\"4\\\",0],\\\"positive\\\":[\\\"3\\\",0],\\\"sampler_name\\\":\\\"lcm\\\",\\\"scheduler\\\":\\\"sgm_uniform\\\",\\\"seed\\\":420260924,\\\"steps\\\":4}},\\\"7\\\":{\\\"class_type\\\":\\\"VAEDecode\\\",\\\"inputs\\\":{\\\"samples\\\":[\\\"6\\\",0],\\\"vae\\\":[\\\"1\\\",2]}},\\\"8\\\":{\\\"_meta\\\":{\\\"itov_image\\\":{\\\"height\\\":512,\\\"width\\\":512}},\\\"class_type\\\":\\\"SaveImage\\\",\\\"inputs\\\":{\\\"filename_prefix\\\":\\\"itov/inference/35d11ee82a69c185a763369f03dac5788ebc645bfcde25123e7db79db32f9996/000\\\",\\\"images\\\":[\\\"7\\\",0]}}}\",\n        \"workflow_sha256\": \"9678c744e978495ccb0efc516f95265578c2b8aa69bdaba6a3f745ce81e6f358\",\n        \"loras\": [\n          {\n            \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n            \"asset\": {\n              \"path\": \"models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors\",\n              \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n            }\n          },\n          {\n            \"loader_name\": \"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n            \"asset\": {\n              \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n              \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n            }\n          }\n        ]\n      }\n    ],\n    \"request\": {\n      \"bindings\": {\n        \"inference\": {\n          \"seed_inputs\": [\n            {\n              \"node\": \"6\",\n              \"class_type\": \"KSampler\",\n              \"input\": \"seed\"\n            }\n          ]\n        }\n      }\n    },\n    \"runtime\": {\n      \"version\": 1,\n      \"profile\": \"stock-sdxl-inference-v2\",\n      \"scope\": \"runtime_schema_and_asset_binding\",\n      \"server\": \"http://127.0.0.1:8188\",\n      \"runtime\": {\n        \"argv\": [\n          \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n          \"--disable-auto-launch\",\n          \"--listen\",\n          \"127.0.0.1\",\n          \"--port\",\n          \"8188\",\n          \"--input-directory\",\n          \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\input\",\n          \"--output-directory\",\n          \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\",\n          \"--disable-all-custom-nodes\"\n        ],\n        \"comfyui_version\": \"0.37.0\",\n        \"python_version\": \"3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]\",\n        \"pytorch_version\": \"2.13.0+cu130\"\n      },\n      \"devices\": [\n        {\n          \"name\": \"cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync\",\n          \"type\": \"cuda\",\n          \"index\": 0\n        }\n      ],\n      \"node_schema_sha256\": \"1dcedb5bbc84daee5949207216e8494c8f30b5d6908f537251ec81d05f7f479b\",\n      \"files\": [\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\k_diffusion\\\\sampling.py\",\n          \"bytes\": 95082,\n          \"sha256\": \"a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora.py\",\n          \"bytes\": 26117,\n          \"sha256\": \"fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora_convert.py\",\n          \"bytes\": 1970,\n          \"sha256\": \"6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\model_patcher.py\",\n          \"bytes\": 105135,\n          \"sha256\": \"097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sample.py\",\n          \"bytes\": 5096,\n          \"sha256\": \"d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\samplers.py\",\n          \"bytes\": 65846,\n          \"sha256\": \"2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sd.py\",\n          \"bytes\": 146916,\n          \"sha256\": \"e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\",\n          \"bytes\": 64869,\n          \"sha256\": \"dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\folder_paths.py\",\n          \"bytes\": 23745,\n          \"sha256\": \"a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n          \"bytes\": 25024,\n          \"sha256\": \"5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors\",\n          \"bytes\": 6938078334,\n          \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n          \"bytes\": 23396192,\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\lcm_lora_sdxl.safetensors\",\n          \"bytes\": 393855224,\n          \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\nodes.py\",\n          \"bytes\": 111280,\n          \"sha256\": \"4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891\"\n        }\n      ],\n      \"jobs\": 1,\n      \"image_decoder\": {\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n        \"bytes\": 222248960,\n        \"sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    },\n    \"plan_id\": \"d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d\"\n  },\n  \"plan_id\": \"d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d\",\n  \"saved_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\inference\\\\plans\\\\d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d.json\",\n  \"next_action\": \"Run inference run with the saved plan.\"\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 9.15700000000652,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-prepare-candidate.json",
+        "sha256": "e45513b4aa51f75186a710c68caf8141aef95733f3cefa94e26b1eaff066dfdf",
+        "bytes": 5750
+      },
+      "result": {
+        "ok": true,
+        "scope": "prepared_inference_deployment",
+        "deployment": {
+          "version": 1,
+          "scope": "inference_deployment",
+          "specification": {
+            "adapters": [
+              {
+                "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada",
+                "kind": "trained_candidate",
+                "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+                "strength_milli": 750,
+                "training_plan": {
+                  "path": "state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+                  "sha256": "ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764"
+                }
+              }
+            ],
+            "capability": "sdxl-1.0-unet-v1",
+            "checkpoint": {
+              "loader_name": "sd_xl_base_1.0.safetensors",
+              "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+            },
+            "count": 1,
+            "height": 512,
+            "negative_prompt": "text, watermark, collage, divided panels",
+            "prompt": "itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects",
+            "sampler": {
+              "cfg_milli": 7000,
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "karras",
+              "steps": 20
+            },
+            "seed": 420260923,
+            "version": 2,
+            "width": 512
+          },
+          "capabilities": {
+            "ok": true,
+            "scope": "inference_capabilities",
+            "capability": "sdxl-1.0-unet-v1",
+            "checkpoint_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+            "lcm_sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141",
+            "adapter_order": [
+              "lcm (optional)",
+              "trained_candidate (optional)"
+            ],
+            "adapter_target": "UNet only; checkpoint CLIP and VAE remain bound",
+            "candidate_strength_milli": {
+              "min": 1,
+              "max": 1000
+            },
+            "lcm_strength_milli": 1000,
+            "samplers": {
+              "without_lcm": {
+                "sampler_name": "dpmpp_2m",
+                "scheduler": "karras",
+                "steps": [
+                  1,
+                  50
+                ],
+                "cfg_milli": [
+                  1,
+                  15000
+                ]
+              },
+              "with_lcm": {
+                "sampler_name": "lcm",
+                "scheduler": "sgm_uniform",
+                "steps": [
+                  4,
+                  8
+                ],
+                "cfg_milli": [
+                  1000,
+                  1000
+                ]
+              }
+            },
+            "limits": "Pinned SDXL base and LCM bytes, plus technically validated ITOV UNet exports. Compatibility permits experiments; it does not establish stack quality, candidate acceptance, promotion or Diffusers/ComfyUI parity."
+          },
+          "adapters": [
+            {
+              "kind": "trained_candidate",
+              "loader_name": "itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+              "asset": {
+                "path": "models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+                "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+              },
+              "strength_milli": 750,
+              "candidate": {
+                "version": 1,
+                "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+                "assessment_id": "ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a",
+                "result_id": "fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0",
+                "entry": {
+                  "id": "trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+                  "asset": {
+                    "path": "models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+                    "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+                  },
+                  "category": "style",
+                  "slot": "style",
+                  "base_models": [
+                    "sdxl-1.0"
+                  ],
+                  "strength_milli": {
+                    "min": 500,
+                    "recommended": 1000,
+                    "max": 1000
+                  },
+                  "rotation_weight_milli": 1000,
+                  "trigger_words": [
+                    "itovstill"
+                  ],
+                  "status": "candidate"
+                },
+                "purpose": "training",
+                "export": {
+                  "format": "comfy-unet-lora-v1",
+                  "source_sha256": "e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a",
+                  "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+                  "bytes": 23396192,
+                  "tensors": 1120,
+                  "tensor_payload_sha256": "4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0",
+                  "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+                  "alpha_scale_milli": 1000,
+                  "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate."
+                },
+                "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada"
+              }
+            }
+          ],
+          "quality_acceptance": "not_established",
+          "catalog_activation": false,
+          "deployment_id": "e04281d7b4b2c150c772fecc49b45cf801f18d5db535df8ff3d264cfe7ed46db"
+        },
+        "saved_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\deployments\\e04281d7b4b2c150c772fecc49b45cf801f18d5db535df8ff3d264cfe7ed46db.json",
+        "next_action": "Start the stock server; inference plan --save.",
+        "limits": "Assets staged only; no catalog activation, qualification or submission."
+      }
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-prepare-stack.json",
+        "sha256": "148acc01679f42f173a49e0d0d4be6bdd590f754f753dfbf9bd549a7865351aa",
+        "bytes": 6375
+      },
+      "result": {
+        "ok": true,
+        "scope": "prepared_inference_deployment",
+        "deployment": {
+          "version": 1,
+          "scope": "inference_deployment",
+          "specification": {
+            "adapters": [
+              {
+                "kind": "lcm",
+                "loader_name": "lcm_lora_sdxl.safetensors",
+                "sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141",
+                "strength_milli": 1000
+              },
+              {
+                "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada",
+                "kind": "trained_candidate",
+                "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+                "strength_milli": 750,
+                "training_plan": {
+                  "path": "state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+                  "sha256": "ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764"
+                }
+              }
+            ],
+            "capability": "sdxl-1.0-unet-v1",
+            "checkpoint": {
+              "loader_name": "sd_xl_base_1.0.safetensors",
+              "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+            },
+            "count": 1,
+            "height": 512,
+            "negative_prompt": "text, watermark, collage, divided panels",
+            "prompt": "itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects",
+            "sampler": {
+              "cfg_milli": 1000,
+              "sampler_name": "lcm",
+              "scheduler": "sgm_uniform",
+              "steps": 4
+            },
+            "seed": 420260924,
+            "version": 2,
+            "width": 512
+          },
+          "capabilities": {
+            "ok": true,
+            "scope": "inference_capabilities",
+            "capability": "sdxl-1.0-unet-v1",
+            "checkpoint_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+            "lcm_sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141",
+            "adapter_order": [
+              "lcm (optional)",
+              "trained_candidate (optional)"
+            ],
+            "adapter_target": "UNet only; checkpoint CLIP and VAE remain bound",
+            "candidate_strength_milli": {
+              "min": 1,
+              "max": 1000
+            },
+            "lcm_strength_milli": 1000,
+            "samplers": {
+              "without_lcm": {
+                "sampler_name": "dpmpp_2m",
+                "scheduler": "karras",
+                "steps": [
+                  1,
+                  50
+                ],
+                "cfg_milli": [
+                  1,
+                  15000
+                ]
+              },
+              "with_lcm": {
+                "sampler_name": "lcm",
+                "scheduler": "sgm_uniform",
+                "steps": [
+                  4,
+                  8
+                ],
+                "cfg_milli": [
+                  1000,
+                  1000
+                ]
+              }
+            },
+            "limits": "Pinned SDXL base and LCM bytes, plus technically validated ITOV UNet exports. Compatibility permits experiments; it does not establish stack quality, candidate acceptance, promotion or Diffusers/ComfyUI parity."
+          },
+          "adapters": [
+            {
+              "kind": "lcm",
+              "loader_name": "lcm_lora_sdxl.safetensors",
+              "asset": {
+                "path": "models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors",
+                "sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141"
+              },
+              "strength_milli": 1000,
+              "candidate": null
+            },
+            {
+              "kind": "trained_candidate",
+              "loader_name": "itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+              "asset": {
+                "path": "models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+                "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+              },
+              "strength_milli": 750,
+              "candidate": {
+                "version": 1,
+                "plan_id": "5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67",
+                "assessment_id": "ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a",
+                "result_id": "fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0",
+                "entry": {
+                  "id": "trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+                  "asset": {
+                    "path": "models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+                    "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+                  },
+                  "category": "style",
+                  "slot": "style",
+                  "base_models": [
+                    "sdxl-1.0"
+                  ],
+                  "strength_milli": {
+                    "min": 500,
+                    "recommended": 1000,
+                    "max": 1000
+                  },
+                  "rotation_weight_milli": 1000,
+                  "trigger_words": [
+                    "itovstill"
+                  ],
+                  "status": "candidate"
+                },
+                "purpose": "training",
+                "export": {
+                  "format": "comfy-unet-lora-v1",
+                  "source_sha256": "e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a",
+                  "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+                  "bytes": 23396192,
+                  "tensors": 1120,
+                  "tensor_payload_sha256": "4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0",
+                  "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+                  "alpha_scale_milli": 1000,
+                  "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate."
+                },
+                "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada"
+              }
+            }
+          ],
+          "quality_acceptance": "not_established",
+          "catalog_activation": false,
+          "deployment_id": "3ec15796b7fc7d3efd5d9d7cde96ed0b8174f723b52386c5c47e3fb19333f25f"
+        },
+        "saved_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\deployments\\3ec15796b7fc7d3efd5d9d7cde96ed0b8174f723b52386c5c47e3fb19333f25f.json",
+        "next_action": "Start the stock server; inference plan --save.",
+        "limits": "Assets staged only; no catalog activation, qualification or submission."
+      }
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-replay-candidate.json",
+        "sha256": "cbfcdfb1cd2405202944063b054b8e103c81373071bdbadc324a7e583e0c4118",
+        "bytes": 13328
+      },
+      "arguments": [
+        "inference",
+        "replay",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e.json",
+        "--save",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"version\": 1,\n  \"scope\": \"inference_technical_report\",\n  \"plan_id\": \"24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e\",\n  \"deployment\": {\n    \"adapters\": [\n      {\n        \"asset\": {\n          \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n        },\n        \"candidate\": {\n          \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"entry\": {\n            \"asset\": {\n              \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n              \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n            },\n            \"base_models\": [\n              \"sdxl-1.0\"\n            ],\n            \"category\": \"style\",\n            \"id\": \"trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"rotation_weight_milli\": 1000,\n            \"slot\": \"style\",\n            \"status\": \"candidate\",\n            \"strength_milli\": {\n              \"max\": 1000,\n              \"min\": 500,\n              \"recommended\": 1000\n            },\n            \"trigger_words\": [\n              \"itovstill\"\n            ]\n          },\n          \"export\": {\n            \"alpha_scale_milli\": 1000,\n            \"bytes\": 23396192,\n            \"format\": \"comfy-unet-lora-v1\",\n            \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\",\n            \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n            \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"source_sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\",\n            \"tensor_payload_sha256\": \"4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0\",\n            \"tensors\": 1120\n          },\n          \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n          \"purpose\": \"training\",\n          \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n          \"version\": 1\n        },\n        \"kind\": \"trained_candidate\",\n        \"loader_name\": \"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"strength_milli\": 750\n      }\n    ],\n    \"capabilities\": {\n      \"adapter_order\": [\n        \"lcm (optional)\",\n        \"trained_candidate (optional)\"\n      ],\n      \"adapter_target\": \"UNet only; checkpoint CLIP and VAE remain bound\",\n      \"candidate_strength_milli\": {\n        \"max\": 1000,\n        \"min\": 1\n      },\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint_sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\",\n      \"lcm_sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n      \"lcm_strength_milli\": 1000,\n      \"limits\": \"Pinned SDXL base and LCM bytes, plus technically validated ITOV UNet exports. Compatibility permits experiments; it does not establish stack quality, candidate acceptance, promotion or Diffusers/ComfyUI parity.\",\n      \"ok\": true,\n      \"samplers\": {\n        \"with_lcm\": {\n          \"cfg_milli\": [\n            1000,\n            1000\n          ],\n          \"sampler_name\": \"lcm\",\n          \"scheduler\": \"sgm_uniform\",\n          \"steps\": [\n            4,\n            8\n          ]\n        },\n        \"without_lcm\": {\n          \"cfg_milli\": [\n            1,\n            15000\n          ],\n          \"sampler_name\": \"dpmpp_2m\",\n          \"scheduler\": \"karras\",\n          \"steps\": [\n            1,\n            50\n          ]\n        }\n      },\n      \"scope\": \"inference_capabilities\"\n    },\n    \"catalog_activation\": false,\n    \"deployment_id\": \"e04281d7b4b2c150c772fecc49b45cf801f18d5db535df8ff3d264cfe7ed46db\",\n    \"quality_acceptance\": \"not_established\",\n    \"scope\": \"inference_deployment\",\n    \"specification\": {\n      \"adapters\": [\n        {\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"kind\": \"trained_candidate\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n          \"strength_milli\": 750,\n          \"training_plan\": {\n            \"path\": \"state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json\",\n            \"sha256\": \"ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764\"\n          }\n        }\n      ],\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint\": {\n        \"loader_name\": \"sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      \"count\": 1,\n      \"height\": 512,\n      \"negative_prompt\": \"text, watermark, collage, divided panels\",\n      \"prompt\": \"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\",\n      \"sampler\": {\n        \"cfg_milli\": 7000,\n        \"sampler_name\": \"dpmpp_2m\",\n        \"scheduler\": \"karras\",\n        \"steps\": 20\n      },\n      \"seed\": 420260923,\n      \"version\": 2,\n      \"width\": 512\n    },\n    \"version\": 1\n  },\n  \"runtime\": {\n    \"devices\": [\n      {\n        \"index\": 0,\n        \"name\": \"cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync\",\n        \"type\": \"cuda\"\n      }\n    ],\n    \"files\": [\n      {\n        \"bytes\": 95082,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\k_diffusion\\\\sampling.py\",\n        \"sha256\": \"a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f\"\n      },\n      {\n        \"bytes\": 26117,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora.py\",\n        \"sha256\": \"fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc\"\n      },\n      {\n        \"bytes\": 1970,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora_convert.py\",\n        \"sha256\": \"6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245\"\n      },\n      {\n        \"bytes\": 105135,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\model_patcher.py\",\n        \"sha256\": \"097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c\"\n      },\n      {\n        \"bytes\": 5096,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sample.py\",\n        \"sha256\": \"d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee\"\n      },\n      {\n        \"bytes\": 65846,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\samplers.py\",\n        \"sha256\": \"2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae\"\n      },\n      {\n        \"bytes\": 146916,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sd.py\",\n        \"sha256\": \"e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec\"\n      },\n      {\n        \"bytes\": 64869,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\",\n        \"sha256\": \"dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b\"\n      },\n      {\n        \"bytes\": 23745,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\folder_paths.py\",\n        \"sha256\": \"a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66\"\n      },\n      {\n        \"bytes\": 25024,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"sha256\": \"5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96\"\n      },\n      {\n        \"bytes\": 6938078334,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      {\n        \"bytes\": 23396192,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n      },\n      {\n        \"bytes\": 111280,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\nodes.py\",\n        \"sha256\": \"4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891\"\n      }\n    ],\n    \"image_decoder\": {\n      \"bytes\": 222248960,\n      \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n      \"sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n    },\n    \"jobs\": 1,\n    \"node_schema_sha256\": \"1dcedb5bbc84daee5949207216e8494c8f30b5d6908f537251ec81d05f7f479b\",\n    \"profile\": \"stock-sdxl-inference-v2\",\n    \"runtime\": {\n      \"argv\": [\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"--disable-auto-launch\",\n        \"--listen\",\n        \"127.0.0.1\",\n        \"--port\",\n        \"8188\",\n        \"--input-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\input\",\n        \"--output-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\",\n        \"--disable-all-custom-nodes\"\n      ],\n      \"comfyui_version\": \"0.37.0\",\n      \"python_version\": \"3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]\",\n      \"pytorch_version\": \"2.13.0+cu130\"\n    },\n    \"scope\": \"runtime_schema_and_asset_binding\",\n    \"server\": \"http://127.0.0.1:8188\",\n    \"version\": 1\n  },\n  \"images\": [\n    {\n      \"index\": 0,\n      \"seed\": 420260923,\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\af36ecfb-6cea-5322-b92c-8776f16bcea2.json\",\n      \"request_id\": \"af36ecfb-6cea-5322-b92c-8776f16bcea2\",\n      \"prompt_id\": \"3514d06c-f0c9-49df-bc0d-b295a3adeb1b\",\n      \"error\": null,\n      \"record_sha256\": \"41cabbe6389c5bedab8083090de5da2c3e0b80e0a8c0771ec1857d04755c4018\",\n      \"image\": {\n        \"path\": \"output/jobs/af36ecfb-6cea-5322-b92c-8776f16bcea2/artifact-0000.png\",\n        \"sha256\": \"afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 335111,\n        \"sha256\": \"afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223\",\n        \"decoded_rgb_sha256\": \"2053e5fec7f4a90d301e5c573a2fbf208e8c43afffff52f8974b0fa61eb96d0c\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    }\n  ],\n  \"technical_pass\": true,\n  \"quality_acceptance\": \"not_established\",\n  \"catalog_activation\": false,\n  \"limits\": \"Exact owned graph, asset and decoded image evidence; no quality acceptance, adapter target coverage or cross-runtime parity claim.\",\n  \"report_id\": \"52fa34a781ec5bd5aafe9317d400bcaf730d31f9ec8d07abcb75fca05ad81438\"\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 8.296999999904074,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-replay-stack.json",
+        "sha256": "9875494c31fd1efdcf07e65e1304bdfbdbafbcdacad11308d433f4fc81ec17b4",
+        "bytes": 14307
+      },
+      "arguments": [
+        "inference",
+        "replay",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d.json",
+        "--save",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"version\": 1,\n  \"scope\": \"inference_technical_report\",\n  \"plan_id\": \"d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d\",\n  \"deployment\": {\n    \"adapters\": [\n      {\n        \"asset\": {\n          \"path\": \"models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors\",\n          \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n        },\n        \"candidate\": null,\n        \"kind\": \"lcm\",\n        \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n        \"strength_milli\": 1000\n      },\n      {\n        \"asset\": {\n          \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n        },\n        \"candidate\": {\n          \"assessment_id\": \"ffb27e04a3138fc3d70631eba864055297725c5d798e8a589820cf867387417a\",\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"entry\": {\n            \"asset\": {\n              \"path\": \"models_shared/trained/f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n              \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n            },\n            \"base_models\": [\n              \"sdxl-1.0\"\n            ],\n            \"category\": \"style\",\n            \"id\": \"trained-f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"rotation_weight_milli\": 1000,\n            \"slot\": \"style\",\n            \"status\": \"candidate\",\n            \"strength_milli\": {\n              \"max\": 1000,\n              \"min\": 500,\n              \"recommended\": 1000\n            },\n            \"trigger_words\": [\n              \"itovstill\"\n            ]\n          },\n          \"export\": {\n            \"alpha_scale_milli\": 1000,\n            \"bytes\": 23396192,\n            \"format\": \"comfy-unet-lora-v1\",\n            \"limits\": \"Tensor names changed, payload bytes preserved; runtime acceptance is separate.\",\n            \"mapping_sha256\": \"6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7\",\n            \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n            \"source_sha256\": \"e88d97095c36213f9849cf1d4a8a1c06d405f124859a6a0ad4b629048a2b8f1a\",\n            \"tensor_payload_sha256\": \"4ac9b6120e4323cdeb2e371dd12b3b877c71707280407ab21e00e051ebab2db0\",\n            \"tensors\": 1120\n          },\n          \"plan_id\": \"5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67\",\n          \"purpose\": \"training\",\n          \"result_id\": \"fee1c495ee384b07887e70441b993ea362bbdce784939f77c669ee611cca04d0\",\n          \"version\": 1\n        },\n        \"kind\": \"trained_candidate\",\n        \"loader_name\": \"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"strength_milli\": 750\n      }\n    ],\n    \"capabilities\": {\n      \"adapter_order\": [\n        \"lcm (optional)\",\n        \"trained_candidate (optional)\"\n      ],\n      \"adapter_target\": \"UNet only; checkpoint CLIP and VAE remain bound\",\n      \"candidate_strength_milli\": {\n        \"max\": 1000,\n        \"min\": 1\n      },\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint_sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\",\n      \"lcm_sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n      \"lcm_strength_milli\": 1000,\n      \"limits\": \"Pinned SDXL base and LCM bytes, plus technically validated ITOV UNet exports. Compatibility permits experiments; it does not establish stack quality, candidate acceptance, promotion or Diffusers/ComfyUI parity.\",\n      \"ok\": true,\n      \"samplers\": {\n        \"with_lcm\": {\n          \"cfg_milli\": [\n            1000,\n            1000\n          ],\n          \"sampler_name\": \"lcm\",\n          \"scheduler\": \"sgm_uniform\",\n          \"steps\": [\n            4,\n            8\n          ]\n        },\n        \"without_lcm\": {\n          \"cfg_milli\": [\n            1,\n            15000\n          ],\n          \"sampler_name\": \"dpmpp_2m\",\n          \"scheduler\": \"karras\",\n          \"steps\": [\n            1,\n            50\n          ]\n        }\n      },\n      \"scope\": \"inference_capabilities\"\n    },\n    \"catalog_activation\": false,\n    \"deployment_id\": \"3ec15796b7fc7d3efd5d9d7cde96ed0b8174f723b52386c5c47e3fb19333f25f\",\n    \"quality_acceptance\": \"not_established\",\n    \"scope\": \"inference_deployment\",\n    \"specification\": {\n      \"adapters\": [\n        {\n          \"kind\": \"lcm\",\n          \"loader_name\": \"lcm_lora_sdxl.safetensors\",\n          \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\",\n          \"strength_milli\": 1000\n        },\n        {\n          \"candidate_id\": \"e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada\",\n          \"kind\": \"trained_candidate\",\n          \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\",\n          \"strength_milli\": 750,\n          \"training_plan\": {\n            \"path\": \"state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json\",\n            \"sha256\": \"ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764\"\n          }\n        }\n      ],\n      \"capability\": \"sdxl-1.0-unet-v1\",\n      \"checkpoint\": {\n        \"loader_name\": \"sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      \"count\": 1,\n      \"height\": 512,\n      \"negative_prompt\": \"text, watermark, collage, divided panels\",\n      \"prompt\": \"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\",\n      \"sampler\": {\n        \"cfg_milli\": 1000,\n        \"sampler_name\": \"lcm\",\n        \"scheduler\": \"sgm_uniform\",\n        \"steps\": 4\n      },\n      \"seed\": 420260924,\n      \"version\": 2,\n      \"width\": 512\n    },\n    \"version\": 1\n  },\n  \"runtime\": {\n    \"devices\": [\n      {\n        \"index\": 0,\n        \"name\": \"cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync\",\n        \"type\": \"cuda\"\n      }\n    ],\n    \"files\": [\n      {\n        \"bytes\": 95082,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\k_diffusion\\\\sampling.py\",\n        \"sha256\": \"a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f\"\n      },\n      {\n        \"bytes\": 26117,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora.py\",\n        \"sha256\": \"fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc\"\n      },\n      {\n        \"bytes\": 1970,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\lora_convert.py\",\n        \"sha256\": \"6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245\"\n      },\n      {\n        \"bytes\": 105135,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\model_patcher.py\",\n        \"sha256\": \"097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c\"\n      },\n      {\n        \"bytes\": 5096,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sample.py\",\n        \"sha256\": \"d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee\"\n      },\n      {\n        \"bytes\": 65846,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\samplers.py\",\n        \"sha256\": \"2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae\"\n      },\n      {\n        \"bytes\": 146916,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\comfy\\\\sd.py\",\n        \"sha256\": \"e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec\"\n      },\n      {\n        \"bytes\": 64869,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\",\n        \"sha256\": \"dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b\"\n      },\n      {\n        \"bytes\": 23745,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\folder_paths.py\",\n        \"sha256\": \"a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66\"\n      },\n      {\n        \"bytes\": 25024,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"sha256\": \"5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96\"\n      },\n      {\n        \"bytes\": 6938078334,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors\",\n        \"sha256\": \"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"\n      },\n      {\n        \"bytes\": 23396192,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\n        \"sha256\": \"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"\n      },\n      {\n        \"bytes\": 393855224,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\loras\\\\lcm_lora_sdxl.safetensors\",\n        \"sha256\": \"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"\n      },\n      {\n        \"bytes\": 111280,\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\nodes.py\",\n        \"sha256\": \"4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891\"\n      }\n    ],\n    \"image_decoder\": {\n      \"bytes\": 222248960,\n      \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-9.0-full_build\\\\bin\\\\ffmpeg.EXE\",\n      \"sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n    },\n    \"jobs\": 1,\n    \"node_schema_sha256\": \"1dcedb5bbc84daee5949207216e8494c8f30b5d6908f537251ec81d05f7f479b\",\n    \"profile\": \"stock-sdxl-inference-v2\",\n    \"runtime\": {\n      \"argv\": [\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\main.py\",\n        \"--disable-auto-launch\",\n        \"--listen\",\n        \"127.0.0.1\",\n        \"--port\",\n        \"8188\",\n        \"--input-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\input\",\n        \"--output-directory\",\n        \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\output\",\n        \"--disable-all-custom-nodes\"\n      ],\n      \"comfyui_version\": \"0.37.0\",\n      \"python_version\": \"3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]\",\n      \"pytorch_version\": \"2.13.0+cu130\"\n    },\n    \"scope\": \"runtime_schema_and_asset_binding\",\n    \"server\": \"http://127.0.0.1:8188\",\n    \"version\": 1\n  },\n  \"images\": [\n    {\n      \"index\": 0,\n      \"seed\": 420260924,\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\18425694-9f81-5e03-b7df-9bb47e2395f9.json\",\n      \"request_id\": \"18425694-9f81-5e03-b7df-9bb47e2395f9\",\n      \"prompt_id\": \"36dc43e7-6e6f-4865-aaa0-fe42f716939d\",\n      \"error\": null,\n      \"record_sha256\": \"da04162b0084aad1e9be1ae80d791217a414e749b9cf0624f54ad5581bebcdbd\",\n      \"image\": {\n        \"path\": \"output/jobs/18425694-9f81-5e03-b7df-9bb47e2395f9/artifact-0000.png\",\n        \"sha256\": \"6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 347262,\n        \"sha256\": \"6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e\",\n        \"decoded_rgb_sha256\": \"947bcdec90743c19ef2ed0d5f70754f0d3f673731500705ddd55ba86b6866532\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    }\n  ],\n  \"technical_pass\": true,\n  \"quality_acceptance\": \"not_established\",\n  \"catalog_activation\": false,\n  \"limits\": \"Exact owned graph, asset and decoded image evidence; no quality acceptance, adapter target coverage or cross-runtime parity claim.\",\n  \"report_id\": \"388f60e7d524afc2c071cfc7601f13cf79f6fda362befa50b1566a4987e09640\"\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 9.047000000020489,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-resume-candidate.json",
+        "sha256": "40d350199314758cd47b1bcde6adfc7881071cdecf1ededf79d72899166222e0",
+        "bytes": 2121
+      },
+      "arguments": [
+        "inference",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e.json",
+        "--wait-timeout",
+        "180",
+        "--poll-interval",
+        "0.2",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"scope\": \"inference_status\",\n  \"plan_id\": \"24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e\",\n  \"ok\": true,\n  \"recorded_status\": \"succeeded\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"images\": [\n    {\n      \"index\": 0,\n      \"seed\": 420260923,\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\af36ecfb-6cea-5322-b92c-8776f16bcea2.json\",\n      \"request_id\": \"af36ecfb-6cea-5322-b92c-8776f16bcea2\",\n      \"prompt_id\": \"3514d06c-f0c9-49df-bc0d-b295a3adeb1b\",\n      \"error\": null,\n      \"record_sha256\": \"41cabbe6389c5bedab8083090de5da2c3e0b80e0a8c0771ec1857d04755c4018\",\n      \"image\": {\n        \"path\": \"output/jobs/af36ecfb-6cea-5322-b92c-8776f16bcea2/artifact-0000.png\",\n        \"sha256\": \"afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 335111,\n        \"sha256\": \"afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223\",\n        \"decoded_rgb_sha256\": \"2053e5fec7f4a90d301e5c573a2fbf208e8c43afffff52f8974b0fa61eb96d0c\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    }\n  ],\n  \"succeeded\": 1,\n  \"total\": 1,\n  \"quality_acceptance\": \"not_established\",\n  \"next_action\": \"Run inference replay --save and inspect image quality.\"\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 6.297000000020489,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-resume-stack.json",
+        "sha256": "f45e5a8113aa15f900b7f4206290d68e3fe77af3e4c9581d59debf7faf905972",
+        "bytes": 2121
+      },
+      "arguments": [
+        "inference",
+        "resume",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d.json",
+        "--wait-timeout",
+        "180",
+        "--poll-interval",
+        "0.2",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"scope\": \"inference_status\",\n  \"plan_id\": \"d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d\",\n  \"ok\": true,\n  \"recorded_status\": \"succeeded\",\n  \"status\": \"succeeded\",\n  \"error\": null,\n  \"images\": [\n    {\n      \"index\": 0,\n      \"seed\": 420260924,\n      \"status\": \"succeeded\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\18425694-9f81-5e03-b7df-9bb47e2395f9.json\",\n      \"request_id\": \"18425694-9f81-5e03-b7df-9bb47e2395f9\",\n      \"prompt_id\": \"36dc43e7-6e6f-4865-aaa0-fe42f716939d\",\n      \"error\": null,\n      \"record_sha256\": \"da04162b0084aad1e9be1ae80d791217a414e749b9cf0624f54ad5581bebcdbd\",\n      \"image\": {\n        \"path\": \"output/jobs/18425694-9f81-5e03-b7df-9bb47e2395f9/artifact-0000.png\",\n        \"sha256\": \"6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e\"\n      },\n      \"decoded\": {\n        \"scope\": \"png_full_decode\",\n        \"width\": 512,\n        \"height\": 512,\n        \"bytes\": 347262,\n        \"sha256\": \"6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e\",\n        \"decoded_rgb_sha256\": \"947bcdec90743c19ef2ed0d5f70754f0d3f673731500705ddd55ba86b6866532\",\n        \"decoder_sha256\": \"05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740\"\n      }\n    }\n  ],\n  \"succeeded\": 1,\n  \"total\": 1,\n  \"quality_acceptance\": \"not_established\",\n  \"next_action\": \"Run inference replay --save and inspect image quality.\"\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 3.344000000040978,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-run-candidate.json",
+        "sha256": "e1893e17a77af8d8e19c207d5911cc3b61bec96e77a84a09ef89b22f4a87994a",
+        "bytes": 1670
+      },
+      "arguments": [
+        "inference",
+        "run",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e.json",
+        "--wait-timeout",
+        "0.05",
+        "--poll-interval",
+        "0.02",
+        "--json"
+      ],
+      "exit_code": 1,
+      "stdout": "{\n  \"scope\": \"inference_status\",\n  \"plan_id\": \"24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e\",\n  \"ok\": false,\n  \"recorded_status\": \"paused\",\n  \"status\": \"paused\",\n  \"error\": \"Stopped waiting; the server job may still run. Resume with job wait.\",\n  \"images\": [\n    {\n      \"index\": 0,\n      \"seed\": 420260923,\n      \"status\": \"timed_out\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\af36ecfb-6cea-5322-b92c-8776f16bcea2.json\",\n      \"request_id\": \"af36ecfb-6cea-5322-b92c-8776f16bcea2\",\n      \"prompt_id\": \"3514d06c-f0c9-49df-bc0d-b295a3adeb1b\",\n      \"error\": \"Stopped waiting; the server job may still run. Resume with job wait.\",\n      \"record_sha256\": \"2691e0d7c7c72d44b08307c8510f070acbcc3cabefc6b4add47f077b665123d6\"\n    }\n  ],\n  \"succeeded\": 0,\n  \"total\": 1,\n  \"quality_acceptance\": \"not_established\",\n  \"next_action\": \"Inspect records; use inference run for a new plan, resume for accepted work, or abandon only after terminal outcomes are known.\"\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 17.780999999959022,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    },
+    {
+      "receipt": {
+        "path": "workspace/state/verification/phase-a04/installed-run-stack.json",
+        "sha256": "239426343f6c494a10b95f4f0830fdc1f111230bced95bfd387e579ce9b0a5b4",
+        "bytes": 1669
+      },
+      "arguments": [
+        "inference",
+        "run",
+        "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\inference\\plans\\d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d.json",
+        "--wait-timeout",
+        "0.05",
+        "--poll-interval",
+        "0.02",
+        "--json"
+      ],
+      "exit_code": 1,
+      "stdout": "{\n  \"scope\": \"inference_status\",\n  \"plan_id\": \"d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d\",\n  \"ok\": false,\n  \"recorded_status\": \"paused\",\n  \"status\": \"paused\",\n  \"error\": \"Stopped waiting; the server job may still run. Resume with job wait.\",\n  \"images\": [\n    {\n      \"index\": 0,\n      \"seed\": 420260924,\n      \"status\": \"timed_out\",\n      \"record_path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\jobs\\\\18425694-9f81-5e03-b7df-9bb47e2395f9.json\",\n      \"request_id\": \"18425694-9f81-5e03-b7df-9bb47e2395f9\",\n      \"prompt_id\": \"36dc43e7-6e6f-4865-aaa0-fe42f716939d\",\n      \"error\": \"Stopped waiting; the server job may still run. Resume with job wait.\",\n      \"record_sha256\": \"680fe81d1080807080321e619d82741a76c09703890a15c1e250a4ced3a1383b\"\n    }\n  ],\n  \"succeeded\": 0,\n  \"total\": 1,\n  \"quality_acceptance\": \"not_established\",\n  \"next_action\": \"Inspect records; use inference run for a new plan, resume for accepted work, or abandon only after terminal outcomes are known.\"\n}\n",
+      "stderr": "",
+      "elapsed_seconds": 18.09299999999348,
+      "installed_module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\S65BhRScXwmn8FS235RaZ\\Lib\\site-packages\\itov\\__init__.py"
+    }
+  ],
+  "retained_artifacts": [
+    {
+      "path": "docs/evidence/phase-a04-candidate-plan-20260923.json",
+      "sha256": "25bb26dc7994ea7beb30cc85d3dc886cc46d1c124f5700b1224807e226de705a",
+      "bytes": 10996
+    },
+    {
+      "path": "docs/evidence/phase-a04-candidate-report-20260923.json",
+      "sha256": "9b5bccb765353805fbe5a9f9d89085d1a009efeed721fb7de8b42e700a8e75aa",
+      "bytes": 9078
+    },
+    {
+      "path": "docs/evidence/phase-a04-candidate-20260923.png",
+      "sha256": "afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223",
+      "bytes": 335111
+    },
+    {
+      "path": "docs/evidence/phase-a04-stack-plan-20260923.json",
+      "sha256": "6778b849f693ff3ab4f376104fa6501436875e38f15eae9bcea649908ffd5995",
+      "bytes": 12322
+    },
+    {
+      "path": "docs/evidence/phase-a04-stack-report-20260923.json",
+      "sha256": "bfa10b7a8be960f39830c0d9a77e7283a9f7fe0e03944c6b9917d2916a8dc0b9",
+      "bytes": 9759
+    },
+    {
+      "path": "docs/evidence/phase-a04-stack-20260923.png",
+      "sha256": "6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e",
+      "bytes": 347262
+    }
+  ],
+  "server": {
+    "identity": {
+      "pid": 10596,
+      "created": 134346650678361942
+    },
+    "argv": [
+      "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\python.exe",
+      "-s",
+      "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+      "--disable-auto-launch",
+      "--listen",
+      "127.0.0.1",
+      "--port",
+      "8188",
+      "--input-directory",
+      "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+      "--output-directory",
+      "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+      "--disable-all-custom-nodes"
+    ]
+  },
+  "cleanup": {
+    "queue_idle": true,
+    "identity": {
+      "pid": 10596,
+      "created": 134346650678361942
+    },
+    "exact_identity_checked": true,
+    "exited": true
+  },
+  "server_log": {
+    "path": "workspace/state/verification/phase-a04/server.log",
+    "sha256": "e25c53d8592e277fa5b56276c794f876d07761223cb789e5ba1ae45f668163a4",
+    "bytes": 9464
+  },
+  "server_log_text": "\u001b[32m[INFO]\u001b[0m setup plugin alembic.autogenerate.schemas\n\u001b[32m[INFO]\u001b[0m setup plugin alembic.autogenerate.tables\n\u001b[32m[INFO]\u001b[0m setup plugin alembic.autogenerate.types\n\u001b[32m[INFO]\u001b[0m setup plugin alembic.autogenerate.constraints\n\u001b[32m[INFO]\u001b[0m setup plugin alembic.autogenerate.defaults\n\u001b[32m[INFO]\u001b[0m setup plugin alembic.autogenerate.comments\n\u001b[32m[INFO]\u001b[0m setup plugin alembic.autogenerate.checkconstraint_byname\n\u001b[1m\u001b[33m[WARNING]\u001b[0m On windows we are currently forcing single GPU mode in ComfyUI due to a Nvidia related issue, if you want to disable this use: --cuda-device all\n\u001b[32m[INFO]\u001b[0m Setting output directory to: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output\n\u001b[32m[INFO]\u001b[0m Setting input directory to: C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input\n\u001b[32m[INFO]\u001b[0m Found comfy_kitchen backend hip: {'available': False, 'disabled': False, 'unavailable_reason': 'PyTorch ROCm/HIP runtime not available', 'capabilities': []}\n\u001b[32m[INFO]\u001b[0m Found comfy_kitchen backend eager: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['adaln', 'apply_rope', 'apply_rope1', 'apply_rope1_', 'apply_rope_', 'apply_rope_split_half', 'apply_rope_split_half1', 'apply_rope_split_half1_', 'apply_rope_split_half_', 'convrot_w4a4_linear', 'dequantize_convrot_w4a4_weight', 'dequantize_int8_convrot_weight', 'dequantize_int8_convrot_weight_dtype', 'dequantize_int8_embedding', 'dequantize_int8_simple', 'dequantize_int8_simple_dtype', 'dequantize_mxfp8', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'dequantize_w4a8_int8_weight', 'fp16_conv3d', 'fp16_linear', 'gemv_awq_w4a16', 'group_norm_silu_pad3d', 'int8_linear', 'na3d', 'prepare_int4_weight_for_int8_linear', 'quantize_and_rotate_rowwise', 'quantize_convrot_w4a4_weight', 'quantize_int8_convrot_weight', 'quantize_int8_rowwise', 'quantize_int8_tensorwise', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'quantize_svdquant_w4a4', 'quantize_w4a8_int8_weight', 'rms_adaln', 'rms_rope', 'rms_rope1', 'rms_rope1_', 'rms_rope_', 'rms_rope_split_half', 'rms_rope_split_half1', 'rms_rope_split_half1_', 'rms_rope_split_half_', 'rotate_int8_convrot_weight', 'scaled_mm_mxfp8', 'scaled_mm_nvfp4', 'scaled_mm_svdquant_w4a4', 'sol_attn', 'stochastic_rounding_fp8', 'w4a8_int8_linear']}\n\u001b[32m[INFO]\u001b[0m Found comfy_kitchen backend triton: {'available': False, 'disabled': True, 'unavailable_reason': \"ImportError: No module named 'triton'\", 'capabilities': []}\n\u001b[32m[INFO]\u001b[0m Found comfy_kitchen backend cuda: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['adaln', 'apply_rope', 'apply_rope1', 'apply_rope1_', 'apply_rope_', 'apply_rope_split_half', 'apply_rope_split_half1', 'apply_rope_split_half1_', 'apply_rope_split_half_', 'convrot_w4a4_linear', 'dequantize_convrot_w4a4_weight', 'dequantize_int8_convrot_weight', 'dequantize_int8_convrot_weight_dtype', 'dequantize_int8_simple', 'dequantize_int8_simple_dtype', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'dequantize_w4a8_int8_weight', 'fp16_conv3d', 'fp16_linear', 'gemv_awq_w4a16', 'group_norm_silu_pad3d', 'int8_linear', 'na3d', 'prepare_int4_weight_for_int8_linear', 'quantize_and_rotate_rowwise', 'quantize_convrot_w4a4_weight', 'quantize_int8_convrot_weight', 'quantize_int8_rowwise', 'quantize_int8_tensorwise', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'quantize_svdquant_w4a4', 'quantize_w4a8_int8_weight', 'rms_adaln', 'rms_rope', 'rms_rope1', 'rms_rope1_', 'rms_rope_', 'rms_rope_split_half', 'rms_rope_split_half1', 'rms_rope_split_half1_', 'rms_rope_split_half_', 'rotate_int8_convrot_weight', 'scaled_mm_nvfp4', 'scaled_mm_svdquant_w4a4', 'sol_attn', 'stochastic_rounding_fp8', 'w4a8_int8_linear']}\n\u001b[32m[INFO]\u001b[0m Checkpoint files will always be loaded safely.\n\u001b[32m[INFO]\u001b[0m Total VRAM 32579 MB, total RAM 63033 MB\n\u001b[32m[INFO]\u001b[0m pytorch version: 2.13.0+cu130\n\u001b[32m[INFO]\u001b[0m Set vram state to: NORMAL_VRAM\n\u001b[32m[INFO]\u001b[0m Device: cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync\n\u001b[32m[INFO]\u001b[0m Using async weight offloading with 2 streams\n\u001b[32m[INFO]\u001b[0m Enabled pinned memory 25213.0\n\u001b[32m[INFO]\u001b[0m Using pytorch attention\n\u001b[32m[INFO]\u001b[0m aimdo: src-win/cuda-detour.c:38:INFO:aimdo_setup_hooks: installing 6 hooks\n\u001b[32m[INFO]\u001b[0m aimdo: src/control.c:269:INFO:comfy-aimdo NVML pressure enabled\n\u001b[32m[INFO]\u001b[0m aimdo: src-win/shmem-detect.c:80:INFO:comfy-aimdo WDDM adapter match: NVIDIA GeForce RTX 5090 runtime_luid=00000000:0001226a dxgi_luid=00000000:0001226a\n\u001b[32m[INFO]\u001b[0m aimdo: src/control.c:284:INFO:comfy-aimdo inited for GPU: NVIDIA GeForce RTX 5090 (VRAM: 32579 MB)\n\u001b[32m[INFO]\u001b[0m DynamicVRAM support detected and enabled\n\u001b[32m[INFO]\u001b[0m Python version: 3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]\n\u001b[32m[INFO]\u001b[0m ComfyUI version: 0.37.0\n\u001b[32m[INFO]\u001b[0m comfy-aimdo version: 0.5.5\n\u001b[32m[INFO]\u001b[0m comfy-kitchen version: 0.2.35\n\u001b[32m[INFO]\u001b[0m comfyui-frontend-package version: 1.52.7\n\u001b[32m[INFO]\u001b[0m comfyui-workflow-templates version: 0.11.66\n\u001b[32m[INFO]\u001b[0m comfyui-embedded-docs version: 0.5.12\n\u001b[32m[INFO]\u001b[0m comfy-kitchen version: 0.2.35\n\u001b[32m[INFO]\u001b[0m comfy-aimdo version: 0.5.5\n\u001b[32m[INFO]\u001b[0m [Prompt Server] web root: C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\comfyui_frontend_package\\static\n\u001b[32m[INFO]\u001b[0m Asset seeder disabled\n\u001b[32m[INFO]\u001b[0m No OpenGL_accelerate module loaded: No module named 'OpenGL_accelerate'\n\u001b[32m[INFO]\u001b[0m Skipping loading of custom nodes\n\u001b[32m[INFO]\u001b[0m Context impl SQLiteImpl.\n\u001b[32m[INFO]\u001b[0m Will assume non-transactional DDL.\n\u001b[32m[INFO]\u001b[0m Using RAM pressure cache.\n\u001b[32m[INFO]\u001b[0m Starting server\n\n\u001b[32m[INFO]\u001b[0m To see the GUI go to: http://127.0.0.1:8188\n\u001b[32m[INFO]\u001b[0m got prompt\n\u001b[32m[INFO]\u001b[0m model weight dtype torch.float16, manual cast: None\n\u001b[32m[INFO]\u001b[0m model_type EPS\n\u001b[32m[INFO]\u001b[0m Model storage policy: fast_disk=True paths=['C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors']\n\u001b[32m[INFO]\u001b[0m Model storage policy: fast_disk=True paths=['C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors']\n\u001b[32m[INFO]\u001b[0m Using pytorch attention in VAE\n\u001b[32m[INFO]\u001b[0m Using pytorch attention in VAE\n\u001b[32m[INFO]\u001b[0m VAE load device: cuda:0, offload device: cpu, dtype: torch.bfloat16\n\u001b[32m[INFO]\u001b[0m Model storage policy: fast_disk=True paths=['C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\AI\\\\ComfyUI\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\checkpoints\\\\sd_xl_base_1.0.safetensors']\n\u001b[32m[INFO]\u001b[0m CLIP/text encoder model load device: cuda:0, offload device: cpu, current: cpu, dtype: torch.float16\n\u001b[32m[INFO]\u001b[0m Requested to load SDXLClipModel\n\u001b[32m[INFO]\u001b[0m Model SDXLClipModel prepared for dynamic VRAM loading. 1560MB Staged. 0 patches attached. Force pre-loaded 180 weights: 400 KB.\n\u001b[32m[INFO]\u001b[0m Model SDXLClipModel prepared for dynamic VRAM loading. 1560MB Staged. 0 patches attached. Force pre-loaded 180 weights: 400 KB.\n\u001b[32m[INFO]\u001b[0m Requested to load SDXL\n\u001b[32m[INFO]\u001b[0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 560 patches attached. Force pre-loaded 512 weights: 1197 KB.\n\n  0%|          | 0/20 [00:00<?, ?it/s]\n  0%|          | 0/20 [00:00<?, ?it/s,   Model Initializing ...  ]\n  0%|          | 0/20 [00:02<?, ?it/s,  Model Initialization complete!  ]\n  5%|\u258c         | 1/20 [00:02<00:42,  2.22s/it,  Model Initialization complete!  ]\n  5%|\u258c         | 1/20 [00:00<00:42,  2.22s/it]                                   \n 15%|\u2588\u258c        | 3/20 [00:00<00:01, 10.86it/s]\n 25%|\u2588\u2588\u258c       | 5/20 [00:00<00:01, 10.80it/s]\n 35%|\u2588\u2588\u2588\u258c      | 7/20 [00:00<00:01, 10.78it/s]\n 45%|\u2588\u2588\u2588\u2588\u258c     | 9/20 [00:00<00:00, 11.77it/s]\n 55%|\u2588\u2588\u2588\u2588\u2588\u258c    | 11/20 [00:01<00:00, 12.16it/s]\n 65%|\u2588\u2588\u2588\u2588\u2588\u2588\u258c   | 13/20 [00:01<00:00, 11.93it/s]\n 75%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258c  | 15/20 [00:01<00:00, 11.91it/s]\n 85%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258c | 17/20 [00:01<00:00, 12.47it/s]\n 95%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258c| 19/20 [00:01<00:00, 12.33it/s]\n100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 20/20 [00:01<00:00, 10.99it/s]\n\u001b[32m[INFO]\u001b[0m Requested to load AutoencoderKL\n\u001b[32m[INFO]\u001b[0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.\n\u001b[32m[INFO]\u001b[0m \u001b[32mPrompt executed in 5.74 seconds\u001b[0m\n\u001b[32m[INFO]\u001b[0m got prompt\n\u001b[32m[INFO]\u001b[0m Requested to load SDXL\n\u001b[32m[INFO]\u001b[0m Model SDXL prepared for dynamic VRAM loading. 4896MB Staged. 788 patches attached. Force pre-loaded 512 weights: 1197 KB.\n\n  0%|          | 0/4 [00:00<?, ?it/s]\n  0%|          | 0/4 [00:00<?, ?it/s,   Model Initializing ...  ]\n  0%|          | 0/4 [00:02<?, ?it/s,  Model Initialization complete!  ]\n 25%|\u2588\u2588\u258c       | 1/4 [00:02<00:06,  2.28s/it,  Model Initialization complete!  ]\n 25%|\u2588\u2588\u258c       | 1/4 [00:00<00:06,  2.28s/it]                                   \n 75%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258c  | 3/4 [00:00<00:00, 12.73it/s]\n100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 4/4 [00:00<00:00, 10.22it/s]\n\u001b[32m[INFO]\u001b[0m Model AutoencoderKL prepared for dynamic VRAM loading. 159MB Staged. 0 patches attached. Force pre-loaded 112 weights: 91 KB.\n\u001b[32m[INFO]\u001b[0m \u001b[32mPrompt executed in 2.83 seconds\u001b[0m\n",
+  "held_after_detach": {
+    "candidate": {
+      "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+      "job_name": "Global\\ITOV-owned-de343c7f-37c9-49a5-a8d9-fe4ee9224a5e",
+      "kind": "external_server_requests",
+      "lease_id": "de343c7f-37c9-49a5-a8d9-fe4ee9224a5e",
+      "limits": "Cooperative single-GPU ownership; external server/clients are not controlled.",
+      "operation_id": "24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e",
+      "owner": {
+        "created": 134346651570526018,
+        "pid": 65992
+      },
+      "plan_id": "24f8b7051336544f8c5a48f1d1ed0a3d642fcb86a4c1778013b022d40471733e",
+      "record_id": "d08cdd30cc9b4b87b642b21ea4434f74442f6ed4d578cad7a9dd23124c875951",
+      "requests": {
+        "af36ecfb-6cea-5322-b92c-8776f16bcea2": {
+          "prompt_id": "3514d06c-f0c9-49df-bc0d-b295a3adeb1b",
+          "request_id": "af36ecfb-6cea-5322-b92c-8776f16bcea2",
+          "status": "timed_out",
+          "terminal": false,
+          "workflow_json": "{\"1\":{\"_meta\":{\"itov_asset_sha256\":\"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"},\"class_type\":\"CheckpointLoaderSimple\",\"inputs\":{\"ckpt_name\":\"sd_xl_base_1.0.safetensors\"}},\"10\":{\"_meta\":{\"itov_asset_sha256\":\"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"},\"class_type\":\"LoraLoaderModelOnly\",\"inputs\":{\"lora_name\":\"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\"model\":[\"1\",0],\"strength_model\":0.75}},\"3\":{\"class_type\":\"CLIPTextEncode\",\"inputs\":{\"clip\":[\"1\",1],\"text\":\"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\"}},\"4\":{\"class_type\":\"CLIPTextEncode\",\"inputs\":{\"clip\":[\"1\",1],\"text\":\"text, watermark, collage, divided panels\"}},\"5\":{\"class_type\":\"EmptyLatentImage\",\"inputs\":{\"batch_size\":1,\"height\":512,\"width\":512}},\"6\":{\"class_type\":\"KSampler\",\"inputs\":{\"cfg\":7.0,\"denoise\":1,\"latent_image\":[\"5\",0],\"model\":[\"10\",0],\"negative\":[\"4\",0],\"positive\":[\"3\",0],\"sampler_name\":\"dpmpp_2m\",\"scheduler\":\"karras\",\"seed\":420260923,\"steps\":20}},\"7\":{\"class_type\":\"VAEDecode\",\"inputs\":{\"samples\":[\"6\",0],\"vae\":[\"1\",2]}},\"8\":{\"_meta\":{\"itov_image\":{\"height\":512,\"width\":512}},\"class_type\":\"SaveImage\",\"inputs\":{\"filename_prefix\":\"itov/inference/d02f3259adb874a3074e86982944b3e30740a5943d4014ed1512ac1b371a6dba/000\",\"images\":[\"7\",0]}}}"
+        }
+      },
+      "server": "http://127.0.0.1:8188",
+      "started_at": "2026-09-23T19:26:14.685562+00:00",
+      "status": "held",
+      "version": 1,
+      "workers": [],
+      "workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace",
+      "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+    },
+    "stack": {
+      "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+      "job_name": "Global\\ITOV-owned-503dd548-b1ca-4a7c-9d74-6cb992f2f59d",
+      "kind": "external_server_requests",
+      "lease_id": "503dd548-b1ca-4a7c-9d74-6cb992f2f59d",
+      "limits": "Cooperative single-GPU ownership; external server/clients are not controlled.",
+      "operation_id": "d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d",
+      "owner": {
+        "created": 134346651986308396,
+        "pid": 10444
+      },
+      "plan_id": "d1af2aab6121476ba7bbe0cea0507efc3c3510e15ea755726af12d559282e88d",
+      "record_id": "ba81b68727353066ce114fdde660c83008c9887f50cb6282f6131f12edb931d6",
+      "requests": {
+        "18425694-9f81-5e03-b7df-9bb47e2395f9": {
+          "prompt_id": "36dc43e7-6e6f-4865-aaa0-fe42f716939d",
+          "request_id": "18425694-9f81-5e03-b7df-9bb47e2395f9",
+          "status": "timed_out",
+          "terminal": false,
+          "workflow_json": "{\"1\":{\"_meta\":{\"itov_asset_sha256\":\"31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b\"},\"class_type\":\"CheckpointLoaderSimple\",\"inputs\":{\"ckpt_name\":\"sd_xl_base_1.0.safetensors\"}},\"10\":{\"_meta\":{\"itov_asset_sha256\":\"a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141\"},\"class_type\":\"LoraLoaderModelOnly\",\"inputs\":{\"lora_name\":\"lcm_lora_sdxl.safetensors\",\"model\":[\"1\",0],\"strength_model\":1.0}},\"11\":{\"_meta\":{\"itov_asset_sha256\":\"f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c\"},\"class_type\":\"LoraLoaderModelOnly\",\"inputs\":{\"lora_name\":\"itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors\",\"model\":[\"10\",0],\"strength_model\":0.75}},\"3\":{\"class_type\":\"CLIPTextEncode\",\"inputs\":{\"clip\":[\"1\",1],\"text\":\"itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects\"}},\"4\":{\"class_type\":\"CLIPTextEncode\",\"inputs\":{\"clip\":[\"1\",1],\"text\":\"text, watermark, collage, divided panels\"}},\"5\":{\"class_type\":\"EmptyLatentImage\",\"inputs\":{\"batch_size\":1,\"height\":512,\"width\":512}},\"6\":{\"class_type\":\"KSampler\",\"inputs\":{\"cfg\":1.0,\"denoise\":1,\"latent_image\":[\"5\",0],\"model\":[\"11\",0],\"negative\":[\"4\",0],\"positive\":[\"3\",0],\"sampler_name\":\"lcm\",\"scheduler\":\"sgm_uniform\",\"seed\":420260924,\"steps\":4}},\"7\":{\"class_type\":\"VAEDecode\",\"inputs\":{\"samples\":[\"6\",0],\"vae\":[\"1\",2]}},\"8\":{\"_meta\":{\"itov_image\":{\"height\":512,\"width\":512}},\"class_type\":\"SaveImage\",\"inputs\":{\"filename_prefix\":\"itov/inference/35d11ee82a69c185a763369f03dac5788ebc645bfcde25123e7db79db32f9996/000\",\"images\":[\"7\",0]}}}"
+        }
+      },
+      "server": "http://127.0.0.1:8188",
+      "started_at": "2026-09-23T19:26:56.560823+00:00",
+      "status": "held",
+      "version": 1,
+      "workers": [],
+      "workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace",
+      "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+    }
+  },
+  "owned_histories": {
+    "candidate": {
+      "prompt": [
+        0,
+        "3514d06c-f0c9-49df-bc0d-b295a3adeb1b",
+        {
+          "1": {
+            "_meta": {
+              "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+            },
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+          },
+          "10": {
+            "_meta": {
+              "itov_asset_sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+            },
+            "class_type": "LoraLoaderModelOnly",
+            "inputs": {
+              "lora_name": "itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+              "model": [
+                "1",
+                0
+              ],
+              "strength_model": 0.75
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects"
+            }
+          },
+          "4": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "text, watermark, collage, divided panels"
+            }
+          },
+          "5": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "batch_size": 1,
+              "height": 512,
+              "width": 512
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "cfg": 7.0,
+              "denoise": 1.0,
+              "latent_image": [
+                "5",
+                0
+              ],
+              "model": [
+                "10",
+                0
+              ],
+              "negative": [
+                "4",
+                0
+              ],
+              "positive": [
+                "3",
+                0
+              ],
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "karras",
+              "seed": 420260923,
+              "steps": 20
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "_meta": {
+              "itov_image": {
+                "height": 512,
+                "width": 512
+              }
+            },
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "itov/inference/d02f3259adb874a3074e86982944b3e30740a5943d4014ed1512ac1b371a6dba/000",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          }
+        },
+        {
+          "itov_request_id": "af36ecfb-6cea-5322-b92c-8776f16bcea2",
+          "client_id": "af36ecfb-6cea-5322-b92c-8776f16bcea2",
+          "create_time": 1790191574704
+        },
+        [
+          "8"
+        ]
+      ],
+      "outputs": {
+        "8": {
+          "images": [
+            {
+              "filename": "000_00001_.png",
+              "subfolder": "itov\\inference\\d02f3259adb874a3074e86982944b3e30740a5943d4014ed1512ac1b371a6dba",
+              "type": "output"
+            }
+          ]
+        }
+      },
+      "status": {
+        "status_str": "success",
+        "completed": true,
+        "messages": [
+          [
+            "execution_start",
+            {
+              "prompt_id": "3514d06c-f0c9-49df-bc0d-b295a3adeb1b",
+              "timestamp": 1790191574705
+            }
+          ],
+          [
+            "execution_cached",
+            {
+              "nodes": [],
+              "prompt_id": "3514d06c-f0c9-49df-bc0d-b295a3adeb1b",
+              "timestamp": 1790191574706
+            }
+          ],
+          [
+            "execution_success",
+            {
+              "prompt_id": "3514d06c-f0c9-49df-bc0d-b295a3adeb1b",
+              "timestamp": 1790191580446
+            }
+          ]
+        ]
+      },
+      "meta": {
+        "8": {
+          "node_id": "8",
+          "display_node": "8",
+          "parent_node": null,
+          "real_node_id": "8"
+        }
+      }
+    },
+    "stack": {
+      "prompt": [
+        1,
+        "36dc43e7-6e6f-4865-aaa0-fe42f716939d",
+        {
+          "1": {
+            "_meta": {
+              "itov_asset_sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+            },
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "sd_xl_base_1.0.safetensors"
+            }
+          },
+          "10": {
+            "_meta": {
+              "itov_asset_sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141"
+            },
+            "class_type": "LoraLoaderModelOnly",
+            "inputs": {
+              "lora_name": "lcm_lora_sdxl.safetensors",
+              "model": [
+                "1",
+                0
+              ],
+              "strength_model": 1.0
+            }
+          },
+          "11": {
+            "_meta": {
+              "itov_asset_sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c"
+            },
+            "class_type": "LoraLoaderModelOnly",
+            "inputs": {
+              "lora_name": "itov_candidate_f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c.safetensors",
+              "model": [
+                "10",
+                0
+              ],
+              "strength_model": 0.75
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects"
+            }
+          },
+          "4": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "clip": [
+                "1",
+                1
+              ],
+              "text": "text, watermark, collage, divided panels"
+            }
+          },
+          "5": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "batch_size": 1,
+              "height": 512,
+              "width": 512
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "cfg": 1.0,
+              "denoise": 1.0,
+              "latent_image": [
+                "5",
+                0
+              ],
+              "model": [
+                "11",
+                0
+              ],
+              "negative": [
+                "4",
+                0
+              ],
+              "positive": [
+                "3",
+                0
+              ],
+              "sampler_name": "lcm",
+              "scheduler": "sgm_uniform",
+              "seed": 420260924,
+              "steps": 4
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "_meta": {
+              "itov_image": {
+                "height": 512,
+                "width": 512
+              }
+            },
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "itov/inference/35d11ee82a69c185a763369f03dac5788ebc645bfcde25123e7db79db32f9996/000",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          }
+        },
+        {
+          "itov_request_id": "18425694-9f81-5e03-b7df-9bb47e2395f9",
+          "client_id": "18425694-9f81-5e03-b7df-9bb47e2395f9",
+          "create_time": 1790191616578
+        },
+        [
+          "8"
+        ]
+      ],
+      "outputs": {
+        "8": {
+          "images": [
+            {
+              "filename": "000_00001_.png",
+              "subfolder": "itov\\inference\\35d11ee82a69c185a763369f03dac5788ebc645bfcde25123e7db79db32f9996",
+              "type": "output"
+            }
+          ]
+        }
+      },
+      "status": {
+        "status_str": "success",
+        "completed": true,
+        "messages": [
+          [
+            "execution_start",
+            {
+              "prompt_id": "36dc43e7-6e6f-4865-aaa0-fe42f716939d",
+              "timestamp": 1790191616579
+            }
+          ],
+          [
+            "execution_cached",
+            {
+              "nodes": [
+                "1",
+                "3",
+                "4",
+                "5"
+              ],
+              "prompt_id": "36dc43e7-6e6f-4865-aaa0-fe42f716939d",
+              "timestamp": 1790191616579
+            }
+          ],
+          [
+            "execution_success",
+            {
+              "prompt_id": "36dc43e7-6e6f-4865-aaa0-fe42f716939d",
+              "timestamp": 1790191619404
+            }
+          ]
+        ]
+      },
+      "meta": {
+        "8": {
+          "node_id": "8",
+          "display_node": "8",
+          "parent_node": null,
+          "real_node_id": "8"
+        }
+      }
+    }
+  },
+  "quality_disposition": "Candidate remains rejected; candidate-only image fails count/material; stack basic objects pass in one sample.",
+  "limits": [
+    "Two different seeds and samplers; no controlled LCM benefit comparison.",
+    "512px, candidate strength 750; no qualification of every permitted setting.",
+    "Stock loader runtime acceptance, not complete tensor target coverage or Diffusers parity.",
+    "No catalog activation; cooperative single-local-GPU Windows ownership."
+  ]
+}

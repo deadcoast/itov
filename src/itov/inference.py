@@ -34,7 +34,12 @@ PROFILES = {
 
 
 def load_spec(path: Path) -> dict:
-    return validate_spec(parse_json(read_document(path)))
+    value = parse_json(read_document(path))
+    if isinstance(value, dict) and value.get("version") == 2:
+        from itov.inference_capabilities import validate_spec as validate_v2
+
+        return validate_v2(value)
+    return validate_spec(value)
 
 
 def validate_spec(value) -> dict:

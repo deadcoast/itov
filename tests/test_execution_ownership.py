@@ -17,13 +17,15 @@ from test_batch_execution import execute
 from test_batch_execution import execution_case as execution_case
 from test_evaluation_runtime import planned
 from test_evaluation_runtime import runtime_case as runtime_case
+from test_inference_runtime import inference_v2 as inference_v2  # noqa: F401
+from test_inference_runtime import planned as planned_inference
 from test_jobs import job_setup as job_setup
 from test_parallel import protocol as parallel_protocol  # noqa: F401 - dynamic pytest fixture
 from test_parallel import trial
 from test_training import protocol as training_protocol  # noqa: F401 - dynamic pytest fixture
 from test_training import training_inputs as training_inputs
 
-from itov import device, evaluation_runtime, training, vram
+from itov import device, evaluation_runtime, inference_runtime, training, vram
 from itov.batch_execution import _lock
 from itov.client_ownership import ClientLease
 from itov.client_ownership import target_gpu as actual_target_gpu
@@ -35,7 +37,7 @@ from itov.windows_process import Job, process_state
 GPU = "GPU-19396af4-e5de-4d99-a258-803d73f4af12"
 
 
-@pytest.fixture(params=["job", "batch", "evaluation", "training", "parallel"])
+@pytest.fixture(params=["job", "batch", "evaluation", "inference", "training", "parallel"])
 def entrypoint(request, http_server, monkeypatch):
     family = request.param
     routes = http_server[1]
@@ -52,6 +54,11 @@ def entrypoint(request, http_server, monkeypatch):
         _, path = planned(item)
         config, routes = item.config, item.routes
         run = partial(evaluation_runtime.run, config, path, wait_timeout=0.1)
+    elif family == "inference":
+        item = request.getfixturevalue("inference_v2")
+        _, path = planned_inference(item)
+        config, routes = item.config, item.routes
+        run = partial(inference_runtime.run, config, path, wait_timeout=0.1)
     elif family == "training":
         item = request.getfixturevalue("training_protocol")
         config, registry = item.config, item.registry

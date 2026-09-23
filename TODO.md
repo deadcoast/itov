@@ -1,12 +1,12 @@
 # Development TODO
 
-Updated 2026-09-23 after A-03 ownership integration and verification.
+Updated 2026-09-23 after A-04 candidate/stack inference integration and verification.
 
 **Product status: incomplete.** ITOV has useful low-level protocols and narrowly exercised media/training paths. It does not yet provide a cohesive, broadly qualified generation, training, evaluation and discovery application. Earlier stage checkmarks describe prototype increments, not completion of those product capabilities.
 
 The mandatory independent-human review gate is shelved. The assistant owns testing, visual inspection, evidence collection and reasoned quality decisions. Failed or uncertain results remain failed or uncertain. The current curated candidate has object-count/regression failures and unresolved trigger specificity; it is not accepted for production.
 
-Current focus: **Phase A**, with A-04 next. A-01 result validation/recovery, A-02 deployed evaluation and A-03 shared ownership are delivered and recorded in [CHANGELOG.md](CHANGELOG.md). [A-03 verification](docs/evidence/phase-a03-verification-20260923.json) covers cross-family contention, native process shutdown, conservative external-request recovery and an installed live trial. Its scope is cooperative Windows/single-local-GPU ownership; arbitrary external clients remain outside that exclusion. The [deployed image inspection](docs/deployed-evaluation-review-20260923.md) still rejects the candidate. The [source audit](docs/development-audit-20260922.md) explains why the remaining tasks are necessary. The [previous TODO](docs/history/TODO-20260922-stage-prototypes.md) is preserved as a historical snapshot and is no longer the active plan.
+Current focus: **Phase A**, with A-05 next. A-01 through A-04 are delivered and recorded in [CHANGELOG.md](CHANGELOG.md). [A-04 verification](docs/evidence/phase-a04-verification-20260923.json) covers candidate deployment, explicit SDXL/LoRA capability bindings, incompatible-stack refusal, shared ownership and installed candidate/LCM-stack renders. [Image inspection](docs/candidate-inference-review-20260923.md) retains a candidate-only count/material failure and one stack image with the basic objects present; it does not accept the candidate or prove a controlled improvement. Execution remains cooperative Windows/single-local-GPU ownership. The [source audit](docs/development-audit-20260922.md) explains why the remaining tasks are necessary. The [previous TODO](docs/history/TODO-20260922-stage-prototypes.md) is preserved as a historical snapshot and is no longer the active plan.
 
 ## How work is tracked
 
@@ -29,12 +29,11 @@ Current focus: **Phase A**, with A-04 next. A-01 result validation/recovery, A-0
 
 ## Phase A — execution and integration foundations
 
-Delivered A-01 through A-03 have moved to the changelog. The [state/recovery contract](docs/training-result-states.md), [deployed evaluation runbook](docs/deployed-evaluation.md) and [shared ownership contract](docs/execution-ownership.md) describe their supported boundaries. Historical records remain unchanged. These close bounded integration increments, not Phase A or model-quality acceptance.
+Delivered A-01 through A-04 have moved to the changelog. The [state/recovery contract](docs/training-result-states.md), [deployed evaluation runbook](docs/deployed-evaluation.md), [shared ownership contract](docs/execution-ownership.md) and [candidate inference runbook](docs/candidate-inference.md) describe their supported boundaries. Historical records remain unchanged. These close bounded integration increments, not Phase A or model-quality acceptance.
 
 | ID | Status | Work | Acceptance evidence |
 | --- | --- | --- | --- |
-| A-04 | **Next; A-02/A-03 delivered** | Make trained-candidate deployment and applicable LoRA stacks first-class inference inputs. Separate model capabilities, graph construction and qualification from the two current fixed inference presets. | A trained candidate travels through public commands with verified model/adapter/strength bindings; incompatible stacks fail before submission. Stock nodes may remain where they meet the capability contract. |
-| A-05 | Open; A-01/A-02 | Introduce clear internal records and module boundaries for training results, evaluation cases and review decisions. Remove repeated assessment/hash work from one operation after profiling it; retain final freshness checks. | Targeted contract/migration tests and measured repeated-command cost. No silent behavior change in saved artifacts or historical read paths. |
+| A-05 | **Next; A-01–A-04 delivered** | Introduce clear internal records and module boundaries for training results, evaluation cases and review decisions. Remove repeated assessment/hash work from one operation after profiling it; retain final freshness checks. | Targeted contract/migration tests and measured repeated-command cost. No silent behavior change in saved artifacts or historical read paths. |
 | A-06 | Open; A-01–A-05 | Align CLI status/error meanings and expose concrete next actions, relevant artifacts and failure causes. Document the supported workflow as one reproducible runbook. | Source and installed CLI exercises cover default text/JSON, partial progress, refusal, recovery and completed replay without hand-edited state. |
 
 ## Phase B — curated data and durable training

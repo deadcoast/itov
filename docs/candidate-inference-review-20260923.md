@@ -1,0 +1,16 @@
+# A-04 installed inference inspection — 2026-09-23
+
+The assistant inspected both actual 512×512 PNGs produced through the installed wheel's public inference commands. This is a two-image integration trial, not a quality benchmark or a controlled comparison. The candidate remains rejected on the earlier frozen evaluation evidence.
+
+Both specifications request `itovstill`, a blue ceramic vase beside two yellow pears on a plain wooden table, natural window light and separated objects. Negative text requests no text, watermark, collage or divided panels. The candidate is the same previously rejected curated artifact, at model strength 0.75; CLIP and VAE remain from the exact pinned SDXL checkpoint.
+
+| Input | Settings | Direct visual observation | Case disposition |
+| --- | --- | --- | --- |
+| [Candidate only](evidence/phase-a04-candidate-20260923.png) | Seed 420260923; 20 steps, CFG 7, DPM++ 2M/Karras | One yellow pear, rather than two. The blue vase looks transparent/glass rather than ceramic and contains unrequested yellow flowers. A white covering obscures much of the table. One coherent image, with no obvious text/watermark or divided panels. | Prompt/count failure retained; no acceptance |
+| [LCM then candidate](evidence/phase-a04-stack-20260923.png) | Seed 420260924; LCM strength 1, candidate 0.75; 4 steps, CFG 1, LCM/SGM uniform | Two yellow pears beside an opaque blue vase on a wooden surface, with window light. Basic requested objects/count are present. The left pear has a thin irregular stem and the vase surface includes an indistinct reflection. No obvious text/watermark or divided panels. | Basic object/count check passes for this image only; general quality remains unestablished |
+
+The seed, sampler, step count, CFG and acceleration adapter change together, so these images do not isolate the effect of LCM or prove that stacking improves the candidate. There is no baseline/trigger-off control here. Trigger specificity, regression behavior, strength-range quality and generalization remain unresolved. A-04 does not replace the [A-02 frozen evaluation review](deployed-evaluation-review-20260923.md).
+
+Technical evidence is separate: each image came from its pinned saved plan, with verified model/adapter hashes and strengths, an owned request, full PNG decoding and a saved offline technical report. Both initial waits timed out; resume observed the same prompt without duplication. The fresh trial server had no prior history and ended with exactly two entries. It was stopped only after its identity and empty queue were checked. An incompatible LCM stack with CFG 7 failed in the public plan command before any POST.
+
+See the [runtime receipt](evidence/phase-a04-runtime-20260923.json), [verification receipt](evidence/phase-a04-verification-20260923.json), [candidate plan](evidence/phase-a04-candidate-plan-20260923.json), [stack plan](evidence/phase-a04-stack-plan-20260923.json), [candidate report](evidence/phase-a04-candidate-report-20260923.json) and [stack report](evidence/phase-a04-stack-report-20260923.json). ComfyUI logged 560 attached model patches for the candidate and 788 for the combined stack. Those logs do not attest every tensor's intended target or establish Diffusers parity.

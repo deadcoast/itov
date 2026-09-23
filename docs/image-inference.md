@@ -1,5 +1,7 @@
 # Pinned image inference
 
+This page describes the historical version-one preset/catalog route. For explicit trained-candidate inputs, ordered LoRA stacks, configurable samplers and the integrated inference commands, use the [version-two candidate inference runbook](candidate-inference.md). Version-one specs and plans retain their original behavior.
+
 ITOV 0.6.0 adds stock SDXL inference preparation on top of the existing catalog, deterministic planner, and sequential executor. The two profiles are deliberately small qualification baselines. Preparation does not download weights, import a catalog, reserve seeds, or submit a prompt.
 
 ## Profiles and assets

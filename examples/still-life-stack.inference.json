@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "capability": "sdxl-1.0-unet-v1",
+  "checkpoint": {
+    "loader_name": "sd_xl_base_1.0.safetensors",
+    "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+  },
+  "adapters": [
+    {
+      "kind": "lcm",
+      "loader_name": "lcm_lora_sdxl.safetensors",
+      "sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141",
+      "strength_milli": 1000
+    },
+    {
+      "kind": "trained_candidate",
+      "training_plan": {
+        "path": "state/training/plans/5fab677a7e4ed2aa68ede9e4108109f351e79c1e12fb72f59dd0308c3e9dfc67.json",
+        "sha256": "ea269959df4ae3df539e31e5d4ead0e41229c934a05ce38ee76c0a6fd7ab5764"
+      },
+      "candidate_id": "e55466910ebe173da8d7cd48b6547bffcd58cd1673cd4d11ee7fb77bc6803ada",
+      "sha256": "f15fbab1d2ba248d6b37d431c51c9081b41561407b7315dafff51a59aa051b1c",
+      "strength_milli": 750
+    }
+  ],
+  "sampler": {
+    "steps": 4,
+    "cfg_milli": 1000,
+    "sampler_name": "lcm",
+    "scheduler": "sgm_uniform"
+  },
+  "prompt": "itovstill, a blue ceramic vase beside two yellow pears on a plain wooden table, soft natural window light, clear separated objects",
+  "negative_prompt": "text, watermark, collage, divided panels",
+  "width": 512,
+  "height": 512,
+  "seed": 420260924,
+  "count": 1
+}

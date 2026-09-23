@@ -131,6 +131,8 @@ The stage-five acceptance run used the neutral image-copy workflow: seven jobs a
 
 ## Pinned image inference
 
+A-04 adds version-two inference with explicit model capabilities, sampler settings and ordered LoRA bindings. Use `inference capabilities` to inspect the bounded SDXL contract, then `inference prepare`, `plan --save`, `run`, `status`, `resume` and `replay --save`. The [candidate and stack runbook](docs/candidate-inference.md) covers trained-candidate identity, deployment, strength controls and incompatible-stack refusals. This route stages experimental candidates without catalog activation; the current candidate remains rejected on quality. Version-one preset/catalog workflows below remain supported.
+
 The SDXL base and SDXL+LCM profiles prepare stock workflows with expected checkpoint/LoRA hashes, fixed sampler settings, and explicit seeds:
 
 ```powershell

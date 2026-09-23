@@ -151,15 +151,36 @@ def parser() -> argparse.ArgumentParser:
                 action="append",
                 help="Bind measured VRAM profiles; retained automatically on resume",
             )
-    inference = commands.add_parser("inference", help="Prepare pinned stock SDXL inference batches")
+    inference = commands.add_parser(
+        "inference", help="Deploy, qualify and execute SDXL adapter stacks"
+    )
     inference_actions = inference.add_subparsers(dest="action", required=True)
-    for action in ("prepare", "plan"):
+    for action in (
+        "capabilities",
+        "prepare",
+        "plan",
+        "run",
+        "status",
+        "resume",
+        "replay",
+        "abandon",
+    ):
         item = inference_actions.add_parser(action)
-        item.add_argument("file", type=Path, help="Inference specification JSON")
+        if action != "capabilities":
+            item.add_argument(
+                "file", type=Path, help="Inference specification or saved v2 plan JSON"
+            )
         item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
         item.add_argument("--json", action="store_true")
-        if action == "plan":
+        if action in {"plan", "replay"}:
             item.add_argument("--save", action="store_true")
+        if action in {"plan", "run", "resume"}:
+            item.add_argument("--timeout", type=float, default=3)
+        if action in {"run", "resume"}:
+            item.add_argument("--wait-timeout", type=float, default=300)
+            item.add_argument("--poll-interval", type=float, default=1)
+        if action == "resume":
+            item.add_argument("--prompt-id")
     video = commands.add_parser("video", help="Prepare, plan, and verify pinned Wan video batches")
     video_actions = video.add_subparsers(dest="action", required=True)
     for action in ("prepare", "plan", "verify"):
@@ -642,8 +663,67 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(result, indent=2))
             return 0
         elif args.command == "inference":
+            from itov import inference_runtime
+            from itov.inference_capabilities import capabilities
+
+            if args.action == "capabilities":
+                result = capabilities()
+                if args.json:
+                    print(json.dumps(result, indent=2))
+                else:
+                    print(result["capability"])
+                    print("Adapter order: " + " -> ".join(result["adapter_order"]))
+                    print(result["limits"])
+                return 0
             config = load_config(args.config)
-            spec = load_spec(args.file)
+            spec = load_spec(args.file) if args.action in {"prepare", "plan"} else None
+            if spec is None or spec["version"] == 2:
+                if args.action == "prepare":
+                    result = inference_runtime.prepare(config, spec)
+                elif args.action == "plan":
+                    result = inference_runtime.plan(
+                        config, spec, save=args.save, timeout=args.timeout
+                    )
+                    result = {
+                        "ok": True,
+                        "scope": result["scope"],
+                        "plan": result,
+                        "plan_id": result["plan_id"],
+                        "saved_path": str(
+                            config.root / f"state/inference/plans/{result['plan_id']}.json"
+                        )
+                        if args.save
+                        else None,
+                        "next_action": "Run inference run with the saved plan.",
+                    }
+                elif args.action in {"run", "resume"}:
+                    result = inference_runtime.run(
+                        config,
+                        args.file,
+                        resume=args.action == "resume",
+                        prompt_id=getattr(args, "prompt_id", None),
+                        timeout=args.timeout,
+                        wait_timeout=args.wait_timeout,
+                        poll_interval=args.poll_interval,
+                    )
+                elif args.action == "replay":
+                    result = inference_runtime.replay(config, args.file, save=args.save)
+                else:
+                    result = getattr(inference_runtime, args.action)(config, args.file)
+                if args.json:
+                    print(json.dumps(result, indent=2))
+                else:
+                    print(f"Inference: {result.get('status', result['scope'])}")
+                    for key in ("plan_id", "report_id", "saved_path", "next_action", "limits"):
+                        if result.get(key):
+                            print(f"{key.replace('_', ' ').capitalize()}: {result[key]}")
+                    for row in result.get("images", []):
+                        print(f"  Seed {row['seed']}: {row['status']}")
+                        if row.get("image"):
+                            print(f"    {row['image']['path']}")
+                        if row.get("error"):
+                            print(f"    {row['error']}")
+                return 0 if result.get("ok", result.get("technical_pass", True)) else 1
             if args.action == "prepare":
                 result = prepare_inference(config, spec)
                 if not args.json:
