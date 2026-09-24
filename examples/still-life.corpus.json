@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "training_plan": {
+    "path": "state/training/plans/26c3cb899dddae04e8f06919642e431742434e61c8e66b5a6a33968a2ae91cf7.json",
+    "sha256": "8c8d3a07d05100711b5080b3e26e4db689d5552d6c91596477578408c15a29e1"
+  },
+  "suite": {
+    "version": 2,
+    "id": "still-life-broad-c01-v1",
+    "trigger": "itovstill",
+    "cases": [
+      {
+        "expectation": "Exactly two yellow pears and one blue vase, intact distinct objects and a coherent table. Adapter with trigger should show oil-painted still-life appearance without adding objects, grids or borders. Compare all four conditions; baseline trigger effects do not prove learned activation.",
+        "id": "vase-and-pears",
+        "kind": "regression",
+        "negative_prompt": "text, watermark, signature, frame",
+        "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+        "seeds": [
+          11760922,
+          11760923,
+          11960924
+        ],
+        "coverage": [
+          "counts",
+          "attributes",
+          "layout",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "legacy_diagnostic"
+      },
+      {
+        "expectation": "One red cube and one white cone remain distinct with coherent shadows. Without trigger the adapter should preserve photographic appearance and prompt adherence. With trigger assess whether painterly change preserves object identity and composition; record unintended fruit, flowers, repetition or distortion.",
+        "id": "paper-geometry",
+        "kind": "regression",
+        "negative_prompt": "text, watermark, signature, frame",
+        "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+        "seeds": [
+          11860922,
+          11860923,
+          11960925
+        ],
+        "coverage": [
+          "counts",
+          "attributes",
+          "layout",
+          "trigger_specificity",
+          "strength_range",
+          "unrelated_regression"
+        ],
+        "exposure": "legacy_diagnostic"
+      },
+      {
+        "id": "three-apples",
+        "kind": "holdout",
+        "prompt": "A single still life of exactly three red apples in a horizontal row on an empty cream table, all three fully visible and separated, plain background",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "Exactly three separate red apples in one horizontal row, all fully visible. No extra fruit, vessels, panels or borders. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12060924,
+          12060925,
+          12060926
+        ],
+        "coverage": [
+          "counts",
+          "layout",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "single-cup",
+        "kind": "holdout",
+        "prompt": "One empty yellow ceramic cup with one handle on a bare dark wooden tabletop, a single still life with a plain gray background",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "Exactly one yellow ceramic cup, one handle and an empty opening; no saucer, spoon, fruit or repeated cups. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061024,
+          12061025,
+          12061026
+        ],
+        "coverage": [
+          "counts",
+          "attributes",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "color-binding",
+        "kind": "holdout",
+        "prompt": "One green glass bottle to the left of one orange ceramic bowl on a white table, single scene, plain backdrop, both objects fully visible",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "One green transparent bottle on the left and one orange opaque bowl on the right. Preserve material/color bindings and separation. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061124,
+          12061125,
+          12061126
+        ],
+        "coverage": [
+          "attributes",
+          "layout",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "size-binding",
+        "kind": "holdout",
+        "prompt": "One large white ceramic bowl behind one small blue ceramic cup on a wooden table, both objects fully visible, single scene, plain background",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "Exactly two vessels: a larger white bowl behind a smaller blue cup. Preserve relative sizes, colors and front/back ordering. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061224,
+          12061225,
+          12061226
+        ],
+        "coverage": [
+          "attributes",
+          "counts",
+          "layout",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "plate-left-vase",
+        "kind": "holdout",
+        "prompt": "One white plate lying flat on the left and one tall blue vase standing on the right of an otherwise empty wooden table, single continuous scene",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "One flat plate left, one upright vase right, coherent shared table plane. No duplicated views, divided panels, fruit or flowers. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061324,
+          12061325,
+          12061326
+        ],
+        "coverage": [
+          "layout",
+          "counts",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "linen-metal",
+        "kind": "holdout",
+        "prompt": "A close still life of one folded coarse beige linen napkin beside one smooth reflective silver spoon on a plain dark table",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "One coarse woven linen napkin and one smooth reflective silver spoon. Distinguish cloth weave from metal without turning either into fruit or repeated patterns. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061424,
+          12061425,
+          12061426
+        ],
+        "coverage": [
+          "textures",
+          "attributes",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "matte-gloss",
+        "kind": "holdout",
+        "prompt": "One matte red clay sphere beside one glossy black ceramic sphere on a light gray tabletop, soft studio light, single scene",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "Exactly two spheres: matte red clay and glossy black ceramic with distinct surface responses, coherent shadows and intact circular silhouettes. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061524,
+          12061525,
+          12061526
+        ],
+        "coverage": [
+          "textures",
+          "attributes",
+          "counts",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "mountain-photo",
+        "kind": "regression",
+        "prompt": "A realistic landscape photograph of a snow-covered mountain reflected in a calm alpine lake under a clear blue sky, no buildings or people",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "One coherent outdoor photographic landscape with snow, water reflection and blue sky. No still-life objects, panels or borders. No-trigger adapter must preserve the photographic task. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061624,
+          12061625,
+          12061626
+        ],
+        "coverage": [
+          "unrelated_regression",
+          "textures",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "bicycle-photo",
+        "kind": "regression",
+        "prompt": "A side-view studio photograph of one blue bicycle with exactly two wheels against a plain white background, the entire bicycle visible, no rider",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "Exactly one complete blue bicycle with two connected wheels and a coherent frame, fully visible on white. No rider, fruit, vessels, repeated bikes or painterly drift without trigger. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061724,
+          12061725,
+          12061726
+        ],
+        "coverage": [
+          "unrelated_regression",
+          "counts",
+          "attributes",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      },
+      {
+        "id": "bird-photo",
+        "kind": "regression",
+        "prompt": "A realistic wildlife photograph of one small brown sparrow perched on a single bare branch against a soft green background, entire bird visible",
+        "negative_prompt": "text, watermark, signature, frame",
+        "expectation": "One anatomically coherent brown sparrow on one bare branch, feather detail and photographic appearance without trigger. No duplicate birds, fruit, vessels or panels. Compare the base trigger effect separately from learned activation. At each adapter strength, target painterly change may occur with the trigger only while object identity, count, layout and unrelated-task content remain intact; lower strength need not improve quality monotonically.",
+        "seeds": [
+          12061824,
+          12061825,
+          12061826
+        ],
+        "coverage": [
+          "unrelated_regression",
+          "textures",
+          "counts",
+          "trigger_specificity",
+          "strength_range"
+        ],
+        "exposure": "baseline_only"
+      }
+    ],
+    "strengths_milli": [
+      250,
+      500,
+      1000
+    ],
+    "policy": {
+      "retention": "all_cases_seeds_and_failures",
+      "holdout": "excluded_from_training_and_tuning",
+      "contamination": "declare_exposure_and_add_new_holdouts_without_removing_old_cases",
+      "method": "Preregister all twelve prompts and thirty-six case/seed pairs. Freeze before baseline generation or any new tuning. Inspect both base conditions at all seeds. Later compare both adapter conditions at 0.25, 0.5 and 1.0 against the matched base controls; record all failures and uncertainty without ranking by loss or pixel differences. Legacy cases are exposed diagnostics. New holdouts are excluded from training captions, data selection and hyperparameter tuning; baseline inspection is declared exposure, not a claim of a hidden test set. Use only diagnostic regressions for C-04 development. If a holdout informs tuning, declare contamination in a new additive corpus and add fresh holdouts while preserving every old case and seed.",
+      "limitations": "Twelve hand-authored prompts are broader targeted SDXL still-life coverage, not statistical population coverage. Exact normalized caption exclusion cannot prove semantic or pretraining independence. Counts/material/layout require direct inspection with uncertain allowed. Strength and no-trigger expectations are frozen now but base-only results cannot measure adapter behavior. ComfyUI dpmpp_2m/karras, CFG 7, 20 steps, 512px differs from the retained Diffusers diagnostics; same seeds do not establish sampler parity."
+    }
+  }
+}

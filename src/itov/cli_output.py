@@ -10,6 +10,8 @@ from pathlib import Path
 INCOMPLETE = frozenset(
     {
         "not_started",
+        "incomplete",
+        "inconclusive",
         "reserved",
         "prepared",
         "review_pending",
@@ -72,7 +74,7 @@ def _causes(result):
             )
     if result.get("document", {}).get("qualified") is False:
         add("document.qualified", "Required managed-worker execution overlap was not observed")
-    for key in ("checks", "issues", "findings", "matrix", "images", "jobs"):
+    for key in ("checks", "issues", "findings", "matrix", "images", "jobs", "members"):
         rows = result.get(key, [])
         if not isinstance(rows, list):
             continue
@@ -322,6 +324,95 @@ def _guidance(args, result, state):
         )
         if status == "artifact_invalid":
             message = "Published data failed verification. Preserve the bundle and investigate."
+    elif command == "checks":
+        message = "Artifact measurements and calibration retain uncertainty; no model is accepted."
+        if result.get("scope") == "image_check_packet":
+            message = (
+                "Inspect all images and fill the sibling .reference.json. The .request.json "
+                "and .response.json define the optional evaluator exchange."
+            )
+            if result.get("saved_path"):
+                configured(
+                    "Record calibration",
+                    "checks",
+                    "calibrate",
+                    result["saved_path"],
+                    "--reference",
+                    str(Path(result["saved_path"]).with_suffix(".reference.json")),
+                    "--save",
+                )
+    elif command == "corpus":
+        message = "Frozen coverage and baseline observations do not establish candidate quality."
+        if result.get("status") == "review_pending":
+            message = "Inspect every baseline image, then fill the saved sibling .review.json."
+            configured(
+                "Record baseline observations",
+                "corpus",
+                "baseline",
+                source,
+                "--evaluation",
+                str(getattr(args, "evaluation", "EVALUATION_PLAN")),
+                "--review",
+                "BASELINE.review.json",
+                "--save",
+            )
+        elif result.get("baseline_id"):
+            message = "Baseline observations retained, including failures and uncertainty."
+        elif result.get("corpus_id"):
+            message = "Coverage frozen. Plan a version-two baseline evaluation before tuning."
+    elif command == "experiment":
+        message = (
+            "Inspect every declared checkpoint and repetition against the frozen cases. "
+            "Loss does not select a checkpoint; selection does not authorize promotion."
+        )
+        manifest = result.get("saved_path") if action == "plan" else source
+        if action in {"plan", "run", "status"} and manifest:
+            configured("Inspect experiment members", "experiment", "status", manifest)
+        if action == "status" and status == "review_pending":
+            configured("Save review packet", "experiment", "packet", source, "--save")
+        if action == "packet" and result.get("saved_path"):
+            configured(
+                "Record checkpoint selection",
+                "experiment",
+                "decide",
+                source,
+                "--review",
+                str(Path(result["saved_path"]).with_suffix(".review.json")),
+                "--save",
+                when="After completing all case verdicts and observations",
+            )
+        if action == "decide" and result.get("saved_path"):
+            configured(
+                "Replay decision evidence",
+                "experiment",
+                "replay",
+                source,
+                "--decision",
+                result["saved_path"],
+            )
+    elif command == "training" and action == "checkpoints":
+        message = (
+            "Inspect each checkpoint status. Select an exact complete checkpoint for "
+            "resume-plan; no worker started."
+        )
+        configured("Inspect continuation syntax", "training", "resume-plan", "--help")
+    elif command == "training" and action == "resume-plan" and state == "ok":
+        message = (
+            "Continuation planned in a new attempt; the source attempt remains preserved. "
+            "No worker started."
+        )
+        if result.get("saved_path"):
+            configured("Inspect run syntax", "training", "run", "--help")
+        else:
+            configured(
+                "Save continuation plan",
+                "training",
+                "resume-plan",
+                source,
+                "--checkpoint",
+                str(args.checkpoint),
+                "--save",
+            )
     elif command == "training" and action in {"run", "status", "recover"}:
         configured("Inspect the training attempt", "training", "status", source)
         if state == "ok":
@@ -339,6 +430,8 @@ def _guidance(args, result, state):
                 "Inspect result.json and worker.log. Preserve the failed attempt; "
                 "correct inputs and create a new plan."
             )
+        if "checkpoints" in result.get("artifacts", {}):
+            configured("Inspect retained checkpoints", "training", "checkpoints", source)
     elif (
         action == "plan"
         and command in {"batch", "inference", "evaluation", "training", "audio", "video"}
@@ -461,6 +554,12 @@ def _text(result, meta):
         "status",
         "scope",
         "plan_id",
+        "experiment_id",
+        "corpus_id",
+        "baseline_id",
+        "calibration_id",
+        "evaluator_status",
+        "selected_endpoint",
         "dataset_id",
         "import_id",
         "inspection_id",
@@ -509,6 +608,37 @@ def _text(result, meta):
         lines.append(f"Export SHA-256: {result['entry']['asset']['sha256']}")
     if "adapter_order" in result:
         lines.append("Adapter order: " + " -> ".join(result["adapter_order"]))
+    if result.get("scope") == "frozen_evaluation_corpus":
+        coverage = result["coverage"]
+        lines.append(
+            f"Coverage: {coverage['case_seed_pairs']} case/seed pairs; "
+            f"{coverage['baseline_images']} baseline images; "
+            f"{coverage['comparison_images']} comparison images"
+        )
+    if result.get("scope") == "image_check_packet":
+        lines.append(f"Measured images: {len(result['measurements'])}")
+        lines.append("Semantic quality: unavailable from artifact measurements")
+    if result.get("scope") == "image_check_calibration":
+        for criterion, row in result["summary"].items():
+            lines.append(
+                f"{criterion}: {row['examples']} images; false accepts {row['false_accepts']}; "
+                f"false rejects {row['false_rejects']}; predictions uncertain "
+                f"{row['prediction_uncertain']}, unavailable {row['prediction_unavailable']}; "
+                f"reference uncertain {row['reference_uncertain']}, unavailable "
+                f"{row['reference_unavailable']}"
+            )
+        lines.append("Promotion eligible: False")
+    if result.get("scope") == "corpus_base_model_baseline":
+        lines.append("Baseline image outcomes: " + json.dumps(result["outcomes"], sort_keys=True))
+        lines.append("Promotion eligible: False")
+    if result.get("scope", "").startswith("experiment_"):
+        for key in ("budget", "allocated"):
+            if key in result:
+                lines.append(key.capitalize() + ": " + json.dumps(result[key], sort_keys=True))
+        for row in result.get("members", []):
+            lines.append(
+                f"Member {row['id']}: " + str(row.get("disposition", row.get("status", "planned")))
+            )
     for key in ("owner", "worker", "controller"):
         if key in result:
             lines.append(f"{key.capitalize()}: " + json.dumps(result[key], ensure_ascii=True))

@@ -4,6 +4,10 @@ This is the supported command sequence for the current Windows, single-local-NVI
 
 ## Read a response
 
+For B-03 training configuration, use the [optimization runbook](training-configuration.md). It explains v3 specifications, the effective sample/rate plan, supported settings, partial step evidence and the separate technical/quality outcomes.
+
+For C-01 evaluation coverage, use the [corpus runbook](evaluation-corpus.md). Freeze broader cases and strengths independently of training, execute a base-model baseline, then record every image observation. Pending review returns 1; a successfully recorded baseline returns 0 even when images fail. It cannot promote a candidate.
+
 All result commands print text by default. Add `--json` for exactly one JSON object on stdout, including argument/configuration errors. JSON retains the existing domain fields and adds `_cli` version 1:
 
 | Field | Meaning |
@@ -132,7 +136,7 @@ This example pins the retained local still-life candidate; it is not portable tr
 
 ## 5. Train, assess and compare the deployed artifact
 
-Training requires declared local source images/captions, prepared dataset, provenance/curation, frozen quality cases, checkpoint/configuration/tokenizer files and the pinned optional training environment. Use [transactional dataset import](dataset-import.md) for new local or retained Met inputs; it preserves failed attempts and publishes a verified complete bundle. Acquisition and training checkpoint restart remain later work. The following commands inspect the historical version-one pilot; provision using the [training](training-and-promotion.md) and [curation](curated-quality-review.md) contracts:
+Training requires declared local source images/captions, prepared dataset, provenance/curation, frozen quality cases, checkpoint/configuration/tokenizer files and the pinned optional training environment. Use [transactional dataset import](dataset-import.md) for new local or retained Met inputs; it preserves failed attempts and publishes a verified complete bundle. Acquisition remains later work. [Version-four checkpoints](training-checkpoints.md) add explicit compatible continuation from committed optimizer state. The following commands inspect the historical version-one pilot; provision using the [training](training-and-promotion.md) and [curation](curated-quality-review.md) contracts:
 
 For new reviewed data, first follow [dataset inspection and freezing](dataset-review.md). Inspect every image/caption and pair finding, freeze the selection, import its generated declaration, and bind Met curation with `dataset curate CURATION --freeze FREEZE --save`. The printed v2 curation declaration can be pinned in the existing training qualification. The three-work reviewed pilot is a data-method result, not accepted model training evidence.
 
@@ -149,9 +153,11 @@ uv run --inexact --locked itov training candidate $training.saved_path --config 
 uv run --inexact --locked itov evaluation packet $training.saved_path --config $cfg --save
 ```
 
-An unchanged plan with an existing attempt refuses to train again. For existing completed work, start at `training status` using its saved path. `artifacts_validated` establishes technical artifact checks, not learned quality. The printed result/log paths and failure boundary identify a failed attempt. `training recover` only reconciles a stopped attempt; it does not resume optimization or launch another worker.
+An unchanged plan with an existing attempt refuses to train again. For existing completed work, start at `training status` using its saved path. `artifacts_validated` establishes technical artifact checks, not learned quality. The printed result/log paths and failure boundary identify a failed attempt. `training recover` only reconciles a stopped attempt; it does not resume optimization or launch another worker. For v4, inspect `training checkpoints PLAN`, then explicitly select a complete manifest with `training resume-plan PLAN --checkpoint CHECKPOINT_JSON --save` and run that new plan. Partial checkpoints and changed execution inputs are refused; the old attempt remains preserved.
 
-For a new experiment, create an evaluation specification referring to that exact training plan and its file hash. The retained `examples/still-life.evaluation.json` already binds the local historical trial, so it can replay that experiment rather than automatically selecting newly trained weights:
+For bounded checkpoint comparisons, use [experiment manifests](training-experiments.md): `experiment plan SPEC --save` declares hypotheses, endpoints, repetitions, budget and frozen review protocol; `experiment run MANIFEST --member ID --gpu UUID` executes one declared attempt. `experiment status` preserves each outcome, and `experiment packet --save` creates a complete pending case review. `experiment decide MANIFEST --review REVIEW --save` records loss-independent selection or rejection; `experiment replay --decision DECISION` checks the saved evidence. Selection is only for further evaluation. No failed repetition can be omitted, and no selected checkpoint is automatically activated.
+
+For deployed evaluation, create an evaluation specification referring to the exact training plan and its file hash. The retained `examples/still-life.evaluation.json` already binds the local historical trial, so it can replay that experiment rather than automatically selecting newly trained weights:
 
 ```powershell
 $comparison = uv run --inexact --locked itov evaluation plan examples/still-life.evaluation.json --config $cfg --save --json | ConvertFrom-Json

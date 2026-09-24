@@ -10,7 +10,7 @@ import time
 from contextlib import closing
 from pathlib import Path
 
-from itov import device, training_results
+from itov import device, training_config, training_results
 from itov.batch_execution import _lock as execution_lock
 from itov.catalog import (
     array,
@@ -111,6 +111,11 @@ def worker_sources():
         "dataset_freeze.py",
         "dataset_inspection.py",
         "dataset_identity.py",
+        "training_config.py",
+        "training_optimization.py",
+        "training_checkpoints.py",
+        "training_checkpoint_worker.py",
+        "checkpoint_tensors.py",
     )
     return {name: sha256(Path(__file__).with_name(name).read_bytes()) for name in names}
 
@@ -135,11 +140,15 @@ def validate_spec(spec):
             "trigger",
             "parameters",
         }
-        | ({"qualification"} if spec.get("version") == 2 else set()),
+        | ({"qualification"} if spec.get("version") in (2, 3, 4) else set())
+        | ({"optimization"} if spec.get("version") in (3, 4) else set())
+        | ({"checkpoints"} if spec.get("version") == 4 else set()),
         "training specification",
     )
     require(
-        type(spec["version"]) is int and spec["version"] in (1, 2) and spec["profile"] == PROFILE,
+        type(spec["version"]) is int
+        and spec["version"] in (1, 2, 3, 4)
+        and spec["profile"] == (training_config.PROFILE if spec["version"] in (3, 4) else PROFILE),
         "Unsupported training profile",
     )
     identifier(spec["id"], "training id")
@@ -177,6 +186,15 @@ def validate_spec(spec):
         1 <= params["learning_rate_millionths"] <= 1000 and 60 <= params["timeout_seconds"] <= 3600,
         "Invalid learning rate/time bound",
     )
+    if spec["version"] in (3, 4):
+        training_config.validate(spec["optimization"], params)
+    if spec["version"] == 4:
+        object_fields(spec["checkpoints"], {"every_steps"}, "checkpoint policy")
+        integer(spec["checkpoints"]["every_steps"], "checkpoint cadence", minimum=1)
+        require(
+            spec["checkpoints"]["every_steps"] <= params["steps"],
+            "Checkpoint cadence exceeds step budget",
+        )
 
 
 def make_plan(config, spec, source_hash):
@@ -184,7 +202,7 @@ def make_plan(config, spec, source_hash):
     digest(source_hash, "specification hash")
     dataset_path, _ = file_ref(config.root, spec["dataset"], maximum=32 * 1024 * 1024)
     dataset = load_dataset(config.root, dataset_path)
-    if spec["version"] == 2:
+    if spec["version"] in (2, 3, 4):
         from itov.quality import qualification
 
         qualification(config.root, spec)
@@ -262,6 +280,12 @@ def make_plan(config, spec, source_hash):
             "purpose": dataset["dataset"]["purpose"],
             "environment": environment,
             "worker_sources": worker_sources(),
+            **(
+                {"optimization": training_config.resolve(spec, dataset["dataset"]["samples"])}
+                if spec["version"] in (3, 4)
+                else {}
+            ),
+            **({"restart": None} if spec["version"] == 4 else {}),
             "policy": {
                 "free_gpu_bytes": 16 * 1024**3,
                 "available_physical_bytes": 16 * 1024**3,
@@ -269,7 +293,10 @@ def make_plan(config, spec, source_hash):
                 "scope": "experimental_start_floor_not_measured_capacity_guarantee",
             },
             "limits": (
-                "Bounded SDXL UNet LoRA training only; no text-encoder training, network "
+                "Bounded SDXL optimizer checkpoints with explicit compatible continuation; "
+                "no model quality acceptance or automatic promotion."
+                if spec["version"] == 4
+                else "Bounded SDXL UNet LoRA training only; no text-encoder training, network "
                 "downloads, execution resume, model quality acceptance or automatic promotion."
             ),
         },
@@ -298,7 +325,9 @@ def load_plan(path):
             "policy",
             "limits",
             "plan_id",
-        },
+        }
+        | ({"optimization"} if value.get("specification", {}).get("version") in (3, 4) else set())
+        | ({"restart"} if value.get("specification", {}).get("version") == 4 else set()),
         "training plan",
     )
     require(
@@ -316,6 +345,14 @@ def load_plan(path):
 
 def revalidate(config, value):
     rebuilt = make_plan(config, value["specification"], value["specification_sha256"])
+    if value.get("restart") is not None:
+        from itov import training_checkpoints
+
+        training_checkpoints.restart(config, value, current=True)
+        rebuilt = seal(
+            {**{k: v for k, v in rebuilt.items() if k != "plan_id"}, "restart": value["restart"]},
+            "plan_id",
+        )
     require(rebuilt == value, "Training plan inputs or environment changed")
 
 
@@ -355,6 +392,14 @@ def status(config, path):
         "candidate_assessment": "not_performed_by_training",
         "artifacts": {key: str(folder / key) for key in ("run.json", "result.json", "worker.log")},
     }
+    if value["specification"]["version"] in (3, 4):
+        observed["artifacts"].update(
+            optimization=str(folder / "optimization.json"),
+            optimization_events=str(folder / "optimization"),
+        )
+    if value["specification"]["version"] == 4:
+        observed["artifacts"]["checkpoints"] = str(folder / "checkpoints")
+        observed["restart"] = value["restart"]
     if record["status"] in ("succeeded", "artifacts_validated"):
         observed["worker_completion"] = "completed"
         try:
@@ -423,6 +468,23 @@ def run(config, path, gpu_uuid, *, registry=None):
         )
         gpu, host = gpu_snapshot(), host_memory()
         require(gpu["uuid"].lower() == gpu_uuid.lower(), "Training GPU UUID differs")
+        if value.get("restart"):
+            from itov import training_checkpoints
+
+            _, checkpoint = training_checkpoints.restart(config, value, current=True)
+            previous = checkpoint["runtime"]
+            require(
+                previous["device"] == "cuda"
+                and all(
+                    previous[key] == gpu[field]
+                    for key, field in (
+                        ("gpu_uuid", "uuid"),
+                        ("gpu_name", "name"),
+                        ("driver", "driver"),
+                    )
+                ),
+                "Checkpoint GPU identity/driver differs",
+            )
         require(
             gpu["free_bytes"] >= value["policy"]["free_gpu_bytes"],
             "Insufficient free GPU memory for experimental training floor",

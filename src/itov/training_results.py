@@ -10,7 +10,7 @@ import sys
 from contextlib import contextmanager
 
 from itov.catalog import array as json_array
-from itov.catalog import integer, object_fields, require, sha256
+from itov.catalog import canonical_bytes, integer, object_fields, require, sha256
 from itov.comfyui import parse_json
 from itov.evidence_reads import observe, read_document
 from itov.records import Document
@@ -175,7 +175,9 @@ def _validate(config, plan, folder, *, expected_result_id, capture):
                 "elapsed_ns",
                 "result_id",
             }
-            | ({"quality_matrix"} if plan["specification"]["version"] == 2 else set()),
+            | ({"quality_matrix"} if plan["specification"]["version"] in (2, 3, 4) else set())
+            | ({"optimization"} if plan["specification"]["version"] in (3, 4) else set())
+            | ({"checkpoints"} if plan["specification"]["version"] == 4 else set()),
             "successful training result",
         )
         require(
@@ -234,6 +236,37 @@ def _validate(config, plan, folder, *, expected_result_id, capture):
         for loss in result["training_loss_billionths"]:
             integer(loss, "training loss")
     ids = sorted(s["id"] for s in dataset["samples"] if s["split"] == "validation")
+    if result["version"] in (3, 4):
+        with boundary("optimization_evidence"):
+            from itov import training_config
+
+            effective = training_config.resolve(
+                plan["specification"], dataset["dataset"]["samples"]
+            )
+            require(
+                effective == plan["optimization"],
+                "Planned optimization differs from dataset/config",
+            )
+            trace_path, _ = file_ref(folder, result["optimization"], maximum=32 * 1024**2)
+            trace = training_config.validate_trace(
+                parse_json(read_document(trace_path)), effective, result
+            )
+            expected_files = {"effective.json": effective, "precision.json": trace["precision"]}
+            for kind, rows in (("step", trace["steps"]), ("validation", trace["validation"])):
+                expected_files.update({f"{kind}-{row['step']:06d}.json": row for row in rows})
+            from itov.qualification import safe_path
+
+            for name, expected in expected_files.items():
+                require(
+                    read_document(safe_path(folder, "optimization/" + name))
+                    == canonical_bytes(expected) + b"\n",
+                    "Optimization event differs or is incomplete: " + name,
+                )
+        if result["version"] == 4:
+            with boundary("checkpoint_evidence"):
+                from itov import training_checkpoints
+
+                training_checkpoints.validate_result(config, plan, folder, result, trace)
     with boundary("heldout_matrix"):
         for phase in ("heldout_before", "heldout_after"):
             rows = json_array(result[phase], phase)
@@ -277,7 +310,7 @@ def _validate(config, plan, folder, *, expected_result_id, capture):
             )
     with boundary("quality_matrix"):
         evidence = None
-        if result["version"] == 2:
+        if result["version"] in (2, 3, 4):
             from itov.quality import matrix_evidence
 
             for row in json_array(result["quality_matrix"], "quality matrix"):

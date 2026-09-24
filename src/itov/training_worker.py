@@ -36,14 +36,32 @@ def train(request):
     dataset = load_dataset(root, root / spec["dataset"]["path"])
     require(dataset["dataset_id"] == value["dataset_id"], "Worker dataset differs")
     params = spec["parameters"]
+    configured = spec["version"] in (3, 4)
+    durable = spec["version"] == 4
+    if configured:
+        from itov import training_config
+
+        require(
+            value["optimization"] == training_config.resolve(spec, dataset["dataset"]["samples"]),
+            "Worker optimization configuration differs",
+        )
+        publish(output / "optimization" / "effective.json", value["optimization"])
     torch.set_num_threads(2)
     torch.set_num_interop_threads(2)
     torch.manual_seed(params["seed"])
+    if durable:
+        import random
+
+        random.seed(params["seed"])
+        np.random.seed(params["seed"])
     require(
         torch.cuda.is_available() and torch.cuda.device_count() == 1,
         "One selected CUDA device is required",
     )
     require(torch.cuda.is_bf16_supported(), "Training device must support BF16")
+    if configured:
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
     torch.cuda.reset_peak_memory_stats()
     print("Loading pinned local SDXL checkpoint", flush=True)
     pipe = StableDiffusionXLPipeline.from_single_file(
@@ -167,29 +185,158 @@ def train(request):
             ]
 
     print("Evaluating held-out losses before optimization", flush=True)
-    before = evaluate()
-    unet.train()
     unet.enable_gradient_checkpointing()
-    optimizer = torch.optim.AdamW(learned, lr=params["learning_rate_millionths"] / 10**6)
-    losses = []
-    for step in range(params["steps"]):
-        optimizer.zero_grad(set_to_none=True)
-        value_loss = loss(training[step % len(training)], (params["seed"] + step) % 2**32)
-        value_loss.backward()
+    optimization_ref = None
+    checkpoint_manager = None
+    if configured:
+        from itov.training_optimization import optimize
+        from itov.windows_process import host_memory
+
+        training_by_id = {item["id"]: item for item in training}
+        frozen = [p for p in unet.parameters() if not p.requires_grad]
+        require(all(p.dtype == torch.bfloat16 for p in frozen), "Frozen UNet precision differs")
         require(
-            all(p.grad is None or bool(torch.isfinite(p.grad).all()) for p in learned),
-            "Nonfinite LoRA gradient",
+            all(p.dtype == torch.float32 for p in learned), "Trainable adapter precision differs"
         )
-        norm = torch.nn.utils.clip_grad_norm_(learned, 1.0)
-        require(bool(torch.isfinite(norm)), "Nonfinite gradient norm")
-        optimizer.step()
-        losses.append(round(float(value_loss.detach()) * 10**9))
-        print(
-            f"Optimizer step {step + 1}/{params['steps']}: loss_billionths={losses[-1]}", flush=True
+        require(next(pipe.vae.parameters()).dtype == torch.float32, "VAE precision differs")
+        precision = {
+            "frozen_unet_dtype": str(frozen[0].dtype),
+            "adapter_dtype": str(learned[0].dtype),
+            "gradient_dtype": "torch.float32",
+            "vae_dtype": str(next(pipe.vae.parameters()).dtype),
+            "autocast_dtype": "torch.bfloat16",
+            "loss_dtype": "torch.float32",
+            "tf32": False,
+            "adapter_tensors": len(learned),
+        }
+        publish(output / "optimization" / "precision.json", precision)
+
+        def batch_loss(rows):
+            latents, noises, timesteps, embeds, pooled = [], [], [], [], []
+            for row in rows:
+                item = training_by_id[row["sample"]]
+                generator = torch.Generator(device="cuda").manual_seed(row["noise_seed"])
+                latent = item["latent"].to("cuda")
+                latents.append(latent)
+                noises.append(
+                    torch.randn(
+                        latent.shape, device="cuda", dtype=latent.dtype, generator=generator
+                    )
+                )
+                timesteps.append(
+                    torch.randint(
+                        0,
+                        scheduler.config.num_train_timesteps,
+                        (1,),
+                        device="cuda",
+                        generator=generator,
+                    )
+                )
+                embeds.append(item["embeds"].to("cuda"))
+                pooled.append(item["pooled"].to("cuda"))
+            latent, noise, timestep = torch.cat(latents), torch.cat(noises), torch.cat(timesteps)
+            noisy = scheduler.add_noise(latent, noise, timestep)
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                prediction = unet(
+                    noisy,
+                    timestep,
+                    encoder_hidden_states=torch.cat(embeds),
+                    added_cond_kwargs={
+                        "text_embeds": torch.cat(pooled),
+                        "time_ids": time_ids.repeat(len(rows), 1),
+                    },
+                ).sample
+            require(prediction.dtype == torch.bfloat16, "UNet autocast output precision differs")
+            return (
+                torch.nn.functional.mse_loss(prediction.float(), noise.float(), reduction="none")
+                .flatten(1)
+                .mean(1)
+                .mean()
+            )
+
+        def observe():
+            host = host_memory()
+            previous_allocated = checkpoint_manager.peak_allocated if checkpoint_manager else 0
+            previous_reserved = checkpoint_manager.peak_reserved if checkpoint_manager else 0
+            return {
+                "cuda_allocated_bytes": torch.cuda.memory_allocated(),
+                "cuda_reserved_bytes": torch.cuda.memory_reserved(),
+                "cuda_peak_allocated_bytes": max(
+                    torch.cuda.max_memory_allocated(), previous_allocated
+                ),
+                "cuda_peak_reserved_bytes": max(
+                    torch.cuda.max_memory_reserved(), previous_reserved
+                ),
+                "host_available_physical_bytes": host["available_physical"],
+                "host_available_commit_bytes": host["available_commit"],
+            }
+
+        def emit(kind, step, row):
+            publish(output / "optimization" / f"{kind}-{step:06d}.json", row)
+
+        if durable:
+            from types import SimpleNamespace
+
+            from itov import training_checkpoints
+            from itov.training_checkpoint_worker import Checkpoints, runtime
+            from itov.vram import gpu_snapshot
+
+            source = (
+                training_checkpoints.restart(SimpleNamespace(root=root), value)
+                if value["restart"]
+                else None
+            )
+            checkpoint_manager = Checkpoints(
+                value, output, unet, precision, runtime(gpu_snapshot()), emit, source
+            )
+        steps, validation = optimize(
+            unet,
+            learned,
+            value["optimization"],
+            batch_loss,
+            evaluate,
+            observe,
+            emit,
+            torch.cuda.synchronize,
+            restore=checkpoint_manager.restore if checkpoint_manager else None,
+            checkpoint=checkpoint_manager.save if checkpoint_manager else None,
         )
-    after = evaluate()
-    optimizer.zero_grad(set_to_none=True)
-    del optimizer
+        losses = [row["loss_billionths"] for row in steps]
+        before, after = validation[0]["losses"], validation[-1]["losses"]
+        trace = {
+            "version": 1,
+            "plan_id": value["plan_id"],
+            "config": value["optimization"]["config"],
+            "precision": precision,
+            "steps": steps,
+            "validation": validation,
+        }
+        trace_path = publish(output / "optimization.json", trace)
+        optimization_ref = {"path": "optimization.json", "sha256": sha256(trace_path.read_bytes())}
+    else:
+        before = evaluate()
+        unet.train()
+        optimizer = torch.optim.AdamW(learned, lr=params["learning_rate_millionths"] / 10**6)
+        losses = []
+        for step in range(params["steps"]):
+            optimizer.zero_grad(set_to_none=True)
+            value_loss = loss(training[step % len(training)], (params["seed"] + step) % 2**32)
+            value_loss.backward()
+            require(
+                all(p.grad is None or bool(torch.isfinite(p.grad).all()) for p in learned),
+                "Nonfinite LoRA gradient",
+            )
+            norm = torch.nn.utils.clip_grad_norm_(learned, 1.0)
+            require(bool(torch.isfinite(norm)), "Nonfinite gradient norm")
+            optimizer.step()
+            losses.append(round(float(value_loss.detach()) * 10**9))
+            print(
+                f"Optimizer step {step + 1}/{params['steps']}: loss_billionths={losses[-1]}",
+                flush=True,
+            )
+        after = evaluate()
+        optimizer.zero_grad(set_to_none=True)
+        del optimizer
     state = {
         name: tensor.detach().float().cpu().contiguous()
         for name, tensor in get_peft_model_state_dict(unet).items()
@@ -258,7 +405,7 @@ def train(request):
             print(f"Saved held-out {label}: {path.name}", flush=True)
         previews.append(pair)
     matrix = []
-    if spec["version"] == 2:
+    if spec["version"] in (2, 3, 4):
         from itov.quality import expected, qualification
 
         _, suite = qualification(root, spec)
@@ -288,13 +435,21 @@ def train(request):
         "heldout_before": before,
         "heldout_after": after,
         "previews": previews,
-        **({"quality_matrix": matrix} if spec["version"] == 2 else {}),
+        **({"quality_matrix": matrix} if spec["version"] in (2, 3, 4) else {}),
+        **({"optimization": optimization_ref} if configured else {}),
+        **({"checkpoints": checkpoint_manager.references} if checkpoint_manager else {}),
         "changed_adapter_tensors": changed,
         "trainable_parameters": sum(p.numel() for p in learned),
         "adapter_only": True,
         "export_reloaded": True,
-        "max_memory_allocated": torch.cuda.max_memory_allocated(),
-        "max_memory_reserved": torch.cuda.max_memory_reserved(),
+        "max_memory_allocated": max(
+            torch.cuda.max_memory_allocated(),
+            checkpoint_manager.peak_allocated if checkpoint_manager else 0,
+        ),
+        "max_memory_reserved": max(
+            torch.cuda.max_memory_reserved(),
+            checkpoint_manager.peak_reserved if checkpoint_manager else 0,
+        ),
         "quality_acceptance": "not_established",
         "purpose": value["purpose"],
         "limits": (

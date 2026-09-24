@@ -320,15 +320,35 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--image-python", type=Path, help="Python with Pillow 12.3.0")
     training = commands.add_parser("training", help="Pinned, owned SDXL LoRA training")
     training_actions = training.add_subparsers(dest="action", required=True)
-    for action in ("plan", "run", "status", "recover", "candidate"):
+    for action in ("plan", "run", "status", "recover", "candidate", "checkpoints", "resume-plan"):
         item = training_actions.add_parser(action)
         item.add_argument("file", type=Path)
         item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
         item.add_argument("--json", action="store_true")
-        if action in {"plan", "candidate"}:
+        if action in {"plan", "candidate", "resume-plan"}:
             item.add_argument("--save", action="store_true")
+        if action == "resume-plan":
+            item.add_argument("--checkpoint", type=Path, required=True)
         if action == "run":
             item.add_argument("--gpu", required=True)
+    experiment = commands.add_parser(
+        "experiment", help="Preregister bounded checkpoint experiments"
+    )
+    actions = experiment.add_subparsers(dest="action", required=True)
+    for action in ("plan", "run", "status", "packet", "decide", "replay"):
+        item = actions.add_parser(action)
+        item.add_argument("file", type=Path, help="Experiment specification or saved manifest")
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"plan", "packet", "decide"}:
+            item.add_argument("--save", action="store_true")
+        if action == "run":
+            item.add_argument("--member", required=True)
+            item.add_argument("--gpu", required=True)
+        if action == "decide":
+            item.add_argument("--review", type=Path, required=True)
+        if action == "replay":
+            item.add_argument("--decision", type=Path, required=True)
     evaluation = commands.add_parser("evaluation", help="Technical training assessment")
     evaluation_actions = evaluation.add_subparsers(dest="action", required=True)
     for action in ("assess", "packet", "plan", "run", "status", "resume", "replay", "abandon"):
@@ -358,6 +378,30 @@ def parser() -> argparse.ArgumentParser:
         else:
             item.add_argument("--expected-head", required=True)
             item.add_argument("--decision", required=True)
+    corpus = commands.add_parser("corpus", help="Freeze evaluation coverage and record baselines")
+    actions = corpus.add_subparsers(dest="action", required=True)
+    for action in ("freeze", "inspect", "baseline", "replay"):
+        item = actions.add_parser(action)
+        item.add_argument("file", type=Path)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"freeze", "baseline"}:
+            item.add_argument("--save", action="store_true")
+        if action == "baseline":
+            item.add_argument("--evaluation", type=Path, required=True)
+            item.add_argument("--review", type=Path)
+    checks = commands.add_parser("checks", help="Measure images and calibrate optional evaluators")
+    actions = checks.add_subparsers(dest="action", required=True)
+    for action in ("packet", "inspect", "calibrate", "replay"):
+        item = actions.add_parser(action)
+        item.add_argument("file", type=Path)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"packet", "calibrate"}:
+            item.add_argument("--save", action="store_true")
+        if action == "calibrate":
+            item.add_argument("--reference", type=Path, required=True)
+            item.add_argument("--evaluator", type=Path)
     return root
 
 
@@ -422,6 +466,76 @@ def _execute(args):
             poll_interval=args.poll_interval,
             **{"prompt_id": args.prompt_id} if args.action == "wait" else {},
         )
+        return result
+    elif args.command == "checks":
+        from itov import image_checks
+
+        config = load_config(args.config)
+        if args.action in {"inspect", "replay"}:
+            return getattr(image_checks, args.action)(config, args.file)
+        if args.action == "packet":
+            result = image_checks.packet(config, args.file, save=args.save)
+            folder, key = "packets", "packet_id"
+        else:
+            result = image_checks.calibrate(
+                config, args.file, args.reference, evaluator_path=args.evaluator, save=args.save
+            )
+            folder, key = "calibrations", "calibration_id"
+        if args.save:
+            result = {
+                **result,
+                "saved_path": str(
+                    config.root / f"state/evaluation/checks/{folder}/{result[key]}.json"
+                ),
+            }
+        return result
+    elif args.command == "corpus":
+        from itov import evaluation_corpus
+
+        config = load_config(args.config)
+        if args.action == "baseline":
+            result = evaluation_corpus.baseline(
+                config, args.file, args.evaluation, review_path=args.review, save=args.save
+            )
+        elif args.action == "freeze":
+            result = evaluation_corpus.freeze(config, args.file, save=args.save)
+        else:
+            return getattr(evaluation_corpus, args.action)(config, args.file)
+        if args.save:
+            folder, key = (
+                ("corpora", "corpus_id")
+                if args.action == "freeze"
+                else ("baselines", "baseline_id")
+            )
+            result = {
+                **result,
+                "saved_path": str(config.root / f"state/evaluation/{folder}/{result[key]}.json"),
+            }
+        return result
+    elif args.command == "experiment":
+        from itov import experiments
+
+        config = load_config(args.config)
+        if args.action == "run":
+            return experiments.run(config, args.file, args.member, args.gpu)
+        if args.action == "decide":
+            result = experiments.decide(config, args.file, args.review, save=args.save)
+        elif args.action == "replay":
+            return experiments.replay(config, args.file, args.decision)
+        elif args.action == "status":
+            return experiments.status(config, args.file)
+        else:
+            result = getattr(experiments, args.action)(config, args.file, save=args.save)
+        if args.save:
+            category, key = {
+                "plan": ("plans", "experiment_id"),
+                "packet": ("packets", "packet_id"),
+                "decide": ("decisions", "decision_id"),
+            }[args.action]
+            result = {
+                **result,
+                "saved_path": str(config.root / f"state/experiments/{category}/{result[key]}.json"),
+            }
         return result
     elif args.command in {"dataset", "training", "evaluation", "promotion"}:
         from itov import evaluation, training, training_data
@@ -511,8 +625,13 @@ def _execute(args):
                 )
             else:
                 result = evaluation.promotion(config, args.file, args.review, save=args.save)
-        elif args.action == "plan":
-            result = training.plan(config, args.file)
+        elif args.action in {"plan", "resume-plan"}:
+            if args.action == "resume-plan":
+                from itov import training_checkpoints
+
+                result = training_checkpoints.resume_plan(config, args.file, args.checkpoint)
+            else:
+                result = training.plan(config, args.file)
             if args.save:
                 saved = training.save_plan(config, result)
                 result = {**result, "saved_path": str(saved)}
@@ -520,6 +639,10 @@ def _execute(args):
             result = evaluation.candidate(config, args.file, save=args.save)
         elif args.action == "run":
             result = training.run(config, args.file, args.gpu)
+        elif args.action == "checkpoints":
+            from itov import training_checkpoints
+
+            result = training_checkpoints.status(config, args.file)
         else:
             result = getattr(training, args.action)(config, args.file)
         return result

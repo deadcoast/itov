@@ -40,18 +40,26 @@ RUNTIME_SOURCES = (
 
 
 def validate_spec(value):
+    require(
+        isinstance(value, dict)
+        and type(value.get("version")) is int
+        and value["version"] in (1, 2),
+        "Unsupported evaluation version",
+    )
+    extra = {"strength_milli"} if value["version"] == 1 else {"corpus", "mode"}
     object_fields(
         value,
-        {"version", "id", "training_plan", "sampler", "width", "height", "strength_milli"},
+        {"version", "id", "training_plan", "sampler", "width", "height"} | extra,
         "deployed evaluation specification",
-    )
-    require(
-        type(value["version"]) is int and value["version"] == 1, "Unsupported evaluation version"
     )
     identifier(value["id"], "evaluation id")
     image_contract({key: value[key] for key in ("width", "height")})
-    integer(value["strength_milli"], "adapter strength", minimum=1)
-    require(value["strength_milli"] <= 1000, "Evaluation strength must be 1..1000 milli")
+    if value["version"] == 1:
+        integer(value["strength_milli"], "adapter strength", minimum=1)
+        require(value["strength_milli"] <= 1000, "Evaluation strength must be 1..1000 milli")
+    else:
+        object_fields(value["corpus"], {"path", "sha256"}, "frozen corpus reference")
+        require(value["mode"] in {"baseline", "comparison"}, "Invalid corpus evaluation mode")
     sampler = value["sampler"]
     object_fields(
         sampler, {"steps", "cfg_milli", "sampler_name", "scheduler"}, "evaluation sampler"
@@ -75,9 +83,21 @@ def _context(config, spec, *, save=False):
     path, _ = file_ref(config.root, spec["training_plan"])
     trained = training.load_plan(path)
     require(
-        trained["specification"]["version"] == 2, "Evaluation requires a frozen v2 training suite"
+        trained["specification"]["version"] in (2, 3, 4),
+        "Evaluation requires a frozen v2/v3/v4 training suite",
     )
-    _, suite = quality.qualification(config.root, trained["specification"])
+    curated, suite = quality.qualification(config.root, trained["specification"])
+    if spec["version"] == 2:
+        from itov import evaluation_corpus
+
+        corpus_path, _ = file_ref(config.root, spec["corpus"])
+        frozen = evaluation_corpus.inspect(config, corpus_path)
+        require(
+            curated["dataset_id"] == frozen["dataset_id"]
+            and suite["trigger"] == frozen["specification"]["suite"]["trigger"],
+            "Corpus dataset or trigger differs",
+        )
+        suite = frozen["specification"]["suite"]
     candidate = evaluation.candidate(config, path, save=save)
     return trained, suite, candidate
 
@@ -91,7 +111,14 @@ def _definition(spec, trained_id, checkpoint, suite, candidate):
     }
     definition_id = sha256(canonical_bytes({"spec": spec, "candidate": candidate, "suite": suite}))
     jobs = []
-    for index, condition in enumerate(quality.expected(suite)):
+    from itov.evaluation_cases import conditions
+
+    require(suite["version"] == spec["version"], "Evaluation suite version differs")
+    expected = [
+        condition.to_dict()
+        for condition in conditions(suite, baseline=spec.get("mode") == "baseline")
+    ]
+    for index, condition in enumerate(expected):
         adapter = condition["role"].startswith("adapter_")
         graph = {
             "1": {
@@ -139,7 +166,8 @@ def _definition(spec, trained_id, checkpoint, suite, candidate):
                 "inputs": {
                     "model": ["1", 0],
                     "lora_name": deployment["loader_name"],
-                    "strength_model": spec["strength_milli"] / 1000,
+                    "strength_model": condition.get("strength_milli", spec.get("strength_milli"))
+                    / 1000,
                 },
                 "_meta": {"itov_asset_sha256": deployment["asset"]["sha256"]},
             }
@@ -325,6 +353,8 @@ def status(config, path):
                 key: job[key]
                 for key in ("index", "case_id", "seed", "role", "prompt", "negative_prompt")
             }
+            if "strength_milli" in job:
+                row["strength_milli"] = job["strength_milli"]
             row["status"] = "reserved" if observed["jobs"] else "not_started"
             record_path = job_path(config, value["plan_id"], index)
             row["record_path"] = str(record_path)
@@ -439,7 +469,15 @@ def replay(config, path, *, save=False):
             "suite": value["suite"],
             "runtime": value["runtime"],
             "sampler": value["specification"]["sampler"],
-            "strength_milli": value["specification"]["strength_milli"],
+            **(
+                {"strength_milli": value["specification"]["strength_milli"]}
+                if value["specification"]["version"] == 1
+                else {
+                    "mode": value["specification"]["mode"],
+                    "corpus": value["specification"]["corpus"],
+                    "strengths_milli": value["suite"]["strengths_milli"],
+                }
+            ),
             "matrix": observed["matrix"],
             "technical_pass": True,
             "quality_acceptance": "not_established",

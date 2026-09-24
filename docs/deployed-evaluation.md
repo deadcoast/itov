@@ -6,6 +6,8 @@ A-02 adds a supported route from a technically valid trained candidate to a comp
 
 Use a successful version 2 training plan with a frozen curated dataset and quality suite. The current suite contract allows two to four cases, two seeds per case, and requires held-out and regression coverage. Every case/seed produces four conditions in fixed order: `base_plain`, `base_trigger`, `adapter_plain`, `adapter_trigger`. Seeds intentionally repeat across conditions. Training assessment and the existing candidate export validation still apply.
 
+The paragraph above describes version-one evaluation specifications and their original training suite. Curated v3/v4 training is also supported. C-01 adds [version-two corpus evaluation](evaluation-corpus.md): a separate frozen corpus with 8–24 cases, 3–8 seeds per case and multiple strengths. `mode: "baseline"` renders only the two base controls; `mode: "comparison"` renders both controls and both adapter conditions at every frozen strength. Old plan and report identities remain unchanged.
+
 [The pilot specification](../examples/still-life.evaluation.json) pins this workspace's retained curated training plan. A fresh workspace must provision and validate its own training inputs and supply their plan path/hash. Paths inside the specification are relative to the configured workspace; the specification argument itself is a normal CLI path.
 
 ```json

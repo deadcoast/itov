@@ -4,6 +4,14 @@ ITOV is an incomplete local ComfyUI application under development. Its current f
 
 The [current TODO](TODO.md) and [source audit](docs/development-audit-20260922.md) track the remaining architecture, dataset/training, autonomous evaluation and end-to-end work. The mandatory human-review gate has been shelved by the user. Assistant reviews record methods, limitations and case evidence; the current curated candidate is rejected on observed quality failures. Earlier successful tests and example runs establish only their documented scope.
 
+[Configured training](docs/training-configuration.md) adds explicit micro-batching, gradient accumulation, deterministic sampling, learning-rate schedules and validation cadence. Plans retain the complete sample/noise order; measured optimizer and precision evidence is required for technical validation. Model-quality acceptance remains a separate decision.
+
+[Durable checkpoints](docs/training-checkpoints.md) retain adapter/AdamW state, RNG state and committed progress. Inspect them with `training checkpoints`, then use `training resume-plan --checkpoint` to plan an explicit continuation in a new attempt while preserving the interrupted run.
+
+[Bounded experiments](docs/training-experiments.md) preregister hypotheses, checkpoint endpoints, repetitions and budgets. The `experiment` commands execute declared members, preserve failures and record case-level selection decisions against frozen images. Loss remains diagnostic; selection does not authorize promotion.
+
+[Frozen evaluation corpora](docs/evaluation-corpus.md) extend coverage independently of training. The `corpus` commands preserve legacy failures, freeze broader cases and strength conditions, and record complete base-model observations before tuning. Version-two `evaluation` plans render baseline controls or the full comparison through the existing owned runtime workflow.
+
 Start with the [operator runbook](docs/operator-runbook.md) for the supported sequence from setup through execution, recovery and completed replay. Result commands now use consistent text/JSON outcomes, artifact references and suggested next commands. JSON adds `_cli` metadata without changing saved evidence; incomplete status/retirement returns exit 1, including batch status and abandonment.
 
 To combine a directory of Markdown specifications into one searchable PDF, run

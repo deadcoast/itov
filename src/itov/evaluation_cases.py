@@ -41,6 +41,7 @@ class EvaluationCondition:
     role: str
     prompt: str
     negative_prompt: str
+    strength_milli: int | None = None
 
     def to_dict(self):
         return {
@@ -49,10 +50,33 @@ class EvaluationCondition:
             "role": self.role,
             "prompt": self.prompt,
             "negative_prompt": self.negative_prompt,
+            **({"strength_milli": self.strength_milli} if self.strength_milli is not None else {}),
         }
 
 
-def conditions(suite):
+def conditions(suite, *, baseline=False):
+    if suite.get("version") == 2:
+        from itov.evaluation_corpus import validate_suite
+
+        validate_suite(suite)
+        roles = [(role, 0) for role in ROLES[:2]]
+        if not baseline:
+            roles += [
+                (role, strength) for strength in suite["strengths_milli"] for role in ROLES[2:]
+            ]
+        return tuple(
+            EvaluationCondition(
+                case["id"],
+                seed,
+                role,
+                ((suite["trigger"] + " ") if role.endswith("trigger") else "") + case["prompt"],
+                case["negative_prompt"],
+                strength,
+            )
+            for case in suite["cases"]
+            for seed in case["seeds"]
+            for role, strength in roles
+        )
     return tuple(
         condition
         for case in suite["cases"]

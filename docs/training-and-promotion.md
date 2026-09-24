@@ -4,7 +4,11 @@ ITOV 0.12.0 adds a bounded SDXL UNet LoRA path. The user selected neutral synthe
 
 The [curated review extension](curated-quality-review.md) adds v2 training plans and full case coverage. Version 0.13.1 supports assistant-authored v3 reviews after the user shelved the human-only gate. Historical v1 results remain inspectable; v1 non-smoke reviews alone cannot qualify for promotion. This remains a prototype trainer with substantial open work in the [active TODO](../TODO.md); the smoke evidence below is historical.
 
+[Training specification v3](training-configuration.md) adds declared batch/accumulation, deterministic sampling, constant or warmup/decay learning rates, validation cadence and checked optimizer/precision traces. This specification version is separate from review-document versions. It retains the curated quality matrix and existing execution/assessment path; the fixed-loop description and trials below document historical v1/v2 behavior.
+
 ## Authority and baseline
+
+[Durable v4 checkpoints](training-checkpoints.md) preserve optimizer/RNG state for explicit compatible continuation. [Experiment manifests](training-experiments.md) preregister independent final-checkpoint endpoints, repetitions, hypotheses, budgets and frozen case reviews. Experiment selection uses quality verdicts separately from loss and is only a decision about further evaluation; it does not replace deployed-runtime review or promotion policy.
 
 Part 5's voice/LTX sketch contains unresolved configuration, data-loader and optimization functions and assumed audio APIs. Part 7's evaluator leaves rendering and workflow construction unimplemented. Its promotion example moves weights before separate manifest/ledger writes, substitutes an empty manifest after corruption and deletes quarantined weights. Those examples remain unchanged as design inputs; they are not installed or executed.
 

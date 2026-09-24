@@ -126,7 +126,10 @@ def packet(config, plan_path, *, save=False):
 
     with assessment_context(config, plan_path) as context:
         plan = context.plan.to_dict()
-        require(plan["specification"]["version"] == 2, "Review packet requires curated training v2")
+        require(
+            plan["specification"]["version"] in (2, 3, 4),
+            "Review packet requires curated training v2/v3/v4",
+        )
         report = evaluation._assessment(context)
         candidate, _ = evaluation._candidate(context, assessment=report)
         evidence = context.validated.evaluation

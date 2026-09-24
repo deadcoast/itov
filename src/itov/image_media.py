@@ -26,7 +26,8 @@ def image_tools():
     return _file(Path(executable))
 
 
-def verify_image(path: Path, expected):
+def decode_image(path: Path, expected):
+    """Return the verified receipt and its exact RGB bytes to bounded image checks."""
     expected = image_contract(expected)
     require(33 <= path.stat().st_size <= 32 * 1024**2, "Evaluation PNG size is unsupported")
     raw = path.read_bytes()
@@ -77,4 +78,8 @@ def verify_image(path: Path, expected):
         "sha256": sha256(raw),
         "decoded_rgb_sha256": sha256(result.stdout),
         "decoder_sha256": decoder["sha256"],
-    }
+    }, result.stdout
+
+
+def verify_image(path: Path, expected):
+    return decode_image(path, expected)[0]

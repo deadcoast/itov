@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "id": "still-life-c01-base-v1",
+  "training_plan": {
+    "path": "state/training/plans/26c3cb899dddae04e8f06919642e431742434e61c8e66b5a6a33968a2ae91cf7.json",
+    "sha256": "8c8d3a07d05100711b5080b3e26e4db689d5552d6c91596477578408c15a29e1"
+  },
+  "corpus": {
+    "sha256": "e9d41011b9f908f0e10dd6a82da26247517d2bb059ffe5f8bf7f6207974ed06b",
+    "path": "state/evaluation/corpora/7c9474c4f3c4803e6fed60c01df34df0d4023390da26ed1545685a61517dfae0.json"
+  },
+  "mode": "baseline",
+  "sampler": {
+    "steps": 20,
+    "scheduler": "karras",
+    "cfg_milli": 7000,
+    "sampler_name": "dpmpp_2m"
+  },
+  "width": 512,
+  "height": 512
+}

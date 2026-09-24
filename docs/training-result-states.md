@@ -42,7 +42,9 @@ A status response has `scope=training_status_observation`. Its `record_id` ident
 | `optimizer_evidence` | Adapter-only/reload declarations, changed-tensor evidence, exact optimizer-step count and complete nonnegative loss records. |
 | `heldout_matrix` | Every held-out sample, prescribed noise seed and loss before and after training. |
 | `preview_matrix` | Required paired previews, exact prompt/seed, distinct pair paths and referenced file hashes. |
-| `quality_matrix` | For v2 specifications, every frozen case/seed/condition, exact prompt bindings, distinct paths and referenced image hashes. |
+| `optimization_evidence` | For v3/v4, exact configured sample/rate order, finite gradient/precision declarations, complete validation cadence and immutable events. |
+| `checkpoint_evidence` | For v4, complete declared checkpoint bundles, committed inherited history and agreement with the final trace. |
+| `quality_matrix` | For v2/v3/v4 specifications, every frozen case/seed/condition, exact prompt bindings, distinct paths and referenced image hashes. |
 | `record_publication` | Publishing a durable controller transition failed. Inspect status before recovery. |
 
 Preview/matrix file checks establish their declared bindings and hashes, not full image decoding or visual quality. The worker's optimizer/reload declarations remain evidence supplied by that worker. Full model-to-loader compatibility and quality acceptance require the separate evaluation workflow. Status/assessment replay checks saved result and dataset/evaluation evidence; it does not require the original trainer source or ML environment to remain installed. Fresh execution and finalization recovery do require those pinned execution inputs.
@@ -57,7 +59,7 @@ uv run --inexact --locked itov training recover workspace/state/training/plans/P
 
 Recovery requires the exact controller identity to be dead, no live processes in its native job, and confirmed worker exit. An uncertain identity, live worker or different held device lease is refused. The matching abandoned device lease is recovered only after those checks. Recovery never starts a worker or submits another training run.
 
-- Interrupted `running` attempts become failed; execution/checkpoint resume is not implemented.
+- Interrupted `running` attempts become failed. For v4, [explicit checkpoint continuation](training-checkpoints.md) can then create a new plan from a selected complete checkpoint; recovery itself never resumes execution. Earlier versions cannot restore optimizer state.
 - Interrupted version 2 `validating` attempts can become `artifacts_validated` after the complete shared validation and fresh execution-input checks. Invalid or incomplete artifacts become a boundary-specific failure.
 - Already terminal attempts cannot be recovered or silently rerun. `status` and `evaluation assess` can recheck them without changing their records.
 - A missing or malformed `run.json` is an operational error requiring inspection. Recovery does not guess a current record from partial journals.
