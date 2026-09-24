@@ -12,6 +12,7 @@ INCOMPLETE = frozenset(
         "not_started",
         "reserved",
         "prepared",
+        "review_pending",
         "running",
         "validating",
         "submitting",
@@ -259,6 +260,44 @@ def _guidance(args, result, state):
                 "but cannot rerun a terminal failed job. Abandon only after "
                 "outcomes are known."
             )
+    elif command == "dataset" and action in {"inspect", "freeze", "review-verify"}:
+        refs = result.get("artifacts", {})
+        if refs.get("review template"):
+            configured(
+                "Validate and freeze the review",
+                "dataset",
+                "freeze",
+                refs["review template"],
+                "--save",
+                when="After inspecting every image/caption and disposing of flagged pairs",
+            )
+        elif action == "inspect" and state != "error":
+            configured("Save inspection and pending review", "dataset", "inspect", source, "--save")
+        if refs.get("freeze"):
+            configured("Verify the frozen selection", "dataset", "review-verify", refs["freeze"])
+            configured(
+                "Prepare the reviewed selection",
+                "dataset",
+                "import",
+                refs["import declaration"],
+                "--source-root",
+                str(Path(config).absolute().parent),
+                when="Using the pinned Pillow image environment; this creates a new dataset",
+            )
+        elif action == "freeze" and state != "error":
+            configured(
+                "Recheck the explicit review",
+                "dataset",
+                "freeze",
+                source,
+                "--save",
+                when="After resolving blockers or explicitly excluding unresolved samples",
+            )
+        if state != "error":
+            message = (
+                "Inspect all images, captions, identity warnings and pair findings. "
+                "Similarity is a review aid; freezing does not accept model quality."
+            )
     elif command == "dataset" and action in {"import", "status", "recover"}:
         refs = result.get("artifacts", {})
         operation = refs.get("operation") or (source if action != "import" else None)
@@ -424,6 +463,9 @@ def _text(result, meta):
         "plan_id",
         "dataset_id",
         "import_id",
+        "inspection_id",
+        "freeze_id",
+        "review_id",
         "candidate_id",
         "assessment_id",
         "packet_id",
@@ -458,7 +500,9 @@ def _text(result, meta):
         "code",
         "index",
     ):
-        if key in details:
+        if key in details and not (
+            key == "samples" and isinstance(details[key], list) and is_dataset_inspection(result)
+        ):
             lines.append(f"{key.replace('_', ' ').capitalize()}: {details[key]}")
     if "entry" in result:
         lines.append(f"Candidate weights: {result['entry']['asset']['path']}")
@@ -481,6 +525,12 @@ def _text(result, meta):
         )
     if "completed_images" in result:
         lines.append(f"Progress: {result['completed_images']}/{result['total']} images prepared")
+    if is_dataset_inspection(result):
+        lines.append(
+            f"Review pool: {len(result['samples'])} samples, "
+            f"{result['counts']['pairs']} pairs, {result['counts']['flagged_pairs']} flagged"
+        )
+        lines.append(f"Unresolved identities: {result['counts']['unresolved_samples']}")
     for row in result.get("checks", []):
         lines.append(f"{row['status'].upper()} {row['name']}: {row['detail']}")
     for row in result.get("findings", []):
@@ -517,6 +567,10 @@ def _text(result, meta):
         rendered = " ".join("'" + arg.replace("'", "''") + "'" for arg in action["argv"])
         lines.extend([f"  {action['label']} ({action['when']}):", f"  & {rendered}"])
     return "\n".join(lines)
+
+
+def is_dataset_inspection(result):
+    return result.get("scope") == "dataset_duplicate_identity_caption_observations"
 
 
 def present(args, result, *, exception=False, interrupted=False):

@@ -27,6 +27,8 @@ uv run --locked itov training plan examples/sdxl-still-life.training.json --save
 
 The v1 curation declaration requires exactly `version`, `dataset`, `curator`, `selection_policy`, `rights`, `transform`, and `works`. Each work binds a sample, Met object ID, metadata reference, provider image URL, selection note and caption note. Repeated artwork IDs/URLs, missing samples, changed bytes, missing public-domain declarations, mismatched work groups and artists crossing splits are refused. Artist identity uses the provider's display name, not a universal authority identifier.
 
+B-02 adds [stable identifier, duplicate and caption review](dataset-review.md) without rewriting that historical v1 contract. New v2 curation adds a pinned `selection` freeze and requires the exact reviewed import declaration/provenance. The review records all 28 pilot pairs and retains the mixed-style confound, qualified Gauguin attribution and caption omissions. Its narrower selection has Roesen/Ream in training and Peale in validation; the tiny three-work pool does not establish improved learning. Historical eight-work training and rejected model results remain unchanged.
+
 ## Evaluation fixed before training
 
 The v2 training specification adds `qualification: {curation, suite}`, both hashed file references. The plan binds those declarations and five trainer/qualification source modules. Controller revalidation checks them before and after execution; changing curation, captions or cases requires a new plan. Legacy v1 training evidence can still be inspected, but its review contract cannot authorize non-smoke promotion.

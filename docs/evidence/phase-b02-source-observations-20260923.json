@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-23",
+  "method": "Assistant inspection of all eight retained source JPEGs and the retained monochrome excluded source at their available resolution, plus the old contact sheet; provider page consulted to resolve the small bird details in Met 436305. No new images downloaded.",
+  "source_observation": {
+    "url": "https://www.metmuseum.org/art/collection/search/436305",
+    "kind": "Paraphrased observation from official page; not a complete archived page",
+    "observation": "The provider describes a bird carcass on the plate and a living bird on the bread. The source image was inspected directly; the old caption omits both subjects.",
+    "impact": "Refined the declared target before any new training to exclude animals/carcasses; retained the first inspection and created a new target-bound inspection."
+  },
+  "limits": "Attribution and semantic judgments are supplied observations. Available image resolution, small corpus, heuristic fingerprints and unknown foundation pretraining overlap limit conclusions. No model improvement claim."
+}

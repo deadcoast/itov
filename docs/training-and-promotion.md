@@ -52,6 +52,8 @@ uv run --locked itov training status workspace/state/training/plans/PLAN_ID.json
 
 Use the printed plan ID and observed GPU UUID. Plans bind the prepared dataset, model checkpoint, all 14 configuration/tokenizer files, executable, selected package versions and the trainer/result-validation source modules. Added config files, changed captions, changed dependencies and stale plans are refused before training. Plans permit rank 4 or 8, 1–256 steps and 60–3600 seconds. Fixed seeds do not guarantee bitwise reproducibility across different runtimes/devices.
 
+For reviewed Met inputs, [B-02 freezing](dataset-review.md) produces a new import declaration and `dataset curate --freeze` produces a v2 curation declaration for `qualification.curation`. It binds the exact frozen selection and captions through the existing training-specification v2 path. New plans pin the review validators; completed historical plans keep their existing evidence semantics. The current reviewed corpus is only two training works and one validation work, so it is unsuitable as proof of broad quality.
+
 ## Ownership, failures and resource limits
 
 Training acquires the existing whole-workspace execution lock and a same-user GPU UUID lease. It refuses an unfinished batch, a nonempty ComfyUI queue or an existing attempt. One hidden Windows worker enters the owned Job Object while suspended and starts only after its identity is journaled. The worker sets Hugging Face offline flags and uses local checkpoint/configuration files.

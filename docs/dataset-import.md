@@ -93,4 +93,4 @@ Invalid declarations and unavailable decoder environments fail admission before 
 
 ## Evidence boundary
 
-[B-01 verification](evidence/phase-b01-verification-20260923.json) records source/installed tests, real process exits, fresh-folder builds and the retained eight-image museum trial. The original pilot's captions, split and mixed painting styles are preserved. B-02 still owns perceptual duplicate review, stronger creator/work grouping, caption inspection and the intended visual target. Preparation success establishes neither dataset suitability nor model-quality acceptance.
+[B-01 verification](evidence/phase-b01-verification-20260923.json) records source/installed tests, real process exits, fresh-folder builds and the retained eight-image museum trial. The original pilot's captions, split and mixed painting styles are preserved. [B-02 review](dataset-review.md) now adds perceptual observations, stable attributed creator/work grouping, caption inspection and an explicitly frozen visual target/selection. Preparation success establishes neither dataset suitability nor model-quality acceptance.

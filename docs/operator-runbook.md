@@ -134,6 +134,8 @@ This example pins the retained local still-life candidate; it is not portable tr
 
 Training requires declared local source images/captions, prepared dataset, provenance/curation, frozen quality cases, checkpoint/configuration/tokenizer files and the pinned optional training environment. Use [transactional dataset import](dataset-import.md) for new local or retained Met inputs; it preserves failed attempts and publishes a verified complete bundle. Acquisition and training checkpoint restart remain later work. The following commands inspect the historical version-one pilot; provision using the [training](training-and-promotion.md) and [curation](curated-quality-review.md) contracts:
 
+For new reviewed data, first follow [dataset inspection and freezing](dataset-review.md). Inspect every image/caption and pair finding, freeze the selection, import its generated declaration, and bind Met curation with `dataset curate CURATION --freeze FREEZE --save`. The printed v2 curation declaration can be pinned in the existing training qualification. The three-work reviewed pilot is a data-method result, not accepted model training evidence.
+
 ```powershell
 uv run --inexact --locked itov dataset validate workspace/training/data/met-still-life-v1/dataset.json --config $cfg
 uv run --inexact --locked itov dataset prepare workspace/training/data/met-still-life-v1/dataset.json --config $cfg

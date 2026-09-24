@@ -284,6 +284,9 @@ def parser() -> argparse.ArgumentParser:
         item.add_argument("--json", action="store_true")
         if action == "curate":
             item.add_argument("--save", action="store_true")
+            item.add_argument(
+                "--freeze", type=Path, help="Bind this import to a verified frozen review"
+            )
     for action in ("import", "status", "recover", "verify"):
         item = dataset_actions.add_parser(action)
         item.add_argument(
@@ -304,6 +307,17 @@ def parser() -> argparse.ArgumentParser:
                 type=Path,
                 help="Python with the optional pinned Pillow dependency",
             )
+    for action in ("inspect", "freeze", "review-verify"):
+        item = dataset_actions.add_parser(action)
+        item.add_argument(
+            "file", type=Path, help="Inspection specification, review, or frozen selection"
+        )
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action != "review-verify":
+            item.add_argument("--save", action="store_true")
+        if action == "inspect":
+            item.add_argument("--image-python", type=Path, help="Python with Pillow 12.3.0")
     training = commands.add_parser("training", help="Pinned, owned SDXL LoRA training")
     training_actions = training.add_subparsers(dest="action", required=True)
     for action in ("plan", "run", "status", "recover", "candidate"):
@@ -414,7 +428,18 @@ def _execute(args):
 
         config = load_config(args.config)
         if args.command == "dataset":
-            if args.action in {"import", "status", "recover", "verify"}:
+            if args.action in {"inspect", "freeze", "review-verify"}:
+                from itov import dataset_freeze, dataset_inspection
+
+                if args.action == "inspect":
+                    result = dataset_inspection.inspect(
+                        config, args.file, image_python=args.image_python, save=args.save
+                    )
+                elif args.action == "freeze":
+                    result = dataset_freeze.freeze(config, args.file, save=args.save)
+                else:
+                    result = dataset_freeze.verify(config, args.file)
+            elif args.action in {"import", "status", "recover", "verify"}:
                 from itov import dataset_import
 
                 if args.action == "verify":
@@ -434,7 +459,11 @@ def _execute(args):
             elif args.action == "curate":
                 from itov import curation
 
-                result = curation.validate(config.root, args.file, save=args.save)
+                result = (
+                    curation.bind_selection(config.root, args.file, args.freeze, save=args.save)
+                    if args.freeze
+                    else curation.validate(config.root, args.file, save=args.save)
+                )
             else:
                 operation = (
                     training_data.prepare if args.action == "prepare" else training_data.validate

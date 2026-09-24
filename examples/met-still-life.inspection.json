@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "dataset": {
+    "path": "training/imports/4f4b17cb1662ee4e55c4f7e0460ce347fe8b19d1872ddd434d3310b812522b70/prepared.json",
+    "sha256": "7ce170fc1cb7adbf72b56040039d06244ece0a610930549debab524719b8ea79"
+  },
+  "curation": {
+    "path": "training/imports/4f4b17cb1662ee4e55c4f7e0460ce347fe8b19d1872ddd434d3310b812522b70/curation.json",
+    "sha256": "12fd13e35fd0f4ad113eac7f709058cce33441fff53d917723ff9d840518a5ec"
+  },
+  "target": {
+    "id": "met-tabletop-naturalistic-v1",
+    "description": "Representational tabletop oil paintings with recognizable food, fruit and vessels, naturalistic volume and one continuous scene. This is a bounded subject/treatment target, not an artist-style imitation.",
+    "include": [
+      "Color oil painting with naturalistically modeled, recognizable food or fruit",
+      "A visible tabletop or cloth surface organizes one continuous still-life scene",
+      "Literal captions describe visible objects and setting without artist-name conditioning"
+    ],
+    "exclude": [
+      "Angular or deliberately flattened modernist treatment",
+      "Hanging single-subject studies and flowers without a tabletop food arrangement",
+      "Monochrome reproductions, fish, vanitas and trompe-l oeil subjects",
+      "Unresolved creator attribution or identity in a retained selected sample",
+      "Live animals and animal carcasses introduce subject matter outside the selected fruit, food and vessels treatment"
+    ]
+  },
+  "trigger": "itovstill",
+  "local_identities": [],
+  "exclusions": [
+    {
+      "id": "met-10895",
+      "source": {
+        "path": "training/data/met-still-life-v1/sources/10895.jpg",
+        "sha256": "3e93998681cc86ad2c6e052db53156a1deb0c7bf9ee1b74faff59d749513c940"
+      },
+      "metadata": {
+        "path": "training/data/met-still-life-v1/metadata/10895.json",
+        "sha256": "6ea3f41ed69d16a78a69574082a1bf5d940c013c2cb33fc6c8c3eef6eb11b890"
+      },
+      "reason": "Monochrome reproduction is outside the color tabletop target",
+      "limitations": "Source image and provider metadata retained; photographic reproduction may not reflect original colors"
+    },
+    {
+      "id": "met-10476",
+      "source": null,
+      "metadata": {
+        "path": "training/data/met-still-life-v1/metadata/10476.json",
+        "sha256": "683d7cc108f123205e5f955a14b5a5b7f13f51bd150256cc5f977afbc03d5e17"
+      },
+      "reason": "Fish subject outside the selected fruit, food and vessels target",
+      "limitations": "Metadata-only exclusion; source image was not acquired or visually judged in this review"
+    },
+    {
+      "id": "met-10996",
+      "source": null,
+      "metadata": {
+        "path": "training/data/met-still-life-v1/metadata/10996.json",
+        "sha256": "6d9ce8b78ba1d088c8ed30bd9ec7595108129fb2179941e64fbf3bd1ef2b23d0"
+      },
+      "reason": "Trompe-l oeil subject outside the selected tabletop target",
+      "limitations": "Metadata-only exclusion; source image unavailable locally"
+    },
+    {
+      "id": "met-435918",
+      "source": null,
+      "metadata": {
+        "path": "training/data/met-still-life-v1/metadata/435918.json",
+        "sha256": "abd57101fef323ee91769cc302660cc90e542da46eef9080b3577a9b5ae9122a"
+      },
+      "reason": "Vanitas theme outside the selected food, fruit and vessels target",
+      "limitations": "Metadata-only exclusion; source image unavailable locally"
+    },
+    {
+      "id": "met-436485",
+      "source": null,
+      "metadata": {
+        "path": "training/data/met-still-life-v1/metadata/436485.json",
+        "sha256": "0a203dcc26174fd96d10226978cfc5455e532a53b31d0f2fce7e14ce7b396900"
+      },
+      "reason": "Vanitas theme outside the selected food, fruit and vessels target",
+      "limitations": "Metadata-only exclusion; source image unavailable locally"
+    }
+  ]
+}

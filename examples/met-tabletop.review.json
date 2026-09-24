@@ -1,0 +1,245 @@
+{
+  "inspection": {
+    "path": "state/dataset-reviews/inspections/a24ba3cb3d5f5bcb3531171942d1ab72efe71b0818e3db52dd1a0ff2eeac4ce7.json",
+    "sha256": "e39a35d9bfafc0abfaff8428d4c6eb66cb42d19b520e3944653d99bd7372c92e"
+  },
+  "pairs": [
+    {
+      "pair_id": "bd4189e72932c93b215847d33de44047ec4ace794ff8a47e2579649ee67d689c",
+      "decision": "distinct",
+      "notes": "Compared cake slices, plate, grapes and glass with dense tiered fruit display with basket and melon; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "b3648063e524f90d46726b4da9478462f12bd1ba43835648119c7aef8ba44655",
+      "decision": "distinct",
+      "notes": "Compared cake slices, plate, grapes and glass with foreground grapes and peach beside a tall dark pitcher; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "cd13bf0f6a2cfe8bc147bbc97d26ea7614a0bbe11a015ef57c88c3f97a45028f",
+      "decision": "distinct",
+      "notes": "Compared cake slices, plate, grapes and glass with isolated hanging red grape bunch; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "51d1972aa2f6af9254fe80001b198adc66679194b6c5cbedd4319f5d8b92189a",
+      "decision": "distinct",
+      "notes": "Compared cake slices, plate, grapes and glass with jug, glass, bread and live/dead birds; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "d7b8f40c7843666bf25bfe7c1e87079e2f02bee9e1a8edf0c9e5738357c128b7",
+      "decision": "distinct",
+      "notes": "Compared cake slices, plate, grapes and glass with fruit and green bottle over white cloth; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "bd2dadecbf4d3223cbb3eb9f919aa90f9306c989ac11a559ec9e8595ee8125a1",
+      "decision": "distinct",
+      "notes": "Compared cake slices, plate, grapes and glass with angular green pitcher and basket beside red chair; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "1166aeb75fabd630f98356f0e6e8ec84a554f5a1798ec13369c90e2b11b6648d",
+      "decision": "distinct",
+      "notes": "Compared cake slices, plate, grapes and glass with blue/white flowers and fern leaves; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "a5b3e28c305968c01d3711b07e7388db71682a59e08d3d54b7068754c14c78df",
+      "decision": "distinct",
+      "notes": "Compared dense tiered fruit display with basket and melon with foreground grapes and peach beside a tall dark pitcher; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "1792287cda219db35481f5b6eb408ca81b6b47f19ba8184177640e21fff6ab50",
+      "decision": "distinct",
+      "notes": "Compared dense tiered fruit display with basket and melon with isolated hanging red grape bunch; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "d009679ffb775f1413443d4971425cc682c59155781bb53a221174bd269aad71",
+      "decision": "distinct",
+      "notes": "Compared dense tiered fruit display with basket and melon with jug, glass, bread and live/dead birds; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "e12f7719e8655052db30fdef98c6631629a7c471c2041fe2206dc21921ab007b",
+      "decision": "distinct",
+      "notes": "Compared dense tiered fruit display with basket and melon with fruit and green bottle over white cloth; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "5fc73561b679f9bf0f6e4cc7c19dbf9b7fa13a4df3b511d81e53ac9f6889d7a7",
+      "decision": "distinct",
+      "notes": "Compared dense tiered fruit display with basket and melon with angular green pitcher and basket beside red chair; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "525b9c5dd1a31230e8fad69a1b0facea9630b0fcea9d5687a12ab6839cc4e97e",
+      "decision": "distinct",
+      "notes": "Compared dense tiered fruit display with basket and melon with blue/white flowers and fern leaves; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "b6dae95d36a34e7eec9adab80afc5a7873cd3c7cf70ad7082914ab68d836b02c",
+      "decision": "distinct",
+      "notes": "Compared foreground grapes and peach beside a tall dark pitcher with isolated hanging red grape bunch; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "5de1b58a0c72dd02e8d4cd210f0b087306db19b6de4f5acdb553052b3faf27ec",
+      "decision": "distinct",
+      "notes": "Compared foreground grapes and peach beside a tall dark pitcher with jug, glass, bread and live/dead birds; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "970cc4ccde1243187c0464f7390ad2f4f1214a40e531a5062627a4209e476359",
+      "decision": "distinct",
+      "notes": "Compared foreground grapes and peach beside a tall dark pitcher with fruit and green bottle over white cloth; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "7f68d16bdec516a1c0ccf3d2ed62ed89a8f1069118d593ab6b3ec1820a4a42d3",
+      "decision": "distinct",
+      "notes": "Compared foreground grapes and peach beside a tall dark pitcher with angular green pitcher and basket beside red chair; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "9c2013a232d3245705dd45de8899ad1f42bcc613a8c2c1f85402dbe5ddc90eec",
+      "decision": "distinct",
+      "notes": "Compared foreground grapes and peach beside a tall dark pitcher with blue/white flowers and fern leaves; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "6f0e48d73704feb497828cb0d712795d334bda97a3395ac228c89ad01f1dd7c8",
+      "decision": "distinct",
+      "notes": "Compared isolated hanging red grape bunch with jug, glass, bread and live/dead birds; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "43d6b61b4e42e2afe9a9fe36b109b678b3634c6989bf67854ecaa7c2df9e1551",
+      "decision": "distinct",
+      "notes": "Compared isolated hanging red grape bunch with fruit and green bottle over white cloth; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "b47925766fb6d1abcdc29b83fd3cfd4679c650339110f40b4ca2e07ce7a2e7d9",
+      "decision": "distinct",
+      "notes": "Compared isolated hanging red grape bunch with angular green pitcher and basket beside red chair; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "087fa0e8ae78b0d40b45292b62d41ac232efa8ebe92d025ba82066105ea91a1d",
+      "decision": "distinct",
+      "notes": "Compared isolated hanging red grape bunch with blue/white flowers and fern leaves; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "e60c7c77fc846f656b44e6474ed24391e790e254d8f191a39170e177ff2bc09b",
+      "decision": "distinct",
+      "notes": "Compared jug, glass, bread and live/dead birds with fruit and green bottle over white cloth; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "f5589a2f7e6449ad52f055a566efdf1c6ad1de7ef1ffa737a0ea01c5b7fea454",
+      "decision": "distinct",
+      "notes": "Compared jug, glass, bread and live/dead birds with angular green pitcher and basket beside red chair; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "647a08cded7991936d641559bd1016e6630295c2ebf3006dd19df715c8643f16",
+      "decision": "distinct",
+      "notes": "Compared jug, glass, bread and live/dead birds with blue/white flowers and fern leaves; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "21e68029663f93b98c2d0cf4c33cbf513bc4f4e516f2711b9a73a7318bf034bc",
+      "decision": "distinct",
+      "notes": "Compared fruit and green bottle over white cloth with angular green pitcher and basket beside red chair; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "7473707269a624acf3583e90902666f794153465a2ac4653111f907b36b28ac0",
+      "decision": "distinct",
+      "notes": "Compared fruit and green bottle over white cloth with blue/white flowers and fern leaves; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    },
+    {
+      "pair_id": "aa7c04418b477492fce2e32f7d8631b812e32b397f8aa003e45dcbaf83483f99",
+      "decision": "distinct",
+      "notes": "Compared angular green pitcher and basket beside red chair with blue/white flowers and fern leaves; different visible compositions and subjects, with no alternate reproduction/crop apparent at these retained resolutions. This is a bounded visual judgment, not corpus-wide duplicate recall."
+    }
+  ],
+  "reviewer": {
+    "kind": "assistant",
+    "name": "Codex assistant",
+    "method": "Inspected the retained contact sheet, all eight source JPEGs individually and excluded monochrome 10895. Compared all 28 pair rows against distinct observed compositions. Read pinned provider creator identifiers and qualified attribution. Consulted https://www.metmuseum.org/art/collection/search/436305 for the small bird subjects; observation retained in docs/evidence/phase-b02-source-observations-20260923.json. Captions use literal visible objects, one itovstill token and no artist-name conditioning. Target was refined before any new model experiment.",
+    "limitations": "Only the locally retained low-resolution images and provider assertions were inspected. Hash distances are heuristic and not crop/rotation invariant; no corpus-wide recall or pretraining independence claim. Style-of attribution does not identify the actual maker. The final two-training/one-validation set is very small and differs in era, palette and density; it is not a representative corpus or proof of useful learning."
+  },
+  "samples": [
+    {
+      "caption": "itovstill oil painting of sliced cake on a plate with green grapes, dried fruit and a stemmed glass on a tabletop against a brown background\n",
+      "caption_notes": "Confirmed cake slices, plate, grapes and glass in the source; added dried fruit without claiming a species.",
+      "caption_verdict": "accept",
+      "decision": "include",
+      "decision_notes": "Keep the existing validation assignment; caption describes the visible scene without promising arbitrary counts.",
+      "sample": "met-11737",
+      "split": "validation",
+      "target_fit": "match",
+      "target_notes": "Naturalistically modeled food and vessels on one tabletop. Held out as the sole validation work; different retained creator IDs from selected training works."
+    },
+    {
+      "caption": "itovstill oil painting of an abundant display of grapes, peaches, sliced melon and other fruit in bowls and a basket, with stemmed glasses and dark foliage behind\n",
+      "caption_notes": "The image includes baskets and glassware as well as bowls; the old caption underdescribed these. Do not assert a precise fruit count.",
+      "caption_verdict": "accept",
+      "decision": "include",
+      "decision_notes": "Retain in training with revised literal caption; density/style variation remains an explicit limitation.",
+      "sample": "met-11939",
+      "split": "train",
+      "target_fit": "match",
+      "target_notes": "Recognizable modeled fruit and vessels in one continuous tabletop display. Dense arrangement remains different from the simpler selected works."
+    },
+    {
+      "caption": "itovstill oil painting of pale grapes, a peach, a bowl of red grapes, a stemmed glass and a tall dark pitcher on a white cloth against a brown background\n",
+      "caption_notes": "Direct inspection supports red grapes in the bowl, pale foreground grapes, one prominent peach, glass and tall pitcher; caption is more specific than the old red-fruit description.",
+      "caption_verdict": "accept",
+      "decision": "include",
+      "decision_notes": "Retain in training; the other work by the same attributed creator is explicitly excluded for target mismatch.",
+      "sample": "met-16590",
+      "split": "train",
+      "target_fit": "match",
+      "target_notes": "Naturalistically modeled fruit and vessels on a cloth-covered tabletop in a continuous scene."
+    },
+    {
+      "caption": "itovstill oil painting of one hanging bunch of red grapes against a muted green background\n",
+      "caption_notes": "Original caption matches the retained hanging grape study.",
+      "caption_verdict": "accept",
+      "decision": "exclude",
+      "decision_notes": "Exclude under the tabletop criterion. Retain the shared Ream constituent, ULAN and Wikidata identifiers with met-16590.",
+      "sample": "met-16592",
+      "split": "train",
+      "target_fit": "mismatch",
+      "target_notes": "Naturalistic fruit, but isolated hanging subject and no tabletop arrangement."
+    },
+    {
+      "caption": "itovstill oil painting of a brown jug, a stemmed glass, sliced lemon, walnuts, a bird carcass on a dark plate and a living bird on bread on a linen-covered table\n",
+      "caption_notes": "The prior caption omits both birds. Source inspection and the attributed Met curatorial description resolve these small subjects; no bird species is asserted.",
+      "caption_verdict": "accept",
+      "decision": "exclude",
+      "decision_notes": "Exclude after direct caption/subject review. Preserve original image, caption, old model evidence and the first broader inspection.",
+      "sample": "met-436305",
+      "split": "train",
+      "target_fit": "mismatch",
+      "target_notes": "Naturalistic tabletop treatment, but live/dead animal subjects are outside the refined fruit, food and vessels target."
+    },
+    {
+      "caption": "itovstill oil painting of yellow and green fruit and a green bottle on a white cloth, with curved motifs in the background\n",
+      "caption_notes": "Original several-pears caption overgeneralizes the fruit; proposed broader fruit description avoids uncertain individual identification.",
+      "caption_verdict": "accept",
+      "decision": "exclude",
+      "decision_notes": "Exclude for target mismatch and unresolved maker attribution: constituent name says Style of Paul Gauguin and provider prefix qualifies authorship. Associated Gauguin IDs are grouping evidence, not authentication of the maker.",
+      "sample": "met-436450",
+      "split": "validation",
+      "target_fit": "mismatch",
+      "target_notes": "Flatter outlines and visible expressive brushwork differ from the chosen naturalistic treatment."
+    },
+    {
+      "caption": "itovstill colorful angular oil painting of a green pitcher, a basket of fruit and a glass on a patterned tabletop beside a red chair\n",
+      "caption_notes": "Source shows a basket-like fruit container, patterned cloth, vessel and red chair; updated the older bowl description.",
+      "caption_verdict": "accept",
+      "decision": "exclude",
+      "decision_notes": "Exclude for treatment mismatch; retain it in the reviewed pool rather than deleting it.",
+      "sample": "met-488147",
+      "split": "train",
+      "target_fit": "mismatch",
+      "target_notes": "Angular forms, fractured perspective and saturated modernist treatment are outside the selected naturalistic target."
+    },
+    {
+      "caption": "itovstill oil painting of blue and white flowers with green fern leaves against a dark brown background\n",
+      "caption_notes": "Source shows both blue and small white flowers with fern leaves; original caption mentioned only blue flowers.",
+      "caption_verdict": "accept",
+      "decision": "exclude",
+      "decision_notes": "Exclude for subject/composition mismatch; preserve the source and attributed creator record.",
+      "sample": "met-898372",
+      "split": "train",
+      "target_fit": "mismatch",
+      "target_notes": "Floral study without food, vessels or a tabletop arrangement."
+    }
+  ],
+  "version": 1
+}

@@ -216,6 +216,8 @@ ITOV 0.12.0 adds explicit dataset preparation, pinned training plans, one owned 
 
 New local and retained Met datasets can use [transactional import and recovery](docs/dataset-import.md): `itov dataset import DECLARATION --source-root INPUTS --config WORKSPACE/itov.toml`. It fully decodes and transforms declared images, retains failed attempts and publishes complete bundles. Preparation requires the optional `dataset` extra (Pillow 12.3.0), available in the checkout dev environment, or `--image-python` pointing to that dependency. `dataset status`, `recover` and `verify` expose progress and commit integrity. The older commands below remain available for existing version-one data.
 
+[Dataset review and freezing](docs/dataset-review.md) add all-pair content/perceptual observations, stable attributed work/creator groups, leakage checks and explicit caption/target judgments. `dataset inspect`, `freeze` and `review-verify` preserve exclusions and freeze the selected split/captions. `dataset curate --freeze` binds a newly imported Met selection into training qualification. The reviewed pilot now selects two training works and one validation work; it remains too small to establish useful model quality, and the existing candidate remains rejected.
+
 ```powershell
 uv run --locked itov dataset prepare workspace/training/data/neutral-geometry-v1/dataset.json --json
 uv run --locked itov training plan examples/sdxl-neutral.training.json --save --json

@@ -108,6 +108,9 @@ def worker_sources():
         "evidence_reads.py",
         "dataset_snapshot.py",
         "dataset_manifest.py",
+        "dataset_freeze.py",
+        "dataset_inspection.py",
+        "dataset_identity.py",
     )
     return {name: sha256(Path(__file__).with_name(name).read_bytes()) for name in names}
 
