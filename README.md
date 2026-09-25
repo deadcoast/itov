@@ -12,6 +12,10 @@ The [current TODO](TODO.md) and [source audit](docs/development-audit-20260922.m
 
 [Frozen evaluation corpora](docs/evaluation-corpus.md) extend coverage independently of training. The `corpus` commands preserve legacy failures, freeze broader cases and strength conditions, and record complete base-model observations before tuning. Version-two `evaluation` plans render baseline controls or the full comparison through the existing owned runtime workflow.
 
+[Image checks and evaluator calibration](docs/image-checks.md) bind repeatable artifact measurements and optional evaluator judgments to every completed evaluation image. The `checks` commands report false accepts/rejects, uncertainty and missing judgments against direct inspection, without assigning a composite quality score or accepting a model.
+
+[Deployed candidate review](docs/deployed-review.md) verifies the installed loader's tensor targets and records complete image/comparison judgments. `evaluation mapping`, `review-packet`, `decide` and `decision-replay` bind a conservative disposition to the actual deployed artifact, runtime and decoded matrix. Failed or uncertain quality prevents acceptance; these commands do not activate a candidate.
+
 Start with the [operator runbook](docs/operator-runbook.md) for the supported sequence from setup through execution, recovery and completed replay. Result commands now use consistent text/JSON outcomes, artifact references and suggested next commands. JSON adds `_cli` metadata without changing saved evidence; incomplete status/retirement returns exit 1, including batch status and abandonment.
 
 To combine a directory of Markdown specifications into one searchable PDF, run

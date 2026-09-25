@@ -2,6 +2,8 @@
 
 C-01 adds `corpus freeze`, `inspect`, `baseline` and `replay`, plus version-two `evaluation` specifications. A corpus is independent of a training run's original diagnostic matrix. Existing validated checkpoints can use its cases without retraining. The original version-one training suites, evaluation plans and reports retain their formats and identities.
 
+C-02's [image checks](image-checks.md) measure completed evaluation images and compare narrow artifact screens or optional evaluators with complete reference annotations. Its [calibration](image-check-calibration-20260924.md) reuses the exposed baseline, preserves every semantic verdict and adds direct inspection of outer framing. This is evaluator calibration, not a new independent model holdout or authorization to tune training on these cases.
+
 ## Declare coverage before rendering
 
 [The corpus example](../examples/still-life.corpus.json) contains twelve prompts, three fixed seeds per prompt, explicit expectations and seven coverage axes: counts, attributes, layout, textures, trigger specificity, strength range and unrelated-task regressions. Seven cases are new held-out target tasks; five are regression cases, including both previously inspected prompts. Their original text, expectations and two seeds remain unchanged, with a third seed added. New landscape, bicycle and bird tasks test unintended still-life/style transfer.

@@ -8,6 +8,8 @@ For B-03 training configuration, use the [optimization runbook](training-configu
 
 For C-01 evaluation coverage, use the [corpus runbook](evaluation-corpus.md). Freeze broader cases and strengths independently of training, execute a base-model baseline, then record every image observation. Pending review returns 1; a successfully recorded baseline returns 0 even when images fail. It cannot promote a candidate.
 
+For C-02, use [`checks packet/inspect/calibrate/replay`](image-checks.md) after complete deployed evaluation. Inspect every image and record complete references; supply an optional evaluator response only when available. Successful recording returns 0 while preserving false accepts/rejects and uncertainty. The initial screen [missed all six observed bordered images](image-check-calibration-20260924.md); its passes cannot establish quality. C-03's complete candidate matrix remains outstanding.
+
 All result commands print text by default. Add `--json` for exactly one JSON object on stdout, including argument/configuration errors. JSON retains the existing domain fields and adds `_cli` version 1:
 
 | Field | Meaning |
@@ -171,6 +173,8 @@ uv run --inexact --locked itov evaluation replay $comparison.saved_path --config
 Inspect all base/trigger/adapter conditions and seeds. Retain count/material/regression failures and uncertainty. A saved technical report has `quality_acceptance: not_established`. The packet writes a pending `.review.json` template; the assistant records observations, evidence hashes, method, limitations and an actual verdict. It must not turn failed checks into approvals. Use `promotion prepare TRAINING_PLAN --review REVIEW --save` to inspect policy; explicit `promotion apply` additionally binds the reviewed decision and current catalog head. This runbook stops at the current candidate's rejection.
 
 ## Recovery choices
+
+For a complete version-two deployed comparison, use the [C-03 review sequence](deployed-review.md): `evaluation mapping PLAN --save`, `evaluation review-packet PLAN --mapping CERTIFICATE --save`, inspect every image/comparison and fill the saved template, then `evaluation decide PACKET --review REVIEW --save`. `evaluation decision-replay DECISION` repeats all bindings and the disposition offline. A valid recorded rejection returns exit 0; read `disposition`, not the command exit alone. This decision format does not feed the legacy promotion command; C-05 lifecycle integration remains outstanding.
 
 | Observation | Safe next operation | Required evidence |
 | --- | --- | --- |

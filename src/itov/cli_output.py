@@ -324,6 +324,36 @@ def _guidance(args, result, state):
         )
         if status == "artifact_invalid":
             message = "Published data failed verification. Preserve the bundle and investigate."
+    elif command == "evaluation" and action in {
+        "mapping",
+        "mapping-inspect",
+        "review-packet",
+        "review-inspect",
+        "decide",
+        "decision-replay",
+    }:
+        message = "Loader evidence and complete matrix review do not activate a candidate."
+        if result.get("scope") == "deployed_review_packet":
+            message = (
+                "Inspect every image and matched comparison, then fill the sibling "
+                ".review.json including uncertainty."
+            )
+            if result.get("saved_path"):
+                configured(
+                    "Record candidate disposition",
+                    "evaluation",
+                    "decide",
+                    result["saved_path"],
+                    "--review",
+                    str(Path(result["saved_path"]).with_suffix(".review.json")),
+                    "--save",
+                )
+        if result.get("scope") == "deployed_candidate_decision":
+            message = (
+                "Recorded disposition: "
+                + result["disposition"]
+                + ". No candidate activation occurred."
+            )
     elif command == "checks":
         message = "Artifact measurements and calibration retain uncertainty; no model is accepted."
         if result.get("scope") == "image_check_packet":
@@ -618,6 +648,20 @@ def _text(result, meta):
     if result.get("scope") == "image_check_packet":
         lines.append(f"Measured images: {len(result['measurements'])}")
         lines.append("Semantic quality: unavailable from artifact measurements")
+    if result.get("scope") == "deployed_loader_mapping":
+        lines.append(f"Mapped targets: {len(result['mapping']['rows'])}")
+        lines.append("Loader registration verified; image quality is separate")
+    if result.get("scope") == "deployed_review_packet":
+        lines.append(
+            f"Images: {len(result['evaluation']['matrix'])}; comparisons: {len(result['groups'])}"
+        )
+        lines.append("Quality review pending")
+    if result.get("scope") == "deployed_candidate_decision":
+        lines.append("Disposition: " + result["disposition"])
+        lines.append(
+            "Required judgments: " + json.dumps(result["required_judgments"], sort_keys=True)
+        )
+        lines.append("Promotion eligible: False")
     if result.get("scope") == "image_check_calibration":
         for criterion, row in result["summary"].items():
             lines.append(

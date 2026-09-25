@@ -8,6 +8,8 @@ Use a successful version 2 training plan with a frozen curated dataset and quali
 
 The paragraph above describes version-one evaluation specifications and their original training suite. Curated v3/v4 training is also supported. C-01 adds [version-two corpus evaluation](evaluation-corpus.md): a separate frozen corpus with 8–24 cases, 3–8 seeds per case and multiple strengths. `mode: "baseline"` renders only the two base controls; `mode: "comparison"` renders both controls and both adapter conditions at every frozen strength. Old plan and report identities remain unchanged.
 
+After complete replay, use [`checks packet`](image-checks.md) for versioned artifact measurements and an optional evaluator request. Calibration retains every image's reference/prediction, error counts and unknown judgments. Neither technical decode nor artifact-screen passes establish candidate quality; the initial border screen missed all six observed framed baseline images.
+
 [The pilot specification](../examples/still-life.evaluation.json) pins this workspace's retained curated training plan. A fresh workspace must provision and validate its own training inputs and supply their plan path/hash. Paths inside the specification are relative to the configured workspace; the specification argument itself is a normal CLI path.
 
 ```json
@@ -54,6 +56,10 @@ A timeout or Ctrl+C stops the controller's wait; accepted server work can still 
 Every evaluation output must be exactly one owned PNG with the declared dimensions, pinned file hash, successful complete FFmpeg RGB decoding and a recorded decoded-pixel hash. Corrupt/truncated files stop progress before the next job. Decoder identity is pinned. Image validity and changed pixels do not establish prompt adherence or useful training.
 
 `replay --save` requires the complete valid matrix, current training/candidate inputs, unchanged declared runtime/model files and the same decoder. It performs no HTTP and writes an immutable `state/evaluation/reports/REPORT_ID.json` containing all bindings, image paths, hashes and owned job references. Its `technical_pass` is separate from `quality_acceptance: not_established`. Inspect the actual images and retain case-level quality findings before making any disposition. Replay does not activate, promote, certify loader-target coverage or establish Diffusers/ComfyUI sampler parity.
+
+For version-two comparisons, continue through [loader mapping and deployed candidate review](deployed-review.md). `evaluation mapping` probes the actual installed CPU loader and records every tensor-to-target binding and patch strength. `review-packet` binds that certificate to the complete decoded matrix; `decide` and `decision-replay` record/revalidate all image and matched-comparison judgments. These separate records preserve the technical report's original scope and never promote a candidate.
+
+An instrumented runtime plan binds the observer session, including server identity. Restarting the server requires a new plan for future submissions even when model/source/settings bytes are unchanged. Preserve the old plan and refusal; do not edit the runtime identity in a saved plan. Completed offline replay does not require that original server process to remain running.
 
 CLI exits are 0 for a saved/printed plan, complete valid status/run/replay, and 1 for incomplete, paused, failed, abandoned or artifact-invalid reports. Malformed inputs, stale bindings and operational refusals before an execution report return 2. Default text prints counts and case-level progress; `--json` retains all bindings and diagnostics.
 

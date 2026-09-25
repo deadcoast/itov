@@ -67,6 +67,7 @@ def _packet(config, evaluation_path):
             "scope": "image_check_packet",
             "evaluation_plan": _reference(config, evaluation_path),
             "evaluation": report,
+            "reference_rubrics": RUBRICS,
             "checker": {
                 "version": image_metrics.VERSION,
                 "parameters": image_metrics.PARAMETERS,
@@ -198,6 +199,7 @@ def _read_packet(config, path):
             "scope",
             "evaluation_plan",
             "evaluation",
+            "reference_rubrics",
             "checker",
             "measurements",
             "controls",

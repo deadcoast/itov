@@ -351,6 +351,24 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--decision", type=Path, required=True)
     evaluation = commands.add_parser("evaluation", help="Technical training assessment")
     evaluation_actions = evaluation.add_subparsers(dest="action", required=True)
+    for action in (
+        "mapping",
+        "mapping-inspect",
+        "review-packet",
+        "review-inspect",
+        "decide",
+        "decision-replay",
+    ):
+        item = evaluation_actions.add_parser(action)
+        item.add_argument("file", type=Path)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"mapping", "review-packet", "decide"}:
+            item.add_argument("--save", action="store_true")
+        if action == "review-packet":
+            item.add_argument("--mapping", type=Path, required=True)
+        if action == "decide":
+            item.add_argument("--review", type=Path, required=True)
     for action in ("assess", "packet", "plan", "run", "status", "resume", "replay", "abandon"):
         item = evaluation_actions.add_parser(action)
         item.add_argument("file", type=Path)
@@ -584,7 +602,41 @@ def _execute(args):
                 )
                 result = operation(config.root, args.file)
         elif args.command == "evaluation":
-            if args.action in {"plan", "run", "status", "resume", "replay", "abandon"}:
+            if args.action in {
+                "mapping",
+                "mapping-inspect",
+                "review-packet",
+                "review-inspect",
+                "decide",
+                "decision-replay",
+            }:
+                from itov import deployed_loader, deployed_review
+
+                if args.action == "mapping":
+                    result = deployed_loader.mapping(config, args.file, save=args.save)
+                elif args.action == "mapping-inspect":
+                    result = deployed_loader.inspect(config, args.file)
+                elif args.action == "review-packet":
+                    result = deployed_review.packet(config, args.file, args.mapping, save=args.save)
+                elif args.action == "review-inspect":
+                    result = deployed_review.inspect(config, args.file)
+                elif args.action == "decide":
+                    result = deployed_review.decide(config, args.file, args.review, save=args.save)
+                else:
+                    result = deployed_review.replay(config, args.file)
+                if getattr(args, "save", False):
+                    folder, key = {
+                        "mapping": ("mappings", "mapping_id"),
+                        "review-packet": ("review-packets", "packet_id"),
+                        "decide": ("decisions", "decision_id"),
+                    }[args.action]
+                    result = {
+                        **result,
+                        "saved_path": str(
+                            config.root / f"state/evaluation/{folder}/{result[key]}.json"
+                        ),
+                    }
+            elif args.action in {"plan", "run", "status", "resume", "replay", "abandon"}:
                 from itov import evaluation_runtime
 
                 if args.action == "plan":
