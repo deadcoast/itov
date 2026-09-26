@@ -197,6 +197,8 @@ Follow the suggested domain status/replay command for that validation. See the
 
 Model assets must already match their declared hashes. The v1 SDXL, Wan video and Stable Audio examples use `prepare`, explicit reviewed catalog import, `plan --save`, then the batch commands above. Use `video verify SPEC OUTPUT.mp4`, `audio verify SPEC OUTPUT`, and `av mux SPEC` for their media contracts. [Image](image-inference.md), [video](image-to-video.md), [audio/A/V](audio-and-av.md) and [VRAM](vram-profiling.md) detail provisioning and bounded qualification. The A/V examples reference retained jobs; new sessions must declare their own job/record/artifact hashes.
 
+For [extended video/audio](extended-media.md), use the v2 examples and the same explicit catalog/qualification sequence. `video bind-source --save` binds a completed image job; `av spec --save` selects completed media records and a source-audio offset. `av replay` verifies an existing bundle without creating one. `batch cancel` records a durable request to finish accepted work and retire remaining picks; optional `--interrupt-running` requires the reviewed atomic per-job endpoint. Keep the owner running or resume the same plan to settle it. A saved request is not terminal cancellation; abandoned plans still return exit one and retain seeds.
+
 Version-two SDXL inference stages explicit checkpoint/adapter bindings without catalog activation. Set `$inferenceSpec` to your declared specification; it must pin your own asset and training-plan hashes:
 
 ```powershell

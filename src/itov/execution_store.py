@@ -191,6 +191,8 @@ def record_run(db, plan_id: str, status: str, error: str | None = None):
 
 
 def report(db, config: Config, plan: dict) -> dict:
+    from itov.batch_cancellation import requested
+
     run, rows = check_run(db, config, plan)
     return {
         "ok": run["status"] == "succeeded",
@@ -200,4 +202,5 @@ def report(db, config: Config, plan: dict) -> dict:
         "jobs": [dict(row) for row in rows],
         "succeeded": sum(row["status"] == "succeeded" for row in rows),
         "scope": "sequential_batch_observations",
+        **({"cancellation": value} if (value := requested(config, plan)) else {}),
     }

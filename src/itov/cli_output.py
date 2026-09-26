@@ -256,6 +256,28 @@ def _guidance(args, result, state):
                 " Acceptance is unknown. Inspect server history; only a provenance- "
                 "matched prompt id may be supplied to job wait --prompt-id."
             )
+    elif command == "batch" and action == "cancel":
+        message = (
+            (
+                "Cancellation requested. Keep the owning controller running, or resume this plan "
+                "to observe accepted work and retire remaining picks. Seeds stay reserved."
+            )
+            if state == "ok"
+            else message
+        )
+        configured("Observe and settle cancellation", "batch", "resume", source)
+    elif command == "video" and action == "bind-source" and state == "ok":
+        message = "Source job and image bytes are bound; prepare the saved specification next."
+        if result.get("saved_path"):
+            configured("Stage the bound video source", "video", "prepare", result["saved_path"])
+    elif command == "av":
+        if action == "spec" and state == "ok":
+            message = "Sources and audio offset are bound. Inspect the specification before muxing."
+            if result.get("saved_path"):
+                configured("Compose the saved A/V specification", "av", "mux", result["saved_path"])
+        elif state == "ok":
+            message = "Decode and timing checks passed. Inspect full playback for media quality."
+            configured("Reverify published A/V output", "av", "replay", source)
     elif command in {"batch", "inference", "evaluation"} and action in {
         "run",
         "resume",

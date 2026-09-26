@@ -199,6 +199,9 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
             bind(config.comfyui_root, name)
     for job in plan["jobs"]:
         graph = parse_json(job["workflow_json"])
+        from itov.media_configuration import extended_graph
+
+        audio_limit = extended_graph(graph)
         validation = validate_workflow(graph, registry).to_dict()
         require(
             validation["valid"],
@@ -238,6 +241,13 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
                 )
                 asset = bind(config.runtime_root / "input", inputs["image"])
                 _pin(node, asset, "input image", required=video)
+                if "itov_source" in node.get("_meta", {}):
+                    from itov.media_sources import image_source
+
+                    source = node["_meta"]["itov_source"]
+                    output = image_source(config, source, asset["sha256"])
+                    bind(config.root, f"state/jobs/{source['request_id']}.json")
+                    bind(output.parent, output.name)
             elif kind == "CLIPTextEncode":
                 require(
                     isinstance(inputs["text"], str) and "embedding:" not in inputs["text"].lower(),
@@ -304,14 +314,14 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
             elif kind == "EmptyLatentAudio":
                 require(
                     type(inputs["seconds"]) is int
-                    and 1 <= inputs["seconds"] <= 10
+                    and 1 <= inputs["seconds"] <= audio_limit
                     and inputs["batch_size"] == 1,
-                    "Audio profile requires 1..10 seconds and batch size one",
+                    "Audio duration exceeds its versioned contract or batch size is not one",
                 )
             elif kind == "ConditioningStableAudio":
                 require(
-                    inputs["seconds_start"] == 0 and 1 <= inputs["seconds_total"] <= 10,
-                    "Audio conditioning must start at zero and last 1..10 seconds",
+                    inputs["seconds_start"] == 0 and 1 <= inputs["seconds_total"] <= audio_limit,
+                    "Audio conditioning must start at zero and fit its versioned duration",
                 )
             elif kind == "CreateVideo":
                 require(

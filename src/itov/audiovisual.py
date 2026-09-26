@@ -35,9 +35,25 @@ def load_spec(path: Path) -> dict:
 
 
 def validate_spec(value: dict) -> dict:
-    object_fields(value, {"version", "video", "audio", "policy"}, "audiovisual specification")
-    require(type(value["version"]) is int and value["version"] == 1, "Invalid audiovisual version")
-    require(value["policy"] == "start-zero-trim-or-pad-v1", "Unsupported audio alignment policy")
+    extended = isinstance(value, dict) and value.get("version") == 2
+    object_fields(
+        value,
+        {"version", "video", "audio", "policy"} | ({"audio_offset_ms"} if extended else set()),
+        "audiovisual specification",
+    )
+    require(
+        type(value["version"]) is int and value["version"] in (1, 2), "Invalid audiovisual version"
+    )
+    require(
+        value["policy"]
+        == ("source-offset-trim-or-pad-v2" if extended else "start-zero-trim-or-pad-v1"),
+        "Unsupported audio alignment policy",
+    )
+    if extended:
+        require(
+            type(value["audio_offset_ms"]) is int and 0 <= value["audio_offset_ms"] < 47000,
+            "Audio source offset must be 0..46999 milliseconds",
+        )
     for kind in ("video", "audio"):
         binding = value[kind]
         object_fields(binding, {"request_id", "node_id", "sha256", "record_sha256"}, kind)
@@ -108,18 +124,20 @@ def _source(config: Config, binding: dict, kind: str) -> dict:
     }
 
 
-def _alignment(video: dict, audio: dict) -> dict:
+def _alignment(video: dict, audio: dict, offset_ms=0) -> dict:
     contract = video["contract"]
     target = round(Fraction(contract["frames"] * 48000, contract["fps"]))
     resampled = round(Fraction(audio["contract"]["samples"] * 48000, 44100))
+    offset = offset_ms * 48
+    require(offset < resampled, "Audio source offset leaves no samples")
     return {
         "sample_rate": 48000,
         "channels": 2,
         "target_samples": target,
-        "offset_samples": 0,
+        "offset_samples": offset,
         "resampled_source_samples_estimate": resampled,
-        "trim_samples_estimate": max(0, resampled - target),
-        "pad_samples_estimate": max(0, target - resampled),
+        "trim_samples_estimate": max(0, resampled - offset - target),
+        "pad_samples_estimate": max(0, target - (resampled - offset)),
         "normalization": "none",
         "sample_format": "s16le",
         "codec": "aac",
@@ -217,16 +235,64 @@ def _verify(directory: Path, video: dict, alignment: dict) -> dict:
     }
 
 
-def mux(config: Config, spec: dict) -> dict:
+def build_spec(
+    config, video_record, audio_record, *, video_node, audio_node, audio_offset_ms=0, save=False
+):
+    from itov.media_sources import from_record
+    from itov.training_data import publish
+
+    spec = validate_spec(
+        {
+            "version": 2,
+            "policy": "source-offset-trim-or-pad-v2",
+            "audio_offset_ms": audio_offset_ms,
+            "video": from_record(config, video_record, video_node, "SaveVideo"),
+            "audio": from_record(config, audio_record, audio_node, "SaveAudioAdvanced"),
+        }
+    )
+    video, audio = (_source(config, spec[kind], kind) for kind in ("video", "audio"))
+    _alignment(video, audio, audio_offset_ms)
+    result = {"ok": True, "scope": "bound_av_sources", "specification": spec}
+    if save:
+        path = safe_path(
+            config.root, f"state/av/specifications/{sha256(canonical_bytes(spec))}.json"
+        )
+        publish(path, spec)
+        result["saved_path"] = str(path)
+    return result
+
+
+def _fresh_sources(config, sources):
+    for source in sources:
+        require(
+            _file(Path(source["path"]))["sha256"] == source["sha256"], "Source changed during mux"
+        )
+        record = safe_path(config.root, f"state/jobs/{source['request_id']}.json")
+        require(
+            sha256(read_document(record)) == source["record_sha256"],
+            "Source job record changed during mux",
+        )
+
+
+def replay(config, spec):
+    return mux(config, spec, require_existing=True)
+
+
+def mux(config: Config, spec: dict, *, require_existing=False) -> dict:
     spec = validate_spec(spec)
     operation_id = sha256(canonical_bytes(spec))
     root = safe_path(config.root, "output/av")
+    destination = safe_path(root, operation_id)
+    require(
+        not require_existing or destination.is_dir(),
+        "Published A/V output is missing; replay cannot create it",
+    )
     root.mkdir(parents=True, exist_ok=True)
     locks = safe_path(config.root, "state/av")
     locks.mkdir(parents=True, exist_ok=True)
     with file_lock(locks / (operation_id + ".lock")):
         video, audio = (_source(config, spec[kind], kind) for kind in ("video", "audio"))
-        alignment = _alignment(video, audio)
+        alignment = _alignment(video, audio, spec.get("audio_offset_ms", 0))
         destination = safe_path(root, operation_id)
         if destination.exists():
             receipt = parse_json(read_document(safe_path(destination, "receipt.json")))
@@ -248,6 +314,12 @@ def mux(config: Config, spec: dict) -> dict:
                     "Published mux artifact differs; preserve and inspect",
                 )
             _verify(destination, video, alignment)
+            require(
+                receipt.get("alignment") == alignment
+                and receipt.get("sources") == {"video": video, "audio": audio},
+                "Published A/V source or alignment contract differs",
+            )
+            _fresh_sources(config, (video, audio))
             return {
                 "ok": True,
                 "status": "verified_existing",
@@ -259,6 +331,9 @@ def mux(config: Config, spec: dict) -> dict:
             tools = video_tools()
             common = [tools["ffmpeg"], "-v", "error", "-xerror", "-nostdin", "-n"]
             samples = alignment["target_samples"]
+            offset_filter = (
+                f"atrim=start_sample={alignment['offset_samples']}," if spec["version"] == 2 else ""
+            )
             _run(
                 common
                 + [
@@ -269,7 +344,7 @@ def mux(config: Config, spec: dict) -> dict:
                     "-map",
                     "0:a:0",
                     "-af",
-                    f"aresample=48000,apad,atrim=end_sample={samples},asetpts=N/SR/TB",
+                    f"aresample=48000,{offset_filter}apad,atrim=end_sample={samples},asetpts=N/SR/TB",
                     "-ac",
                     "2",
                     "-c:a",
@@ -308,11 +383,7 @@ def mux(config: Config, spec: dict) -> dict:
                 ]
             )
             validation = _verify(attempt, video, alignment)
-            for source in (video, audio):
-                require(
-                    _file(Path(source["path"]))["sha256"] == source["sha256"],
-                    "Source changed during mux",
-                )
+            _fresh_sources(config, (video, audio))
             receipt = {
                 "version": 1,
                 "operation_id": operation_id,
@@ -337,6 +408,7 @@ def mux(config: Config, spec: dict) -> dict:
             }
             receipt["receipt_sha256"] = sha256(_receipt_bytes(receipt))
             _atomic_write(attempt / "receipt.json", _receipt_bytes(receipt) + b"\n", exclusive=True)
+            _fresh_sources(config, (video, audio))
             os.rename(attempt, destination)
         except Exception as error:
             if attempt.exists():

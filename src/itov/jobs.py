@@ -170,6 +170,7 @@ def _wait(
     record: dict,
     wait_timeout: float,
     poll_interval: float,
+    on_poll=None,
 ) -> dict:
     deadline = time.monotonic() + wait_timeout
     original_timeout = client.timeout
@@ -179,6 +180,8 @@ def _wait(
     try:
         while time.monotonic() < deadline:
             client.timeout = min(original_timeout, max(0.001, deadline - time.monotonic()))
+            if on_poll is not None:
+                on_poll(client, record)
             history = client.history(record["prompt_id"])
             if history is not None:
                 if "owner" in record or "device_lease" in record:
@@ -380,6 +383,7 @@ def _wait_job(
     timeout: float = 3,
     wait_timeout: float = 120,
     poll_interval: float = 1,
+    on_poll=None,
 ) -> dict:
     _timing(wait_timeout, poll_interval)
     validate_timeout(timeout)
@@ -460,4 +464,5 @@ def _wait_job(
             record,
             wait_timeout,
             poll_interval,
+            on_poll=on_poll,
         )

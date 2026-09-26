@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "task": "D-02",
+  "local_date": "2026-09-26",
+  "prior_receipt": {
+    "file": "docs/evidence/phase-d02-verification-20260925.json",
+    "sha256": "08b3b8c6b02bd2536eaf5ed2cb7c3eaebf01837102c6e9350bb8524d56057b40",
+    "unchanged": true
+  },
+  "status": "active_pending_perceptual_playback_and_listening_review",
+  "task_complete": false,
+  "implementation_complete": true,
+  "technical_verification_complete": true,
+  "inspection": {
+    "technical_browser_playback_complete": true,
+    "artifacts_played_to_end": 6,
+    "video_frames_presented_including_av": 404,
+    "dropped_frames": 0,
+    "corrupted_frames": 0,
+    "unique_frames_directly_inspected_in_prior_review": 202,
+    "new_browser_screenshots_directly_inspected": 4,
+    "video_121_and_av_121": "Unrequested hand visible; prompt-compliance failure retained.",
+    "audio_exports_explicitly_authorized_and_emitted": [
+      "audio-20",
+      "audio-47"
+    ],
+    "audio_listening_complete": false,
+    "continuous_motion_perceptual_review_complete": false,
+    "quality_accepted": false,
+    "remaining": "Actual perceptual review of complete audio/A/V tracks and continuous video playback. Output-only audio rendering supplies no auditory input to the assistant."
+  },
+  "preservation": {
+    "prior_evidence_files_verified_unchanged": 143,
+    "historical_files_verified_unchanged": 2047,
+    "packaged_source_modules_verified_unchanged": 86,
+    "readme_verified_unchanged": true,
+    "worker_sources_verified_unchanged": 21,
+    "catalog_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+    "scm_dev_tools": "0.5.0"
+  },
+  "validation": {
+    "local_document_links_checked": 54,
+    "server_port_closed": true,
+    "browser_closed": true,
+    "source_tests_rerun": false,
+    "reason": "Source and package bytes unchanged; continuation adds browser verification and documentation only."
+  },
+  "evidence": {
+    "docs/evidence/phase-d02-browser-playback-20260926.json": {
+      "bytes": 98167,
+      "sha256": "2d7a5310bfe07c06c00c2d39d1fc7ca53713128fdb34a4b3afb1946a11fc4280"
+    },
+    "docs/evidence/phase-d02-inspection-paths-20260926.json": {
+      "bytes": 1612,
+      "sha256": "85ece0db2b1a0d418ff289b716e897fd839408c6923c8dc609a6b55c843c5d58"
+    },
+    "docs/evidence/phase-d02-video-81-browser-20260926.png": {
+      "bytes": 306952,
+      "sha256": "87b3420e0ec5a86697a9d00e80316785e50ef0c518abbfcf26a8752ee9b395fe"
+    },
+    "docs/evidence/phase-d02-video-121-browser-20260926.png": {
+      "bytes": 319219,
+      "sha256": "cd5f74d8c7c6b10a50d53663bea1dfef60c1647cb2161a90ae4ffdbe0709b61b"
+    },
+    "docs/evidence/phase-d02-av-81-browser-20260926.png": {
+      "bytes": 311369,
+      "sha256": "32b693b8f77682cd10f12895ade44c488398a62463a941f08b22cad34c913bd3"
+    },
+    "docs/evidence/phase-d02-av-121-browser-20260926.png": {
+      "bytes": 320040,
+      "sha256": "e1b2c24b298b48d771e1f7a24430fc9da6ccc0742028fb99230570d119994df1"
+    },
+    "workspace/state/verification/phase-d02-playback-20260926/playback.cjs": {
+      "bytes": 8313,
+      "sha256": "a935ff46ca3d755e7442d71a5ebd8e47b1ab58168425eb407cdafe0260850ebf"
+    },
+    "workspace/state/verification/phase-d02-playback-20260926/playback.log": {
+      "bytes": 718,
+      "sha256": "cc1d43d97d5610e9681bb1219b23585fbecc12c00934c8e3ef5c815849d93717"
+    },
+    "workspace/state/verification/phase-d02-playback-20260926/finalize_playback.py": {
+      "bytes": 6857,
+      "sha256": "5b5ff64ff935e787f8ace848c8fd3c0120a3adbee43c9d84b470432ef867b91a"
+    },
+    "docs/d02-playback-verification-20260926.md": {
+      "bytes": 5450,
+      "sha256": "27da08d305fd7187ffbef0745037afd47b08168deaca5f3b0d7649165280f53c"
+    },
+    "docs/extended-media.md": {
+      "bytes": 8970,
+      "sha256": "4c896e7167ab1f7e604117830c9caf5d6cc3e1a59aeb54ddd29c9afc4fbb1cfa"
+    },
+    "TODO.md": {
+      "bytes": 17149,
+      "sha256": "6688bc6c1c56bba70e5eb55f7c5d30b3062c8295a7d81458c73a19bc66edf6a1"
+    },
+    "CHANGELOG.md": {
+      "bytes": 94652,
+      "sha256": "4030c795421bed7b61d4c6312102a1410371b27635c1b731e79d1fcd9aa2d523"
+    }
+  }
+}

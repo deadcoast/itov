@@ -22,6 +22,8 @@ The [current TODO](TODO.md) and [source audit](docs/development-audit-20260922.m
 
 The installed [workspace workflow](docs/workspace-workflow.md) provides `workspace guide`, `starter`, `request`, `status`, `inspect` and `dependencies`. It creates neutral image-copy inputs without source helpers, routes saved records to their owning controllers, and retains missing optional-package diagnostics. Offline inventory reports recorded state; domain commands still revalidate artifacts and quality.
 
+[Extended media](docs/extended-media.md) adds version-two video/audio durations and sampler settings, completed-image source binding, durable batch cancellation, saved A/V source specifications and offline replay. Existing version-one specifications keep their bounds and meaning. Media decoding and timing checks remain separate from visual, listening and prompt-compliance judgments.
+
 Start with the [operator runbook](docs/operator-runbook.md) for the supported sequence from setup through execution, recovery and completed replay. Result commands now use consistent text/JSON outcomes, artifact references and suggested next commands. JSON adds `_cli` metadata without changing saved evidence; incomplete status/retirement returns exit 1, including batch status and abandonment.
 
 To combine a directory of Markdown specifications into one searchable PDF, run

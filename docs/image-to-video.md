@@ -1,5 +1,8 @@
 # Pinned image-to-video baseline
 
+This page preserves the version-one baseline. See [extended media](extended-media.md)
+for version-two durations, sampler configuration, source-job binding and cancellation.
+
 ITOV 0.7.0 adds `video prepare`, `video plan`, and `video verify` for the `wan22-ti2v-5b-v1` profile. The prepared graph reuses the catalog, deterministic planner, and sequential executor. Input/model pins, stock node qualification, and decoded output checks define the supported path.
 
 ## Model and workflow provenance

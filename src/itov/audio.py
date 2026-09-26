@@ -43,11 +43,19 @@ def validate_spec(value: dict) -> dict:
             "seconds",
             "seed",
             "count",
-        },
+        }
+        | ({"sampler"} if isinstance(value, dict) and value.get("version") == 2 else set()),
         "audio specification",
     )
-    require(type(value["version"]) is int and value["version"] == 1, "Invalid audio version")
-    require(value["profile"] == PROFILE, "Unsupported audio profile")
+    require(type(value["version"]) is int and value["version"] in (1, 2), "Invalid audio version")
+    require(
+        value["profile"] == (PROFILE if value["version"] == 1 else "stable-audio-open-v2"),
+        "Unsupported audio profile",
+    )
+    if value["version"] == 2:
+        from itov.media_configuration import sampler
+
+        sampler(value["sampler"], "audio")
     for name in ("checkpoint", "text_encoder"):
         asset = value[name]
         object_fields(asset, {"loader_name", "sha256"}, name)
@@ -61,7 +69,10 @@ def validate_spec(value: dict) -> dict:
             "Prompts must be at most 4096 characters without external embeddings",
         )
     integer(value["seconds"], "seconds", minimum=1)
-    require(value["seconds"] <= 10, "Audio duration must be an integer in 1..10 seconds")
+    require(
+        value["seconds"] <= (47 if value["version"] == 2 else 10),
+        "Audio duration must be an integer in 1..10 (v1) or 1..47 (v2) seconds",
+    )
     integer(value["seed"], "seed")
     integer(value["count"], "count", minimum=1)
     require(
@@ -75,6 +86,7 @@ def output_contract(spec: dict) -> dict:
     spec = validate_spec(spec)
     # Stock EmptyLatentAudio rounds to an even latent length, decoded at stride 2048.
     return {
+        **({"version": 2} if spec["version"] == 2 else {}),
         "sample_rate": 44100,
         "channels": 2,
         "samples": round(spec["seconds"] * 44100 / 4096) * 4096,
@@ -143,11 +155,15 @@ def describe(spec: dict) -> dict:
             "_meta": {"itov_audio": output_contract(spec)},
         },
     }
+    if spec["version"] == 2:
+        graph["7"]["inputs"].update(
+            steps=spec["sampler"]["steps"], cfg=spec["sampler"]["cfg_milli"] / 1000
+        )
     raw = _workflow_json(graph).encode("utf-8")
     preset = {
         "id": "audio-" + spec_id,
         "category": "text-to-audio",
-        "tags": [PROFILE],
+        "tags": [spec["profile"]],
         "workflow": {"path": f"workflows/audio/{spec_id}.api.json", "sha256": sha256(raw)},
         "base_model": "stable-audio-open-1.0",
         "rotation_weight_milli": 1000,

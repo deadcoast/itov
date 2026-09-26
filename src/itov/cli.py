@@ -174,7 +174,7 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument(
                 "--save", action="store_true", help="Save under workspace/state/plans"
             )
-    for action in ("qualify", "run", "resume", "status", "abandon"):
+    for action in ("qualify", "run", "resume", "status", "abandon", "cancel"):
         item = batch_actions.add_parser(action)
         item.add_argument("file", type=Path, help="Saved immutable batch plan")
         _connection_arguments(item)
@@ -185,6 +185,12 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--qualification", type=Path, required=True)
         if action == "resume":
             item.add_argument("--prompt-id", help="Reconcile only with matching server provenance")
+        if action == "cancel":
+            item.add_argument(
+                "--interrupt-running",
+                action="store_true",
+                help="Request a targeted interrupt of the proven owned running prompt",
+            )
         if action in {"run", "resume"}:
             item.add_argument("--wait-timeout", type=float, default=120.0)
             item.add_argument("--poll-interval", type=float, default=1.0)
@@ -226,7 +232,7 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--prompt-id")
     video = commands.add_parser("video", help="Prepare, plan, and verify pinned Wan video batches")
     video_actions = video.add_subparsers(dest="action", required=True)
-    for action in ("prepare", "plan", "verify"):
+    for action in ("prepare", "plan", "verify", "bind-source"):
         item = video_actions.add_parser(action)
         item.add_argument("file", type=Path, help="Video specification JSON")
         item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
@@ -235,6 +241,10 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument(
                 "--image-source", type=Path, help="Copy this exact pinned PNG into workspace input"
             )
+        elif action == "bind-source":
+            item.add_argument("record", type=Path, help="Completed source image job record")
+            item.add_argument("--node", required=True)
+            item.add_argument("--save", action="store_true")
         elif action == "plan":
             item.add_argument("--save", action="store_true")
         else:
@@ -252,10 +262,24 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("artifact", type=Path)
     av = commands.add_parser("av", help="Compose completed owned audio/video artifacts")
     av_actions = av.add_subparsers(dest="action", required=True)
-    item = av_actions.add_parser("mux", help="Create or reverify an immutable audiovisual output")
-    item.add_argument("file", type=Path, help="Pinned audiovisual specification JSON")
-    item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
-    item.add_argument("--json", action="store_true")
+    for action in ("mux", "replay", "spec"):
+        item = av_actions.add_parser(action)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "spec":
+            item.add_argument("--video-record", type=Path, required=True)
+            item.add_argument("--audio-record", type=Path, required=True)
+            item.add_argument("--video-node", required=True)
+            item.add_argument("--audio-node", required=True)
+            item.add_argument(
+                "--audio-offset-ms",
+                type=int,
+                default=0,
+                help="Start this far into the source audio, then trim or pad to video",
+            )
+            item.add_argument("--save", action="store_true")
+        else:
+            item.add_argument("file", type=Path, help="Pinned audiovisual specification JSON")
     vram = commands.add_parser("vram", help="Measure exact workloads and check VRAM admission")
     actions = vram.add_subparsers(dest="action", required=True)
     server = actions.add_parser(
@@ -890,7 +914,21 @@ def _execute(args):
                 result = {**result, "path": str(path)}
         return result
     elif args.command == "av":
-        result = mux(load_config(args.config), load_av_spec(args.file))
+        from itov.audiovisual import build_spec, replay
+
+        config = load_config(args.config)
+        if args.action == "spec":
+            result = build_spec(
+                config,
+                args.video_record,
+                args.audio_record,
+                video_node=args.video_node,
+                audio_node=args.audio_node,
+                audio_offset_ms=args.audio_offset_ms,
+                save=args.save,
+            )
+        else:
+            result = (replay if args.action == "replay" else mux)(config, load_av_spec(args.file))
         return result
     elif args.command == "audio":
         spec = load_audio_spec(args.file)
@@ -910,14 +948,18 @@ def _execute(args):
             }
         return result
     elif args.command == "video":
+        from itov.media_configuration import video_contract
+
         spec = load_video_spec(args.file)
         if args.action == "verify":
-            result = verify_video(
-                args.artifact, {key: spec[key] for key in ("width", "height", "frames", "fps")}
-            )
+            result = verify_video(args.artifact, video_contract(spec))
         else:
             config = load_config(args.config)
-            if args.action == "prepare":
+            if args.action == "bind-source":
+                from itov.media_sources import bind_video
+
+                result = bind_video(config, spec, args.record, args.node, save=args.save)
+            elif args.action == "prepare":
                 result = prepare_video(config, spec, image_source=args.image_source)
             else:
                 plan = plan_video(config, spec)
@@ -995,7 +1037,11 @@ def _execute(args):
             result = {"ok": True, "qualification": receipt, "path": str(path) if path else None}
         else:
             config = load_config(args.config)
-            if args.action in {"status", "abandon"}:
+            if args.action == "cancel":
+                from itov.batch_cancellation import cancel
+
+                result = cancel(config, args.file, interrupt_running=args.interrupt_running)
+            elif args.action in {"status", "abandon"}:
                 operation = batch_status if args.action == "status" else abandon_batch
                 result = operation(config, args.file)
             else:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from itov import media_configuration
 from itov.batch import _workflow_json, create_plan
 from itov.batch_request import neutral_request
 from itov.catalog import (
@@ -56,11 +57,25 @@ def validate_spec(value: dict) -> dict:
             "fps",
             "seed",
             "count",
-        },
+        }
+        | (
+            {"sampler", "source"}
+            if isinstance(value, dict) and value.get("version") == 2
+            else set()
+        ),
         "video specification",
     )
-    require(type(value["version"]) is int and value["version"] == 1, "Invalid video version")
-    require(value["profile"] == PROFILE, "Unsupported video profile")
+    require(type(value["version"]) is int and value["version"] in (1, 2), "Invalid video version")
+    require(
+        value["profile"] == (PROFILE if value["version"] == 1 else "wan22-ti2v-5b-v2"),
+        "Unsupported video profile",
+    )
+    if value["version"] == 2:
+        from itov.media_sources import binding
+
+        media_configuration.sampler(value["sampler"], "video")
+        if value["source"] is not None:
+            binding(value["source"])
     for name in (*LOADERS, "input_image"):
         asset = value[name]
         field = "name" if name == "input_image" else "loader_name"
@@ -79,7 +94,7 @@ def validate_spec(value: dict) -> dict:
             len(value[name]) <= 4096 and "embedding:" not in value[name].lower(),
             "Prompts must be at most 4096 characters without external embeddings",
         )
-    video_contract({key: value[key] for key in ("width", "height", "frames", "fps")})
+    video_contract(media_configuration.video_contract(value))
     integer(value["seed"], "seed")
     integer(value["count"], "count", minimum=1)
     require(
@@ -156,17 +171,21 @@ def describe(spec: dict) -> dict:
                     "format": "mp4",
                     "format.codec": "h264",
                 },
-                "_meta": {
-                    "itov_video": {key: spec[key] for key in ("width", "height", "frames", "fps")}
-                },
+                "_meta": {"itov_video": media_configuration.video_contract(spec)},
             },
         }
     )
+    if spec["version"] == 2:
+        settings = spec["sampler"]
+        graph["8"]["inputs"]["shift"] = settings["shift_milli"] / 1000
+        graph["9"]["inputs"].update(steps=settings["steps"], cfg=settings["cfg_milli"] / 1000)
+        if spec["source"] is not None:
+            graph["4"]["_meta"]["itov_source"] = spec["source"]
     raw = _workflow_json(graph).encode("utf-8")
     preset = {
         "id": "video-" + spec_id,
         "category": "image-to-video",
-        "tags": [PROFILE],
+        "tags": [spec["profile"]],
         "workflow": {"path": f"workflows/video/{spec_id}.api.json", "sha256": sha256(raw)},
         "base_model": "wan2.2-ti2v-5b",
         "rotation_weight_milli": 1000,
@@ -183,6 +202,10 @@ def _assets(config: Config, spec: dict):
 
 
 def _input(config: Config, spec: dict) -> Path:
+    if spec.get("source") is not None:
+        from itov.media_sources import image_source
+
+        image_source(config, spec["source"], spec["input_image"]["sha256"])
     path = safe_path(config.root / "input", spec["input_image"]["name"])
     require(
         _file(path)["sha256"] == spec["input_image"]["sha256"],
@@ -200,6 +223,11 @@ def prepare_video(config: Config, spec: dict, *, image_source: Path | None = Non
     catalog = snapshot.to_dict()["catalog"]
     _merge(catalog["presets"], definition["preset"])
     validate_catalog(catalog)
+    if spec.get("source") is not None:
+        from itov.media_sources import image_source as read_source
+
+        source = read_source(config, spec["source"], spec["input_image"]["sha256"])
+        _publish(safe_path(config.root / "input", spec["input_image"]["name"]), source.read_bytes())
     if image_source is not None:
         require(image_source.stat().st_size <= 16 * 1024**2, "Source PNG exceeds 16 MiB")
         raw = image_source.read_bytes()

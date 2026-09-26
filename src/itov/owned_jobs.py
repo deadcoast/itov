@@ -109,6 +109,7 @@ def observe_owned(
     wait_timeout: float,
     poll_interval: float,
     prompt_id: str | None = None,
+    on_poll=None,
 ) -> dict:
     path = job_path(config, plan["plan_id"], job["index"])
     with _guard(path):
@@ -139,5 +140,10 @@ def observe_owned(
         elif prompt_id is not None:
             require(record.get("prompt_id") == prompt_id, "Prompt ID differs from acknowledged job")
     return wait_job(
-        config, path, timeout=timeout, wait_timeout=wait_timeout, poll_interval=poll_interval
+        config,
+        path,
+        timeout=timeout,
+        wait_timeout=wait_timeout,
+        poll_interval=poll_interval,
+        **({"on_poll": on_poll} if on_poll is not None else {}),
     )

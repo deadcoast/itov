@@ -1,0 +1,34 @@
+{
+  "count": 1,
+  "diffusion": {
+    "loader_name": "wan2.2_ti2v_5B_fp16.safetensors",
+    "sha256": "456f901338bd9eadbded3828b819109a9b68e8a525ca5cf8d0049a69fcfeca1e"
+  },
+  "fps": 24,
+  "frames": 121,
+  "height": 640,
+  "input_image": {
+    "name": "itov-video-still-life.png",
+    "sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+  },
+  "negative_prompt": "text, watermark, blurry, flickering, distorted objects",
+  "profile": "wan22-ti2v-5b-v2",
+  "prompt": "The camera slowly moves to the right around a red ceramic teapot and green pears on a wooden table, gentle natural window light, coherent still life, smooth subtle camera motion.",
+  "sampler": {
+    "cfg_milli": 5000,
+    "shift_milli": 8000,
+    "steps": 20
+  },
+  "seed": 920260931,
+  "source": null,
+  "text_encoder": {
+    "loader_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+    "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+  },
+  "vae": {
+    "loader_name": "wan2.2_vae.safetensors",
+    "sha256": "e40321bd36b9709991dae2530eb4ac303dd168276980d3e9bc4b6e2b75fed156"
+  },
+  "version": 2,
+  "width": 640
+}

@@ -138,6 +138,7 @@ def run_reserved_plan(
     submission_guard,
 ):
     """Shared sequential protocol; callers validate plan semantics before entry."""
+    from itov import batch_cancellation as cancellation
     from itov.client_ownership import ClientLease
     from itov.execution_ownership import workspace_available
 
@@ -210,6 +211,12 @@ def run_reserved_plan(
             record_run(db, plan["plan_id"], "running")
             for job, saved in zip(plan["jobs"], rows, strict=True):
                 path = job_path(config, plan["plan_id"], job["index"])
+                if (
+                    saved["status"] == "reserved"
+                    and not path.exists()
+                    and cancellation.requested(config, plan)
+                ):
+                    continue
                 if saved["status"] == "reserved":
                     record = prepare_owned(config, plan, job)
                     # A job file is published before the database leaves reserved.
@@ -233,6 +240,8 @@ def run_reserved_plan(
                         "Job record moved backwards to prepared; preserve and inspect",
                     )
                 if record["status"] == "prepared":
+                    if cancellation.requested(config, plan):
+                        continue
                     require(
                         prompt_id is None, "Prompt ID can only reconcile a previously submitted job"
                     )
@@ -248,7 +257,9 @@ def run_reserved_plan(
                     )
                     if profiles is not None:
                         enforce(config, plan, profiles, current)
-                    with submission_guard(config, plan):
+                    with submission_guard(config, plan), cancellation.guard(config, plan):
+                        if cancellation.requested(config, plan):
+                            continue
                         record = submit_owned(config, plan, job, client, device_owner=device_owner)
                     device_owner.update(record)
                     record_job(db, plan["plan_id"], job["index"], record)
@@ -268,12 +279,19 @@ def run_reserved_plan(
                     wait_timeout=wait_timeout,
                     poll_interval=poll_interval,
                     prompt_id=selected_prompt,
+                    on_poll=lambda client, record: cancellation.poll(config, plan, client, record),
                 )
                 device_owner.update(record)
                 if selected_prompt:
                     prompt_id = None
                 record_job(db, plan["plan_id"], job["index"], record)
                 if record["status"] != "succeeded":
+                    if cancellation.requested(config, plan) and record["status"] in {
+                        "failed",
+                        "rejected",
+                        "validation_failed",
+                    }:
+                        continue
                     state = (
                         "failed"
                         if record["status"] in {"failed", "rejected", "validation_failed"}
@@ -282,7 +300,16 @@ def run_reserved_plan(
                     record_run(db, plan["plan_id"], state, record.get("error"))
                     return report(db, config, plan)
             require(prompt_id is None, "No uncertain submission accepts the supplied prompt ID")
-            record_run(db, plan["plan_id"], "succeeded")
+            with cancellation.guard(config, plan):
+                if cancellation.requested(config, plan):
+                    record_run(
+                        db,
+                        plan["plan_id"],
+                        "abandoned",
+                        "Cancellation settled; remaining picks and seeds retired",
+                    )
+                else:
+                    record_run(db, plan["plan_id"], "succeeded")
         except (OSError, ValueError, ComfyUIError, sqlite3.Error) as error:
             record_run(db, plan["plan_id"], "paused", str(error))
         except KeyboardInterrupt:

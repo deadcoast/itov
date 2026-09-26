@@ -4,6 +4,19 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-26 — D-02 browser playback verified; perceptual review open
+
+- Used the installed Playwright/Chromium browser to play all six retained media outputs from start to finish. All 404 video/A/V frames were presented with zero dropped or corrupted frames; audio tracks decoded, and no media errors or stalls occurred. Both temporary browser and loopback server were closed.
+- Inspected four browser screenshots; the unrequested hand remains visible in video 121 and A/V 121. Explicit authorization allowed both generated FLAC files to reach the audio renderer, but that output path supplied no auditory input for assistant listening. Perceptual playback/listening review remains incomplete; D-02 stays active and D-03 has not started.
+- Added the [continuation report](docs/d02-playback-verification-20260926.md) and [receipt](docs/evidence/phase-d02-playback-verification-20260926.json), preserving the prior report, receipt, media, source and package bytes. No model rerender, source change, package rebuild, activation or release occurred.
+
+### 2026-09-25 — D-02 extended media implementation; playback review open
+
+- Added version-two video/audio duration and sampler configuration, `video bind-source`, durable `batch cancel` with optional atomic per-job interruption, saved `av spec` source/offset selection and standalone `av replay`. Legacy media formats retain their meaning. Source records, connected generation graphs, immutable publication and uncertain ownership are checked. See the [contract](docs/extended-media.md).
+- Generated and fully decoded 81/121-frame videos, 20/47-second audio and two A/V compositions. An actual targeted interrupt retained one failed audio job and both reserved seeds. All 202 video frames were inspected: the 121-frame clip reproduces the unrequested-hand defect; camera-orbit adherence remains uncertain. Audio listening and full playback remain unverified because no browser connection was available and automatic approval review rejected the audio-renderer export.
+- Passed **1,584 broad source tests**, **254 source/254 installed checks**, then **134 source/134 final-wheel checks** for the final cancellation refinement. Final parity covers 86 modules and README. Installed replay verifies retained media; a fresh final-wheel cancellation trial completed one accepted neutral image-copy job, retired two remaining picks and produced no duplicate prompt. Verification-driver errors remain preserved alongside corrected results.
+- Preserved 2,047 historical files, 21 worker-source hashes, catalog HEAD and SCM 0.5.0. Measured resource limits and failed/uncertain quality are recorded in the [review](docs/d02-media-verification-20260925.md) and [receipt](docs/evidence/phase-d02-verification-20260925.json). **D-02 remains active pending playback/listening; D-03 has not started.** No training, tuning, activation, release or Git publication occurred. Version remains 0.13.1, unreleased.
+
 ### 2026-09-25 — D-01 discoverable installed workspace workflow
 
 - Added `workspace guide/starter/request/status/inspect/dependencies` and links from existing domain results. Installed recipes name explicit inputs; packaged neutral image/workflow/catalog files remove source-helper startup dependencies. Requests pin current HEAD and still require normal planning and runtime qualification. See the [contract](docs/workspace-workflow.md) and [operator runbook](docs/operator-runbook.md).

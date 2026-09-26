@@ -13,7 +13,16 @@ from itov.comfyui import parse_json
 
 
 def video_contract(value: dict) -> dict:
-    object_fields(value, {"width", "height", "frames", "fps"}, "video contract")
+    extended = isinstance(value, dict) and "version" in value
+    object_fields(
+        value,
+        {"width", "height", "frames", "fps"} | ({"version"} if extended else set()),
+        "video contract",
+    )
+    require(
+        not extended or type(value["version"]) is int and value["version"] == 2,
+        "Unsupported video contract version",
+    )
     for key in value:
         integer(value[key], key, minimum=1)
     require(
@@ -24,8 +33,8 @@ def video_contract(value: dict) -> dict:
         "Video dimensions must be multiples of 32 in 512..832, at most 832x640 pixels",
     )
     require(
-        9 <= value["frames"] <= 49 and value["frames"] % 4 == 1,
-        "Video frames must be 4n+1 in 9..49",
+        9 <= value["frames"] <= (121 if extended else 49) and value["frames"] % 4 == 1,
+        "Video frames must be 4n+1 in 9..49 (v1) or 9..121 (v2)",
     )
     require(8 <= value["fps"] <= 30, "Video fps must be within 8..30")
     return dict(value)

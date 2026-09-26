@@ -13,7 +13,16 @@ from itov.media import _run, video_tools
 
 
 def audio_contract(value: dict) -> dict:
-    object_fields(value, {"sample_rate", "channels", "samples"}, "audio contract")
+    extended = isinstance(value, dict) and "version" in value
+    object_fields(
+        value,
+        {"sample_rate", "channels", "samples"} | ({"version"} if extended else set()),
+        "audio contract",
+    )
+    require(
+        not extended or type(value["version"]) is int and value["version"] == 2,
+        "Unsupported audio contract version",
+    )
     for key in value:
         integer(value[key], key, minimum=1)
     require(
@@ -21,7 +30,8 @@ def audio_contract(value: dict) -> dict:
         "Audio baseline requires 44100 Hz stereo",
     )
     require(
-        4096 <= value["samples"] <= 44100 * 11 and value["samples"] % 4096 == 0,
+        4096 <= value["samples"] <= (round(47 * 44100 / 4096) * 4096 if extended else 44100 * 11)
+        and value["samples"] % 4096 == 0,
         "Audio samples must be bounded multiples of 4096",
     )
     return dict(value)

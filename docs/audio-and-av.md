@@ -1,5 +1,9 @@
 # Pinned audio and audiovisual output
 
+This page preserves the version-one baseline. See [extended media](extended-media.md)
+for longer audio, explicit sampler settings, saved A/V source selection and offset,
+standalone replay and durable cancellation.
+
 ITOV 0.8.0 adds `audio prepare`, `audio plan`, `audio verify`, and `av mux`. Audio generation uses the existing qualified sequential runner. Composition consumes completed local job artifacts and never submits another GPU job.
 
 ## Baseline and setup
