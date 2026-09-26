@@ -56,3 +56,10 @@ Selection means **selected for further evaluation**. It is not production qualit
 The [B-05 trial](training-experiment-trial-20260924.md) records the bounded experiment, reproduction comparison, direct image inspection and checkpoint dispositions. The B-02 selection remains two training works and one validation work. This feature does not establish corpus adequacy, general quality improvement, intermediate-checkpoint rendering, automatic search or production readiness.
 
 The actual repetitions had identical sample/noise/rate order and RNG bytes, but different weights, losses and adapter images. Exact numerical reproduction failed and all checkpoints were rejected on independently inspected quality evidence. A manifest reproduces the declared execution protocol; it cannot guarantee numeric determinism from seeds alone. Preserve such mismatches and measure repetition variation before making causal comparisons. The current GPU profile does not enable deterministic algorithms.
+
+Version-two experiment declarations add [preregistered numerical tolerances](experiment-variance.md).
+After every member is terminal, `experiment variance MANIFEST --save` measures all
+within-endpoint pairs, preserving failed attempts and exact-equality failures.
+`experiment variance-replay MANIFEST --report REPORT` recomputes the saved evidence
+offline. Use these measurements before interpreting a changed training endpoint;
+they never replace the complete visual decision.

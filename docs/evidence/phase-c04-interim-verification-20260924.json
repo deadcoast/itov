@@ -1,0 +1,2740 @@
+{
+  "version": 1,
+  "scope": "phase_c04_interim_verification",
+  "status": "development_verified_runtime_pending",
+  "task_complete": false,
+  "candidate_status": "previously_rejected",
+  "promotion_eligible": false,
+  "limits": "Implementation, tests, package checks, frozen-input audit and retrospective comparison validation only. Six new training attempts and 64 deployed images are preregistered but unexecuted. No improvement, causal kernel finding, new quality decision, independent holdout exposure or numerical determinism claim.",
+  "protocol": {
+    "file": {
+      "path": "workspace/state/verification/phase-c04/protocol.json",
+      "sha256": "3808cd928c16e69bb0a62bc6c86539ee60a09ae477c9dc1e2b2cd2dc5183bb9e",
+      "bytes": 4362
+    },
+    "value": {
+      "data_conditioning": "Audit all three frozen source/prepared images and captions, tokenizer truncation and trigger tokenization; keep data unchanged. No new data selected from holdout outcomes.",
+      "decision_rule": "Reject any candidate with observed required-case failure; uncertain activation remains inconclusive. A setting can be promising for further evaluation without accepting a candidate.",
+      "evaluations": [
+        {
+          "path": "state/verification/phase-c04/diagnostic-512-250.json",
+          "sha256": "20cb4f4157dce156690c494e2f0d317369e74c5af91f69fe13ef18466da34057"
+        },
+        {
+          "path": "state/verification/phase-c04/diagnostic-512-1000.json",
+          "sha256": "0b8a3688f48c486d4a8f2eb322dcf92156e36b29be23809188cee9e269ea3860"
+        },
+        {
+          "path": "state/verification/phase-c04/diagnostic-1024-250.json",
+          "sha256": "7c783fff03e3928c5b27dc7c1860f0482fef302d91a86ebc9777da3201126ca9"
+        },
+        {
+          "path": "state/verification/phase-c04/diagnostic-1024-1000.json",
+          "sha256": "02c1c2562012218fdb4e0b60d9e0d12e292ae247036a5117fcadec0d09e7c9b7"
+        }
+      ],
+      "experiment": {
+        "path": "state/verification/phase-c04/trial.experiment.json",
+        "sha256": "f686419d79b521a8757c91ea27a303fa7301cc28329c3da9155a0e3e4439cec0"
+      },
+      "experiment_id": "1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1",
+      "exposure": "Only two legacy regression cases. Seven C-01 holdouts and existing corpus bytes unchanged. No detector changes or automatic filtering.",
+      "gpu": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+      "inference_hypothesis": "The 512px generation setting may contribute to collapsed counts/divided panels. Compare 512 versus 1024 while preserving prompt/seed/model/sampler. Compare strengths .25 versus 1 and plain versus trigger at both resolutions. No causal training claim from cross-runtime comparisons.",
+      "maximum_deployed_images": 64,
+      "maximum_training_attempts": 6,
+      "maximum_training_images": 108,
+      "maximum_updates": 18,
+      "repetition_rule": "Absolute maximum differences <=1e-6 for weights, optimizer moments and quantized losses; exact payload equality separate. No tolerance relaxation after results.",
+      "review": "Inspect every diagnostic seed at every setting in all four roles; record adherence, panels/borders and activation specificity. Improvement must survive both seeds; adverse seeds remain. Unresolved differences inconclusive. Training and deployed-runtime findings separate.",
+      "runtime_bound": "Each training worker <=900 seconds. Each deployed public run uses its owned job timeout; no new seeds, training retries, or adaptive endpoints.",
+      "time_utc": "2026-09-25T01:45:23.211013+00:00",
+      "worker_sources": {
+        "checkpoint_tensors.py": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc",
+        "curation.py": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c",
+        "dataset_freeze.py": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09",
+        "dataset_identity.py": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f",
+        "dataset_inspection.py": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1",
+        "dataset_manifest.py": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240",
+        "dataset_snapshot.py": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926",
+        "evaluation_cases.py": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033",
+        "evidence_reads.py": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e",
+        "quality.py": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681",
+        "records.py": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164",
+        "review_records.py": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506",
+        "training.py": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070",
+        "training_checkpoint_worker.py": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb",
+        "training_checkpoints.py": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193",
+        "training_config.py": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f",
+        "training_data.py": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4",
+        "training_optimization.py": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113",
+        "training_records.py": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30",
+        "training_results.py": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01",
+        "training_worker.py": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b"
+      }
+    }
+  },
+  "experiment": {
+    "file": {
+      "path": "workspace/state/verification/phase-c04/experiment-plan.json",
+      "sha256": "d6529fb64d7c1f03198c35bb325cc5910a19da95c2ce6f3e59f577ac08e9986d",
+      "bytes": 5149
+    },
+    "value": {
+      "allocated": {
+        "max_attempts": 6,
+        "max_optimizer_steps": 18,
+        "max_worker_seconds": 5400
+      },
+      "experiment_id": "1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1",
+      "limits": "Independent final-checkpoint endpoints, each trained from its declared seed; repeated prefix work consumes the budget. Intermediate restart bundles are not evaluated. Selection is for further evaluation only, never production acceptance or promotion. Loss is diagnostic. Reviews inspect every frozen case, seed and all four conditions.",
+      "members": [
+        {
+          "endpoint": "short",
+          "id": "short-r1",
+          "plan": {
+            "path": "state/training/plans/df1e10380c9c7edfde24ff858ce1d572d740464058f6d1faadba1da48480bd66.json",
+            "sha256": "3e517be76dc87bcd4269e89848de2556f9c79b77c6716e2dd7e8fd03a1284e38"
+          },
+          "repetition": 1
+        },
+        {
+          "endpoint": "short",
+          "id": "short-r2",
+          "plan": {
+            "path": "state/training/plans/c2ed48ab7a458c1d6a90724bfde3cec4cc2a30ef8188fa729e6fbe9b2a090d2b.json",
+            "sha256": "17b1a7eea7baab84474d0eb39b082629e57ca944aaa2489309b2defcf75b6a8d"
+          },
+          "repetition": 2
+        },
+        {
+          "endpoint": "short",
+          "id": "short-r3",
+          "plan": {
+            "path": "state/training/plans/5a083cf8c0c5c917c10d5b9350e50531ae2c7d97314e56ce2a0758b7107598fd.json",
+            "sha256": "d38bef1573f0f2ef4f6feb190d358c8476e0806995d0920312b402c4949df560"
+          },
+          "repetition": 3
+        },
+        {
+          "endpoint": "long",
+          "id": "long-r1",
+          "plan": {
+            "path": "state/training/plans/0328b50fd6110585fa8eaac1e0cde968a96916ba5e7222879f99572d7c4ddec0.json",
+            "sha256": "6e3ceb55f3fe9f72e52d6b932fed3a074b55bad4de3ca9ba2a468480acb8c99a"
+          },
+          "repetition": 1
+        },
+        {
+          "endpoint": "long",
+          "id": "long-r2",
+          "plan": {
+            "path": "state/training/plans/c87e5dc78f0758c0d92f9bac499452475e15bc808c150774897e1cafda8e86d7.json",
+            "sha256": "f2ffcf2b08ee33ff74eb2dad1d2a2c1f804cb9e484e534a5f27b19c180bcd866"
+          },
+          "repetition": 2
+        },
+        {
+          "endpoint": "long",
+          "id": "long-r3",
+          "plan": {
+            "path": "state/training/plans/947113a8335860d00ae55baf69aa631103bee84615cfd90c2b169b21271fc8be.json",
+            "sha256": "1abeb8927a343e51ba918bb3cfa5ff6dfe3e36b8bfee8d1c0cfbded632515033"
+          },
+          "repetition": 3
+        }
+      ],
+      "scope": "experiment_plan",
+      "specification": {
+        "budget": {
+          "max_attempts": 6,
+          "max_optimizer_steps": 18,
+          "max_worker_seconds": 5400
+        },
+        "endpoints": [
+          {
+            "hypothesis": "Replicate the exposed two-update baseline.",
+            "id": "short",
+            "training": {
+              "path": "state/verification/phase-c04/short.training.json",
+              "sha256": "b7de67bb7294f43389e813c853365a6a70b0d9c84330b49f1e736dd3cd7da5df"
+            }
+          },
+          {
+            "hypothesis": "Four updates may change adherence or untriggered regression beyond the observed repetition spread.",
+            "id": "long",
+            "training": {
+              "path": "state/verification/phase-c04/long.training.json",
+              "sha256": "2fec4f3042f438cb541c7d803e9c2c974f02b46ec24ed8015c3003f752c3397a"
+            }
+          }
+        ],
+        "hypothesis": "Measure within-endpoint numerical variation before interpreting two versus four updates; all frozen legacy diagnostic seeds retained.",
+        "id": "c04-repetition-duration-20260924",
+        "numerical_tolerances": {
+          "loss_abs_billionths": 1000,
+          "optimizer_abs_billionths": 1000,
+          "weight_abs_billionths": 1000
+        },
+        "protocol": {
+          "limitations": "Three repetitions per endpoint estimate only observed variation, not population variance or causality. Exposed cases, same seed, two training works, 512px Diffusers diagnostics. Seven C-01 independent holdouts remain excluded. No promotion.",
+          "method": "Inspect all four conditions for both legacy cases and both seeds in every repetition. Fail observed count, object identity, panel, or untriggered photographic-preservation defects; mark uncertain activation when painterly specificity is unresolved. Compare repetition ranges before duration. No loss-based selection. Same frozen two-work training data and one validation work; audit captions and images without changing selection. This old v1 suite calls the exposed pears case holdout; C-01 correctly classifies both legacy cases as diagnostic regressions.",
+          "selection": "all_cases_all_repetitions_then_fewest_steps"
+        },
+        "repetitions": 3,
+        "version": 2
+      },
+      "specification_sha256": "f686419d79b521a8757c91ea27a303fa7301cc28329c3da9155a0e3e4439cec0",
+      "suite": {
+        "cases": [
+          {
+            "expectation": "Exactly two yellow pears and one blue vase, intact distinct objects and a coherent table. Adapter with trigger should show oil-painted still-life appearance without adding objects, grids or borders. Compare all four conditions; baseline trigger effects do not prove learned activation.",
+            "id": "vase-and-pears",
+            "kind": "holdout",
+            "negative_prompt": "text, watermark, signature, frame",
+            "prompt": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+            "seeds": [
+              11760922,
+              11760923
+            ]
+          },
+          {
+            "expectation": "One red cube and one white cone remain distinct with coherent shadows. Without trigger the adapter should preserve photographic appearance and prompt adherence. With trigger assess whether painterly change preserves object identity and composition; record unintended fruit, flowers, repetition or distortion.",
+            "id": "paper-geometry",
+            "kind": "regression",
+            "negative_prompt": "text, watermark, signature, frame",
+            "prompt": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+            "seeds": [
+              11860922,
+              11860923
+            ]
+          }
+        ],
+        "id": "still-life-independent-v1",
+        "trigger": "itovstill",
+        "version": 1
+      },
+      "version": 1
+    }
+  },
+  "training_templates": [
+    {
+      "file": {
+        "path": "workspace/state/verification/phase-c04/short.training.json",
+        "sha256": "b7de67bb7294f43389e813c853365a6a70b0d9c84330b49f1e736dd3cd7da5df",
+        "bytes": 3008
+      },
+      "value": {
+        "checkpoint": {
+          "loader_name": "sd_xl_base_1.0.safetensors",
+          "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+        },
+        "checkpoints": {
+          "every_steps": 2
+        },
+        "dataset": {
+          "path": "training/imports/8b950f635d492e9b6a69f0eb63e4e9ccd331f6de6a6e56536fdb6b02c853cce5/prepared.json",
+          "sha256": "00b52a9ad88d7578ced82d765c53316e62ce6eb9d4f4efceb02a5e8b5746e56f"
+        },
+        "environment": {
+          "path": "training/environment/Scripts/python.exe",
+          "sha256": "b1425d5543e344414064684b14fdb507b9647a94da7eb3234f98fb50b5628bf7"
+        },
+        "id": "c04-short-20260924",
+        "model_config": {
+          "directory": "training/sdxl-config",
+          "files": [
+            {
+              "path": "model_index.json",
+              "sha256": "6d7b93508390ab91ac5bfbe4aeb4dc2d83f7bb1b05fb069d714b5b0c75f70d44"
+            },
+            {
+              "path": "scheduler/scheduler_config.json",
+              "sha256": "af3e45a949aff8b8341ab8b811429ec03fee857a700a1d9477363e4fff9666e2"
+            },
+            {
+              "path": "text_encoder/config.json",
+              "sha256": "39b8b2e4b1949e36969caa425b6c81c68bace99198dd9078ce05d16ad401fe7f"
+            },
+            {
+              "path": "text_encoder_2/config.json",
+              "sha256": "a892d1c3a69a7e9247a24de2bc1d5891e3109a54696e53be20093af671072c34"
+            },
+            {
+              "path": "unet/config.json",
+              "sha256": "30ebc70750223e59006f7f2b4e1e6c102570aa19a9c4ae3e1fbe7591332dbae6"
+            },
+            {
+              "path": "vae/config.json",
+              "sha256": "0b331c8ac22ded5f9997a144a575c1d113d6169aff262c353f39015bd24a6264"
+            },
+            {
+              "path": "tokenizer/merges.txt",
+              "sha256": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+            },
+            {
+              "path": "tokenizer/special_tokens_map.json",
+              "sha256": "c4864a9376a8401918425bed71fc14fc0e81f9b59ec45c1cf96cccb2df508eac"
+            },
+            {
+              "path": "tokenizer/tokenizer_config.json",
+              "sha256": "19d7b034cb0cc3ce9766c2231373ab8aa8991fc72e2c8f76558bfaae3de0d563"
+            },
+            {
+              "path": "tokenizer/vocab.json",
+              "sha256": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+            },
+            {
+              "path": "tokenizer_2/merges.txt",
+              "sha256": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+            },
+            {
+              "path": "tokenizer_2/special_tokens_map.json",
+              "sha256": "f118ab3a983206e4f32583448de6bd6aae4ee21869135cef1f5848a753cdaab6"
+            },
+            {
+              "path": "tokenizer_2/tokenizer_config.json",
+              "sha256": "c9d23941f76a41cbd50eda9290f57be7828f0a7a677939e9ef181f7e12bd1bdf"
+            },
+            {
+              "path": "tokenizer_2/vocab.json",
+              "sha256": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+            }
+          ],
+          "repository": "stabilityai/stable-diffusion-xl-base-1.0",
+          "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+        },
+        "optimization": {
+          "accumulation_steps": 2,
+          "micro_batch_size": 1,
+          "precision": "bf16-frozen-fp32-adapter-v1",
+          "sampling": "shuffle_epoch",
+          "schedule": "constant",
+          "validation_every_steps": 2,
+          "warmup_steps": 0
+        },
+        "parameters": {
+          "learning_rate_millionths": 100,
+          "rank": 8,
+          "resolution": 512,
+          "seed": 9052401,
+          "steps": 2,
+          "timeout_seconds": 900
+        },
+        "profile": "sdxl-unet-lora-v2",
+        "qualification": {
+          "curation": {
+            "path": "state/training/curation-specifications/f6be3a6298e4b88e46a440add5a1bc7f51daa4b53cbefa7f8329f14f2fab3450.json",
+            "sha256": "f6be3a6298e4b88e46a440add5a1bc7f51daa4b53cbefa7f8329f14f2fab3450"
+          },
+          "suite": {
+            "path": "training/still-life.quality.json",
+            "sha256": "9b4e52c6abdfcb8331852516fdabcbd78e2bcf174b3169ff5cb8ba8b45e7ecf3"
+          }
+        },
+        "trigger": "itovstill",
+        "version": 4
+      }
+    },
+    {
+      "file": {
+        "path": "workspace/state/verification/phase-c04/long.training.json",
+        "sha256": "2fec4f3042f438cb541c7d803e9c2c974f02b46ec24ed8015c3003f752c3397a",
+        "bytes": 3007
+      },
+      "value": {
+        "checkpoint": {
+          "loader_name": "sd_xl_base_1.0.safetensors",
+          "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+        },
+        "checkpoints": {
+          "every_steps": 2
+        },
+        "dataset": {
+          "path": "training/imports/8b950f635d492e9b6a69f0eb63e4e9ccd331f6de6a6e56536fdb6b02c853cce5/prepared.json",
+          "sha256": "00b52a9ad88d7578ced82d765c53316e62ce6eb9d4f4efceb02a5e8b5746e56f"
+        },
+        "environment": {
+          "path": "training/environment/Scripts/python.exe",
+          "sha256": "b1425d5543e344414064684b14fdb507b9647a94da7eb3234f98fb50b5628bf7"
+        },
+        "id": "c04-long-20260924",
+        "model_config": {
+          "directory": "training/sdxl-config",
+          "files": [
+            {
+              "path": "model_index.json",
+              "sha256": "6d7b93508390ab91ac5bfbe4aeb4dc2d83f7bb1b05fb069d714b5b0c75f70d44"
+            },
+            {
+              "path": "scheduler/scheduler_config.json",
+              "sha256": "af3e45a949aff8b8341ab8b811429ec03fee857a700a1d9477363e4fff9666e2"
+            },
+            {
+              "path": "text_encoder/config.json",
+              "sha256": "39b8b2e4b1949e36969caa425b6c81c68bace99198dd9078ce05d16ad401fe7f"
+            },
+            {
+              "path": "text_encoder_2/config.json",
+              "sha256": "a892d1c3a69a7e9247a24de2bc1d5891e3109a54696e53be20093af671072c34"
+            },
+            {
+              "path": "unet/config.json",
+              "sha256": "30ebc70750223e59006f7f2b4e1e6c102570aa19a9c4ae3e1fbe7591332dbae6"
+            },
+            {
+              "path": "vae/config.json",
+              "sha256": "0b331c8ac22ded5f9997a144a575c1d113d6169aff262c353f39015bd24a6264"
+            },
+            {
+              "path": "tokenizer/merges.txt",
+              "sha256": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+            },
+            {
+              "path": "tokenizer/special_tokens_map.json",
+              "sha256": "c4864a9376a8401918425bed71fc14fc0e81f9b59ec45c1cf96cccb2df508eac"
+            },
+            {
+              "path": "tokenizer/tokenizer_config.json",
+              "sha256": "19d7b034cb0cc3ce9766c2231373ab8aa8991fc72e2c8f76558bfaae3de0d563"
+            },
+            {
+              "path": "tokenizer/vocab.json",
+              "sha256": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+            },
+            {
+              "path": "tokenizer_2/merges.txt",
+              "sha256": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+            },
+            {
+              "path": "tokenizer_2/special_tokens_map.json",
+              "sha256": "f118ab3a983206e4f32583448de6bd6aae4ee21869135cef1f5848a753cdaab6"
+            },
+            {
+              "path": "tokenizer_2/tokenizer_config.json",
+              "sha256": "c9d23941f76a41cbd50eda9290f57be7828f0a7a677939e9ef181f7e12bd1bdf"
+            },
+            {
+              "path": "tokenizer_2/vocab.json",
+              "sha256": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+            }
+          ],
+          "repository": "stabilityai/stable-diffusion-xl-base-1.0",
+          "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+        },
+        "optimization": {
+          "accumulation_steps": 2,
+          "micro_batch_size": 1,
+          "precision": "bf16-frozen-fp32-adapter-v1",
+          "sampling": "shuffle_epoch",
+          "schedule": "constant",
+          "validation_every_steps": 2,
+          "warmup_steps": 0
+        },
+        "parameters": {
+          "learning_rate_millionths": 100,
+          "rank": 8,
+          "resolution": 512,
+          "seed": 9052401,
+          "steps": 4,
+          "timeout_seconds": 900
+        },
+        "profile": "sdxl-unet-lora-v2",
+        "qualification": {
+          "curation": {
+            "path": "state/training/curation-specifications/f6be3a6298e4b88e46a440add5a1bc7f51daa4b53cbefa7f8329f14f2fab3450.json",
+            "sha256": "f6be3a6298e4b88e46a440add5a1bc7f51daa4b53cbefa7f8329f14f2fab3450"
+          },
+          "suite": {
+            "path": "training/still-life.quality.json",
+            "sha256": "9b4e52c6abdfcb8331852516fdabcbd78e2bcf174b3169ff5cb8ba8b45e7ecf3"
+          }
+        },
+        "trigger": "itovstill",
+        "version": 4
+      }
+    }
+  ],
+  "evaluation_specifications": [
+    {
+      "file": {
+        "path": "workspace/state/verification/phase-c04/diagnostic-512-250.json",
+        "sha256": "20cb4f4157dce156690c494e2f0d317369e74c5af91f69fe13ef18466da34057",
+        "bytes": 380
+      },
+      "value": {
+        "height": 512,
+        "id": "c04-diagnostic-512-250-20260924",
+        "sampler": {
+          "cfg_milli": 7000,
+          "sampler_name": "dpmpp_2m",
+          "scheduler": "karras",
+          "steps": 20
+        },
+        "strength_milli": 250,
+        "training_plan": {
+          "path": "state/training/plans/26c3cb899dddae04e8f06919642e431742434e61c8e66b5a6a33968a2ae91cf7.json",
+          "sha256": "8c8d3a07d05100711b5080b3e26e4db689d5552d6c91596477578408c15a29e1"
+        },
+        "version": 1,
+        "width": 512
+      }
+    },
+    {
+      "file": {
+        "path": "workspace/state/verification/phase-c04/diagnostic-512-1000.json",
+        "sha256": "0b8a3688f48c486d4a8f2eb322dcf92156e36b29be23809188cee9e269ea3860",
+        "bytes": 382
+      },
+      "value": {
+        "height": 512,
+        "id": "c04-diagnostic-512-1000-20260924",
+        "sampler": {
+          "cfg_milli": 7000,
+          "sampler_name": "dpmpp_2m",
+          "scheduler": "karras",
+          "steps": 20
+        },
+        "strength_milli": 1000,
+        "training_plan": {
+          "path": "state/training/plans/26c3cb899dddae04e8f06919642e431742434e61c8e66b5a6a33968a2ae91cf7.json",
+          "sha256": "8c8d3a07d05100711b5080b3e26e4db689d5552d6c91596477578408c15a29e1"
+        },
+        "version": 1,
+        "width": 512
+      }
+    },
+    {
+      "file": {
+        "path": "workspace/state/verification/phase-c04/diagnostic-1024-250.json",
+        "sha256": "7c783fff03e3928c5b27dc7c1860f0482fef302d91a86ebc9777da3201126ca9",
+        "bytes": 383
+      },
+      "value": {
+        "height": 1024,
+        "id": "c04-diagnostic-1024-250-20260924",
+        "sampler": {
+          "cfg_milli": 7000,
+          "sampler_name": "dpmpp_2m",
+          "scheduler": "karras",
+          "steps": 20
+        },
+        "strength_milli": 250,
+        "training_plan": {
+          "path": "state/training/plans/26c3cb899dddae04e8f06919642e431742434e61c8e66b5a6a33968a2ae91cf7.json",
+          "sha256": "8c8d3a07d05100711b5080b3e26e4db689d5552d6c91596477578408c15a29e1"
+        },
+        "version": 1,
+        "width": 1024
+      }
+    },
+    {
+      "file": {
+        "path": "workspace/state/verification/phase-c04/diagnostic-1024-1000.json",
+        "sha256": "02c1c2562012218fdb4e0b60d9e0d12e292ae247036a5117fcadec0d09e7c9b7",
+        "bytes": 385
+      },
+      "value": {
+        "height": 1024,
+        "id": "c04-diagnostic-1024-1000-20260924",
+        "sampler": {
+          "cfg_milli": 7000,
+          "sampler_name": "dpmpp_2m",
+          "scheduler": "karras",
+          "steps": 20
+        },
+        "strength_milli": 1000,
+        "training_plan": {
+          "path": "state/training/plans/26c3cb899dddae04e8f06919642e431742434e61c8e66b5a6a33968a2ae91cf7.json",
+          "sha256": "8c8d3a07d05100711b5080b3e26e4db689d5552d6c91596477578408c15a29e1"
+        },
+        "version": 1,
+        "width": 1024
+      }
+    }
+  ],
+  "data_conditioning_audit": {
+    "file": {
+      "path": "workspace/state/verification/phase-c04/data-conditioning-audit.json",
+      "sha256": "c778cc4e059f98c1a0618e9114287cae206d740ba269b9aea1cb8e57c95635a4",
+      "bytes": 27362
+    },
+    "value": {
+      "dataset": {
+        "path": "training/imports/8b950f635d492e9b6a69f0eb63e4e9ccd331f6de6a6e56536fdb6b02c853cce5/prepared.json",
+        "sha256": "00b52a9ad88d7578ced82d765c53316e62ce6eb9d4f4efceb02a5e8b5746e56f"
+      },
+      "texts": [
+        {
+          "id": "met-11737",
+          "split": "validation",
+          "text": "itovstill oil painting of sliced cake on a plate with green grapes, dried fruit and a stemmed glass on a tabletop against a brown background\n",
+          "tokenization": [
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                2870,
+                3086,
+                539,
+                28121,
+                2972,
+                525,
+                320,
+                5135,
+                593,
+                1901,
+                18580,
+                267,
+                16037,
+                5190,
+                537,
+                320,
+                795,
+                19570,
+                3313,
+                525,
+                320,
+                25773,
+                1601,
+                320,
+                2866,
+                5994,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "oil</w>",
+                "painting</w>",
+                "of</w>",
+                "sliced</w>",
+                "cake</w>",
+                "on</w>",
+                "a</w>",
+                "plate</w>",
+                "with</w>",
+                "green</w>",
+                "grapes</w>",
+                ",</w>",
+                "dried</w>",
+                "fruit</w>",
+                "and</w>",
+                "a</w>",
+                "ste",
+                "mmed</w>",
+                "glass</w>",
+                "on</w>",
+                "a</w>",
+                "tabletop</w>",
+                "against</w>",
+                "a</w>",
+                "brown</w>",
+                "background</w>",
+                "<|endoftext|>"
+              ],
+              "length": 31,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            },
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                2870,
+                3086,
+                539,
+                28121,
+                2972,
+                525,
+                320,
+                5135,
+                593,
+                1901,
+                18580,
+                267,
+                16037,
+                5190,
+                537,
+                320,
+                795,
+                19570,
+                3313,
+                525,
+                320,
+                25773,
+                1601,
+                320,
+                2866,
+                5994,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "oil</w>",
+                "painting</w>",
+                "of</w>",
+                "sliced</w>",
+                "cake</w>",
+                "on</w>",
+                "a</w>",
+                "plate</w>",
+                "with</w>",
+                "green</w>",
+                "grapes</w>",
+                ",</w>",
+                "dried</w>",
+                "fruit</w>",
+                "and</w>",
+                "a</w>",
+                "ste",
+                "mmed</w>",
+                "glass</w>",
+                "on</w>",
+                "a</w>",
+                "tabletop</w>",
+                "against</w>",
+                "a</w>",
+                "brown</w>",
+                "background</w>",
+                "<|endoftext|>"
+              ],
+              "length": 31,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            }
+          ]
+        },
+        {
+          "id": "met-11939",
+          "split": "train",
+          "text": "itovstill oil painting of an abundant display of grapes, peaches, sliced melon and other fruit in bowls and a basket, with stemmed glasses and dark foliage behind\n",
+          "tokenization": [
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                2870,
+                3086,
+                539,
+                550,
+                31611,
+                4456,
+                539,
+                18580,
+                267,
+                27216,
+                267,
+                28121,
+                12146,
+                537,
+                1010,
+                5190,
+                530,
+                17787,
+                537,
+                320,
+                10338,
+                267,
+                593,
+                795,
+                19570,
+                6116,
+                537,
+                3144,
+                26350,
+                2403,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "oil</w>",
+                "painting</w>",
+                "of</w>",
+                "an</w>",
+                "abundant</w>",
+                "display</w>",
+                "of</w>",
+                "grapes</w>",
+                ",</w>",
+                "peaches</w>",
+                ",</w>",
+                "sliced</w>",
+                "melon</w>",
+                "and</w>",
+                "other</w>",
+                "fruit</w>",
+                "in</w>",
+                "bowls</w>",
+                "and</w>",
+                "a</w>",
+                "basket</w>",
+                ",</w>",
+                "with</w>",
+                "ste",
+                "mmed</w>",
+                "glasses</w>",
+                "and</w>",
+                "dark</w>",
+                "foliage</w>",
+                "behind</w>",
+                "<|endoftext|>"
+              ],
+              "length": 35,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            },
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                2870,
+                3086,
+                539,
+                550,
+                31611,
+                4456,
+                539,
+                18580,
+                267,
+                27216,
+                267,
+                28121,
+                12146,
+                537,
+                1010,
+                5190,
+                530,
+                17787,
+                537,
+                320,
+                10338,
+                267,
+                593,
+                795,
+                19570,
+                6116,
+                537,
+                3144,
+                26350,
+                2403,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "oil</w>",
+                "painting</w>",
+                "of</w>",
+                "an</w>",
+                "abundant</w>",
+                "display</w>",
+                "of</w>",
+                "grapes</w>",
+                ",</w>",
+                "peaches</w>",
+                ",</w>",
+                "sliced</w>",
+                "melon</w>",
+                "and</w>",
+                "other</w>",
+                "fruit</w>",
+                "in</w>",
+                "bowls</w>",
+                "and</w>",
+                "a</w>",
+                "basket</w>",
+                ",</w>",
+                "with</w>",
+                "ste",
+                "mmed</w>",
+                "glasses</w>",
+                "and</w>",
+                "dark</w>",
+                "foliage</w>",
+                "behind</w>",
+                "<|endoftext|>"
+              ],
+              "length": 35,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            }
+          ]
+        },
+        {
+          "id": "met-16590",
+          "split": "train",
+          "text": "itovstill oil painting of pale grapes, a peach, a bowl of red grapes, a stemmed glass and a tall dark pitcher on a white cloth against a brown background\n",
+          "tokenization": [
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                2870,
+                3086,
+                539,
+                12518,
+                18580,
+                267,
+                320,
+                11538,
+                267,
+                320,
+                3814,
+                539,
+                736,
+                18580,
+                267,
+                320,
+                795,
+                19570,
+                3313,
+                537,
+                320,
+                7771,
+                3144,
+                13445,
+                525,
+                320,
+                1579,
+                14559,
+                1601,
+                320,
+                2866,
+                5994,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "oil</w>",
+                "painting</w>",
+                "of</w>",
+                "pale</w>",
+                "grapes</w>",
+                ",</w>",
+                "a</w>",
+                "peach</w>",
+                ",</w>",
+                "a</w>",
+                "bowl</w>",
+                "of</w>",
+                "red</w>",
+                "grapes</w>",
+                ",</w>",
+                "a</w>",
+                "ste",
+                "mmed</w>",
+                "glass</w>",
+                "and</w>",
+                "a</w>",
+                "tall</w>",
+                "dark</w>",
+                "pitcher</w>",
+                "on</w>",
+                "a</w>",
+                "white</w>",
+                "cloth</w>",
+                "against</w>",
+                "a</w>",
+                "brown</w>",
+                "background</w>",
+                "<|endoftext|>"
+              ],
+              "length": 37,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            },
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                2870,
+                3086,
+                539,
+                12518,
+                18580,
+                267,
+                320,
+                11538,
+                267,
+                320,
+                3814,
+                539,
+                736,
+                18580,
+                267,
+                320,
+                795,
+                19570,
+                3313,
+                537,
+                320,
+                7771,
+                3144,
+                13445,
+                525,
+                320,
+                1579,
+                14559,
+                1601,
+                320,
+                2866,
+                5994,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "oil</w>",
+                "painting</w>",
+                "of</w>",
+                "pale</w>",
+                "grapes</w>",
+                ",</w>",
+                "a</w>",
+                "peach</w>",
+                ",</w>",
+                "a</w>",
+                "bowl</w>",
+                "of</w>",
+                "red</w>",
+                "grapes</w>",
+                ",</w>",
+                "a</w>",
+                "ste",
+                "mmed</w>",
+                "glass</w>",
+                "and</w>",
+                "a</w>",
+                "tall</w>",
+                "dark</w>",
+                "pitcher</w>",
+                "on</w>",
+                "a</w>",
+                "white</w>",
+                "cloth</w>",
+                "against</w>",
+                "a</w>",
+                "brown</w>",
+                "background</w>",
+                "<|endoftext|>"
+              ],
+              "length": 37,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            }
+          ]
+        },
+        {
+          "id": "vase-and-pears-plain",
+          "split": "exposed_diagnostic",
+          "text": "A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+          "tokenization": [
+            {
+              "ids": [
+                49406,
+                320,
+                1170,
+                970,
+                539,
+                5840,
+                1237,
+                4481,
+                39565,
+                13519,
+                637,
+                1746,
+                15112,
+                20431,
+                525,
+                320,
+                10709,
+                9057,
+                2175,
+                267,
+                871,
+                1010,
+                13770,
+                267,
+                3616,
+                1145,
+                5799,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "a</w>",
+                "still</w>",
+                "life</w>",
+                "of</w>",
+                "exactly</w>",
+                "two</w>",
+                "yellow</w>",
+                "pears</w>",
+                "beside</w>",
+                "one</w>",
+                "blue</w>",
+                "ceramic</w>",
+                "vase</w>",
+                "on</w>",
+                "a</w>",
+                "plain</w>",
+                "wooden</w>",
+                "table</w>",
+                ",</w>",
+                "no</w>",
+                "other</w>",
+                "objects</w>",
+                ",</w>",
+                "warm</w>",
+                "side</w>",
+                "lighting</w>",
+                "<|endoftext|>"
+              ],
+              "length": 28,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            },
+            {
+              "ids": [
+                49406,
+                320,
+                1170,
+                970,
+                539,
+                5840,
+                1237,
+                4481,
+                39565,
+                13519,
+                637,
+                1746,
+                15112,
+                20431,
+                525,
+                320,
+                10709,
+                9057,
+                2175,
+                267,
+                871,
+                1010,
+                13770,
+                267,
+                3616,
+                1145,
+                5799,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "a</w>",
+                "still</w>",
+                "life</w>",
+                "of</w>",
+                "exactly</w>",
+                "two</w>",
+                "yellow</w>",
+                "pears</w>",
+                "beside</w>",
+                "one</w>",
+                "blue</w>",
+                "ceramic</w>",
+                "vase</w>",
+                "on</w>",
+                "a</w>",
+                "plain</w>",
+                "wooden</w>",
+                "table</w>",
+                ",</w>",
+                "no</w>",
+                "other</w>",
+                "objects</w>",
+                ",</w>",
+                "warm</w>",
+                "side</w>",
+                "lighting</w>",
+                "<|endoftext|>"
+              ],
+              "length": 28,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            }
+          ]
+        },
+        {
+          "id": "vase-and-pears-trigger",
+          "split": "exposed_diagnostic",
+          "text": "itovstill A still life of exactly two yellow pears beside one blue ceramic vase on a plain wooden table, no other objects, warm side lighting",
+          "tokenization": [
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                320,
+                1170,
+                970,
+                539,
+                5840,
+                1237,
+                4481,
+                39565,
+                13519,
+                637,
+                1746,
+                15112,
+                20431,
+                525,
+                320,
+                10709,
+                9057,
+                2175,
+                267,
+                871,
+                1010,
+                13770,
+                267,
+                3616,
+                1145,
+                5799,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "a</w>",
+                "still</w>",
+                "life</w>",
+                "of</w>",
+                "exactly</w>",
+                "two</w>",
+                "yellow</w>",
+                "pears</w>",
+                "beside</w>",
+                "one</w>",
+                "blue</w>",
+                "ceramic</w>",
+                "vase</w>",
+                "on</w>",
+                "a</w>",
+                "plain</w>",
+                "wooden</w>",
+                "table</w>",
+                ",</w>",
+                "no</w>",
+                "other</w>",
+                "objects</w>",
+                ",</w>",
+                "warm</w>",
+                "side</w>",
+                "lighting</w>",
+                "<|endoftext|>"
+              ],
+              "length": 31,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            },
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                320,
+                1170,
+                970,
+                539,
+                5840,
+                1237,
+                4481,
+                39565,
+                13519,
+                637,
+                1746,
+                15112,
+                20431,
+                525,
+                320,
+                10709,
+                9057,
+                2175,
+                267,
+                871,
+                1010,
+                13770,
+                267,
+                3616,
+                1145,
+                5799,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "a</w>",
+                "still</w>",
+                "life</w>",
+                "of</w>",
+                "exactly</w>",
+                "two</w>",
+                "yellow</w>",
+                "pears</w>",
+                "beside</w>",
+                "one</w>",
+                "blue</w>",
+                "ceramic</w>",
+                "vase</w>",
+                "on</w>",
+                "a</w>",
+                "plain</w>",
+                "wooden</w>",
+                "table</w>",
+                ",</w>",
+                "no</w>",
+                "other</w>",
+                "objects</w>",
+                ",</w>",
+                "warm</w>",
+                "side</w>",
+                "lighting</w>",
+                "<|endoftext|>"
+              ],
+              "length": 31,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            }
+          ]
+        },
+        {
+          "id": "paper-geometry-plain",
+          "split": "exposed_diagnostic",
+          "text": "A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+          "tokenization": [
+            {
+              "ids": [
+                49406,
+                320,
+                3772,
+                3155,
+                8853,
+                539,
+                637,
+                736,
+                9057,
+                11353,
+                537,
+                637,
+                1579,
+                2802,
+                10266,
+                525,
+                320,
+                1395,
+                7048,
+                7744,
+                267,
+                3773,
+                12971,
+                267,
+                871,
+                1010,
+                13770,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "a</w>",
+                "clean</w>",
+                "studio</w>",
+                "photograph</w>",
+                "of</w>",
+                "one</w>",
+                "red</w>",
+                "wooden</w>",
+                "cube</w>",
+                "and</w>",
+                "one</w>",
+                "white</w>",
+                "paper</w>",
+                "cone</w>",
+                "on</w>",
+                "a</w>",
+                "light</w>",
+                "gray</w>",
+                "surface</w>",
+                ",</w>",
+                "soft</w>",
+                "shadows</w>",
+                ",</w>",
+                "no</w>",
+                "other</w>",
+                "objects</w>",
+                "<|endoftext|>"
+              ],
+              "length": 28,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            },
+            {
+              "ids": [
+                49406,
+                320,
+                3772,
+                3155,
+                8853,
+                539,
+                637,
+                736,
+                9057,
+                11353,
+                537,
+                637,
+                1579,
+                2802,
+                10266,
+                525,
+                320,
+                1395,
+                7048,
+                7744,
+                267,
+                3773,
+                12971,
+                267,
+                871,
+                1010,
+                13770,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "a</w>",
+                "clean</w>",
+                "studio</w>",
+                "photograph</w>",
+                "of</w>",
+                "one</w>",
+                "red</w>",
+                "wooden</w>",
+                "cube</w>",
+                "and</w>",
+                "one</w>",
+                "white</w>",
+                "paper</w>",
+                "cone</w>",
+                "on</w>",
+                "a</w>",
+                "light</w>",
+                "gray</w>",
+                "surface</w>",
+                ",</w>",
+                "soft</w>",
+                "shadows</w>",
+                ",</w>",
+                "no</w>",
+                "other</w>",
+                "objects</w>",
+                "<|endoftext|>"
+              ],
+              "length": 28,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            }
+          ]
+        },
+        {
+          "id": "paper-geometry-trigger",
+          "split": "exposed_diagnostic",
+          "text": "itovstill A clean studio photograph of one red wooden cube and one white paper cone on a light gray surface, soft shadows, no other objects",
+          "tokenization": [
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                320,
+                3772,
+                3155,
+                8853,
+                539,
+                637,
+                736,
+                9057,
+                11353,
+                537,
+                637,
+                1579,
+                2802,
+                10266,
+                525,
+                320,
+                1395,
+                7048,
+                7744,
+                267,
+                3773,
+                12971,
+                267,
+                871,
+                1010,
+                13770,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "a</w>",
+                "clean</w>",
+                "studio</w>",
+                "photograph</w>",
+                "of</w>",
+                "one</w>",
+                "red</w>",
+                "wooden</w>",
+                "cube</w>",
+                "and</w>",
+                "one</w>",
+                "white</w>",
+                "paper</w>",
+                "cone</w>",
+                "on</w>",
+                "a</w>",
+                "light</w>",
+                "gray</w>",
+                "surface</w>",
+                ",</w>",
+                "soft</w>",
+                "shadows</w>",
+                ",</w>",
+                "no</w>",
+                "other</w>",
+                "objects</w>",
+                "<|endoftext|>"
+              ],
+              "length": 31,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            },
+            {
+              "ids": [
+                49406,
+                529,
+                6420,
+                1170,
+                320,
+                3772,
+                3155,
+                8853,
+                539,
+                637,
+                736,
+                9057,
+                11353,
+                537,
+                637,
+                1579,
+                2802,
+                10266,
+                525,
+                320,
+                1395,
+                7048,
+                7744,
+                267,
+                3773,
+                12971,
+                267,
+                871,
+                1010,
+                13770,
+                49407
+              ],
+              "tokens": [
+                "<|startoftext|>",
+                "it",
+                "ov",
+                "still</w>",
+                "a</w>",
+                "clean</w>",
+                "studio</w>",
+                "photograph</w>",
+                "of</w>",
+                "one</w>",
+                "red</w>",
+                "wooden</w>",
+                "cube</w>",
+                "and</w>",
+                "one</w>",
+                "white</w>",
+                "paper</w>",
+                "cone</w>",
+                "on</w>",
+                "a</w>",
+                "light</w>",
+                "gray</w>",
+                "surface</w>",
+                ",</w>",
+                "soft</w>",
+                "shadows</w>",
+                ",</w>",
+                "no</w>",
+                "other</w>",
+                "objects</w>",
+                "<|endoftext|>"
+              ],
+              "length": 31,
+              "max_length": 77,
+              "truncated": false,
+              "trigger_ids": [
+                529,
+                6420,
+                1170
+              ]
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "id": "met-11737",
+          "kind": "source",
+          "size": [
+            600,
+            422
+          ],
+          "sha256": "22af7b5eb7f942a99574ba118201f77c7fd436c480c40979efb0ebf557104fbb",
+          "pixel_sha256": "e1a95786b70979f4a313f83df3999b97f366f17d1f37446a3c9a533708eafa14"
+        },
+        {
+          "id": "met-11737",
+          "kind": "image",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "c5ec37bd21a689698c49fb1b689401b4bcb6534e35f8182e7ae009654d2d4bbd",
+          "pixel_sha256": "d7b66ec3e84840337b8de7213af694feaf08022fe99c2afbf7f75d5c208c1018"
+        },
+        {
+          "id": "met-11939",
+          "kind": "source",
+          "size": [
+            599,
+            430
+          ],
+          "sha256": "e3b55e0f6c9951197b5ae40935ef5347eda066455bc564720d29d95d804c526d",
+          "pixel_sha256": "398fc7f1c59b4cce935fc7359d4d8b1e0947daf2c05d0b3ab2046d05824273c9"
+        },
+        {
+          "id": "met-11939",
+          "kind": "image",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "5c1316d1e25c658a6b712e84ec29cfb498b07127760cef28ae960c9b61a78ae8",
+          "pixel_sha256": "12893464d113760224690f113dcae8a93c4688087d7765b1a663b0e934a5b1c2"
+        },
+        {
+          "id": "met-16590",
+          "kind": "source",
+          "size": [
+            599,
+            447
+          ],
+          "sha256": "b9689a5cdaf7de0e19ffc01345c8faab1c88568a42a62fc5fdf4f012a23b0b36",
+          "pixel_sha256": "547b337bd7d24fd3d3decc670516ef4fcd71b0c84d569e7a87d34b75a8863372"
+        },
+        {
+          "id": "met-16590",
+          "kind": "image",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "2f9f97d16d97cca1617ffda4f5be033e63641dd196693a2b7a71c53d66accffd",
+          "pixel_sha256": "a4fc8116d04f7c45feb420179ddf0d1ca2c798f68a8b3dd4f434e4640ff06b3c"
+        }
+      ],
+      "scope": "CPU-only local tokenizer and decoded-image audit. No semantic guarantee, causal attribution, data revision, or holdout use."
+    }
+  },
+  "data_image": {
+    "path": "docs/evidence/phase-c04-data-source-prepared.png",
+    "sha256": "e98f0bf91e4b7222d52fde2fb7b9040a55cfeee01166fca878dcb3b8c3a2952a",
+    "bytes": 1643351
+  },
+  "historical_comparison_validation": {
+    "file": {
+      "path": "workspace/state/verification/phase-c04/historical-comparison-validation.json",
+      "sha256": "5210e263ebe3f8c31698f7309a9f368c65ce46025e59ba9a038fa3dc3b7e1990",
+      "bytes": 9919
+    },
+    "value": {
+      "scope": "CPU implementation cross-check against retained B-05 Torch float64 measurements. The 1e-6 comparison is retrospective for B-05; it does not rewrite its protocol or create preregistered evidence.",
+      "packet_id": "b9396c951bfdd1b7d854b6fdd641b9c065b354b267f5be1ef3f3a016ef2bd474",
+      "endpoints": [
+        {
+          "endpoint": "short",
+          "measurements": {
+            "members": [
+              "short-r1",
+              "short-r2"
+            ],
+            "controls": {
+              "runtime_equal": true,
+              "position_equal": true,
+              "precision_equal": true,
+              "sample_noise_rate_order_equal": true,
+              "python_numpy_rng_exact": true,
+              "torch_rng_exact": true
+            },
+            "runtime": {
+              "cuda_capability": [
+                12,
+                0
+              ],
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": false,
+              "deterministic_algorithms": false,
+              "device": "cuda",
+              "driver": "616.64",
+              "gpu_name": "NVIDIA GeForce RTX 5090",
+              "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074"
+            },
+            "parameters": {
+              "weight": {
+                "elements": 11612160,
+                "different_elements": 11344084,
+                "payload_exact": false,
+                "max_absolute_difference_hex": "0x1.7887d80000000p-12"
+              },
+              "exp_avg": {
+                "elements": 11612160,
+                "different_elements": 11497628,
+                "payload_exact": false,
+                "max_absolute_difference_hex": "0x1.1fae400000000p-20"
+              },
+              "exp_avg_sq": {
+                "elements": 11612160,
+                "different_elements": 11496478,
+                "payload_exact": false,
+                "max_absolute_difference_hex": "0x1.bf5c400000000p-37"
+              }
+            },
+            "torch_rng_exact": {
+              "rng.cpu": true,
+              "rng.cuda": true
+            },
+            "loss": {
+              "steps_max_absolute_billionths": 10331,
+              "validation_max_absolute_billionths": 9284
+            },
+            "images": [
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760922,
+                "role": "base_plain",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760922,
+                "role": "base_trigger",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760922,
+                "role": "adapter_plain",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760922,
+                "role": "adapter_trigger",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760923,
+                "role": "base_plain",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760923,
+                "role": "base_trigger",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760923,
+                "role": "adapter_plain",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760923,
+                "role": "adapter_trigger",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860922,
+                "role": "base_plain",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860922,
+                "role": "base_trigger",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860922,
+                "role": "adapter_plain",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860922,
+                "role": "adapter_trigger",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860923,
+                "role": "base_plain",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860923,
+                "role": "base_trigger",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860923,
+                "role": "adapter_plain",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860923,
+                "role": "adapter_trigger",
+                "file_sha256_equal": false
+              }
+            ],
+            "numerically_exact": false,
+            "within_declared_tolerance": false
+          },
+          "matches_prior_torch_float64_measurement": true
+        },
+        {
+          "endpoint": "long",
+          "measurements": {
+            "members": [
+              "long-r1",
+              "long-r2"
+            ],
+            "controls": {
+              "runtime_equal": true,
+              "position_equal": true,
+              "precision_equal": true,
+              "sample_noise_rate_order_equal": true,
+              "python_numpy_rng_exact": true,
+              "torch_rng_exact": true
+            },
+            "runtime": {
+              "cuda_capability": [
+                12,
+                0
+              ],
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": false,
+              "deterministic_algorithms": false,
+              "device": "cuda",
+              "driver": "616.64",
+              "gpu_name": "NVIDIA GeForce RTX 5090",
+              "gpu_uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074"
+            },
+            "parameters": {
+              "weight": {
+                "elements": 11612160,
+                "different_elements": 11550140,
+                "payload_exact": false,
+                "max_absolute_difference_hex": "0x1.f1bd0f0000000p-13"
+              },
+              "exp_avg": {
+                "elements": 11612160,
+                "different_elements": 11607862,
+                "payload_exact": false,
+                "max_absolute_difference_hex": "0x1.a9b5500000000p-18"
+              },
+              "exp_avg_sq": {
+                "elements": 11612160,
+                "different_elements": 11609129,
+                "payload_exact": false,
+                "max_absolute_difference_hex": "0x1.342bc00000000p-34"
+              }
+            },
+            "torch_rng_exact": {
+              "rng.cpu": true,
+              "rng.cuda": true
+            },
+            "loss": {
+              "steps_max_absolute_billionths": 14030,
+              "validation_max_absolute_billionths": 14156
+            },
+            "images": [
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760922,
+                "role": "base_plain",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760922,
+                "role": "base_trigger",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760922,
+                "role": "adapter_plain",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760922,
+                "role": "adapter_trigger",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760923,
+                "role": "base_plain",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760923,
+                "role": "base_trigger",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760923,
+                "role": "adapter_plain",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "vase-and-pears",
+                "seed": 11760923,
+                "role": "adapter_trigger",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860922,
+                "role": "base_plain",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860922,
+                "role": "base_trigger",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860922,
+                "role": "adapter_plain",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860922,
+                "role": "adapter_trigger",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860923,
+                "role": "base_plain",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860923,
+                "role": "base_trigger",
+                "file_sha256_equal": true
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860923,
+                "role": "adapter_plain",
+                "file_sha256_equal": false
+              },
+              {
+                "case_id": "paper-geometry",
+                "seed": 11860923,
+                "role": "adapter_trigger",
+                "file_sha256_equal": false
+              }
+            ],
+            "numerically_exact": false,
+            "within_declared_tolerance": false
+          },
+          "matches_prior_torch_float64_measurement": true
+        }
+      ],
+      "network_and_ml_imports_forbidden": true
+    }
+  },
+  "tests": {
+    "focused-2": {
+      "junit": {
+        "path": "workspace/state/verification/phase-c04/focused-2.xml",
+        "sha256": "02c93abc1019cf5645d5cff0c6cb4d9ef7e1ae2b4705f6b3b30d422d73fe922c",
+        "bytes": 11873
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-c04/focused-2.log",
+        "sha256": "f6cdacc2374ad385bd124a4a9e1af151160bbf61abd36fec7c88873cc5ae9f64",
+        "bytes": 6774
+      },
+      "summary": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "3",
+        "skipped": "0",
+        "tests": "46",
+        "time": "122.995",
+        "timestamp": "2026-09-24T18:43:06.132327-07:00",
+        "hostname": "homeone"
+      },
+      "exit_code": 1
+    },
+    "focused-3": {
+      "junit": {
+        "path": "workspace/state/verification/phase-c04/focused-3.xml",
+        "sha256": "f11ace3a854e717cd34c48ec98d7877e1736d40457e7c712597e2dd021d60ad3",
+        "bytes": 1708
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-c04/focused-3.log",
+        "sha256": "c45206aec32a5751f7859a1b15a3b685fb86c44f2411be2feda4566238dea4d3",
+        "bytes": 215
+      },
+      "summary": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "13",
+        "time": "30.914",
+        "timestamp": "2026-09-24T18:46:12.974017-07:00",
+        "hostname": "homeone"
+      },
+      "exit_code": 0
+    },
+    "full": {
+      "junit": {
+        "path": "workspace/state/verification/phase-c04/full.xml",
+        "sha256": "1ec9c5c079a148a8a8c86f129ac0ea7a40a058c2aac6fa45068bc802df724ee4",
+        "bytes": 196618
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-c04/full.log",
+        "sha256": "cca948f224048988916de26ff8aa4dbefef222f247660543189033d99c4bb116",
+        "bytes": 1844
+      },
+      "summary": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "1454",
+        "time": "1453.423",
+        "timestamp": "2026-09-24T18:48:19.976953-07:00",
+        "hostname": "homeone"
+      },
+      "exit_code": 0
+    },
+    "final-focused": {
+      "junit": {
+        "path": "workspace/state/verification/phase-c04/final-focused.xml",
+        "sha256": "12ba967bded5757772f6f29bf455ec174ec08648a973c3733681a17c08dcc501",
+        "bytes": 2219
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-c04/final-focused.log",
+        "sha256": "8add64e84c381fb7fedc5a08ee6e000271d1f84c455fe50a94fdae7aedcad08e",
+        "bytes": 219
+      },
+      "summary": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "17",
+        "time": "49.332",
+        "timestamp": "2026-09-24T19:01:00.450135-07:00",
+        "hostname": "homeone"
+      },
+      "exit_code": 0
+    },
+    "installed": {
+      "junit": {
+        "path": "workspace/state/verification/phase-c04/installed.xml",
+        "sha256": "0688a1d34d249dd4bcfe33fb21bc8dd1059b6d216aa2fde1466f7efd49ee4b96",
+        "bytes": 6267
+      },
+      "log": {
+        "path": "workspace/state/verification/phase-c04/installed.log",
+        "sha256": "eb1bf7c75b19c1a22c822dd880466d05572b97583f2be9072a8ff8ab6181d253",
+        "bytes": 258
+      },
+      "summary": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "50",
+        "time": "171.816",
+        "timestamp": "2026-09-24T18:57:27.892360-07:00",
+        "hostname": "homeone"
+      },
+      "exit_code": 0
+    }
+  },
+  "initial_setup_failure": {
+    "file": {
+      "path": "workspace/state/verification/phase-c04/initial-test-failure.json",
+      "sha256": "93be418678c90d99e632464c07bed1ffa2320c004bb002c08acc7e24689969ec",
+      "bytes": 155
+    },
+    "value": {
+      "cause": "Parent of pytest basetemp was absent; created the parent before rerun. No runtime experiment had started.",
+      "result": "1 passed, 45 setup errors"
+    }
+  },
+  "test_scope": "The broad source run began before the final comparison-control selector refinement. Final source focused tests, installed experiment/variance tests and real-checkpoint validation use final source bytes. The complete installed suite was not repeated for this addition.",
+  "public_verification": {
+    "source": {
+      "mode": "source",
+      "module": "C:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py",
+      "python": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]",
+      "commands": 4,
+      "module_hashes": {
+        "itov/assessment_context.py": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1",
+        "itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+        "itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+        "itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+        "itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+        "itov/batch_execution.py": "e1c1788e485c6649d48b2996035d169ff240eb8fcdfd1577700d52719b0a8230",
+        "itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+        "itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+        "itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+        "itov/checkpoint_tensors.py": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc",
+        "itov/cli.py": "f46e90526f6ed69ab3a34d9e5693d9c29e849beed70f3ca4432d4a356f65ee68",
+        "itov/client_ownership.py": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73",
+        "itov/cli_output.py": "94b5d634df2c4499f519bb18642cf79008c45497dcb9a317b2d7c54d4b15239b",
+        "itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+        "itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+        "itov/curation.py": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c",
+        "itov/dataset_features.py": "2c6fe67f51aeb800aa9fc5a8cb310498b85b2b43a1ed8be2f8628790cbd824e8",
+        "itov/dataset_freeze.py": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09",
+        "itov/dataset_identity.py": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f",
+        "itov/dataset_images.py": "c49c6ac73ede0d4093c1fb6602285daba5f8ff685746453e30a683a33d710ccf",
+        "itov/dataset_import.py": "386505da9f79d20e50c96e89475a5d0edab686984c5142c686671fab90a21c2e",
+        "itov/dataset_inspection.py": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1",
+        "itov/dataset_manifest.py": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240",
+        "itov/dataset_snapshot.py": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926",
+        "itov/deployed_loader.py": "f0913e39cf84e19bea7cf90b33415a8865a8a858449158f30eaf932c48cfb0cb",
+        "itov/deployed_loader_worker.py": "082244ff1f0fb83d9f0117709499593caaa00ba056fbb5c487c8bf3b60b9335e",
+        "itov/deployed_review.py": "069ac4bb7beba2c3aadd9d8dde1f4ad663f55477b251fa412f49dc71bc7cfbcb",
+        "itov/device.py": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51",
+        "itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+        "itov/evaluation.py": "762bd926d589d7af0551157c5a0d6aa109535bdfeae60cc41bd9777c7632d5b6",
+        "itov/evaluation_cases.py": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033",
+        "itov/evaluation_corpus.py": "74f92dc97277888b42e26331426c0230583833b1f8273c075127834ba1651cb2",
+        "itov/evaluation_runtime.py": "9911b9f6930547b2df8f2cdcb5f05ab0918fedb9e5f0f4569e1e6ef5d5b791f1",
+        "itov/evidence_reads.py": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e",
+        "itov/execution_ownership.py": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33",
+        "itov/execution_store.py": "fb1a2031751b5bbd23c1eadb9cb6e500faf9b5b9d094af675072f288b782eceb",
+        "itov/experiments.py": "ced9bdccefef4a45c826a650ed730cda286cad0387b7b8d95155f3ad427a00f4",
+        "itov/experiment_variance.py": "1caf93861a493f3d6276e36fb5d7fb4b3185d81cb4e43ba4a5347d1c2cc822b8",
+        "itov/image_checks.py": "cc34f6ca912412a521f38fff9bb23df88d5e5909f61c54843b29d71edb714c6c",
+        "itov/image_media.py": "4d98933760364421362a17099df78be07ee9645587ec3f7afae8bcbb0f09ee03",
+        "itov/image_metrics.py": "a04213edc2432988ad9b455877865a5a688134d7cb496010bf104214caaa161d",
+        "itov/inference.py": "abed4f457ee81a40297af7f2d13892b5f7bd29e557bc55aedce1fadd5c724721",
+        "itov/inference_capabilities.py": "fa441ce471d2378e5a829d7b97ec7681cb610ac6dd54b9d510bd2e65e0c5cf4e",
+        "itov/inference_graph.py": "c8265a6caf5fccedb77fe332ac0dcbaec63f82e27de62fc49afee45487109c62",
+        "itov/inference_runtime.py": "c9000ce8e07eb6c7325970de8f1194466f503d9785add9770b2ace34f9e63501",
+        "itov/jobs.py": "d997d0e6a35c4ff6c4c2b42f8877946c1a95d43a6cd6914a256583ea940c63eb",
+        "itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+        "itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+        "itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+        "itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+        "itov/owned_jobs.py": "e7ffd20657852bc3895a723acb4c4f214784bcf43ce44f53b1d172e887774b27",
+        "itov/parallel.py": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84",
+        "itov/qualification.py": "73c06b7fe05f1c598658ada6522173f03e874a8e82737c201d65ce9feb748e68",
+        "itov/quality.py": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681",
+        "itov/records.py": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164",
+        "itov/review_records.py": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506",
+        "itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+        "itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+        "itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+        "itov/training.py": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070",
+        "itov/training_checkpoints.py": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193",
+        "itov/training_checkpoint_worker.py": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb",
+        "itov/training_config.py": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f",
+        "itov/training_data.py": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4",
+        "itov/training_optimization.py": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113",
+        "itov/training_records.py": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30",
+        "itov/training_results.py": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01",
+        "itov/training_worker.py": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b",
+        "itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+        "itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+        "itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+        "itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+        "itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+        "itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+        "itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+        "itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85",
+        "itov/__init__.py": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a",
+        "itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+      },
+      "module_count": 78,
+      "readme_exact": true,
+      "network_and_ml_imports_forbidden": true,
+      "b05_rejected": true,
+      "device_idle": true,
+      "scm_dev_tools": "0.5.0"
+    },
+    "installed": {
+      "mode": "installed",
+      "module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\xA-HpBZRqkYMAWTTE-pxK\\Lib\\site-packages\\itov\\__init__.py",
+      "python": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]",
+      "commands": 4,
+      "module_hashes": {
+        "itov/assessment_context.py": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1",
+        "itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+        "itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+        "itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+        "itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+        "itov/batch_execution.py": "e1c1788e485c6649d48b2996035d169ff240eb8fcdfd1577700d52719b0a8230",
+        "itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+        "itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+        "itov/catalog_store.py": "0042f783057f9e6a562c87b7aef6451664766572e94d397998e1eb02fed5fff5",
+        "itov/checkpoint_tensors.py": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc",
+        "itov/cli.py": "f46e90526f6ed69ab3a34d9e5693d9c29e849beed70f3ca4432d4a356f65ee68",
+        "itov/client_ownership.py": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73",
+        "itov/cli_output.py": "94b5d634df2c4499f519bb18642cf79008c45497dcb9a317b2d7c54d4b15239b",
+        "itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+        "itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+        "itov/curation.py": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c",
+        "itov/dataset_features.py": "2c6fe67f51aeb800aa9fc5a8cb310498b85b2b43a1ed8be2f8628790cbd824e8",
+        "itov/dataset_freeze.py": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09",
+        "itov/dataset_identity.py": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f",
+        "itov/dataset_images.py": "c49c6ac73ede0d4093c1fb6602285daba5f8ff685746453e30a683a33d710ccf",
+        "itov/dataset_import.py": "386505da9f79d20e50c96e89475a5d0edab686984c5142c686671fab90a21c2e",
+        "itov/dataset_inspection.py": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1",
+        "itov/dataset_manifest.py": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240",
+        "itov/dataset_snapshot.py": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926",
+        "itov/deployed_loader.py": "f0913e39cf84e19bea7cf90b33415a8865a8a858449158f30eaf932c48cfb0cb",
+        "itov/deployed_loader_worker.py": "082244ff1f0fb83d9f0117709499593caaa00ba056fbb5c487c8bf3b60b9335e",
+        "itov/deployed_review.py": "069ac4bb7beba2c3aadd9d8dde1f4ad663f55477b251fa412f49dc71bc7cfbcb",
+        "itov/device.py": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51",
+        "itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+        "itov/evaluation.py": "762bd926d589d7af0551157c5a0d6aa109535bdfeae60cc41bd9777c7632d5b6",
+        "itov/evaluation_cases.py": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033",
+        "itov/evaluation_corpus.py": "74f92dc97277888b42e26331426c0230583833b1f8273c075127834ba1651cb2",
+        "itov/evaluation_runtime.py": "9911b9f6930547b2df8f2cdcb5f05ab0918fedb9e5f0f4569e1e6ef5d5b791f1",
+        "itov/evidence_reads.py": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e",
+        "itov/execution_ownership.py": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33",
+        "itov/execution_store.py": "fb1a2031751b5bbd23c1eadb9cb6e500faf9b5b9d094af675072f288b782eceb",
+        "itov/experiments.py": "ced9bdccefef4a45c826a650ed730cda286cad0387b7b8d95155f3ad427a00f4",
+        "itov/experiment_variance.py": "1caf93861a493f3d6276e36fb5d7fb4b3185d81cb4e43ba4a5347d1c2cc822b8",
+        "itov/image_checks.py": "cc34f6ca912412a521f38fff9bb23df88d5e5909f61c54843b29d71edb714c6c",
+        "itov/image_media.py": "4d98933760364421362a17099df78be07ee9645587ec3f7afae8bcbb0f09ee03",
+        "itov/image_metrics.py": "a04213edc2432988ad9b455877865a5a688134d7cb496010bf104214caaa161d",
+        "itov/inference.py": "abed4f457ee81a40297af7f2d13892b5f7bd29e557bc55aedce1fadd5c724721",
+        "itov/inference_capabilities.py": "fa441ce471d2378e5a829d7b97ec7681cb610ac6dd54b9d510bd2e65e0c5cf4e",
+        "itov/inference_graph.py": "c8265a6caf5fccedb77fe332ac0dcbaec63f82e27de62fc49afee45487109c62",
+        "itov/inference_runtime.py": "c9000ce8e07eb6c7325970de8f1194466f503d9785add9770b2ace34f9e63501",
+        "itov/jobs.py": "d997d0e6a35c4ff6c4c2b42f8877946c1a95d43a6cd6914a256583ea940c63eb",
+        "itov/ledger.py": "68e6a388e740baeef9134fddfd5933483f6902f253b21c2eef4ac9ae4a122935",
+        "itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+        "itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+        "itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+        "itov/owned_jobs.py": "e7ffd20657852bc3895a723acb4c4f214784bcf43ce44f53b1d172e887774b27",
+        "itov/parallel.py": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84",
+        "itov/qualification.py": "73c06b7fe05f1c598658ada6522173f03e874a8e82737c201d65ce9feb748e68",
+        "itov/quality.py": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681",
+        "itov/records.py": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164",
+        "itov/review_records.py": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506",
+        "itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+        "itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+        "itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+        "itov/training.py": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070",
+        "itov/training_checkpoints.py": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193",
+        "itov/training_checkpoint_worker.py": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb",
+        "itov/training_config.py": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f",
+        "itov/training_data.py": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4",
+        "itov/training_optimization.py": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113",
+        "itov/training_records.py": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30",
+        "itov/training_results.py": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01",
+        "itov/training_worker.py": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b",
+        "itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+        "itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+        "itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+        "itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+        "itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+        "itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+        "itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+        "itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85",
+        "itov/__init__.py": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a",
+        "itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+      },
+      "module_count": 78,
+      "readme_exact": true,
+      "network_and_ml_imports_forbidden": true,
+      "b05_rejected": true,
+      "device_idle": true,
+      "scm_dev_tools": null
+    },
+    "source_commands": {
+      "file": {
+        "path": "workspace/state/verification/phase-c04/source-public-commands.json",
+        "sha256": "92cde56cc715df490181f3c2647c131fc80723ca30319d79d942a7db0ea294ea",
+        "bytes": 6535
+      },
+      "value": [
+        {
+          "label": "incomplete-numerical-refusal",
+          "argv": [
+            "experiment",
+            "variance",
+            "workspace\\state\\experiments\\plans\\1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1.json",
+            "--json"
+          ],
+          "exit_code": 2,
+          "stdout": "{\n  \"ok\": false,\n  \"error\": \"Every declared member must finish or fail before review; recover stopped attempts\",\n  \"error_type\": \"ValueError\",\n  \"_cli\": {\n    \"version\": 1,\n    \"command\": [\n      \"experiment\",\n      \"variance\"\n    ],\n    \"outcome\": \"error\",\n    \"exit_code\": 2,\n    \"next_action\": \"Numerical repetition measurements retain exact-equality failures separately from declared tolerances. Inspect each pair; no quality or causal conclusion follows.\",\n    \"actions\": [\n      {\n        \"label\": \"Inspect command options\",\n        \"argv\": [\n          \"itov\",\n          \"experiment\",\n          \"variance\",\n          \"--help\"\n        ],\n        \"when\": \"After inspecting the result\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"label\": \"input document\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\experiments\\\\plans\\\\1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1.json\"\n      }\n    ],\n    \"causes\": [\n      {\n        \"location\": \"error\",\n        \"detail\": \"Every declared member must finish or fail before review; recover stopped attempts\"\n      }\n    ]\n  }\n}\n",
+          "stderr": ""
+        },
+        {
+          "label": "v1-tolerance-refusal",
+          "argv": [
+            "experiment",
+            "variance",
+            "workspace\\state\\experiments\\plans\\ec31b306ed90a4eec05ec6c10993d8968c66b62173a43fef96118089ffad8bd6.json",
+            "--json"
+          ],
+          "exit_code": 2,
+          "stdout": "{\n  \"ok\": false,\n  \"error\": \"Variance requires preregistered v2 tolerances\",\n  \"error_type\": \"ValueError\",\n  \"_cli\": {\n    \"version\": 1,\n    \"command\": [\n      \"experiment\",\n      \"variance\"\n    ],\n    \"outcome\": \"error\",\n    \"exit_code\": 2,\n    \"next_action\": \"Numerical repetition measurements retain exact-equality failures separately from declared tolerances. Inspect each pair; no quality or causal conclusion follows.\",\n    \"actions\": [\n      {\n        \"label\": \"Inspect command options\",\n        \"argv\": [\n          \"itov\",\n          \"experiment\",\n          \"variance\",\n          \"--help\"\n        ],\n        \"when\": \"After inspecting the result\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"label\": \"input document\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\experiments\\\\plans\\\\ec31b306ed90a4eec05ec6c10993d8968c66b62173a43fef96118089ffad8bd6.json\"\n      }\n    ],\n    \"causes\": [\n      {\n        \"location\": \"error\",\n        \"detail\": \"Variance requires preregistered v2 tolerances\"\n      }\n    ]\n  }\n}\n",
+          "stderr": ""
+        },
+        {
+          "label": "b05-rejection",
+          "argv": [
+            "experiment",
+            "replay",
+            "workspace\\state\\experiments\\plans\\ec31b306ed90a4eec05ec6c10993d8968c66b62173a43fef96118089ffad8bd6.json",
+            "--decision",
+            "workspace\\state\\experiments\\decisions\\52b4990afefce9c3e752cb100c53072aeff5b4f5d28b7cddc53144c58cb8e336.json",
+            "--json"
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"scope\": \"experiment_decision_replay\",\n  \"decision_id\": \"52b4990afefce9c3e752cb100c53072aeff5b4f5d28b7cddc53144c58cb8e336\",\n  \"valid\": true,\n  \"status\": \"rejected\",\n  \"selected_endpoint\": null,\n  \"promotion_eligible\": false,\n  \"limits\": \"Independent final-checkpoint endpoints, each trained from its declared seed; repeated prefix work consumes the budget. Intermediate restart bundles are not evaluated. Selection is for further evaluation only, never production acceptance or promotion. Loss is diagnostic. Reviews inspect every frozen case, seed and all four conditions.\",\n  \"_cli\": {\n    \"version\": 1,\n    \"command\": [\n      \"experiment\",\n      \"replay\"\n    ],\n    \"outcome\": \"refused\",\n    \"exit_code\": 1,\n    \"next_action\": \"Inspect every declared checkpoint and repetition against the frozen cases. Loss does not select a checkpoint; selection does not authorize promotion.\",\n    \"actions\": [\n      {\n        \"label\": \"Inspect command options\",\n        \"argv\": [\n          \"itov\",\n          \"experiment\",\n          \"replay\",\n          \"--help\"\n        ],\n        \"when\": \"After inspecting the result\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"label\": \"input document\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\experiments\\\\plans\\\\ec31b306ed90a4eec05ec6c10993d8968c66b62173a43fef96118089ffad8bd6.json\"\n      }\n    ],\n    \"causes\": []\n  }\n}\n",
+          "stderr": ""
+        },
+        {
+          "label": "device-status",
+          "argv": [
+            "device",
+            "status",
+            "--gpu",
+            "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"previous\": \"a18c7d9d-b37e-4d69-a884-8477ac17f3fa\",\n  \"reason\": \"external_requests_confirmed_terminal\",\n  \"record_id\": \"c8c8bac494a07148fa58f3f8ceb5552f27fa469c3a3813258bc88b50e6a69ec2\",\n  \"released_at\": \"2026-09-25T00:38:45.589411+00:00\",\n  \"status\": \"idle\",\n  \"version\": 1,\n  \"directory\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\ITOV\\\\device-leases\\\\e2c115fd-447a-8fe0-3257-b17c51919074\",\n  \"_cli\": {\n    \"version\": 1,\n    \"command\": [\n      \"device\",\n      \"status\"\n    ],\n    \"outcome\": \"ok\",\n    \"exit_code\": 0,\n    \"next_action\": \"Inspect cooperative ownership. An idle registry is not proof that unrelated GPU clients are absent.\",\n    \"actions\": [\n      {\n        \"label\": \"Inspect device ownership\",\n        \"argv\": [\n          \"itov\",\n          \"device\",\n          \"status\",\n          \"--gpu\",\n          \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\"\n        ],\n        \"when\": \"After inspecting the result\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"label\": \"directory\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\ITOV\\\\device-leases\\\\e2c115fd-447a-8fe0-3257-b17c51919074\"\n      }\n    ],\n    \"causes\": []\n  }\n}\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "installed_commands": {
+      "file": {
+        "path": "workspace/state/verification/phase-c04/installed-public-commands.json",
+        "sha256": "92cde56cc715df490181f3c2647c131fc80723ca30319d79d942a7db0ea294ea",
+        "bytes": 6535
+      },
+      "value": [
+        {
+          "label": "incomplete-numerical-refusal",
+          "argv": [
+            "experiment",
+            "variance",
+            "workspace\\state\\experiments\\plans\\1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1.json",
+            "--json"
+          ],
+          "exit_code": 2,
+          "stdout": "{\n  \"ok\": false,\n  \"error\": \"Every declared member must finish or fail before review; recover stopped attempts\",\n  \"error_type\": \"ValueError\",\n  \"_cli\": {\n    \"version\": 1,\n    \"command\": [\n      \"experiment\",\n      \"variance\"\n    ],\n    \"outcome\": \"error\",\n    \"exit_code\": 2,\n    \"next_action\": \"Numerical repetition measurements retain exact-equality failures separately from declared tolerances. Inspect each pair; no quality or causal conclusion follows.\",\n    \"actions\": [\n      {\n        \"label\": \"Inspect command options\",\n        \"argv\": [\n          \"itov\",\n          \"experiment\",\n          \"variance\",\n          \"--help\"\n        ],\n        \"when\": \"After inspecting the result\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"label\": \"input document\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\experiments\\\\plans\\\\1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1.json\"\n      }\n    ],\n    \"causes\": [\n      {\n        \"location\": \"error\",\n        \"detail\": \"Every declared member must finish or fail before review; recover stopped attempts\"\n      }\n    ]\n  }\n}\n",
+          "stderr": ""
+        },
+        {
+          "label": "v1-tolerance-refusal",
+          "argv": [
+            "experiment",
+            "variance",
+            "workspace\\state\\experiments\\plans\\ec31b306ed90a4eec05ec6c10993d8968c66b62173a43fef96118089ffad8bd6.json",
+            "--json"
+          ],
+          "exit_code": 2,
+          "stdout": "{\n  \"ok\": false,\n  \"error\": \"Variance requires preregistered v2 tolerances\",\n  \"error_type\": \"ValueError\",\n  \"_cli\": {\n    \"version\": 1,\n    \"command\": [\n      \"experiment\",\n      \"variance\"\n    ],\n    \"outcome\": \"error\",\n    \"exit_code\": 2,\n    \"next_action\": \"Numerical repetition measurements retain exact-equality failures separately from declared tolerances. Inspect each pair; no quality or causal conclusion follows.\",\n    \"actions\": [\n      {\n        \"label\": \"Inspect command options\",\n        \"argv\": [\n          \"itov\",\n          \"experiment\",\n          \"variance\",\n          \"--help\"\n        ],\n        \"when\": \"After inspecting the result\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"label\": \"input document\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\experiments\\\\plans\\\\ec31b306ed90a4eec05ec6c10993d8968c66b62173a43fef96118089ffad8bd6.json\"\n      }\n    ],\n    \"causes\": [\n      {\n        \"location\": \"error\",\n        \"detail\": \"Variance requires preregistered v2 tolerances\"\n      }\n    ]\n  }\n}\n",
+          "stderr": ""
+        },
+        {
+          "label": "b05-rejection",
+          "argv": [
+            "experiment",
+            "replay",
+            "workspace\\state\\experiments\\plans\\ec31b306ed90a4eec05ec6c10993d8968c66b62173a43fef96118089ffad8bd6.json",
+            "--decision",
+            "workspace\\state\\experiments\\decisions\\52b4990afefce9c3e752cb100c53072aeff5b4f5d28b7cddc53144c58cb8e336.json",
+            "--json"
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"scope\": \"experiment_decision_replay\",\n  \"decision_id\": \"52b4990afefce9c3e752cb100c53072aeff5b4f5d28b7cddc53144c58cb8e336\",\n  \"valid\": true,\n  \"status\": \"rejected\",\n  \"selected_endpoint\": null,\n  \"promotion_eligible\": false,\n  \"limits\": \"Independent final-checkpoint endpoints, each trained from its declared seed; repeated prefix work consumes the budget. Intermediate restart bundles are not evaluated. Selection is for further evaluation only, never production acceptance or promotion. Loss is diagnostic. Reviews inspect every frozen case, seed and all four conditions.\",\n  \"_cli\": {\n    \"version\": 1,\n    \"command\": [\n      \"experiment\",\n      \"replay\"\n    ],\n    \"outcome\": \"refused\",\n    \"exit_code\": 1,\n    \"next_action\": \"Inspect every declared checkpoint and repetition against the frozen cases. Loss does not select a checkpoint; selection does not authorize promotion.\",\n    \"actions\": [\n      {\n        \"label\": \"Inspect command options\",\n        \"argv\": [\n          \"itov\",\n          \"experiment\",\n          \"replay\",\n          \"--help\"\n        ],\n        \"when\": \"After inspecting the result\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"label\": \"input document\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\github\\\\_active\\\\itov\\\\workspace\\\\state\\\\experiments\\\\plans\\\\ec31b306ed90a4eec05ec6c10993d8968c66b62173a43fef96118089ffad8bd6.json\"\n      }\n    ],\n    \"causes\": []\n  }\n}\n",
+          "stderr": ""
+        },
+        {
+          "label": "device-status",
+          "argv": [
+            "device",
+            "status",
+            "--gpu",
+            "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+            "--json"
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"previous\": \"a18c7d9d-b37e-4d69-a884-8477ac17f3fa\",\n  \"reason\": \"external_requests_confirmed_terminal\",\n  \"record_id\": \"c8c8bac494a07148fa58f3f8ceb5552f27fa469c3a3813258bc88b50e6a69ec2\",\n  \"released_at\": \"2026-09-25T00:38:45.589411+00:00\",\n  \"status\": \"idle\",\n  \"version\": 1,\n  \"directory\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\ITOV\\\\device-leases\\\\e2c115fd-447a-8fe0-3257-b17c51919074\",\n  \"_cli\": {\n    \"version\": 1,\n    \"command\": [\n      \"device\",\n      \"status\"\n    ],\n    \"outcome\": \"ok\",\n    \"exit_code\": 0,\n    \"next_action\": \"Inspect cooperative ownership. An idle registry is not proof that unrelated GPU clients are absent.\",\n    \"actions\": [\n      {\n        \"label\": \"Inspect device ownership\",\n        \"argv\": [\n          \"itov\",\n          \"device\",\n          \"status\",\n          \"--gpu\",\n          \"GPU-e2c115fd-447a-8fe0-3257-b17c51919074\"\n        ],\n        \"when\": \"After inspecting the result\"\n      }\n    ],\n    \"artifacts\": [\n      {\n        \"label\": \"directory\",\n        \"path\": \"C:\\\\Users\\\\ryanf\\\\AppData\\\\Local\\\\ITOV\\\\device-leases\\\\e2c115fd-447a-8fe0-3257-b17c51919074\"\n      }\n    ],\n    \"causes\": []\n  }\n}\n",
+          "stderr": ""
+        }
+      ]
+    }
+  },
+  "packages": [
+    {
+      "path": "workspace/state/verification/phase-c04/dist/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "bytes": 1
+    },
+    {
+      "path": "workspace/state/verification/phase-c04/dist/itov-0.13.1-py3-none-any.whl",
+      "sha256": "35c1fd23046deff073fa99ba8e4c381205323c25d08f1b9702628ca704eb3b40",
+      "bytes": 242690
+    },
+    {
+      "path": "workspace/state/verification/phase-c04/dist/itov-0.13.1.tar.gz",
+      "sha256": "76039e60a802b8137f9ecc1d83eca46b70fcdfb231e472cfb8143afeb3dd79d4",
+      "bytes": 198215
+    }
+  ],
+  "checks": {
+    "build": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-c04/build.log",
+        "sha256": "46685d8118337c856cfceadbf1191a5ac08aefb42d4f3e7e6d63ab1405137539",
+        "bytes": 291
+      }
+    },
+    "lint-final": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-c04/lint-final.log",
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      }
+    },
+    "format": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-c04/format.log",
+        "sha256": "39efff4101bb4bdef1c60dc45950840fd45dce00f138049a679cd94b647c29e6",
+        "bytes": 29
+      }
+    },
+    "diff-check": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-c04/diff-check.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "real-comparison": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-c04/real-comparison.log",
+        "sha256": "20327c4ff9de3d6365d804090f6afb1dbf3d13b23fcd7af183415f53450b7cd0",
+        "bytes": 260
+      }
+    },
+    "preservation": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-c04/preservation.log",
+        "sha256": "c20bbd04d36edd91c333d167c419f72d90aceec6951137a7b824465e1492da10",
+        "bytes": 532
+      }
+    },
+    "server-cleanup": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-c04/server-cleanup.log",
+        "sha256": "b49d0d7cbfa9a073f07f0f62ca7dcfd303839310b8676910102105c257fae84c",
+        "bytes": 2301
+      }
+    }
+  },
+  "documentation": {
+    "file": {
+      "path": "workspace/state/verification/phase-c04/docs-check.json",
+      "sha256": "d9cd051433162ec24564e960783f49ed73c1ad3df687c9bbb86e77a028254f7d",
+      "bytes": 461
+    },
+    "value": {
+      "files": [
+        "README.md",
+        "TODO.md",
+        "CHANGELOG.md",
+        "docs/experiment-variance.md",
+        "docs/c04-investigation-20260924.md",
+        "docs/training-experiments.md",
+        "docs/development-audit-20260922.md",
+        "docs/operator-runbook.md"
+      ],
+      "utf8": true,
+      "local_links_checked": 217,
+      "c04_status": "active_runtime_pending",
+      "candidate_status": "rejected",
+      "tokenizer_ids_equal": true,
+      "no_audited_truncation": true
+    }
+  },
+  "preservation": {
+    "file": {
+      "path": "workspace/state/verification/phase-c04/preservation.json",
+      "sha256": "922e58f413208cab5b9da871cf3bffb95cfe8be4e7e74813305392cdea812653",
+      "bytes": 530
+    },
+    "value": {
+      "historical_files_preserved": 696,
+      "catalog_head_unchanged": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+      "worker_sources_unchanged": true,
+      "new_training_attempts": 0,
+      "new_evaluation_plans": 0,
+      "new_generated_images": 0,
+      "registered_training_members": 6,
+      "owned_server_state": "dead",
+      "scm_dev_tools": "0.5.0",
+      "host": {
+        "total_physical": 66095271936,
+        "available_physical": 21712175104,
+        "total_commit": 70256021504,
+        "available_commit": 9909100544
+      }
+    }
+  },
+  "preservation_manifest": {
+    "path": "workspace/state/verification/phase-c04/before.json",
+    "sha256": "80a7a05dac5fba2c128045d1dd1152ac93db6d5c3bd7c73e4edd93cd4cc997d0",
+    "bytes": 134488
+  },
+  "server_cleanup": {
+    "file": {
+      "path": "workspace/state/verification/phase-c04/server-training/server-cleanup.json",
+      "sha256": "a3739bea1090adad48418b02acb766018ce4dc91cd719809daa3eac9d07096d8",
+      "bytes": 2299
+    },
+    "value": {
+      "owned_server": {
+        "command": [
+          "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\python_embeded\\python.exe",
+          "-s",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+          "--disable-auto-launch",
+          "--listen",
+          "127.0.0.1",
+          "--port",
+          "8188",
+          "--input-directory",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+          "--output-directory",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+          "--disable-all-custom-nodes",
+          "--cpu",
+          "--disable-pinned-memory",
+          "--disable-api-nodes",
+          "--user-directory",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-c04\\server-training\\comfy-user",
+          "--temp-directory",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-c04\\server-training\\comfy-temp",
+          "--database-url",
+          "sqlite:///C:/Users/ryanf/github/_active/itov/workspace/state/verification/phase-c04/server-training/comfy.sqlite"
+        ],
+        "process": {
+          "pid": 16252,
+          "created": 134347743332866870
+        }
+      },
+      "queue_before": {
+        "queue_running": [],
+        "queue_pending": []
+      },
+      "device_before": {
+        "previous": "a18c7d9d-b37e-4d69-a884-8477ac17f3fa",
+        "reason": "external_requests_confirmed_terminal",
+        "record_id": "c8c8bac494a07148fa58f3f8ceb5552f27fa469c3a3813258bc88b50e6a69ec2",
+        "released_at": "2026-09-25T00:38:45.589411+00:00",
+        "status": "idle",
+        "version": 1,
+        "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+      },
+      "process_after": "dead",
+      "gpu_after": {
+        "uuid": "GPU-e2c115fd-447a-8fe0-3257-b17c51919074",
+        "name": "NVIDIA GeForce RTX 5090",
+        "driver": "616.64",
+        "total_bytes": 34190917632,
+        "used_bytes": 7850688512,
+        "free_bytes": 25900875776
+      },
+      "host_after": {
+        "total_physical": 66095271936,
+        "available_physical": 21797064704,
+        "total_commit": 70256021504,
+        "available_commit": 9882054656
+      },
+      "scope": "Stopped only the identity-verified C-04 training server; restored its initially stopped state."
+    }
+  },
+  "host_at_handoff": {
+    "total_physical": 66095271936,
+    "available_physical": 23078719488,
+    "total_commit": 70256021504,
+    "available_commit": 10128265216
+  },
+  "required_available_commit_bytes": 25769803776,
+  "next_work": "C-04 remains active: execute the declared repetitions, measure every pair, inspect all before/after cases and record the actual investigation disposition after host admission."
+}

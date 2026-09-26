@@ -30,16 +30,24 @@ def _text(value, label):
 
 
 def _spec(value):
+    require(isinstance(value, dict), "Invalid experiment specification")
+    version = value.get("version")
+    require(type(version) is int and version in (1, 2), "Unsupported experiment")
     object_fields(
         value,
-        {"version", "id", "hypothesis", "endpoints", "repetitions", "budget", "protocol"},
+        {"version", "id", "hypothesis", "endpoints", "repetitions", "budget", "protocol"}
+        | ({"numerical_tolerances"} if version == 2 else set()),
         "experiment specification",
     )
-    require(type(value["version"]) is int and value["version"] == 1, "Unsupported experiment")
     identifier(value["id"], "experiment id")
     _text(value["hypothesis"], "experiment hypothesis")
     integer(value["repetitions"], "repetitions", minimum=1)
     require(value["repetitions"] <= 3, "At most three repetitions")
+    if version == 2:
+        from itov.experiment_variance import validate_tolerances
+
+        validate_tolerances(value["numerical_tolerances"])
+        require(value["repetitions"] >= 2, "Numerical experiments require repeated endpoints")
     endpoints = array(value["endpoints"], "endpoints")
     require(1 <= len(endpoints) <= 4, "Declare one to four endpoints")
     seen = set()

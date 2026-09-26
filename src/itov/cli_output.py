@@ -44,6 +44,7 @@ def outcome(result, *, exception=False, interrupted=False):
         status == "rejected"
         or result.get("scope") == "promotion_refused"
         or result.get("admitted") is False
+        or result.get("eligible") is False
     ):
         return "refused", 1
     if status in FAILED:
@@ -197,6 +198,39 @@ def _guidance(args, result, state):
         suggest("Inspect command syntax", "--help")
     elif command == "init" and state == "ok":
         suggest("Check installation", "doctor", "--config", result["config"], "--offline")
+        suggest(
+            "Start the installed workflow",
+            "workspace",
+            "guide",
+            "setup",
+            "--config",
+            result["config"],
+        )
+    elif command == "workspace":
+        message = "Inspect recorded state and follow the owning command; no execution is automatic."
+        actions.extend(result.get("actions", []))
+        if action == "guide":
+            message = (
+                "Follow the displayed sequence; supply every named input before running its step."
+            )
+        elif action == "starter" and state == "ok":
+            root = Path(config).absolute().parent
+            configured(
+                "Validate the starter against the server",
+                "workflow",
+                "validate",
+                root / "workflows/itov-starter.api.json",
+                "--live",
+            )
+            configured("Follow the image-copy sequence", "workspace", "guide", "generation")
+        elif action == "request" and result.get("saved_path"):
+            configured("Plan this pinned request", "batch", "plan", result["saved_path"], "--save")
+        elif action == "dependencies":
+            message = (
+                "Inspect each package result; metadata does not qualify the GPU, runtime or model."
+            )
+        if action != "guide":
+            configured("Choose a workflow", "workspace", "guide")
     elif command == "doctor":
         message = (
             "Inspect each diagnostic; start the configured server before live "
@@ -395,6 +429,21 @@ def _guidance(args, result, state):
             "Inspect every declared checkpoint and repetition against the frozen cases. "
             "Loss does not select a checkpoint; selection does not authorize promotion."
         )
+        if action in {"variance", "variance-replay"}:
+            message = (
+                "Numerical repetition measurements retain exact-equality failures separately "
+                "from declared tolerances. Inspect each pair; no quality or causal conclusion "
+                "follows."
+            )
+            if action == "variance" and result.get("saved_path"):
+                configured(
+                    "Replay numerical evidence",
+                    "experiment",
+                    "variance-replay",
+                    source,
+                    "--report",
+                    result["saved_path"],
+                )
         manifest = result.get("saved_path") if action == "plan" else source
         if action in {"plan", "run", "status"} and manifest:
             configured("Inspect experiment members", "experiment", "status", manifest)
@@ -528,10 +577,27 @@ def _guidance(args, result, state):
         )
         if not getattr(args, "save", False) and state == "ok":
             configured("Save packet and review template", "evaluation", "packet", source, "--save")
+    elif command == "candidate":
+        message = "Inspect current deployed evidence and the exact entry change before applying."
+        if action in {"summary", "deployment"}:
+            message = "Deployment validation is separate from activation eligibility."
+        elif action in {"preview", "retirement", "rollback"}:
+            message = "Preview only; the catalog has not changed."
+            if result.get("eligible") and result.get("saved_path"):
+                configured(
+                    "Apply the reviewed entry change", "candidate", "apply", result["saved_path"]
+                )
+        elif action in {"apply", "recover", "status", "replay"}:
+            message = "Historical lifecycle integrity does not revalidate current model quality."
+            configured("Inspect catalog lifecycle", "candidate", "status")
+            if result.get("recovery_required"):
+                configured("Recover the lifecycle transaction", "candidate", "recover")
+        if result.get("operation_id") and action == "apply":
+            configured("Verify committed lineage", "candidate", "replay", result["operation_id"])
     elif command == "promotion":
         message = (
-            "Inspect the review and blockers. Preserve rejections; only supported "
-            "approving evidence may authorize explicit promotion apply."
+            "Training-only previews are historical evidence. Activation requires candidate "
+            "preview with a complete deployed decision, then candidate apply."
         )
     elif command == "catalog":
         configured("Verify catalog and assets", "catalog", "verify", "--check-files")
@@ -574,15 +640,30 @@ def _guidance(args, result, state):
         message = "Inspect every admission reason and workload estimate before execution."
     if not actions:
         suggest("Inspect command options", command, *([action] if action else []), "--help")
+    if command in {"job", "batch", "training", "evaluation", "candidate", "catalog"}:
+        configured("Navigate this workspace", "workspace", "guide")
     return message, actions
 
 
 def _text(result, meta):
     lines = [f"{meta['outcome'].upper()} {' '.join(meta['command'])} (exit {meta['exit_code']})"]
     details = result.get("decision", result.get("plan", result.get("qualification", result)))
+    if result.get("scope", "").startswith("candidate_"):
+        details = result
     for key in (
         "status",
         "scope",
+        "operation_id",
+        "summary_id",
+        "diagnostic_id",
+        "identity",
+        "interpreter",
+        "entry_id",
+        "action",
+        "catalog_head",
+        "disposition",
+        "eligible",
+        "activation_eligible",
         "plan_id",
         "experiment_id",
         "corpus_id",
@@ -656,12 +737,45 @@ def _text(result, meta):
             f"Images: {len(result['evaluation']['matrix'])}; comparisons: {len(result['groups'])}"
         )
         lines.append("Quality review pending")
-    if result.get("scope") == "deployed_candidate_decision":
-        lines.append("Disposition: " + result["disposition"])
+    if result.get("scope") in {
+        "deployed_candidate_decision",
+        "candidate_summary",
+        "candidate_deployment_validation",
+    }:
         lines.append(
             "Required judgments: " + json.dumps(result["required_judgments"], sort_keys=True)
         )
-        lines.append("Promotion eligible: False")
+        if "promotion_eligible" in result:
+            lines.append(f"Promotion eligible: {result['promotion_eligible']}")
+    if result.get("scope") == "workspace_guide":
+        lines.append(result["description"])
+        for index, step in enumerate(result["steps"], 1):
+            lines.append(f"{index}. {step['label']}: {step['when']}")
+            if step["needs"]:
+                lines.append("   Supply: " + ", ".join(step["needs"]))
+            lines.append(
+                "   & " + " ".join("'" + arg.replace("'", "''") + "'" for arg in step["argv"])
+            )
+    if result.get("scope") == "workspace_inventory":
+        lines.append(
+            f"Saved artifacts: {result['total']}; page offset {result['offset']}; "
+            f"more: {result['more']}"
+        )
+        lines.append("Catalog: " + json.dumps(result["catalog"], sort_keys=True))
+        for row in result["entries"]:
+            lines.append(f"  {row['kind']}: {row['recorded_status']} {row['path']}")
+    if result.get("scope") == "workspace_inspection":
+        lines.append("Document integrity: " + result["integrity"])
+        lines.append("Related: " + json.dumps(result["related"], sort_keys=True))
+    if result.get("scope") == "candidate_lifecycle_status":
+        lines.append(f"Lifecycle operations: {len(result['operations'])}")
+        lines.append(f"Recovery required: {result['recovery_required']}")
+        for entry in result["entries"]:
+            lines.append(f"  {entry['id']}: {entry['status']}; strength {entry['strength_milli']}")
+        lines.append(result["quality"])
+    if result.get("scope") == "candidate_lifecycle_preview":
+        lines.append("Entry before: " + json.dumps(result["before"], ensure_ascii=False))
+        lines.append("Entry after: " + json.dumps(result["after"], ensure_ascii=False))
     if result.get("scope") == "image_check_calibration":
         for criterion, row in result["summary"].items():
             lines.append(

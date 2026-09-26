@@ -234,7 +234,7 @@ def promotion(config, plan_path, review_path=None, *, save=False):
             safe_path(config.root, f"state/training/promotions/{decision['decision_id']}.json"),
             decision,
         )
-    return {"ok": True, "decision": decision}
+    return {"ok": True, "decision": decision, "activation_eligible": False}
 
 
 def apply_promotion(config, plan_path, review_path, expected_head, decision_id):
@@ -245,15 +245,7 @@ def apply_promotion(config, plan_path, review_path, expected_head, decision_id):
         decision["expected_head"] == expected_head and decision["decision_id"] == decision_id,
         "Promotion preview is stale; review a fresh decision",
     )
-    # Publish lineage/asset first; the existing catalog journal atomically commits its snapshot.
-    candidate(config, plan_path, save=True)
-    publish(safe_path(config.root, f"state/training/promotions/{decision_id}.json"), decision)
-    snapshot = CatalogStore(config.root).import_catalog(
-        decision["catalog"], expected_head=expected_head
+    raise ValueError(
+        "Training-only promotion cannot activate a candidate. Use candidate preview with a "
+        "complete deployed decision, then candidate apply (C-05)."
     )
-    return {
-        "ok": True,
-        "decision_id": decision_id,
-        "catalog_head": snapshot.head,
-        "scope": "explicit_reviewed_catalog_promotion",
-    }

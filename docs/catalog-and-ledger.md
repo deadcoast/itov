@@ -80,7 +80,9 @@ Each ledger row contains exactly:
 | `previous_hash` | Prior row hash; 64 zeros for the first row |
 | `row_hash` | SHA-256 defined below |
 
-The row body comprises all row fields except `previous_hash` and `row_hash`. Every writer and verifier uses:
+C-05 additionally supports version-two lifecycle rows after initialization. They have the same fields plus `operation: {path, sha256}`, which references an immutable lifecycle preview. Their actions are `candidate_activate`, `candidate_retire` and `candidate_rollback`. Existing version-one rows and snapshot version one remain unchanged. `candidate status/replay` also validate the bound preview, predecessor snapshot and exact one-entry delta; ordinary ledger verification checks the reference schema and its inclusion in the hash chain. See the [lifecycle contract](candidate-lifecycle.md).
+
+The row body comprises all row fields except `previous_hash` and `row_hash`, including `operation` for version two. Every writer and verifier uses the same domain prefix (the body carries the version):
 
 ```text
 SHA256(b"ITOV-LEDGER-v1\0" + bytes.fromhex(previous_hash) + canonical_bytes(body))
@@ -119,6 +121,8 @@ uv run --locked itov catalog verify --check-files --json
 ```
 
 Recovery holds the same lock and validates the entire intent, its target snapshot, and the exact extension of prior ledger history. It completes a prepared commit, or cleans up an already committed intent, without adding a second event. Running it again reports `not_needed`. New imports refuse pending transactions until recovery runs. Recovery restores the recorded metadata transaction; it does not roll back or rewrite model/workflow files. Verify those separately after recovery.
+
+Lifecycle intent requires `candidate recover`; generic `catalog recover` refuses it. Before publication, lifecycle recovery revalidates the exact deployed authorization and preview. After publication it verifies the committed delta and cleans up intent without reauthorizing the model. `candidate recover --abandon` can archive an uncommitted lifecycle intent under `state/catalog/abandoned` without changing HEAD. Retirement can quarantine unavailable weights and does not verify unrelated model assets; activation validates its own bound deployment evidence. All lifecycle deltas still validate catalog schema and relationships.
 
 Corrupt intent, divergent or missing committed HEAD, or a conflicting snapshot object causes a preserved, explicit error. Recovery never truncates the ledger, re-seals bad rows, guesses a snapshot from directory order, or overwrites corrupt objects. Temporary files left by a hard crash are unreferenced and ignored; no automatic deletion or retention pruning is performed.
 

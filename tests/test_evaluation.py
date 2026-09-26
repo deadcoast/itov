@@ -325,17 +325,11 @@ def test_explicit_promotion_requires_fresh_complete_review_and_catalog_head(cura
     assert not evaluation.promotion(item.config, item.plan_path, review)["ok"]
     raw["checks"][0]["passed"] = True
     document(review, raw)
-    result = evaluation.apply_promotion(
-        item.config, item.plan_path, review, before.head, prepared["decision_id"]
-    )
-    snapshot = store.snapshot()
-    assert result["catalog_head"] == snapshot.head != before.head
-    assert snapshot.to_dict()["catalog"]["loras"][0]["status"] == "active"
-    assert snapshot.report()["events"] == before.report()["events"] + 1
-    with pytest.raises(ValueError, match="stale"):
+    with pytest.raises(ValueError, match="Training-only promotion cannot activate"):
         evaluation.apply_promotion(
             item.config, item.plan_path, review, before.head, prepared["decision_id"]
         )
+    assert store.snapshot() == before
 
 
 @pytest.mark.parametrize("case", ["stale", "missing", "duplicate", "malformed", "evidence"])

@@ -1,0 +1,689 @@
+{
+  "version": 1,
+  "scope": "phase_d01_workspace_workflow_verification",
+  "date": "2026-09-25",
+  "implementation": "Delivered within the documented installed workflow/navigation scope",
+  "source_tests": {
+    "exit_code": 0,
+    "log": {
+      "path": "workspace/state/verification/phase-d01/full.log",
+      "sha256": "edb955898976ff70b04fbe8e5aa1aa25dd32879b5d771ddf88793d98df611397",
+      "bytes": 1925
+    },
+    "xml": {
+      "path": "workspace/state/verification/phase-d01/full.xml",
+      "sha256": "767a43119681f79da29ef059674f0b5a641c7eadc64f034e785ca467047db7be",
+      "bytes": 208567
+    },
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "1541",
+    "time": "1326.935",
+    "timestamp": "2026-09-25T21:01:18.906941-07:00",
+    "hostname": "homeone"
+  },
+  "final_focused_source_tests": {
+    "exit_code": 0,
+    "log": {
+      "path": "workspace/state/verification/phase-d01/final-02.log",
+      "sha256": "5ca8716a11eda14bd313524eb5609c4cb3ae29036df276c9dce14eeaf9819922",
+      "bytes": 388
+    },
+    "xml": {
+      "path": "workspace/state/verification/phase-d01/final-02.xml",
+      "sha256": "1236ebcd3e9f944c9c26f3124815d13d10e12238124a293fd51c36eb8497ae20",
+      "bytes": 19227
+    },
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "146",
+    "time": "187.278",
+    "timestamp": "2026-09-25T21:12:18.671935-07:00",
+    "hostname": "homeone"
+  },
+  "final_installed_tests": {
+    "exit_code": 0,
+    "log": {
+      "path": "workspace/state/verification/phase-d01/installed-final-02.log",
+      "sha256": "ca54050b4f4854a43ec1ce30b1be10d28f96a1fd9c0117e1009570bf2a0c6cb2",
+      "bytes": 398
+    },
+    "xml": {
+      "path": "workspace/state/verification/phase-d01/installed-final-02.xml",
+      "sha256": "a5508fc74e2540258559f21856547e7fcb36b18814ba661aa83c480e8d2758a7",
+      "bytes": 27327
+    },
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "207",
+    "time": "217.464",
+    "timestamp": "2026-09-25T21:12:32.545919-07:00",
+    "hostname": "homeone"
+  },
+  "broad_run_boundary": "Broad suite began before final inference-v2 navigation and malformed parallel-assignment refinements. Final focused and installed suites cover those changes.",
+  "modules": {
+    "count": 83,
+    "parity": {
+      "path": "workspace/state/verification/phase-d01/parity-final.json",
+      "sha256": "11304956f6bb1b824f9c780783bf00e5d8e78eb4aa52f62b4217c9f65b20d9e6",
+      "bytes": 8199
+    },
+    "claims": [
+      "source",
+      "sdist",
+      "wheel",
+      "installed"
+    ],
+    "readme_sha256": "cf181f2100c6407bc175a4e602ca997b35fc4dbfa3129be1100410456665382a"
+  },
+  "artifacts": [
+    {
+      "path": "workspace/state/verification/phase-d01/dist-final-02/itov-0.13.1-py3-none-any.whl",
+      "sha256": "c6cf937f05d575447b6b46d2e84ab7fba5d45b44918d99176190f3b5e2007c06",
+      "bytes": 262275
+    },
+    {
+      "path": "workspace/state/verification/phase-d01/dist-final-02/itov-0.13.1.tar.gz",
+      "sha256": "d6827d6fbbfccbf89e203c2bca59026d40c3644959f81faf0b185c9b0d8d7a3c",
+      "bytes": 215244
+    }
+  ],
+  "runtime": {
+    "module_count": 83,
+    "fresh_workspace": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace",
+    "installed_package": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\core-env\\Lib\\site-packages\\itov\\__init__.py",
+    "python": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]",
+    "commands": 39,
+    "missing_optional_diagnostics": {
+      "dataset": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\state\\workspace\\diagnostics\\76c15bb5d5a970143452dfd9a708db4b3d7d93dff2be26193e58157a82f33e56.json",
+      "training": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\state\\workspace\\diagnostics\\8be866f27cd6810bb0f0d233f40f477c674b0f57819bc0274e4a751c40d293e5.json"
+    },
+    "first_job_status": "timed_out",
+    "completed_jobs": 3,
+    "artifacts": [
+      {
+        "node_id": "2",
+        "category": "images",
+        "filename": "starter_00001_.png",
+        "subfolder": "itov",
+        "type": "output",
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\16fb7c4b-1ffd-5a80-be24-5b89e985567f\\artifact-0000.png",
+        "bytes": 515,
+        "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+      },
+      {
+        "node_id": "2",
+        "category": "images",
+        "filename": "starter_00001_.png",
+        "subfolder": "itov",
+        "type": "output",
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\5da9c075-e843-5528-8f71-c913b19bb959\\artifact-0000.png",
+        "bytes": 515,
+        "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+      },
+      {
+        "node_id": "2",
+        "category": "images",
+        "filename": "starter_00001_.png",
+        "subfolder": "itov",
+        "type": "output",
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\ebe2146e-477e-49ec-a337-ed02fe6656bf\\artifact-0000.png",
+        "bytes": 515,
+        "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+      }
+    ],
+    "server_stopped": true,
+    "offline_replay": true,
+    "source_helpers_used": false,
+    "limits": "Actual neutral stock image I/O only; no model training, new quality judgment or promotion."
+  },
+  "runtime_commands": {
+    "path": "workspace/state/verification/phase-d01/installed-final-commands.json",
+    "sha256": "6254119450515da76b00b60fe4765e4996c91685f04c5b2806f221d679a32dc5",
+    "bytes": 192502
+  },
+  "device_after_session": {
+    "status": "idle",
+    "receipt": {
+      "path": "workspace/state/verification/phase-d01/device-final.json",
+      "sha256": "69011c7aed208ebd29fc3cb4e252edc350a3cb65faa7e01aa1577d1c35c22dd9",
+      "bytes": 1172
+    }
+  },
+  "decoded_images": [
+    {
+      "request_id": "16fb7c4b-1ffd-5a80-be24-5b89e985567f",
+      "artifact": {
+        "node_id": "2",
+        "category": "images",
+        "filename": "starter_00001_.png",
+        "subfolder": "itov",
+        "type": "output",
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\16fb7c4b-1ffd-5a80-be24-5b89e985567f\\artifact-0000.png",
+        "bytes": 515,
+        "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+      },
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f"
+    },
+    {
+      "request_id": "5da9c075-e843-5528-8f71-c913b19bb959",
+      "artifact": {
+        "node_id": "2",
+        "category": "images",
+        "filename": "starter_00001_.png",
+        "subfolder": "itov",
+        "type": "output",
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\5da9c075-e843-5528-8f71-c913b19bb959\\artifact-0000.png",
+        "bytes": 515,
+        "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+      },
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f"
+    },
+    {
+      "request_id": "ebe2146e-477e-49ec-a337-ed02fe6656bf",
+      "artifact": {
+        "node_id": "2",
+        "category": "images",
+        "filename": "starter_00001_.png",
+        "subfolder": "itov",
+        "type": "output",
+        "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\ebe2146e-477e-49ec-a337-ed02fe6656bf\\artifact-0000.png",
+        "bytes": 515,
+        "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+      },
+      "size": [
+        64,
+        64
+      ],
+      "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f"
+    }
+  ],
+  "earlier_runtime_session": {
+    "summary": {
+      "path": "workspace/state/verification/phase-d01/installed-runtime.json",
+      "sha256": "480379f43effa9fb6bbebf9ad8191ca86f3295c6d14c2410fc5bd8368786d6f2",
+      "bytes": 2788
+    },
+    "commands": {
+      "path": "workspace/state/verification/phase-d01/installed-commands.json",
+      "sha256": "a155bf3dea07071958029abde58512aaa6696c0a52c17696e6fcecb1f07665ee",
+      "bytes": 163656
+    },
+    "recovery": {
+      "path": "workspace/state/verification/phase-d01/replay-commands.json",
+      "sha256": "e4db699d07f13b426901889c79d9c66cd2117bacf8a094656716fbe8b7edf671",
+      "bytes": 105688
+    }
+  },
+  "retained_optional_failures": [
+    {
+      "version": 1,
+      "scope": "workspace_dependencies",
+      "kind": "dataset",
+      "observed_at": "2026-09-26T04:14:04.754147+00:00",
+      "interpreter": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\core-env\\Scripts\\python.exe",
+      "metadata": {
+        "python": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "Pillow": null
+        }
+      },
+      "checks": [
+        {
+          "name": "Pillow",
+          "status": "fail",
+          "detail": "Installed: missing; required: 12.3.0"
+        }
+      ],
+      "ok": false,
+      "limits": "Package metadata only; no installs, ML imports, CUDA probe or model qualification.",
+      "diagnostic_id": "76c15bb5d5a970143452dfd9a708db4b3d7d93dff2be26193e58157a82f33e56",
+      "saved_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\state\\workspace\\diagnostics\\76c15bb5d5a970143452dfd9a708db4b3d7d93dff2be26193e58157a82f33e56.json",
+      "_cli": {
+        "version": 1,
+        "command": [
+          "workspace",
+          "dependencies"
+        ],
+        "outcome": "failed",
+        "exit_code": 1,
+        "next_action": "Inspect each package result; metadata does not qualify the GPU, runtime or model.",
+        "actions": [
+          {
+            "label": "Choose a workflow",
+            "argv": [
+              "itov",
+              "workspace",
+              "guide",
+              "--config",
+              "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\itov.toml"
+            ],
+            "when": "After inspecting the result"
+          }
+        ],
+        "artifacts": [
+          {
+            "label": "saved_path",
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\state\\workspace\\diagnostics\\76c15bb5d5a970143452dfd9a708db4b3d7d93dff2be26193e58157a82f33e56.json"
+          }
+        ],
+        "causes": [
+          {
+            "location": "checks[0]",
+            "detail": {
+              "name": "Pillow",
+              "status": "fail",
+              "detail": "Installed: missing; required: 12.3.0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "version": 1,
+      "scope": "workspace_dependencies",
+      "kind": "training",
+      "observed_at": "2026-09-26T04:14:05.372984+00:00",
+      "interpreter": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\core-env\\Scripts\\python.exe",
+      "metadata": {
+        "python": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]",
+        "packages": {
+          "torch": null,
+          "torchvision": null,
+          "transformers": null,
+          "huggingface-hub": null,
+          "tokenizers": null,
+          "diffusers": null,
+          "peft": null,
+          "accelerate": null,
+          "numpy": null,
+          "safetensors": null,
+          "Pillow": null
+        }
+      },
+      "checks": [
+        {
+          "name": "torch",
+          "status": "fail",
+          "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+        },
+        {
+          "name": "torchvision",
+          "status": "fail",
+          "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+        },
+        {
+          "name": "transformers",
+          "status": "fail",
+          "detail": "Installed: missing; required: 4.57.6"
+        },
+        {
+          "name": "huggingface-hub",
+          "status": "fail",
+          "detail": "Installed: missing; required: 0.36.0"
+        },
+        {
+          "name": "tokenizers",
+          "status": "fail",
+          "detail": "Installed: missing; required: 0.22.2"
+        },
+        {
+          "name": "diffusers",
+          "status": "fail",
+          "detail": "Installed: missing; required: 0.38.0"
+        },
+        {
+          "name": "peft",
+          "status": "fail",
+          "detail": "Installed: missing; required: 0.21.0"
+        },
+        {
+          "name": "accelerate",
+          "status": "fail",
+          "detail": "Installed: missing; required: 1.15.0"
+        },
+        {
+          "name": "numpy",
+          "status": "fail",
+          "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+        },
+        {
+          "name": "safetensors",
+          "status": "fail",
+          "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+        },
+        {
+          "name": "Pillow",
+          "status": "fail",
+          "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+        }
+      ],
+      "ok": false,
+      "limits": "Package metadata only; no installs, ML imports, CUDA probe or model qualification.",
+      "diagnostic_id": "8be866f27cd6810bb0f0d233f40f477c674b0f57819bc0274e4a751c40d293e5",
+      "saved_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\state\\workspace\\diagnostics\\8be866f27cd6810bb0f0d233f40f477c674b0f57819bc0274e4a751c40d293e5.json",
+      "_cli": {
+        "version": 1,
+        "command": [
+          "workspace",
+          "dependencies"
+        ],
+        "outcome": "failed",
+        "exit_code": 1,
+        "next_action": "Inspect each package result; metadata does not qualify the GPU, runtime or model.",
+        "actions": [
+          {
+            "label": "Choose a workflow",
+            "argv": [
+              "itov",
+              "workspace",
+              "guide",
+              "--config",
+              "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\itov.toml"
+            ],
+            "when": "After inspecting the result"
+          }
+        ],
+        "artifacts": [
+          {
+            "label": "saved_path",
+            "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\state\\workspace\\diagnostics\\8be866f27cd6810bb0f0d233f40f477c674b0f57819bc0274e4a751c40d293e5.json"
+          }
+        ],
+        "causes": [
+          {
+            "location": "checks[0]",
+            "detail": {
+              "name": "torch",
+              "status": "fail",
+              "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+            }
+          },
+          {
+            "location": "checks[1]",
+            "detail": {
+              "name": "torchvision",
+              "status": "fail",
+              "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+            }
+          },
+          {
+            "location": "checks[2]",
+            "detail": {
+              "name": "transformers",
+              "status": "fail",
+              "detail": "Installed: missing; required: 4.57.6"
+            }
+          },
+          {
+            "location": "checks[3]",
+            "detail": {
+              "name": "huggingface-hub",
+              "status": "fail",
+              "detail": "Installed: missing; required: 0.36.0"
+            }
+          },
+          {
+            "location": "checks[4]",
+            "detail": {
+              "name": "tokenizers",
+              "status": "fail",
+              "detail": "Installed: missing; required: 0.22.2"
+            }
+          },
+          {
+            "location": "checks[5]",
+            "detail": {
+              "name": "diffusers",
+              "status": "fail",
+              "detail": "Installed: missing; required: 0.38.0"
+            }
+          },
+          {
+            "location": "checks[6]",
+            "detail": {
+              "name": "peft",
+              "status": "fail",
+              "detail": "Installed: missing; required: 0.21.0"
+            }
+          },
+          {
+            "location": "checks[7]",
+            "detail": {
+              "name": "accelerate",
+              "status": "fail",
+              "detail": "Installed: missing; required: 1.15.0"
+            }
+          },
+          {
+            "location": "checks[8]",
+            "detail": {
+              "name": "numpy",
+              "status": "fail",
+              "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+            }
+          },
+          {
+            "location": "checks[9]",
+            "detail": {
+              "name": "safetensors",
+              "status": "fail",
+              "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+            }
+          },
+          {
+            "location": "checks[10]",
+            "detail": {
+              "name": "Pillow",
+              "status": "fail",
+              "detail": "Installed: missing; required: installed (runtime compatibility checked during planning)"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "real_catalog_head_unchanged": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+  "real_candidate": {
+    "disposition": "rejected",
+    "activation_eligible": false,
+    "revalidation": {
+      "path": "workspace/state/verification/phase-d01/replay-commands.json",
+      "sha256": "e4db699d07f13b426901889c79d9c66cd2117bacf8a094656716fbe8b7edf671",
+      "bytes": 105688
+    }
+  },
+  "recorded_model_inventories": {
+    "inference": {
+      "total": 2,
+      "receipt": {
+        "path": "workspace/state/verification/phase-d01/real-inference-final.json",
+        "sha256": "e3b7a97e58f029e575db9136e1525eb6001427885f4e88765bfffca19a905284",
+        "bytes": 4172
+      }
+    },
+    "evaluation": {
+      "total": 8,
+      "receipt": {
+        "path": "workspace/state/verification/phase-d01/real-evaluation-final.json",
+        "sha256": "f50923657b633c5c386e53bc760b85538f9ad6383732dac09c16bb8b6a9139de",
+        "bytes": 12096
+      }
+    }
+  },
+  "preservation": {
+    "historical_files_unchanged": 1512,
+    "worker_sources_unchanged": 21,
+    "catalog_head_unchanged": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+    "scm_dev_tools": "0.5.0",
+    "decoded_images": [
+      {
+        "request_id": "16fb7c4b-1ffd-5a80-be24-5b89e985567f",
+        "artifact": {
+          "node_id": "2",
+          "category": "images",
+          "filename": "starter_00001_.png",
+          "subfolder": "itov",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\16fb7c4b-1ffd-5a80-be24-5b89e985567f\\artifact-0000.png",
+          "bytes": 515,
+          "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+        },
+        "size": [
+          64,
+          64
+        ],
+        "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f"
+      },
+      {
+        "request_id": "5da9c075-e843-5528-8f71-c913b19bb959",
+        "artifact": {
+          "node_id": "2",
+          "category": "images",
+          "filename": "starter_00001_.png",
+          "subfolder": "itov",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\5da9c075-e843-5528-8f71-c913b19bb959\\artifact-0000.png",
+          "bytes": 515,
+          "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+        },
+        "size": [
+          64,
+          64
+        ],
+        "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f"
+      },
+      {
+        "request_id": "ebe2146e-477e-49ec-a337-ed02fe6656bf",
+        "artifact": {
+          "node_id": "2",
+          "category": "images",
+          "filename": "starter_00001_.png",
+          "subfolder": "itov",
+          "type": "output",
+          "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d01\\final fresh workspace\\output\\jobs\\ebe2146e-477e-49ec-a337-ed02fe6656bf\\artifact-0000.png",
+          "bytes": 515,
+          "sha256": "9d98ce8cb244faf11be7b81401a30f82c55b05bbcb3f603ce782f3296b1c873c"
+        },
+        "size": [
+          64,
+          64
+        ],
+        "rgb_sha256": "7633729efcf1de67af08948da46353e7497049692776ea271a3b88d4a586f26f"
+      }
+    ],
+    "quality": "Neutral checker image I/O only"
+  },
+  "checks": {
+    "lint-final-02": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/lint-final-02.log",
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      }
+    },
+    "format-final-02": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/format-final-02.log",
+        "sha256": "452c0cb824059b830b0e9a25ad875fb2faab510b9ad4a57889666eb9a7fb45b1",
+        "bytes": 29
+      }
+    },
+    "build-final-02": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/build-final-02.log",
+        "sha256": "74f5275d7b25515b7bba51f890644ec4e22191de3316843806b12647d2420dcd",
+        "bytes": 309
+      }
+    },
+    "install-core-final-02": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/install-core-final-02.log",
+        "sha256": "8e9b75f0786b41f9896acec72291436f4f4dfaa40b455e7da41c4862105c01de",
+        "bytes": 500
+      }
+    },
+    "install-test-final-02": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/install-test-final-02.log",
+        "sha256": "407054e9dab15bb835af66ef7af0f7193fd6262e6717eee5b7781764238ac109",
+        "bytes": 502
+      }
+    },
+    "installed-final-runtime": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/installed-final-runtime.log",
+        "sha256": "72efffc4895e53b64fbd6a3542bb41e2fc8dc09260a7a3441e080165453aaf41",
+        "bytes": 3325
+      }
+    },
+    "replay": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/replay.log",
+        "sha256": "6b56fc8461f876432dbb19dfe45aaa54dccc5a7451032fb6649faf324224266f",
+        "bytes": 2997
+      }
+    },
+    "preservation-final": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/preservation-final.log",
+        "sha256": "6b3ae996493a19cc3c563f2807151efeb2c88b486a520e2a612ba9de3fa1e7ba",
+        "bytes": 2408
+      }
+    },
+    "diff-final": {
+      "exit_code": 0,
+      "log": {
+        "path": "workspace/state/verification/phase-d01/diff-final.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  },
+  "retained_failure": {
+    "log": {
+      "path": "workspace/state/verification/phase-d01/installed-runtime.log",
+      "sha256": "2ad63df0f0eda0072c710486cc6f079faa4cfded07c3efc0656da101ea9cb872",
+      "bytes": 959
+    },
+    "exit_code": 1,
+    "cause": "Initial harness checked TCP refusal immediately after confirmed native-job process exit; connect_ex still succeeded at that instant.",
+    "resolution": "Subsequent owner-dead and three refused connections established shutdown; the same completed jobs replayed with HTTP blocked. Final fresh session waits boundedly for listener closure and passes.",
+    "limits": "No claim about general operating-system socket teardown timing."
+  },
+  "review_found_defect": {
+    "cause": "Initial navigation accepted only version-one artifacts, excluding supported version-two inference plans.",
+    "resolution": "Family-specific version validation, executed inference owner regression, final installed tests and actual retained-plan inventories pass."
+  },
+  "limits": [
+    "Neutral image I/O is not trained-model generation or quality acceptance.",
+    "Core metadata diagnostics do not provision optional packages or establish CUDA readiness.",
+    "Status is a bounded point-in-time recorded observation, not current artifact/process validation.",
+    "Training/evaluation controller routing uses fixtures plus retained actual records; no new training or quality review.",
+    "D-02 longer media and D-05 provisioning/migration/backup and I/O latency remain open."
+  ],
+  "package_version": "0.13.1 unreleased",
+  "next": "D-02"
+}

@@ -118,7 +118,10 @@ class CatalogStore:
         return self._path("pending.json").exists()
 
     def _clean(self):
-        require(not self.recovery_required, "Pending catalog transaction; run catalog recover")
+        require(
+            not self.recovery_required,
+            "Pending catalog transaction; run catalog recover (candidate recover for lifecycle)",
+        )
 
     def _load(self, head: str) -> Snapshot:
         digest(head, "snapshot head")
@@ -149,8 +152,12 @@ class CatalogStore:
         else:
             _atomic_write(path, snapshot.raw, exclusive=True)
 
-    def _commit(self, before: str | None, catalog: dict, ledger: list) -> Snapshot:
-        value = {"version": 1, "catalog": catalog, "ledger": [*ledger, new_event(catalog, ledger)]}
+    def _commit(self, before: str | None, catalog: dict, ledger: list, **event) -> Snapshot:
+        value = {
+            "version": 1,
+            "catalog": catalog,
+            "ledger": [*ledger, new_event(catalog, ledger, **event)],
+        }
         raw = _encoded(value)
         snapshot = _snapshot(raw, sha256(raw))
         # Full redo intent is durable before any generation or HEAD is published.
@@ -189,12 +196,35 @@ class CatalogStore:
                 return current
             return self._commit(current.head, catalog, value["ledger"])
 
-    def recover(self) -> dict:
+    def apply_lifecycle(self, operation, *, guard) -> Snapshot:
+        """Commit a validated one-entry change and its lineage in the same snapshot."""
+        from itov.candidate_lifecycle import load_preview, transition_catalog
+        from itov.training_data import file_ref
+
+        with file_lock(self._path("catalog.lock"), timeout=self.lock_timeout):
+            self._clean()
+            current = self._load(self._head())
+            value = load_preview(file_ref(self.workspace, operation)[0])
+            require(current.head == value["expected_head"], "Stale catalog head")
+            require(value["eligible"], "Lifecycle preview is refused")
+            catalog = transition_catalog(current.to_dict()["catalog"], value)
+            guard()  # Fresh observed evidence at the locked publication boundary.
+            return self._commit(
+                current.head,
+                catalog,
+                current.to_dict()["ledger"],
+                operation=operation,
+                action=value["action"],
+            )
+
+    def recover(self, *, lifecycle_guard=None, expected_pending=None, abandon=False) -> dict:
         require(self.root.is_dir(), "Catalog is not initialized")
         with file_lock(self._path("catalog.lock"), timeout=self.lock_timeout):
             if not self.recovery_required:
                 return {**self._load(self._head()).report(), "recovery": "not_needed"}
             raw = read_document(self._path("pending.json"))
+            if expected_pending is not None:
+                require(sha256(raw) == expected_pending, "Pending transaction changed")
             intent = parse_json(raw)
             object_fields(intent, {"version", "before", "after", "snapshot"}, "pending transaction")
             require(
@@ -222,6 +252,26 @@ class CatalogStore:
                 head in {before, after},
                 "HEAD diverged from pending transaction; preserve and inspect",
             )
+            lifecycle = value["ledger"][-1]["version"] == 2
+            if abandon:
+                require(
+                    lifecycle and head == before, "Only uncommitted lifecycle intent can abandon"
+                )
+                archive = self._path(f"abandoned/{sha256(raw)}.json")
+                archive.parent.mkdir(exist_ok=True)
+                if archive.exists():
+                    require(read_document(archive) == raw, "Abandoned intent differs")
+                else:
+                    _atomic_write(archive, raw, exclusive=True)
+                self._path("pending.json").unlink()
+                return {
+                    **self._load(head).report(),
+                    "recovery": "abandoned",
+                    "archive": str(archive),
+                }
+            if lifecycle:
+                require(lifecycle_guard is not None, "Lifecycle intent requires candidate recover")
+                lifecycle_guard()
             self._publish_object(target)
             if head != after:
                 _atomic_write(self._path("HEAD"), (after + "\n").encode("ascii"))

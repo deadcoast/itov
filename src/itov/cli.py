@@ -63,6 +63,39 @@ def parser() -> argparse.ArgumentParser:
     init.add_argument("--url", default=DEFAULT_URL)
     init.add_argument("--json", action="store_true")
 
+    workspace = commands.add_parser(
+        "workspace", help="Start, navigate and inspect an installed workspace workflow"
+    )
+    workspace_actions = workspace.add_subparsers(dest="action", required=True)
+    from itov.workspace_guide import TOPICS
+    from itov.workspace_navigation import FOLDERS
+
+    for action in ("guide", "starter", "request", "status", "inspect", "dependencies"):
+        item = workspace_actions.add_parser(action)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action == "guide":
+            item.add_argument("topic", nargs="?", choices=TOPICS, default="overview")
+        elif action == "request":
+            item.add_argument("preset")
+            item.add_argument("--count", type=int, default=1)
+            item.add_argument("--seed", type=int, default=0)
+            item.add_argument("--save", action="store_true")
+        elif action == "status":
+            item.add_argument("--kind", choices=("all", *FOLDERS), default="all")
+            item.add_argument("--offset", type=int, default=0)
+            item.add_argument("--limit", type=int, default=25)
+        elif action == "inspect":
+            item.add_argument("file", type=Path)
+        elif action == "dependencies":
+            item.add_argument("kind", choices=("dataset", "training"))
+            item.add_argument(
+                "--python",
+                type=Path,
+                help="Explicit optional environment; defaults to the current interpreter",
+            )
+            item.add_argument("--save", action="store_true")
+
     doctor = commands.add_parser("doctor", help="Check local tools and a running ComfyUI server")
     _connection_arguments(doctor)
     doctor.add_argument("--offline", action="store_true", help="Skip HTTP requests")
@@ -335,12 +368,21 @@ def parser() -> argparse.ArgumentParser:
         "experiment", help="Preregister bounded checkpoint experiments"
     )
     actions = experiment.add_subparsers(dest="action", required=True)
-    for action in ("plan", "run", "status", "packet", "decide", "replay"):
+    for action in (
+        "plan",
+        "run",
+        "status",
+        "packet",
+        "decide",
+        "replay",
+        "variance",
+        "variance-replay",
+    ):
         item = actions.add_parser(action)
         item.add_argument("file", type=Path, help="Experiment specification or saved manifest")
         item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
         item.add_argument("--json", action="store_true")
-        if action in {"plan", "packet", "decide"}:
+        if action in {"plan", "packet", "decide", "variance"}:
             item.add_argument("--save", action="store_true")
         if action == "run":
             item.add_argument("--member", required=True)
@@ -349,6 +391,8 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--review", type=Path, required=True)
         if action == "replay":
             item.add_argument("--decision", type=Path, required=True)
+        if action == "variance-replay":
+            item.add_argument("--report", type=Path, required=True)
     evaluation = commands.add_parser("evaluation", help="Technical training assessment")
     evaluation_actions = evaluation.add_subparsers(dest="action", required=True)
     for action in (
@@ -383,7 +427,7 @@ def parser() -> argparse.ArgumentParser:
             item.add_argument("--poll-interval", type=float, default=1)
         if action == "resume":
             item.add_argument("--prompt-id")
-    promotion = commands.add_parser("promotion", help="Explicitly reviewed catalog promotion")
+    promotion = commands.add_parser("promotion", help="Legacy training-only promotion previews")
     promotion_actions = promotion.add_subparsers(dest="action", required=True)
     for action in ("prepare", "apply"):
         item = promotion_actions.add_parser(action)
@@ -396,6 +440,34 @@ def parser() -> argparse.ArgumentParser:
         else:
             item.add_argument("--expected-head", required=True)
             item.add_argument("--decision", required=True)
+    candidate = commands.add_parser("candidate", help="Reviewed catalog lifecycle and recovery")
+    actions = candidate.add_subparsers(dest="action", required=True)
+    for action in (
+        "summary",
+        "deployment",
+        "preview",
+        "retirement",
+        "rollback",
+        "apply",
+        "status",
+        "replay",
+        "recover",
+    ):
+        item = actions.add_parser(action)
+        item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+        item.add_argument("--json", action="store_true")
+        if action in {"summary", "deployment", "preview", "apply"}:
+            item.add_argument("file", type=Path)
+        if action in {"retirement", "rollback", "replay"}:
+            item.add_argument("identity")
+        if action in {"retirement", "rollback"}:
+            item.add_argument("--reason", required=True)
+        if action in {"summary", "deployment", "preview", "retirement", "rollback"}:
+            item.add_argument("--save", action="store_true")
+        if action == "preview":
+            item.add_argument("--strength-milli", type=int, required=True)
+        if action == "recover":
+            item.add_argument("--abandon", action="store_true")
     corpus = commands.add_parser("corpus", help="Freeze evaluation coverage and record baselines")
     actions = corpus.add_subparsers(dest="action", required=True)
     for action in ("freeze", "inspect", "baseline", "replay"):
@@ -458,6 +530,30 @@ def _catalog_command(args) -> dict:
 
 
 def _execute(args):
+    if args.command == "workspace":
+        from itov import (
+            workspace_dependencies,
+            workspace_guide,
+            workspace_navigation,
+            workspace_starter,
+        )
+
+        if args.action == "guide":
+            return workspace_guide.guide(args.config, args.topic)
+        config = load_config(args.config)
+        if args.action == "starter":
+            return workspace_starter.starter(config)
+        if args.action == "request":
+            return workspace_starter.request(
+                config, args.preset, count=args.count, seed=args.seed, save=args.save
+            )
+        if args.action == "status":
+            return workspace_navigation.status(
+                config, kind=args.kind, offset=args.offset, limit=args.limit
+            )
+        if args.action == "inspect":
+            return workspace_navigation.inspect(config, args.file)
+        return workspace_dependencies.diagnose(config, args.kind, args.python, save=args.save)
     if hasattr(args, "timeout"):
         validate_timeout(args.timeout)
     if args.command == "init":
@@ -534,6 +630,17 @@ def _execute(args):
         from itov import experiments
 
         config = load_config(args.config)
+        if args.action in {"variance", "variance-replay"}:
+            from itov import experiment_variance
+
+            if args.action == "variance-replay":
+                return experiment_variance.replay(config, args.file, args.report)
+            result = experiment_variance.measure(config, args.file, save=args.save)
+            if args.save:
+                result["saved_path"] = str(
+                    experiments._destination(config, "variance", result["variance_id"])
+                )
+            return result
         if args.action == "run":
             return experiments.run(config, args.file, args.member, args.gpu)
         if args.action == "decide":
@@ -555,6 +662,27 @@ def _execute(args):
                 "saved_path": str(config.root / f"state/experiments/{category}/{result[key]}.json"),
             }
         return result
+    elif args.command == "candidate":
+        from itov import candidate_lifecycle as lifecycle
+
+        config = load_config(args.config)
+        if args.action in {"summary", "deployment"}:
+            return lifecycle.summary(
+                config, args.file, deployment=args.action == "deployment", save=args.save
+            )
+        if args.action == "preview":
+            return lifecycle.preview(config, args.file, args.strength_milli, save=args.save)
+        if args.action in {"retirement", "rollback"}:
+            return getattr(lifecycle, args.action)(
+                config, args.identity, args.reason, save=args.save
+            )
+        if args.action == "apply":
+            return lifecycle.apply(config, args.file)
+        if args.action == "replay":
+            return lifecycle.replay(config, args.identity)
+        if args.action == "recover":
+            return lifecycle.recover(config, abandon=args.abandon)
+        return lifecycle.status(config)
     elif args.command in {"dataset", "training", "evaluation", "promotion"}:
         from itov import evaluation, training, training_data
 

@@ -1,6 +1,6 @@
 # Deployed loader mapping and candidate disposition
 
-C-03 adds a supported decision path after a complete [deployed corpus comparison](deployed-evaluation.md). Loader compatibility, decoded artifacts and quality judgments are separate evidence. No command here changes the catalog or activates a candidate. Lifecycle integration remains C-05.
+C-03 adds a supported decision path after a complete [deployed corpus comparison](deployed-evaluation.md). Loader compatibility, decoded artifacts and quality judgments are separate evidence. No command here changes the catalog or activates a candidate. The [C-05 lifecycle](candidate-lifecycle.md) consumes these complete decisions through a separate explicit preview/apply path.
 
 ## Verify the actual exported loader targets
 
@@ -37,7 +37,7 @@ uv run --inexact --locked itov evaluation decision-replay workspace/state/evalua
 
 The packet freezes the rubrics and decision policy. Any failing adapter-image or comparison criterion produces `rejected`. In the absence of failures, any `uncertain` or `unavailable` required judgment produces `inconclusive`. Only all passing required judgments produce `accepted_for_matrix`. Base-image judgments remain mandatory context, but a base failure alone does not reject a candidate that fixes it. Counts remain categorical evidence, without a synthetic quality score.
 
-Every outcome has `promotion_eligible: false`. `accepted_for_matrix` is a bounded review conclusion, not production activation. Existing promotion commands do not consume this new decision format; C-05 must connect the lifecycle. An assistant or human assertion is not independently authenticated by its recorded label.
+Every outcome retains `promotion_eligible: false`. `accepted_for_matrix` is a bounded review conclusion, not production activation. C-05's `candidate preview` freshly replays this decision and applies its own versioned activation policy; the old decision format and its meaning remain unchanged. Legacy training-only `promotion apply` cannot activate. An assistant or human assertion is not independently authenticated by its recorded label.
 
 Replay checks the complete technical matrix and mappings again, current source/image/review references, exact row ordering, every criterion, and the recomputed disposition. Altering a verdict, swapping an image or strength, dropping a case, changing rubric text or resealing a fabricated summary is refused. Publication rehashes observed inputs at the operation boundary. Concurrent file changes remain possible between commands; this is not a filesystem-wide transaction.
 

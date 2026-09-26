@@ -44,6 +44,32 @@ def test_catalog_tail_mismatch_is_detected():
         verify_ledger(ledger, catalog)
 
 
+@pytest.mark.parametrize("mutation", [None, "path", "hash", "action", "missing", "version"])
+def test_lifecycle_rows_extend_v1_without_rewriting_and_bind_the_operation(mutation):
+    catalog = empty_catalog()
+    first = new_event(catalog, [])
+    retained = canonical_bytes(first)
+    reference = {"path": "state/candidates/previews/fixture.json", "sha256": "a" * 64}
+    second = new_event(catalog, [first], operation=reference, action="activate")
+    assert second["version"] == 2 and second["action"] == "candidate_activate"
+    assert canonical_bytes(first) == retained
+    assert verify_ledger([first, second], catalog) == second["row_hash"]
+    if mutation is None:
+        return
+    if mutation == "path":
+        second["operation"]["path"] = "../outside.json"
+    elif mutation == "hash":
+        second["operation"]["sha256"] = "b" * 64
+    elif mutation == "action":
+        second["action"] = []
+    elif mutation == "missing":
+        second.pop("operation")
+    elif mutation == "version":
+        second["version"] = 1
+    with pytest.raises(ValueError):
+        verify_ledger([first, second], catalog)
+
+
 @pytest.mark.parametrize(
     "field,value",
     [

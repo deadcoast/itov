@@ -8,7 +8,7 @@ For B-03 training configuration, use the [optimization runbook](training-configu
 
 For C-01 evaluation coverage, use the [corpus runbook](evaluation-corpus.md). Freeze broader cases and strengths independently of training, execute a base-model baseline, then record every image observation. Pending review returns 1; a successfully recorded baseline returns 0 even when images fail. It cannot promote a candidate.
 
-For C-02, use [`checks packet/inspect/calibrate/replay`](image-checks.md) after complete deployed evaluation. Inspect every image and record complete references; supply an optional evaluator response only when available. Successful recording returns 0 while preserving false accepts/rejects and uncertainty. The initial screen [missed all six observed bordered images](image-check-calibration-20260924.md); its passes cannot establish quality. C-03's complete candidate matrix remains outstanding.
+For C-02, use [`checks packet/inspect/calibrate/replay`](image-checks.md) after complete deployed evaluation. Inspect every image and record complete references; supply an optional evaluator response only when available. Successful recording returns 0 while preserving false accepts/rejects and uncertainty. The initial screen [missed all six observed bordered images](image-check-calibration-20260924.md); its passes cannot establish quality. The [C-03 full matrix](deployed-candidate-review-20260924.md) is complete and the candidate is rejected; future candidate reviews still require every condition.
 
 All result commands print text by default. Add `--json` for exactly one JSON object on stdout, including argument/configuration errors. JSON retains the existing domain fields and adds `_cli` version 1:
 
@@ -38,143 +38,226 @@ Errors/interruption use stderr in text mode; ordinary reports, including failed/
 
 `_cli` is presentation metadata. It is never written into a plan, job record, review packet or sealed report. Use `--save` to publish an immutable artifact; do not redirect an augmented CLI response into a saved-plan path. Existing domain schemas and content IDs remain unchanged.
 
-## 1. Configure and inspect
+## 1. Install, configure and inspect
 
-From the checkout, use the existing environment and repository-local cache:
+Use an explicit ITOV wheel artifact and an existing local ComfyUI installation.
+The wheel does not include ComfyUI, models, training data or optional ML packages.
+The current version is 0.13.1, unreleased; obtain the wheel from the verified build
+for this checkout. Build maintainers use `uv build`; operating the installed wheel
+does not require the source tree.
+
+From PowerShell, replace the installation/workspace paths below with your
+actual paths. The workspace must be new. Keep `$cfg` absolute when changing
+directories. This sequence uses `uv` to create a separate core environment:
 
 ```powershell
-$env:UV_CACHE_DIR = "$PWD\.uv-cache"
-uv sync --inexact --locked
-$cfg = 'workspace/itov.toml'
-# Run init only for a new workspace. It refuses existing configuration.
-uv run --inexact --locked itov init
-uv run --inexact --locked itov doctor --config $cfg --offline
-uv run --inexact --locked itov server start --config $cfg --print-command
+$wheel = 'D:\Packages\itov-0.13.1-py3-none-any.whl'
+$tool = 'D:\Tools\itov-core'
+$work = 'D:\Work\itov-session'
+$comfy = 'D:\AI\ComfyUI_windows_portable\ComfyUI'
+$comfyPython = 'D:\AI\ComfyUI_windows_portable\python_embeded\python.exe'
+uv venv --python 3.11 $tool
+uv pip install --python "$tool\Scripts\python.exe" $wheel
+if ($LASTEXITCODE -ne 0) { throw 'Inspect installation failure before continuing' }
+$env:PATH = "$tool\Scripts;$env:PATH"
+$cfg = "$work\itov.toml"
+itov workspace guide setup --config $cfg
+itov init $work --comfyui-root $comfy --comfyui-python $comfyPython --url http://127.0.0.1:8188
+if ($LASTEXITCODE -ne 0) { throw 'Configuration was not initialized; preserve existing files' }
+itov doctor --config $cfg --offline
+itov workspace status --config $cfg
+itov server start --config $cfg --print-command
 ```
 
-The default runtime is `AI/ComfyUI/ComfyUI_windows_portable/ComfyUI`; `init --comfyui-root PATH --comfyui-python PATH` selects another explicit installation. `doctor` identifies missing tools/runtime files; its failed checks are not waived by successful initialization. FFmpeg/ffprobe must be available for the supported media decoding paths. Optional training uses the separately pinned environment in the [training contract](training-and-promotion.md).
+Inspect every result before continuing; the command exit contract above applies.
+Use `itov workspace guide TOPIC --config $cfg` to discover the sequence for
+generation, models, training, evaluation, catalog or recovery. Named inputs in
+guides must be explicitly supplied. Guidance never submits work or changes state.
+In this checkout, `uv run --inexact --locked itov` is an alternative launcher;
+preserve its existing environment and use `$env:UV_CACHE_DIR = "$PWD\.uv-cache"`.
 
-Start the configured stock server in a separate terminal and leave it in the foreground:
+`doctor` identifies missing runtime files/tools; its failed checks are not waived
+by initialization. FFmpeg/ffprobe are required for supported media decoding.
+Optional-package failures can be retained before provisioning an environment:
 
 ```powershell
-uv run --inexact --locked itov server start --config workspace/itov.toml
+itov workspace dependencies dataset --config $cfg --save
+itov workspace dependencies training --config $cfg --save
+# Once provisioned, select the exact separate interpreter explicitly:
+itov workspace dependencies training --python 'D:\Tools\itov-train\Scripts\python.exe' --config $cfg --save
+```
+
+Exit 1 is expected for missing optional packages in a core-only environment.
+The saved receipt includes each missing/wrong package or interpreter error. This
+metadata probe imports no image/ML library and establishes no CUDA readiness.
+Dataset operations require Pillow 12.3.0 in the selected image interpreter;
+training uses the pins in the [training contract](training-and-promotion.md).
+
+Start the server in a separate terminal, using the same installed executable and
+absolute configuration path. `server start` stays in the foreground; Ctrl+C stops
+that server. Select another free loopback port during init if 8188 is already used.
+
+```powershell
+itov server start --config 'D:\Work\itov-session\itov.toml'
 ```
 
 Back in the operator terminal:
 
 ```powershell
-uv run --inexact --locked itov doctor --config $cfg
+itov doctor --config $cfg
 nvidia-smi -L
 # Set this from the exact UUID printed for the intended local GPU.
 $gpu = 'GPU-REPLACE-WITH-OBSERVED-UUID'
-uv run --inexact --locked itov device status --gpu $gpu --json
+itov device status --gpu $gpu --json
 ```
 
-A held lease is a reason to inspect/resume its owner, not to delete state. ITOV coordinates cooperating same-user commands; unrelated GPU clients can bypass this registry. See [execution ownership](execution-ownership.md).
+A held lease is a reason to inspect/resume its owner. ITOV coordinates cooperating
+same-user commands; unrelated GPU clients can bypass the registry. See
+[execution ownership](execution-ownership.md).
 
 ## 2. Complete and replay a neutral image job
 
-The checkout helper creates a 64×64 PNG and refuses overwrite. Skip that line if the input already exists. It is a source-tree helper, not an installed CLI dependency: installed users may provide their own `example.png` in the configured input directory and the API workflow in `examples/image-copy.api.json`.
+The packaged starter publishes a deterministic 64×64 PNG, a stock image-copy
+workflow and a neutral catalog declaration in the configured workspace. Unchanged
+retries are safe; changed files are preserved and refused. It needs no checkout
+helper, downloaded image or model. This establishes image I/O, not model quality.
 
 ```powershell
-uv run --inexact --locked python scripts/create_preflight_image.py workspace/input/example.png
-uv run --inexact --locked itov workflow validate examples/image-copy.api.json --config $cfg --live
-$job = uv run --inexact --locked itov job run examples/image-copy.api.json --config $cfg --wait-timeout 120 --json | ConvertFrom-Json
+itov workspace starter --config $cfg
+if ($LASTEXITCODE -ne 0) { throw 'Inspect preserved starter inputs before continuing' }
+$workflow = "$work\workflows\itov-starter.api.json"
+itov workflow validate $workflow --config $cfg --live
+if ($LASTEXITCODE -ne 0) { throw 'Workflow/runtime validation failed' }
+$job = itov job run $workflow --config $cfg --wait-timeout 120 --json | ConvertFrom-Json
 $job._cli
-$job.record_path
+itov workspace status --kind jobs --config $cfg
+itov workspace inspect $job.record_path --config $cfg
 ```
 
-Read the outcome before proceeding. A short `--wait-timeout 0.01` can expose partial progress, but fast/cached jobs may finish before any chosen timeout. Timeout never cancels the server job. Preserve the printed record and observe the same request:
+Read the outcome before proceeding. A short `--wait-timeout 0.01` can expose
+partial progress, but fast/cached jobs may finish first. Timeout never cancels a
+server job. Preserve the printed record and observe the same request:
 
 ```powershell
-uv run --inexact --locked itov job wait $job.record_path --config $cfg
-$done = uv run --inexact --locked itov job wait $job.record_path --config $cfg --json | ConvertFrom-Json
+$done = itov job wait $job.record_path --config $cfg --json | ConvertFrom-Json
 $done.artifacts
 ```
 
-A successful wait lists downloaded paths and hashes; subsequent wait with intact artifacts verifies locally without HTTP or another POST. A malformed workflow returns an error or validation failure with the specific cause. If acceptance is unknown, inspect matching server history and, only with its proven identity, use `job wait RECORD --prompt-id ID`. An empty queue, missing history or elapsed time cannot establish that a POST was never accepted.
+A successful wait lists downloaded paths and hashes. Another wait with intact
+artifacts verifies locally without HTTP or another POST. Malformed workflows
+retain their validation/protocol causes. For an uncertain accepted request,
+inspect history and use `job wait RECORD --prompt-id ID` only with proven identity.
+An empty queue, missing history or elapsed time cannot prove a POST was never
+accepted. Owned jobs must use their owning batch/inference/evaluation or parallel
+controller; `workspace inspect` supplies those commands.
 
 ## 3. Plan and execute a batch
 
-For a **fresh neutral catalog** in the configured workspace, the source helpers create explicit input declarations without changing execution state:
+Continue in this **fresh workspace with an empty catalog**. The starter declaration
+is not a merge: preserve any existing catalog and review its entries first.
 
 ```powershell
-uv run --inexact --locked python scripts/create_catalog_example.py --config $cfg
-$initial = uv run --inexact --locked itov catalog init --config $cfg --json | ConvertFrom-Json
-uv run --inexact --locked itov catalog validate workspace/templates/neutral.catalog.json --config $cfg --check-files
-uv run --inexact --locked itov catalog import workspace/templates/neutral.catalog.json --config $cfg --expected-head $initial.head
-uv run --inexact --locked python scripts/create_batch_example.py --config $cfg
-$plan = uv run --inexact --locked itov batch plan workspace/templates/neutral.batch.json --config $cfg --save --json | ConvertFrom-Json
-if ($LASTEXITCODE -ne 0) { throw 'Planning failed; inspect its response' }
-$qualified = uv run --inexact --locked itov batch qualify $plan.path --config $cfg --save --json | ConvertFrom-Json
-if ($LASTEXITCODE -ne 0) { throw 'Qualification failed; inspect its response' }
-uv run --inexact --locked itov batch run $plan.path --config $cfg --qualification $qualified.path
-uv run --inexact --locked itov batch status $plan.path --config $cfg
-uv run --inexact --locked itov batch resume $plan.path --config $cfg
+$initial = itov catalog init --config $cfg --json | ConvertFrom-Json
+if ($LASTEXITCODE -ne 0) { throw 'Inspect existing catalog before continuing' }
+$catalog = "$work\templates\itov-starter.catalog.json"
+itov catalog validate $catalog --config $cfg --check-files
+if ($LASTEXITCODE -ne 0) { throw 'Catalog validation failed' }
+itov catalog import $catalog --config $cfg --expected-head $initial.head
+if ($LASTEXITCODE -ne 0) { throw 'Catalog import failed' }
+$request = itov workspace request itov-starter --count 2 --save --config $cfg --json | ConvertFrom-Json
+if ($LASTEXITCODE -ne 0) { throw 'Request creation failed' }
+$plan = itov batch plan $request.saved_path --config $cfg --save --json | ConvertFrom-Json
+if ($LASTEXITCODE -ne 0) { throw 'Planning failed' }
+itov workspace inspect $plan.path --config $cfg
+$qualified = itov batch qualify $plan.path --config $cfg --save --json | ConvertFrom-Json
+if ($LASTEXITCODE -ne 0) { throw 'Qualification failed' }
+itov batch run $plan.path --config $cfg --qualification $qualified.path
+itov batch status $plan.path --config $cfg
+itov batch resume $plan.path --config $cfg
+itov workspace status --kind batch --config $cfg
 ```
 
-Do not import a neutral replacement over an existing production catalog. For an existing workspace, use `catalog show`, review its current entries and use a request pinned to that head instead. Helpers refuse overwrites; a repeat session uses its saved declarations/plan. Installed users can supply the documented [catalog](catalog-and-ledger.md) and [batch request](batch-planning.md) directly.
+For an existing workspace, start with `catalog show`, use a request pinned to its
+current HEAD, and preserve prior inputs/plans. `workspace request` supports neutral
+presets without seed/LoRA bindings. Model requests use their explicit specifications
+and [batch request contract](batch-planning.md).
 
-Planning submits nothing. Qualification pins runtime/assets. Execution reserves ownership/seeds before submission. `status` is read-only; `resume` collects already accepted work and can submit the unsubmitted remainder after fresh checks. Completed resume revalidates outputs without HTTP. A failed/abandoned plan never silently becomes a fresh attempt.
+Planning submits nothing. Qualification pins runtime/assets. Execution reserves
+ownership/seeds before submission. `resume` collects accepted work and can submit
+the unsubmitted remainder after fresh checks; completed resume revalidates outputs
+without HTTP. Failed/abandoned plans never silently become fresh attempts.
+
+`workspace status` paginates known record directories without scanning assets or
+verification trees. `workspace inspect` checks document integrity and reports
+recorded state. Neither revalidates current weights, outputs or model quality.
+Follow the suggested domain status/replay command for that validation. See the
+[workspace contract](workspace-workflow.md) for inventory limits and exit meanings.
 
 ## 4. Generate with models or a trained candidate
 
 Model assets must already match their declared hashes. The v1 SDXL, Wan video and Stable Audio examples use `prepare`, explicit reviewed catalog import, `plan --save`, then the batch commands above. Use `video verify SPEC OUTPUT.mp4`, `audio verify SPEC OUTPUT`, and `av mux SPEC` for their media contracts. [Image](image-inference.md), [video](image-to-video.md), [audio/A/V](audio-and-av.md) and [VRAM](vram-profiling.md) detail provisioning and bounded qualification. The A/V examples reference retained jobs; new sessions must declare their own job/record/artifact hashes.
 
-Version-two SDXL inference stages explicit checkpoint/adapter bindings without catalog activation:
+Version-two SDXL inference stages explicit checkpoint/adapter bindings without catalog activation. Set `$inferenceSpec` to your declared specification; it must pin your own asset and training-plan hashes:
 
 ```powershell
-uv run --inexact --locked itov inference capabilities
-uv run --inexact --locked itov inference prepare examples/still-life-candidate.inference.json --config $cfg
-$inference = uv run --inexact --locked itov inference plan examples/still-life-candidate.inference.json --config $cfg --save --json | ConvertFrom-Json
+itov inference capabilities
+itov inference prepare $inferenceSpec --config $cfg
+$inference = itov inference plan $inferenceSpec --config $cfg --save --json | ConvertFrom-Json
 if ($LASTEXITCODE -ne 0) { throw 'Inference planning failed' }
-uv run --inexact --locked itov inference run $inference.saved_path --config $cfg
-uv run --inexact --locked itov inference status $inference.saved_path --config $cfg
-uv run --inexact --locked itov inference resume $inference.saved_path --config $cfg
-uv run --inexact --locked itov inference replay $inference.saved_path --config $cfg --save
+itov inference run $inference.saved_path --config $cfg
+itov inference status $inference.saved_path --config $cfg
+itov inference resume $inference.saved_path --config $cfg
+itov inference replay $inference.saved_path --config $cfg --save
 ```
 
-This example pins the retained local still-life candidate; it is not portable training input. A new candidate needs its exact training-plan file hash, candidate ID and export hash in a new specification. Change declarations, never generated graphs or saved plans. Seeds remain reserved, so a deliberate new generation uses new seeds. The [candidate contract](candidate-inference.md) specifies supported strengths, ordered LCM/candidate layers and sampler compatibility. A rejected candidate may be investigated experimentally without accepting or promoting it.
+A new candidate needs its exact training-plan file hash, candidate ID and export hash in a new specification. Change declarations, never generated graphs or saved plans. Seeds remain reserved, so a deliberate new generation uses new seeds. The [candidate contract](candidate-inference.md) specifies supported strengths, ordered LCM/candidate layers and sampler compatibility. A rejected candidate may be investigated experimentally without accepting or promoting it.
 
 ## 5. Train, assess and compare the deployed artifact
 
-Training requires declared local source images/captions, prepared dataset, provenance/curation, frozen quality cases, checkpoint/configuration/tokenizer files and the pinned optional training environment. Use [transactional dataset import](dataset-import.md) for new local or retained Met inputs; it preserves failed attempts and publishes a verified complete bundle. Acquisition remains later work. [Version-four checkpoints](training-checkpoints.md) add explicit compatible continuation from committed optimizer state. The following commands inspect the historical version-one pilot; provision using the [training](training-and-promotion.md) and [curation](curated-quality-review.md) contracts:
-
-For new reviewed data, first follow [dataset inspection and freezing](dataset-review.md). Inspect every image/caption and pair finding, freeze the selection, import its generated declaration, and bind Met curation with `dataset curate CURATION --freeze FREEZE --save`. The printed v2 curation declaration can be pinned in the existing training qualification. The three-work reviewed pilot is a data-method result, not accepted model training evidence.
+Training requires declared local source images/captions, prepared dataset, provenance/curation, frozen quality cases, checkpoint/configuration/tokenizer files and the pinned optional training environment. Use [transactional dataset import](dataset-import.md) for new local or retained Met inputs; it preserves failed attempts and publishes a verified complete bundle. Acquisition remains later work. [Version-four checkpoints](training-checkpoints.md) add explicit compatible continuation from committed optimizer state. Provision using the [training](training-and-promotion.md) and [curation](curated-quality-review.md) contracts. Start with the installed training guide; it names the explicit declarations, interpreters and saved outputs needed at each step:
 
 ```powershell
-uv run --inexact --locked itov dataset validate workspace/training/data/met-still-life-v1/dataset.json --config $cfg
-uv run --inexact --locked itov dataset prepare workspace/training/data/met-still-life-v1/dataset.json --config $cfg
-uv run --inexact --locked itov dataset curate workspace/training/data/met-still-life-v1/curation.json --config $cfg --save
-$training = uv run --inexact --locked itov training plan examples/sdxl-still-life.training.json --config $cfg --save --json | ConvertFrom-Json
+itov workspace guide training --config $cfg
+itov workspace dependencies training --python $trainingPython --config $cfg --save
+itov workspace dependencies dataset --python $imagePython --config $cfg --save
+# After data inspection/freezing/import and writing the bound training specification:
+$training = itov training plan $trainingSpec --config $cfg --save --json | ConvertFrom-Json
 if ($LASTEXITCODE -ne 0) { throw 'Training planning failed' }
-uv run --inexact --locked itov training run $training.saved_path --config $cfg --gpu $gpu
-uv run --inexact --locked itov training status $training.saved_path --config $cfg
-uv run --inexact --locked itov evaluation assess $training.saved_path --config $cfg --save
-uv run --inexact --locked itov training candidate $training.saved_path --config $cfg --save
-uv run --inexact --locked itov evaluation packet $training.saved_path --config $cfg --save
+itov training run $training.saved_path --config $cfg --gpu $gpu
+itov workspace inspect $training.saved_path --config $cfg
+itov training status $training.saved_path --config $cfg
+itov evaluation assess $training.saved_path --config $cfg --save
+itov training candidate $training.saved_path --config $cfg --save
 ```
+
+Set `$trainingPython`, `$imagePython` and `$trainingSpec` to the provisioned interpreters and explicit specification; the training spec also pins its interpreter. For new reviewed data, follow [dataset inspection and freezing](dataset-review.md), import the frozen declaration, and bind Met curation with `dataset curate CURATION --freeze FREEZE --save`. The three-work pilot is a bounded data-method result, not model acceptance. No historical sample/specification is automatically selected for a new workspace.
 
 An unchanged plan with an existing attempt refuses to train again. For existing completed work, start at `training status` using its saved path. `artifacts_validated` establishes technical artifact checks, not learned quality. The printed result/log paths and failure boundary identify a failed attempt. `training recover` only reconciles a stopped attempt; it does not resume optimization or launch another worker. For v4, inspect `training checkpoints PLAN`, then explicitly select a complete manifest with `training resume-plan PLAN --checkpoint CHECKPOINT_JSON --save` and run that new plan. Partial checkpoints and changed execution inputs are refused; the old attempt remains preserved.
 
 For bounded checkpoint comparisons, use [experiment manifests](training-experiments.md): `experiment plan SPEC --save` declares hypotheses, endpoints, repetitions, budget and frozen review protocol; `experiment run MANIFEST --member ID --gpu UUID` executes one declared attempt. `experiment status` preserves each outcome, and `experiment packet --save` creates a complete pending case review. `experiment decide MANIFEST --review REVIEW --save` records loss-independent selection or rejection; `experiment replay --decision DECISION` checks the saved evidence. Selection is only for further evaluation. No failed repetition can be omitted, and no selected checkpoint is automatically activated.
 
-For deployed evaluation, create an evaluation specification referring to the exact training plan and its file hash. The retained `examples/still-life.evaluation.json` already binds the local historical trial, so it can replay that experiment rather than automatically selecting newly trained weights:
+For numerical comparisons, declare [v2 tolerances](experiment-variance.md) before
+execution, then run `experiment variance MANIFEST --save` and
+`experiment variance-replay MANIFEST --report REPORT`. Inspect exact equality,
+every repetition pair and failed/unavailable attempts before attributing a visual
+change to training. A tolerance pass is not a quality decision.
+
+For deployed evaluation, create an evaluation specification referring to the exact training plan and its file hash. Use `workspace guide evaluation` and set `$evaluationSpec` to your own frozen-corpus declaration; bind the exact training-plan path and hash:
 
 ```powershell
-$comparison = uv run --inexact --locked itov evaluation plan examples/still-life.evaluation.json --config $cfg --save --json | ConvertFrom-Json
+$comparison = itov evaluation plan $evaluationSpec --config $cfg --save --json | ConvertFrom-Json
 if ($LASTEXITCODE -ne 0) { throw 'Evaluation planning failed' }
-uv run --inexact --locked itov evaluation run $comparison.saved_path --config $cfg
-uv run --inexact --locked itov evaluation status $comparison.saved_path --config $cfg
-uv run --inexact --locked itov evaluation resume $comparison.saved_path --config $cfg
-uv run --inexact --locked itov evaluation replay $comparison.saved_path --config $cfg --save
+itov evaluation run $comparison.saved_path --config $cfg
+itov evaluation status $comparison.saved_path --config $cfg
+itov evaluation resume $comparison.saved_path --config $cfg
+itov evaluation replay $comparison.saved_path --config $cfg --save
 ```
 
-Inspect all base/trigger/adapter conditions and seeds. Retain count/material/regression failures and uncertainty. A saved technical report has `quality_acceptance: not_established`. The packet writes a pending `.review.json` template; the assistant records observations, evidence hashes, method, limitations and an actual verdict. It must not turn failed checks into approvals. Use `promotion prepare TRAINING_PLAN --review REVIEW --save` to inspect policy; explicit `promotion apply` additionally binds the reviewed decision and current catalog head. This runbook stops at the current candidate's rejection.
+Inspect all base/trigger/adapter conditions and seeds. Retain count/material/regression failures and uncertainty. A saved technical report has `quality_acceptance: not_established`. The packet writes a pending `.review.json` template; the assistant records observations, evidence hashes, method, limitations and an actual verdict. It must not turn failed checks into approvals. Complete the [deployed decision](deployed-review.md), then use [candidate summary, deployment and preview](candidate-lifecycle.md) to inspect lifecycle eligibility. Only an eligible saved preview can be explicitly applied. Legacy training-only `promotion apply` refuses activation. The current candidate remains rejected.
 
 ## Recovery choices
 
-For a complete version-two deployed comparison, use the [C-03 review sequence](deployed-review.md): `evaluation mapping PLAN --save`, `evaluation review-packet PLAN --mapping CERTIFICATE --save`, inspect every image/comparison and fill the saved template, then `evaluation decide PACKET --review REVIEW --save`. `evaluation decision-replay DECISION` repeats all bindings and the disposition offline. A valid recorded rejection returns exit 0; read `disposition`, not the command exit alone. This decision format does not feed the legacy promotion command; C-05 lifecycle integration remains outstanding.
+For a complete version-two deployed comparison, use the [C-03 review sequence](deployed-review.md): `evaluation mapping PLAN --save`, `evaluation review-packet PLAN --mapping CERTIFICATE --save`, inspect every image/comparison and fill the saved template, then `evaluation decide PACKET --review REVIEW --save`. `evaluation decision-replay DECISION` repeats all bindings and the disposition offline. A valid recorded rejection returns exit 0; read `disposition`, not the command exit alone. The C-05 `candidate` commands consume this decision and preserve rejection through explicit policy checks; they do not use a legacy training-only approval.
 
 | Observation | Safe next operation | Required evidence |
 | --- | --- | --- |
@@ -185,10 +268,11 @@ For a complete version-two deployed comparison, use the [C-03 review sequence](d
 | Training running/validating after controller exit | `training recover PLAN` | Confirmed dead controller, worker and native job; fresh result/input checks before final validation |
 | Held device after a crash | `device recover --gpu UUID --lease LEASE_ID` | Exact lease and positively confirmed dead owner/terminal work; empty queue is insufficient |
 | Pending catalog transaction | `catalog recover` | Journal and immutable snapshot consistency; ordinary reads do not repair |
+| Pending candidate lifecycle transaction | `candidate recover` | Exact lineage and fresh approval before HEAD publication; stale uncommitted intent can be explicitly archived with `--abandon` |
 | Managed parallel controller crash | `parallel recover PLAN` | Confirmed owned-worker termination; retires uncertain work without resubmission |
 
 Never repair a workflow by hand-editing run records, deleting a device journal, releasing reserved seeds or changing a saved plan. Follow the owning command's reported causes. Offline completed replay checks existing artifacts/inputs; it does not rerender a model or recertify quality.
 
 ## Verification boundary
 
-[A-06 verification](evidence/phase-a06-verification-20260923.json) records source and installed CLI checks, fixture timeout/failure recovery, real Windows controller exit/recovery with fixture weights, and offline replay of retained model results. No new model training/rendering or broader model-quality acceptance is claimed for this CLI integration task. Phase B and the later application/evaluation phases remain open.
+[A-06 verification](evidence/phase-a06-verification-20260923.json) records source and installed CLI checks, fixture timeout/failure recovery, real Windows controller exit/recovery with fixture weights, and offline replay of retained model results. No new model training/rendering or broader model-quality acceptance is claimed for this CLI integration task. The [D-01 verification](d01-workflow-verification-20260925.md) adds clean installed neutral image I/O, timeout recovery, package parity and retained optional dependency failures; the current contract is [workspace workflow](workspace-workflow.md). Later Phase D and E work remains open.

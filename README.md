@@ -1,6 +1,6 @@
 # ITOV
 
-ITOV is an incomplete local ComfyUI application under development. Its current foundations cover workspace diagnostics, workflow validation, job records, catalogs, deterministic batches, a bounded Windows concurrency trial, lexical constraints and a small SDXL training/evaluation prototype. These low-level integrations still need substantial work to form a cohesive application. The core CLI uses the Python standard library; model training uses a separate optional environment.
+ITOV is an incomplete local ComfyUI application under development. Its current foundations cover workspace diagnostics, workflow validation, job records, catalogs, deterministic batches, a bounded Windows concurrency trial, lexical constraints and a small SDXL training/evaluation prototype. Installed workspace navigation now connects these paths; broader media behavior and provisioning remain incomplete. The core CLI uses the Python standard library; model training uses a separate optional environment.
 
 The [current TODO](TODO.md) and [source audit](docs/development-audit-20260922.md) track the remaining architecture, dataset/training, autonomous evaluation and end-to-end work. The mandatory human-review gate has been shelved by the user. Assistant reviews record methods, limitations and case evidence; the current curated candidate is rejected on observed quality failures. Earlier successful tests and example runs establish only their documented scope.
 
@@ -10,11 +10,17 @@ The [current TODO](TODO.md) and [source audit](docs/development-audit-20260922.m
 
 [Bounded experiments](docs/training-experiments.md) preregister hypotheses, checkpoint endpoints, repetitions and budgets. The `experiment` commands execute declared members, preserve failures and record case-level selection decisions against frozen images. Loss remains diagnostic; selection does not authorize promotion.
 
+[Numerical repetition reports](docs/experiment-variance.md) compare every repetition pair against tolerances declared before execution. `experiment variance` and `variance-replay` retain exact-equality failures, optimizer/RNG controls and image identities separately from quality judgments.
+
 [Frozen evaluation corpora](docs/evaluation-corpus.md) extend coverage independently of training. The `corpus` commands preserve legacy failures, freeze broader cases and strength conditions, and record complete base-model observations before tuning. Version-two `evaluation` plans render baseline controls or the full comparison through the existing owned runtime workflow.
 
 [Image checks and evaluator calibration](docs/image-checks.md) bind repeatable artifact measurements and optional evaluator judgments to every completed evaluation image. The `checks` commands report false accepts/rejects, uncertainty and missing judgments against direct inspection, without assigning a composite quality score or accepting a model.
 
 [Deployed candidate review](docs/deployed-review.md) verifies the installed loader's tensor targets and records complete image/comparison judgments. `evaluation mapping`, `review-packet`, `decide` and `decision-replay` bind a conservative disposition to the actual deployed artifact, runtime and decoded matrix. Failed or uncertain quality prevents acceptance; these commands do not activate a candidate.
+
+[Candidate lifecycle](docs/candidate-lifecycle.md) connects fresh deployed evidence to an explicit catalog preview and apply. The `candidate` commands provide summary, deployment validation, activation, retirement, targeted rollback and journal recovery. Stale or rejected decisions cannot activate; rollback preserves unrelated entries. The current candidate remains rejected.
+
+The installed [workspace workflow](docs/workspace-workflow.md) provides `workspace guide`, `starter`, `request`, `status`, `inspect` and `dependencies`. It creates neutral image-copy inputs without source helpers, routes saved records to their owning controllers, and retains missing optional-package diagnostics. Offline inventory reports recorded state; domain commands still revalidate artifacts and quality.
 
 Start with the [operator runbook](docs/operator-runbook.md) for the supported sequence from setup through execution, recovery and completed replay. Result commands now use consistent text/JSON outcomes, artifact references and suggested next commands. JSON adds `_cli` metadata without changing saved evidence; incomplete status/retirement returns exit 1, including batch status and abandonment.
 
@@ -33,6 +39,8 @@ $env:UV_CACHE_DIR = "$PWD\.uv-cache"
 uv sync --inexact --locked
 uv run itov init
 uv run itov doctor
+uv run itov workspace guide
+uv run itov workspace status
 ```
 
 `init` creates `workspace/itov.toml` and local input, output, model, template, workflow, log, and state directories. Running it again refuses to overwrite the configuration. `workspace/` and downloaded model weights are ignored by Git.

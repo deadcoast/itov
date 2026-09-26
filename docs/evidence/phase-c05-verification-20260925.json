@@ -1,0 +1,2606 @@
+{
+  "version": 1,
+  "scope": "phase_c05_candidate_lifecycle_verification",
+  "task_complete": true,
+  "candidate_status": "rejected",
+  "activation_eligible": false,
+  "product_complete": false,
+  "source_tests": {
+    "log": {
+      "path": "workspace/state/verification/phase-c05/full.log",
+      "sha256": "1808e9e09cce2583feffb8b970b33934972edcb1e01b6692ef2dcc8fccf0df40",
+      "bytes": 1844
+    },
+    "exit_code": 0,
+    "xml": {
+      "path": "workspace/state/verification/phase-c05/full.xml",
+      "sha256": "9a5a5468bc32f7cafe95da06ecd75d1a3969d09458d19dee3bb857d256d017ea",
+      "bytes": 202119
+    },
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "1493",
+    "time": "1344.674",
+    "timestamp": "2026-09-25T18:46:53.730304-07:00",
+    "hostname": "homeone"
+  },
+  "final_source_tests": {
+    "log": {
+      "path": "workspace/state/verification/phase-c05/final-focused-02.log",
+      "sha256": "b264f3b19cf9bbca001404864c040431c4688e10450c14b6eaac7f71ad8d67d5",
+      "bytes": 304
+    },
+    "exit_code": 0,
+    "xml": {
+      "path": "workspace/state/verification/phase-c05/final-focused-02.xml",
+      "sha256": "168600b90bbecc4c4e077f991263ca9f10054be3441db39f73fdd7e6e9b4ba0a",
+      "bytes": 18965
+    },
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "142",
+    "time": "32.751",
+    "timestamp": "2026-09-25T18:54:51.898177-07:00",
+    "hostname": "homeone"
+  },
+  "installed_tests": {
+    "log": {
+      "path": "workspace/state/verification/phase-c05/installed-qualified.log",
+      "sha256": "4e939be20ac9f69d0c4f6183f3d7c40572ad774f9dabc1f99f1f4aa420beaec7",
+      "bytes": 420
+    },
+    "exit_code": 0,
+    "xml": {
+      "path": "workspace/state/verification/phase-c05/installed-qualified.xml",
+      "sha256": "8d50dd00ed980b523fa29c51c85307c1bc7e3247bb151832e059693b7aa00b10",
+      "bytes": 26377
+    },
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "201",
+    "time": "47.745",
+    "timestamp": "2026-09-25T18:57:35.327707-07:00",
+    "hostname": "homeone"
+  },
+  "test_timing_scope": "Broad source run began before final text-label cleanup and malformed-v2-action validation refinement; final focused source and installed suites cover both final changes and the added public CLI sequence.",
+  "checks": {
+    "lint-final": {
+      "log": {
+        "path": "workspace/state/verification/phase-c05/lint-final.log",
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      },
+      "exit_code": 0
+    },
+    "format-final": {
+      "log": {
+        "path": "workspace/state/verification/phase-c05/format-final.log",
+        "sha256": "2487689fe66c63950d14fdd3149e65acd8cf316b19ceb0116e16fca9c8a1af0c",
+        "bytes": 29
+      },
+      "exit_code": 0
+    },
+    "build-final-02": {
+      "log": {
+        "path": "workspace/state/verification/phase-c05/build-final-02.log",
+        "sha256": "f8f137d4de9d7228423cd950b38762d4e686783f4cdef88ad4886c80b6d69fda",
+        "bytes": 303
+      },
+      "exit_code": 0
+    },
+    "source-public": {
+      "log": {
+        "path": "workspace/state/verification/phase-c05/source-public.log",
+        "sha256": "f9572c1c228f72b818ef1444ec3e100e329f5822e7111a1768600019f6acb647",
+        "bytes": 803
+      },
+      "exit_code": 0
+    },
+    "installed-public": {
+      "log": {
+        "path": "workspace/state/verification/phase-c05/installed-public.log",
+        "sha256": "972f4b684e4e35ae1c5b7dedb0008c3d6594c048c52f4609fb9d3e10a22ebf5f",
+        "bytes": 896
+      },
+      "exit_code": 0
+    },
+    "preservation": {
+      "log": {
+        "path": "workspace/state/verification/phase-c05/preservation.log",
+        "sha256": "5d1a1afb0e06e6d7bf79928b2d822ad74e1ba9e4ee65ae2eca12140d685f928b",
+        "bytes": 370
+      },
+      "exit_code": 0
+    },
+    "diff-check": {
+      "log": {
+        "path": "workspace/state/verification/phase-c05/diff-check.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "exit_code": 0
+    }
+  },
+  "public_commands": {
+    "source": [
+      {
+        "label": "summary-text",
+        "argv": [
+          "candidate",
+          "summary",
+          "workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json"
+        ],
+        "exit_code": 0,
+        "elapsed_ms": 97426,
+        "result": "OK candidate summary (exit 0)\nScope: candidate_summary\nSummary id: 16fc9f70a9c928087d0770023315bb74ab6d53729e32c0ff2124ca7ee4647d89\nDisposition: rejected\nActivation eligible: False\nDecision id: 0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff\nTechnical pass: True\nRequired judgments: {\"fail\": 301, \"pass\": 274, \"unavailable\": 0, \"uncertain\": 181}\nCause (blockers): [\"Deployed candidate decision is rejected\"]\nArtifact (input document): C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json\nLimits: Local explicit catalog policy, not new model-quality evidence or authenticated review. No automatic promotion. Historical transaction replay does not requalify a model. Manual catalog import is a separate explicit operator interface. Process-crash recovery uses the existing journal; power-loss durability and hostile concurrent writes are unqualified.\nNext: Deployment validation is separate from activation eligibility.\n  Inspect command options (After inspecting the result):\n  & 'itov' 'candidate' 'summary' '--help'\n"
+      },
+      {
+        "label": "deployment-json",
+        "argv": [
+          "candidate",
+          "deployment",
+          "workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json",
+          "--save",
+          "--json"
+        ],
+        "exit_code": 0,
+        "elapsed_ms": 99357,
+        "result": {
+          "version": 1,
+          "scope": "candidate_deployment_validation",
+          "decision": {
+            "path": "state/evaluation/decisions/0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json",
+            "sha256": "ba95e4883c37a0b983d6badb35a6283e50a07bc5c41e94875509cce2725dd352"
+          },
+          "decision_id": "0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff",
+          "candidate": {
+            "assessment_id": "d81826bef628140c8f1cba41e01f9cfcc4190fa805d07728a6600cc497401b99",
+            "candidate_id": "60399a05e5b87f2a3c7de57b5c9e54443fcd6186070be1dde2f1574e569d09d6",
+            "entry": {
+              "asset": {
+                "path": "models_shared/trained/2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors",
+                "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2"
+              },
+              "base_models": [
+                "sdxl-1.0"
+              ],
+              "category": "style",
+              "id": "trained-2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2",
+              "rotation_weight_milli": 1000,
+              "slot": "style",
+              "status": "candidate",
+              "strength_milli": {
+                "max": 1000,
+                "min": 500,
+                "recommended": 1000
+              },
+              "trigger_words": [
+                "itovstill"
+              ]
+            },
+            "export": {
+              "alpha_scale_milli": 1000,
+              "bytes": 46621032,
+              "format": "comfy-unet-lora-v1",
+              "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate.",
+              "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+              "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2",
+              "source_sha256": "e64ea2e15a6647cfd755eb6e30a997c8cccd5452c0df0284b59b6f9dc4ebf461",
+              "tensor_payload_sha256": "47ab170156e18028f56692fa3f3dad06270a57bd2938ef868e5ebe8f60e2326e",
+              "tensors": 1120
+            },
+            "plan_id": "26c3cb899dddae04e8f06919642e431742434e61c8e66b5a6a33968a2ae91cf7",
+            "purpose": "training",
+            "result_id": "8d5fa22e00077ab8b35042de4b9ff915952e6fb2c3c363dff739c574c57270fe",
+            "version": 1
+          },
+          "evaluation_plan_id": "24f2e130bdec26c6f48d059e16c990bd91acb32180f72a5e444dd70b425586bf",
+          "mapping_id": "24d9d6e13d031762214fc195e57ee38925da16cba1e6350ce06e0f2e0246afdb",
+          "deployment": {
+            "asset": {
+              "path": "models_shared/trained/2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors",
+              "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2"
+            },
+            "loader_name": "itov_evaluation_2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors"
+          },
+          "runtime": {
+            "devices": [
+              {
+                "index": 0,
+                "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+                "type": "cuda"
+              }
+            ],
+            "files": [
+              {
+                "bytes": 95082,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\k_diffusion\\sampling.py",
+                "sha256": "a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f"
+              },
+              {
+                "bytes": 26117,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\lora.py",
+                "sha256": "fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc"
+              },
+              {
+                "bytes": 1970,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\lora_convert.py",
+                "sha256": "6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245"
+              },
+              {
+                "bytes": 7220,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\memory_management.py",
+                "sha256": "6497cd57ffb15356824b82ca88f60dc1a4b054361e2e2f2c98b84b42d8765fac"
+              },
+              {
+                "bytes": 75009,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_management.py",
+                "sha256": "28812661915b7081d554f8ed14c7a33a2fe744776281eb5b5760bedd30a38408"
+              },
+              {
+                "bytes": 105135,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_patcher.py",
+                "sha256": "097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c"
+              },
+              {
+                "bytes": 5096,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\sample.py",
+                "sha256": "d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee"
+              },
+              {
+                "bytes": 65846,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py",
+                "sha256": "2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae"
+              },
+              {
+                "bytes": 146916,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\sd.py",
+                "sha256": "e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec"
+              },
+              {
+                "bytes": 64869,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py",
+                "sha256": "dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b"
+              },
+              {
+                "bytes": 23745,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\folder_paths.py",
+                "sha256": "a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66"
+              },
+              {
+                "bytes": 25024,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+                "sha256": "5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96"
+              },
+              {
+                "bytes": 6938078334,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\sd_xl_base_1.0.safetensors",
+                "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+              },
+              {
+                "bytes": 46621032,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\loras\\itov_evaluation_2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors",
+                "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2"
+              },
+              {
+                "bytes": 111280,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py",
+                "sha256": "4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891"
+              }
+            ],
+            "image_decoder": {
+              "bytes": 222248960,
+              "path": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+              "sha256": "05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740"
+            },
+            "jobs": 288,
+            "node_schema_sha256": "4fa8ca81a5933a79b15d4b0dd089bb480ea45da189cd640c8deff0f5908e2a97",
+            "profile": "stock-sdxl-evaluation-v1",
+            "runtime": {
+              "argv": [
+                "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+                "--disable-auto-launch",
+                "--listen",
+                "127.0.0.1",
+                "--port",
+                "8188",
+                "--input-directory",
+                "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+                "--output-directory",
+                "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+                "--disable-all-custom-nodes",
+                "--user-directory",
+                "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\user",
+                "--temp-directory",
+                "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\scratch",
+                "--database-url",
+                "sqlite:///C:/Users/ryanf/github/_active/itov/workspace/state/vram/asset-index.sqlite",
+                "--itov-vram-observer-v1"
+              ],
+              "comfyui_version": "0.37.0",
+              "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+              "pytorch_version": "2.13.0+cu130"
+            },
+            "scope": "runtime_schema_and_asset_binding",
+            "server": "http://127.0.0.1:8188",
+            "version": 1,
+            "vram_observer": {
+              "allocator_backend": "cudaMallocAsync",
+              "bootstrap_sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+              "cuda_version": "13.0",
+              "cudnn_version": 92000,
+              "device": {
+                "index": 0,
+                "name": "NVIDIA GeForce RTX 5090",
+                "total_bytes": 34162016256,
+                "uuid": "e2c115fd-447a-8fe0-3257-b17c51919074"
+              },
+              "environment": {
+                "CUBLAS_WORKSPACE_CONFIG": null,
+                "CUDA_MODULE_LOADING": null,
+                "CUDA_VISIBLE_DEVICES": "0",
+                "PYTORCH_ALLOC_CONF": null,
+                "PYTORCH_CUDA_ALLOC_CONF": "backend:cudaMallocAsync"
+              },
+              "identity_sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+              "packages": {
+                "comfy-aimdo": "0.5.5",
+                "comfy-kitchen": "0.2.35",
+                "torch": "2.13.0+cu130"
+              },
+              "pid": 61316,
+              "session_id": "5ab4e9af-b5b7-4391-be88-8b79a5429c53",
+              "started_at": "2026-09-24T23:01:56.559896+00:00",
+              "version": 1
+            }
+          },
+          "technical_pass": true,
+          "disposition": "rejected",
+          "required_judgments": {
+            "fail": 301,
+            "pass": 274,
+            "unavailable": 0,
+            "uncertain": 181
+          },
+          "by_case": {
+            "bicycle-photo": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 5,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 4
+                },
+                "usable_strength": {
+                  "fail": 7,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 2
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 17,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 7
+                },
+                "prompt_adherence": {
+                  "fail": 17,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 7
+                }
+              }
+            },
+            "bird-photo": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 2,
+                  "pass": 7,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 8,
+                  "pass": 15,
+                  "unavailable": 0,
+                  "uncertain": 1
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "color-binding": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 5,
+                  "pass": 4,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 8,
+                  "pass": 1,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 4,
+                  "pass": 20,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 18,
+                  "pass": 3,
+                  "unavailable": 0,
+                  "uncertain": 3
+                }
+              }
+            },
+            "linen-metal": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 6,
+                  "unavailable": 0,
+                  "uncertain": 3
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 19,
+                  "unavailable": 0,
+                  "uncertain": 5
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "matte-gloss": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 3,
+                  "pass": 4,
+                  "unavailable": 0,
+                  "uncertain": 2
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 8,
+                  "pass": 16,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 22,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 2
+                }
+              }
+            },
+            "mountain-photo": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 3,
+                  "pass": 6,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 4,
+                  "pass": 20,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 4,
+                  "pass": 20,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "paper-geometry": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 4,
+                  "unavailable": 0,
+                  "uncertain": 5
+                },
+                "usable_strength": {
+                  "fail": 6,
+                  "pass": 3,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 16,
+                  "unavailable": 0,
+                  "uncertain": 8
+                },
+                "prompt_adherence": {
+                  "fail": 16,
+                  "pass": 8,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "plate-left-vase": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 24,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 20,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 4
+                }
+              }
+            },
+            "single-cup": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 24,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 24
+                }
+              }
+            },
+            "size-binding": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 24,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "three-apples": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 6,
+                  "unavailable": 0,
+                  "uncertain": 3
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 8,
+                  "pass": 16,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "vase-and-pears": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 24,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            }
+          },
+          "review_metadata": {
+            "limitations": "Exposed fixed cases, one render per condition, small three-work training selection and known prior failures. Not blind, independent gold labels, statistical validation, a parity experiment or numerical determinism. Oil-style specificity and hidden object details remain uncertain where not visible. No training/tuning or promotion.",
+            "method": "Direct inspection of all 288 images as 36 lossless contact sheets with 512px tiles, two columns plain/trigger and four rows base/0.25/0.5/1.0. Original 512px images 216, 222 and 223 also inspected. All image and matched-comparison judgments retained. Labels and prior baseline failures visible; no optional evaluator invoked. C-02 border screen is unqualified and was not used for quality decisions.",
+            "packet_id": "251821eb1d09fa0ba80259065a4dc58d7d2b632b950a514fe81b6d23468d732e",
+            "reviewer": "Codex assistant",
+            "reviewer_kind": "assistant",
+            "sources": [
+              {
+                "path": "state/verification/phase-c03/protocol-before-inspection.json",
+                "sha256": "fe7c6bb32f05b0049ab44efb0fafc39858131fdd1fc04c31229c376e99a3d873"
+              },
+              {
+                "path": "state/verification/phase-c03/inspection-notes.json",
+                "sha256": "7aae6c12ebe8f140f29c616494b2576e60632ddb1c0127d13cba0e1ba4455861"
+              },
+              {
+                "path": "state/verification/phase-c03/images.json",
+                "sha256": "6d42d8481d0db374159909056a78dd19c387c8a092f4de13e354d0aea48572b2"
+              },
+              {
+                "path": "state/verification/phase-c03/sampler-comparison.json",
+                "sha256": "a01d8e65de822e4035f0164bb448026600435f0e5b7ad3a92f7d8ed814eaa55e"
+              },
+              {
+                "path": "state/verification/phase-c03/baseline-comparison.json",
+                "sha256": "2c645105c47f6823a02a57b77f109cdb243f11b7b0592406f1cf05e540372e38"
+              }
+            ],
+            "version": 1
+          },
+          "reviewed_strengths_milli": [
+            250,
+            500,
+            1000
+          ],
+          "activation_eligible": false,
+          "blockers": [
+            "Deployed candidate decision is rejected"
+          ],
+          "limits": "Local explicit catalog policy, not new model-quality evidence or authenticated review. No automatic promotion. Historical transaction replay does not requalify a model. Manual catalog import is a separate explicit operator interface. Process-crash recovery uses the existing journal; power-loss durability and hostile concurrent writes are unqualified.",
+          "summary_id": "416e8265d1704053d331c2a78a6347a98d092b5dac785623d39bbc2f1a298e89",
+          "saved_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\summaries\\416e8265d1704053d331c2a78a6347a98d092b5dac785623d39bbc2f1a298e89.json",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "deployment"
+            ],
+            "outcome": "ok",
+            "exit_code": 0,
+            "next_action": "Deployment validation is separate from activation eligibility.",
+            "actions": [
+              {
+                "label": "Inspect command options",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "deployment",
+                  "--help"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [
+              {
+                "label": "saved_path",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\summaries\\416e8265d1704053d331c2a78a6347a98d092b5dac785623d39bbc2f1a298e89.json"
+              },
+              {
+                "label": "input document",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json"
+              }
+            ],
+            "causes": [
+              {
+                "location": "blockers",
+                "detail": [
+                  "Deployed candidate decision is rejected"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "label": "refused-preview",
+        "argv": [
+          "candidate",
+          "preview",
+          "workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json",
+          "--strength-milli",
+          "500",
+          "--save",
+          "--json"
+        ],
+        "exit_code": 1,
+        "elapsed_ms": 98770,
+        "result": {
+          "version": 1,
+          "scope": "candidate_lifecycle_preview",
+          "action": "activate",
+          "entry_id": "trained-2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2",
+          "expected_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+          "before": null,
+          "after": {
+            "asset": {
+              "path": "models_shared/trained/2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors",
+              "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2"
+            },
+            "base_models": [
+              "sdxl-1.0"
+            ],
+            "category": "style",
+            "id": "trained-2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2",
+            "rotation_weight_milli": 1000,
+            "slot": "style",
+            "status": "active",
+            "strength_milli": {
+              "min": 500,
+              "max": 500,
+              "recommended": 500
+            },
+            "trigger_words": [
+              "itovstill"
+            ]
+          },
+          "authorization": {
+            "decision": {
+              "path": "state/evaluation/decisions/0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json",
+              "sha256": "ba95e4883c37a0b983d6badb35a6283e50a07bc5c41e94875509cce2725dd352"
+            },
+            "strength_milli": 500
+          },
+          "previous_authorization": null,
+          "source_operation": null,
+          "reason": "Explicit activation of the reviewed candidate at the selected strength",
+          "policy": {
+            "version": 1,
+            "activation": "Current complete accepted_for_matrix decision, non-smoke candidate, verified deployment/mapping and one explicitly reviewed nonzero strength.",
+            "retirement": "Set only this entry to quarantined; retain assets and all evidence.",
+            "rollback": "Undo only the latest managed change to this exact entry value. Restoring active status requires the original deployed authorization to pass again."
+          },
+          "eligible": false,
+          "blockers": [
+            "Deployed candidate decision is rejected"
+          ],
+          "limits": "Local explicit catalog policy, not new model-quality evidence or authenticated review. No automatic promotion. Historical transaction replay does not requalify a model. Manual catalog import is a separate explicit operator interface. Process-crash recovery uses the existing journal; power-loss durability and hostile concurrent writes are unqualified.",
+          "operation_id": "5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a",
+          "ok": false,
+          "saved_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\previews\\5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a.json",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "preview"
+            ],
+            "outcome": "refused",
+            "exit_code": 1,
+            "next_action": "Preview only; the catalog has not changed.",
+            "actions": [
+              {
+                "label": "Inspect command options",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "preview",
+                  "--help"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [
+              {
+                "label": "saved_path",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\previews\\5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a.json"
+              },
+              {
+                "label": "input document",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json"
+              }
+            ],
+            "causes": [
+              {
+                "location": "blockers",
+                "detail": [
+                  "Deployed candidate decision is rejected"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "label": "refused-apply",
+        "argv": [
+          "candidate",
+          "apply",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\previews\\5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a.json",
+          "--json"
+        ],
+        "exit_code": 2,
+        "elapsed_ms": 91016,
+        "result": {
+          "ok": false,
+          "error": "Deployed candidate decision is rejected",
+          "error_type": "ValueError",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "apply"
+            ],
+            "outcome": "error",
+            "exit_code": 2,
+            "next_action": "Historical lifecycle integrity does not revalidate current model quality.",
+            "actions": [
+              {
+                "label": "Inspect catalog lifecycle",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "status",
+                  "--config",
+                  "workspace\\itov.toml"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [
+              {
+                "label": "input document",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\previews\\5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a.json"
+              }
+            ],
+            "causes": [
+              {
+                "location": "error",
+                "detail": "Deployed candidate decision is rejected"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "label": "lifecycle-status",
+        "argv": [
+          "candidate",
+          "status",
+          "--json"
+        ],
+        "exit_code": 0,
+        "elapsed_ms": 206,
+        "result": {
+          "scope": "candidate_lifecycle_status",
+          "ok": true,
+          "catalog_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+          "recovery_required": false,
+          "entries": [
+            {
+              "asset": {
+                "path": "models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors",
+                "sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141"
+              },
+              "base_models": [
+                "sdxl-1.0"
+              ],
+              "category": "acceleration",
+              "id": "inference-lcm-a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141",
+              "rotation_weight_milli": 1000,
+              "slot": "lcm",
+              "status": "active",
+              "strength_milli": {
+                "max": 1000,
+                "min": 1000,
+                "recommended": 1000
+              },
+              "trigger_words": []
+            }
+          ],
+          "operations": [],
+          "quality": "Not revalidated; use candidate summary for current deployed evidence",
+          "limits": "Local explicit catalog policy, not new model-quality evidence or authenticated review. No automatic promotion. Historical transaction replay does not requalify a model. Manual catalog import is a separate explicit operator interface. Process-crash recovery uses the existing journal; power-loss durability and hostile concurrent writes are unqualified.",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "status"
+            ],
+            "outcome": "ok",
+            "exit_code": 0,
+            "next_action": "Historical lifecycle integrity does not revalidate current model quality.",
+            "actions": [
+              {
+                "label": "Inspect catalog lifecycle",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "status",
+                  "--config",
+                  "workspace\\itov.toml"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [],
+            "causes": []
+          }
+        }
+      },
+      {
+        "label": "recovery-noop",
+        "argv": [
+          "candidate",
+          "recover",
+          "--json"
+        ],
+        "exit_code": 0,
+        "elapsed_ms": 189,
+        "result": {
+          "scope": "candidate_lifecycle_recovery",
+          "ok": true,
+          "recovery": "not_needed",
+          "catalog_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "recover"
+            ],
+            "outcome": "ok",
+            "exit_code": 0,
+            "next_action": "Historical lifecycle integrity does not revalidate current model quality.",
+            "actions": [
+              {
+                "label": "Inspect catalog lifecycle",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "status",
+                  "--config",
+                  "workspace\\itov.toml"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [],
+            "causes": []
+          }
+        }
+      },
+      {
+        "label": "retained-c04-failed-variance",
+        "argv": [
+          "experiment",
+          "variance-replay",
+          "workspace\\state\\experiments\\plans\\1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1.json",
+          "--report",
+          "workspace\\state\\experiments\\variance\\4ce12568f14f8cf87f7b82710e4437e0d71134632b0d231a6aa007a89e411d8c.json",
+          "--json"
+        ],
+        "exit_code": 1,
+        "elapsed_ms": 105810,
+        "result": {
+          "scope": "experiment_variance_replay",
+          "valid": true,
+          "variance_id": "4ce12568f14f8cf87f7b82710e4437e0d71134632b0d231a6aa007a89e411d8c",
+          "status": "failed",
+          "exact_reproduction": false,
+          "promotion_eligible": false,
+          "limits": "All within-endpoint repetition pairs are measured. Observed ranges are descriptive, not confidence bounds or causal attribution. Tolerances were declared in the experiment; passing them does not establish exact determinism or image quality. Image equality uses encoded file hashes, not a semantic or perceptual score. Failed attempts remain unavailable.",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "experiment",
+              "variance-replay"
+            ],
+            "outcome": "failed",
+            "exit_code": 1,
+            "next_action": "Numerical repetition measurements retain exact-equality failures separately from declared tolerances. Inspect each pair; no quality or causal conclusion follows.",
+            "actions": [
+              {
+                "label": "Inspect command options",
+                "argv": [
+                  "itov",
+                  "experiment",
+                  "variance-replay",
+                  "--help"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [
+              {
+                "label": "input document",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\experiments\\plans\\1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1.json"
+              }
+            ],
+            "causes": []
+          }
+        }
+      }
+    ],
+    "installed": [
+      {
+        "label": "summary-text",
+        "argv": [
+          "candidate",
+          "summary",
+          "workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json"
+        ],
+        "exit_code": 0,
+        "elapsed_ms": 97766,
+        "result": "OK candidate summary (exit 0)\nScope: candidate_summary\nSummary id: 16fc9f70a9c928087d0770023315bb74ab6d53729e32c0ff2124ca7ee4647d89\nDisposition: rejected\nActivation eligible: False\nDecision id: 0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff\nTechnical pass: True\nRequired judgments: {\"fail\": 301, \"pass\": 274, \"unavailable\": 0, \"uncertain\": 181}\nCause (blockers): [\"Deployed candidate decision is rejected\"]\nArtifact (input document): C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json\nLimits: Local explicit catalog policy, not new model-quality evidence or authenticated review. No automatic promotion. Historical transaction replay does not requalify a model. Manual catalog import is a separate explicit operator interface. Process-crash recovery uses the existing journal; power-loss durability and hostile concurrent writes are unqualified.\nNext: Deployment validation is separate from activation eligibility.\n  Inspect command options (After inspecting the result):\n  & 'itov' 'candidate' 'summary' '--help'\n"
+      },
+      {
+        "label": "deployment-json",
+        "argv": [
+          "candidate",
+          "deployment",
+          "workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json",
+          "--save",
+          "--json"
+        ],
+        "exit_code": 0,
+        "elapsed_ms": 96468,
+        "result": {
+          "version": 1,
+          "scope": "candidate_deployment_validation",
+          "decision": {
+            "path": "state/evaluation/decisions/0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json",
+            "sha256": "ba95e4883c37a0b983d6badb35a6283e50a07bc5c41e94875509cce2725dd352"
+          },
+          "decision_id": "0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff",
+          "candidate": {
+            "assessment_id": "d81826bef628140c8f1cba41e01f9cfcc4190fa805d07728a6600cc497401b99",
+            "candidate_id": "60399a05e5b87f2a3c7de57b5c9e54443fcd6186070be1dde2f1574e569d09d6",
+            "entry": {
+              "asset": {
+                "path": "models_shared/trained/2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors",
+                "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2"
+              },
+              "base_models": [
+                "sdxl-1.0"
+              ],
+              "category": "style",
+              "id": "trained-2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2",
+              "rotation_weight_milli": 1000,
+              "slot": "style",
+              "status": "candidate",
+              "strength_milli": {
+                "max": 1000,
+                "min": 500,
+                "recommended": 1000
+              },
+              "trigger_words": [
+                "itovstill"
+              ]
+            },
+            "export": {
+              "alpha_scale_milli": 1000,
+              "bytes": 46621032,
+              "format": "comfy-unet-lora-v1",
+              "limits": "Tensor names changed, payload bytes preserved; runtime acceptance is separate.",
+              "mapping_sha256": "6f9cd278226d1d0ee9906e4da9207e8fb66b8a87d11f2e6b26de85f7fc4c85d7",
+              "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2",
+              "source_sha256": "e64ea2e15a6647cfd755eb6e30a997c8cccd5452c0df0284b59b6f9dc4ebf461",
+              "tensor_payload_sha256": "47ab170156e18028f56692fa3f3dad06270a57bd2938ef868e5ebe8f60e2326e",
+              "tensors": 1120
+            },
+            "plan_id": "26c3cb899dddae04e8f06919642e431742434e61c8e66b5a6a33968a2ae91cf7",
+            "purpose": "training",
+            "result_id": "8d5fa22e00077ab8b35042de4b9ff915952e6fb2c3c363dff739c574c57270fe",
+            "version": 1
+          },
+          "evaluation_plan_id": "24f2e130bdec26c6f48d059e16c990bd91acb32180f72a5e444dd70b425586bf",
+          "mapping_id": "24d9d6e13d031762214fc195e57ee38925da16cba1e6350ce06e0f2e0246afdb",
+          "deployment": {
+            "asset": {
+              "path": "models_shared/trained/2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors",
+              "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2"
+            },
+            "loader_name": "itov_evaluation_2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors"
+          },
+          "runtime": {
+            "devices": [
+              {
+                "index": 0,
+                "name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync",
+                "type": "cuda"
+              }
+            ],
+            "files": [
+              {
+                "bytes": 95082,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\k_diffusion\\sampling.py",
+                "sha256": "a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f"
+              },
+              {
+                "bytes": 26117,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\lora.py",
+                "sha256": "fce6903ca8150611b3f6477c3772bfef0662a2b01747a579ff56b415a44c29bc"
+              },
+              {
+                "bytes": 1970,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\lora_convert.py",
+                "sha256": "6c199c3404828838b5745aafc1b0759566a45287f5c3e9cebd31f248cc179245"
+              },
+              {
+                "bytes": 7220,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\memory_management.py",
+                "sha256": "6497cd57ffb15356824b82ca88f60dc1a4b054361e2e2f2c98b84b42d8765fac"
+              },
+              {
+                "bytes": 75009,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_management.py",
+                "sha256": "28812661915b7081d554f8ed14c7a33a2fe744776281eb5b5760bedd30a38408"
+              },
+              {
+                "bytes": 105135,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_patcher.py",
+                "sha256": "097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c"
+              },
+              {
+                "bytes": 5096,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\sample.py",
+                "sha256": "d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee"
+              },
+              {
+                "bytes": 65846,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\samplers.py",
+                "sha256": "2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae"
+              },
+              {
+                "bytes": 146916,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\comfy\\sd.py",
+                "sha256": "e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec"
+              },
+              {
+                "bytes": 64869,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\execution.py",
+                "sha256": "dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b"
+              },
+              {
+                "bytes": 23745,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\folder_paths.py",
+                "sha256": "a8dae8d0b09c2caafbb7cc2f627d81bd9c299ff1de9c8698e2e32760dde1dc66"
+              },
+              {
+                "bytes": 25024,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+                "sha256": "5a958d6975d8b6096887df7f5160cecf760e5b434a5471bb5f8efaae73bcfd96"
+              },
+              {
+                "bytes": 6938078334,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\checkpoints\\sd_xl_base_1.0.safetensors",
+                "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b"
+              },
+              {
+                "bytes": 46621032,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\models\\loras\\itov_evaluation_2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors",
+                "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2"
+              },
+              {
+                "bytes": 111280,
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\nodes.py",
+                "sha256": "4678d41906fa63780816748b38d9d7bb7364e5504ea4be91b6d8fcb842f5d891"
+              }
+            ],
+            "image_decoder": {
+              "bytes": 222248960,
+              "path": "C:\\Users\\ryanf\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-9.0-full_build\\bin\\ffmpeg.EXE",
+              "sha256": "05f4251bce9293c2ab492cb17ca7724a0ffd0d06c881ba2ee83b82a89c2fc740"
+            },
+            "jobs": 288,
+            "node_schema_sha256": "4fa8ca81a5933a79b15d4b0dd089bb480ea45da189cd640c8deff0f5908e2a97",
+            "profile": "stock-sdxl-evaluation-v1",
+            "runtime": {
+              "argv": [
+                "C:\\Users\\ryanf\\github\\_active\\itov\\AI\\ComfyUI\\ComfyUI_windows_portable\\ComfyUI\\main.py",
+                "--disable-auto-launch",
+                "--listen",
+                "127.0.0.1",
+                "--port",
+                "8188",
+                "--input-directory",
+                "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\input",
+                "--output-directory",
+                "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\output",
+                "--disable-all-custom-nodes",
+                "--user-directory",
+                "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\user",
+                "--temp-directory",
+                "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\vram\\scratch",
+                "--database-url",
+                "sqlite:///C:/Users/ryanf/github/_active/itov/workspace/state/vram/asset-index.sqlite",
+                "--itov-vram-observer-v1"
+              ],
+              "comfyui_version": "0.37.0",
+              "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+              "pytorch_version": "2.13.0+cu130"
+            },
+            "scope": "runtime_schema_and_asset_binding",
+            "server": "http://127.0.0.1:8188",
+            "version": 1,
+            "vram_observer": {
+              "allocator_backend": "cudaMallocAsync",
+              "bootstrap_sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+              "cuda_version": "13.0",
+              "cudnn_version": 92000,
+              "device": {
+                "index": 0,
+                "name": "NVIDIA GeForce RTX 5090",
+                "total_bytes": 34162016256,
+                "uuid": "e2c115fd-447a-8fe0-3257-b17c51919074"
+              },
+              "environment": {
+                "CUBLAS_WORKSPACE_CONFIG": null,
+                "CUDA_MODULE_LOADING": null,
+                "CUDA_VISIBLE_DEVICES": "0",
+                "PYTORCH_ALLOC_CONF": null,
+                "PYTORCH_CUDA_ALLOC_CONF": "backend:cudaMallocAsync"
+              },
+              "identity_sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+              "packages": {
+                "comfy-aimdo": "0.5.5",
+                "comfy-kitchen": "0.2.35",
+                "torch": "2.13.0+cu130"
+              },
+              "pid": 61316,
+              "session_id": "5ab4e9af-b5b7-4391-be88-8b79a5429c53",
+              "started_at": "2026-09-24T23:01:56.559896+00:00",
+              "version": 1
+            }
+          },
+          "technical_pass": true,
+          "disposition": "rejected",
+          "required_judgments": {
+            "fail": 301,
+            "pass": 274,
+            "unavailable": 0,
+            "uncertain": 181
+          },
+          "by_case": {
+            "bicycle-photo": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 5,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 4
+                },
+                "usable_strength": {
+                  "fail": 7,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 2
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 17,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 7
+                },
+                "prompt_adherence": {
+                  "fail": 17,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 7
+                }
+              }
+            },
+            "bird-photo": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 2,
+                  "pass": 7,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 8,
+                  "pass": 15,
+                  "unavailable": 0,
+                  "uncertain": 1
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "color-binding": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 5,
+                  "pass": 4,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 8,
+                  "pass": 1,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 4,
+                  "pass": 20,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 18,
+                  "pass": 3,
+                  "unavailable": 0,
+                  "uncertain": 3
+                }
+              }
+            },
+            "linen-metal": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 6,
+                  "unavailable": 0,
+                  "uncertain": 3
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 19,
+                  "unavailable": 0,
+                  "uncertain": 5
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "matte-gloss": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 3,
+                  "pass": 4,
+                  "unavailable": 0,
+                  "uncertain": 2
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 8,
+                  "pass": 16,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 22,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 2
+                }
+              }
+            },
+            "mountain-photo": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 3,
+                  "pass": 6,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 4,
+                  "pass": 20,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 4,
+                  "pass": 20,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "paper-geometry": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 4,
+                  "unavailable": 0,
+                  "uncertain": 5
+                },
+                "usable_strength": {
+                  "fail": 6,
+                  "pass": 3,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 16,
+                  "unavailable": 0,
+                  "uncertain": 8
+                },
+                "prompt_adherence": {
+                  "fail": 16,
+                  "pass": 8,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "plate-left-vase": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 24,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 20,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 4
+                }
+              }
+            },
+            "single-cup": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 24,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 24
+                }
+              }
+            },
+            "size-binding": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 24,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "three-apples": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 6,
+                  "unavailable": 0,
+                  "uncertain": 3
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 8,
+                  "pass": 16,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            },
+            "vase-and-pears": {
+              "comparisons": {
+                "activation_specificity": {
+                  "fail": 0,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 9
+                },
+                "preservation": {
+                  "fail": 0,
+                  "pass": 9,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "usable_strength": {
+                  "fail": 9,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              },
+              "images": {
+                "image_quality": {
+                  "fail": 0,
+                  "pass": 24,
+                  "unavailable": 0,
+                  "uncertain": 0
+                },
+                "prompt_adherence": {
+                  "fail": 24,
+                  "pass": 0,
+                  "unavailable": 0,
+                  "uncertain": 0
+                }
+              }
+            }
+          },
+          "review_metadata": {
+            "limitations": "Exposed fixed cases, one render per condition, small three-work training selection and known prior failures. Not blind, independent gold labels, statistical validation, a parity experiment or numerical determinism. Oil-style specificity and hidden object details remain uncertain where not visible. No training/tuning or promotion.",
+            "method": "Direct inspection of all 288 images as 36 lossless contact sheets with 512px tiles, two columns plain/trigger and four rows base/0.25/0.5/1.0. Original 512px images 216, 222 and 223 also inspected. All image and matched-comparison judgments retained. Labels and prior baseline failures visible; no optional evaluator invoked. C-02 border screen is unqualified and was not used for quality decisions.",
+            "packet_id": "251821eb1d09fa0ba80259065a4dc58d7d2b632b950a514fe81b6d23468d732e",
+            "reviewer": "Codex assistant",
+            "reviewer_kind": "assistant",
+            "sources": [
+              {
+                "path": "state/verification/phase-c03/protocol-before-inspection.json",
+                "sha256": "fe7c6bb32f05b0049ab44efb0fafc39858131fdd1fc04c31229c376e99a3d873"
+              },
+              {
+                "path": "state/verification/phase-c03/inspection-notes.json",
+                "sha256": "7aae6c12ebe8f140f29c616494b2576e60632ddb1c0127d13cba0e1ba4455861"
+              },
+              {
+                "path": "state/verification/phase-c03/images.json",
+                "sha256": "6d42d8481d0db374159909056a78dd19c387c8a092f4de13e354d0aea48572b2"
+              },
+              {
+                "path": "state/verification/phase-c03/sampler-comparison.json",
+                "sha256": "a01d8e65de822e4035f0164bb448026600435f0e5b7ad3a92f7d8ed814eaa55e"
+              },
+              {
+                "path": "state/verification/phase-c03/baseline-comparison.json",
+                "sha256": "2c645105c47f6823a02a57b77f109cdb243f11b7b0592406f1cf05e540372e38"
+              }
+            ],
+            "version": 1
+          },
+          "reviewed_strengths_milli": [
+            250,
+            500,
+            1000
+          ],
+          "activation_eligible": false,
+          "blockers": [
+            "Deployed candidate decision is rejected"
+          ],
+          "limits": "Local explicit catalog policy, not new model-quality evidence or authenticated review. No automatic promotion. Historical transaction replay does not requalify a model. Manual catalog import is a separate explicit operator interface. Process-crash recovery uses the existing journal; power-loss durability and hostile concurrent writes are unqualified.",
+          "summary_id": "416e8265d1704053d331c2a78a6347a98d092b5dac785623d39bbc2f1a298e89",
+          "saved_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\summaries\\416e8265d1704053d331c2a78a6347a98d092b5dac785623d39bbc2f1a298e89.json",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "deployment"
+            ],
+            "outcome": "ok",
+            "exit_code": 0,
+            "next_action": "Deployment validation is separate from activation eligibility.",
+            "actions": [
+              {
+                "label": "Inspect command options",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "deployment",
+                  "--help"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [
+              {
+                "label": "saved_path",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\summaries\\416e8265d1704053d331c2a78a6347a98d092b5dac785623d39bbc2f1a298e89.json"
+              },
+              {
+                "label": "input document",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json"
+              }
+            ],
+            "causes": [
+              {
+                "location": "blockers",
+                "detail": [
+                  "Deployed candidate decision is rejected"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "label": "refused-preview",
+        "argv": [
+          "candidate",
+          "preview",
+          "workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json",
+          "--strength-milli",
+          "500",
+          "--save",
+          "--json"
+        ],
+        "exit_code": 1,
+        "elapsed_ms": 91844,
+        "result": {
+          "version": 1,
+          "scope": "candidate_lifecycle_preview",
+          "action": "activate",
+          "entry_id": "trained-2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2",
+          "expected_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+          "before": null,
+          "after": {
+            "asset": {
+              "path": "models_shared/trained/2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2.safetensors",
+              "sha256": "2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2"
+            },
+            "base_models": [
+              "sdxl-1.0"
+            ],
+            "category": "style",
+            "id": "trained-2c3c3b56760e1d2ddcb71bdf713b23d32c6c236edb578c423faf476a25badfd2",
+            "rotation_weight_milli": 1000,
+            "slot": "style",
+            "status": "active",
+            "strength_milli": {
+              "min": 500,
+              "max": 500,
+              "recommended": 500
+            },
+            "trigger_words": [
+              "itovstill"
+            ]
+          },
+          "authorization": {
+            "decision": {
+              "path": "state/evaluation/decisions/0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json",
+              "sha256": "ba95e4883c37a0b983d6badb35a6283e50a07bc5c41e94875509cce2725dd352"
+            },
+            "strength_milli": 500
+          },
+          "previous_authorization": null,
+          "source_operation": null,
+          "reason": "Explicit activation of the reviewed candidate at the selected strength",
+          "policy": {
+            "version": 1,
+            "activation": "Current complete accepted_for_matrix decision, non-smoke candidate, verified deployment/mapping and one explicitly reviewed nonzero strength.",
+            "retirement": "Set only this entry to quarantined; retain assets and all evidence.",
+            "rollback": "Undo only the latest managed change to this exact entry value. Restoring active status requires the original deployed authorization to pass again."
+          },
+          "eligible": false,
+          "blockers": [
+            "Deployed candidate decision is rejected"
+          ],
+          "limits": "Local explicit catalog policy, not new model-quality evidence or authenticated review. No automatic promotion. Historical transaction replay does not requalify a model. Manual catalog import is a separate explicit operator interface. Process-crash recovery uses the existing journal; power-loss durability and hostile concurrent writes are unqualified.",
+          "operation_id": "5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a",
+          "ok": false,
+          "saved_path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\previews\\5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a.json",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "preview"
+            ],
+            "outcome": "refused",
+            "exit_code": 1,
+            "next_action": "Preview only; the catalog has not changed.",
+            "actions": [
+              {
+                "label": "Inspect command options",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "preview",
+                  "--help"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [
+              {
+                "label": "saved_path",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\previews\\5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a.json"
+              },
+              {
+                "label": "input document",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\evaluation\\decisions\\0ab0bd418b90ce6f6172149c8dcc4184d3ebb8e46d71a6d6f161619ef36ae4ff.json"
+              }
+            ],
+            "causes": [
+              {
+                "location": "blockers",
+                "detail": [
+                  "Deployed candidate decision is rejected"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "label": "refused-apply",
+        "argv": [
+          "candidate",
+          "apply",
+          "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\previews\\5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a.json",
+          "--json"
+        ],
+        "exit_code": 2,
+        "elapsed_ms": 89766,
+        "result": {
+          "ok": false,
+          "error": "Deployed candidate decision is rejected",
+          "error_type": "ValueError",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "apply"
+            ],
+            "outcome": "error",
+            "exit_code": 2,
+            "next_action": "Historical lifecycle integrity does not revalidate current model quality.",
+            "actions": [
+              {
+                "label": "Inspect catalog lifecycle",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "status",
+                  "--config",
+                  "workspace\\itov.toml"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [
+              {
+                "label": "input document",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\candidates\\previews\\5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a.json"
+              }
+            ],
+            "causes": [
+              {
+                "location": "error",
+                "detail": "Deployed candidate decision is rejected"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "label": "lifecycle-status",
+        "argv": [
+          "candidate",
+          "status",
+          "--json"
+        ],
+        "exit_code": 0,
+        "elapsed_ms": 234,
+        "result": {
+          "scope": "candidate_lifecycle_status",
+          "ok": true,
+          "catalog_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+          "recovery_required": false,
+          "entries": [
+            {
+              "asset": {
+                "path": "models_shared/inference/a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141.safetensors",
+                "sha256": "a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141"
+              },
+              "base_models": [
+                "sdxl-1.0"
+              ],
+              "category": "acceleration",
+              "id": "inference-lcm-a764e6859b6e04047cd761c08ff0cee96413a8e004c9f07707530cd776b19141",
+              "rotation_weight_milli": 1000,
+              "slot": "lcm",
+              "status": "active",
+              "strength_milli": {
+                "max": 1000,
+                "min": 1000,
+                "recommended": 1000
+              },
+              "trigger_words": []
+            }
+          ],
+          "operations": [],
+          "quality": "Not revalidated; use candidate summary for current deployed evidence",
+          "limits": "Local explicit catalog policy, not new model-quality evidence or authenticated review. No automatic promotion. Historical transaction replay does not requalify a model. Manual catalog import is a separate explicit operator interface. Process-crash recovery uses the existing journal; power-loss durability and hostile concurrent writes are unqualified.",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "status"
+            ],
+            "outcome": "ok",
+            "exit_code": 0,
+            "next_action": "Historical lifecycle integrity does not revalidate current model quality.",
+            "actions": [
+              {
+                "label": "Inspect catalog lifecycle",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "status",
+                  "--config",
+                  "workspace\\itov.toml"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [],
+            "causes": []
+          }
+        }
+      },
+      {
+        "label": "recovery-noop",
+        "argv": [
+          "candidate",
+          "recover",
+          "--json"
+        ],
+        "exit_code": 0,
+        "elapsed_ms": 234,
+        "result": {
+          "scope": "candidate_lifecycle_recovery",
+          "ok": true,
+          "recovery": "not_needed",
+          "catalog_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "candidate",
+              "recover"
+            ],
+            "outcome": "ok",
+            "exit_code": 0,
+            "next_action": "Historical lifecycle integrity does not revalidate current model quality.",
+            "actions": [
+              {
+                "label": "Inspect catalog lifecycle",
+                "argv": [
+                  "itov",
+                  "candidate",
+                  "status",
+                  "--config",
+                  "workspace\\itov.toml"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [],
+            "causes": []
+          }
+        }
+      },
+      {
+        "label": "retained-c04-failed-variance",
+        "argv": [
+          "experiment",
+          "variance-replay",
+          "workspace\\state\\experiments\\plans\\1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1.json",
+          "--report",
+          "workspace\\state\\experiments\\variance\\4ce12568f14f8cf87f7b82710e4437e0d71134632b0d231a6aa007a89e411d8c.json",
+          "--json"
+        ],
+        "exit_code": 1,
+        "elapsed_ms": 101516,
+        "result": {
+          "scope": "experiment_variance_replay",
+          "valid": true,
+          "variance_id": "4ce12568f14f8cf87f7b82710e4437e0d71134632b0d231a6aa007a89e411d8c",
+          "status": "failed",
+          "exact_reproduction": false,
+          "promotion_eligible": false,
+          "limits": "All within-endpoint repetition pairs are measured. Observed ranges are descriptive, not confidence bounds or causal attribution. Tolerances were declared in the experiment; passing them does not establish exact determinism or image quality. Image equality uses encoded file hashes, not a semantic or perceptual score. Failed attempts remain unavailable.",
+          "_cli": {
+            "version": 1,
+            "command": [
+              "experiment",
+              "variance-replay"
+            ],
+            "outcome": "failed",
+            "exit_code": 1,
+            "next_action": "Numerical repetition measurements retain exact-equality failures separately from declared tolerances. Inspect each pair; no quality or causal conclusion follows.",
+            "actions": [
+              {
+                "label": "Inspect command options",
+                "argv": [
+                  "itov",
+                  "experiment",
+                  "variance-replay",
+                  "--help"
+                ],
+                "when": "After inspecting the result"
+              }
+            ],
+            "artifacts": [
+              {
+                "label": "input document",
+                "path": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\experiments\\plans\\1192ef70ad6324a7c7ef6efef16187f28f4e02cfea2622049baec511d4d0cbc1.json"
+              }
+            ],
+            "causes": []
+          }
+        }
+      }
+    ]
+  },
+  "package": {
+    "source": {
+      "mode": "source",
+      "module": "C:\\Users\\ryanf\\github\\_active\\itov\\src\\itov\\__init__.py",
+      "python": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]",
+      "commands": 7,
+      "module_hashes": {
+        "itov/assessment_context.py": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1",
+        "itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+        "itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+        "itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+        "itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+        "itov/batch_execution.py": "e1c1788e485c6649d48b2996035d169ff240eb8fcdfd1577700d52719b0a8230",
+        "itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+        "itov/candidate_lifecycle.py": "f611af8d22fb9fa369897bf82b07cffde55d475be9d9feb914ac26d259d540cc",
+        "itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+        "itov/catalog_store.py": "c0063761edfca7f61ca04dfc8a2aaa2bde448156ce9ddb77c2a317a1e25aa516",
+        "itov/checkpoint_tensors.py": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc",
+        "itov/cli.py": "cb9b51e425537b61f83184405bcaa5ebea7c4daefcf14d9e83aa9cf5881c40ad",
+        "itov/client_ownership.py": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73",
+        "itov/cli_output.py": "7b3692d091b1ae4cbabaac23a722262f00a81a05e01a67e130bf0444a79ea956",
+        "itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+        "itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+        "itov/curation.py": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c",
+        "itov/dataset_features.py": "2c6fe67f51aeb800aa9fc5a8cb310498b85b2b43a1ed8be2f8628790cbd824e8",
+        "itov/dataset_freeze.py": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09",
+        "itov/dataset_identity.py": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f",
+        "itov/dataset_images.py": "c49c6ac73ede0d4093c1fb6602285daba5f8ff685746453e30a683a33d710ccf",
+        "itov/dataset_import.py": "386505da9f79d20e50c96e89475a5d0edab686984c5142c686671fab90a21c2e",
+        "itov/dataset_inspection.py": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1",
+        "itov/dataset_manifest.py": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240",
+        "itov/dataset_snapshot.py": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926",
+        "itov/deployed_loader.py": "f0913e39cf84e19bea7cf90b33415a8865a8a858449158f30eaf932c48cfb0cb",
+        "itov/deployed_loader_worker.py": "082244ff1f0fb83d9f0117709499593caaa00ba056fbb5c487c8bf3b60b9335e",
+        "itov/deployed_review.py": "069ac4bb7beba2c3aadd9d8dde1f4ad663f55477b251fa412f49dc71bc7cfbcb",
+        "itov/device.py": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51",
+        "itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+        "itov/evaluation.py": "ff94418347a7ff0468bebd57eb50502be17fcfa751ed4c13c717c27bacb17fd5",
+        "itov/evaluation_cases.py": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033",
+        "itov/evaluation_corpus.py": "74f92dc97277888b42e26331426c0230583833b1f8273c075127834ba1651cb2",
+        "itov/evaluation_runtime.py": "9911b9f6930547b2df8f2cdcb5f05ab0918fedb9e5f0f4569e1e6ef5d5b791f1",
+        "itov/evidence_reads.py": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e",
+        "itov/execution_ownership.py": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33",
+        "itov/execution_store.py": "fb1a2031751b5bbd23c1eadb9cb6e500faf9b5b9d094af675072f288b782eceb",
+        "itov/experiments.py": "ced9bdccefef4a45c826a650ed730cda286cad0387b7b8d95155f3ad427a00f4",
+        "itov/experiment_variance.py": "1caf93861a493f3d6276e36fb5d7fb4b3185d81cb4e43ba4a5347d1c2cc822b8",
+        "itov/image_checks.py": "cc34f6ca912412a521f38fff9bb23df88d5e5909f61c54843b29d71edb714c6c",
+        "itov/image_media.py": "4d98933760364421362a17099df78be07ee9645587ec3f7afae8bcbb0f09ee03",
+        "itov/image_metrics.py": "a04213edc2432988ad9b455877865a5a688134d7cb496010bf104214caaa161d",
+        "itov/inference.py": "abed4f457ee81a40297af7f2d13892b5f7bd29e557bc55aedce1fadd5c724721",
+        "itov/inference_capabilities.py": "fa441ce471d2378e5a829d7b97ec7681cb610ac6dd54b9d510bd2e65e0c5cf4e",
+        "itov/inference_graph.py": "c8265a6caf5fccedb77fe332ac0dcbaec63f82e27de62fc49afee45487109c62",
+        "itov/inference_runtime.py": "c9000ce8e07eb6c7325970de8f1194466f503d9785add9770b2ace34f9e63501",
+        "itov/jobs.py": "d997d0e6a35c4ff6c4c2b42f8877946c1a95d43a6cd6914a256583ea940c63eb",
+        "itov/ledger.py": "cb0f70896fd5825ac712bab81576644a859664ddca0bbdded51dea6b556eeb6b",
+        "itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+        "itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+        "itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+        "itov/owned_jobs.py": "e7ffd20657852bc3895a723acb4c4f214784bcf43ce44f53b1d172e887774b27",
+        "itov/parallel.py": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84",
+        "itov/qualification.py": "73c06b7fe05f1c598658ada6522173f03e874a8e82737c201d65ce9feb748e68",
+        "itov/quality.py": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681",
+        "itov/records.py": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164",
+        "itov/review_records.py": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506",
+        "itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+        "itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+        "itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+        "itov/training.py": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070",
+        "itov/training_checkpoints.py": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193",
+        "itov/training_checkpoint_worker.py": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb",
+        "itov/training_config.py": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f",
+        "itov/training_data.py": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4",
+        "itov/training_optimization.py": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113",
+        "itov/training_records.py": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30",
+        "itov/training_results.py": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01",
+        "itov/training_worker.py": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b",
+        "itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+        "itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+        "itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+        "itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+        "itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+        "itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+        "itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+        "itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85",
+        "itov/__init__.py": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a",
+        "itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+      },
+      "module_count": 79,
+      "readme_exact": true,
+      "network_and_ml_imports_forbidden": true,
+      "candidate_status": "rejected",
+      "catalog_head_unchanged": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+      "preview_id": "5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a",
+      "deployment_summary_id": "416e8265d1704053d331c2a78a6347a98d092b5dac785623d39bbc2f1a298e89",
+      "c04_numerical_status": "failed",
+      "scm_dev_tools": "0.5.0"
+    },
+    "installed": {
+      "mode": "installed",
+      "module": "C:\\Users\\ryanf\\github\\_active\\itov\\.uv-cache\\archive-v0\\n197jQrhO7M6XeeNrjV2c\\Lib\\site-packages\\itov\\__init__.py",
+      "python": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]",
+      "commands": 7,
+      "module_hashes": {
+        "itov/assessment_context.py": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1",
+        "itov/audio.py": "b75d005513050292b2c18f5d9cb0e15bacf002b1cfa348189276d98e19901e1e",
+        "itov/audiovisual.py": "e421dac63fcc30d87aaef1b5fd209306dc2bcd59c873ddd390f0132213d99b19",
+        "itov/audio_media.py": "e8e1a1183df9458c6347097c3c7e52c4ed24188602241ebe652fb721a78f3282",
+        "itov/batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+        "itov/batch_execution.py": "e1c1788e485c6649d48b2996035d169ff240eb8fcdfd1577700d52719b0a8230",
+        "itov/batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+        "itov/candidate_lifecycle.py": "f611af8d22fb9fa369897bf82b07cffde55d475be9d9feb914ac26d259d540cc",
+        "itov/catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+        "itov/catalog_store.py": "c0063761edfca7f61ca04dfc8a2aaa2bde448156ce9ddb77c2a317a1e25aa516",
+        "itov/checkpoint_tensors.py": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc",
+        "itov/cli.py": "cb9b51e425537b61f83184405bcaa5ebea7c4daefcf14d9e83aa9cf5881c40ad",
+        "itov/client_ownership.py": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73",
+        "itov/cli_output.py": "7b3692d091b1ae4cbabaac23a722262f00a81a05e01a67e130bf0444a79ea956",
+        "itov/comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+        "itov/config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+        "itov/curation.py": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c",
+        "itov/dataset_features.py": "2c6fe67f51aeb800aa9fc5a8cb310498b85b2b43a1ed8be2f8628790cbd824e8",
+        "itov/dataset_freeze.py": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09",
+        "itov/dataset_identity.py": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f",
+        "itov/dataset_images.py": "c49c6ac73ede0d4093c1fb6602285daba5f8ff685746453e30a683a33d710ccf",
+        "itov/dataset_import.py": "386505da9f79d20e50c96e89475a5d0edab686984c5142c686671fab90a21c2e",
+        "itov/dataset_inspection.py": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1",
+        "itov/dataset_manifest.py": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240",
+        "itov/dataset_snapshot.py": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926",
+        "itov/deployed_loader.py": "f0913e39cf84e19bea7cf90b33415a8865a8a858449158f30eaf932c48cfb0cb",
+        "itov/deployed_loader_worker.py": "082244ff1f0fb83d9f0117709499593caaa00ba056fbb5c487c8bf3b60b9335e",
+        "itov/deployed_review.py": "069ac4bb7beba2c3aadd9d8dde1f4ad663f55477b251fa412f49dc71bc7cfbcb",
+        "itov/device.py": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51",
+        "itov/doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+        "itov/evaluation.py": "ff94418347a7ff0468bebd57eb50502be17fcfa751ed4c13c717c27bacb17fd5",
+        "itov/evaluation_cases.py": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033",
+        "itov/evaluation_corpus.py": "74f92dc97277888b42e26331426c0230583833b1f8273c075127834ba1651cb2",
+        "itov/evaluation_runtime.py": "9911b9f6930547b2df8f2cdcb5f05ab0918fedb9e5f0f4569e1e6ef5d5b791f1",
+        "itov/evidence_reads.py": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e",
+        "itov/execution_ownership.py": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33",
+        "itov/execution_store.py": "fb1a2031751b5bbd23c1eadb9cb6e500faf9b5b9d094af675072f288b782eceb",
+        "itov/experiments.py": "ced9bdccefef4a45c826a650ed730cda286cad0387b7b8d95155f3ad427a00f4",
+        "itov/experiment_variance.py": "1caf93861a493f3d6276e36fb5d7fb4b3185d81cb4e43ba4a5347d1c2cc822b8",
+        "itov/image_checks.py": "cc34f6ca912412a521f38fff9bb23df88d5e5909f61c54843b29d71edb714c6c",
+        "itov/image_media.py": "4d98933760364421362a17099df78be07ee9645587ec3f7afae8bcbb0f09ee03",
+        "itov/image_metrics.py": "a04213edc2432988ad9b455877865a5a688134d7cb496010bf104214caaa161d",
+        "itov/inference.py": "abed4f457ee81a40297af7f2d13892b5f7bd29e557bc55aedce1fadd5c724721",
+        "itov/inference_capabilities.py": "fa441ce471d2378e5a829d7b97ec7681cb610ac6dd54b9d510bd2e65e0c5cf4e",
+        "itov/inference_graph.py": "c8265a6caf5fccedb77fe332ac0dcbaec63f82e27de62fc49afee45487109c62",
+        "itov/inference_runtime.py": "c9000ce8e07eb6c7325970de8f1194466f503d9785add9770b2ace34f9e63501",
+        "itov/jobs.py": "d997d0e6a35c4ff6c4c2b42f8877946c1a95d43a6cd6914a256583ea940c63eb",
+        "itov/ledger.py": "cb0f70896fd5825ac712bab81576644a859664ddca0bbdded51dea6b556eeb6b",
+        "itov/linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+        "itov/locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+        "itov/media.py": "c9d2f22c0f07a9a74a20101d88cb0e3cb3442179cb5d204fd9882f2c886f02ab",
+        "itov/owned_jobs.py": "e7ffd20657852bc3895a723acb4c4f214784bcf43ce44f53b1d172e887774b27",
+        "itov/parallel.py": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84",
+        "itov/qualification.py": "73c06b7fe05f1c598658ada6522173f03e874a8e82737c201d65ce9feb748e68",
+        "itov/quality.py": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681",
+        "itov/records.py": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164",
+        "itov/review_records.py": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506",
+        "itov/rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+        "itov/runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+        "itov/scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+        "itov/training.py": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070",
+        "itov/training_checkpoints.py": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193",
+        "itov/training_checkpoint_worker.py": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb",
+        "itov/training_config.py": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f",
+        "itov/training_data.py": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4",
+        "itov/training_optimization.py": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113",
+        "itov/training_records.py": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30",
+        "itov/training_results.py": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01",
+        "itov/training_worker.py": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b",
+        "itov/trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+        "itov/video.py": "ae984e8acbddbc71cf24ef9d5953715a4f03838fad5ae63c03b3a594a92ab49f",
+        "itov/vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+        "itov/vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+        "itov/vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+        "itov/windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+        "itov/worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+        "itov/workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85",
+        "itov/__init__.py": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a",
+        "itov/__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+      },
+      "module_count": 79,
+      "readme_exact": true,
+      "network_and_ml_imports_forbidden": true,
+      "candidate_status": "rejected",
+      "catalog_head_unchanged": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+      "preview_id": "5284a0c7b578af0848af4bcc582e7dce79c7d5d76ac571afe12c2bcd7e446f1a",
+      "deployment_summary_id": "416e8265d1704053d331c2a78a6347a98d092b5dac785623d39bbc2f1a298e89",
+      "c04_numerical_status": "failed",
+      "scm_dev_tools": null
+    },
+    "wheel": {
+      "path": "workspace/state/verification/phase-c05/dist-qualified/itov-0.13.1-py3-none-any.whl",
+      "sha256": "8997d4b4c213ab0554fabbbafbaf8bb2850c11e6a60976c4868d4f1c8046bb52",
+      "bytes": 249286
+    },
+    "sdist": {
+      "path": "workspace/state/verification/phase-c05/dist-qualified/itov-0.13.1.tar.gz",
+      "sha256": "0c7399b37a739a133e2bcc95d844c79d32f1cabf6752fdb9f9abdac95aa77850",
+      "bytes": 204136
+    }
+  },
+  "process_crash_fixtures": [
+    {
+      "workspace": "workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser0",
+      "head": "cc076e1e50c5150008adf181654fde74796689e4db2022fbe24394f8af2f4c16",
+      "last_action": "candidate_activate",
+      "status": "active",
+      "events": 2,
+      "operation": {
+        "path": "C:/Users/ryanf/github/_active/itov/workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser0/workspace/state/candidates/previews/84dd84f36e4c5bfc0df44a095da78932ed61d3f608e438db173f36c34198db7d.json",
+        "sha256": "536ec40a9389d5865032803ec9e33954be7b96d924ddc7f421f2f901900e3b87",
+        "bytes": 1834
+      }
+    },
+    {
+      "workspace": "workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser1",
+      "head": "f36959116609b0445b9cc1617f56e078bfd27ed348f755c920187323a059d51e",
+      "last_action": "candidate_activate",
+      "status": "active",
+      "events": 2,
+      "operation": {
+        "path": "C:/Users/ryanf/github/_active/itov/workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser1/workspace/state/candidates/previews/945e6887a40e238130e4f27b58bb2d2bb9565ad6c9d0f9282560d0c8a0d4c9f3.json",
+        "sha256": "9f5de6e4e418c93555febd9258c41d465ff5bb653e309f53eb8e5656fb759bc6",
+        "bytes": 1834
+      }
+    },
+    {
+      "workspace": "workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser2",
+      "head": "19c5f5adfef9e9a93fb58dbe82552aef30a393631c5c1d8d732366940afe3d61",
+      "last_action": "candidate_activate",
+      "status": "active",
+      "events": 2,
+      "operation": {
+        "path": "C:/Users/ryanf/github/_active/itov/workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser2/workspace/state/candidates/previews/d2c41fea52b1207ef50aaf4f20f57ab7634418b13f11f9ba135ebcf9f0eac9d1.json",
+        "sha256": "634da5005e632264d92c68edebd2516c796ea1344978bac14737ac4fd84c32f2",
+        "bytes": 1834
+      }
+    },
+    {
+      "workspace": "workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser3",
+      "head": "81399c9cc79af691f3b71c9be2d73a7baf500022c3cedcc3f33fd6ac1011bce1",
+      "last_action": "candidate_retire",
+      "status": "quarantined",
+      "events": 3,
+      "operation": {
+        "path": "C:/Users/ryanf/github/_active/itov/workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser3/workspace/state/candidates/previews/fc164aea33112fa498371abcc813a3bdfbef3f2ba4e8b261fc1c90a13b22873b.json",
+        "sha256": "d2ed911888d590ac4cdf7e9a643057b320d20ff7c3d40f397d3d0def9a0e7ef1",
+        "bytes": 2140
+      }
+    },
+    {
+      "workspace": "workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser4",
+      "head": "2448dbf52e5b802a1ca739398f59ff5b257b30c11c90b22c780f159ba43763d8",
+      "last_action": "candidate_retire",
+      "status": "quarantined",
+      "events": 3,
+      "operation": {
+        "path": "C:/Users/ryanf/github/_active/itov/workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser4/workspace/state/candidates/previews/63796663afc4862279fc736cc13d7d582c4cde7b82a45d9a6ffa3875a5576181.json",
+        "sha256": "385d82aee54e6455894521fd813c55db48b341b425c7bc9d8d1533b36bc216a6",
+        "bytes": 2140
+      }
+    },
+    {
+      "workspace": "workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser5",
+      "head": "95d83c5e3323a3e5bd99d44d2af319d43c6b52964ccd9dcda6202ab927e401f9",
+      "last_action": "candidate_retire",
+      "status": "quarantined",
+      "events": 3,
+      "operation": {
+        "path": "C:/Users/ryanf/github/_active/itov/workspace/state/verification/phase-c05/pytest-installed-qualified/test_real_process_death_preser5/workspace/state/candidates/previews/76840f265c91f6900d7b5b6096389bca624b8ce726052e66b2dbc6298faa909a.json",
+        "sha256": "07e186508ae42371fbf3ec2b8d7cc36ad8c61b02b02300e03936ed76e7371309",
+        "bytes": 2140
+      }
+    }
+  ],
+  "preservation": {
+    "historical_files_unchanged": 1508,
+    "catalog_head_unchanged": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+    "scm_dev_tools": "0.5.0",
+    "candidate_status": "rejected",
+    "scope": "Prior C-04 preservation plus current model training, experiment, deployed evaluation and owned job records; not all historical verification fixtures."
+  },
+  "retained_failures": [
+    {
+      "cause": "Initial focused command named a nonexistent test file; no tests ran.",
+      "log": {
+        "path": "workspace/state/verification/phase-c05/focused-01.log",
+        "sha256": "2e1a0436d2c666d1b396ca97655cf22275a62dabff17c09fd343a0c8aa781222",
+        "bytes": 89
+      }
+    },
+    {
+      "cause": "Online dependency resolution was blocked by the sandbox network; the cached offline install succeeded.",
+      "log": {
+        "path": "workspace/state/verification/phase-c05/installed.log",
+        "sha256": "42ee5d541e4a7628813b0f33f8744ac0b489323faaeb6e6dd9d68d8b77f6a4d0",
+        "bytes": 367
+      }
+    },
+    {
+      "cause": "Verification harness expected an underscore instead of the human-readable space in the text label. The command itself returned valid rejection.",
+      "log": {
+        "path": "workspace/state/verification/phase-c05/source-public-01.log",
+        "sha256": "4a8bb10c05840b18bb277461616757218a4f24a2326ed01d3cb5bcb7c03c9d58",
+        "bytes": 1533
+      }
+    },
+    {
+      "cause": "Same-version wheel path reused a stale uv cached package; malformed v2 action regression exposed old ledger code. Built wheel matched source. Distinct artifact path plus explicit reinstall passed all 201 checks.",
+      "log": {
+        "path": "workspace/state/verification/phase-c05/installed-final-02.log",
+        "sha256": "7194e99e33af827f549c2c932725b24c2c7412756cc1e69fc0021e060e89628d",
+        "bytes": 4679
+      }
+    }
+  ],
+  "policy": "Fresh complete accepted_for_matrix deployed decision, training purpose and one reviewed nonzero strength. Retirement quarantines. Rollback changes only one entry; restoring active status freshly validates original authorization. Legacy training-only apply cannot bypass deployed review.",
+  "limits": "Successful activation/retirement/rollback and forced process-death qualification use synthetic runtime/loader fixtures, with production review, decision, evidence and catalog gates. Real deployed evidence remains rejected; no actual model activation, new training/rendering, tuning, release or Git publication. Historical replay does not requalify current model quality. Power-loss durability, hostile concurrent writes, remote filesystems, general model quality, numerical determinism and the end-to-end application remain unqualified.",
+  "next": "D-01"
+}

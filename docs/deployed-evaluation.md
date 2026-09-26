@@ -24,7 +24,7 @@ After complete replay, use [`checks packet`](image-checks.md) for versioned arti
 }
 ```
 
-The supported graph uses the training checkpoint, stock `LoraLoaderModelOnly`, one image per job, explicit `dpmpp_2m`/`karras`, 1–50 steps, CFG 0.001–15, adapter strength 0.001–1 and dimensions 512–1024 in multiples of 64. Only the 512px/20-step/CFG-7/strength-1 pilot has actual model evidence. Other accepted numeric settings have validation/protocol coverage, not a broad quality or capacity qualification. FFmpeg must be on PATH for bounded PNG decoding; the core CLI does not import an ML framework.
+The supported graph uses the training checkpoint, stock `LoraLoaderModelOnly`, one image per job, explicit `dpmpp_2m`/`karras`, 1–50 steps, CFG 0.001–15, adapter strength 0.001–1 and dimensions 512–1024 in multiples of 64. The [C-03 complete review](deployed-candidate-review-20260924.md) provides actual 512px/20-step/CFG-7 evidence at strengths 0.25, 0.5 and 1.0; the candidate is rejected on quality. Other accepted numeric settings have validation/protocol coverage, not a broad quality or capacity qualification. FFmpeg must be on PATH for bounded PNG decoding; the core CLI does not import an ML framework.
 
 Start the configured stock server with `itov server start`, or inspect its exact argument list with `itov server start --print-command`. Custom nodes must be disabled and the server arguments must match the configured runtime command exactly. Do not replace loaded runtime/model files during a comparison; restart the server before planning after such changes.
 
