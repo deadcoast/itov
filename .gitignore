@@ -26,5 +26,5 @@ __pycache__/
 /output/pdf/
 /tmp/pdfs/
 
-# sensitive docs
+# ignored docs
 docs/design_spec/scene_templates/sensitive/
