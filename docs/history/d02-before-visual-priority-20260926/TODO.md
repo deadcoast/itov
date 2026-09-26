@@ -1,0 +1,87 @@
+# Development TODO
+
+Updated during D-02 extended media development.
+
+**Product status: incomplete.** ITOV has useful low-level protocols and narrowly exercised media/training paths. It does not yet provide a cohesive, broadly qualified generation, training, evaluation and discovery application. Earlier stage checkmarks describe prototype increments, not completion of those product capabilities.
+
+The mandatory independent-human review gate is shelved. The assistant owns testing, visual inspection, evidence collection and reasoned quality decisions. Failed or uncertain results remain failed or uncertain. The current curated candidate has object-count/regression failures and unresolved trigger specificity; it is not accepted for production.
+
+Active task: **D-02: extended image-to-video and audio/A/V workflows**. Implementation, longer runtime trials, cancellation, package checks and all-frame review are recorded in the [D-02 verification](docs/d02-media-verification-20260925.md). The [playback continuation](docs/d02-playback-verification-20260926.md) verifies full browser playback of all six outputs and successful authorized audio delivery. **Perceptual playback/listening inspection remains incomplete**: the renderer supplies no auditory input to the assistant, and browser telemetry does not establish perceptual quality. The 121-frame clip reproduces the unrequested-hand defect; quality is not accepted. D-03 has not started. D-01 delivers [installed workspace navigation](docs/workspace-workflow.md), packaged neutral inputs, HEAD-bound requests and retained optional dependency diagnostics. Its [verification](docs/d01-workflow-verification-20260925.md) includes a fresh installed session, timeout recovery, offline replay, final package parity and preserved candidate rejection. C-05 delivers [candidate lifecycle commands](docs/candidate-lifecycle.md) with fresh deployed-decision policy, atomic lineage, explicit retirement, targeted rollback and journal recovery. [Verification](docs/evidence/phase-c05-verification-20260925.json) distinguishes synthetic activation/crash fixtures from actual rejected-candidate refusal. The real catalog remains unchanged. C-04 completed six training repetitions, 18 updates and direct inspection of 108 training plus 64 deployed images. Its [investigation](docs/c04-investigation-20260924.md) rejects both new endpoints and retains the existing candidate rejection: four of six numerical pairs fail the declared tolerance, two reproduce exactly, and neither tested resolution/strength change resolves the required cases. The [final verification](docs/evidence/phase-c04-verification-20260924.json) separates implementation, runtime, numerical and quality outcomes. Numerical causes and intended trigger specificity remain unresolved. C-03 completed all 288 deployed conditions, verified all 1,120 exported tensors against 560 loader targets, inspected every image and recorded all 108 matched strength comparisons. The [deployed candidate review](docs/deployed-candidate-review-20260924.md) rejects the candidate for missing objects, count/layout failures and regressions; intended trigger specificity remains unestablished. [Verification](docs/evidence/phase-c03-verification-20260924.json) separates successful execution/mapping/package checks from adverse quality judgments. All 72 new base controls exactly match C-01's decoded pixels in this bounded cross-session observation. C-01's original 7 passing, 52 failing and 13 uncertain image observations remain unchanged. [C-02 calibration](docs/image-check-calibration-20260924.md) still retains 6/6 missed natural borders and 144 unavailable semantic predictions; its screen remains unqualified. No model was accepted or promoted.
+
+A-01 through A-06 and B-01 through B-05 are delivered within their documented scope and recorded in [CHANGELOG.md](CHANGELOG.md). [Experiment manifests](docs/training-experiments.md) preregister hypotheses, independent checkpoint endpoints, repetitions, budgets and frozen case decisions. [B-05 verification](docs/evidence/phase-b05-verification-20260924.json) covers 1,299 source and 1,299 installed tests, four actual attempts and twelve optimizer updates. Both endpoints and all four repetitions were [rejected on quality evidence](docs/training-experiment-trial-20260924.md). **Exact numerical reproduction failed** despite matching sample/noise/rate order and RNG; all nine adapter images differed per endpoint. The workflow reproduces the declared execution and records unsuccessful outcomes; it does not establish numerical determinism or a clean causal duration effect. C-04 measured the new repetition range and retained failed exact/tolerance outcomes; numerical causality remains unqualified. The selected two training works and one validation work do not establish corpus adequacy or improved learning. The previous candidate remains rejected. Execution remains cooperative Windows/single-local-GPU ownership. The [source audit](docs/development-audit-20260922.md) explains why the remaining tasks are necessary. The [previous TODO](docs/history/TODO-20260922-stage-prototypes.md) remains a historical snapshot, not the active plan.
+
+## How work is tracked
+
+- Keep one phase active and work dependency-first. Record newly found defects under the affected task.
+- A task needs a usable implementation, meaningful failure/recovery checks and the evidence specified below before it moves to the changelog. A successful example or a test count alone does not finish a capability.
+- Report implementation status, actual runtime behavior and measured/observed quality separately. State unresolved defects before describing the next stage.
+- Preserve failed runs, source assets, user changes and historical evidence. Use new identities for changed datasets, experiments and reports.
+- Integrate delivered behavior into supported commands and tracked documentation. Local investigation scripts are temporary tooling, not the finished feature.
+- Continue ordinary development and testing autonomously. Ask for information only where a decision genuinely depends on the user's intent or unavailable input.
+
+## Phase map
+
+| Phase | Status | Product outcome | Exit evidence |
+| --- | --- | --- | --- |
+| A. Execution and integration foundations | **Delivered within the documented supported scope** | One coherent path from declared inputs through owned execution, validated artifacts and recoverable state | Supported commands exercise success, bad artifacts, interruption, stale inputs and replay across the affected execution paths |
+| B. Curated data and durable training | **Delivered within the documented bounded scope; numerical determinism unqualified** | Reproducible data preparation and inspectable training experiments with useful restart/checkpoint behavior | Declared data rebuild, split checks, checkpoint/restart evidence and repeated model experiments; failed exact reproduction and quality outcomes retained |
+| C. Autonomous evaluation and improvement | **C-01–C-05 delivered within bounded scopes; quality failures retained** | Repeatable, evidence-backed decisions about quality, activation and regressions | Frozen independent cases, complete deployed-runtime coverage, calibrated checks, assistant inspection and a recorded candidate disposition |
+| D. End-to-end application and operator workflow | D-01 delivered; D-02 active, browser playback passed; perceptual review pending | Usable image/video/audio workflows and coherent diagnostics rather than disconnected command fragments | Representative end-to-end sessions, interruption/recovery, clean installation and documented known limits |
+| E. Discovery, lookup and scheduled curation | Backlog; original Stage 12 | Controlled acquisition, searchable lineage and repeatable unattended cycles | Bounded source adapters, snapshot-consistent queries, schedule ownership, recovery and qualified promotion/retirement policy |
+
+## Phase A — execution and integration foundations
+
+Delivered A-01 through A-06 have moved to the changelog. The [state/recovery contract](docs/training-result-states.md), [deployed evaluation runbook](docs/deployed-evaluation.md), [shared ownership contract](docs/execution-ownership.md), [candidate inference runbook](docs/candidate-inference.md), [record/freshness contract](docs/assessment-records.md) and [operator runbook](docs/operator-runbook.md) describe their supported boundaries. Historical records remain unchanged. These deliver the six bounded Phase A tasks; they do not establish model-quality acceptance, arbitrary runtime/device support or the end-to-end product requirements in B–E.
+
+## Phase B — curated data and durable training
+
+B-01 through B-05 have moved to the changelog. The [import/recovery contract](docs/dataset-import.md) covers declared inputs, full decode/transform receipts and complete-bundle publication. The [review/freeze contract](docs/dataset-review.md) retains all 28 pilot pairs, exclusions, unresolved attribution and exact selected captions/splits. Stable provider/local identifiers constrain work/creator leakage; heuristic distances do not prove perceptual independence. [Configured training](docs/training-configuration.md) supports micro-batch/accumulation pairs 1/1, 1/2 and 2/1, sequential/shuffled epochs, constant/warmup-decay rates and explicit validation cadence within the existing 512px/rank-4/8 bounds. [V4 checkpoints](docs/training-checkpoints.md) add complete optimizer/RNG bundles and compatible continuation at committed update boundaries. [Experiments](docs/training-experiments.md) bind endpoint repetitions and loss-independent quality decisions to an explicit budget and protocol. Historical v3 step events remain diagnostics. Live acquisition remains E-02; this three-work selection and its short trials do not establish a useful corpus, numerical determinism or model quality.
+
+The B-05 campaign executed its declared repetitions and rejected every checkpoint against frozen cases. Its exact numerical reproduction check failed and remains visible. The delivered scope is experiment management, bounded repeated execution and evidence-backed checkpoint disposition, not deterministic GPU training or a successful learned model.
+
+## Phase C — autonomous evaluation and improvement
+
+C-01 through C-05 have moved to the changelog. Its [corpus workflow](docs/evaluation-corpus.md) preserves legacy failures, freezes all seven coverage axes and records complete base-model observations. Broader cases expose collapsed objects, utensil/fruit substitutions, repetition, framing and visibility failures before adapter application. Declared coverage and caption exclusion do not prove semantic independence or corpus sufficiency. The seven held-out prompts remain excluded from subsequent training/tuning; baseline exposure and future contamination must remain explicit.
+
+C-05 adds [summary, deployment validation, policy preview, activation, retirement and rollback](docs/candidate-lifecycle.md). Stale or rejected decisions cannot activate; interrupted changes recover through the same policy. Rollback preserves later unrelated entries and revalidates authorization before restoring active status. The current candidate is rejected; no real model activation occurred.
+
+C-02's artifact measurements and evaluator exchange are delivered within their documented scope. Its initial border screen missed all six observed natural borders and two constructed bordered controls. Keep those failures; any future detector revision requires qualification on fresh cases before use as a filter. C-04 made no detector change. Optional semantic evaluator performance remains unavailable. C-03 completed direct assistant inspection of its entire matrix; future candidates still require complete evidence. This calibration reused exposed images and did not create an independent model holdout.
+
+C-04 delivered [preregistered numerical reports and replay](docs/experiment-variance.md),
+the frozen data/tokenizer audit and its bounded failure investigation. All six new
+members completed but failed case review. Deployed inspection retained 56 adherence
+failures, eight passes and 16 uncertain activation comparisons. Increasing resolution
+added objects and turned a passing geometry seed into a failing one; lower strength
+did not recover the missing objects. These findings complete the investigation, not
+model acceptance, numerical determinism or the end-to-end application. The seven
+C-01 holdouts remain unused by C-04. C-05 preserves rejection and refuses stale
+lifecycle evidence; technical success does not confer activation approval.
+
+## Phase D — end-to-end application and operator workflow
+
+D-01 has moved to the changelog. The [workspace contract](docs/workspace-workflow.md) and [installed operator runbook](docs/operator-runbook.md) connect supported commands without source-only startup helpers. Recorded-state inventory does not revalidate current artifacts or model quality. Fresh installed verification completed neutral image I/O; broader media behavior and provisioning remain below.
+
+| ID | Status | Work | Acceptance evidence |
+| --- | --- | --- | --- |
+| D-02 | Active; implementation/technical playback verified, perceptual review pending; D-01 | Develop image-to-video and audio/A/V beyond the short proof runs: duration/configuration support, exact source lineage, cancellation/recovery and downstream artifact contracts. See the [development contract](docs/extended-media.md). | Representative longer media tasks, full playback/frame/audio inspection, preserved error cases and measured resources. The existing unrequested-hand case remains a regression input. |
+| D-03 | Open; D-02 | Implement objective audio/visual quality checks appropriate to the selected models and inspect listening/semantic synchronization. Reconcile the original voice/LTX design separately before adding its unimplemented capabilities. | Task-specific scorecards, actual audio/video inspection and declared limitations. Mux timing alone does not establish semantic or lip synchronization. |
+| D-04 | Open; A-03/D-02 | Extend workload measurement/admission and cancellation across supported media instead of generalizing the two-worker audio trial. | Repeated identity-bound observations, pressure/refusal cases, cross-command contention and actual overlap where supported. No unmeasured speedup/capacity claim. |
+| D-05 | Open; D-01–D-04 | Finish clean-install/update behavior, optional ML provisioning, configuration migration, backups/restores and operator documentation. Profile and address repeated I/O/latency bottlenecks. | Installed-package end-to-end verification and recovery exercises, measured command costs and a candid supported-capability matrix. |
+
+C-01 retained a Windows `WinError 5` while replacing an owned job record after server acceptance. Public resume reconciled that request and finished without an extra completed render. The contending process is undetermined; transient sharing-failure hardening and repeated validation cost remain D-05 work. Preserve the [paused/resumed evidence](docs/evidence/phase-c01-verification-20260924.json).
+
+## Phase E — discovery and scheduling backlog
+
+- [ ] E-01: Reconcile original Parts 7–10 and 12.1–12.4 against the implemented contracts before importing their example algorithms or performance claims.
+- [ ] E-02: Add bounded source acquisition, rights/provenance retention, download continuation and quarantine with per-provider failure handling.
+- [ ] E-03: Build snapshot-consistent reverse lookup over assets, compatibility, triggers, lineage and candidate decisions; read-only queries must report stale/missing state.
+- [ ] E-04: Implement phrase-bank constraints and versioned curation with explicit infeasibility/relaxation reports and reproducible sampling.
+- [ ] E-05: Add owned scheduled cycles with budgets, idempotency, interruption recovery and policy-driven candidate handling; ordinary development does not require a human review gate.
+
+## Existing evidence and unresolved dependencies
+
+The changelog retains the implemented protocols, scoped test runs, real media/training trials and corrections from the old stage plan. The prototype evidence is useful regression material. It does not close the phases above.
+
+Continue using the existing uv environments, pinned model files, ComfyUI installation and repository-local caches. Keep the large installer, downloaded models and generated workspace out of Git. Recheck current device/host memory before new model work. Preserve SCM 0.5.0 and unrelated workspace changes.
+
+The public-domain dataset choice is settled. An independent human review is no longer a dependency. Open requirements are engineering work and better evaluation/data evidence: original REQ-08/10/15 (media quality/activation), REQ-11/12/14/19 (resource/runtime scope), REQ-17 (phrase balancing), and REQ-18 (curated quality) map to the phases above. Earlier requirements marked satisfied only for a prototype retain that narrower evidence scope.

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "date": "2026-09-26",
+  "task": "D-02",
+  "decision": "User reprioritized usable images and silent image-to-video; all audio/A/V development deferred until explicitly reprioritized.",
+  "status": "active_visual_operability_audio_deferred",
+  "task_complete": false,
+  "active": "D-02.1 usable base image generation",
+  "next": "D-02.2 usable silent image-to-video",
+  "audio_is_completion_gate": false,
+  "audio_review_complete": false,
+  "model_quality_accepted": false,
+  "supersedes": {
+    "receipt": "docs/evidence/phase-d02-playback-verification-20260926.json",
+    "sha256": "14c7b85ea3d2e870d8de688de3fd91ae4870b433d5111eed1dcd75a2296236f5",
+    "scope": "Current task priority and audio completion dependency only; prior observations and failures remain unchanged."
+  },
+  "historical_planning_documents": {
+    "TODO.md": {
+      "snapshot": "docs/history/d02-before-visual-priority-20260926/TODO.md",
+      "bytes": 17149,
+      "sha256": "6688bc6c1c56bba70e5eb55f7c5d30b3062c8295a7d81458c73a19bc66edf6a1"
+    },
+    "CHANGELOG.md": {
+      "snapshot": "docs/history/d02-before-visual-priority-20260926/CHANGELOG.md",
+      "bytes": 94652,
+      "sha256": "4030c795421bed7b61d4c6312102a1410371b27635c1b731e79d1fcd9aa2d523"
+    },
+    "docs/extended-media.md": {
+      "snapshot": "docs/history/d02-before-visual-priority-20260926/extended-media.md",
+      "bytes": 8970,
+      "sha256": "4c896e7167ab1f7e604117830c9caf5d6cc3e1a59aeb54ddd29c9afc4fbb1cfa"
+    }
+  },
+  "validation": {
+    "prior_receipt_evidence_entries_preserved": 13,
+    "original_d02_evidence_files_unchanged": 143,
+    "source_modules_unchanged": 86,
+    "readme_unchanged": true,
+    "local_document_links_checked": 186,
+    "new_model_jobs": 0,
+    "source_tests_rerun": false,
+    "reason": "Priority and documentation change only; source, packages and media unchanged."
+  },
+  "documents": {
+    "TODO.md": {
+      "bytes": 18735,
+      "sha256": "21dcb920f5a94d29b766112d8ad145b3c76eff16f32f95d7849b78648cc46253"
+    },
+    "CHANGELOG.md": {
+      "bytes": 95476,
+      "sha256": "6f46f9e49723ddf75584cb21d3ef3fd237e3098edbf85ffc23e75ffae9500b0a"
+    },
+    "docs/extended-media.md": {
+      "bytes": 9367,
+      "sha256": "f0e7ae6d5e2c2e6b3d5107db296005edd0d2de890d1eb2c0ad69105e983d7437"
+    },
+    "docs/operator-runbook.md": {
+      "bytes": 24020,
+      "sha256": "f22efcfc330160ba5e4338e95f61d9627b6a8c6bf25444c3e2d2a02ed2827808"
+    },
+    "docs/audio-and-av.md": {
+      "bytes": 9879,
+      "sha256": "a3047ff0eedac3d0271ccfd67f13b48f2a5dda858730444c9fff02d53594e1d0"
+    },
+    "docs/visual-development-priority-20260926.md": {
+      "bytes": 4318,
+      "sha256": "48f811f4072a5fb3ebf245392b16d570dd70f62e8101a5b2af0955dd67cf8002"
+    }
+  }
+}

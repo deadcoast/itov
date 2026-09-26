@@ -1,14 +1,18 @@
 # Extended media workflow (D-02)
 
-Development contract: D-02 is active. Completion requires implementation,
-failure/recovery tests, installed-package checks and actual longer media inspection.
-Existing Stage 7/8 files and the unrequested-hand regression remain unchanged.
+Development contract: D-02 is active for image and silent image-to-video
+operability. The user's [2026-09-26 priority change](visual-development-priority-20260926.md)
+defers all audio/A/V development and listening gates. Work first on a usable base
+image workflow, then subject-preserving video with requested motion. Existing
+Stage 7/8 files and the unrequested-hand regression remain unchanged.
 
 The [D-02 verification](d02-media-verification-20260925.md) records completed
 implementation, longer runtime trials and all-frame inspection. The
 [playback continuation](d02-playback-verification-20260926.md) records complete
-browser playback of all six outputs. Perceptual playback/listening review remains
-incomplete; D-02 is not closed.
+browser playback of all six outputs. Visual quality remains unaccepted; D-02 is
+not closed. Unfinished audio/listening work is deferred and no longer blocks
+visual development. The audio/A/V contracts below document retained implementation,
+not the active development priority.
 
 ## Design
 
@@ -52,9 +56,10 @@ publication; failed and interrupted attempts remain available.
   duplication. Cancellation must not erase failure evidence or reserved seeds.
 - Test longer generated FFmpeg fixtures, exact offset/trim/pad, replay and changed
   source/publication boundaries, including process interruption.
-- Run longer pinned video/audio jobs sequentially, retain resource samples, inspect
-  every frame and the full audio/A/V playback, and include the old hand regression.
-  Separate technical acceptance from prompt/visual/listening observations.
+- Run bounded image and silent video comparisons, retain resource samples, inspect
+  every image/frame and complete video playback, and include the old hand regression.
+  Separate technical acceptance from prompt/visual judgments. Audio generation,
+  listening and A/V review are deferred under the current priority.
 - Verify the final installed wheel from explicit paths, package/source parity,
   scoped tests, lint and historical preservation before closing D-02.
 

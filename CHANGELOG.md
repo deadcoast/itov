@@ -4,6 +4,17 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-26 — user-facing training pipeline added as priority three
+
+- Added D-02.3 after base image and silent image-to-video operation: a graphical reference-media section, per-item descriptions, training presets, progress, checkpoint recovery and separate test-prompt previews. The [requirements](docs/training-workspace-requirements.md) specify the installed workflow and failure/recovery evidence needed.
+- Retained the existing image LoRA backend as the integration starting point; video training needs separately implemented and qualified backend/data support. This entry records requested scope, not an implemented interface or qualified training quality. Audio remains deferred.
+
+### 2026-09-26 — visual operation takes priority; audio deferred
+
+- Redirected D-02 to usable base image generation first, then silent image-to-video subject preservation and requested motion. The [priority decision](docs/visual-development-priority-20260926.md) and TODO name these as the active work; current model failures remain unresolved.
+- Deferred all audio/A/V development, dedicated generation/listening work and synchronization/voice features until explicitly reprioritized. Unfinished audio review no longer blocks visual development or acceptance. Existing commands and historical evidence remain intact.
+- Preserved exact snapshots of the three planning documents bound by the previous playback receipt before changing their priorities. This scope correction claims no model improvement or D-02 completion.
+
 ### 2026-09-26 — D-02 browser playback verified; perceptual review open
 
 - Used the installed Playwright/Chromium browser to play all six retained media outputs from start to finish. All 404 video/A/V frames were presented with zero dropped or corrupted frames; audio tracks decoded, and no media errors or stalls occurred. Both temporary browser and loopback server were closed.

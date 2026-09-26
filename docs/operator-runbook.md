@@ -1,5 +1,14 @@
 # ITOV operator runbook
 
+Current development order is [usable images, silent image-to-video, then a stable
+training workspace](visual-development-priority-20260926.md). The planned
+[training interface](training-workspace-requirements.md) will provide reference
+image uploads, descriptions, training/recovery and result previews; it is not yet
+implemented.
+Audio/A/V generation, listening and synchronization work are deferred; existing
+audio command documentation is retained for reference and is not a required step
+in the visual workflow.
+
 This is the supported command sequence for the current Windows, single-local-NVIDIA-GPU implementation. It covers a reproducible image-I/O session, model inference, training assessment and deployed evaluation, with one status/recovery contract. It does not install ComfyUI/models, acquire a training corpus or establish useful model quality. Those remain explicit prerequisites and later development work. The current still-life candidate remains **rejected**.
 
 ## Read a response

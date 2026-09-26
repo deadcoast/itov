@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "date": "2026-09-26",
+  "task": "D-02.3",
+  "status": "planned_third_priority",
+  "user_request": "Create an easy-to-use stable training pipeline with reference image input and text descriptions of the image or video.",
+  "priority_order": [
+    "D-02.1 usable image generation",
+    "D-02.2 usable silent image-to-video",
+    "D-02.3 usable stable training workspace"
+  ],
+  "training_interface_implemented": false,
+  "video_training_implemented": false,
+  "existing_training_backend": "Bounded SDXL image LoRA with dataset and checkpoint/recovery contracts",
+  "audio_deferred": true,
+  "previous_priority_receipt": {
+    "path": "docs/evidence/phase-d02-visual-priority-20260926.json",
+    "sha256": "29f6db088cf739c774568cdd1a3cfc398327c1d6fe80c78f22924badaa2a8f9f"
+  },
+  "historical_planning_documents": {
+    "TODO.md": {
+      "snapshot": "docs/history/d02-before-training-priority-20260926/TODO.md",
+      "bytes": 18735,
+      "sha256": "21dcb920f5a94d29b766112d8ad145b3c76eff16f32f95d7849b78648cc46253"
+    },
+    "CHANGELOG.md": {
+      "snapshot": "docs/history/d02-before-training-priority-20260926/CHANGELOG.md",
+      "bytes": 95476,
+      "sha256": "6f46f9e49723ddf75584cb21d3ef3fd237e3098edbf85ffc23e75ffae9500b0a"
+    },
+    "docs/visual-development-priority-20260926.md": {
+      "snapshot": "docs/history/d02-before-training-priority-20260926/visual-development-priority-20260926.md",
+      "bytes": 4318,
+      "sha256": "48f811f4072a5fb3ebf245392b16d570dd70f62e8101a5b2af0955dd67cf8002"
+    },
+    "docs/operator-runbook.md": {
+      "snapshot": "docs/history/d02-before-training-priority-20260926/operator-runbook.md",
+      "bytes": 24020,
+      "sha256": "f22efcfc330160ba5e4338e95f61d9627b6a8c6bf25444c3e2d2a02ed2827808"
+    }
+  },
+  "validation": {
+    "prior_documents_preserved": 6,
+    "source_modules_unchanged": 86,
+    "readme_unchanged": true,
+    "local_document_links_checked": 184,
+    "source_tests_rerun": false,
+    "new_training_or_generation_jobs": 0,
+    "reason": "Added user-requested third priority and requirements; no application implementation change."
+  },
+  "documents": {
+    "TODO.md": {
+      "bytes": 19862,
+      "sha256": "2003811c499ad5be2f28421b3a32d6216edbd4edaca3957a42fb9f3effec87e7"
+    },
+    "CHANGELOG.md": {
+      "bytes": 96170,
+      "sha256": "4cf3c07e53226e3c1e536fb53faa0a95ed54bd6a9b254c232f1caa8300d4045a"
+    },
+    "docs/visual-development-priority-20260926.md": {
+      "bytes": 5215,
+      "sha256": "b0ffc5eee4c1442654b9dc12c39ae33efca2939dc2438064fcdff95e48818ab6"
+    },
+    "docs/operator-runbook.md": {
+      "bytes": 24233,
+      "sha256": "fcc8c2a393e74d6a6d538423db3db2096eee830916dc242a7e31f892ce2b2a47"
+    },
+    "docs/training-workspace-requirements.md": {
+      "bytes": 5532,
+      "sha256": "53b1f68dabd982f585f95678bed8ffbe36836d3080e64f34c531d70bcb6f6125"
+    }
+  }
+}

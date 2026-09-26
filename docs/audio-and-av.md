@@ -1,5 +1,11 @@
 # Pinned audio and audiovisual output
 
+**Development deferred by the user on 2026-09-26.** Images and silent
+image-to-video take priority. The [priority decision](visual-development-priority-20260926.md)
+removes audio generation, listening and synchronization from the active work and
+its completion gates until explicitly reprioritized. Commands and evidence below
+remain reference material; unfinished audio review is not marked accepted.
+
 This page preserves the version-one baseline. See [extended media](extended-media.md)
 for longer audio, explicit sampler settings, saved A/V source selection and offset,
 standalone replay and durable cancellation.
