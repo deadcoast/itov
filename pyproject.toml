@@ -4,7 +4,9 @@ version = "0.13.1"
 description = "Local ComfyUI catalogs, deterministic batches, and pinned image inference"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "sourcery>=1.46.0",
+]
 
 [project.optional-dependencies]
 # Dataset workers check for this exact Pillow version before decoding images.

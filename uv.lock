@@ -92,6 +92,9 @@ wheels = [
 name = "itov"
 version = "0.13.1"
 source = { editable = "." }
+dependencies = [
+    { name = "sourcery" },
+]
 
 [package.optional-dependencies]
 dataset = [
@@ -108,7 +111,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "pillow", marker = "extra == 'dataset'", specifier = "==12.3.0" }]
+requires-dist = [
+    { name = "pillow", marker = "extra == 'dataset'", specifier = "==12.3.0" },
+    { name = "sourcery", specifier = ">=1.46.0" },
+]
 provides-extras = ["dataset"]
 
 [package.metadata.requires-dev]
@@ -487,6 +493,17 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/3d/02/7f10ef4700bc223c30a3fdd10631a29830c45524b810a3c7ed947af64591/ruff-0.16.8-py3-none-win32.whl", hash = "sha256:55793ba85c69921e89be061426d91a78652d6e50317c962240922747a4eb713f", size = 10093472, upload-time = "2026-09-16T15:54:37.47Z" },
     { url = "https://files.pythonhosted.org/packages/1e/5d/a509c07d714b6da88f2c518b4637cf6f1d46b074be8f0f1e5fb9ff5126fe/ruff-0.16.8-py3-none-win_amd64.whl", hash = "sha256:a6b85621fd3c81e31fc5f5add09c9c078b430db3595ca632efafdec9e64ebfaa", size = 10586899, upload-time = "2026-09-16T15:54:40.488Z" },
     { url = "https://files.pythonhosted.org/packages/fe/a0/50787329e4f20bf9dc9f6230015d46ec69c51a97ace5bc202dae4755365d/ruff-0.16.8-py3-none-win_arm64.whl", hash = "sha256:d075e820af612102ce217f07cc93e69f9490b10ec13ea85fa87bd03d996cef8a", size = 10386316, upload-time = "2026-09-16T15:54:43.332Z" },
+]
+
+[[package]]
+name = "sourcery"
+version = "1.46.0"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a7/73/5c811ec03285b869f564f710458c9ec4e95f6e1838aad9bff0fa5f61edf5/sourcery-1.46.0-py2.py3-none-macosx_10_9_x86_64.whl", hash = "sha256:0a0a96e4241c786eb98f304835e20788cf539c646744def58ee03ce744360b05", size = 111599225, upload-time = "2026-09-17T14:19:11.459Z" },
+    { url = "https://files.pythonhosted.org/packages/26/95/754a136c08cbc15f9180406ca125d18fcf95804d345c24cede7ae0f9adaa/sourcery-1.46.0-py2.py3-none-macosx_11_0_arm64.whl", hash = "sha256:f3da3536158c5acd3fc8462e8e58ee96538f12f36c9f1deafcadf1af8d6875dd", size = 96780461, upload-time = "2026-09-17T14:19:15.886Z" },
+    { url = "https://files.pythonhosted.org/packages/3c/4b/1d50091efe83de343bc7e93177f9475b7d4fec870eb78ed4b6b465d78afe/sourcery-1.46.0-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:b6bbf53acfd21d12399a74ce891b40ddf4a9fdcc56a8511f5f237923dfdb2fa2", size = 137450494, upload-time = "2026-09-17T14:19:20.343Z" },
+    { url = "https://files.pythonhosted.org/packages/8d/88/59f2da728768fd462b52ed06b2ce5831648e46d218e2cd1da9c108a732e5/sourcery-1.46.0-py2.py3-none-win_amd64.whl", hash = "sha256:790f5c8d5567f41a68a339c17e8947c235a83bb6d27d9880b8ccdd53d1305ade", size = 95002422, upload-time = "2026-09-17T14:19:24.921Z" },
 ]
 
 [[package]]
