@@ -1,5 +1,16 @@
 # Candidate and adapter-stack inference
 
+For a base image without adapters, start with the
+[description-based image workflow](base-image-workflow.md):
+`inference spec --prompt "..." --seed 926202600 --save` creates a version-two
+request with 1024×1024 defaults. The same prepare/plan/run commands below execute
+it. This convenience does not establish visual quality.
+
+The separate [FLUX.2 Klein text-to-image contract](flux-image-workflow.md) uses
+version-three specifications and the same owned prepare/plan/run/status/resume/
+replay commands. It does not support SDXL adapters or establish model acceptance.
+The version-two SDXL contract below retains its existing meaning.
+
 A-04 introduces version-two inference specifications. Model capabilities, pure graph construction, asset deployment and runtime qualification live in separate modules. Sampler settings and adapter strengths are explicit inputs. The existing [version-one catalog profiles](image-inference.md) and saved historical plans remain supported without migration.
 
 This is a bounded SDXL inference path. Deployment is permission to experiment with a technically validated artifact, not production promotion. The current curated candidate remains rejected for the [observed object-count, regression and trigger-specificity problems](deployed-evaluation-review-20260923.md). No command here activates catalog entries or changes that disposition.

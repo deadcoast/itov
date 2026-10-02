@@ -1,0 +1,1428 @@
+{
+  "version": 1,
+  "task": "D-02.1",
+  "date": "2026-09-26",
+  "status": "active_experimental_flux_code_implemented_gpu_work_deferred_by_user",
+  "task_complete": false,
+  "code_implemented": true,
+  "actual_flux_runtime_qualified": false,
+  "visual_quality_accepted": false,
+  "training_ui_implemented": false,
+  "user_constraint": "Continue code work; defer GPU runs. Received after the earlier 21-image SDXL trial completed.",
+  "new_gpu_runs": 0,
+  "new_image_generations": 0,
+  "new_training_runs": 0,
+  "new_audio_work": false,
+  "model_weights_downloaded": false,
+  "missing_flux_assets": [
+    "diffusion",
+    "text_encoder",
+    "vae"
+  ],
+  "reference_verification": {
+    "version": 1,
+    "reference_commit": "25ff90a51cc8f6ee56bd78ec3b11f294925fb36d",
+    "text_template_subgraph": "a67caa28-5f85-4917-8396-36004960dd30",
+    "node_types_compared": 12,
+    "connections_and_settings": [
+      [
+        "3",
+        "clip",
+        [
+          "2",
+          0
+        ]
+      ],
+      [
+        "4",
+        "conditioning",
+        [
+          "3",
+          0
+        ]
+      ],
+      [
+        "5",
+        "width",
+        1024
+      ],
+      [
+        "5",
+        "height",
+        1024
+      ],
+      [
+        "7",
+        "samples",
+        [
+          "13",
+          0
+        ]
+      ],
+      [
+        "7",
+        "vae",
+        [
+          "9",
+          0
+        ]
+      ],
+      [
+        "11",
+        "width",
+        1024
+      ],
+      [
+        "11",
+        "height",
+        1024
+      ],
+      [
+        "12",
+        "model",
+        [
+          "1",
+          0
+        ]
+      ],
+      [
+        "12",
+        "positive",
+        [
+          "3",
+          0
+        ]
+      ],
+      [
+        "12",
+        "negative",
+        [
+          "4",
+          0
+        ]
+      ],
+      [
+        "13",
+        "noise",
+        [
+          "6",
+          0
+        ]
+      ],
+      [
+        "13",
+        "guider",
+        [
+          "12",
+          0
+        ]
+      ],
+      [
+        "13",
+        "sampler",
+        [
+          "10",
+          0
+        ]
+      ],
+      [
+        "13",
+        "sigmas",
+        [
+          "11",
+          0
+        ]
+      ],
+      [
+        "13",
+        "latent_image",
+        [
+          "5",
+          0
+        ]
+      ],
+      [
+        "10",
+        "sampler_name",
+        "euler"
+      ],
+      [
+        "11",
+        "steps",
+        4
+      ],
+      [
+        "12",
+        "cfg",
+        1
+      ],
+      [
+        "5",
+        "batch_size",
+        1
+      ],
+      [
+        "1",
+        "weight_dtype",
+        "default"
+      ],
+      [
+        "2",
+        "type",
+        "flux2"
+      ],
+      [
+        "2",
+        "device",
+        "default"
+      ]
+    ],
+    "declared_differences": [
+      "Pinned FP8 diffusion file instead of BF16 text template selector; official FP8 edit template confirms the loader.",
+      "User prompt and deterministic consecutive seed replace interactive widgets.",
+      "Content-addressed SaveImage output and asset hashes added."
+    ],
+    "pinned_metadata_verified": {
+      "diffusion": {
+        "revision": "5b4408e59397a4a37ccb46afe426d8ed86379441",
+        "sha256": "97ed34fe0567e436200f2faee3939b88f2b5d99f8af2a4dc16532c4245c0ccb6",
+        "bytes": 4070624520
+      },
+      "text_encoder": {
+        "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+        "sha256": "6c671498573ac2f7a5501502ccce8d2b08ea6ca2f661c458e708f36b36edfc5a",
+        "bytes": 8044982048
+      },
+      "vae": {
+        "revision": "ed33133cd56476eac818c0943b6f9419b3e4a3a1",
+        "sha256": "d64f3a68e1cc4f9f4e29b6e0da38a0204fe9a49f2d4053f0ec1fa1ca02f9c4b5",
+        "bytes": 336213556
+      }
+    },
+    "installed_runtime_source_hashes": {
+      "execution.py": "dbf84f520bdafbdec014cf595838ccbca4fb08888e2be4064b1d105816ab0d3b",
+      "comfy/sd.py": "e5c943227092ce67bc3a38a3ac927d9dcbd83455c7947603ac10263cbe93f4ec",
+      "comfy/model_base.py": "f9f4890be76c42fcc19bb11bfe5c6258531e32a87bda9743d6551f4432338326",
+      "comfy/model_detection.py": "68b7d114a9086b3f8c27fc2a8f1af02c964b7a49755f00769f06f2fe8b7d5833",
+      "comfy/supported_models.py": "b766169dff81b6398ed2bbc9cb5ae0e83835e8ee55bb5b47c973e83b292aef31",
+      "comfy/model_patcher.py": "097a1399cd00ef38f66fdcafef400e1320343a695ba529c30ee4f8325213401c",
+      "comfy/samplers.py": "2850b400e0c07ddb73429f35e5da3de01952e7ee58f4c050124ea948cbda53ae",
+      "comfy/sample.py": "d19263c4aa14262bf6f2462ca0256c038396640ee3d88c9a4a5c0c2c219311ee",
+      "comfy/k_diffusion/sampling.py": "a7f22bd23cf8da6814c0adf0328704b2946370f09939bb364c2523dc1fcc902f",
+      "comfy/ldm/flux/model.py": "5fc574e119694e8732ee36b8192507492368a3464310634943606ff6aea200f7",
+      "comfy/ldm/flux/layers.py": "a1b4ad338135cade52b1dec2c174121ce37ffda309cfdc6ba81ad8a98bad0300",
+      "comfy/ldm/flux/math.py": "9bf5d1045e1b090290b7e71453dfb1f00e0e9b8f4516c57c8507847edbe526d9",
+      "comfy/ldm/models/autoencoder.py": "662a458ef7163030644cec21b43308ac3350a9dcc64618b6c056f2b287d8b52f",
+      "comfy/ldm/modules/diffusionmodules/model.py": "1cb82102881d9e493fb4d87e495f597287c51f5fc75a71f5ab2586749ff3a9e9",
+      "comfy/text_encoders/flux.py": "e25458ab048671953ef048276bb39dc27c7bfeee67821234833a80ed315e75a6",
+      "comfy/text_encoders/llama.py": "060264bb7ade0ba6574d02593d959d4facf525345d7345f1180f2e15e2dfcaa3",
+      "comfy/sd1_clip.py": "322635df651e73b3bd5d9298611722602ca0de7336c2404ef12b524080340840",
+      "comfy/text_encoders/qwen25_tokenizer/tokenizer_config.json": "021c81f54eabfd88c7f26f2d9fa601cd7e1c0f236a547e7480aaffa72dee747a",
+      "comfy/text_encoders/qwen25_tokenizer/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "comfy/text_encoders/qwen25_tokenizer/merges.txt": "b8e04af9c950e393054010dcef499c3f005e803e9b2da1a09b96a26c33266eb1"
+    },
+    "actual_runtime_executed": false,
+    "gpu_runs": 0,
+    "model_weights_downloaded": false
+  },
+  "tests": {
+    "new_flux": 28,
+    "initial_focused_with_request_checks": 37,
+    "full_source_passed": 1624,
+    "installed_focused_passed": 232,
+    "lint_passed": true,
+    "formatted_files": 147,
+    "scope": "CPU/HTTP fixtures and static checks. No actual FLUX model generation or GPU training."
+  },
+  "package": {
+    "version": "0.13.1",
+    "python": "3.11.14 (main, Oct 14 2025, 21:21:22) [MSC v.1944 64 bit (AMD64)]",
+    "installed_package": "C:\\Users\\ryanf\\github\\_active\\itov\\workspace\\state\\verification\\phase-d021-flux\\installed-core\\Lib\\site-packages\\itov",
+    "modules": {
+      "assessment_context.py": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1",
+      "audio.py": "a67bf917af0e50c3a84ccea2efa010a90a1a6c57c7a0aecbb84f00225a1f5aa0",
+      "audiovisual.py": "cbca72179f3ec8f8ce8de5f83761bafe244e8f570aff6d0bd434561c5c906753",
+      "audio_media.py": "9486796ebee4e395dc31cbeb27bd6134a3ad37051a211bbd94e88e3c5c14dfc9",
+      "batch.py": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587",
+      "batch_cancellation.py": "9683b762dcbd043c3d281a9c417aa64dcb18d69f1f2f2af06c814ea86f5a417b",
+      "batch_execution.py": "57907361a5ff4eb27599b2147bc2560423122bfa0a28cb1cce2f90bc7f2c011d",
+      "batch_request.py": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f",
+      "candidate_lifecycle.py": "f611af8d22fb9fa369897bf82b07cffde55d475be9d9feb914ac26d259d540cc",
+      "catalog.py": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c",
+      "catalog_store.py": "c0063761edfca7f61ca04dfc8a2aaa2bde448156ce9ddb77c2a317a1e25aa516",
+      "checkpoint_tensors.py": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc",
+      "cli.py": "97ae99e44ac3c659a3464e603a437df3179edbd769035c7584012b69a791985b",
+      "client_ownership.py": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73",
+      "cli_output.py": "ba0befbb277e3141de97c82518d0213244cd06940d22c8400bf693f522027bf9",
+      "comfyui.py": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477",
+      "config.py": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949",
+      "curation.py": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c",
+      "dataset_features.py": "2c6fe67f51aeb800aa9fc5a8cb310498b85b2b43a1ed8be2f8628790cbd824e8",
+      "dataset_freeze.py": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09",
+      "dataset_identity.py": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f",
+      "dataset_images.py": "c49c6ac73ede0d4093c1fb6602285daba5f8ff685746453e30a683a33d710ccf",
+      "dataset_import.py": "386505da9f79d20e50c96e89475a5d0edab686984c5142c686671fab90a21c2e",
+      "dataset_inspection.py": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1",
+      "dataset_manifest.py": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240",
+      "dataset_snapshot.py": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926",
+      "deployed_loader.py": "f0913e39cf84e19bea7cf90b33415a8865a8a858449158f30eaf932c48cfb0cb",
+      "deployed_loader_worker.py": "082244ff1f0fb83d9f0117709499593caaa00ba056fbb5c487c8bf3b60b9335e",
+      "deployed_review.py": "069ac4bb7beba2c3aadd9d8dde1f4ad663f55477b251fa412f49dc71bc7cfbcb",
+      "device.py": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51",
+      "doctor.py": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523",
+      "evaluation.py": "ff94418347a7ff0468bebd57eb50502be17fcfa751ed4c13c717c27bacb17fd5",
+      "evaluation_cases.py": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033",
+      "evaluation_corpus.py": "74f92dc97277888b42e26331426c0230583833b1f8273c075127834ba1651cb2",
+      "evaluation_runtime.py": "9911b9f6930547b2df8f2cdcb5f05ab0918fedb9e5f0f4569e1e6ef5d5b791f1",
+      "evidence_reads.py": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e",
+      "execution_ownership.py": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33",
+      "execution_store.py": "2a798db089eaf40791d7b468e0ed2c4ffd815df299d544905d8cd4a787a4dfe4",
+      "experiments.py": "ced9bdccefef4a45c826a650ed730cda286cad0387b7b8d95155f3ad427a00f4",
+      "experiment_variance.py": "1caf93861a493f3d6276e36fb5d7fb4b3185d81cb4e43ba4a5347d1c2cc822b8",
+      "flux_image.py": "9c8197bfb277bd1bc2428237bcefabd00db7def542fd15ef9cd88c1a5fbe14da",
+      "image_checks.py": "cc34f6ca912412a521f38fff9bb23df88d5e5909f61c54843b29d71edb714c6c",
+      "image_media.py": "4d98933760364421362a17099df78be07ee9645587ec3f7afae8bcbb0f09ee03",
+      "image_metrics.py": "a04213edc2432988ad9b455877865a5a688134d7cb496010bf104214caaa161d",
+      "image_request.py": "c1588a2aa3fc90e30c3bbbdc5bfb37b19234586169e6d61dbb6ce2630f80e76b",
+      "inference.py": "8417fde3cf5f7cc77df04440635a1427c61c9a5ae80ebaf88e321b379e5624ad",
+      "inference_capabilities.py": "86e304ac9f4faeede202a4e64681bb09d994f0209cf33a20480540709f71c5ea",
+      "inference_graph.py": "0fa9476d66d4425da14dee753fd745ee32470c4e7e6e02032d57d1feec1db70e",
+      "inference_runtime.py": "f4707fa724df3ee3ab7b507ed922fc2b2c1188f93b4e378a0e23fe63339dc9f1",
+      "jobs.py": "d0558692e66909a5226170aa1ed76b3c4921c66bd33f32d9bda845991b3f1a18",
+      "ledger.py": "cb0f70896fd5825ac712bab81576644a859664ddca0bbdded51dea6b556eeb6b",
+      "linting.py": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604",
+      "locking.py": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455",
+      "media.py": "171ff0f1e3ba97525b05734832cb03cdf638875d85d2867b98dcdbadb5d532b7",
+      "media_configuration.py": "43a27ef84c4b7a0a48edb1c2e85e744f317a0a174e5702338e28a757546134d8",
+      "media_sources.py": "5d3191e0e205252fb814953dd43520d0a1cf72d98ef969ecf7950592f7d9c741",
+      "owned_jobs.py": "882bf2da4a59412e11b5622e2af44394c54621ca85aa9e5893d428f39362098a",
+      "parallel.py": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84",
+      "qualification.py": "91265dce9dfa97be8f0da8d3e034d2189d6581e493dfcfe976e641b6aeaab3fe",
+      "quality.py": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681",
+      "records.py": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164",
+      "review_records.py": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506",
+      "rotation.py": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429",
+      "runtime.py": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969",
+      "scene.py": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26",
+      "training.py": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070",
+      "training_checkpoints.py": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193",
+      "training_checkpoint_worker.py": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb",
+      "training_config.py": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f",
+      "training_data.py": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4",
+      "training_optimization.py": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113",
+      "training_records.py": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30",
+      "training_results.py": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01",
+      "training_worker.py": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b",
+      "trigger.py": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3",
+      "video.py": "e80ee9cf6039409bebea10e11123727f8b956f2e673211c0fd3081e015d1b9d4",
+      "vram.py": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31",
+      "vram_identity.py": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61",
+      "vram_runtime.py": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c",
+      "windows_process.py": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d",
+      "worker_bootstrap.py": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6",
+      "workflow.py": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85",
+      "workspace_dependencies.py": "909426365be41c05664ef0f2038436104671711dedf7be932a7c30deb069e2e0",
+      "workspace_guide.py": "a5acacf9046f1396cd1661216855473b0b2734e82d10039588eb72ca8719ccff",
+      "workspace_navigation.py": "6a16e3d348fef0026142a2b21c1696fcbc3a2ccfdfa06ca7099853f277289a86",
+      "workspace_starter.py": "d03868a52b09473ed7c1478584f4b4d444d4761be27bf373ccc15d81640fc9f8",
+      "__init__.py": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a",
+      "__main__.py": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+    },
+    "readme_sha256": "8878ba192966f3aa4c2805c222f5ca5b4f25975120153055e539e6c67f681165",
+    "source_sdist_wheel_core_equal": true,
+    "core_without_ml_or_pillow": true,
+    "commands": 18,
+    "prior_sdxl_plans_replayed": 7,
+    "prior_sdxl_request_identities_preserved": 7,
+    "new_generation_jobs": 0,
+    "flux_model_assets_installed": false,
+    "missing_assets_refused": true,
+    "released": false
+  },
+  "preservation": {
+    "prior_d021_manifest_entries": 293,
+    "unchanged_at_original_paths": 277,
+    "changed_paths_preserved_as_snapshots": {
+      "CHANGELOG.md": {
+        "path": "docs/history/d021-before-flux-code-20260926/CHANGELOG.md",
+        "sha256": "60f5e4c7997757dded91b1bf2321b90d81bd57adaa25d9a4885a72b63cea7ad2"
+      },
+      "docs/base-image-workflow.md": {
+        "path": "docs/history/d021-before-flux-code-20260926/docs/base-image-workflow.md",
+        "sha256": "9c7390d0ec82469a37a556d00e8644108a4b21e540c8ae948bcc720c13d9133f"
+      },
+      "docs/candidate-inference.md": {
+        "path": "docs/history/d021-before-flux-code-20260926/docs/candidate-inference.md",
+        "sha256": "2c6bd570a79eb4c8a6d8989c629cdcd940d90ad1e9d44c7ab86f609a0cb3a561"
+      },
+      "docs/operator-runbook.md": {
+        "path": "docs/history/d021-before-flux-code-20260926/docs/operator-runbook.md",
+        "sha256": "8c7d3e16c9dccb3e36c8c1896aa28ea638cca9dd8508e530d176a8e6bc824733"
+      },
+      "README.md": {
+        "path": "docs/history/d021-before-flux-code-20260926/README.md",
+        "sha256": "41644614dbd41873d3381ff9d095d6f09e79b8e8ca70d39db0cc0171fe7611e7"
+      },
+      "src/itov/cli.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/cli.py",
+        "sha256": "c1874046def8021fa221f52c87c32b64f55d4a84940808efef835d37e3fb6496"
+      },
+      "src/itov/cli_output.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/cli_output.py",
+        "sha256": "e8a5424c3424dddfe870282c385fb8be7d49a9cb06c06c8bdef7dcab10fb0605"
+      },
+      "src/itov/image_request.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/image_request.py",
+        "sha256": "9519ab8e84e2ecd50f524d6a7f96bb690ce21a748337282d5f754284377377ce"
+      },
+      "src/itov/inference.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/inference.py",
+        "sha256": "abed4f457ee81a40297af7f2d13892b5f7bd29e557bc55aedce1fadd5c724721"
+      },
+      "src/itov/inference_capabilities.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/inference_capabilities.py",
+        "sha256": "fa441ce471d2378e5a829d7b97ec7681cb610ac6dd54b9d510bd2e65e0c5cf4e"
+      },
+      "src/itov/inference_graph.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/inference_graph.py",
+        "sha256": "c8265a6caf5fccedb77fe332ac0dcbaec63f82e27de62fc49afee45487109c62"
+      },
+      "src/itov/inference_runtime.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/inference_runtime.py",
+        "sha256": "c9000ce8e07eb6c7325970de8f1194466f503d9785add9770b2ace34f9e63501"
+      },
+      "src/itov/qualification.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/qualification.py",
+        "sha256": "6ceb826c00d620076baeb0ed1142150bf8d3d99e16ac3ccaea1823fc5e151eab"
+      },
+      "src/itov/workspace_guide.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/workspace_guide.py",
+        "sha256": "57a0f4cc6ca4ef452c8f7a4009e38a6474db5ca1e136f0b98fb21ed65161ea12"
+      },
+      "src/itov/workspace_navigation.py": {
+        "path": "docs/history/d021-before-flux-code-20260926/src/itov/workspace_navigation.py",
+        "sha256": "4e433dc71f268efe98cb8a386e8047cd2375ac514fe10d4fcedc9314363b10ea"
+      },
+      "TODO.md": {
+        "path": "docs/history/d021-before-flux-code-20260926/TODO.md",
+        "sha256": "59e6f98457e912a7617f53ee47bb92d3b388fa7967347392900a51c67461c0e2"
+      }
+    },
+    "older_historical_files_unchanged": 2047,
+    "prior_d02_evidence_files_unchanged": 143,
+    "worker_sources": {
+      "training_worker.py": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b",
+      "training.py": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070",
+      "training_data.py": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4",
+      "training_results.py": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01",
+      "curation.py": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c",
+      "quality.py": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681",
+      "records.py": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164",
+      "training_records.py": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30",
+      "evaluation_cases.py": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033",
+      "review_records.py": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506",
+      "evidence_reads.py": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e",
+      "dataset_snapshot.py": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926",
+      "dataset_manifest.py": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240",
+      "dataset_freeze.py": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09",
+      "dataset_inspection.py": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1",
+      "dataset_identity.py": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f",
+      "training_config.py": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f",
+      "training_optimization.py": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113",
+      "training_checkpoints.py": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193",
+      "training_checkpoint_worker.py": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb",
+      "checkpoint_tensors.py": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc"
+    },
+    "catalog_head": "ba91f4aa5b2b50cfd149b0b77cd8169dea8bbabacd84ef6c750b19cb13720148",
+    "scm_dev_tools": "0.5.0"
+  },
+  "retained_setup_failures": [
+    "source-audit-01.log: sandbox socket refusal; metadata-only escalation succeeded",
+    "core-install.log: sandbox package-index refusal; existing offline cache install succeeded"
+  ],
+  "final_device_status": {
+    "previous": "ec66302a-9d08-4ea4-9f3c-5ba472c8fada",
+    "reason": "external_requests_confirmed_terminal",
+    "record_id": "83f9dcc48ea0730361a3fb230642986b50d5bb73cec46f94946e13327efee493",
+    "released_at": "2026-09-26T12:50:45.354709+00:00",
+    "status": "idle",
+    "version": 1,
+    "directory": "C:\\Users\\ryanf\\AppData\\Local\\ITOV\\device-leases\\e2c115fd-447a-8fe0-3257-b17c51919074"
+  },
+  "local_document_links_checked": 237,
+  "remaining": [
+    "Install and verify the pinned weights when GPU work resumes.",
+    "Actual stock runtime/schema and resource qualification.",
+    "Real interruption/recovery and complete visual review under a newly declared experiment.",
+    "Silent image-to-video, then graphical training workspace."
+  ],
+  "evidence": {
+    ".gitattributes": {
+      "bytes": 297,
+      "sha256": "10ebbe7f2012b8b26ab864030ce9701f6fe0dfa46356291d6fea9ef1af6891db"
+    },
+    "CHANGELOG.md": {
+      "bytes": 99974,
+      "sha256": "62368d1c8372a5b43406c12aa592183afcecf5920133b0592112516efe58a684"
+    },
+    "docs/base-image-workflow.md": {
+      "bytes": 3710,
+      "sha256": "130094a2862889a96058f02c21ac7da69cf1fd393cc06df7a55763ce8cb7c404"
+    },
+    "docs/candidate-inference.md": {
+      "bytes": 8863,
+      "sha256": "488cd49dac9548665da03672f3a1798517f45cada84bd4c73ebfe357208cc4b5"
+    },
+    "docs/d021-flux-code-verification-20260926.md": {
+      "bytes": 5365,
+      "sha256": "95b69a03ba247485fb1754d8b7666a2ea2eebd3b5834236c6e008137627f1088"
+    },
+    "docs/evidence/phase-d021-flux-sources/comfy-klein-metadata.json": {
+      "bytes": 2716,
+      "sha256": "fade25ab33c26e6d9f6c6414c5cf09985fbf3daaa5f1219c69a8dcbe9e435024"
+    },
+    "docs/evidence/phase-d021-flux-sources/diffusion-metadata.json": {
+      "bytes": 2011,
+      "sha256": "598c9a71b4c03bab11fb1b1e359136ec806c4538ca9e4c5788b0d12a198f216f"
+    },
+    "docs/evidence/phase-d021-flux-sources/official-fp8-distilled-edit.json": {
+      "bytes": 109299,
+      "sha256": "c6f244ca71db195dec9b5e902c35af82b788871ad4b6247fdd88b10ea65a5b20"
+    },
+    "docs/evidence/phase-d021-flux-sources/official-text-to-image.json": {
+      "bytes": 69831,
+      "sha256": "28ce65d9b8b248b807599cb053e0a08d0ed123878edd0ac99dc900c60988b44e"
+    },
+    "docs/evidence/phase-d021-flux-sources/text-metadata.json": {
+      "bytes": 3998,
+      "sha256": "177180e24991183d7059f0005785160a37e7c88d8a277f8fd5fd377fba738ac7"
+    },
+    "docs/evidence/phase-d021-flux-sources/vae-metadata.json": {
+      "bytes": 3378,
+      "sha256": "ac8e271f9e0b4364f4ec0b89b815d4b184fd322b4a5508f38a3756db0826fe06"
+    },
+    "docs/evidence/phase-d021-verification-20260926.json": {
+      "bytes": 78409,
+      "sha256": "3940ec679b7325899a0ef4c5eeebef8e0d3aab8991700da5fe9b2d182bf404a8"
+    },
+    "docs/flux-image-workflow.md": {
+      "bytes": 5961,
+      "sha256": "ca65b15ed93fab9288da161ad593015f46434da441a3cd2677117909fa1da3ba"
+    },
+    "docs/history/d021-before-flux-code-20260926/CHANGELOG.md": {
+      "bytes": 98527,
+      "sha256": "60f5e4c7997757dded91b1bf2321b90d81bd57adaa25d9a4885a72b63cea7ad2"
+    },
+    "docs/history/d021-before-flux-code-20260926/docs/base-image-workflow.md": {
+      "bytes": 3348,
+      "sha256": "9c7390d0ec82469a37a556d00e8644108a4b21e540c8ae948bcc720c13d9133f"
+    },
+    "docs/history/d021-before-flux-code-20260926/docs/candidate-inference.md": {
+      "bytes": 8554,
+      "sha256": "2c6bd570a79eb4c8a6d8989c629cdcd940d90ad1e9d44c7ab86f609a0cb3a561"
+    },
+    "docs/history/d021-before-flux-code-20260926/docs/operator-runbook.md": {
+      "bytes": 24527,
+      "sha256": "8c7d3e16c9dccb3e36c8c1896aa28ea638cca9dd8508e530d176a8e6bc824733"
+    },
+    "docs/history/d021-before-flux-code-20260926/README.md": {
+      "bytes": 25429,
+      "sha256": "41644614dbd41873d3381ff9d095d6f09e79b8e8ca70d39db0cc0171fe7611e7"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/__init__.py": {
+      "bytes": 63,
+      "sha256": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/__main__.py": {
+      "bytes": 52,
+      "sha256": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/assessment_context.py": {
+      "bytes": 1664,
+      "sha256": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/audio.py": {
+      "bytes": 7928,
+      "sha256": "a67bf917af0e50c3a84ccea2efa010a90a1a6c57c7a0aecbb84f00225a1f5aa0"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/audio_media.py": {
+      "bytes": 4958,
+      "sha256": "9486796ebee4e395dc31cbeb27bd6134a3ad37051a211bbd94e88e3c5c14dfc9"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/audiovisual.py": {
+      "bytes": 16413,
+      "sha256": "cbca72179f3ec8f8ce8de5f83761bafe244e8f570aff6d0bd434561c5c906753"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/batch.py": {
+      "bytes": 7308,
+      "sha256": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/batch_cancellation.py": {
+      "bytes": 7270,
+      "sha256": "9683b762dcbd043c3d281a9c417aa64dcb18d69f1f2f2af06c814ea86f5a417b"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/batch_execution.py": {
+      "bytes": 13735,
+      "sha256": "57907361a5ff4eb27599b2147bc2560423122bfa0a28cb1cce2f90bc7f2c011d"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/batch_request.py": {
+      "bytes": 7361,
+      "sha256": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/candidate_lifecycle.py": {
+      "bytes": 19355,
+      "sha256": "f611af8d22fb9fa369897bf82b07cffde55d475be9d9feb914ac26d259d540cc"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/catalog.py": {
+      "bytes": 10771,
+      "sha256": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/catalog_store.py": {
+      "bytes": 11548,
+      "sha256": "c0063761edfca7f61ca04dfc8a2aaa2bde448156ce9ddb77c2a317a1e25aa516"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/checkpoint_tensors.py": {
+      "bytes": 3736,
+      "sha256": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/cli.py": {
+      "bytes": 53005,
+      "sha256": "c1874046def8021fa221f52c87c32b64f55d4a84940808efef835d37e3fb6496"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/cli_output.py": {
+      "bytes": 41376,
+      "sha256": "e8a5424c3424dddfe870282c385fb8be7d49a9cb06c06c8bdef7dcab10fb0605"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/client_ownership.py": {
+      "bytes": 11161,
+      "sha256": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/comfyui.py": {
+      "bytes": 11288,
+      "sha256": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/config.py": {
+      "bytes": 5020,
+      "sha256": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/curation.py": {
+      "bytes": 7588,
+      "sha256": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/dataset_features.py": {
+      "bytes": 2979,
+      "sha256": "2c6fe67f51aeb800aa9fc5a8cb310498b85b2b43a1ed8be2f8628790cbd824e8"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/dataset_freeze.py": {
+      "bytes": 15755,
+      "sha256": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/dataset_identity.py": {
+      "bytes": 5198,
+      "sha256": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/dataset_images.py": {
+      "bytes": 4859,
+      "sha256": "c49c6ac73ede0d4093c1fb6602285daba5f8ff685746453e30a683a33d710ccf"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/dataset_import.py": {
+      "bytes": 14474,
+      "sha256": "386505da9f79d20e50c96e89475a5d0edab686984c5142c686671fab90a21c2e"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/dataset_inspection.py": {
+      "bytes": 18709,
+      "sha256": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/dataset_manifest.py": {
+      "bytes": 7125,
+      "sha256": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/dataset_snapshot.py": {
+      "bytes": 12893,
+      "sha256": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/deployed_loader.py": {
+      "bytes": 11883,
+      "sha256": "f0913e39cf84e19bea7cf90b33415a8865a8a858449158f30eaf932c48cfb0cb"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/deployed_loader_worker.py": {
+      "bytes": 4397,
+      "sha256": "082244ff1f0fb83d9f0117709499593caaa00ba056fbb5c487c8bf3b60b9335e"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/deployed_review.py": {
+      "bytes": 13783,
+      "sha256": "069ac4bb7beba2c3aadd9d8dde1f4ad663f55477b251fa412f49dc71bc7cfbcb"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/device.py": {
+      "bytes": 6509,
+      "sha256": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/doctor.py": {
+      "bytes": 3730,
+      "sha256": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/evaluation.py": {
+      "bytes": 9616,
+      "sha256": "ff94418347a7ff0468bebd57eb50502be17fcfa751ed4c13c717c27bacb17fd5"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/evaluation_cases.py": {
+      "bytes": 2657,
+      "sha256": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/evaluation_corpus.py": {
+      "bytes": 14296,
+      "sha256": "74f92dc97277888b42e26331426c0230583833b1f8273c075127834ba1651cb2"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/evaluation_runtime.py": {
+      "bytes": 20311,
+      "sha256": "9911b9f6930547b2df8f2cdcb5f05ab0918fedb9e5f0f4569e1e6ef5d5b791f1"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/evidence_reads.py": {
+      "bytes": 2457,
+      "sha256": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/execution_ownership.py": {
+      "bytes": 3228,
+      "sha256": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/execution_store.py": {
+      "bytes": 8266,
+      "sha256": "2a798db089eaf40791d7b468e0ed2c4ffd815df299d544905d8cd4a787a4dfe4"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/experiment_variance.py": {
+      "bytes": 10392,
+      "sha256": "1caf93861a493f3d6276e36fb5d7fb4b3185d81cb4e43ba4a5347d1c2cc822b8"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/experiments.py": {
+      "bytes": 22581,
+      "sha256": "ced9bdccefef4a45c826a650ed730cda286cad0387b7b8d95155f3ad427a00f4"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/image_checks.py": {
+      "bytes": 18615,
+      "sha256": "cc34f6ca912412a521f38fff9bb23df88d5e5909f61c54843b29d71edb714c6c"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/image_media.py": {
+      "bytes": 2738,
+      "sha256": "4d98933760364421362a17099df78be07ee9645587ec3f7afae8bcbb0f09ee03"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/image_metrics.py": {
+      "bytes": 4914,
+      "sha256": "a04213edc2432988ad9b455877865a5a688134d7cb496010bf104214caaa161d"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/image_request.py": {
+      "bytes": 1935,
+      "sha256": "9519ab8e84e2ecd50f524d6a7f96bb690ce21a748337282d5f754284377377ce"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/inference.py": {
+      "bytes": 10922,
+      "sha256": "abed4f457ee81a40297af7f2d13892b5f7bd29e557bc55aedce1fadd5c724721"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/inference_capabilities.py": {
+      "bytes": 5846,
+      "sha256": "fa441ce471d2378e5a829d7b97ec7681cb610ac6dd54b9d510bd2e65e0c5cf4e"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/inference_graph.py": {
+      "bytes": 4095,
+      "sha256": "c8265a6caf5fccedb77fe332ac0dcbaec63f82e27de62fc49afee45487109c62"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/inference_runtime.py": {
+      "bytes": 14001,
+      "sha256": "c9000ce8e07eb6c7325970de8f1194466f503d9785add9770b2ace34f9e63501"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/jobs.py": {
+      "bytes": 19228,
+      "sha256": "d0558692e66909a5226170aa1ed76b3c4921c66bd33f32d9bda845991b3f1a18"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/ledger.py": {
+      "bytes": 3976,
+      "sha256": "cb0f70896fd5825ac712bab81576644a859664ddca0bbdded51dea6b556eeb6b"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/linting.py": {
+      "bytes": 4856,
+      "sha256": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/locking.py": {
+      "bytes": 1677,
+      "sha256": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/media.py": {
+      "bytes": 7035,
+      "sha256": "171ff0f1e3ba97525b05734832cb03cdf638875d85d2867b98dcdbadb5d532b7"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/media_configuration.py": {
+      "bytes": 4857,
+      "sha256": "43a27ef84c4b7a0a48edb1c2e85e744f317a0a174e5702338e28a757546134d8"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/media_sources.py": {
+      "bytes": 5190,
+      "sha256": "5d3191e0e205252fb814953dd43520d0a1cf72d98ef969ecf7950592f7d9c741"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/owned_jobs.py": {
+      "bytes": 5765,
+      "sha256": "882bf2da4a59412e11b5622e2af44394c54621ca85aa9e5893d428f39362098a"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/parallel.py": {
+      "bytes": 25617,
+      "sha256": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/qualification.py": {
+      "bytes": 16341,
+      "sha256": "6ceb826c00d620076baeb0ed1142150bf8d3d99e16ac3ccaea1823fc5e151eab"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/quality.py": {
+      "bytes": 10318,
+      "sha256": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/records.py": {
+      "bytes": 487,
+      "sha256": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/review_records.py": {
+      "bytes": 5051,
+      "sha256": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/rotation.py": {
+      "bytes": 9595,
+      "sha256": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/runtime.py": {
+      "bytes": 2738,
+      "sha256": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/scene.py": {
+      "bytes": 8776,
+      "sha256": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training.py": {
+      "bytes": 26362,
+      "sha256": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training_checkpoint_worker.py": {
+      "bytes": 8193,
+      "sha256": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training_checkpoints.py": {
+      "bytes": 14581,
+      "sha256": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training_config.py": {
+      "bytes": 12257,
+      "sha256": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training_data.py": {
+      "bytes": 8421,
+      "sha256": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training_optimization.py": {
+      "bytes": 4690,
+      "sha256": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training_records.py": {
+      "bytes": 786,
+      "sha256": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training_results.py": {
+      "bytes": 14194,
+      "sha256": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/training_worker.py": {
+      "bytes": 20818,
+      "sha256": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/trigger.py": {
+      "bytes": 8894,
+      "sha256": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/video.py": {
+      "bytes": 9969,
+      "sha256": "e80ee9cf6039409bebea10e11123727f8b956f2e673211c0fd3081e015d1b9d4"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/vram.py": {
+      "bytes": 21293,
+      "sha256": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/vram_identity.py": {
+      "bytes": 1007,
+      "sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/vram_runtime.py": {
+      "bytes": 7570,
+      "sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/windows_process.py": {
+      "bytes": 11163,
+      "sha256": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/worker_bootstrap.py": {
+      "bytes": 758,
+      "sha256": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/workflow.py": {
+      "bytes": 12047,
+      "sha256": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/workspace_dependencies.py": {
+      "bytes": 3272,
+      "sha256": "909426365be41c05664ef0f2038436104671711dedf7be932a7c30deb069e2e0"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/workspace_guide.py": {
+      "bytes": 16978,
+      "sha256": "57a0f4cc6ca4ef452c8f7a4009e38a6474db5ca1e136f0b98fb21ed65161ea12"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/workspace_navigation.py": {
+      "bytes": 17772,
+      "sha256": "4e433dc71f268efe98cb8a386e8047cd2375ac514fe10d4fcedc9314363b10ea"
+    },
+    "docs/history/d021-before-flux-code-20260926/src/itov/workspace_starter.py": {
+      "bytes": 4553,
+      "sha256": "d03868a52b09473ed7c1478584f4b4d444d4761be27bf373ccc15d81640fc9f8"
+    },
+    "docs/history/d021-before-flux-code-20260926/tests/test_image_request.py": {
+      "bytes": 4624,
+      "sha256": "484990e9cab2fb25e0ca07d7ba79de2ed3537d339b0c6a7f9325b83ef5e412f8"
+    },
+    "docs/history/d021-before-flux-code-20260926/TODO.md": {
+      "bytes": 20784,
+      "sha256": "59e6f98457e912a7617f53ee47bb92d3b388fa7967347392900a51c67461c0e2"
+    },
+    "docs/operator-runbook.md": {
+      "bytes": 24833,
+      "sha256": "dce4196fcceebec85164fe5e9958a36dd8471c4f65abe11c78df187390afdb23"
+    },
+    "README.md": {
+      "bytes": 25806,
+      "sha256": "8878ba192966f3aa4c2805c222f5ca5b4f25975120153055e539e6c67f681165"
+    },
+    "src/itov/__init__.py": {
+      "bytes": 63,
+      "sha256": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a"
+    },
+    "src/itov/__main__.py": {
+      "bytes": 52,
+      "sha256": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+    },
+    "src/itov/assessment_context.py": {
+      "bytes": 1664,
+      "sha256": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1"
+    },
+    "src/itov/audio.py": {
+      "bytes": 7928,
+      "sha256": "a67bf917af0e50c3a84ccea2efa010a90a1a6c57c7a0aecbb84f00225a1f5aa0"
+    },
+    "src/itov/audio_media.py": {
+      "bytes": 4958,
+      "sha256": "9486796ebee4e395dc31cbeb27bd6134a3ad37051a211bbd94e88e3c5c14dfc9"
+    },
+    "src/itov/audiovisual.py": {
+      "bytes": 16413,
+      "sha256": "cbca72179f3ec8f8ce8de5f83761bafe244e8f570aff6d0bd434561c5c906753"
+    },
+    "src/itov/batch.py": {
+      "bytes": 7308,
+      "sha256": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587"
+    },
+    "src/itov/batch_cancellation.py": {
+      "bytes": 7270,
+      "sha256": "9683b762dcbd043c3d281a9c417aa64dcb18d69f1f2f2af06c814ea86f5a417b"
+    },
+    "src/itov/batch_execution.py": {
+      "bytes": 13735,
+      "sha256": "57907361a5ff4eb27599b2147bc2560423122bfa0a28cb1cce2f90bc7f2c011d"
+    },
+    "src/itov/batch_request.py": {
+      "bytes": 7361,
+      "sha256": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f"
+    },
+    "src/itov/candidate_lifecycle.py": {
+      "bytes": 19355,
+      "sha256": "f611af8d22fb9fa369897bf82b07cffde55d475be9d9feb914ac26d259d540cc"
+    },
+    "src/itov/catalog.py": {
+      "bytes": 10771,
+      "sha256": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c"
+    },
+    "src/itov/catalog_store.py": {
+      "bytes": 11548,
+      "sha256": "c0063761edfca7f61ca04dfc8a2aaa2bde448156ce9ddb77c2a317a1e25aa516"
+    },
+    "src/itov/checkpoint_tensors.py": {
+      "bytes": 3736,
+      "sha256": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc"
+    },
+    "src/itov/cli.py": {
+      "bytes": 53500,
+      "sha256": "97ae99e44ac3c659a3464e603a437df3179edbd769035c7584012b69a791985b"
+    },
+    "src/itov/cli_output.py": {
+      "bytes": 41385,
+      "sha256": "ba0befbb277e3141de97c82518d0213244cd06940d22c8400bf693f522027bf9"
+    },
+    "src/itov/client_ownership.py": {
+      "bytes": 11161,
+      "sha256": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73"
+    },
+    "src/itov/comfyui.py": {
+      "bytes": 11288,
+      "sha256": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477"
+    },
+    "src/itov/config.py": {
+      "bytes": 5020,
+      "sha256": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949"
+    },
+    "src/itov/curation.py": {
+      "bytes": 7588,
+      "sha256": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c"
+    },
+    "src/itov/dataset_features.py": {
+      "bytes": 2979,
+      "sha256": "2c6fe67f51aeb800aa9fc5a8cb310498b85b2b43a1ed8be2f8628790cbd824e8"
+    },
+    "src/itov/dataset_freeze.py": {
+      "bytes": 15755,
+      "sha256": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09"
+    },
+    "src/itov/dataset_identity.py": {
+      "bytes": 5198,
+      "sha256": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f"
+    },
+    "src/itov/dataset_images.py": {
+      "bytes": 4859,
+      "sha256": "c49c6ac73ede0d4093c1fb6602285daba5f8ff685746453e30a683a33d710ccf"
+    },
+    "src/itov/dataset_import.py": {
+      "bytes": 14474,
+      "sha256": "386505da9f79d20e50c96e89475a5d0edab686984c5142c686671fab90a21c2e"
+    },
+    "src/itov/dataset_inspection.py": {
+      "bytes": 18709,
+      "sha256": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1"
+    },
+    "src/itov/dataset_manifest.py": {
+      "bytes": 7125,
+      "sha256": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240"
+    },
+    "src/itov/dataset_snapshot.py": {
+      "bytes": 12893,
+      "sha256": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926"
+    },
+    "src/itov/deployed_loader.py": {
+      "bytes": 11883,
+      "sha256": "f0913e39cf84e19bea7cf90b33415a8865a8a858449158f30eaf932c48cfb0cb"
+    },
+    "src/itov/deployed_loader_worker.py": {
+      "bytes": 4397,
+      "sha256": "082244ff1f0fb83d9f0117709499593caaa00ba056fbb5c487c8bf3b60b9335e"
+    },
+    "src/itov/deployed_review.py": {
+      "bytes": 13783,
+      "sha256": "069ac4bb7beba2c3aadd9d8dde1f4ad663f55477b251fa412f49dc71bc7cfbcb"
+    },
+    "src/itov/device.py": {
+      "bytes": 6509,
+      "sha256": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51"
+    },
+    "src/itov/doctor.py": {
+      "bytes": 3730,
+      "sha256": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523"
+    },
+    "src/itov/evaluation.py": {
+      "bytes": 9616,
+      "sha256": "ff94418347a7ff0468bebd57eb50502be17fcfa751ed4c13c717c27bacb17fd5"
+    },
+    "src/itov/evaluation_cases.py": {
+      "bytes": 2657,
+      "sha256": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033"
+    },
+    "src/itov/evaluation_corpus.py": {
+      "bytes": 14296,
+      "sha256": "74f92dc97277888b42e26331426c0230583833b1f8273c075127834ba1651cb2"
+    },
+    "src/itov/evaluation_runtime.py": {
+      "bytes": 20311,
+      "sha256": "9911b9f6930547b2df8f2cdcb5f05ab0918fedb9e5f0f4569e1e6ef5d5b791f1"
+    },
+    "src/itov/evidence_reads.py": {
+      "bytes": 2457,
+      "sha256": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e"
+    },
+    "src/itov/execution_ownership.py": {
+      "bytes": 3228,
+      "sha256": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33"
+    },
+    "src/itov/execution_store.py": {
+      "bytes": 8266,
+      "sha256": "2a798db089eaf40791d7b468e0ed2c4ffd815df299d544905d8cd4a787a4dfe4"
+    },
+    "src/itov/experiment_variance.py": {
+      "bytes": 10392,
+      "sha256": "1caf93861a493f3d6276e36fb5d7fb4b3185d81cb4e43ba4a5347d1c2cc822b8"
+    },
+    "src/itov/experiments.py": {
+      "bytes": 22581,
+      "sha256": "ced9bdccefef4a45c826a650ed730cda286cad0387b7b8d95155f3ad427a00f4"
+    },
+    "src/itov/flux_image.py": {
+      "bytes": 10196,
+      "sha256": "9c8197bfb277bd1bc2428237bcefabd00db7def542fd15ef9cd88c1a5fbe14da"
+    },
+    "src/itov/image_checks.py": {
+      "bytes": 18615,
+      "sha256": "cc34f6ca912412a521f38fff9bb23df88d5e5909f61c54843b29d71edb714c6c"
+    },
+    "src/itov/image_media.py": {
+      "bytes": 2738,
+      "sha256": "4d98933760364421362a17099df78be07ee9645587ec3f7afae8bcbb0f09ee03"
+    },
+    "src/itov/image_metrics.py": {
+      "bytes": 4914,
+      "sha256": "a04213edc2432988ad9b455877865a5a688134d7cb496010bf104214caaa161d"
+    },
+    "src/itov/image_request.py": {
+      "bytes": 2919,
+      "sha256": "c1588a2aa3fc90e30c3bbbdc5bfb37b19234586169e6d61dbb6ce2630f80e76b"
+    },
+    "src/itov/inference.py": {
+      "bytes": 10927,
+      "sha256": "8417fde3cf5f7cc77df04440635a1427c61c9a5ae80ebaf88e321b379e5624ad"
+    },
+    "src/itov/inference_capabilities.py": {
+      "bytes": 6012,
+      "sha256": "86e304ac9f4faeede202a4e64681bb09d994f0209cf33a20480540709f71c5ea"
+    },
+    "src/itov/inference_graph.py": {
+      "bytes": 4240,
+      "sha256": "0fa9476d66d4425da14dee753fd745ee32470c4e7e6e02032d57d1feec1db70e"
+    },
+    "src/itov/inference_runtime.py": {
+      "bytes": 14348,
+      "sha256": "f4707fa724df3ee3ab7b507ed922fc2b2c1188f93b4e378a0e23fe63339dc9f1"
+    },
+    "src/itov/jobs.py": {
+      "bytes": 19228,
+      "sha256": "d0558692e66909a5226170aa1ed76b3c4921c66bd33f32d9bda845991b3f1a18"
+    },
+    "src/itov/ledger.py": {
+      "bytes": 3976,
+      "sha256": "cb0f70896fd5825ac712bab81576644a859664ddca0bbdded51dea6b556eeb6b"
+    },
+    "src/itov/linting.py": {
+      "bytes": 4856,
+      "sha256": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604"
+    },
+    "src/itov/locking.py": {
+      "bytes": 1677,
+      "sha256": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455"
+    },
+    "src/itov/media.py": {
+      "bytes": 7035,
+      "sha256": "171ff0f1e3ba97525b05734832cb03cdf638875d85d2867b98dcdbadb5d532b7"
+    },
+    "src/itov/media_configuration.py": {
+      "bytes": 4857,
+      "sha256": "43a27ef84c4b7a0a48edb1c2e85e744f317a0a174e5702338e28a757546134d8"
+    },
+    "src/itov/media_sources.py": {
+      "bytes": 5190,
+      "sha256": "5d3191e0e205252fb814953dd43520d0a1cf72d98ef969ecf7950592f7d9c741"
+    },
+    "src/itov/owned_jobs.py": {
+      "bytes": 5765,
+      "sha256": "882bf2da4a59412e11b5622e2af44394c54621ca85aa9e5893d428f39362098a"
+    },
+    "src/itov/parallel.py": {
+      "bytes": 25617,
+      "sha256": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84"
+    },
+    "src/itov/qualification.py": {
+      "bytes": 17782,
+      "sha256": "91265dce9dfa97be8f0da8d3e034d2189d6581e493dfcfe976e641b6aeaab3fe"
+    },
+    "src/itov/quality.py": {
+      "bytes": 10318,
+      "sha256": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681"
+    },
+    "src/itov/records.py": {
+      "bytes": 487,
+      "sha256": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164"
+    },
+    "src/itov/review_records.py": {
+      "bytes": 5051,
+      "sha256": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506"
+    },
+    "src/itov/rotation.py": {
+      "bytes": 9595,
+      "sha256": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429"
+    },
+    "src/itov/runtime.py": {
+      "bytes": 2738,
+      "sha256": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969"
+    },
+    "src/itov/scene.py": {
+      "bytes": 8776,
+      "sha256": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26"
+    },
+    "src/itov/training.py": {
+      "bytes": 26362,
+      "sha256": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070"
+    },
+    "src/itov/training_checkpoint_worker.py": {
+      "bytes": 8193,
+      "sha256": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb"
+    },
+    "src/itov/training_checkpoints.py": {
+      "bytes": 14581,
+      "sha256": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193"
+    },
+    "src/itov/training_config.py": {
+      "bytes": 12257,
+      "sha256": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f"
+    },
+    "src/itov/training_data.py": {
+      "bytes": 8421,
+      "sha256": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4"
+    },
+    "src/itov/training_optimization.py": {
+      "bytes": 4690,
+      "sha256": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113"
+    },
+    "src/itov/training_records.py": {
+      "bytes": 786,
+      "sha256": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30"
+    },
+    "src/itov/training_results.py": {
+      "bytes": 14194,
+      "sha256": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01"
+    },
+    "src/itov/training_worker.py": {
+      "bytes": 20818,
+      "sha256": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b"
+    },
+    "src/itov/trigger.py": {
+      "bytes": 8894,
+      "sha256": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3"
+    },
+    "src/itov/video.py": {
+      "bytes": 9969,
+      "sha256": "e80ee9cf6039409bebea10e11123727f8b956f2e673211c0fd3081e015d1b9d4"
+    },
+    "src/itov/vram.py": {
+      "bytes": 21293,
+      "sha256": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31"
+    },
+    "src/itov/vram_identity.py": {
+      "bytes": 1007,
+      "sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61"
+    },
+    "src/itov/vram_runtime.py": {
+      "bytes": 7570,
+      "sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c"
+    },
+    "src/itov/windows_process.py": {
+      "bytes": 11163,
+      "sha256": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d"
+    },
+    "src/itov/worker_bootstrap.py": {
+      "bytes": 758,
+      "sha256": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6"
+    },
+    "src/itov/workflow.py": {
+      "bytes": 12047,
+      "sha256": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+    },
+    "src/itov/workspace_dependencies.py": {
+      "bytes": 3272,
+      "sha256": "909426365be41c05664ef0f2038436104671711dedf7be932a7c30deb069e2e0"
+    },
+    "src/itov/workspace_guide.py": {
+      "bytes": 17333,
+      "sha256": "a5acacf9046f1396cd1661216855473b0b2734e82d10039588eb72ca8719ccff"
+    },
+    "src/itov/workspace_navigation.py": {
+      "bytes": 17788,
+      "sha256": "6a16e3d348fef0026142a2b21c1696fcbc3a2ccfdfa06ca7099853f277289a86"
+    },
+    "src/itov/workspace_starter.py": {
+      "bytes": 4553,
+      "sha256": "d03868a52b09473ed7c1478584f4b4d444d4761be27bf373ccc15d81640fc9f8"
+    },
+    "tests/test_flux_image.py": {
+      "bytes": 13593,
+      "sha256": "38d20e8a1f48d447350fa4248931e45e2875479a4bd07a367c81278df19f543a"
+    },
+    "tests/test_image_request.py": {
+      "bytes": 4624,
+      "sha256": "484990e9cab2fb25e0ca07d7ba79de2ed3537d339b0c6a7f9325b83ef5e412f8"
+    },
+    "TODO.md": {
+      "bytes": 21643,
+      "sha256": "448cbaa5efa4a6372b6451b5697823e6fa3626d42f26879100018069a67c45be"
+    },
+    "workspace/state/verification/phase-d021-flux/before.json": {
+      "bytes": 51286,
+      "sha256": "a8b80e18d70f7410e4d9ed905283fe89fa3cfb1bd4d5dc5bf31e9fccb8eed7a8"
+    },
+    "workspace/state/verification/phase-d021-flux/build-01.log": {
+      "bytes": 303,
+      "sha256": "b3eed5c9f6bafda45b8d6fc492e821afa2f479ecdf65ef8a4e8ce45e3328b027"
+    },
+    "workspace/state/verification/phase-d021-flux/comfy-klein-metadata.json": {
+      "bytes": 2716,
+      "sha256": "fade25ab33c26e6d9f6c6414c5cf09985fbf3daaa5f1219c69a8dcbe9e435024"
+    },
+    "workspace/state/verification/phase-d021-flux/core-env.log": {
+      "bytes": 210,
+      "sha256": "697c134db3b2dfdc689c36ad6e38c74de0c1828f7cfe2acdc16b4c6dbd1d8b46"
+    },
+    "workspace/state/verification/phase-d021-flux/core-install-02.log": {
+      "bytes": 393,
+      "sha256": "8b3cd5b893a474970dde62469792a42e7bade4daa93a502060d84e2c4934337b"
+    },
+    "workspace/state/verification/phase-d021-flux/core-install.log": {
+      "bytes": 473,
+      "sha256": "fad0b640a322f36cf07ba8682b599d5b9f561289fc0efc75aa82365f313ac2da"
+    },
+    "workspace/state/verification/phase-d021-flux/diffusion-metadata.json": {
+      "bytes": 2011,
+      "sha256": "598c9a71b4c03bab11fb1b1e359136ec806c4538ca9e4c5788b0d12a198f216f"
+    },
+    "workspace/state/verification/phase-d021-flux/dist/.gitignore": {
+      "bytes": 1,
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+    },
+    "workspace/state/verification/phase-d021-flux/dist/itov-0.13.1-py3-none-any.whl": {
+      "bytes": 277168,
+      "sha256": "605dba227936dff55ebd229dd262775276bfde241ef1ce4304398580bd8bb75e"
+    },
+    "workspace/state/verification/phase-d021-flux/dist/itov-0.13.1.tar.gz": {
+      "bytes": 227546,
+      "sha256": "fd09b6ca74f1a061539b416d03e791672d23700b0c06a07c95f47f56d02cb6c9"
+    },
+    "workspace/state/verification/phase-d021-flux/finalize.py": {
+      "bytes": 7083,
+      "sha256": "ce58792492b900cc2b61989e685721930699e42f7d134ec73ad42c3d8a220fda"
+    },
+    "workspace/state/verification/phase-d021-flux/format-01.exit": {
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    "workspace/state/verification/phase-d021-flux/format-01.log": {
+      "bytes": 29,
+      "sha256": "57b3b121c7f5169820194b6d72a7959c6bc7ea8d8ec1993ac8503ce4efea1168"
+    },
+    "workspace/state/verification/phase-d021-flux/inspect_sources.py": {
+      "bytes": 2520,
+      "sha256": "6ad4e6f319e3b551823a49262b9b9582a79784408600d67ef68dccccb8dee32e"
+    },
+    "workspace/state/verification/phase-d021-flux/installed image workspace/state/inference/specifications/8cf990e375908bcfb0dade1eaaf899e00c24270fd5d235c355f138745b347f29.json": {
+      "bytes": 665,
+      "sha256": "7edcd8636c4d34233ea81ad1851ce16e12fe0358beca8c95d7c184db92284193"
+    },
+    "workspace/state/verification/phase-d021-flux/installed-commands.json": {
+      "bytes": 160070,
+      "sha256": "4c4b539000a4c7df40ea4d003296b852015cd6bec22d653bf757c15f1e645e25"
+    },
+    "workspace/state/verification/phase-d021-flux/installed-tests-01.exit": {
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    "workspace/state/verification/phase-d021-flux/installed-tests-01.log": {
+      "bytes": 357,
+      "sha256": "6023da368834876e96cfcc5f30fa2e43692269e9757f260ee95c7110c1ffcbf5"
+    },
+    "workspace/state/verification/phase-d021-flux/installed-verification-01.exit": {
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    "workspace/state/verification/phase-d021-flux/installed-verification-01.log": {
+      "bytes": 1407,
+      "sha256": "f6c65d2d85fc9925a9792540dc8afb6a4150af4b13a6288d66f1a3f1290c97b7"
+    },
+    "workspace/state/verification/phase-d021-flux/installed-verification.json": {
+      "bytes": 8811,
+      "sha256": "1dda8f8a97ed890170efa88a3bb054854123176d996e95b770c6541e6a99a50c"
+    },
+    "workspace/state/verification/phase-d021-flux/lint-01.exit": {
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    "workspace/state/verification/phase-d021-flux/lint-01.log": {
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    "workspace/state/verification/phase-d021-flux/new-tests-01.exit": {
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    "workspace/state/verification/phase-d021-flux/new-tests-01.log": {
+      "bytes": 102,
+      "sha256": "91e161b06d844665d1ecad30b30dd820c7ec334236a113c68b989978e5c04022"
+    },
+    "workspace/state/verification/phase-d021-flux/official-fp8-distilled-edit.json": {
+      "bytes": 109299,
+      "sha256": "c6f244ca71db195dec9b5e902c35af82b788871ad4b6247fdd88b10ea65a5b20"
+    },
+    "workspace/state/verification/phase-d021-flux/official-text-to-image.json": {
+      "bytes": 69831,
+      "sha256": "28ce65d9b8b248b807599cb053e0a08d0ed123878edd0ac99dc900c60988b44e"
+    },
+    "workspace/state/verification/phase-d021-flux/reference-01.exit": {
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    "workspace/state/verification/phase-d021-flux/reference-01.log": {
+      "bytes": 115,
+      "sha256": "56d6542dd44e78515664fb5ce4182380947981111dd0966aaca595bfb14837ea"
+    },
+    "workspace/state/verification/phase-d021-flux/reference-verification.json": {
+      "bytes": 5098,
+      "sha256": "e72f92ed21e877e34c6235cd3e8e145eb2f511876e9ef494be7b0274c8e31ce1"
+    },
+    "workspace/state/verification/phase-d021-flux/source-audit-01.log": {
+      "bytes": 4572,
+      "sha256": "f32d32ab7fe1d22d759bada57ffb1530a5952754236f4cf26da0a860ed077328"
+    },
+    "workspace/state/verification/phase-d021-flux/source-audit-02.log": {
+      "bytes": 2932,
+      "sha256": "8916ef015abc64f55ad207c808ef038eeecb7a5531bfc3ad310df21884e1c9fb"
+    },
+    "workspace/state/verification/phase-d021-flux/source-full-01.exit": {
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    "workspace/state/verification/phase-d021-flux/source-full-01.log": {
+      "bytes": 1898,
+      "sha256": "aef730f699c5b434dfab4c32e14495c52b8635979f2bacd93814918b62ff4323"
+    },
+    "workspace/state/verification/phase-d021-flux/template-tree.json": {
+      "bytes": 1213734,
+      "sha256": "1eee705ddce0ae4117dc0ddcede6f60db217096631dc0c32f349aaa456a63c20"
+    },
+    "workspace/state/verification/phase-d021-flux/test-env.log": {
+      "bytes": 210,
+      "sha256": "3f7cd6e978ce1b30c36176c24c130a80f1b7eac5ca707a5d2251c01461d985ff"
+    },
+    "workspace/state/verification/phase-d021-flux/test-install.log": {
+      "bytes": 504,
+      "sha256": "94dea4fc903ee317578faa5dca94869737a8e7077f9b945da92db7754868969e"
+    },
+    "workspace/state/verification/phase-d021-flux/text-metadata.json": {
+      "bytes": 3998,
+      "sha256": "177180e24991183d7059f0005785160a37e7c88d8a277f8fd5fd377fba738ac7"
+    },
+    "workspace/state/verification/phase-d021-flux/vae-metadata.json": {
+      "bytes": 3378,
+      "sha256": "ac8e271f9e0b4364f4ec0b89b815d4b184fd322b4a5508f38a3756db0826fe06"
+    },
+    "workspace/state/verification/phase-d021-flux/verify_installed.py": {
+      "bytes": 5320,
+      "sha256": "7e8dae7560c6c177d8fd349ddcfafe7023f499dd484936a5d250cf084a19d227"
+    },
+    "workspace/state/verification/phase-d021-flux/verify_reference.py": {
+      "bytes": 4424,
+      "sha256": "51fa055b82e8d0f1407811e8ca4ba1dbe2c48febf072ac1701c30bc448221957"
+    }
+  },
+  "manifest_excludes": [
+    "This receipt and its active finalizer log/exit."
+  ]
+}

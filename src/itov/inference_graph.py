@@ -9,6 +9,10 @@ SCOPE = "capability_inference_plan"
 
 def definition(spec, deployment):
     spec = validate_spec(spec)
+    if spec["version"] == 3:
+        from itov.flux_image import definition as flux_definition
+
+        return flux_definition(spec, deployment)
     require(deployment["specification"] == spec, "Deployment specification differs")
     spec_id = sha256(canonical_bytes(spec))
     image = {key: spec[key] for key in ("width", "height")}

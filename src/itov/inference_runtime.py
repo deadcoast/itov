@@ -21,6 +21,10 @@ from itov.training_results import boundary
 
 def _deployment(config, spec, *, stage=False):
     spec = validate_spec(spec)
+    if spec["version"] == 3:
+        from itov.flux_image import deployment
+
+        return deployment(config, spec)
     checkpoint = safe_path(
         config.comfyui_root / "models/checkpoints", spec["checkpoint"]["loader_name"]
     )
@@ -118,10 +122,15 @@ def prepare(config, spec):
 
 
 def _runtime(config, value, *, timeout):
-    receipt = qualify_graphs(config, value, timeout=timeout, extra_sources=RUNTIME_SOURCES)
+    sources, profile = RUNTIME_SOURCES, "stock-sdxl-inference-v2"
+    if value["specification"]["version"] == 3:
+        from itov.flux_image import RUNTIME_SOURCES as flux_sources
+
+        sources, profile = flux_sources, "stock-flux2-klein-inference-v3"
+    receipt = qualify_graphs(config, value, timeout=timeout, extra_sources=sources)
     receipt.pop("qualification_id")
     receipt.pop("plan_id")
-    return {**receipt, "image_decoder": image_tools(), "profile": "stock-sdxl-inference-v2"}
+    return {**receipt, "image_decoder": image_tools(), "profile": profile}
 
 
 def plan(config, spec, *, save=False, timeout=3):

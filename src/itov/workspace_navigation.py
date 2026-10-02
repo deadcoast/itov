@@ -114,7 +114,7 @@ def _owner(config, value):
             _, _, plan = _document(config, path)
             require(_kind(plan)[0] == family, "Owner family differs")
             require(
-                plan["version"] == (2 if family == "inference" else 1),
+                plan["version"] in ((2, 3) if family == "inference" else (1,)),
                 "Unsupported owner plan version",
             )
             check_seal(plan, "plan_id")
@@ -166,7 +166,7 @@ def inspect(config, path):
     path, raw, value = _document(config, path)
     kind, key = _kind(value)
     require(
-        value["version"] == (2 if kind == "inference" else 1),
+        value["version"] in ((2, 3) if kind == "inference" else (1,)),
         "Unsupported navigation artifact version",
     )
     if key:

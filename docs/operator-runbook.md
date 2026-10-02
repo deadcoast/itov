@@ -13,6 +13,16 @@ This is the supported command sequence for the current Windows, single-local-NVI
 
 ## Read a response
 
+To generate a base image from a description, follow the
+[base-image workflow](base-image-workflow.md). `inference spec --prompt ... --save`
+creates a saved version-two request with explicit settings and a preparation
+action. Runtime qualification and image-quality review remain separate steps.
+
+The experimental [FLUX image path](flux-image-workflow.md) uses `--model
+flux2-klein-4b-fp8` and the same inference owner/recovery commands. It has no
+adapter or training integration. GPU runs are currently deferred by the user;
+drafting and inspecting capabilities do not start a server or load a model.
+
 For B-03 training configuration, use the [optimization runbook](training-configuration.md). It explains v3 specifications, the effective sample/rate plan, supported settings, partial step evidence and the separate technical/quality outcomes.
 
 For C-01 evaluation coverage, use the [corpus runbook](evaluation-corpus.md). Freeze broader cases and strengths independently of training, execute a base-model baseline, then record every image observation. Pending review returns 1; a successfully recorded baseline returns 0 even when images fail. It cannot promote a candidate.

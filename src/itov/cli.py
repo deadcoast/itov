@@ -201,9 +201,27 @@ def parser() -> argparse.ArgumentParser:
                 help="Bind measured VRAM profiles; retained automatically on resume",
             )
     inference = commands.add_parser(
-        "inference", help="Deploy, qualify and execute SDXL adapter stacks"
+        "inference", help="Describe images and execute pinned image model workflows"
     )
     inference_actions = inference.add_subparsers(dest="action", required=True)
+    image_spec = inference_actions.add_parser(
+        "spec", help="Describe a base image; defaults to SDXL at 1024x1024"
+    )
+    image_spec.add_argument("--prompt", required=True, help="Describe the image to generate")
+    image_spec.add_argument("--model", choices=("sdxl", "flux2-klein-4b-fp8"), default="sdxl")
+    image_spec.add_argument("--negative-prompt", default="")
+    image_spec.add_argument("--width", type=int, default=1024)
+    image_spec.add_argument("--height", type=int, default=1024)
+    image_spec.add_argument("--seed", type=int, default=0)
+    image_spec.add_argument("--count", type=int, default=1)
+    image_spec.add_argument("--steps", type=int, help="SDXL default 20; FLUX distilled requires 4")
+    image_spec.add_argument("--cfg-milli", type=int, help="SDXL default 7000; FLUX requires 1000")
+    image_spec.add_argument(
+        "--checkpoint", help="SDXL checkpoint loader name; pinned base bytes only"
+    )
+    image_spec.add_argument("--save", action="store_true")
+    image_spec.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
+    image_spec.add_argument("--json", action="store_true")
     for action in (
         "capabilities",
         "prepare",
@@ -215,9 +233,11 @@ def parser() -> argparse.ArgumentParser:
         "abandon",
     ):
         item = inference_actions.add_parser(action)
+        if action == "capabilities":
+            item.add_argument("--model", choices=("sdxl", "flux2-klein-4b-fp8"), default="sdxl")
         if action != "capabilities":
             item.add_argument(
-                "file", type=Path, help="Inference specification or saved v2 plan JSON"
+                "file", type=Path, help="Inference specification or saved v2/v3 plan JSON"
             )
         item.add_argument("--config", type=Path, default=Path("workspace/itov.toml"))
         item.add_argument("--json", action="store_true")
@@ -976,11 +996,36 @@ def _execute(args):
         from itov.inference_capabilities import capabilities
 
         if args.action == "capabilities":
+            if args.model == "flux2-klein-4b-fp8":
+                from itov.flux_image import capabilities
+
             result = capabilities()
             return result
         config = load_config(args.config)
+        if args.action == "spec":
+            from itov.image_request import create
+
+            return create(
+                config,
+                save=args.save,
+                **{
+                    key: getattr(args, key)
+                    for key in (
+                        "model",
+                        "prompt",
+                        "negative_prompt",
+                        "width",
+                        "height",
+                        "seed",
+                        "count",
+                        "steps",
+                        "cfg_milli",
+                        "checkpoint",
+                    )
+                },
+            )
         spec = load_spec(args.file) if args.action in {"prepare", "plan"} else None
-        if spec is None or spec["version"] == 2:
+        if spec is None or spec["version"] in (2, 3):
             if args.action == "prepare":
                 result = inference_runtime.prepare(config, spec)
             elif args.action == "plan":

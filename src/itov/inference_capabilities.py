@@ -70,6 +70,10 @@ def asset(value, label):
 
 
 def validate_spec(value):
+    if isinstance(value, dict) and value.get("version") == 3:
+        from itov.flux_image import validate_spec as validate_flux
+
+        return validate_flux(value)
     object_fields(
         value,
         {

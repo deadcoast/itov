@@ -270,6 +270,17 @@ def _guidance(args, result, state):
         message = "Source job and image bytes are bound; prepare the saved specification next."
         if result.get("saved_path"):
             configured("Stage the bound video source", "video", "prepare", result["saved_path"])
+    elif command == "inference" and action == "spec" and state == "ok":
+        message = "Image request described; inspect its prompt and settings before planning."
+        if result.get("saved_path"):
+            configured(
+                "Check the model and prepare this image",
+                "inference",
+                "prepare",
+                result["saved_path"],
+            )
+        else:
+            message += " Use --save to keep the specification."
     elif command == "av":
         if action == "spec" and state == "ok":
             message = "Sources and audio offset are bound. Inspect the specification before muxing."
@@ -543,7 +554,7 @@ def _guidance(args, result, state):
         if not saved:
             configured("Save the immutable plan", command, "plan", source, "--save")
         elif command in {"batch", "audio", "video"} or (
-            command == "inference" and result.get("plan", {}).get("version") != 2
+            command == "inference" and result.get("plan", {}).get("version") not in (2, 3)
         ):
             configured("Qualify the saved plan", "batch", "qualify", saved, "--save")
         elif command == "training":

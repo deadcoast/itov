@@ -55,6 +55,15 @@ AUDIO_MODULES = {
         "SaveAudioAdvanced",
     )
 }
+FLUX_MODULES = {
+    "EmptyFlux2LatentImage": "comfy_extras.nodes_flux",
+    "Flux2Scheduler": "comfy_extras.nodes_flux",
+    "KSamplerSelect": "comfy_extras.nodes_custom_sampler",
+    "CFGGuider": "comfy_extras.nodes_custom_sampler",
+    "RandomNoise": "comfy_extras.nodes_custom_sampler",
+    "SamplerCustomAdvanced": "comfy_extras.nodes_custom_sampler",
+    "ConditioningZeroOut": "nodes",
+}
 
 
 def model_path(config: Config, kind: str, name: str) -> Path:
@@ -143,7 +152,16 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
         "Extra model search paths are not supported by this qualification profile",
     )
     used, files = set(), {}
-    video = any(
+    flux = any(
+        node["class_type"] in FLUX_MODULES
+        for job in plan["jobs"]
+        for node in parse_json(job["workflow_json"]).values()
+    )
+    if flux:
+        from itov.flux_image import qualify_definition
+
+        qualify_definition(plan)
+    video = not flux and any(
         node["class_type"] in VIDEO_MODULES
         for job in plan["jobs"]
         for node in parse_json(job["workflow_json"]).values()
@@ -165,6 +183,8 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
         "Audio and video generation require separate qualified plans",
     )
     profile = "stock-stable-audio-v1" if audio else "stock-wan22-v1" if video else PROFILE
+    if flux:
+        profile = "stock-flux2-klein-v1"
 
     def bind(root, name):
         path = safe_path(root, name)
@@ -220,13 +240,23 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
             for binding in plan["request"]["bindings"][job["preset"]]["seed_inputs"]
             if binding["class_type"] == "KSampler" and binding["input"] == "seed"
         }
+        noise_nodes = {
+            binding["node"]
+            for binding in plan["request"]["bindings"][job["preset"]]["seed_inputs"]
+            if binding["class_type"] == "RandomNoise" and binding["input"] == "noise_seed"
+        }
         for node_id, node in graph.items():
             kind, inputs = node["class_type"], node["inputs"]
             require(
-                kind in SUPPORTED or kind in VIDEO_MODULES or kind in AUDIO_MODULES,
+                kind in SUPPORTED
+                or kind in VIDEO_MODULES
+                or kind in AUDIO_MODULES
+                or (flux and kind in FLUX_MODULES),
                 f"Node is outside the {profile} profile: {kind}",
             )
-            module = AUDIO_MODULES.get(kind, VIDEO_MODULES.get(kind, "nodes"))
+            module = FLUX_MODULES.get(
+                kind, AUDIO_MODULES.get(kind, VIDEO_MODULES.get(kind, "nodes"))
+            )
             require(
                 registry[kind].get("python_module") == module,
                 f"Node is not the stock implementation: {kind}",
@@ -267,14 +297,14 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
                 _pin(node, asset, kind, required=True)
                 if kind == "CLIPLoader":
                     require(
-                        inputs["type"] == ("stable_audio" if audio else "wan")
+                        inputs["type"] == ("flux2" if flux else "stable_audio" if audio else "wan")
                         and inputs.get("device", "default") == "default",
                         "Profile requires its default text encoder type and device",
                     )
                 if kind == "UNETLoader":
                     require(
                         inputs["weight_dtype"] == "default",
-                        "Video profile requires the pinned model's default dtype",
+                        "Profile requires the pinned model's default dtype",
                     )
             elif kind in {"LoraLoader", "LoraLoaderModelOnly"}:
                 name = inputs["lora_name"]
@@ -339,6 +369,13 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
                     and job["seed"] is not None
                     and inputs["seed"] == job["seed"],
                     "Every KSampler seed must be covered by the plan's seed reservation",
+                )
+            elif kind == "RandomNoise":
+                require(
+                    node_id in noise_nodes
+                    and job["seed"] is not None
+                    and inputs["noise_seed"] == job["seed"],
+                    "Every RandomNoise seed must be covered by the plan's seed reservation",
                 )
     system = stats["system"]
     body = {

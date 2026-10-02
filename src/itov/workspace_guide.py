@@ -114,13 +114,33 @@ def guide(config_path, topic):
         ),
         "models": (
             (
-                "Provide a declared model specification and exact installed asset "
-                "hashes. V1 media plans use batch execution; v2 candidate inference "
+                "Describe a base image with inference spec, or provide a declared "
+                "model specification and exact installed asset hashes. "
+                "V1 media plans use batch execution; v2/v3 image inference "
                 "has its own owner. Each prepare/plan result supplies the next "
-                "commands."
+                "commands. FLUX.2 Klein is experimental; its GPU and visual "
+                "qualification remain pending."
             ),
             [
                 step("Inspect inference capabilities", "inference", "capabilities"),
+                step(
+                    "Inspect experimental FLUX assets and limits",
+                    "inference",
+                    "capabilities",
+                    "--model",
+                    "flux2-klein-4b-fp8",
+                ),
+                step(
+                    "Describe and save a base image request",
+                    "inference",
+                    "spec",
+                    "--prompt",
+                    "IMAGE_DESCRIPTION",
+                    "--seed",
+                    "0",
+                    "--save",
+                    needs=["IMAGE_DESCRIPTION"],
+                ),
                 step(
                     "Prepare image model assets",
                     "inference",

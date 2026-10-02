@@ -155,6 +155,18 @@ The stage-five acceptance run used the neutral image-copy workflow: seven jobs a
 
 ## Pinned image inference
 
+Start with `inference spec --prompt "One red teapot on a wooden table" --seed 926202600 --save`
+to describe a base image without writing JSON. The saved request uses 1024×1024
+defaults and the existing prepare/plan/run pipeline. See the
+[base-image workflow](docs/base-image-workflow.md). Visual quality remains
+unaccepted; this request builder does not resolve the known model failures.
+
+An experimental [FLUX.2 Klein 4B FP8 workflow](docs/flux-image-workflow.md) is available
+with `inference spec --model flux2-klein-4b-fp8 --prompt "..." --save`.
+It has separate pinned model assets and a version-three graph. Code/protocol
+verification does not qualify its actual runtime or image quality; GPU runs are
+deferred at the user's request. SDXL remains the default.
+
 A-04 adds version-two inference with explicit model capabilities, sampler settings and ordered LoRA bindings. Use `inference capabilities` to inspect the bounded SDXL contract, then `inference prepare`, `plan --save`, `run`, `status`, `resume` and `replay --save`. The [candidate and stack runbook](docs/candidate-inference.md) covers trained-candidate identity, deployment, strength controls and incompatible-stack refusals. This route stages experimental candidates without catalog activation; the current candidate remains rejected on quality. Version-one preset/catalog workflows below remain supported.
 
 The SDXL base and SDXL+LCM profiles prepare stock workflows with expected checkpoint/LoRA hashes, fixed sampler settings, and explicit seeds:

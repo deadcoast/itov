@@ -4,6 +4,25 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-09-26 — D-02.1 experimental FLUX image integration; GPU work deferred
+
+- Added `inference spec/capabilities --model flux2-klein-4b-fp8`, pinned diffusion/text/VAE assets, an immutable version-three graph and existing owned prepare/plan/run/status/resume/replay integration. Native Flux2 scheduling and RandomNoise seed ownership are explicit; unsupported negative prompts, adapters and sampler settings are refused.
+- Confined new custom sampler nodes to the declared graph; checked stale model/tokenizer/schema refusal, graph tampering, lost acknowledgements and v3 workspace navigation with CPU/HTTP fixtures. Matched the official distilled template's relevant nodes/connections and upstream asset metadata. See the [contract](docs/flux-image-workflow.md) and [verification](docs/d021-flux-code-verification-20260926.md).
+- Passed 1,624 full-source and 232 installed checks. Exact package parity covers 88 modules and README; 18 installed commands include seven offline replays of prior SDXL plans and missing-FLUX-assets refusal. No real model was loaded by these checks.
+- Preserved SDXL defaults, specification identities, previous images and quality failures. The user explicitly deferred further GPU runs: no FLUX weight downloads, actual model execution, visual acceptance, training, audio work or activation occurred. D-02.1 remains active; this is backend code, not a completed training interface or operational-model claim.
+
+### 2026-09-26 — D-02.1 image comparison completed; resolution hypothesis rejected
+
+- Completed the declared 21-image base-only comparison after host memory recovered. Directly inspected every original: 512px development passed 1/6, 1024px development passed 0/6 and 1024px fresh cases passed 4/9. Higher resolution lost the passing geometry seed and added objects. No usable recipe or model-quality acceptance is claimed; D-02.1 remains active.
+- Retained all 21 original PNGs, seven labeled sheets, per-image judgments, successful owned records and two server histories. The initial startup refusal and a second admission pause between resolutions remain recorded; continuation generated only the 15 unstarted images. Both owned servers stopped. Audio, video, training and activation were not performed.
+- The [results report](docs/d021-image-results-20260926.md) supersedes the pending-memory status below. It also corrects the earlier evidence receipt's hash for its own still-open finalizer log without rewriting that receipt. Changed receipt-bound planning documents have exact pre-results snapshots. Request creation and package checks remain separate from failed model quality.
+
+### 2026-09-26 — D-02.1 base-image request workflow; visual trial pending memory
+
+- Added `inference spec --prompt ... --save`, with explicit native-size defaults, optional supported settings, immutable version-two saves and next-command guidance. Integrated it into the workspace guide and [base-image runbook](docs/base-image-workflow.md). Existing request/graph identities and runtime ownership behavior are preserved.
+- Passed 156 focused source and 156 installed checks; final source/sdist/wheel/core-install parity covers 87 modules and README. An initial fixture connection-abort failure remains recorded with the successful isolated/full reruns. The clean installed command also verifies the pinned checkpoint without model loading.
+- Audited the SDXL graph and dimension-conditioning path; no wiring defect was established. Declared a 21-image 512-versus-1024 comparison, then retained a host-commit refusal before server startup. **No new images or image-quality acceptance. D-02.1 remains active.** See [development evidence](docs/d021-image-development-20260926.md). Audio remains deferred; no training, activation, release or Git publication occurred.
+
 ### 2026-09-26 — user-facing training pipeline added as priority three
 
 - Added D-02.3 after base image and silent image-to-video operation: a graphical reference-media section, per-item descriptions, training presets, progress, checkpoint recovery and separate test-prompt previews. The [requirements](docs/training-workspace-requirements.md) specify the installed workflow and failure/recovery evidence needed.
