@@ -19,7 +19,13 @@ build-backend = "uv_build"
 
 [dependency-groups]
 # uv installs this group by default for local development.
-dev = ["pytest>=8,<9", "ruff>=0.9,<1", "Pillow==12.3.0"]
+dev = [
+    "pytest>=8,<9",
+    "ruff>=0.9,<1",
+    "Pillow==12.3.0",
+    "mypy>=2.4.0",
+    "pyright>=1.1.414",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

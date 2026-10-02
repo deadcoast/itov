@@ -8,10 +8,13 @@ import math
 import struct
 import sys
 from contextlib import contextmanager
+from pathlib import Path
+from typing import Literal, overload
 
 from itov.catalog import array as json_array
 from itov.catalog import canonical_bytes, integer, object_fields, require, sha256
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
+from itov.config import Config
 from itov.evidence_reads import observe, read_document
 from itov.records import Document
 from itov.training_data import check_seal, file_ref, load_dataset
@@ -33,7 +36,7 @@ def boundary(name):
     except ResultValidationError:
         raise
     except KeyboardInterrupt as error:
-        error.boundary = name
+        error.__dict__["boundary"] = name
         raise
     except (OSError, ValueError, KeyError, TypeError, struct.error) as error:
         raise ResultValidationError(name, str(error)) from error
@@ -80,8 +83,7 @@ def weight_snapshot(path, rank, expected_sha256):
 def _inspect_weights(handle, size, rank):
     header_size = struct.unpack("<Q", handle.read(8))[0]
     require(2 <= header_size <= min(4 * 1024 * 1024, size - 8), "Invalid safetensors header size")
-    header = parse_json(handle.read(header_size))
-    require(isinstance(header, dict), "Invalid safetensors header")
+    header = parse_json_object(handle.read(header_size), message="Invalid safetensors header")
     tensors = {k: v for k, v in header.items() if k != "__metadata__"}
     require(0 < len(tensors) <= 4096, "Invalid LoRA tensor count")
     spans, pairs = [], {}
@@ -95,7 +97,8 @@ def _inspect_weights(handle, size, rank):
             ),
             None,
         )
-        require(suffix is not None, "Unexpected LoRA tensor name")
+        if suffix is None:
+            raise ValueError("Unexpected LoRA tensor name")
         object_fields(tensor, {"dtype", "shape", "data_offsets"}, "LoRA tensor")
         require(tensor["dtype"] in ("F32", "F16", "BF16"), "Unsupported LoRA dtype")
         shape, offsets = tensor["shape"], tensor["data_offsets"]
@@ -148,7 +151,36 @@ def validate_record(config, plan, folder, *, expected_result_id=None):
     return _validate(config, plan, folder, expected_result_id=expected_result_id, capture=True)
 
 
-def _validate(config, plan, folder, *, expected_result_id, capture):
+@overload
+def _validate(
+    config: Config,
+    plan: dict,
+    folder: Path,
+    *,
+    expected_result_id: str | None,
+    capture: Literal[True],
+) -> ValidatedTrainingResult: ...
+
+
+@overload
+def _validate(
+    config: Config,
+    plan: dict,
+    folder: Path,
+    *,
+    expected_result_id: str | None,
+    capture: Literal[False],
+) -> dict: ...
+
+
+def _validate(
+    config: Config,
+    plan: dict,
+    folder: Path,
+    *,
+    expected_result_id: str | None,
+    capture: bool,
+) -> ValidatedTrainingResult | dict:
     result = read_result(folder, plan, expected_result_id=expected_result_id)
     with boundary("result_schema"):
         object_fields(
@@ -318,6 +350,7 @@ def _validate(config, plan, folder, *, expected_result_id, capture):
                 integer(row.get("seed"), "quality result seed")
             evidence = matrix_evidence(config.root, plan["specification"], result, folder)
     if capture:
+        assert snapshot is not None
         return ValidatedTrainingResult(
             Document.capture(result), Document.capture(dataset), snapshot, evidence
         )

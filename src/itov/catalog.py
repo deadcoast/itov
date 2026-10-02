@@ -15,7 +15,8 @@ MAX_DOCUMENT_BYTES = 32 * 1024 * 1024
 MAX_INTEGER = 2**64 - 1
 
 
-def require(condition: bool, message: str):
+def require(condition: object, message: str) -> None:
+    """Reject a false condition, including empty values used by document validators."""
     if not condition:
         raise ValueError(message)
 

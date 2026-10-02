@@ -4,6 +4,13 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-10-02 — first Python diagnostic correction pass
+
+- Added checked JSON-object decoding for immutable records, catalog snapshots and lint documents. Sealed records now return a dictionary only after their existing object/hash checks succeed; the generic JSON parser retains support for scalar and array values.
+- Corrected training-result return types, evidence-read context types, dataset dimension initialization, catalog recovery narrowing and interruption metadata handling. Existing duplicate-key, nonfinite-number, hash, freshness and ownership checks remain active.
+- Added mypy and Pyright to uv development dependencies. Across all 88 source modules, Pyright errors fell from 830 to 379 and mypy errors from 175 to 161. The eight changed source modules have no errors in those runs; the broader cleanup remains open.
+- Passed 376 targeted tests, including 12 new malformed-document and interruption checks and 40 candidate lifecycle/recovery checks, plus Ruff and uv dependency checks. The full regression suite and GPU/model execution were not rerun for this pass. See the [review and remaining diagnostics](docs/evidence/python-errors-pass1-20261002.json).
+
 ### 2026-09-26 — D-02.1 experimental FLUX image integration; GPU work deferred
 
 - Added `inference spec/capabilities --model flux2-klein-4b-fp8`, pinned diffusion/text/VAE assets, an immutable version-three graph and existing owned prepare/plan/run/status/resume/replay integration. Native Flux2 scheduling and RandomNoise seed ownership are explicit; unsupported negative prompts, adapters and sampler settings are refused.

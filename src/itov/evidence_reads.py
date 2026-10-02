@@ -1,5 +1,7 @@
 """Operation-local read receipts with a fresh content check; never a hash cache."""
 
+from __future__ import annotations
+
 import hashlib
 from contextlib import contextmanager
 from contextvars import ContextVar
@@ -8,7 +10,7 @@ from pathlib import Path
 
 from itov.catalog import read_document as _read_document
 
-_active = ContextVar("itov_evidence_reads", default=None)
+_active: ContextVar[EvidenceReads | None] = ContextVar("itov_evidence_reads", default=None)
 
 
 @dataclass(frozen=True)
@@ -39,9 +41,9 @@ class EvidenceReads:
     An observation never skips a read/check. Nested scopes also feed their parent.
     """
 
-    def __init__(self):
-        self._files = {}
-        self._parent = None
+    def __init__(self) -> None:
+        self._files: dict[Path, FileObservation] = {}
+        self._parent: EvidenceReads | None = None
 
     @contextmanager
     def capture(self):

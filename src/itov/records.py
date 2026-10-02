@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 
 from itov.catalog import canonical_bytes
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 
 
 @dataclass(frozen=True)
@@ -13,8 +13,10 @@ class Document:
     raw: bytes
 
     @classmethod
-    def capture(cls, value):
+    def capture(cls, value: dict):
+        if not isinstance(value, dict):
+            raise ValueError("Document requires a JSON object")
         return cls(canonical_bytes(value))
 
-    def to_dict(self):
-        return parse_json(self.raw)
+    def to_dict(self) -> dict:
+        return parse_json_object(self.raw)

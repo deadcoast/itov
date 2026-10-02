@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-02",
+  "status": "first_pass_complete_remaining_diagnostics_open",
+  "input": {
+    "path": "src/PYTHON_ERRORS.js",
+    "sha256": "fc129fef335a62fd8ecf18d7f7c026a12683c208d6d8ba4711fd60aca4e79d96",
+    "entries": 1011,
+    "preserved": true,
+    "note": "The 1011 exported entries include 830 Pylance errors, 175 mypy errors and 6 mypy notes. Reports from different checkers overlap; these are not distinct runtime bugs."
+  },
+  "tools": {
+    "python": "3.13.9",
+    "pyright": "1.1.414",
+    "mypy": "2.4.0",
+    "installation": "uv development group, recorded in pyproject.toml and uv.lock"
+  },
+  "diagnostics": {
+    "source_files": 88,
+    "pyright": {
+      "before": 830,
+      "after": 379,
+      "reduction": 451,
+      "command": "uv run --no-sync --offline pyright --pythonpath .venv/Scripts/python.exe --outputjson src/itov",
+      "status": "still_failing"
+    },
+    "mypy": {
+      "before": 175,
+      "after": 161,
+      "reduction": 14,
+      "command": "uv run --no-sync --offline mypy --python-executable .venv/Scripts/python.exe --show-error-codes src/itov",
+      "status": "still_failing",
+      "scope": "Default mypy checks, not strict mode or --check-untyped-defs; Pyright also analyzed source bodies."
+    }
+  },
+  "changed_source_files": {
+    "src/itov/catalog.py": "a71c804f76c7e5c4cf094cc9f756ec3805d07c61a05efea3b3e40d723b1ef818",
+    "src/itov/catalog_store.py": "ea890fa366e052c43040eb58affe1cec7aaeff4dfd8cc977ac44226640e6aa26",
+    "src/itov/comfyui.py": "5cb8287e70d576ce0f9933e137873c9ea1b6f5f05e3824a0f990998f5789a66d",
+    "src/itov/evidence_reads.py": "083b90aa3983497c614c22d309669d2171dbcb9ade420c1fec05dab0dbf7443b",
+    "src/itov/linting.py": "740c9237d673b3d36c5014fb417105e7150eb01a7b2310147ba5f4c17e2a518d",
+    "src/itov/records.py": "3f5ab6ea486cf354817ad56ce777e13014f9f069b26324cb2885e809ac6294c4",
+    "src/itov/training_data.py": "4126993b49932410bedaa1be82b3061ac78e495feb91620f0c53898a1e79f4ca",
+    "src/itov/training_results.py": "25c47f0802b89a71d2044f5f5601d5b9751fd453719b70f4ef20fc62d783b0eb"
+  },
+  "changed_source_diagnostics": {
+    "pyright": 0,
+    "mypy": 0
+  },
+  "corrections": [
+    {
+      "area": "JSON document boundaries",
+      "files": [
+        "comfyui.py",
+        "records.py",
+        "catalog_store.py",
+        "linting.py"
+      ],
+      "change": "Added parse_json_object with a runtime dictionary check. Generic parse_json still returns object and accepts non-object JSON. Immutable documents and snapshots expose independent validated dictionaries."
+    },
+    {
+      "area": "Sealed documents and dataset metadata",
+      "files": [
+        "training_data.py"
+      ],
+      "change": "check_seal now explicitly narrows object to dict before preserving the existing digest checks. Typed group/source maps and per-sample dimension tracking prevent unbound or previous-sample dimension state."
+    },
+    {
+      "area": "Training result variants",
+      "files": [
+        "training_results.py"
+      ],
+      "change": "Literal overloads distinguish dictionary results from captured ValidatedTrainingResult. Tensor suffix and snapshot presence are narrowed; interruption tagging retains the original exception object."
+    },
+    {
+      "area": "Evidence context and catalog recovery",
+      "files": [
+        "evidence_reads.py",
+        "catalog_store.py",
+        "catalog.py"
+      ],
+      "change": "ContextVar and parent state allow EvidenceReads or None. Catalog HEAD overloads distinguish required and optional reads. Recovery explicitly checks missing HEAD/guard. require accepts the truthy values its callers already use."
+    }
+  ],
+  "validation": {
+    "targeted_pytest": {
+      "passed": 376,
+      "failed": 0,
+      "errors": 0,
+      "new_cases": 12,
+      "seconds": 91.26,
+      "files": [
+        "test_json_documents.py",
+        "test_comfyui.py",
+        "test_workflow.py",
+        "test_catalog.py",
+        "test_catalog_store.py",
+        "test_training.py",
+        "test_training_results.py",
+        "test_assessment_records.py",
+        "test_dataset_import.py",
+        "test_trigger.py",
+        "test_scene.py",
+        "test_candidate_lifecycle.py"
+      ],
+      "runs": [
+        {
+          "passed": 336,
+          "seconds": 74.28,
+          "junit": "workspace/state/verification/python-errors-20261002-pass1/pytest.xml"
+        },
+        {
+          "passed": 40,
+          "seconds": 16.98,
+          "junit": "workspace/state/verification/python-errors-20261002-pass1/pytest-lifecycle.xml"
+        }
+      ]
+    },
+    "ruff_check": "passed",
+    "ruff_format": "passed",
+    "uv_lock_check": "passed",
+    "uv_package_check": "passed",
+    "full_suite": "not_run_for_this_pass",
+    "gpu_or_model_execution": "not_run"
+  },
+  "remaining_pyright_by_file": {
+    "vram.py": 32,
+    "client_ownership.py": 28,
+    "workspace_navigation.py": 26,
+    "audiovisual.py": 23,
+    "parallel.py": 21,
+    "device.py": 17,
+    "inference_graph.py": 15,
+    "batch_cancellation.py": 13,
+    "dataset_import.py": 13,
+    "candidate_lifecycle.py": 11,
+    "qualification.py": 9,
+    "quality.py": 9,
+    "training_worker.py": 9,
+    "batch_execution.py": 8,
+    "execution_ownership.py": 8,
+    "flux_image.py": 8,
+    "training.py": 8,
+    "batch.py": 7,
+    "deployed_review.py": 7,
+    "training_checkpoint_worker.py": 7,
+    "dataset_features.py": 6,
+    "deployed_loader_worker.py": 6,
+    "image_checks.py": 6,
+    "inference_runtime.py": 6,
+    "media.py": 6,
+    "curation.py": 5,
+    "dataset_inspection.py": 5,
+    "media_sources.py": 5,
+    "scene.py": 5,
+    "batch_request.py": 4,
+    "evaluation_corpus.py": 4,
+    "vram_runtime.py": 4,
+    "dataset_manifest.py": 3,
+    "deployed_loader.py": 3,
+    "owned_jobs.py": 3,
+    "audio.py": 2,
+    "dataset_freeze.py": 2,
+    "evaluation.py": 2,
+    "experiments.py": 2,
+    "image_media.py": 2,
+    "inference.py": 2,
+    "jobs.py": 2,
+    "trigger.py": 2,
+    "video.py": 2,
+    "audio_media.py": 1,
+    "checkpoint_tensors.py": 1,
+    "cli_output.py": 1,
+    "dataset_images.py": 1,
+    "evaluation_runtime.py": 1,
+    "experiment_variance.py": 1,
+    "image_request.py": 1,
+    "ledger.py": 1,
+    "training_checkpoints.py": 1,
+    "training_optimization.py": 1,
+    "workspace_starter.py": 1
+  },
+  "remaining_pyright_by_rule": {
+    "reportIndexIssue": 137,
+    "reportAttributeAccessIssue": 108,
+    "reportArgumentType": 36,
+    "reportOptionalSubscript": 30,
+    "reportMissingImports": 26,
+    "reportReturnType": 12,
+    "reportOptionalMemberAccess": 10,
+    "reportPossiblyUnboundVariable": 7,
+    "reportOperatorIssue": 4,
+    "reportGeneralTypeIssues": 4,
+    "reportOptionalIterable": 3,
+    "reportCallIssue": 1,
+    "reportOptionalOperand": 1
+  },
+  "next_work": [
+    {
+      "priority": 1,
+      "files": [
+        "vram.py",
+        "client_ownership.py",
+        "workspace_navigation.py",
+        "parallel.py",
+        "device.py"
+      ],
+      "action": "Replace assumptions about decoded object documents with checked dictionary boundaries while preserving domain-specific validation and error messages.",
+      "done_when": "Affected Pyright/mypy errors cleared and ownership/replay/recovery tests pass."
+    },
+    {
+      "priority": 2,
+      "files": [
+        "inference_graph.py",
+        "dataset_import.py",
+        "batch_cancellation.py",
+        "candidate_lifecycle.py"
+      ],
+      "action": "Narrow optional values and callback/record types at their actual validation boundaries.",
+      "done_when": "No unchecked None/index paths in the selected diagnostics, with refusal and recovery behavior preserved."
+    },
+    {
+      "priority": 3,
+      "files": [
+        "training_worker.py",
+        "training_checkpoint_worker.py",
+        "training_optimization.py",
+        "deployed_loader_worker.py",
+        "vram_runtime.py",
+        "dataset_features.py"
+      ],
+      "action": "Resolve optional-worker import analysis against its actual interpreter/source roots; do not install similarly named packages for ComfyUI-local or adjacent first-party modules.",
+      "done_when": "Imports resolve in the intended development analysis context without weakening missing-import checks or conflating root, training and ComfyUI environments."
+    }
+  ],
+  "raw_evidence": {
+    "pyright-before.json": "workspace/state/verification/python-errors-20261002-pass1/pyright-before.json",
+    "pyright-after.json": "workspace/state/verification/python-errors-20261002-pass1/pyright-after.json",
+    "mypy-before.txt": "workspace/state/verification/python-errors-20261002-pass1/mypy-before.txt",
+    "mypy-after.txt": "workspace/state/verification/python-errors-20261002-pass1/mypy-after.txt",
+    "pytest.xml": "workspace/state/verification/python-errors-20261002-pass1/pytest.xml",
+    "pytest-lifecycle.xml": "workspace/state/verification/python-errors-20261002-pass1/pytest-lifecycle.xml"
+  },
+  "limits": [
+    "The original diagnostic export is historical; rerun the documented commands for current locations.",
+    "Saved training plans bind worker source hashes and may require fresh planning after source changes.",
+    "Raw verification artifacts are workspace-local; this tracked report retains counts, changes, file hashes and remaining work.",
+    "No blanket Any return was added to the generic JSON parser, and no type-ignore directives or disabled diagnostic rules were added."
+  ]
+}

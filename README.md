@@ -222,8 +222,15 @@ $env:UV_CACHE_DIR = "$PWD\.uv-cache"
 uv run --locked pytest --basetemp .test-tmp
 uv run --locked ruff check .
 uv run --locked ruff format --check .
+uv run --locked pyright --pythonpath .venv/Scripts/python.exe src/itov
+uv run --locked mypy --python-executable .venv/Scripts/python.exe src/itov
 uv build
 ```
+
+Pyright and mypy are included in the uv development group. Both commands currently
+report remaining source diagnostics; the [first correction pass](docs/evidence/python-errors-pass1-20261002.json)
+records the baseline, corrections, targeted tests and outstanding files. The original
+`src/PYTHON_ERRORS.js` export is retained as historical input.
 
 Automated tests use temporary workspaces, a local HTTP fixture, and owned child processes for lock contention and crash recovery. Real runtime qualification is recorded separately. The [development review](docs/development-review.md) records completed gates, acceptance limits, and the next stage.
 

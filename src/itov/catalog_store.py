@@ -6,6 +6,7 @@ import os
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal, overload
 
 from itov.catalog import (
     MAX_DOCUMENT_BYTES,
@@ -19,7 +20,7 @@ from itov.catalog import (
     validate_catalog,
     verify_assets,
 )
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.ledger import new_event, verify_ledger
 from itov.locking import file_lock
 
@@ -56,7 +57,7 @@ class Snapshot:
     raw: bytes
 
     def to_dict(self) -> dict:
-        return parse_json(self.raw)
+        return parse_json_object(self.raw)
 
     def report(self) -> dict:
         value = self.to_dict()
@@ -72,7 +73,7 @@ class Snapshot:
 
 def _snapshot(raw: bytes, head: str) -> Snapshot:
     require(sha256(raw) == head, "Snapshot SHA-256 mismatch")
-    value = parse_json(raw)
+    value = parse_json_object(raw, message="snapshot: expected an object")
     object_fields(value, {"version", "catalog", "ledger"}, "snapshot")
     require(type(value["version"]) is int and value["version"] == 1, "Invalid snapshot version")
     validate_catalog(value["catalog"])
@@ -97,6 +98,12 @@ class CatalogStore:
 
     def _prepare(self):
         self._path("objects").mkdir(parents=True, exist_ok=True)
+
+    @overload
+    def _head(self, *, missing_ok: Literal[False] = False) -> str: ...
+
+    @overload
+    def _head(self, *, missing_ok: Literal[True]) -> str | None: ...
 
     def _head(self, *, missing_ok: bool = False) -> str | None:
         path = self._path("HEAD")
@@ -225,7 +232,7 @@ class CatalogStore:
             raw = read_document(self._path("pending.json"))
             if expected_pending is not None:
                 require(sha256(raw) == expected_pending, "Pending transaction changed")
-            intent = parse_json(raw)
+            intent = parse_json_object(raw, message="pending transaction: expected an object")
             object_fields(intent, {"version", "before", "after", "snapshot"}, "pending transaction")
             require(
                 type(intent["version"]) is int and intent["version"] == 1,
@@ -254,9 +261,8 @@ class CatalogStore:
             )
             lifecycle = value["ledger"][-1]["version"] == 2
             if abandon:
-                require(
-                    lifecycle and head == before, "Only uncommitted lifecycle intent can abandon"
-                )
+                if not lifecycle or head is None or head != before:
+                    raise ValueError("Only uncommitted lifecycle intent can abandon")
                 archive = self._path(f"abandoned/{sha256(raw)}.json")
                 archive.parent.mkdir(exist_ok=True)
                 if archive.exists():
@@ -270,7 +276,8 @@ class CatalogStore:
                     "archive": str(archive),
                 }
             if lifecycle:
-                require(lifecycle_guard is not None, "Lifecycle intent requires candidate recover")
+                if lifecycle_guard is None:
+                    raise ValueError("Lifecycle intent requires candidate recover")
                 lifecycle_guard()
             self._publish_object(target)
             if head != after:

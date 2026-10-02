@@ -60,6 +60,14 @@ def parse_json(value: str | bytes) -> object:
     )
 
 
+def parse_json_object(value: str | bytes, *, message: str = "Expected a JSON object") -> dict:
+    """Decode an object document, retaining the strict generic JSON parser."""
+    result = parse_json(value)
+    if not isinstance(result, dict):
+        raise ValueError(message)
+    return result
+
+
 def submission_matches(expected: dict, actual: object) -> bool:
     """Compare provenance, allowing only lossless scalar numeric input coercion.
 

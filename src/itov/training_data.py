@@ -43,8 +43,9 @@ def seal(body, key):
     return {**body, key: sha256(canonical_bytes(body))}
 
 
-def check_seal(value, key):
-    require(isinstance(value, dict), "Expected a sealed object")
+def check_seal(value: object, key: str) -> dict:
+    if not isinstance(value, dict):
+        raise ValueError("Expected a sealed object")
     digest(value.get(key), key)
     require(
         value[key] == sha256(canonical_bytes({k: v for k, v in value.items() if k != key})),
@@ -100,7 +101,9 @@ def validate_value(root: Path, value, source):
     )
     samples = array(value["samples"], "samples")
     require(2 <= len(samples) <= 256, "Dataset requires 2 to 256 samples")
-    seen, paths, images, groups, sources, observations = set(), set(), set(), {}, {}, []
+    seen, paths, images, observations = set(), set(), set(), []
+    groups: dict[str, str] = {}
+    sources: dict[str, str] = {}
     splits = {"train": 0, "validation": 0}
     total = 0
     committed = set()
@@ -112,6 +115,7 @@ def validate_value(root: Path, value, source):
         identifier(sample["group"], "sample group")
         require(sample["split"] in ("train", "validation"), "Invalid sample split")
         split = sample["split"]
+        dimensions: tuple[int, int] | None = None
         for field in ("source", "image", "caption"):
             # Legacy commands cannot downgrade an incomplete managed import into
             # a prepared dataset. Staging validation uses local projected paths.
@@ -150,6 +154,7 @@ def validate_value(root: Path, value, source):
                     and (depth, color, compression, filtering, interlace) == (8, 2, 0, 0, 0),
                     "Prepared PNG must be square, 64..2048, RGB8 and noninterlaced",
                 )
+                dimensions = width, height
             elif field == "caption":
                 caption = asset.read_bytes().decode("utf-8")
                 text(caption.strip(), "caption")
@@ -160,6 +165,10 @@ def validate_value(root: Path, value, source):
         ):
             require(mapping.get(item, split) == split, f"Train/validation {field} leakage")
             mapping[item] = split
+        # Every sample must have passed the image branch above before publication.
+        if dimensions is None:
+            raise ValueError("Prepared image dimensions are missing")
+        width, height = dimensions
         observations.append(
             {"id": key, "split": split, "group": sample["group"], "width": width, "height": height}
         )

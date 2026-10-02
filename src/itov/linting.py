@@ -18,7 +18,7 @@ from itov.catalog import (
     text,
 )
 from itov.catalog_store import CatalogStore, _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.locking import file_lock
 from itov.qualification import safe_path
 
@@ -63,7 +63,7 @@ def origin(value):
 
 def document(path: Path):
     raw = read_document(path)
-    return parse_json(raw), {"sha256": sha256(raw), "bytes": len(raw)}
+    return parse_json_object(raw), {"sha256": sha256(raw), "bytes": len(raw)}
 
 
 def context(config, plan_path=None):
