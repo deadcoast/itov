@@ -38,7 +38,7 @@ From PowerShell in this repository:
 
 ```powershell
 $env:UV_CACHE_DIR = "$PWD\.uv-cache"
-uv sync --inexact --locked
+uv sync --locked
 uv run itov init
 uv run itov doctor
 uv run itov workspace guide

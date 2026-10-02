@@ -4,12 +4,10 @@ version = "0.13.1"
 description = "Local ComfyUI catalogs, deterministic batches, and pinned image inference"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-    "setuptools>=84.0.0",
-    "types-setuptools>=84.0.0.20260812",
-]
+dependencies = []
 
 [project.optional-dependencies]
+# Dataset workers check for this exact Pillow version before decoding images.
 dataset = ["Pillow==12.3.0"]
 
 [project.scripts]
@@ -20,6 +18,7 @@ requires = ["uv_build>=0.9.5,<0.10"]
 build-backend = "uv_build"
 
 [dependency-groups]
+# uv installs this group by default for local development.
 dev = ["pytest>=8,<9", "ruff>=0.9,<1", "Pillow==12.3.0"]
 
 [tool.pytest.ini_options]
