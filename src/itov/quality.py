@@ -12,7 +12,7 @@ from itov.catalog import (
     sha256,
     text,
 )
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evaluation_cases import ROLES as ROLES
 from itov.evaluation_cases import EvaluationEvidence, conditions
 from itov.evidence_reads import read_document
@@ -25,7 +25,7 @@ from itov.training_data import file_ref, load_dataset, publish, seal
 
 
 def suite(root, path, dataset, trigger):
-    value = parse_json(read_document(path))
+    value = parse_json_object(read_document(path), message="quality suite: expected an object")
     object_fields(value, {"version", "id", "trigger", "cases"}, "quality suite")
     require(type(value["version"]) is int and value["version"] == 1, "Unsupported suite version")
     identifier(value["id"], "suite id")
@@ -133,6 +133,8 @@ def packet(config, plan_path, *, save=False):
         report = evaluation._assessment(context)
         candidate, _ = evaluation._candidate(context, assessment=report)
         evidence = context.validated.evaluation
+        if evidence is None:
+            raise ValueError("Review packet requires validated evaluation evidence")
         curated, suite_value = evidence.curation.to_dict(), evidence.suite.to_dict()
         folder, rows = context.folder, evidence.rows()
     images = [

@@ -25,7 +25,7 @@ from itov.catalog import (
     text,
 )
 from itov.catalog_store import _atomic_write
-from itov.comfyui import ComfyUIClient, parse_json
+from itov.comfyui import ComfyUIClient, parse_json, parse_json_object
 from itov.evidence_reads import read_document
 from itov.jobs import _now
 from itov.locking import file_lock
@@ -85,7 +85,7 @@ def probe(python: Path):
     except (OSError, subprocess.TimeoutExpired) as error:
         raise ValueError("Training environment probe failed") from error
     require(result.returncode == 0, "Training dependencies unavailable: " + result.stderr[-2000:])
-    value = parse_json(result.stdout)
+    value = parse_json_object(result.stdout, message="Invalid training environment probe")
     require(
         all(value["packages"].get(k) == v for k, v in PINNED.items()),
         "Unsupported trainer package versions",
@@ -497,8 +497,11 @@ def run(config, path, gpu_uuid, *, registry=None):
             "Insufficient host memory for experimental training floor",
         )
         with device.Lease(gpu_uuid, config.root, value["plan_id"], root=registry) as lease:
+            if lease.value is None:
+                raise ValueError("Device lease has not been acquired")
             owner = Job(lease.value["job_name"])
             failed_boundary = "worker_execution"
+            body: dict | None = None
             try:
                 folder.mkdir(parents=True)
                 body = {
@@ -585,7 +588,7 @@ def run(config, path, gpu_uuid, *, registry=None):
                     status="artifacts_validated", artifact_validation="passed", finished_at=_now()
                 )
             except (OSError, ValueError, KeyboardInterrupt) as error:
-                if folder.exists() and (folder / "run.json").exists():
+                if body is not None and folder.exists() and (folder / "run.json").exists():
                     body.update(
                         status="failed",
                         error=str(error) or "Interrupted",

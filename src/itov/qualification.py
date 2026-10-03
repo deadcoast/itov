@@ -11,7 +11,7 @@ from itov.audio_media import audio_contract
 from itov.batch import replay_plan
 from itov.catalog import canonical_bytes, digest, read_document, relative_path, require, sha256
 from itov.catalog_store import _atomic_write
-from itov.comfyui import ComfyUIClient, parse_json
+from itov.comfyui import ComfyUIClient, parse_json_object
 from itov.config import Config
 from itov.media import video_contract, video_tools
 from itov.runtime import launch_command, profile_main_argv
@@ -155,7 +155,7 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
     flux = any(
         node["class_type"] in FLUX_MODULES
         for job in plan["jobs"]
-        for node in parse_json(job["workflow_json"]).values()
+        for node in parse_json_object(job["workflow_json"]).values()
     )
     if flux:
         from itov.flux_image import qualify_definition
@@ -164,12 +164,12 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
     video = not flux and any(
         node["class_type"] in VIDEO_MODULES
         for job in plan["jobs"]
-        for node in parse_json(job["workflow_json"]).values()
+        for node in parse_json_object(job["workflow_json"]).values()
     )
     audio = any(
         node["class_type"] in AUDIO_MODULES
         for job in plan["jobs"]
-        for node in parse_json(job["workflow_json"]).values()
+        for node in parse_json_object(job["workflow_json"]).values()
     )
     require(
         not (
@@ -177,7 +177,7 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
             and any(
                 node["class_type"] in {"CreateVideo", "SaveVideo", "Wan22ImageToVideoLatent"}
                 for job in plan["jobs"]
-                for node in parse_json(job["workflow_json"]).values()
+                for node in parse_json_object(job["workflow_json"]).values()
             )
         ),
         "Audio and video generation require separate qualified plans",
@@ -198,10 +198,8 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
     observer = None
     if instrumented:
         observer = client._json("/itov/vram").get("identity")
-        require(
-            isinstance(observer, dict) and observer.get("version") == 1,
-            "Missing VRAM observer identity",
-        )
+        if not isinstance(observer, dict) or observer.get("version") != 1:
+            raise ValueError("Missing VRAM observer identity")
         for name, field in (
             ("vram_runtime.py", "bootstrap_sha256"),
             ("vram_identity.py", "identity_sha256"),
@@ -218,7 +216,7 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
         ):
             bind(config.comfyui_root, name)
     for job in plan["jobs"]:
-        graph = parse_json(job["workflow_json"])
+        graph = parse_json_object(job["workflow_json"])
         from itov.media_configuration import extended_graph
 
         audio_limit = extended_graph(graph)
@@ -227,7 +225,7 @@ def qualify_graphs(config: Config, plan: dict, *, timeout: float = 3, extra_sour
             validation["valid"],
             f"Live workflow validation failed at job {job['index']}: {validation['issues']}",
         )
-        planned_loras = {}
+        planned_loras: dict[str, str] = {}
         for item in job["loras"]:
             name, asset_hash = item["loader_name"], item["asset"]["sha256"]
             require(
@@ -413,8 +411,7 @@ def save_qualification(config: Config, receipt: dict) -> Path:
 
 def load_qualification(path: Path) -> dict:
     raw = read_document(path)
-    receipt = parse_json(raw)
-    require(isinstance(receipt, dict), "Qualification must be an object")
+    receipt = parse_json_object(raw, message="Qualification must be an object")
     body = {key: value for key, value in receipt.items() if key != "qualification_id"}
     require(
         receipt.get("qualification_id") == sha256(canonical_bytes(body)),

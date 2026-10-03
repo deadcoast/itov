@@ -10,7 +10,7 @@ from pathlib import Path
 
 from itov.catalog import canonical_bytes, require, sha256
 from itov.catalog_store import _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.jobs import _now
 from itov.locking import file_lock
 from itov.qualification import safe_path
@@ -27,17 +27,16 @@ def directory(gpu_uuid: str, root: Path | None = None) -> Path:
     return safe_path(root or registry_root(), device)
 
 
-def _write(path: Path, body: dict):
+def _write(path: Path, body: dict) -> dict:
     value = {**body, "record_id": sha256(canonical_bytes(body))}
     _atomic_write(path, canonical_bytes(value) + b"\n")
     return value
 
 
-def _read(path: Path):
+def _read(path: Path) -> dict:
     require(path.is_file(), "Device registry is incomplete; preserve and inspect")
     raw = path.read_bytes()
-    value = parse_json(raw)
-    require(isinstance(value, dict), "Invalid device registry")
+    value = parse_json_object(raw, message="Invalid device registry")
     body = {k: v for k, v in value.items() if k != "record_id"}
     require(
         value.get("version") == 1
@@ -118,7 +117,7 @@ class Lease:
     def __init__(self, gpu_uuid: str, workspace: Path, plan_id: str, *, root=None):
         self.gpu_uuid, self.workspace, self.plan_id, self.root = gpu_uuid, workspace, plan_id, root
         self.context = None
-        self.value = None
+        self.value: dict | None = None
 
     def __enter__(self):
         self.context = _locked(self.gpu_uuid, self.root)
@@ -153,11 +152,15 @@ class Lease:
             raise
 
     def register(self, identity: dict):
+        if self.value is None:
+            raise ValueError("Device lease has not been acquired")
         body = {k: v for k, v in self.value.items() if k != "record_id"}
         body["workers"] = [*body["workers"], identity]
         self.value = _write(self.path, body)
 
     def release(self):
+        if self.value is None:
+            raise ValueError("Device lease has not been acquired")
         require(job_active(self.value["job_name"]) == 0, "Owned job has not stopped")
         require(
             all(process_state(p) == "dead" for p in self.value["workers"]),
@@ -167,4 +170,5 @@ class Lease:
 
     def __exit__(self, *args):
         # An exception/abrupt controller exit leaves its journal held. Never clear by age.
-        self.context.__exit__(*args)
+        if self.context is not None:
+            self.context.__exit__(*args)

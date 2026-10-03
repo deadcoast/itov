@@ -6,7 +6,7 @@ import uuid
 from pathlib import Path
 
 from itov.catalog import require, sha256
-from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json
+from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json_object
 from itov.config import Config
 from itov.jobs import _guard, _now, _save
 from itov.jobs import _wait_job as wait_job
@@ -23,16 +23,18 @@ def job_path(config: Config, plan_id: str, index: int) -> Path:
 
 def read_owned(config: Config, plan: dict, job: dict) -> dict:
     path = job_path(config, plan["plan_id"], job["index"])
-    record = parse_json(path.read_bytes())
+    record = parse_json_object(
+        path.read_bytes(),
+        message="Job ownership/workflow differs from the reserved plan; preserve and inspect",
+    )
     require(
-        isinstance(record, dict)
-        and record.get("version") == 1
+        record.get("version") == 1
         and record.get("request_id") == path.stem
         and record.get("server") == config.url
         and record.get("owner") == {"plan_id": plan["plan_id"], "index": job["index"]}
         and record.get("workflow_sha256") == job["workflow_sha256"]
         and sha256(job["workflow_json"].encode()) == job["workflow_sha256"]
-        and json_text(record.get("workflow")) == json_text(parse_json(job["workflow_json"])),
+        and json_text(record.get("workflow")) == json_text(parse_json_object(job["workflow_json"])),
         "Job ownership/workflow differs from the reserved plan; preserve and inspect",
     )
     require(
@@ -55,7 +57,7 @@ def prepare_owned(config: Config, plan: dict, job: dict) -> dict:
             "owner": {"plan_id": plan["plan_id"], "index": job["index"]},
             "workflow_path": None,
             "workflow_sha256": job["workflow_sha256"],
-            "workflow": parse_json(job["workflow_json"]),
+            "workflow": parse_json_object(job["workflow_json"]),
             "created_at": _now(),
             "status": "prepared",
             "prompt_id": None,

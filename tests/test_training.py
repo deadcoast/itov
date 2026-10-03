@@ -430,6 +430,38 @@ def test_startup_refusal_does_not_claim_run_or_device(protocol, monkeypatch, rea
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Native Windows training ownership")
+def test_run_directory_race_preserves_original_error_and_existing_record(protocol, monkeypatch):
+    item = protocol
+    folder = training.run_folder(item.config, item.plan)
+    prior = b'{"existing":"preserve this attempt"}\n'
+    failure = FileExistsError("run directory appeared during startup")
+    mkdir = Path.mkdir
+    stopped = []
+
+    def raced_directory(path, *args, **kwargs):
+        if path == folder:
+            mkdir(path, parents=True)
+            (path / "run.json").write_bytes(prior)
+            raise failure
+        return mkdir(path, *args, **kwargs)
+
+    class ObservedJob(Job):
+        def stop(self):
+            super().stop()
+            stopped.append(True)
+
+    monkeypatch.setattr(Path, "mkdir", raced_directory)
+    monkeypatch.setattr(training, "Job", ObservedJob)
+    with pytest.raises(FileExistsError) as raised:
+        training.run(item.config, item.plan_path, GPU, registry=item.registry)
+    assert raised.value is failure
+    assert stopped == [True]
+    assert (folder / "run.json").read_bytes() == prior
+    assert not (folder / "request.json").exists()
+    assert device.status(GPU, root=item.registry)["status"] == "idle"
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Native Windows training ownership")
 def test_recover_requires_dead_controller_and_does_not_restart(protocol, monkeypatch):
     item = protocol
     fake_job(monkeypatch, "success")

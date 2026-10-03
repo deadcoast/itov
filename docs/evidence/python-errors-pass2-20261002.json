@@ -1,0 +1,1387 @@
+{
+  "version": 1,
+  "scope": "python_diagnostics_correction_pass_2",
+  "recorded_at": "2026-10-02T23:32:17.334810+00:00",
+  "base_commit": "9c5706ca6f20d502a9e1ea38f991a9236d6fff34",
+  "status": "partial_cleanup_verified_remaining_diagnostics_open",
+  "previous_report": "docs/evidence/python-errors-pass1-20261002.json",
+  "input": {
+    "path": "src/PYTHON_ERRORS.js",
+    "sha256": "fc129fef335a62fd8ecf18d7f7c026a12683c208d6d8ba4711fd60aca4e79d96",
+    "preserved": true
+  },
+  "environment": {
+    "python": "3.13.9 (main, Oct 14 2025, 21:22:32) [MSC v.1944 64 bit (AMD64)]",
+    "interpreter": "C:\\Users\\ryanf\\github\\_active\\itov\\.venv\\Scripts\\python.exe",
+    "uv": "uv 0.9.5 (d5f39331a 2025-10-21)",
+    "dependency_changes_this_pass": false
+  },
+  "diagnostics": {
+    "pyright": {
+      "before": 379,
+      "after": 163,
+      "reduction": 216,
+      "files_analyzed": 88,
+      "status": "still_failing",
+      "command": "uv run --no-sync --offline pyright --pythonpath .venv/Scripts/python.exe --outputjson src/itov"
+    },
+    "mypy": {
+      "before": 161,
+      "after": 87,
+      "reduction": 74,
+      "status": "still_failing",
+      "command": "uv run --no-sync --offline mypy --python-executable .venv/Scripts/python.exe --show-error-codes src/itov",
+      "scope": "Default mypy checks; not strict mode or --check-untyped-defs. Pyright also analyzes source bodies."
+    }
+  },
+  "changed_source_files": {
+    "src/itov/batch_cancellation.py": "1dba48d27d406aac7c0a5e6479245f2effeaf4358ce2d5273027324697de457d",
+    "src/itov/batch_execution.py": "ef32a5feb8b427caaabb20b7beba26ec6085b4e4c616d85410f6108e7646afc1",
+    "src/itov/client_ownership.py": "52b6c355fff1119d009ced240103fcaee1a76004207382600a429d7c87a477d0",
+    "src/itov/device.py": "c6ddbd2c35aa2609bbef89e0a9e84eada447e4f7cc60e7c27599aadb482a202d",
+    "src/itov/execution_ownership.py": "2202d15fbc7b7d7165db51ab3483eaa2f1d96ef010e3664a11e6acd57d3410f3",
+    "src/itov/flux_image.py": "2eba697c9d333683dbfe6e73dd2cda98956ed2be883c503ab212a3c7d1ca9dc2",
+    "src/itov/inference_capabilities.py": "95ac98cd6396b9918f0ec50ae52794091ce4ea7f28daedbbd09840daf2036091",
+    "src/itov/owned_jobs.py": "b24130c81b2232781061fcb969b22ace82f1e8a754afb486ef1f95221733850a",
+    "src/itov/parallel.py": "0e1f69a61dfc753e30075218a6a348559554b7c999c7aa44d826787515e06085",
+    "src/itov/qualification.py": "fdd198d16b4e5318846ad4c654594c2068785152e157fb5533d85279fdbe5dd4",
+    "src/itov/quality.py": "08b3ae94a1909cfcfc810513c980cb7f7a68dc558c78a948fab8fa0c1f567d02",
+    "src/itov/training.py": "9d61355cf24e81b2a7ae2244523fd56ebd64a6991f963c7e4d86d892b19d2265",
+    "src/itov/vram.py": "e264c484e846d0debf5ff3788da60e6d0ebbe8282728dcd0e24bd81659f466a7",
+    "src/itov/workspace_navigation.py": "0df6684aa1ac6e679c3f6eb341392c54e02cb5c6e64d5df2476566db176b1552"
+  },
+  "changed_source_diagnostics": {
+    "pyright": 0,
+    "mypy": 0
+  },
+  "corrections": [
+    {
+      "area": "Ownership and cancellation records",
+      "change": "Checked object decoding for device journals, owned jobs, external-request graphs, cancellation requests and intents. Lease state and unresolved recovery prompts are explicitly checked before use. Existing locks, request bindings, terminal proofs, archives and no-resubmission rules remain active."
+    },
+    {
+      "area": "VRAM and parallel replay",
+      "change": "Profiles, telemetry, guard records, calibrations and replay receipts decode through the checked object boundary. Missing history and non-object telemetry are retained as issues or admission refusals. Observer identity and cold/warm session collection types are explicit."
+    },
+    {
+      "area": "Training startup failure",
+      "change": "Initialize the local run record as absent and only update it after construction. A run-directory race preserves the original FileExistsError and any existing record while stopping the owned job and releasing its lease; no worker request is published."
+    },
+    {
+      "area": "Qualification and inference contracts",
+      "change": "Validated SDXL and FLUX specifications return checked independent dictionaries. Qualification graphs and receipts use checked decoding. Review packets explicitly require captured evaluation evidence. Fractional batch timing arguments retain their supported float types."
+    },
+    {
+      "area": "Offline navigation",
+      "change": "Artifact and execution-receipt readers return checked dictionaries. Owner jobs and recorded worker ports are narrowed before indexing. Inventory catalog metadata can contain the recovery boolean."
+    },
+    {
+      "area": "Download test isolation",
+      "change": "The downloader unit tests now specify free disk capacity. They exercise exact-budget success, hash/length rejection, existing-file preservation and refusal one byte below the reserve before any request or partial file. Production downloader and its 1 GiB reserve were not changed."
+    }
+  ],
+  "validation": {
+    "targeted_pytest": {
+      "passed_unique_cases": 496,
+      "unresolved_failures": 0,
+      "new_cases": 5,
+      "runs": [
+        {
+          "tests": 444,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "passed": 444,
+          "seconds": 364.414,
+          "junit": "workspace/state/verification/python-errors-20261002-pass2/pytest-regression-run2.xml"
+        },
+        {
+          "tests": 51,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0,
+          "passed": 48,
+          "seconds": 12.337,
+          "junit": "workspace/state/verification/python-errors-20261002-pass2/pytest-qualification.xml"
+        },
+        {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "passed": 4,
+          "seconds": 0.088,
+          "junit": "workspace/state/verification/python-errors-20261002-pass2/pytest-download-capacity.xml"
+        }
+      ],
+      "initial_focused_run": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 8,
+        "seconds": 6.511,
+        "junit": "workspace/state/verification/python-errors-20261002-pass2/pytest-new.xml"
+      },
+      "counting": "444 broader regression passes plus 48 supplementary passes plus 4 corrected capacity cases. The initial eight-case focused run repeats cases in the broader run and is not added."
+    },
+    "retained_failed_attempts": [
+      {
+        "junit": "workspace/state/verification/python-errors-20261002-pass2/pytest-regression.xml",
+        "tests_run": 0,
+        "cause": "Command referenced nonexistent tests/test_inference_capabilities.py; corrected selection in pytest-regression-run2.xml."
+      },
+      {
+        "junit": "workspace/state/verification/python-errors-20261002-pass2/pytest-qualification.xml",
+        "failed": 3,
+        "cause": "Downloader tests depended on actual C: free capacity. Observed free bytes 48783360 were below the production 1 GiB reserve, so intended hash/length assertions were not reached.",
+        "resolution": "Explicit test capacity and a new insufficient-space boundary case; all four cases passed in pytest-download-capacity.xml. Original failed report retained."
+      }
+    ],
+    "ruff_check": "passed: src/itov tests",
+    "ruff_format": "passed: all 139 source/test Python files",
+    "uv_lock_check": "passed: uv lock --check --offline",
+    "uv_package_check": "passed: all 18 installed packages compatible",
+    "cli_version": "passed: itov 0.13.1",
+    "full_suite": "not_run_for_this_pass",
+    "gpu_or_model_execution": "not_run",
+    "package_build_or_installed_artifact_tests": "not_run_for_this_pass"
+  },
+  "remaining_pyright_by_file": {
+    "audiovisual.py": 23,
+    "dataset_import.py": 13,
+    "candidate_lifecycle.py": 11,
+    "training_worker.py": 9,
+    "batch.py": 7,
+    "deployed_review.py": 7,
+    "training_checkpoint_worker.py": 7,
+    "dataset_features.py": 6,
+    "deployed_loader_worker.py": 6,
+    "image_checks.py": 6,
+    "media.py": 6,
+    "curation.py": 5,
+    "dataset_inspection.py": 5,
+    "media_sources.py": 5,
+    "scene.py": 5,
+    "batch_request.py": 4,
+    "vram_runtime.py": 4,
+    "dataset_manifest.py": 3,
+    "deployed_loader.py": 3,
+    "audio.py": 2,
+    "dataset_freeze.py": 2,
+    "evaluation.py": 2,
+    "evaluation_corpus.py": 2,
+    "experiments.py": 2,
+    "image_media.py": 2,
+    "jobs.py": 2,
+    "trigger.py": 2,
+    "video.py": 2,
+    "audio_media.py": 1,
+    "checkpoint_tensors.py": 1,
+    "cli_output.py": 1,
+    "dataset_images.py": 1,
+    "experiment_variance.py": 1,
+    "inference.py": 1,
+    "ledger.py": 1,
+    "training_checkpoints.py": 1,
+    "training_optimization.py": 1,
+    "workspace_starter.py": 1
+  },
+  "remaining_pyright_by_rule": {
+    "reportIndexIssue": 48,
+    "reportAttributeAccessIssue": 35,
+    "reportMissingImports": 26,
+    "reportArgumentType": 19,
+    "reportOptionalSubscript": 14,
+    "reportReturnType": 7,
+    "reportGeneralTypeIssues": 3,
+    "reportOperatorIssue": 3,
+    "reportOptionalIterable": 3,
+    "reportOptionalMemberAccess": 2,
+    "reportCallIssue": 1,
+    "reportOptionalOperand": 1,
+    "reportPossiblyUnboundVariable": 1
+  },
+  "remaining_mypy_by_file": {
+    "audiovisual.py": 23,
+    "batch.py": 8,
+    "deployed_loader_worker.py": 7,
+    "video.py": 7,
+    "media.py": 6,
+    "training_worker.py": 6,
+    "locking.py": 5,
+    "vram_runtime.py": 4,
+    "batch_request.py": 4,
+    "training_checkpoint_worker.py": 3,
+    "audio.py": 3,
+    "rotation.py": 2,
+    "scene.py": 2,
+    "windows_process.py": 1,
+    "dataset_features.py": 1,
+    "workflow.py": 1,
+    "training_optimization.py": 1,
+    "audio_media.py": 1,
+    "jobs.py": 1,
+    "inference.py": 1
+  },
+  "remaining_pyright": [
+    {
+      "file": "src/itov/audio.py",
+      "line": 30,
+      "column": 26,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"object\" cannot be assigned to parameter \"value\" of type \"dict[Unknown, Unknown]\" in function \"validate_spec\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/audio.py",
+      "line": 82,
+      "column": 12,
+      "rule": "reportReturnType",
+      "message": "Type \"object\" is not assignable to return type \"dict[Unknown, Unknown]\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/audio_media.py",
+      "line": 41,
+      "column": 12,
+      "rule": "reportReturnType",
+      "message": "Type \"object\" is not assignable to return type \"dict[Unknown, Unknown]\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 34,
+      "column": 26,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"object\" cannot be assigned to parameter \"value\" of type \"dict[Unknown, Unknown]\" in function \"validate_spec\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 67,
+      "column": 12,
+      "rule": "reportReturnType",
+      "message": "Type \"object\" is not assignable to return type \"dict[Unknown, Unknown]\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 77,
+      "column": 21,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 78,
+      "column": 20,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 79,
+      "column": 20,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 80,
+      "column": 20,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 81,
+      "column": 20,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 82,
+      "column": 31,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 85,
+      "column": 31,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 86,
+      "column": 12,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 97,
+      "column": 27,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 98,
+      "column": 52,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 102,
+      "column": 33,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 121,
+      "column": 22,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 213,
+      "column": 26,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 215,
+      "column": 18,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 301,
+      "column": 25,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 302,
+      "column": 29,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 305,
+      "column": 58,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"items\" for class \"object\"\n\u00a0\u00a0Attribute \"items\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 307,
+      "column": 57,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 313,
+      "column": 24,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 318,
+      "column": 25,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/audiovisual.py",
+      "line": 319,
+      "column": 29,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/batch.py",
+      "line": 70,
+      "column": 28,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"bytes | None\" cannot be assigned to parameter \"value\" of type \"str | bytes\" in function \"parse_json\"\n\u00a0\u00a0Type \"bytes | None\" is not assignable to type \"str | bytes\"\n\u00a0\u00a0\u00a0\u00a0Type \"None\" is not assignable to type \"str | bytes\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is not assignable to \"bytes\""
+    },
+    {
+      "file": "src/itov/batch.py",
+      "line": 72,
+      "column": 61,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"object\" cannot be assigned to parameter \"graph\" of type \"dict[Unknown, Unknown]\" in function \"validate_bindings\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/batch.py",
+      "line": 84,
+      "column": 13,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/batch.py",
+      "line": 88,
+      "column": 20,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/batch.py",
+      "line": 96,
+      "column": 47,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"object\" cannot be assigned to parameter \"graph\" of type \"dict[Unknown, Unknown]\" in function \"_workflow_json\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/batch.py",
+      "line": 122,
+      "column": 12,
+      "rule": "reportReturnType",
+      "message": "Type \"object\" is not assignable to return type \"dict[Unknown, Unknown]\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/batch.py",
+      "line": 168,
+      "column": 12,
+      "rule": "reportReturnType",
+      "message": "Type \"object\" is not assignable to return type \"dict[Unknown, Unknown]\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/batch_request.py",
+      "line": 161,
+      "column": 17,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/batch_request.py",
+      "line": 169,
+      "column": 18,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/batch_request.py",
+      "line": 170,
+      "column": 38,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/batch_request.py",
+      "line": 175,
+      "column": 12,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 283,
+      "column": 16,
+      "rule": "reportGeneralTypeIssues",
+      "message": "Expected mapping for dictionary unpack operator"
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 317,
+      "column": 42,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 320,
+      "column": 52,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 321,
+      "column": 23,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 322,
+      "column": 13,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 323,
+      "column": 21,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 462,
+      "column": 9,
+      "rule": "reportGeneralTypeIssues",
+      "message": "Expected mapping for dictionary unpack operator"
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 482,
+      "column": 44,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 482,
+      "column": 73,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 488,
+      "column": 33,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/candidate_lifecycle.py",
+      "line": 492,
+      "column": 42,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/checkpoint_tensors.py",
+      "line": 34,
+      "column": 19,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/cli_output.py",
+      "line": 155,
+      "column": 45,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"tuple[Unknown, Any | None]\" cannot be assigned to parameter \"key\" of type \"tuple[str, str]\" in function \"get\"\n\u00a0\u00a0Type \"Any | None\" is not assignable to type \"str\"\n\u00a0\u00a0\u00a0\u00a0\"None\" is not assignable to \"str\""
+    },
+    {
+      "file": "src/itov/curation.py",
+      "line": 75,
+      "column": 34,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/curation.py",
+      "line": 75,
+      "column": 64,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/curation.py",
+      "line": 82,
+      "column": 32,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/curation.py",
+      "line": 112,
+      "column": 13,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/curation.py",
+      "line": 149,
+      "column": 18,
+      "rule": "reportGeneralTypeIssues",
+      "message": "Expected mapping for dictionary unpack operator"
+    },
+    {
+      "file": "src/itov/dataset_features.py",
+      "line": 13,
+      "column": 6,
+      "rule": "reportMissingImports",
+      "message": "Import \"dataset_images\" could not be resolved"
+    },
+    {
+      "file": "src/itov/dataset_features.py",
+      "line": 14,
+      "column": 6,
+      "rule": "reportMissingImports",
+      "message": "Import \"dataset_images\" could not be resolved"
+    },
+    {
+      "file": "src/itov/dataset_features.py",
+      "line": 54,
+      "column": 9,
+      "rule": "reportOperatorIssue",
+      "message": "Operator \">\" not supported for types \"float | tuple[int, ...]\" and \"float | tuple[int, ...]\"\n\u00a0\u00a0Operator \">\" not supported for types \"float\" and \"tuple[int, ...]\"\n\u00a0\u00a0Operator \">\" not supported for types \"tuple[int, ...]\" and \"float\""
+    },
+    {
+      "file": "src/itov/dataset_features.py",
+      "line": 56,
+      "column": 28,
+      "rule": "reportCallIssue",
+      "message": "No overloads for \"sum\" match the provided arguments"
+    },
+    {
+      "file": "src/itov/dataset_features.py",
+      "line": 56,
+      "column": 32,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"list[float | tuple[int, ...]]\" cannot be assigned to parameter \"iterable\" of type \"Iterable[_SupportsSumNoDefaultT(1)@sum]\" in function \"sum\"\n\u00a0\u00a0\"list[float | tuple[int, ...]]\" is not assignable to \"Iterable[_SupportsSumNoDefaultT(1)@sum]\"\n\u00a0\u00a0\u00a0\u00a0Type parameter \"_T_co@Iterable\" is covariant, but \"float | tuple[int, ...]\" is not a subtype of \"_SupportsSumNoDefaultT(1)@sum\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Type \"float | tuple[int, ...]\" is not assignable to type \"_SupportsSumWithNoDefaultGiven\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Type \"float | tuple[int, ...]\" is not assignable to type \"_SupportsSumWithNoDefaultGiven\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"tuple[int, ...]\" is incompatible with protocol \"_SupportsSumWithNoDefaultGiven\""
+    },
+    {
+      "file": "src/itov/dataset_features.py",
+      "line": 65,
+      "column": 23,
+      "rule": "reportOperatorIssue",
+      "message": "Operator \"-\" not supported for types \"float | tuple[int, int]\" and \"float | tuple[int, int]\"\n\u00a0\u00a0Operator \"-\" not supported for types \"float\" and \"tuple[int, int]\"\n\u00a0\u00a0Operator \"-\" not supported for types \"tuple[int, int]\" and \"float\"\n\u00a0\u00a0Operator \"-\" not supported for types \"tuple[int, int]\" and \"tuple[int, int]\""
+    },
+    {
+      "file": "src/itov/dataset_freeze.py",
+      "line": 300,
+      "column": 32,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_freeze.py",
+      "line": 327,
+      "column": 56,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_images.py",
+      "line": 78,
+      "column": 26,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"tuple[int, ...]\" cannot be assigned to parameter \"box\" of type \"Image | tuple[int, int, int, int] | tuple[int, int] | None\" in function \"paste\"\n\u00a0\u00a0Type \"tuple[int, ...]\" is not assignable to type \"Image | tuple[int, int, int, int] | tuple[int, int] | None\"\n\u00a0\u00a0\u00a0\u00a0\"tuple[int, ...]\" is not assignable to \"Image\"\n\u00a0\u00a0\u00a0\u00a0\"tuple[int, ...]\" is not assignable to \"tuple[int, int, int, int]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Tuple size mismatch; expected 4 but received indeterminate\n\u00a0\u00a0\u00a0\u00a0\"tuple[int, ...]\" is not assignable to \"tuple[int, int]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Tuple size mismatch; expected 2 but received indeterminate\n\u00a0\u00a0\u00a0\u00a0\"tuple[int, ...]\" is not assignable to \"None\""
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 42,
+      "column": 40,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 43,
+      "column": 47,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 45,
+      "column": 31,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 46,
+      "column": 12,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 76,
+      "column": 20,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 77,
+      "column": 27,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 77,
+      "column": 54,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 80,
+      "column": 42,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 112,
+      "column": 41,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 238,
+      "column": 43,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"Unknown | dict[Unknown, Unknown] | None\" cannot be assigned to parameter \"args\" of type \"StrPath\" in function \"__new__\"\n\u00a0\u00a0Type \"Unknown | dict[Unknown, Unknown] | None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0Type \"dict[Unknown, Unknown]\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"dict[Unknown, Unknown]\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"dict[Unknown, Unknown]\" is incompatible with protocol \"PathLike[str]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"__fspath__\" is not present"
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 238,
+      "column": 43,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"Unknown | dict[Unknown, Unknown] | None\" cannot be assigned to parameter \"args\" of type \"StrPath\" in function \"__init__\"\n\u00a0\u00a0Type \"Unknown | dict[Unknown, Unknown] | None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0Type \"dict[Unknown, Unknown]\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"dict[Unknown, Unknown]\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"dict[Unknown, Unknown]\" is incompatible with protocol \"PathLike[str]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"__fspath__\" is not present"
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 238,
+      "column": 68,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"Unknown | dict[Unknown, Unknown] | None\" cannot be assigned to parameter \"args\" of type \"StrPath\" in function \"__new__\"\n\u00a0\u00a0Type \"Unknown | dict[Unknown, Unknown] | None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0Type \"dict[Unknown, Unknown]\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"dict[Unknown, Unknown]\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"dict[Unknown, Unknown]\" is incompatible with protocol \"PathLike[str]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"__fspath__\" is not present"
+    },
+    {
+      "file": "src/itov/dataset_import.py",
+      "line": 238,
+      "column": 68,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"Unknown | dict[Unknown, Unknown] | None\" cannot be assigned to parameter \"args\" of type \"StrPath\" in function \"__init__\"\n\u00a0\u00a0Type \"Unknown | dict[Unknown, Unknown] | None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0Type \"dict[Unknown, Unknown]\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"dict[Unknown, Unknown]\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"dict[Unknown, Unknown]\" is incompatible with protocol \"PathLike[str]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"__fspath__\" is not present"
+    },
+    {
+      "file": "src/itov/dataset_inspection.py",
+      "line": 102,
+      "column": 17,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_inspection.py",
+      "line": 155,
+      "column": 40,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_inspection.py",
+      "line": 156,
+      "column": 41,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_inspection.py",
+      "line": 158,
+      "column": 31,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_inspection.py",
+      "line": 159,
+      "column": 12,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/dataset_manifest.py",
+      "line": 162,
+      "column": 45,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_manifest.py",
+      "line": 162,
+      "column": 75,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/dataset_manifest.py",
+      "line": 165,
+      "column": 36,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/deployed_loader.py",
+      "line": 166,
+      "column": 63,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_loader.py",
+      "line": 308,
+      "column": 26,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_loader.py",
+      "line": 309,
+      "column": 13,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_loader_worker.py",
+      "line": 29,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"comfy.options\" could not be resolved"
+    },
+    {
+      "file": "src/itov/deployed_loader_worker.py",
+      "line": 32,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"comfy.lora\" could not be resolved"
+    },
+    {
+      "file": "src/itov/deployed_loader_worker.py",
+      "line": 33,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"comfy.lora_convert\" could not be resolved"
+    },
+    {
+      "file": "src/itov/deployed_loader_worker.py",
+      "line": 34,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"comfy.sd\" could not be resolved"
+    },
+    {
+      "file": "src/itov/deployed_loader_worker.py",
+      "line": 35,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"comfy.utils\" could not be resolved"
+    },
+    {
+      "file": "src/itov/deployed_loader_worker.py",
+      "line": 36,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/deployed_review.py",
+      "line": 285,
+      "column": 43,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_review.py",
+      "line": 289,
+      "column": 42,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_review.py",
+      "line": 302,
+      "column": 49,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_review.py",
+      "line": 312,
+      "column": 34,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_review.py",
+      "line": 334,
+      "column": 29,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_review.py",
+      "line": 335,
+      "column": 28,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/deployed_review.py",
+      "line": 337,
+      "column": 41,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"items\" for class \"object\"\n\u00a0\u00a0Attribute \"items\" is unknown"
+    },
+    {
+      "file": "src/itov/evaluation.py",
+      "line": 133,
+      "column": 34,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"items\" for class \"object\"\n\u00a0\u00a0Attribute \"items\" is unknown"
+    },
+    {
+      "file": "src/itov/evaluation.py",
+      "line": 172,
+      "column": 8,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/evaluation_corpus.py",
+      "line": 134,
+      "column": 17,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/evaluation_corpus.py",
+      "line": 135,
+      "column": 17,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/experiment_variance.py",
+      "line": 112,
+      "column": 42,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/experiments.py",
+      "line": 83,
+      "column": 17,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/experiments.py",
+      "line": 307,
+      "column": 59,
+      "rule": "reportOptionalMemberAccess",
+      "message": "\"rows\" is not a known attribute of \"None\""
+    },
+    {
+      "file": "src/itov/image_checks.py",
+      "line": 75,
+      "column": 64,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"str | None\" cannot be assigned to parameter \"args\" of type \"StrPath\" in function \"__new__\"\n\u00a0\u00a0Type \"str | None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0Type \"None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is incompatible with protocol \"PathLike[str]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"__fspath__\" is not present"
+    },
+    {
+      "file": "src/itov/image_checks.py",
+      "line": 75,
+      "column": 64,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"str | None\" cannot be assigned to parameter \"args\" of type \"StrPath\" in function \"__init__\"\n\u00a0\u00a0Type \"str | None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0Type \"None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is incompatible with protocol \"PathLike[str]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"__fspath__\" is not present"
+    },
+    {
+      "file": "src/itov/image_checks.py",
+      "line": 378,
+      "column": 13,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/image_checks.py",
+      "line": 392,
+      "column": 18,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/image_checks.py",
+      "line": 428,
+      "column": 63,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"items\" for class \"object\"\n\u00a0\u00a0Attribute \"items\" is unknown"
+    },
+    {
+      "file": "src/itov/image_checks.py",
+      "line": 430,
+      "column": 66,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/image_media.py",
+      "line": 26,
+      "column": 23,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"str | None\" cannot be assigned to parameter \"args\" of type \"StrPath\" in function \"__new__\"\n\u00a0\u00a0Type \"str | None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0Type \"None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is incompatible with protocol \"PathLike[str]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"__fspath__\" is not present"
+    },
+    {
+      "file": "src/itov/image_media.py",
+      "line": 26,
+      "column": 23,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"str | None\" cannot be assigned to parameter \"args\" of type \"StrPath\" in function \"__init__\"\n\u00a0\u00a0Type \"str | None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0Type \"None\" is not assignable to type \"StrPath\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is not assignable to \"str\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"None\" is incompatible with protocol \"PathLike[str]\"\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\"__fspath__\" is not present"
+    },
+    {
+      "file": "src/itov/inference.py",
+      "line": 98,
+      "column": 12,
+      "rule": "reportReturnType",
+      "message": "Type \"object\" is not assignable to return type \"dict[Unknown, Unknown]\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/jobs.py",
+      "line": 299,
+      "column": 45,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"object\" cannot be assigned to parameter \"graph\" of type \"dict[Unknown, Unknown]\" in function \"submit\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/jobs.py",
+      "line": 439,
+      "column": 33,
+      "rule": "reportOptionalIterable",
+      "message": "Object of type \"None\" cannot be used as iterable value"
+    },
+    {
+      "file": "src/itov/ledger.py",
+      "line": 34,
+      "column": 39,
+      "rule": "reportOperatorIssue",
+      "message": "Operator \"+\" not supported for types \"Literal['candidate_']\" and \"Unknown | None\"\n\u00a0\u00a0Operator \"+\" not supported for types \"Literal['candidate_']\" and \"None\""
+    },
+    {
+      "file": "src/itov/media.py",
+      "line": 94,
+      "column": 59,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/media.py",
+      "line": 98,
+      "column": 21,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/media.py",
+      "line": 100,
+      "column": 31,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/media.py",
+      "line": 102,
+      "column": 14,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/media.py",
+      "line": 109,
+      "column": 24,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/media.py",
+      "line": 118,
+      "column": 29,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/media_sources.py",
+      "line": 43,
+      "column": 20,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/media_sources.py",
+      "line": 45,
+      "column": 18,
+      "rule": "reportOptionalMemberAccess",
+      "message": "\"get\" is not a known attribute of \"None\""
+    },
+    {
+      "file": "src/itov/media_sources.py",
+      "line": 49,
+      "column": 19,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"get\" for class \"object\"\n\u00a0\u00a0Attribute \"get\" is unknown"
+    },
+    {
+      "file": "src/itov/media_sources.py",
+      "line": 54,
+      "column": 24,
+      "rule": "reportOptionalIterable",
+      "message": "Object of type \"None\" cannot be used as iterable value"
+    },
+    {
+      "file": "src/itov/media_sources.py",
+      "line": 102,
+      "column": 24,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/scene.py",
+      "line": 120,
+      "column": 45,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/scene.py",
+      "line": 129,
+      "column": 16,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/scene.py",
+      "line": 132,
+      "column": 45,
+      "rule": "reportAttributeAccessIssue",
+      "message": "Cannot access attribute \"items\" for class \"object\"\n\u00a0\u00a0Attribute \"items\" is unknown"
+    },
+    {
+      "file": "src/itov/scene.py",
+      "line": 134,
+      "column": 19,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/scene.py",
+      "line": 200,
+      "column": 51,
+      "rule": "reportOptionalSubscript",
+      "message": "Object of type \"None\" is not subscriptable"
+    },
+    {
+      "file": "src/itov/training_checkpoint_worker.py",
+      "line": 15,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_checkpoint_worker.py",
+      "line": 39,
+      "column": 16,
+      "rule": "reportMissingImports",
+      "message": "Import \"numpy\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_checkpoint_worker.py",
+      "line": 40,
+      "column": 16,
+      "rule": "reportMissingImports",
+      "message": "Import \"torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_checkpoint_worker.py",
+      "line": 41,
+      "column": 14,
+      "rule": "reportMissingImports",
+      "message": "Import \"safetensors.torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_checkpoint_worker.py",
+      "line": 110,
+      "column": 16,
+      "rule": "reportMissingImports",
+      "message": "Import \"numpy\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_checkpoint_worker.py",
+      "line": 111,
+      "column": 16,
+      "rule": "reportMissingImports",
+      "message": "Import \"torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_checkpoint_worker.py",
+      "line": 112,
+      "column": 14,
+      "rule": "reportMissingImports",
+      "message": "Import \"safetensors.torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_checkpoints.py",
+      "line": 374,
+      "column": 44,
+      "rule": "reportOptionalIterable",
+      "message": "Object of type \"None\" cannot be used as iterable value"
+    },
+    {
+      "file": "src/itov/training_optimization.py",
+      "line": 24,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 22,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"numpy\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 23,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 24,
+      "column": 10,
+      "rule": "reportMissingImports",
+      "message": "Import \"diffusers\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 25,
+      "column": 10,
+      "rule": "reportMissingImports",
+      "message": "Import \"diffusers.utils\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 26,
+      "column": 10,
+      "rule": "reportMissingImports",
+      "message": "Import \"peft\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 27,
+      "column": 10,
+      "rule": "reportMissingImports",
+      "message": "Import \"peft.utils\" could not be resolved"
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 465,
+      "column": 19,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 467,
+      "column": 30,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/training_worker.py",
+      "line": 486,
+      "column": 28,
+      "rule": "reportIndexIssue",
+      "message": "\"__getitem__\" method not defined on type \"object\""
+    },
+    {
+      "file": "src/itov/trigger.py",
+      "line": 63,
+      "column": 17,
+      "rule": "reportOptionalOperand",
+      "message": "Operator \"+\" not supported for \"None\""
+    },
+    {
+      "file": "src/itov/trigger.py",
+      "line": 197,
+      "column": 48,
+      "rule": "reportPossiblyUnboundVariable",
+      "message": "\"selected\" is possibly unbound"
+    },
+    {
+      "file": "src/itov/video.py",
+      "line": 39,
+      "column": 26,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"object\" cannot be assigned to parameter \"value\" of type \"dict[Unknown, Unknown]\" in function \"validate_spec\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/video.py",
+      "line": 104,
+      "column": 12,
+      "rule": "reportReturnType",
+      "message": "Type \"object\" is not assignable to return type \"dict[Unknown, Unknown]\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    },
+    {
+      "file": "src/itov/vram_runtime.py",
+      "line": 35,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"execution\" could not be resolved"
+    },
+    {
+      "file": "src/itov/vram_runtime.py",
+      "line": 36,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"server\" could not be resolved"
+    },
+    {
+      "file": "src/itov/vram_runtime.py",
+      "line": 37,
+      "column": 12,
+      "rule": "reportMissingImports",
+      "message": "Import \"torch\" could not be resolved"
+    },
+    {
+      "file": "src/itov/vram_runtime.py",
+      "line": 38,
+      "column": 10,
+      "rule": "reportMissingImports",
+      "message": "Import \"aiohttp\" could not be resolved"
+    },
+    {
+      "file": "src/itov/workspace_starter.py",
+      "line": 117,
+      "column": 57,
+      "rule": "reportArgumentType",
+      "message": "Argument of type \"object\" cannot be assigned to parameter \"graph\" of type \"dict[Unknown, Unknown]\" in function \"validate_bindings\"\n\u00a0\u00a0\"object\" is not assignable to \"dict[Unknown, Unknown]\""
+    }
+  ],
+  "next_priorities": [
+    "Continue checked JSON boundaries in dataset import/inspection, batch plans and candidate lifecycle/review readers.",
+    "Resolve remaining optional values and collection types in image/media readers without changing their runtime contracts.",
+    "Separate worker environment and first-party runtime import resolution from third-party dependency installation: comfy, execution, server and dataset_images are not root uv package requirements.",
+    "Retain deferred audio/A/V feature scope; diagnostics remain visible rather than suppressed."
+  ],
+  "limits": [
+    "This is a source correction pass, not a clean repository-wide type gate or product/model qualification.",
+    "Source-bound training plans and qualifications may require regeneration after these source changes.",
+    "C: free space was low during verification. No user files, caches or prior evidence were removed."
+  ],
+  "local_artifacts": [
+    "workspace/state/verification/python-errors-20261002-pass2/pyright-before.json",
+    "workspace/state/verification/python-errors-20261002-pass2/pyright-after.json",
+    "workspace/state/verification/python-errors-20261002-pass2/mypy-before.txt",
+    "workspace/state/verification/python-errors-20261002-pass2/mypy-after.txt"
+  ]
+}

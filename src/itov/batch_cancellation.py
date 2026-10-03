@@ -6,7 +6,7 @@ from urllib.parse import quote
 
 from itov.batch import load_plan
 from itov.catalog import canonical_bytes, object_fields, require, sha256
-from itov.comfyui import ComfyUIError, parse_json
+from itov.comfyui import ComfyUIError, parse_json_object
 from itov.execution_store import check_run
 from itov.jobs import _now
 from itov.locking import file_lock
@@ -38,7 +38,7 @@ def requested(config, plan):
     if not path.exists():
         return None
     raw = path.read_bytes()
-    value = parse_json(raw)
+    value = parse_json_object(raw, message="cancellation request: expected an object")
     object_fields(
         value,
         {"version", "plan_id", "plan_sha256", "server", "policy", "created_at"},
@@ -87,7 +87,7 @@ def cancel(config, path, *, interrupt_running=False):
     with guard(config, plan), _database(config) as db:
         run, _ = check_run(db, config, plan)
         require(
-            parse_json(run["qualification"]).get("scope") != "managed_two_worker_audio",
+            parse_json_object(run["qualification"]).get("scope") != "managed_two_worker_audio",
             "Use parallel recover for a managed parallel batch",
         )
         prior = requested(config, plan)
@@ -142,7 +142,7 @@ def poll(config, plan, client, record):
     intent = safe_path(root, record["request_id"] + ".intent.json")
     if intent.exists():
         # An interrupted process or lost response never authorizes another POST.
-        saved = parse_json(intent.read_bytes())
+        saved = parse_json_object(intent.read_bytes(), message="Invalid cancellation intent")
         require(
             saved.get("request_id") == record["request_id"]
             and saved.get("prompt_id") == record["prompt_id"]

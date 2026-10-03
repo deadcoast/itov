@@ -364,7 +364,9 @@ def test_inconsistent_measurement_is_refused(measured, damage):
     assert not assess(measured)["admitted"]
 
 
-@pytest.mark.parametrize("damage", ["missing", "failed", "different_workload", "valid"])
+@pytest.mark.parametrize(
+    "damage", ["missing", "failed", "different_workload", "not_object", "valid"]
+)
 def test_previous_execution_must_prove_a_successful_cache_state(measured, monkeypatch, damage):
     config, plan, receipt, profiles, _, live, _, _ = measured
     metric = copy.deepcopy(profiles[0]["observations"][0]["measurement"])
@@ -379,7 +381,9 @@ def test_previous_execution_must_prove_a_successful_cache_state(measured, monkey
     directory = config.root / "state/vram/telemetry" / live["identity"]["session_id"]
     directory.mkdir(parents=True)
     if damage != "missing":
-        (directory / "last.json").write_bytes(canonical_bytes(metric))
+        (directory / "last.json").write_bytes(
+            canonical_bytes([] if damage == "not_object" else metric)
+        )
     monkeypatch.setattr(
         vram, "assess", lambda *args, **kwargs: {"ok": True, "admitted": True, "reasons": []}
     )
@@ -387,6 +391,47 @@ def test_previous_execution_must_prove_a_successful_cache_state(measured, monkey
     assert result["admitted"] is (damage == "valid")
     if damage != "valid":
         assert result["reasons"] == ["unqualified_live_cache_evidence"]
+    if damage == "not_object":
+        assert result["cache_error"] == "VRAM telemetry: expected an object"
+
+
+@pytest.mark.parametrize("damage", ["missing_history", "not_object"])
+def test_profile_collection_retains_invalid_measurement_as_an_issue(measured, monkeypatch, damage):
+    config, plan, receipt, _, gpu, _, _, _ = measured
+    job = plan["jobs"][0]
+    workflow = parse_json(job["workflow_json"])
+    record = {
+        "status": "succeeded",
+        "request_id": "request-fixture",
+        "prompt_id": "prompt-fixture",
+        "workflow": workflow,
+    }
+    history = {
+        "status": {"completed": True, "status_str": "success"},
+        "prompt": [0, record["prompt_id"], workflow, {"itov_request_id": record["request_id"]}],
+    }
+    directory = (
+        config.runtime_root / "state/vram/telemetry" / receipt["vram_observer"]["session_id"]
+    )
+    directory.mkdir(parents=True)
+    telemetry = directory / "prompt-fixture.json"
+    telemetry.write_bytes(b"[]\n")
+    monkeypatch.setattr(vram, "read_owned", lambda *_: record)
+    monkeypatch.setattr(
+        vram.ComfyUIClient,
+        "history",
+        lambda *_: None if damage == "missing_history" else history,
+    )
+    profile, saved = vram.collect_profile(config, {**plan, "jobs": [job]}, receipt, gpu)
+    expected = (
+        "Missing matching terminal server ownership"
+        if damage == "missing_history"
+        else "VRAM telemetry: expected an object"
+    )
+    assert profile["observations"] == []
+    assert profile["issues"] == [{"job_index": job["index"], "error": expected}]
+    assert vram.load_profile(saved) == profile
+    assert telemetry.read_bytes() == b"[]\n"
 
 
 def test_claim_commits_guard_and_seeds_in_one_transaction(measured):

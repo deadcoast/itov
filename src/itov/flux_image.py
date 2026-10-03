@@ -1,7 +1,7 @@
 """Pinned FLUX.2 Klein 4B FP8 text-to-image contract; GPU quality remains unqualified."""
 
 from itov.catalog import MAX_INTEGER, canonical_bytes, integer, object_fields, require, sha256, text
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.image_media import image_contract
 from itov.inference_capabilities import asset
 from itov.qualification import _file, json_text, model_path
@@ -67,7 +67,7 @@ RUNTIME_SOURCES = (
 
 
 def capabilities():
-    return parse_json(
+    return parse_json_object(
         canonical_bytes(
             {
                 "ok": True,
@@ -87,7 +87,7 @@ def capabilities():
     )
 
 
-def validate_spec(value):
+def validate_spec(value) -> dict:
     object_fields(
         value,
         {
@@ -131,7 +131,7 @@ def validate_spec(value):
         value["count"] <= 16 and value["seed"] + value["count"] - 1 <= MAX_INTEGER,
         "Inference requires 1..16 consecutive uint64 seeds",
     )
-    return parse_json(canonical_bytes(value))
+    return parse_json_object(canonical_bytes(value))
 
 
 def specification(

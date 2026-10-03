@@ -11,7 +11,7 @@ from itov.catalog import (
     require,
     text,
 )
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.image_media import image_contract
 
 CAPABILITY = "sdxl-1.0-unet-v1"
@@ -69,7 +69,7 @@ def asset(value, label):
     digest(value["sha256"], label + ".sha256")
 
 
-def validate_spec(value):
+def validate_spec(value) -> dict:
     if isinstance(value, dict) and value.get("version") == 3:
         from itov.flux_image import validate_spec as validate_flux
 
@@ -156,4 +156,4 @@ def validate_spec(value):
         all(sampler[key] == contract[key] for key in ("sampler_name", "scheduler")),
         "Sampler/scheduler is incompatible with adapter stack",
     )
-    return parse_json(canonical_bytes(value))
+    return parse_json_object(canonical_bytes(value))

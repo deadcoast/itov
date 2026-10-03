@@ -228,9 +228,10 @@ uv build
 ```
 
 Pyright and mypy are included in the uv development group. Both commands currently
-report remaining source diagnostics; the [first correction pass](docs/evidence/python-errors-pass1-20261002.json)
-records the baseline, corrections, targeted tests and outstanding files. The original
-`src/PYTHON_ERRORS.js` export is retained as historical input.
+report remaining source diagnostics; the [second correction pass](docs/evidence/python-errors-pass2-20261002.json)
+records the current counts, corrections, targeted tests and outstanding files. The
+[first pass](docs/evidence/python-errors-pass1-20261002.json) and the original
+`src/PYTHON_ERRORS.js` export are retained as historical input.
 
 Automated tests use temporary workspaces, a local HTTP fixture, and owned child processes for lock contention and crash recovery. Real runtime qualification is recorded separately. The [development review](docs/development-review.md) records completed gates, acceptance limits, and the next stage.
 

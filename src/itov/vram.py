@@ -16,7 +16,7 @@ from itov.catalog import (
     sha256,
 )
 from itov.catalog_store import _atomic_write
-from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json, submission_matches
+from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json_object, submission_matches
 from itov.config import Config
 from itov.owned_jobs import job_path, read_owned
 from itov.qualification import load_qualification, qualify, safe_path
@@ -70,7 +70,8 @@ def gpu_snapshot() -> dict:
 
 def fingerprint(receipt: dict, gpu: dict) -> str:
     observer = receipt.get("vram_observer")
-    require(isinstance(observer, dict), "Qualification requires the instrumented VRAM runtime")
+    if not isinstance(observer, dict):
+        raise ValueError("Qualification requires the instrumented VRAM runtime")
     body = {
         key: receipt[key]
         for key in ("profile", "runtime", "devices", "node_schema_sha256", "files")
@@ -103,7 +104,7 @@ def _save(config: Config, category: str, body: dict, id_field: str) -> tuple[dic
 
 def load_profile(path: Path) -> dict:
     raw = read_document(path)
-    value = parse_json(raw)
+    value = parse_json_object(raw, message="VRAM profile: expected an object")
     object_fields(
         value,
         {
@@ -161,9 +162,10 @@ def collect_profile(config: Config, plan: dict, receipt: dict, gpu: dict) -> tup
             record = read_owned(config, plan, job)
             require(record["status"] == "succeeded", "Only successful collected jobs qualify")
             history = client.history(record["prompt_id"])
+            if history is None:
+                raise ValueError("Missing matching terminal server ownership")
             require(
-                history is not None
-                and history["status"].get("completed") is True
+                history["status"].get("completed") is True
                 and history["status"].get("status_str") == "success"
                 and history["prompt"][3].get("itov_request_id") == record["request_id"]
                 and submission_matches(record["workflow"], history["prompt"][2]),
@@ -174,7 +176,7 @@ def collect_profile(config: Config, plan: dict, receipt: dict, gpu: dict) -> tup
                 f"state/vram/telemetry/{observer['session_id']}/{record['prompt_id']}.json",
             )
             raw = read_document(telemetry)
-            metric = parse_json(raw)
+            metric = parse_json_object(raw, message="VRAM telemetry: expected an object")
             from itov.vram_identity import encoded
 
             require(
@@ -244,7 +246,7 @@ def capture(config: Config, path: Path, qualification: Path, *, wait_timeout=900
         "Capture requires a fresh observer process for an honest cold measurement",
     )
     require(2 <= len(plan["jobs"]) <= 4, "Capture requires 2..4 explicitly seeded jobs")
-    keys = {workload_key(parse_json(job["workflow_json"])) for job in plan["jobs"]}
+    keys = {workload_key(parse_json_object(job["workflow_json"])) for job in plan["jobs"]}
     require(
         len(keys) == 1 and all(job["seed"] is not None for job in plan["jobs"]),
         "Capture requires one exact workload with explicit varying seeds",
@@ -362,9 +364,11 @@ def assess(
         gpu["used_bytes"], memory["global_total_bytes"] - memory["global_free_bytes"]
     )
     total = min(gpu["total_bytes"], memory["global_total_bytes"])
-    keys = sorted({workload_key(parse_json(job["workflow_json"])) for job in plan["jobs"]})
+    keys = sorted({workload_key(parse_json_object(job["workflow_json"])) for job in plan["jobs"]})
     for key in keys:
-        observations, cold, warm = [], set(), set()
+        observations = []
+        cold: set[str] = set()
+        warm: set[str] = set()
         rejected = []
         for profile in profiles:
             if profile.get("runtime_key") != runtime_key:
@@ -447,7 +451,10 @@ def check(config: Config, plan: dict, profiles: list[dict], *, workers=1, receip
             directory = safe_path(config.runtime_root, f"state/vram/telemetry/{session}")
             latest = []
             for path in directory.glob("*.json"):
-                metric = parse_json(read_document(safe_path(directory, path.name)))
+                metric = parse_json_object(
+                    read_document(safe_path(directory, path.name)),
+                    message="VRAM telemetry: expected an object",
+                )
                 if metric.get("sequence") == state["executions"] - 1:
                     latest.append(metric)
             require(len(latest) == 1, "Missing unique last-execution measurement")
@@ -485,7 +492,7 @@ def guard(
     )
     supplied = [load_profile(item) for item in paths] if paths else None
     if path.exists():
-        value = parse_json(read_document(path))
+        value = parse_json_object(read_document(path), message="VRAM guard: expected an object")
         body = {key: item for key, item in value.items() if key != "guard_id"}
         require(
             value.get("guard_id") == sha256(canonical_bytes(body))

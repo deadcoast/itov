@@ -13,7 +13,7 @@ from urllib.parse import urlsplit
 
 from itov import device
 from itov.catalog import object_fields, require
-from itov.comfyui import ComfyUIClient, parse_json, submission_matches
+from itov.comfyui import ComfyUIClient, parse_json_object, submission_matches
 from itov.config import validate_url
 from itov.jobs import _now
 from itov.qualification import json_text, safe_path
@@ -57,7 +57,7 @@ def terminal_history(request, history):
         and prompt[1] == request["prompt_id"]
         and isinstance(prompt[3], dict)
         and prompt[3].get("itov_request_id") == request["request_id"]
-        and submission_matches(parse_json(request["workflow_json"]), prompt[2]),
+        and submission_matches(parse_json_object(request["workflow_json"]), prompt[2]),
         "Terminal history does not belong to the exact owned request and graph",
     )
     status = history.get("status", {})
@@ -77,12 +77,11 @@ def recover_requests(value):
             continue
         prompt = client.find_submission(
             request["request_id"],
-            parse_json(request["workflow_json"]),
+            parse_json_object(request["workflow_json"]),
             prompt_id=request.get("prompt_id"),
         )
-        require(
-            prompt is not None, "External request outcome is unknown; preserve the device lease"
-        )
+        if prompt is None:
+            raise ValueError("External request outcome is unknown; preserve the device lease")
         terminal_history({**request, "prompt_id": prompt}, client.history(prompt))
 
 
@@ -92,15 +91,17 @@ class ClientLease:
     def __init__(self, config, operation_id, *, root=None):
         self.config, self.operation_id, self.root = config, operation_id, root
         self.context = None
-        self.value = None
+        self.value: dict | None = None
 
     def __enter__(self):
         return self
 
-    def _open(self, gpu_uuid, *, expected_id=None):
+    def _open(self, gpu_uuid, *, expected_id=None) -> dict:
         if self.context is not None:
+            if self.value is None:
+                raise ValueError("Device lease has not been acquired")
             require(self.value["gpu_uuid"] == gpu_uuid, "Device binding changed")
-            return
+            return self.value
         context = device._locked(gpu_uuid, self.root)
         entered = False
         try:
@@ -144,12 +145,15 @@ class ClientLease:
             self.folder, self.path = folder, path
             self.value = device._write(path, body)
             self.context = context
+            return self.value
         except BaseException:
             if entered:
                 context.__exit__(*sys.exc_info())
             raise
 
     def _write(self):
+        if self.value is None:
+            raise ValueError("Device lease has not been acquired")
         self.value = device._write(
             self.path, {k: v for k, v in self.value.items() if k != "record_id"}
         )
@@ -157,26 +161,25 @@ class ClientLease:
     def begin(self, record):
         """Journal intent before POST. False means prior intent, never permission to retry."""
         gpu_uuid = target_gpu(self.config)
-        if self.value is None:
-            self._open(gpu_uuid)
-        require(self.value["gpu_uuid"] == gpu_uuid, "Submission device identity changed")
+        value = self.value if self.value is not None else self._open(gpu_uuid)
+        require(value["gpu_uuid"] == gpu_uuid, "Submission device identity changed")
         key = record["request_id"]
         record["device_lease"] = {
-            "gpu_uuid": self.value["gpu_uuid"],
-            "lease_id": self.value["lease_id"],
+            "gpu_uuid": value["gpu_uuid"],
+            "lease_id": value["lease_id"],
             "operation_id": self.operation_id,
             "server_control": "external",
         }
-        if key in self.value["requests"]:
+        if key in value["requests"]:
             require(
                 submission_matches(
-                    record["workflow"], parse_json(self.value["requests"][key]["workflow_json"])
+                    record["workflow"], parse_json_object(value["requests"][key]["workflow_json"])
                 ),
                 "Previously journaled request graph differs",
             )
             return False
         require(
-            all(item["terminal"] for item in self.value["requests"].values()),
+            all(item["terminal"] for item in value["requests"].values()),
             "An unresolved request retains device ownership; observe it before submitting",
         )
         queue = ComfyUIClient(self.config.url).queue()
@@ -184,7 +187,7 @@ class ClientLease:
             not queue["queue_running"] and not queue["queue_pending"],
             "Server queue is busy; no new submission",
         )
-        self.value["requests"][key] = {
+        value["requests"][key] = {
             "request_id": key,
             "workflow_json": json_text(record["workflow"]),
             "prompt_id": None,
@@ -226,15 +229,15 @@ class ClientLease:
             )
             self._match_request(saved, record)
             return
-        self._open(binding["gpu_uuid"], expected_id=binding["lease_id"])
-        self._match_request(self.value, record)
+        value = self._open(binding["gpu_uuid"], expected_id=binding["lease_id"])
+        self._match_request(value, record)
 
     @staticmethod
     def _match_request(value, record):
         request = value["requests"].get(record["request_id"])
         require(isinstance(request, dict), "Request is missing from its device lease")
         require(
-            submission_matches(parse_json(request["workflow_json"]), record["workflow"])
+            submission_matches(parse_json_object(request["workflow_json"]), record["workflow"])
             and (
                 request["prompt_id"] is None
                 or record.get("prompt_id") in {None, request["prompt_id"]}
@@ -247,7 +250,7 @@ class ClientLease:
             return
         request = self.value["requests"][record["request_id"]]
         require(
-            submission_matches(parse_json(request["workflow_json"]), record["workflow"]),
+            submission_matches(parse_json_object(request["workflow_json"]), record["workflow"]),
             "Request graph changed",
         )
         request.update(prompt_id=record.get("prompt_id"), status=record["status"])
@@ -266,6 +269,8 @@ class ClientLease:
         if self.context is None:
             return
         try:
+            if self.value is None:
+                raise ValueError("Device lease has not been acquired")
             if all(item["terminal"] for item in self.value["requests"].values()):
                 device._retire(
                     self.folder, self.path, self.value, "external_requests_confirmed_terminal"

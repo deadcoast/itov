@@ -17,7 +17,7 @@ from itov.batch import load_plan
 from itov.batch_execution import _lock
 from itov.catalog import canonical_bytes, integer, object_fields, read_document, require, sha256
 from itov.catalog_store import CatalogStore, _atomic_write
-from itov.comfyui import ComfyUIClient, parse_json
+from itov.comfyui import ComfyUIClient, parse_json_object
 from itov.config import Config
 from itov.execution_store import check_run, claim, open_store, record_job, record_run, report
 from itov.jobs import _now
@@ -61,7 +61,7 @@ def save_document(config: Config, category: str, body: dict, field="record_id"):
 
 def load_calibration(path: Path) -> dict:
     raw = read_document(path)
-    value = parse_json(raw)
+    value = parse_json_object(raw, message="Parallel calibration: expected an object")
     object_fields(
         value,
         {
@@ -180,7 +180,7 @@ def validate_plan(plan: dict, *, calibrate: bool):
     )
     keys = set()
     for job in plan["jobs"]:
-        graph = parse_json(job["workflow_json"])
+        graph = parse_json_object(job["workflow_json"])
         kinds = [node["class_type"] for node in graph.values()]
         require(
             set(kinds) <= AUDIO_NODES
@@ -358,6 +358,8 @@ def run(
         _idle(config.url)
         gpu = vram.gpu_snapshot()
         with device.Lease(gpu["uuid"], config.root, plan["plan_id"], root=registry) as lease:
+            if lease.value is None:
+                raise ValueError("Device lease has not been acquired")
             pool = Job(lease.value["job_name"])
             claimed = False
             result = None
@@ -553,7 +555,7 @@ def resume(config: Config, path: Path) -> dict:
     plan = load_plan(path)
     with _lock(config), closing(open_store(config, create=False)) as db:
         saved, _ = check_run(db, config, plan)
-        receipt = parse_json(saved["qualification"])
+        receipt = parse_json_object(saved["qualification"])
         require(receipt.get("scope") == "managed_two_worker_audio", "Not a managed parallel plan")
         require(
             saved["status"] == "succeeded",
@@ -576,7 +578,7 @@ def recover(config: Config, path: Path, *, registry=None) -> dict:
     plan = load_plan(path)
     with _lock(config), closing(open_store(config, create=False)) as db:
         saved, _ = check_run(db, config, plan)
-        receipt = parse_json(saved["qualification"])
+        receipt = parse_json_object(saved["qualification"])
         require(receipt.get("scope") == "managed_two_worker_audio", "Not a managed parallel plan")
         require(
             saved["status"] not in {"succeeded", "abandoned"},

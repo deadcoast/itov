@@ -4,7 +4,7 @@ import sqlite3
 from contextlib import closing
 
 from itov.catalog import require
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.qualification import safe_path
 
 JOB_TERMINAL = {"succeeded", "failed", "rejected", "validation_failed", "collection_failed"}
@@ -46,8 +46,10 @@ def workspace_available(config, *, plan_id=None, request_id=None):
             }
     jobs = safe_path(config.root, "state/jobs")
     for path in sorted(jobs.glob("*.json")):
-        record = parse_json(safe_path(jobs, path.name).read_bytes())
-        require(isinstance(record, dict), "Invalid job ownership record; preserve and inspect")
+        record = parse_json_object(
+            safe_path(jobs, path.name).read_bytes(),
+            message="Invalid job ownership record; preserve and inspect",
+        )
         require(
             isinstance(record.get("status"), str)
             and record["status"] in JOB_PENDING | JOB_TERMINAL,
@@ -66,8 +68,10 @@ def workspace_available(config, *, plan_id=None, request_id=None):
         )
     training = safe_path(config.root, "state/training/runs")
     for path in sorted(training.glob("*/run.json")):
-        record = parse_json(safe_path(training, path.relative_to(training).as_posix()).read_bytes())
-        require(isinstance(record, dict), "Invalid training ownership record")
+        record = parse_json_object(
+            safe_path(training, path.relative_to(training).as_posix()).read_bytes(),
+            message="Invalid training ownership record",
+        )
         require(
             isinstance(record.get("status"), str)
             and record["status"]

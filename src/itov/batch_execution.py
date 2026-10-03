@@ -9,7 +9,7 @@ from pathlib import Path
 from itov.batch import load_plan
 from itov.catalog import canonical_bytes, require
 from itov.catalog_store import CatalogStore
-from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json
+from itov.comfyui import ComfyUIClient, ComfyUIError, parse_json_object
 from itov.config import Config, validate_timeout
 from itov.execution_store import (
     check_run,
@@ -48,7 +48,7 @@ def abandon_reserved_plan(config, plan):
     with _lock(config), closing(open_store(config, create=False)) as db:
         run, rows = check_run(db, config, plan)
         require(
-            parse_json(run["qualification"]).get("scope") != "managed_two_worker_audio",
+            parse_json_object(run["qualification"]).get("scope") != "managed_two_worker_audio",
             "Use parallel recover for a managed parallel batch",
         )
         if run["status"] in {"succeeded", "failed", "abandoned"}:
@@ -127,12 +127,12 @@ def run_reserved_plan(
     config,
     plan,
     *,
-    qualification=None,
+    qualification: dict | None = None,
     resume=False,
     prompt_id=None,
-    timeout=3,
-    wait_timeout=120,
-    poll_interval=1,
+    timeout: float = 3,
+    wait_timeout: float = 120,
+    poll_interval: float = 1,
     vram_profiles=None,
     qualify_plan,
     submission_guard,
@@ -162,22 +162,22 @@ def run_reserved_plan(
         guard_id = None
         if profiles is not None:
             guard_file = safe_path(config.root, f"state/vram/guards/{plan['plan_id']}.json")
-            guard_id = parse_json(guard_file.read_bytes())["guard_id"]
+            guard_id = parse_json_object(guard_file.read_bytes())["guard_id"]
+            if not isinstance(guard_id, str):
+                raise ValueError("Invalid VRAM guard identity")
         existing = db.execute(
             "SELECT plan_id FROM runs WHERE plan_id = ?", (plan["plan_id"],)
         ).fetchone()
         if existing is None:
-            require(
-                not resume and qualification is not None,
-                "A new batch requires --qualification from batch qualify --save",
-            )
+            if resume or qualification is None:
+                raise ValueError("A new batch requires --qualification from batch qualify --save")
             receipt = qualification
             require(
                 receipt == qualify_plan(config, plan, timeout=timeout),
                 "Qualification changed; qualify and inspect the current bindings",
             )
             claim(db, config, plan, receipt, vram_guard_id=guard_id)
-        elif profiles is not None and not guards:
+        elif guard_id is not None and not guards:
             from itov.jobs import _now
 
             with transaction(db):
@@ -187,7 +187,7 @@ def run_reserved_plan(
                 )
         run, rows = check_run(db, config, plan)
         require(
-            parse_json(run["qualification"]).get("scope") != "managed_two_worker_audio",
+            parse_json_object(run["qualification"]).get("scope") != "managed_two_worker_audio",
             "Use parallel resume or recover for a managed parallel batch",
         )
         if run["status"] == "abandoned":
@@ -200,7 +200,7 @@ def run_reserved_plan(
         require(
             other is None, "Another batch retains workspace execution ownership; resume it first"
         )
-        receipt = parse_json(run["qualification"])
+        receipt = parse_json_object(run["qualification"])
         if qualification is not None:
             require(
                 qualification == receipt,

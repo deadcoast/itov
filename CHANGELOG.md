@@ -4,6 +4,13 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-10-02 — second Python diagnostic correction pass
+
+- Corrected 14 source modules covering ownership, cancellation, VRAM records, qualification, inference specifications, review packets and offline navigation. Checked JSON-object readers and explicit optional-state checks preserve existing hashes, locks, recovery proofs and no-resubmission rules.
+- Fixed training startup error handling when a run directory appears before the local run record is constructed. The original failure and existing record are preserved, the owned job stops, and its lease is released. Malformed VRAM telemetry is retained as an issue or admission refusal.
+- Across 88 source modules, Pyright errors fell from 379 to 163 and mypy errors from 161 to 87. All 14 edited modules have zero errors in these runs; remaining repository diagnostics stay visible. No uv dependency or lock changes were needed.
+- Passed 496 distinct targeted test cases, including five new cases, plus Ruff, uv lock/dependency checks and the CLI version check. Three supplementary downloader tests initially failed because the host had less than the required 1 GiB disk reserve. Their capacity is now explicit, with an additional low-space refusal case; the production reserve remains unchanged. Failed reports are retained. Full-suite, installed-package and GPU/model checks were not rerun. See the [corrections, verification and remaining diagnostics](docs/evidence/python-errors-pass2-20261002.json).
+
 ### 2026-10-02 — first Python diagnostic correction pass
 
 - Added checked JSON-object decoding for immutable records, catalog snapshots and lint documents. Sealed records now return a dictionary only after their existing object/hash checks succeed; the generic JSON parser retains support for scalar and array values.

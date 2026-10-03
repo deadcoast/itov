@@ -7,7 +7,7 @@ from pathlib import Path
 
 from itov.catalog import canonical_bytes, digest, integer, require, sha256
 from itov.catalog_store import CatalogStore
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import read_document
 from itov.qualification import safe_path
 from itov.training_data import check_seal
@@ -50,8 +50,7 @@ def _document(config, path):
     require(path.is_relative_to(config.root), "Inspect a saved artifact inside this workspace")
     path = safe_path(config.root, path.relative_to(config.root).as_posix())
     raw = read_document(path)
-    value = parse_json(raw)
-    require(isinstance(value, dict), "Expected an artifact object")
+    value = parse_json_object(raw, message="Expected an artifact object")
     require(type(value.get("version")) is int and value["version"] > 0, "Invalid artifact version")
     return path, raw, value
 
@@ -95,8 +94,7 @@ def _execution_state(config, value):
         )
         require(isinstance(row[0], str), "Invalid recorded execution state")
         require(row[3] == config.url, "Execution belongs to another configured server")
-        receipt = parse_json(row[2])
-        require(isinstance(receipt, dict), "Invalid execution qualification")
+        receipt = parse_json_object(row[2], message="Invalid execution qualification")
         return row[0], receipt
 
 
@@ -119,7 +117,8 @@ def _owner(config, value):
             )
             check_seal(plan, "plan_id")
             jobs = plan.get("jobs")
-            require(isinstance(jobs, list) and owner["index"] < len(jobs), "Owner job is missing")
+            if not isinstance(jobs, list) or owner["index"] >= len(jobs):
+                raise ValueError("Owner job is missing")
             job = jobs[owner["index"]]
             require(
                 isinstance(job, dict)
@@ -136,7 +135,8 @@ def _owner(config, value):
                 from itov.parallel import assignments, worker_configs
 
                 ports = receipt.get("ports")
-                require(isinstance(ports, list), "Missing recorded worker ports")
+                if not isinstance(ports, list):
+                    raise ValueError("Missing recorded worker ports")
                 require(
                     receipt.get("mode") in ("calibrate", "qualify") and len(jobs) >= 2,
                     "Invalid recorded parallel assignment",
@@ -355,7 +355,8 @@ def status(config, *, kind="all", offset=0, limit=25):
     integer(offset, "offset")
     integer(limit, "limit", minimum=1)
     require(limit <= 200 and (kind == "all" or kind in FOLDERS), "Invalid inventory limit or kind")
-    catalog, errors, paths = {}, [], []
+    catalog: dict = {}
+    errors, paths = [], []
     store = CatalogStore(config.root)
     try:
         if store._path("HEAD").exists():

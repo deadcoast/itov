@@ -3,6 +3,7 @@ import importlib.util
 import io
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from test_batch_execution import execution_case as execution_case
@@ -239,8 +240,18 @@ def downloader():
     return module
 
 
-@pytest.mark.parametrize("data", [b"expected", b"wrong", b"too much content"])
-def test_download_publishes_only_exact_hash_and_length(tmp_path, downloader, data):
+@pytest.mark.parametrize(
+    "data,free_bytes",
+    [
+        (b"expected", 1024**3 + 8),
+        (b"wrong", 1024**3 + 8),
+        (b"too much content", 1024**3 + 8),
+        (b"expected", 1024**3 + 7),
+    ],
+)
+def test_download_publishes_only_exact_hash_and_length(
+    tmp_path, downloader, monkeypatch, data, free_bytes
+):
     asset = {
         "id": "fixture",
         "destination": "models/checkpoints/fixture.safetensors",
@@ -250,14 +261,23 @@ def test_download_publishes_only_exact_hash_and_length(tmp_path, downloader, dat
         "bytes": 8,
         "sha256": sha256(b"expected"),
     }
+    monkeypatch.setattr(downloader.shutil, "disk_usage", lambda _: SimpleNamespace(free=free_bytes))
+    requests = []
 
     class Opener:
         def open(self, url, timeout):
+            requests.append(url)
             assert "/resolve/" + "a" * 40 in url and timeout == 30
             return io.BytesIO(data)
 
     target = tmp_path / asset["destination"]
-    if data == b"expected":
+    if free_bytes < 1024**3 + asset["bytes"]:
+        with pytest.raises(ValueError, match="Insufficient disk space"):
+            downloader.fetch(tmp_path, asset, opener=Opener())
+        assert not requests
+        assert not target.exists()
+        assert not list(target.parent.glob("*.partial"))
+    elif data == b"expected":
         assert (
             downloader.fetch(tmp_path, asset, opener=Opener())["status"]
             == "downloaded_and_verified"
