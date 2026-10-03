@@ -38,6 +38,7 @@ def probe(request):
     model = comfy.sd.load_checkpoint_guess_config(
         request["checkpoint"], output_vae=False, output_clip=False
     )[0]
+    assert model is not None, "ComfyUI did not load a checkpoint model"
     state = model.model.state_dict()
     assert all(t.device.type == "cpu" for t in state.values()), "Non-CPU checkpoint tensor"
     lora = comfy.utils.load_torch_file(request["adapter"], safe_load=True)
@@ -72,6 +73,7 @@ def probe(request):
     accepted = []
     for strength in request["strengths_milli"]:
         patched, clip = comfy.sd.load_lora_for_models(model, None, lora, strength / 1000, 0)
+        assert patched is not None, "ComfyUI did not return a patched model"
         assert clip is None and set(patched.patches) == set(loaded)
         assert all(
             len(p) == 1 and p[0][0] == strength / 1000 and p[0][2:] == (1.0, None, None)

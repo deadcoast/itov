@@ -1,0 +1,137 @@
+{
+  "date": "2026-10-03",
+  "scope": "Native Windows uv development environment and Python diagnostic corrections",
+  "changed_sha256": {
+    "pyproject.toml": "9b7b7f74f7d7f68f5fade0f53f1c6bacac18ffc7d6512ca9d966e5ef17a886f0",
+    "uv.lock": "6643d5499282275015a8dec0b01c5f2bcb9d4ea69e84f9482de58766408b4bd2",
+    ".vscode/settings.json": "3d81b6264323493d3e7c70ae514321516f782d4fd9a2700b3d878802ce5981bc",
+    "src/itov/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/itov/deployed_loader_worker.py": "907bfee6283e217dfb40063551800f105844e4f3b62a0ed4761aada2c0714817",
+    "src/itov/training_worker.py": "b7ede08b3c2d99287c297919d9c1aeca6cff5e5e886d6d4eb6e11e5ec0344bca",
+    "README.md": "c817252eea0c5268ac300747e7de05501d13f05c0d8e45d376f53019ce3c866b",
+    "CHANGELOG.md": "895ceed943e5fb47f10bed45ec2a5e45f06c38c13b05c144f2bd5dea5d78d084"
+  },
+  "editor_export_preserved": {
+    "path": "src/PYTHON_ERRORS.js",
+    "sha256": "6914c43939a193feb6886c314d047b32b74914bad5d1af432d2aedb55837742a"
+  },
+  "dev_versions": {
+    "comfyui-types": "1.4.1",
+    "sourcery": "1.46.0",
+    "pytest": "8.4.2",
+    "ruff": "0.16.8",
+    "mypy": "2.4.0",
+    "pyright": "1.1.414",
+    "Pillow": "12.3.0",
+    "torch": "2.13.0",
+    "numpy": "2.5.2",
+    "safetensors": "0.8.0",
+    "aiohttp": "3.14.3",
+    "diffusers": "0.38.0",
+    "peft": "0.21.0",
+    "accelerate": "1.15.0",
+    "transformers": "4.57.6",
+    "huggingface-hub": "0.36.0",
+    "tokenizers": "0.22.2"
+  },
+  "existing_training_and_cuda_environments_modified": false,
+  "checker_configuration": {
+    "environment": ".venv",
+    "comfyui_source": "AI/ComfyUI/ComfyUI_windows_portable/ComfyUI",
+    "missing_imports_enabled": true,
+    "mypy_follow_imports": "silent",
+    "mypy_checks_unannotated_bodies": false,
+    "pyright_mode": "basic"
+  },
+  "pyright": {
+    "before_errors": 24,
+    "after": {
+      "filesAnalyzed": 88,
+      "errorCount": 0,
+      "warningCount": 0,
+      "informationCount": 0,
+      "timeInSec": 9.5
+    },
+    "report": "workspace/state/verification/python-dev-profile-20261003/pyright-native-final.json"
+  },
+  "mypy": {
+    "before_errors": 21,
+    "after_errors": 0,
+    "checked_files": 90,
+    "informational_notes": 3,
+    "scope": [
+      "src/itov",
+      "tests/test_jobs.py",
+      "tests/test_dataset_review.py"
+    ],
+    "report": "workspace/state/verification/python-dev-profile-20261003/mypy-native-final.txt"
+  },
+  "pytest": {
+    "passed": 236,
+    "failed": 0,
+    "errors": 0,
+    "report": "workspace/state/verification/python-dev-profile-20261003/pytest-native.xml",
+    "scope": [
+      "tests/test_training.py",
+      "tests/test_training_config.py",
+      "tests/test_training_checkpoints.py",
+      "tests/test_deployed_review.py",
+      "tests/test_assessment_records.py"
+    ],
+    "timing": "Passed before final equivalent Diffusers import-path adjustment; native checks verified direct exports identical to original public exports."
+  },
+  "cpu_contracts_native": {
+    "status": "passed",
+    "torch": "2.13.0+cpu",
+    "scheduler_mapping_matches_attributes": true,
+    "int64_timesteps": true,
+    "noise_tensor_equal": true,
+    "latent_output_type": true,
+    "pillow_preview_bytes": 77,
+    "lora_tensor_identity_preserved": true,
+    "cuda_initialized": false,
+    "model_loaded": false
+  },
+  "cpu_contracts_worker_environment": {
+    "status": "passed",
+    "torch": "2.13.0+cu130",
+    "scheduler_mapping_matches_attributes": true,
+    "int64_timesteps": true,
+    "noise_tensor_equal": true,
+    "latent_output_type": true,
+    "pillow_preview_bytes": 77,
+    "lora_tensor_identity_preserved": true,
+    "cuda_initialized": false,
+    "model_loaded": false
+  },
+  "native_worker_third_party_imports": "passed; direct/public scheduler, pipeline, and converter objects identical; CUDA uninitialized",
+  "ruff": "lint and format checks passed; 139 Python files",
+  "uv": {
+    "locked_sync": "passed",
+    "lock_check": "passed",
+    "dependency_check": "59 installed packages compatible"
+  },
+  "package": {
+    "build": "passed",
+    "wheel_sha256": "36a49b00f71a95b8425fc09f0d6d820715ebd35ff505e0ac6bdbca6a9294bb83",
+    "sdist_sha256": "ed216cd2a317b1f6b44ebff0ac81c6f6b13fc78599edfa9944ef57d90114dac2",
+    "matching_python_modules": 88,
+    "py_typed_in_wheel_and_sdist": true,
+    "readme_matches_after_newline_normalization": true,
+    "runtime_requirements": [
+      "Requires-Dist: pillow==12.3.0 ; extra == 'dataset'"
+    ]
+  },
+  "limits": [
+    "Default/basic static coverage; mypy still skips unannotated function bodies.",
+    "Full 1647-test suite not repeated in this pass.",
+    "ComfyUI source is local and ignored by Git; fresh clones must provision it or update the documented source path.",
+    "No GPU runs or model loading."
+  ],
+  "references": [
+    "https://docs.astral.sh/uv/concepts/projects/dependencies/",
+    "https://github.com/tkreuziger/comfyui-types",
+    "https://mypy.readthedocs.io/en/stable/config_file.html",
+    "https://github.com/microsoft/pyright/blob/main/docs/configuration.md"
+  ]
+}

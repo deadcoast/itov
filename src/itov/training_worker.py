@@ -7,8 +7,10 @@ import os
 import sys
 import time
 import traceback
+from collections.abc import Callable
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from typing import cast
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -21,8 +23,14 @@ from itov.training_data import file_ref, load_dataset, publish, seal
 def train(request):
     import numpy as np
     import torch
-    from diffusers import DDPMScheduler, StableDiffusionXLPipeline
-    from diffusers.utils import convert_state_dict_to_diffusers
+    from diffusers.pipelines.stable_diffusion_xl.pipeline_output import (
+        StableDiffusionXLPipelineOutput,
+    )
+    from diffusers.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl import (
+        StableDiffusionXLPipeline,
+    )
+    from diffusers.schedulers.scheduling_ddpm import DDPMScheduler
+    from diffusers.utils.state_dict_utils import convert_state_dict_to_diffusers
     from peft import LoraConfig
     from peft.utils import get_peft_model_state_dict
     from PIL import Image
@@ -73,8 +81,17 @@ def train(request):
         add_watermarker=False,
     )
     scheduler = DDPMScheduler.from_config(pipe.scheduler.config)
+    if not isinstance(scheduler, DDPMScheduler):
+        raise ValueError("Expected one DDPM scheduler from the pinned configuration")
     require(
-        scheduler.config.prediction_type == "epsilon", "Only SDXL epsilon prediction is supported"
+        scheduler.config["prediction_type"] == "epsilon",
+        "Only SDXL epsilon prediction is supported",
+    )
+    # Diffusers 0.38 annotates timesteps as IntTensor, but indexes with the
+    # int64 Tensor returned by torch.randint. Describe that supported signature
+    # without changing timestep dtype, random draws, or the library method.
+    add_noise = cast(
+        Callable[[torch.Tensor, torch.Tensor, torch.Tensor], torch.Tensor], scheduler.add_noise
     )
     for module in (pipe.unet, pipe.vae, pipe.text_encoder, pipe.text_encoder_2):
         module.requires_grad_(False)
@@ -153,9 +170,9 @@ def train(request):
         latent = item["latent"].to("cuda")
         noise = torch.randn(latent.shape, device="cuda", dtype=latent.dtype, generator=generator)
         timestep = torch.randint(
-            0, scheduler.config.num_train_timesteps, (1,), device="cuda", generator=generator
+            0, scheduler.config["num_train_timesteps"], (1,), device="cuda", generator=generator
         )
-        noisy = scheduler.add_noise(latent, noise, timestep)
+        noisy = add_noise(latent, noise, timestep)
         with torch.autocast("cuda", dtype=torch.bfloat16):
             prediction = unet(
                 noisy,
@@ -226,7 +243,7 @@ def train(request):
                 timesteps.append(
                     torch.randint(
                         0,
-                        scheduler.config.num_train_timesteps,
+                        scheduler.config["num_train_timesteps"],
                         (1,),
                         device="cuda",
                         generator=generator,
@@ -235,7 +252,7 @@ def train(request):
                 embeds.append(item["embeds"].to("cuda"))
                 pooled.append(item["pooled"].to("cuda"))
             latent, noise, timestep = torch.cat(latents), torch.cat(noises), torch.cat(timesteps)
-            noisy = scheduler.add_noise(latent, noise, timestep)
+            noisy = add_noise(latent, noise, timestep)
             with torch.autocast("cuda", dtype=torch.bfloat16):
                 prediction = unet(
                     noisy,
@@ -349,7 +366,7 @@ def train(request):
     require(changed > 0, "Training did not change any adapter tensors")
     StableDiffusionXLPipeline.save_lora_weights(
         str(output),
-        unet_lora_layers=convert_state_dict_to_diffusers(state),
+        unet_lora_layers=dict(convert_state_dict_to_diffusers(state)),
         safe_serialization=True,
     )
     weights = output / "pytorch_lora_weights.safetensors"
@@ -371,7 +388,7 @@ def train(request):
             unet.enable_adapters()
         else:
             unet.disable_adapters()
-        latents = pipe(
+        rendered = pipe(
             prompt=prompt,
             negative_prompt=negative_prompt,
             width=512,
@@ -380,7 +397,13 @@ def train(request):
             guidance_scale=7.0,
             generator=torch.Generator(device="cuda").manual_seed(seed),
             output_type="latent",
-        ).images
+            return_dict=True,
+        )
+        if not isinstance(rendered, StableDiffusionXLPipelineOutput):
+            raise ValueError("Expected a structured SDXL pipeline result")
+        latents = rendered.images
+        if not isinstance(latents, torch.Tensor):
+            raise ValueError("Expected latent tensors from the SDXL pipeline")
         require(
             getattr(pipe.vae.config, "latents_mean", None) is None
             and getattr(pipe.vae.config, "latents_std", None) is None,
@@ -392,7 +415,13 @@ def train(request):
                 return_dict=False,
             )[0]
         require(bool(torch.isfinite(decoded).all()), "Nonfinite preview pixels")
-        pipe.image_processor.postprocess(decoded, output_type="pil")[0].save(path)
+        images = pipe.image_processor.postprocess(decoded, output_type="pil")
+        if not isinstance(images, list) or not images:
+            raise ValueError("Expected a decoded Pillow preview image")
+        preview = images[0]
+        if not isinstance(preview, Image.Image):
+            raise ValueError("Expected a decoded Pillow preview image")
+        preview.save(path)
         return {"path": path.name, "sha256": sha256(path.read_bytes())}
 
     for index, item in enumerate(heldout[:2]):

@@ -219,24 +219,53 @@ Use [TODO.md](TODO.md) as the working task list, including current stages, depen
 
 ```powershell
 $env:UV_CACHE_DIR = "$PWD\.uv-cache"
+uv sync --locked
 uv run --locked pytest --basetemp .test-tmp
 uv run --locked ruff check .
 uv run --locked ruff format --check .
-uv run --locked pyright --pythonpath .venv/Scripts/python.exe src/itov
-uv run --locked mypy --python-executable .venv/Scripts/python.exe src/itov
+uv run --locked pyright
+uv run --locked mypy
 uv build
 ```
 
-Pyright and mypy are included in the uv development group. Both commands currently
-report missing imports in the separate training and ComfyUI workers: 24 Pyright
-diagnostics and 21 mypy diagnostics. Other reported source type errors have been
-corrected. The [third correction pass](docs/evidence/python-errors-pass3-20261003.json)
-records the corrections, verification and remaining imports. These include runtime
-packages such as Torch and ComfyUI's own `comfy`, `execution` and `server` modules;
-the latter are first-party ComfyUI source, not uv package names. The
-[first](docs/evidence/python-errors-pass1-20261002.json) and
-[second](docs/evidence/python-errors-pass2-20261002.json) reports and the original
-`src/PYTHON_ERRORS.js` export are retained as historical input.
+The default uv development group installs the linters, pytest, Pillow, your
+`comfyui-types` and Sourcery packages, and the ML libraries needed to analyze the
+workers. It targets Python 3.13+; the published core CLI still supports Python
+3.11+. VS Code and the commands above use `.venv` and the configuration in
+`pyproject.toml`. ITOV includes `py.typed` so its annotations are visible when
+imported from tests or installed clients.
+
+| Imports | Development dependency |
+| --- | --- |
+| `torch` | `torch==2.13.0` |
+| `numpy` | `numpy==2.5.2` |
+| `safetensors.torch` | `safetensors==0.8.0` |
+| `aiohttp` | `aiohttp==3.14.3` |
+| `diffusers` | `diffusers==0.38.0` |
+| `peft` | `peft==0.21.0` |
+
+The dev profile also pins `accelerate==1.15.0`, `transformers==4.57.6`,
+`huggingface-hub==0.36.0` and `tokenizers==0.22.2` to the compatible versions
+required by `training.PINNED`. `uv.lock` records their resolved dependencies.
+These packages expose their own types; no separate stub packages are needed for
+the six imports above. The development Torch installation is separate from the
+portable runtime's CUDA build and does not replace it.
+
+ComfyUI's `comfy.*`, `execution` and `server` modules resolve from
+`AI/ComfyUI/ComfyUI_windows_portable/ComfyUI` through the checkers' source paths.
+A fresh checkout needs ComfyUI source at that location, or corresponding changes
+to Pyright's `extraPaths` and mypy's `mypy_path`. The installed
+[`comfyui-types`](https://github.com/tkreuziger/comfyui-types) package provides
+custom-node helpers under `comfyui_types`; it does not supply those internal
+modules. Neither checker disables missing-import errors.
+
+Mypy analyzes imported source for type information but reports diagnostics in the
+requested ITOV files (`follow_imports = "silent"`). Its default mode still skips
+unannotated function bodies; Pyright's basic mode supplies additional body checks.
+The earlier [first](docs/evidence/python-errors-pass1-20261002.json),
+[second](docs/evidence/python-errors-pass2-20261002.json), and
+[third](docs/evidence/python-errors-pass3-20261003.json) reports retain their
+historical results. `src/PYTHON_ERRORS.js` remains the supplied editor export.
 
 Automated tests use temporary workspaces, a local HTTP fixture, and owned child processes for lock contention and crash recovery. Real runtime qualification is recorded separately. The [development review](docs/development-review.md) records completed gates, acceptance limits, and the next stage.
 

@@ -4,6 +4,13 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-10-03 — native uv development dependencies and import resolution
+
+- Installed and locked the ML development libraries in `.venv`, matching the existing worker package versions and training compatibility constraints. Kept `comfyui-types` and Sourcery in the default dev group. The Windows development Torch wheel is CPU-only; the separate CUDA and training environments were not modified.
+- Configured Pyright, mypy and VS Code to use the development environment and the local ComfyUI source. Added ITOV's packaged `py.typed` marker to fix untyped imports from tests. Missing-import diagnostics remain enabled.
+- Corrected worker errors exposed by resolving the actual library types: optional ComfyUI model results, scheduler/configuration access, Diffusers export paths, tensor output checks and Pillow preview checks. A precise callable annotation accommodates Diffusers' timestep annotation without changing integer dtype or random draws.
+- Verification and limits are recorded in the [development profile report](docs/evidence/python-dev-profile-20261003.json). CPU library checks do not load models or initialize CUDA; GPU work remains deferred.
+
 ### 2026-10-03 — third Python diagnostic correction pass
 
 - Corrected 38 source modules across dataset import/review, batch planning, candidate lifecycle, image/media validation, checkpoint records and workflow typing. Object checks and explicit optional-state checks retain existing integrity, ownership and refusal behavior. Invalid standalone workflows still produce a durable validation-failure record without submission.

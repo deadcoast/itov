@@ -4,10 +4,7 @@ version = "0.13.1"
 description = "Local ComfyUI catalogs, deterministic batches, and pinned image inference"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-    "comfyui-types>=1.4.1",
-    "sourcery>=1.46.0",
-]
+dependencies = []
 
 [project.optional-dependencies]
 # Dataset workers check for this exact Pillow version before decoding images.
@@ -23,12 +20,55 @@ build-backend = "uv_build"
 [dependency-groups]
 # uv installs this group by default for local development.
 dev = [
+    "comfyui-types>=1.4.1",
+    "sourcery>=1.46.0",
     "pytest>=8,<9",
     "ruff>=0.9,<1",
     "Pillow==12.3.0",
     "mypy>=2.4.0",
     "pyright>=1.1.414",
+    "aiohttp==3.14.3",
+    "numpy==2.5.2",
+    "safetensors==0.8.0",
+    "torch==2.13.0",
+    "diffusers==0.38.0",
+    "peft==0.21.0",
+    "accelerate==1.15.0",
+    "transformers==4.57.6",
+    "huggingface-hub==0.36.0",
+    "tokenizers==0.22.2",
 ]
+
+# The local development interpreter is 3.13; the core CLI still supports 3.11+.
+[tool.uv.dependency-groups]
+dev = {requires-python = ">=3.13"}
+
+# Third-party types come from the uv dev environment. ComfyUI's internal
+# modules come from the local portable source checkout.
+[tool.pyright]
+include = ["src/itov"]
+exclude = [".venv", ".uv-cache", "AI", "workspace", "build", "dist"]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.11"
+pythonPlatform = "Windows"
+typeCheckingMode = "basic"
+extraPaths = [
+    "src",
+    "AI/ComfyUI/ComfyUI_windows_portable/ComfyUI",
+]
+
+[tool.mypy]
+files = ["src/itov"]
+python_version = "3.11"
+python_executable = ".venv/Scripts/python.exe"
+mypy_path = [
+    "$MYPY_CONFIG_FILE_DIR/src",
+    "$MYPY_CONFIG_FILE_DIR/AI/ComfyUI/ComfyUI_windows_portable/ComfyUI",
+]
+# Analyze imported libraries for their types; report errors in ITOV itself.
+follow_imports = "silent"
+cache_dir = "workspace/state/typecheck/mypy"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
