@@ -75,7 +75,7 @@ def transform(source, destination, expected):
         fitted = ImageOps.contain(rgb, (512, 512), Image.Resampling.LANCZOS)
     offset = [(512 - fitted.width) // 2, (512 - fitted.height) // 2]
     canvas = Image.new("RGB", (512, 512), (245, 240, 225))
-    canvas.paste(fitted, tuple(offset))
+    canvas.paste(fitted, (offset[0], offset[1]))
     # A fresh canvas strips source EXIF/ICC metadata; no ICC color conversion is claimed.
     with destination.open("xb") as target:
         canvas.save(target, format="PNG")

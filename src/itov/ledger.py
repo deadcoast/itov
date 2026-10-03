@@ -29,7 +29,8 @@ def new_event(catalog: dict, ledger: list[dict], *, operation=None, action=None)
     }
     if operation is not None:
         require(bool(ledger), "Lifecycle changes require an initialized catalog")
-        require(action in {"activate", "retire", "rollback"}, "Invalid lifecycle action")
+        if action is None or action not in {"activate", "retire", "rollback"}:
+            raise ValueError("Invalid lifecycle action")
         _asset(operation, "lifecycle operation")
         body.update(version=2, action="candidate_" + action, operation=operation)
     previous = ledger[-1]["row_hash"] if ledger else GENESIS

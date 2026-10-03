@@ -4,6 +4,13 @@ Record user-visible changes, verification, and incomplete acceptance gates here 
 
 ## Unreleased
 
+### 2026-10-03 — third Python diagnostic correction pass
+
+- Corrected 38 source modules across dataset import/review, batch planning, candidate lifecycle, image/media validation, checkpoint records and workflow typing. Object checks and explicit optional-state checks retain existing integrity, ownership and refusal behavior. Invalid standalone workflows still produce a durable validation-failure record without submission.
+- Fixed the isolated dataset fingerprint worker's package import and scalar grayscale typing. Captured RGB and grayscale vectors before the change and verified identical fingerprints, oriented pixel hashes and intensity ranges from both source and the unpacked wheel. The image preparation offset retains its original values.
+- Pyright errors fell from 163 to 24 and mypy errors from 87 to 21 across 88 source modules. Every remaining diagnostic is an unresolved import in the separate training/ComfyUI workers. No diagnostic suppression or uv dependency changes were added. The [report](docs/evidence/python-errors-pass3-20261003.json) identifies the six third-party distributions separately from ComfyUI source modules.
+- Passed the full 1,647-test suite, including six new regression cases, plus Ruff, uv lock/dependency checks, the CLI version check and POSIX lock type check. The wheel and source archive build offline; all 88 packaged Python modules match source, and the packaged decoder probe and fingerprint checks pass. GPU/model execution remains deferred.
+
 ### 2026-10-02 — second Python diagnostic correction pass
 
 - Corrected 14 source modules covering ownership, cancellation, VRAM records, qualification, inference specifications, review packets and offline navigation. Checked JSON-object readers and explicit optional-state checks preserve existing hashes, locks, recovery proofs and no-resubmission rules.

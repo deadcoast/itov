@@ -288,7 +288,7 @@ def _run_job(config, workflow, *, request_id, device_owner, timeout, wait_timeou
         "artifacts": [],
     }
     with _guard(path):
-        if not validation["valid"]:
+        if not validation["valid"] or not isinstance(graph, dict):
             record["status"] = "validation_failed"
             return _save(path, record)
         if not device_owner.begin(record):
@@ -435,7 +435,7 @@ def _wait_job(
             expected_directory = _contained_directory(config, f"output/jobs/{request_id}")
             artifacts = record.get("artifacts")
             intact = isinstance(artifacts, list) and bool(artifacts)
-            if intact:
+            if isinstance(artifacts, list) and intact:
                 for artifact in artifacts:
                     output = Path(artifact["path"])
                     if output.resolve().parent != expected_directory.resolve():

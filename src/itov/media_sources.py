@@ -5,7 +5,7 @@ import uuid
 from pathlib import Path
 
 from itov.catalog import digest, object_fields, require, sha256, text
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import read_document
 from itov.qualification import _file, safe_path
 from itov.training_data import publish
@@ -29,7 +29,9 @@ def completed(config, value, kind):
     path = safe_path(config.root, f"state/jobs/{value['request_id']}.json")
     raw = read_document(path)
     require(sha256(raw) == value["record_sha256"], "Pinned source job record differs")
-    record = parse_json(raw)
+    record = parse_json_object(
+        raw, message="Source must be a completed job in this workspace/server"
+    )
     require(
         isinstance(record, dict)
         and type(record.get("version")) is int
@@ -41,16 +43,15 @@ def completed(config, value, kind):
         "Source must be a completed job in this workspace/server",
     )
     graph = record.get("workflow")
-    require(isinstance(graph, dict), "Invalid source workflow")
+    if not isinstance(graph, dict):
+        raise ValueError("Invalid source workflow")
     node = graph.get(value["node_id"])
     require(
         isinstance(node, dict) and node.get("class_type") == kind, "Source output node type differs"
     )
     rows = record.get("artifacts")
-    require(
-        isinstance(rows, list) and all(isinstance(r, dict) for r in rows),
-        "Invalid source artifacts",
-    )
+    if not isinstance(rows, list) or not all(isinstance(r, dict) for r in rows):
+        raise ValueError("Invalid source artifacts")
     rows = [r for r in rows if r.get("node_id") == value["node_id"]]
     require(
         len(rows) == 1
@@ -95,10 +96,8 @@ def from_record(config, path, node, kind):
     path = safe_path(config.root, path.relative_to(config.root).as_posix())
     raw = read_document(path)
     record = parse_json(raw)
-    require(
-        isinstance(record, dict) and isinstance(record.get("artifacts"), list),
-        "Invalid source record",
-    )
+    if not isinstance(record, dict) or not isinstance(record.get("artifacts"), list):
+        raise ValueError("Invalid source record")
     rows = [r for r in record["artifacts"] if isinstance(r, dict) and r.get("node_id") == node]
     require(len(rows) == 1, "Select exactly one completed output node")
     value = {

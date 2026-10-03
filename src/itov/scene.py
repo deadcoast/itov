@@ -6,7 +6,7 @@ from pathlib import Path
 
 from itov import linting
 from itov.catalog import array, integer, object_fields, require, sha256, text
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.trigger import index as trigger_index
 
 TERM_FIELDS = {"required_positive", "forbidden_positive", "required_negative", "forbidden_negative"}
@@ -112,6 +112,8 @@ def prompt(graph, link):
 def lint(config, constraints_path: Path, plan_path: Path, *, save=False):
     value, source = load_constraints(constraints_path)
     store, snapshot, plan = linting.context(config, plan_path)
+    if plan is None:
+        raise ValueError("Scene lint requires a batch plan")
     catalog = snapshot.to_dict()["catalog"]
     loras = {lora["id"]: lora for lora in catalog["loras"]}
     trigger_index(catalog)  # Same declaration and resource bounds as trigger collision lint.
@@ -128,7 +130,7 @@ def lint(config, constraints_path: Path, plan_path: Path, *, save=False):
     findings, checked = [], []
     for job in plan["jobs"]:
         rule = rules[job["preset"]]
-        graph = parse_json(job["workflow_json"])
+        graph = parse_json_object(job["workflow_json"])
         samplers = [key for key, n in graph.items() if n["class_type"] == "KSampler"]
         require(samplers == [rule["sampler"]], "Scene lint requires exactly the declared KSampler")
         sampler = graph[rule["sampler"]]

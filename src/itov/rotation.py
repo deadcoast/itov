@@ -94,7 +94,7 @@ def feasible_stacks(catalog: dict, request: dict):
     work = 0
     for preset_id in sorted(request["presets"]):
         preset = presets[preset_id]
-        candidates = {slot: [] for slot in slots}
+        candidates: dict[str, list[str]] = {slot: [] for slot in slots}
         for key in sorted(policy["ids"]):
             lora = loras[key]
             reasons = []
@@ -154,7 +154,8 @@ def select_jobs(catalog: dict, request: dict, stacks: dict) -> list[dict]:
     loras = {item["id"]: item for item in catalog["loras"]}
     policy = request["lora_policy"]
     draws = Draws(request["seed"])
-    jobs, used_seeds = [], set()
+    jobs: list[dict] = []
+    used_seeds: set[int] = set()
     soft = sorted(sorted(pair) for pair in catalog["compatibility"]["soft_conflicts"])
 
     def recent(size):

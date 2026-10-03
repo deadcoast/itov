@@ -8,7 +8,7 @@ from itov import dataset_inspection as inspection
 from itov import dataset_manifest
 from itov.catalog import array, canonical_bytes, object_fields, require, sha256, text
 from itov.catalog_store import _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.curation import TRANSFORM
 from itov.evidence_reads import EvidenceReads, read_document
 from itov.locking import file_lock
@@ -322,8 +322,7 @@ def artifacts(root, base):
 def freeze(config, path, *, save=False):
     with EvidenceReads().capture() as reads:
         raw = read_document(path)
-        review_value = parse_json(raw)
-        require(isinstance(review_value, dict), "Expected dataset review object")
+        review_value = parse_json_object(raw, message="Expected dataset review object")
         source, _ = file_ref(config.root, review_value.get("inspection"), maximum=32 * 1024**2)
         observed = inspection.load(config.root, source)
         value = decide(observed, review_value, inspection.retained(raw))

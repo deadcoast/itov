@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 from itov.catalog import integer, object_fields, require
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.media import _run, video_tools
 
 
@@ -38,7 +38,7 @@ def audio_contract(value: dict) -> dict:
 
 
 def probe_audio(path: Path) -> dict:
-    return parse_json(
+    return parse_json_object(
         _run(
             [
                 video_tools()["ffprobe"],

@@ -5,11 +5,12 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from typing import Literal, overload
 
 from itov.batch_request import validate_bindings, validate_request
 from itov.catalog import MAX_DOCUMENT_BYTES, canonical_bytes, digest, read_document, require, sha256
 from itov.catalog_store import CatalogStore, _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.rotation import ALGORITHM, feasible_stacks, select_jobs
 from itov.workflow import validate_workflow
 
@@ -26,6 +27,18 @@ PLAN_FIELDS = {
     "jobs",
     "plan_id",
 }
+
+
+@overload
+def _asset(root: Path, reference: dict, *, workflow: Literal[True]) -> bytes: ...
+
+
+@overload
+def _asset(root: Path, reference: dict, *, workflow: Literal[False] = False) -> None: ...
+
+
+@overload
+def _asset(root: Path, reference: dict, *, workflow: bool) -> bytes | None: ...
 
 
 def _asset(root: Path, reference: dict, *, workflow: bool = False) -> bytes | None:
@@ -59,7 +72,7 @@ def create_plan(workspace: Path, request) -> dict:
     head = digest(request.get("catalog_head"), "catalog_head")
     snapshot = store.snapshot(expected_head=head, require_clean=True)
     catalog = snapshot.to_dict()["catalog"]
-    request = validate_request(parse_json(canonical_bytes(request)), catalog)
+    request = validate_request(parse_json_object(canonical_bytes(request)), catalog)
     presets = {item["id"]: item for item in catalog["presets"]}
     loras = {item["id"]: item for item in catalog["loras"]}
     stacks, exclusions, eligible = feasible_stacks(catalog, request)
@@ -67,7 +80,7 @@ def create_plan(workspace: Path, request) -> dict:
     for key in sorted(request["presets"]):
         preset = presets[key]
         raw = _asset(store.workspace, preset["workflow"], workflow=True)
-        graph = parse_json(raw)
+        graph = parse_json_object(raw, message=f"Invalid API workflow: {key}")
         require(validate_workflow(graph).valid, f"Invalid API workflow: {key}")
         validate_bindings(preset, request["bindings"][key], graph)
         templates[key] = raw
@@ -78,7 +91,7 @@ def create_plan(workspace: Path, request) -> dict:
     jobs = select_jobs(catalog, request, stacks)
     workflow_size = 0
     for job in jobs:
-        graph = parse_json(templates[job["preset"]])
+        graph = parse_json_object(templates[job["preset"]])
         binding = request["bindings"][job["preset"]]
         for seed in binding["seed_inputs"]:
             graph[seed["node"]]["inputs"][seed["input"]] = job["seed"]
@@ -117,9 +130,7 @@ def create_plan(workspace: Path, request) -> dict:
 
 
 def load_request(path: Path) -> dict:
-    value = parse_json(read_document(path))
-    require(isinstance(value, dict), "Batch request must be an object")
-    return value
+    return parse_json_object(read_document(path), message="Batch request must be an object")
 
 
 def _check_plan(value):
@@ -162,7 +173,7 @@ def save_plan(workspace: Path, plan: dict) -> Path:
 
 def load_plan(path: Path) -> dict:
     raw = read_document(path)
-    plan = parse_json(raw)
+    plan = parse_json_object(raw, message="batch plan: expected an object")
     _check_plan(plan)
     require(raw == canonical_bytes(plan) + b"\n", "Plan is not canonically encoded")
     return plan

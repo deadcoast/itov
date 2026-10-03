@@ -13,7 +13,7 @@ from itov.catalog import (
     sha256,
 )
 from itov.catalog_store import CatalogStore, _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.qualification import safe_path
 from itov.review_records import CRITERIA as CRITERIA
 from itov.review_records import ReviewDecision
@@ -128,7 +128,7 @@ def _export(snapshot):
     integrity = snapshot.integrity.to_dict()
     raw, expected_sha256 = snapshot.raw, snapshot.sha256
     size = struct.unpack("<Q", raw[:8])[0]
-    original = parse_json(raw[8 : 8 + size])
+    original = parse_json_object(raw[8 : 8 + size], message="Adapter header must be an object")
     header, mapping = {}, {}
     for name, tensor in original.items():
         if name == "__metadata__":
@@ -163,7 +163,7 @@ def _export(snapshot):
 
 def review(config, report, path, candidate_id, plan_path=None):
     raw = read_document(path)
-    value = parse_json(raw)
+    value = parse_json_object(raw)
     decision = ReviewDecision.parse(value, report["assessment_id"], candidate_id)
     for check in decision.checks:
         for ref in check.evidence:

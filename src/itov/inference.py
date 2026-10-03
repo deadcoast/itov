@@ -23,7 +23,7 @@ from itov.catalog import (
     validate_catalog,
 )
 from itov.catalog_store import CatalogStore, _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.config import Config
 from itov.qualification import _file, safe_path
 
@@ -95,7 +95,7 @@ def validate_spec(value) -> dict:
     require(value["count"] <= 16, "An inference qualification batch supports at most 16 jobs")
     integer(value["seed"], "seed")
     require(value["seed"] + value["count"] - 1 <= MAX_INTEGER, "Inference seeds overflow uint64")
-    return parse_json(canonical_bytes(value))
+    return parse_json_object(canonical_bytes(value))
 
 
 def describe(spec: dict) -> dict:

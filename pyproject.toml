@@ -5,6 +5,7 @@ description = "Local ComfyUI catalogs, deterministic batches, and pinned image i
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "comfyui-types>=1.4.1",
     "sourcery>=1.46.0",
 ]
 

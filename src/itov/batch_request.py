@@ -154,18 +154,16 @@ def validate_bindings(preset: dict, binding: dict, graph: dict):
     )
     for seed in seeds:
         node = graph.get(seed["node"])
-        require(
-            isinstance(node, dict) and node["class_type"] == seed["class_type"],
-            f"{preset['id']}: missing or changed seed node",
-        )
+        if not isinstance(node, dict) or node["class_type"] != seed["class_type"]:
+            raise ValueError(f"{preset['id']}: missing or changed seed node")
         integer(node["inputs"].get(seed["input"]), "Bound seed input must be an integer literal")
     loader_nodes = set()
     for slot in binding["lora_slots"]:
         node = graph.get(slot["node"])
-        require(
-            isinstance(node, dict) and node["class_type"] in LOADERS,
-            f"{preset['id']}: only LoraLoader/LoraLoaderModelOnly bindings are supported",
-        )
+        if not isinstance(node, dict) or node["class_type"] not in LOADERS:
+            raise ValueError(
+                f"{preset['id']}: only LoraLoader/LoraLoaderModelOnly bindings are supported"
+            )
         inputs = node["inputs"]
         links = ["model", "clip"] if node["class_type"] == "LoraLoader" else ["model"]
         for name in links:

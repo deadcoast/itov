@@ -22,7 +22,8 @@ def image_tools():
     from itov.qualification import _file
 
     executable = shutil.which("ffmpeg")
-    require(executable is not None, "Evaluation image validation requires ffmpeg on PATH")
+    if executable is None:
+        raise ValueError("Evaluation image validation requires ffmpeg on PATH")
     return _file(Path(executable))
 
 

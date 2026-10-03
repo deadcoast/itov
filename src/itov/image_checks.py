@@ -6,7 +6,7 @@ from pathlib import Path
 
 from itov import image_media, image_metrics
 from itov.catalog import array, canonical_bytes, object_fields, require, sha256, text
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import EvidenceReads, read_document
 from itov.qualification import safe_path
 from itov.training_data import check_seal, file_ref, publish, seal
@@ -46,6 +46,12 @@ def _destination(config, key, identifier):
 def _packet(config, evaluation_path):
     from itov import evaluation_runtime
 
+    implementation = {}
+    for module in (image_metrics, image_media):
+        filename = module.__file__
+        if filename is None:
+            raise ValueError("Image checker implementation source is unavailable")
+        implementation[module.__name__] = sha256(read_document(Path(filename)))
     report = evaluation_runtime.replay(config, evaluation_path)
     rows = []
     for row in report["matrix"]:
@@ -71,10 +77,7 @@ def _packet(config, evaluation_path):
             "checker": {
                 "version": image_metrics.VERSION,
                 "parameters": image_metrics.PARAMETERS,
-                "implementation": {
-                    module.__name__: sha256(read_document(Path(module.__file__)))
-                    for module in (image_metrics, image_media)
-                },
+                "implementation": implementation,
                 "rubrics": image_metrics.RUBRICS,
             },
             "measurements": rows,
@@ -364,11 +367,11 @@ def _summaries(rows, criteria):
 
 def _calibrate(config, packet_path, reference_path, evaluator_path):
     packet = _read_packet(config, packet_path)
-    reference = _reference_labels(config, parse_json(read_document(reference_path)), packet)
+    reference = _reference_labels(config, parse_json_object(read_document(reference_path)), packet)
     evaluator = (
         None
         if evaluator_path is None
-        else _evaluator(config, parse_json(read_document(evaluator_path)), packet)
+        else _evaluator(config, parse_json_object(read_document(evaluator_path)), packet)
     )
     rows = []
     for index, (item, measured, observed) in enumerate(

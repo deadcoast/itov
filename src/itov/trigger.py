@@ -51,13 +51,13 @@ def load_rules(path: Path):
     )
 
 
-def near(a, b, limit):
+def near(a: str, b: str, limit: int) -> bool:
     """Banded Levenshtein threshold, including bounded substring differences."""
     if abs(len(a) - len(b)) > limit:
         return False
-    previous = {j: j for j in range(min(len(b), limit) + 1)}
+    previous: dict[int, int] = {j: j for j in range(min(len(b), limit) + 1)}
     for i, ca in enumerate(a, 1):
-        current = {}
+        current: dict[int, int] = {}
         for j in range(max(0, i - limit), min(len(b), i + limit) + 1):
             current[j] = min(
                 previous.get(j, limit + 1) + 1,
@@ -165,6 +165,7 @@ def lint(config, rules_path: Path, *, plan_path=None, strict=False, save=False):
     if plan is None:
         findings = findings_for(rows, vocabularies, rules["near_distance"])
         selected_rows = rows
+        selected = {lora["id"] for lora in catalog["loras"]}
     else:
         presets = {p["id"]: p for p in catalog["presets"]}
         selected = {lora["id"] for job in plan["jobs"] for lora in job["loras"]}

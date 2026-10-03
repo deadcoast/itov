@@ -86,9 +86,8 @@ def _verify_video(path: Path, expected: dict, *, with_audio: bool) -> dict:
             ]
         )
     )
-    require(
-        isinstance(probe, dict) and isinstance(probe.get("streams"), list), "Invalid video probe"
-    )
+    if not isinstance(probe, dict) or not isinstance(probe.get("streams"), list):
+        raise ValueError("Invalid video probe")
     if with_audio:
         require(
             sorted(item.get("codec_type", "") for item in probe["streams"]) == ["audio", "video"],

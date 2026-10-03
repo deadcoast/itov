@@ -18,7 +18,7 @@ from itov.catalog import (
     validate_catalog,
 )
 from itov.catalog_store import CatalogStore
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.config import Config
 from itov.inference import _merge, _publish
 from itov.qualification import _file, model_path, safe_path
@@ -27,7 +27,9 @@ PROFILE = "stable-audio-open-v1"
 
 
 def load_spec(path: Path) -> dict:
-    return validate_spec(parse_json(read_document(path)))
+    return validate_spec(
+        parse_json_object(read_document(path), message="audio specification: expected an object")
+    )
 
 
 def validate_spec(value: dict) -> dict:
@@ -79,7 +81,7 @@ def validate_spec(value: dict) -> dict:
         value["count"] <= 4 and value["seed"] + value["count"] - 1 <= MAX_INTEGER,
         "Audio count must be 1..4 without seed overflow",
     )
-    return parse_json(canonical_bytes(value))
+    return parse_json_object(canonical_bytes(value))
 
 
 def output_contract(spec: dict) -> dict:
@@ -96,7 +98,7 @@ def output_contract(spec: dict) -> dict:
 def describe(spec: dict) -> dict:
     spec = validate_spec(spec)
     spec_id = sha256(canonical_bytes(spec))
-    graph = {
+    graph: dict[str, dict] = {
         "1": {
             "class_type": "CheckpointLoaderSimple",
             "inputs": {"ckpt_name": spec["checkpoint"]["loader_name"]},

@@ -16,7 +16,7 @@ from itov.catalog import (
     validate_catalog,
 )
 from itov.catalog_store import CatalogStore, _snapshot
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import EvidenceReads, read_document
 from itov.locking import file_lock
 from itov.qualification import safe_path
@@ -275,7 +275,8 @@ def _activation(config, path, strength, snapshot):
 def _retirement(config, key, reason, snapshot):
     identifier(key, "entry_id")
     before = _entry(snapshot.to_dict()["catalog"], key)
-    require(before is not None, "Catalog entry is missing")
+    if before is None:
+        raise ValueError("Catalog entry is missing")
     return _build(
         snapshot,
         action="retire",
@@ -310,7 +311,8 @@ def _rollback(config, identity, reason, snapshot):
     original = next(
         (r["operation"] for r in history if r["operation"]["operation_id"] == identity), None
     )
-    require(original is not None, "Lifecycle operation is not committed in this catalog")
+    if original is None:
+        raise ValueError("Lifecycle operation is not committed in this catalog")
     latest = next(
         r["operation"]
         for r in reversed(history)
@@ -454,7 +456,8 @@ def replay(config, identity):
             (r for r in _history(config, snapshot) if r["operation"]["operation_id"] == identity),
             None,
         )
-        require(match is not None, "Lifecycle operation is not committed in this catalog")
+        if match is None:
+            raise ValueError("Lifecycle operation is not committed in this catalog")
     reads.verify()
     return {
         "scope": "candidate_lifecycle_replay",
@@ -477,7 +480,7 @@ def recover(config, *, abandon=False):
                 "catalog_head": snapshot.head,
             }
         raw = read_document(store._path("pending.json"))
-        intent = parse_json(raw)
+        intent = parse_json_object(raw, message="pending transaction: expected an object")
         object_fields(intent, {"version", "before", "after", "snapshot"}, "pending transaction")
         target = _snapshot(canonical_bytes(intent["snapshot"]) + b"\n", intent["after"])
         event = target.to_dict()["ledger"][-1]

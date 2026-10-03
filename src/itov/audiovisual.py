@@ -18,7 +18,7 @@ from itov.catalog import (
     text,
 )
 from itov.catalog_store import _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.config import Config
 from itov.locking import file_lock
 from itov.media import _run, _verify_video, verify_video, video_tools
@@ -31,7 +31,11 @@ def _receipt_bytes(value: dict) -> bytes:
 
 
 def load_spec(path: Path) -> dict:
-    return validate_spec(parse_json(read_document(path)))
+    return validate_spec(
+        parse_json_object(
+            read_document(path), message="audiovisual specification: expected an object"
+        )
+    )
 
 
 def validate_spec(value: dict) -> dict:
@@ -64,15 +68,14 @@ def validate_spec(value: dict) -> dict:
         text(binding["node_id"], "node_id")
         digest(binding["sha256"], "artifact hash")
         digest(binding["record_sha256"], "job record hash")
-    return parse_json(canonical_bytes(value))
+    return parse_json_object(canonical_bytes(value))
 
 
 def _source(config: Config, binding: dict, kind: str) -> dict:
     path = safe_path(config.root, f"state/jobs/{binding['request_id']}.json")
     raw = read_document(path)
     require(sha256(raw) == binding["record_sha256"], "Pinned job record differs")
-    record = parse_json(raw)
-    require(isinstance(record, dict), "Job record must be an object")
+    record = parse_json_object(raw, message="Job record must be an object")
     require(
         type(record.get("version")) is int
         and record.get("version") == 1
@@ -191,7 +194,7 @@ def _verify(directory: Path, video: dict, alignment: dict) -> dict:
         alignment["target_samples"] <= decoded["samples"] < alignment["target_samples"] + 1024,
         "Decoded AAC duration exceeds the terminal packet allowance",
     )
-    frames = parse_json(
+    frames = parse_json_object(
         _run(
             [
                 video_tools()["ffprobe"],
@@ -295,8 +298,10 @@ def mux(config: Config, spec: dict, *, require_existing=False) -> dict:
         alignment = _alignment(video, audio, spec.get("audio_offset_ms", 0))
         destination = safe_path(root, operation_id)
         if destination.exists():
-            receipt = parse_json(read_document(safe_path(destination, "receipt.json")))
-            require(isinstance(receipt, dict), "Mux receipt must be an object")
+            receipt = parse_json_object(
+                read_document(safe_path(destination, "receipt.json")),
+                message="Mux receipt must be an object",
+            )
             require(
                 receipt.get("specification") == spec
                 and receipt.get("operation_id") == operation_id,

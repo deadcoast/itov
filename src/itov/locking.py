@@ -5,7 +5,7 @@ from __future__ import annotations
 import contextlib
 import errno
 import math
-import os
+import sys
 import time
 from pathlib import Path
 
@@ -24,7 +24,7 @@ def file_lock(path: Path, *, timeout: float = 0):
         while True:
             handle.seek(0)
             try:
-                if os.name == "nt":
+                if sys.platform == "win32":
                     import msvcrt
 
                     msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
@@ -43,7 +43,7 @@ def file_lock(path: Path, *, timeout: float = 0):
             yield
         finally:
             handle.seek(0)
-            if os.name == "nt":
+            if sys.platform == "win32":
                 msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
             else:
                 fcntl.flock(handle, fcntl.LOCK_UN)

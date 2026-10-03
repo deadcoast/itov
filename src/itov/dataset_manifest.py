@@ -151,9 +151,10 @@ def verify_provenance(folder, value):
                 maximum=4 * 1024**2,
             )
             metadata = parse_json(read_document(path))
+            if not isinstance(metadata, dict):
+                raise ValueError("Met metadata lacks matching public-domain artwork declaration")
             require(
-                isinstance(metadata, dict)
-                and type(metadata.get("objectID")) is int
+                type(metadata.get("objectID")) is int
                 and metadata["objectID"] == p["object_id"]
                 and metadata.get("isPublicDomain") is True,
                 "Met metadata lacks matching public-domain artwork declaration",

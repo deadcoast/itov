@@ -10,7 +10,7 @@ import sys
 from contextlib import ExitStack
 
 from itov.catalog import integer, object_fields, require
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import EvidenceReads, read_document
 from itov.training_data import check_seal, file_ref, publish, seal
 
@@ -108,7 +108,7 @@ def _pair(config, a, b, tolerance):
     checkpoints, states = [], []
     for member in (a, b):
         path, _ = file_ref(config.root, member["checkpoint"], maximum=32 * 1024**2)
-        checkpoint = parse_json(read_document(path))
+        checkpoint = parse_json_object(read_document(path))
         state, _ = file_ref(path.parent, checkpoint["state"], maximum=256 * 1024**2)
         checkpoints.append(checkpoint)
         states.append(state)

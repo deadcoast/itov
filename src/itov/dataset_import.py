@@ -13,7 +13,7 @@ from itov import dataset_manifest as manifest
 from itov import dataset_snapshot as snapshots
 from itov.catalog import canonical_bytes, object_fields, require, sha256
 from itov.catalog_store import _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import read_document
 from itov.locking import file_lock
 from itov.qualification import safe_path
@@ -37,7 +37,8 @@ def _worker(python, arguments):
         raise ValueError(
             "Dataset image worker failed: " + run.stderr.decode(errors="replace")[-2000:]
         ) from error
-    require(isinstance(result, dict), "Dataset image worker returned an invalid result")
+    if not isinstance(result, dict):
+        raise ValueError("Dataset image worker returned an invalid result")
     require(
         run.returncode == 0 and result.get("ok") is True,
         "Dataset image worker: " + str(result.get("error", "No successful result")),
@@ -70,7 +71,9 @@ def _latest(folder):
     marker = safe_path(folder, "current.json")
     if not marker.exists():
         return None, None
-    current = parse_json(read_document(marker))
+    current = parse_json_object(
+        read_document(marker), message="current dataset attempt: expected an object"
+    )
     object_fields(current, {"attempt_id"}, "current dataset attempt")
     require(
         isinstance(current["attempt_id"], str)
@@ -229,12 +232,12 @@ def recover(config, path, *, source_root=None, image_python=None):
             "Published dataset is invalid; preserve it and investigate",
         )
         _, record = _latest(folder)
-        source = source_root or (record and record["source_root"])
-        python = image_python or (record and record["image_python"])
-        require(
-            source and python,
-            "Recovery before the first attempt requires --source-root and --image-python",
-        )
+        source = source_root or (record["source_root"] if record else None)
+        python = image_python or (record["image_python"] if record else None)
+        if not source or not python:
+            raise ValueError(
+                "Recovery before the first attempt requires --source-root and --image-python"
+            )
         return _build(config, value, Path(source).absolute(), Path(python).absolute())
 
 

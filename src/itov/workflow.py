@@ -52,7 +52,7 @@ def _compatible(actual: str, expected: str) -> bool:
 
 def _expand_inputs(required: dict, optional: dict, values: dict) -> tuple[dict, dict]:
     """Expand selected V3 dynamic combos into their dotted API input names."""
-    groups = {"required": {}, "optional": {}}
+    groups: dict[str, dict] = {"required": {}, "optional": {}}
     pending = [("required", required, "", 0), ("optional", optional, "", 0)]
     while pending:
         group, declarations, prefix, depth = pending.pop()

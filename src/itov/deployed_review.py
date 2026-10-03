@@ -227,7 +227,9 @@ def _judgments(value, rubrics):
         text(judgment["uncertainty"], "review uncertainty")
 
 
-def validate_review(config, value, packet):
+def validate_review(config, value: object, packet) -> dict:
+    if not isinstance(value, dict):
+        raise ValueError("deployed review: expected an object")
     object_fields(
         value,
         {

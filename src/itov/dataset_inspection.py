@@ -23,7 +23,7 @@ from itov.catalog import (
     text,
 )
 from itov.catalog_store import _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import EvidenceReads, read_document
 from itov.qualification import safe_path
 from itov.training_data import check_seal, file_ref, load_dataset, publish, seal
@@ -61,7 +61,7 @@ def unretain(value):
     require(isinstance(value["utf8"], str), "Retained declaration must be UTF-8")
     raw = value["utf8"].encode("utf-8")
     require(retained(raw) == value, "Retained declaration differs")
-    return parse_json(raw)
+    return parse_json_object(raw, message="Retained declaration must be an object")
 
 
 def inputs(root, value):
@@ -97,7 +97,7 @@ def inputs(root, value):
         require(not local, "Met identities derive from metadata; overrides are not accepted")
     else:
         if dataset["version"] == 2:
-            operation = parse_json(read_document(dataset_path.parent / "operation.json"))
+            operation = parse_json_object(read_document(dataset_path.parent / "operation.json"))
             require(
                 operation["definition"]["provider"] == "local",
                 "Met dataset inspection requires its curation reference",
@@ -150,7 +150,8 @@ def worker(python, arguments):
         raise ValueError(
             "Review decoder failed: " + run.stderr.decode(errors="replace")[-2000:]
         ) from error
-    require(isinstance(result, dict), "Invalid review decoder response")
+    if not isinstance(result, dict):
+        raise ValueError("Invalid review decoder response")
     require(
         run.returncode == 0 and result.get("ok") is True,
         "Review decoder: " + str(result.get("error", "No successful result")),

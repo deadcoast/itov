@@ -8,7 +8,7 @@ from pathlib import Path
 
 from itov import evaluation_runtime
 from itov.catalog import canonical_bytes, object_fields, require, sha256
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import EvidenceReads, observe, read_document
 from itov.qualification import _file, safe_path
 from itov.training_data import check_seal, file_ref, publish, seal
@@ -52,7 +52,9 @@ def _inputs(config, plan):
     return files
 
 
-def validate_result(result, header, strengths):
+def validate_result(result: object, header, strengths) -> dict:
+    if not isinstance(result, dict):
+        raise ValueError("loader result: expected an object")
     object_fields(
         result,
         {
@@ -85,7 +87,8 @@ def validate_result(result, header, strengths):
         "Unsupported loader model/runtime",
     )
     require(isinstance(result["rows"], list) and result["rows"], "Missing loader mappings")
-    consumed, targets = set(), []
+    consumed: set[str] = set()
+    targets = []
     for row in result["rows"]:
         object_fields(
             row,
@@ -158,11 +161,11 @@ def _header(path):
     with path.open("rb") as stream:
         size = struct.unpack("<Q", stream.read(8))[0]
         require(size <= 16 * 1024**2, "Adapter header too large")
-        return parse_json(stream.read(size))
+        return parse_json_object(stream.read(size), message="Adapter header must be an object")
 
 
 def _request(config, plan):
-    graph = parse_json(plan["jobs"][0]["workflow_json"])
+    graph = parse_json_object(plan["jobs"][0]["workflow_json"])
     checkpoint = config.comfyui_root / "models/checkpoints" / graph["1"]["inputs"]["ckpt_name"]
     adapter = safe_path(config.comfyui_root / "models/loras", plan["deployment"]["loader_name"])
     strengths = sorted(
@@ -283,7 +286,7 @@ def inspect(config, path):
             "Loader binding or implementation changed",
         )
         request_path = file_ref(config.root, value["request"])[0]
-        request = parse_json(read_document(request_path))
+        request = parse_json_object(read_document(request_path), message="Loader request differs")
         require(request == _request(config, plan), "Loader request differs")
         output = file_ref(config.root, value["result"])[0]
         file_ref(config.root, value["log"])

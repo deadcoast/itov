@@ -14,7 +14,7 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from itov.catalog import read_document, require, sha256
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.training_data import file_ref, load_dataset, publish, seal
 
 
@@ -461,7 +461,7 @@ def train(request):
 
 
 def main():
-    request = parse_json(read_document(Path(sys.argv[1])))
+    request = parse_json_object(read_document(Path(sys.argv[1])))
     output = Path(request["output"])
     os.environ.update(
         CUDA_VISIBLE_DEVICES=request["gpu_uuid"],

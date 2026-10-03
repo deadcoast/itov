@@ -194,7 +194,7 @@ class Job:
         if C.get_last_error() == 183:
             self.kernel.CloseHandle(self.handle)
             raise ValueError("Owned job name already exists")
-        self.children = []
+        self.children: list[ProcessInfo] = []
         limits = ExtendedLimits()
         limits.basic.flags = 0x2000  # JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
         try:

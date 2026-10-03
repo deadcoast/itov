@@ -370,6 +370,8 @@ def validate_result(config, plan, folder, result, trace):
                 "Checkpoint runtime/parameter identity changed",
             )
         runtime, parameters = value["runtime"], value["parameters"]
+    if parameters is None:
+        raise ValueError("Checkpoint parameter evidence is missing")
     require(
         sum(math.prod(p["shape"]) for p in parameters) == result["trainable_parameters"],
         "Checkpoint parameter total differs from result",

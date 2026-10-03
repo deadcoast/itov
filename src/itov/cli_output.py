@@ -152,7 +152,8 @@ def _artifacts(args, result):
             ("evaluation", "replay"): "report_id",
             ("inference", "replay"): "report_id",
         }
-        key = identities.get((args.command, getattr(args, "action", None)))
+        action = getattr(args, "action", None)
+        key = identities.get((args.command, action)) if isinstance(action, str) else None
         if key and result.get(key):
             add("saved document", f"state/{folders[key]}/{result[key]}.json", workspace=True)
         if key == "candidate_id" and "entry" in result:

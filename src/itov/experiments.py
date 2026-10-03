@@ -8,7 +8,7 @@ from itov import quality, training
 from itov.assessment_context import assessment_context
 from itov.catalog import array, canonical_bytes, identifier, integer, object_fields, require, sha256
 from itov.catalog import text as checked_text
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import EvidenceReads, read_document
 from itov.locking import file_lock
 from itov.qualification import safe_path
@@ -78,7 +78,7 @@ def _inputs(config, spec):
     templates = []
     for endpoint in spec["endpoints"]:
         path, _ = file_ref(config.root, endpoint["training"], maximum=32 * 1024**2)
-        template = parse_json(read_document(path))
+        template = parse_json_object(read_document(path))
         training.validate_spec(template)
         require(template["version"] == 4, "Experiments require v4 optimizer checkpoints")
         templates.append(template)
@@ -271,6 +271,9 @@ def _observation(config, row, planned, path, *, images):
         return base
     with assessment_context(config, path) as context:
         result = context.validated.result.to_dict()
+        evidence = context.validated.evaluation
+        if evidence is None:
+            raise ValueError("Experiment images require validated evaluation evidence")
         base.update(
             result=_reference(config, folder / "result.json"),
             result_id=result["result_id"],
@@ -304,7 +307,7 @@ def _observation(config, row, planned, path, *, images):
                         .as_posix(),
                     },
                 }
-                for image in context.validated.evaluation.rows()
+                for image in evidence.rows()
             ],
         )
     return base

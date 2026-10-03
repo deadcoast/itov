@@ -6,7 +6,7 @@ import zlib
 from itov.batch_request import neutral_request, validate_bindings, validate_request
 from itov.catalog import canonical_bytes, empty_catalog, require, sha256
 from itov.catalog_store import CatalogStore, _atomic_write
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json_object
 from itov.locking import file_lock
 from itov.qualification import safe_path
 from itov.training_data import file_ref, publish, seal
@@ -114,7 +114,7 @@ def request(config, preset, *, count=1, seed=0, save=False):
     )
     entry = next(row for row in catalog["presets"] if row["id"] == preset)
     path, _ = file_ref(config.root, entry["workflow"])
-    validate_bindings(entry, value["bindings"][preset], parse_json(path.read_bytes()))
+    validate_bindings(entry, value["bindings"][preset], parse_json_object(path.read_bytes()))
     store.snapshot(expected_head=snapshot.head, require_clean=True)
     result = {
         "scope": "workspace_batch_request",

@@ -126,10 +126,8 @@ def _freeze(config, spec):
     cases = {case["id"]: case for case in suite["cases"]}
     for old in legacy["cases"]:
         case = cases.get(old["id"])
-        require(
-            case is not None and case["exposure"] == "legacy_diagnostic",
-            "All legacy cases must remain declared diagnostics",
-        )
+        if case is None or case["exposure"] != "legacy_diagnostic":
+            raise ValueError("All legacy cases must remain declared diagnostics")
         require(
             all(case[key] == old[key] for key in CASE_FIELDS - {"kind", "seeds"})
             and case["seeds"][: len(old["seeds"])] == old["seeds"],

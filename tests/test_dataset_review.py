@@ -633,3 +633,45 @@ def test_reviewed_curation_cannot_form_recursive_inspection_chains(tmp_path):
     spec["curation"] = inspection.ref(config.root, Path(bound["saved_path"]))
     with pytest.raises(ValueError, match="base version-one provenance"):
         inspection.inspect(config, document(config.root / "recursive-inspection.json", spec))
+
+
+@pytest.mark.parametrize(
+    "mode,rgb_hash,dhash,ahash,luma_range",
+    [
+        (
+            "RGB",
+            "e06308b85a6cce1776b5474b16f6c8327c6fc45768a307527a2903f9a12e6891",
+            "33d1f9f8fefeffff",
+            "f8f87c3e1e1f0f07",
+            228,
+        ),
+        (
+            "L",
+            "2fda891b2494c329910232575f9b42ed8d83618f5d77c6f947a42ef06c34ac84",
+            "3f8bd1fcfeffffff",
+            "80e0f8fe7f1f0701",
+            253,
+        ),
+    ],
+)
+def test_isolated_fingerprints_preserve_pre_correction_vectors(
+    tmp_path, mode, rgb_hash, dhash, ahash, luma_range
+):
+    image = Image.new(mode, (12, 8))
+    pixels = [
+        ((x * 23 + y * 17) % 256, (x * 11 + y * 31) % 256, (x * 7 + y * 47) % 256)
+        for y in range(8)
+        for x in range(12)
+    ]
+    image.putdata(pixels if mode == "RGB" else [pixel[0] for pixel in pixels])
+    exif = image.getexif()
+    exif[274] = 6
+    path = tmp_path / "oriented.png"
+    image.save(path, exif=exif)
+    value = inspection.worker(Path(sys.executable), [path, sha256(path.read_bytes())])
+    assert value["source_size"] == [12, 8]
+    assert value["oriented_size"] == [8, 12]
+    assert value["rgb_sha256"] == rgb_hash
+    assert value["dhash"] == dhash
+    assert value["ahash"] == ahash
+    assert value["luma_range"] == luma_range

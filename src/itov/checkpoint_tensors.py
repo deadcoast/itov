@@ -25,10 +25,8 @@ def inspect(path, parameters, cuda):
         length = struct.unpack("<Q", stream.read(8))[0]
         require(2 <= length <= min(4 * 1024**2, size - 8), "Invalid checkpoint tensor header")
         header = parse_json(stream.read(length))
-        require(
-            isinstance(header, dict) and set(header) == set(expected),
-            "Checkpoint tensor keys differ",
-        )
+        if not isinstance(header, dict) or set(header) != set(expected):
+            raise ValueError("Checkpoint tensor keys differ")
         ranges = []
         for name, (dtype, shape) in expected.items():
             row = header[name]

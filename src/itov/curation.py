@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from itov.catalog import array, canonical_bytes, integer, object_fields, require, sha256, text
-from itov.comfyui import parse_json
+from itov.comfyui import parse_json, parse_json_object
 from itov.evidence_reads import read_document
 from itov.qualification import safe_path
 from itov.training_data import file_ref, load_dataset, publish, seal
@@ -62,9 +62,10 @@ def validate_value(root, value, *, save=False):
         objects.add(oid)
         metadata_path, _ = file_ref(root, work["metadata"], maximum=4 * 1024**2)
         metadata = parse_json(read_document(metadata_path))
+        if not isinstance(metadata, dict):
+            raise ValueError("Metadata lacks matching public-domain artwork declaration")
         require(
-            isinstance(metadata, dict)
-            and type(metadata.get("objectID")) is int
+            type(metadata.get("objectID")) is int
             and metadata["objectID"] == oid
             and metadata.get("isPublicDomain") is True,
             "Metadata lacks matching public-domain artwork declaration",
@@ -107,7 +108,7 @@ def validate_value(root, value, *, save=False):
         observed_path, _ = file_ref(root, selection["inspection"])
         observed = dataset_inspection.load(root, observed_path)
         _, files = dataset_freeze.documents(root, selection, observed)
-        operation = parse_json(read_document(dataset_path.parent / "operation.json"))
+        operation = parse_json_object(read_document(dataset_path.parent / "operation.json"))
         require(
             operation["declaration"]["utf8"].encode("utf-8") == files["import.json"],
             "Imported dataset differs from the frozen selection declaration",
@@ -142,10 +143,8 @@ def bind_selection(root, path, freeze_path, *, save=False):
 
     with EvidenceReads().capture() as reads:
         value = parse_json(read_document(path))
-        require(
-            isinstance(value, dict) and value.get("version") == 1,
-            "Bind the imported dataset's base version-one curation declaration",
-        )
+        if not isinstance(value, dict) or value.get("version") != 1:
+            raise ValueError("Bind the imported dataset's base version-one curation declaration")
         value = {**value, "version": 2, "selection": ref(root, freeze_path)}
         report = validate_value(root, value)
         reads.verify()

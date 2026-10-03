@@ -228,9 +228,14 @@ uv build
 ```
 
 Pyright and mypy are included in the uv development group. Both commands currently
-report remaining source diagnostics; the [second correction pass](docs/evidence/python-errors-pass2-20261002.json)
-records the current counts, corrections, targeted tests and outstanding files. The
-[first pass](docs/evidence/python-errors-pass1-20261002.json) and the original
+report missing imports in the separate training and ComfyUI workers: 24 Pyright
+diagnostics and 21 mypy diagnostics. Other reported source type errors have been
+corrected. The [third correction pass](docs/evidence/python-errors-pass3-20261003.json)
+records the corrections, verification and remaining imports. These include runtime
+packages such as Torch and ComfyUI's own `comfy`, `execution` and `server` modules;
+the latter are first-party ComfyUI source, not uv package names. The
+[first](docs/evidence/python-errors-pass1-20261002.json) and
+[second](docs/evidence/python-errors-pass2-20261002.json) reports and the original
 `src/PYTHON_ERRORS.js` export are retained as historical input.
 
 Automated tests use temporary workspaces, a local HTTP fixture, and owned child processes for lock contention and crash recovery. Real runtime qualification is recorded separately. The [development review](docs/development-review.md) records completed gates, acceptance limits, and the next stage.

@@ -8,10 +8,10 @@ import sys
 import warnings
 from pathlib import Path
 
-# -I excludes the script directory. Import only the adjacent, packaged decoder module.
-sys.path.insert(0, str(Path(__file__).parent))
-from dataset_images import MAX_PIXELS, digest
-from dataset_images import engine as decode_engine
+# -I excludes the script directory. Resolve our decoder through its packaged name.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from itov.dataset_images import MAX_PIXELS, digest
+from itov.dataset_images import engine as decode_engine
 
 PROFILE = "oriented-rgb-dhash64-ahash64-v1"
 
@@ -48,13 +48,16 @@ def describe(path, expected):
             raise ValueError("Invalid review EXIF orientation")
         rgb = ImageOps.exif_transpose(image).convert("RGB")
     gray = rgb.convert("L")
-    d = list(gray.resize((9, 8), Image.Resampling.LANCZOS).get_flattened_data())
-    a = list(gray.resize((8, 8), Image.Resampling.LANCZOS).get_flattened_data())
+    # L-mode bytes are the same scalar 8-bit intensities used by these hashes.
+    d = gray.resize((9, 8), Image.Resampling.LANCZOS).tobytes()
+    a = gray.resize((8, 8), Image.Resampling.LANCZOS).tobytes()
     dhash = sum(
         (d[y * 9 + x] > d[y * 9 + x + 1]) << (y * 8 + x) for y in range(8) for x in range(8)
     )
     ahash = sum((n * 64 >= sum(a)) << i for i, n in enumerate(a))
     low, high = gray.getextrema()
+    if not isinstance(low, int) or not isinstance(high, int):
+        raise ValueError("Expected grayscale intensity extrema")
     return {
         "source_sha256": expected,
         "source_size": original,

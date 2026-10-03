@@ -59,6 +59,19 @@ def test_failed_validation_never_submits(job_setup):
     assert not any(method == "POST" for method, _ in requests)
 
 
+@pytest.mark.parametrize("value", [None, [], "scalar", 1])
+def test_non_object_workflow_retains_validation_failure_without_submission(job_setup, value):
+    config, workflow, _history, _routes, requests = job_setup
+    workflow.write_text(json.dumps(value), encoding="utf-8")
+    result = run_job(config, workflow)
+    assert result["status"] == "validation_failed"
+    assert result["validation"]["valid"] is False
+    saved = json.loads(Path(result["record_path"]).read_bytes())
+    assert saved["workflow"] == value
+    assert saved["status"] == "validation_failed"
+    assert not any(method == "POST" for method, _ in requests)
+
+
 def test_server_validation_rejection_preserves_details(job_setup):
     config, workflow, _history, routes, requests = job_setup
     body = {
