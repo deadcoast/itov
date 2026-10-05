@@ -9,7 +9,7 @@ they change the scope or supersede the constraints below.
    files; do not reset, clean, commit, or push as an incidental development step.
 2. Read [TODO.md](TODO.md) for active priorities and execution constraints,
    [README.md](README.md) for supported commands, and the relevant feature document
-   under `docs/`. Read [CHANGELOG.md](CHANGELOG.md) and the applicable evidence when
+   through [docs/README.md](docs/README.md). Read [CHANGELOG.md](CHANGELOG.md) and the applicable evidence when
    continuing previous work. Older stage reports are historical, not current task
    authority.
 3. Review the implementation and affected tests, identify the required change,
@@ -34,7 +34,9 @@ independent-human review gate is shelved; do not reintroduce it as a blocker.
 | `tests/` | Pytest coverage, including temporary workspaces and process protocols |
 | `pyproject.toml`, `uv.lock`, `.python-version` | Dependency, tooling, and interpreter authority |
 | `.vscode/settings.json` | Editor interpreter and mypy integration |
-| `docs/`, `docs/evidence/` | Feature contracts and retained verification reports |
+| `docs/README.md` | Documentation index: current guides/contracts, dated reports, designs and history |
+| `docs/development/` | Current status, source/test map, CLI inventory and preservation rules |
+| `docs/evidence/`, `docs/history/` | Retained validation/artifacts and exact historical snapshots |
 | `examples/`, `scripts/` | Example inputs and task-specific helpers; inspect before running |
 | `workspace/` | Ignored local state, plans, runs, training environment, and verification artifacts |
 | `AI/ComfyUI/ComfyUI_windows_portable/` | Ignored local ComfyUI installation, assets, and embedded Python |
@@ -133,7 +135,7 @@ $runId = (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + [guid]::NewGuid().ToString
 $verificationDir = "workspace/state/verification/$runId"
 New-Item -ItemType Directory -Force $verificationDir | Out-Null
 # Add specific tests/test_*.py paths for a targeted run; otherwise this runs the suite.
-uv run --locked pytest --basetemp "$verificationDir/pytest-tmp" --junitxml "$verificationDir/pytest.xml" -q
+uv run --locked pytest --basetemp "$verificationDir/pytest-tmp" -o cache_dir="$verificationDir/pytest-cache" --junitxml "$verificationDir/pytest.xml" -q
 uv build
 uv run --locked itov --version
 ```

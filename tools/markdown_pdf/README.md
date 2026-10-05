@@ -11,33 +11,25 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if needed.
 repository in PowerShell:
 
 ```powershell
+$env:UV_CACHE_DIR = "$PWD\.uv-cache"
 # Prompt for the directory. Blank input cancels.
-.\markdown-to-pdf.ps1
-
-# A supplied path bypasses the prompt, including in scripts.
-.\markdown-to-pdf.ps1 "C:\Projects\My specs"
-
-# Choose the output path and title.
-.\markdown-to-pdf.ps1 ".\docs\design_spec" -o ".\output\pdf\design-specs.pdf" --title "Development specifications"
-
-# Preview included files and exclusions without reading document contents.
-.\markdown-to-pdf.ps1 ".\docs\design_spec" --list
-
-# Add exclusions. Repeat --exclude as needed.
-.\markdown-to-pdf.ps1 ".\docs" --exclude "archive" --exclude "draft-*.md"
+uv run --project tools/markdown_pdf --locked --no-dev markdown-pdf
+# Explicit input, output and title.
+uv run --project tools/markdown_pdf --locked --no-dev markdown-pdf docs/design_spec -o output/pdf/design-specs.pdf --title "Development specifications"
+# Preview files and exclusions without reading document contents.
+uv run --project tools/markdown_pdf --locked --no-dev markdown-pdf docs/design_spec --list
+# Restrict a whole-docs export to maintained material as needed.
+uv run --project tools/markdown_pdf --locked --no-dev markdown-pdf docs --exclude history --exclude evidence --exclude legacy --exclude design_spec --exclude methods
 ```
 
-The default output is `DIRECTORY.pdf` **beside** the selected directory. Existing PDFs
-are protected; pass `--force` to replace one. Relative output paths are relative to the
-working directory. An output path must end in `.pdf`.
+Run from the repository root, or use an absolute path with `--project`. The earlier
+PowerShell launcher is absent in this checkout; the project CLI above is the
+supported source entry point. Input is a positional directory argument.
 
-The launcher uses its own location to find the tool, so it can also be called by absolute
-path from another working directory. To run without a PowerShell launcher (also works on
-Linux/macOS):
-
-```console
-uv run --project tools/markdown_pdf --locked --no-dev markdown-pdf "path/to/specs"
-```
+The default output is `DIRECTORY.pdf` **beside** the selected directory. Existing
+PDFs are protected; pass `--force` only when deliberately replacing an export.
+Prefer a new named output under `output/pdf/` to retain previous exports. Relative
+output paths resolve from the working directory and must end in `.pdf`.
 
 Dependency installation may use the network on first run. Conversion itself reads local
 Markdown and generates the PDF locally; it does not upload documents, fetch images or

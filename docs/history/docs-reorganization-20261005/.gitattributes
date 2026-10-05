@@ -1,0 +1,5 @@
+# Preserve exact bytes for the new receipt-bound history and upstream snapshots.
+/docs/history/d021-before-development-20260926/** -text
+/docs/history/d021-before-image-results-20260926/** -text
+/docs/history/d021-before-flux-code-20260926/** -text
+/docs/evidence/phase-d021-flux-sources/** -text

@@ -1,0 +1,311 @@
+{
+  "date": "2026-10-05",
+  "status": "passed",
+  "scope": "Documentation organization, source reconciliation and preservation; no application behavior change",
+  "repository_version": "0.13.1",
+  "organization": {
+    "relocated_markdown_documents": 56,
+    "dated_reports_with_navigation_only_edits": 20,
+    "existing_evidence_artifacts_indexed": 349,
+    "source_modules_mapped": 88,
+    "cli_families": 25,
+    "cli_actions": 112
+  },
+  "preservation": {
+    "original_docs_files": 542,
+    "relocated_docs_with_exact_original_snapshots": 56,
+    "existing_docs_unchanged_at_original_paths": 486,
+    "total_preserved_originals_including_root_and_converter_guide": 62,
+    "deleted_without_preservation": 0,
+    "application_source_changed": false,
+    "tests_changed": false,
+    "dependencies_changed": false,
+    "original_design_specifications_changed": false,
+    "existing_evidence_changed": false,
+    "existing_history_changed": false,
+    "user_design_exports_changed": false,
+    "manifest": "docs/history/docs-reorganization-20261005/manifest.json",
+    "manifest_sha256": "9140a43ecb34b0b69e731716fb31159e2d5f50865dc506d264791538147ea91d",
+    "scope_verification": {
+      "status": "passed",
+      "baseline_files": 798,
+      "out_of_scope_changes": [],
+      "application_modules_unchanged": 88,
+      "dated_reports_with_only_link_edits": 20,
+      "deleted_without_preservation": 0
+    }
+  },
+  "corrected_guidance": [
+    "Historical development review is no longer treated as the current phase/gate authority.",
+    "Sequential batches participate in the shared same-user device lease; VRAM checks do not reserve GPU memory.",
+    "Legacy training-only promotion apply refuses activation; fresh deployed candidate policy is required.",
+    "The eight-work pilot is historical; later frozen selection contains two training and one validation work.",
+    "Later video-duration and cancellation support is linked separately from original stage evidence.",
+    "Development commands use scoped Ruff paths and fresh pytest temporary/cache directories.",
+    "The absent Markdown PDF PowerShell wrapper is replaced in supported instructions by the actual project CLI.",
+    "The editor diagnostic export is documented as a historical/supplied input; absent at this review."
+  ],
+  "pytest": {
+    "status": "passed",
+    "passed": 85,
+    "failed": 0,
+    "scope": [
+      "tests/test_cli.py",
+      "tests/test_cli_contract.py",
+      "tests/test_workspace_workflow.py"
+    ],
+    "junit": "workspace/state/verification/docs-reorganization-20261005/pytest.xml",
+    "log": "workspace/state/verification/docs-reorganization-20261005/pytest.log",
+    "warning": "One PytestCacheWarning: access denied to existing .pytest_cache. Tests passed. Documented commands now select a fresh repository-local cache; no repeated test run was needed for that documentation correction."
+  },
+  "documentation_checker_cases": {
+    "status": "passed",
+    "cases": [
+      {
+        "case": "valid-file-and-fragment",
+        "expected_errors": 0,
+        "observed_errors": 0
+      },
+      {
+        "case": "duplicate-heading",
+        "expected_errors": 0,
+        "observed_errors": 0
+      },
+      {
+        "case": "missing-file",
+        "expected_errors": 1,
+        "observed_errors": 1
+      },
+      {
+        "case": "missing-fragment",
+        "expected_errors": 1,
+        "observed_errors": 1
+      },
+      {
+        "case": "escape-repository",
+        "expected_errors": 1,
+        "observed_errors": 1
+      },
+      {
+        "case": "external-not-fetched",
+        "expected_errors": 0,
+        "observed_errors": 0
+      },
+      {
+        "case": "reference-link-target",
+        "expected_errors": 1,
+        "observed_errors": 1
+      },
+      {
+        "case": "code-example-not-link",
+        "expected_errors": 0,
+        "observed_errors": 0
+      },
+      {
+        "case": "unclosed-fence",
+        "expected_errors": 1,
+        "observed_errors": 1
+      },
+      {
+        "case": "image-link",
+        "expected_errors": 1,
+        "observed_errors": 1
+      }
+    ]
+  },
+  "package": {
+    "status": "passed",
+    "matching_python_modules": 88,
+    "py_typed_in_wheel_and_sdist": true,
+    "sdist_readme_exact": true,
+    "wheel_readme_matches_after_newline_normalization": true,
+    "commands_from_unpacked_wheel": [
+      {
+        "argv": [
+          "--version"
+        ],
+        "exit_code": 0,
+        "log": "workspace/state/verification/docs-reorganization-20261005/wheel-command-0.log"
+      },
+      {
+        "argv": [
+          "workspace",
+          "guide"
+        ],
+        "exit_code": 0,
+        "log": "workspace/state/verification/docs-reorganization-20261005/wheel-command-1.log"
+      },
+      {
+        "argv": [
+          "inference",
+          "capabilities",
+          "--json"
+        ],
+        "exit_code": 0,
+        "log": "workspace/state/verification/docs-reorganization-20261005/wheel-command-2.log"
+      },
+      {
+        "argv": [
+          "inference",
+          "capabilities",
+          "--model",
+          "flux2-klein-4b-fp8",
+          "--json"
+        ],
+        "exit_code": 0,
+        "log": "workspace/state/verification/docs-reorganization-20261005/wheel-command-3.log"
+      }
+    ],
+    "core_import_without_ML": true,
+    "wheel": {
+      "path": "workspace/state/verification/docs-reorganization-20261005/dist-final/itov-0.13.1-py3-none-any.whl",
+      "sha256": "e6107ab17dfe870db0921f9a79ece05bd96a44e8465332d8f9e2ceadf25ad82c"
+    },
+    "sdist": {
+      "path": "workspace/state/verification/docs-reorganization-20261005/dist-final/itov-0.13.1.tar.gz",
+      "sha256": "f098a4bd628db48217b2372b3f5655be2cb7799020624735c54b5476f4fd07c0"
+    },
+    "limits": [
+      "Unpacked-wheel CLI verification; not a new environment installation or GPU/model qualification.",
+      "No changed application or worker source."
+    ]
+  },
+  "retained_initial_findings": [
+    {
+      "path": "workspace/state/verification/docs-reorganization-20261005/docs-check-initial.json",
+      "status": "failed",
+      "cause": "New receipt not yet written (two links); absent historical editor export incorrectly linked (corrected)."
+    },
+    {
+      "path": "workspace/state/verification/docs-reorganization-20261005/package-attempt-1.json",
+      "status": "failed",
+      "cause": "Verifier email parser did not preserve UTF-8 README; explicit UTF-8 comparison passed on unchanged package bytes."
+    },
+    {
+      "status": "failed_then_corrected",
+      "scope": "Initial new documentation checker Ruff run",
+      "cause": "One 102-character line and two formatting findings; shortened/formatted the new script before final checks."
+    }
+  ],
+  "limits": [
+    "Full application suite, type checkers and GPU/model trials were not rerun for this documentation-only change.",
+    "Focused CPU tests and package/source parity do not qualify image quality, CUDA behavior, numerical reproducibility or model acceptance.",
+    "No model downloads, inference, training, runtime startup, candidate activation, environment replacement, release, commit or push performed.",
+    "Historical links/commands/hashes remain in exact original snapshots; use the relocation manifest rather than rewriting old receipts.",
+    "Documentation checker does not fetch external URLs, execute examples or prove semantic correctness of all prose.",
+    "Package CLI checks use an unpacked wheel with verified import location, not a newly installed clean environment."
+  ],
+  "documentation": {
+    "status": "passed",
+    "maintained_markdown_files": 83,
+    "local_links_checked": 1632,
+    "historical_markdown_excluded_from_live_links": 110,
+    "source_modules_mapped": 88,
+    "cli_families": 25,
+    "cli_actions": 112,
+    "preserved_originals_verified": 62,
+    "untouched_documents_verified": 486,
+    "errors": [],
+    "limits": [
+      "Local Markdown links/ATX fragments and fenced-code subset; no external URL checks.",
+      "Historical/design/research bodies retain old paths; bytes checked separately.",
+      "Parser inventory covers families/actions, not every flag or example command.",
+      "No inference, training, runtime submission, model loading or downloads."
+    ]
+  },
+  "final_checks": {
+    "documentation": "passed; 83 maintained Markdown files and 1632 local links",
+    "ruff_check": "passed; scripts/check_documentation.py",
+    "ruff_format_check": "passed; scripts/check_documentation.py",
+    "git_diff_check": "passed; Git emitted line-ending conversion notices for four live root files",
+    "converter_cli_help": "passed offline from the retained tools/markdown_pdf project; separate project environment used",
+    "final_scope_recheck": "passed; no changes to baseline files outside declared documentation/navigation scope"
+  },
+  "changed_document_sha256": {
+    "docs/guides/audio-and-av.md": "81d2903157c2dea4b915842b9de94f64863b133d89c37e99bc92bbbe51bcf7a6",
+    "docs/guides/base-image-workflow.md": "cc5c9f6ecabac3ccb18f196b5c9d69b79968510c930d4437729c4569d5eb186c",
+    "docs/guides/candidate-inference.md": "a677468ff6e92873b5f49d24413815d58784f3e51fc2336c26834223e5d04621",
+    "docs/guides/extended-media.md": "d9a5871a76198137fe8f8ca1ab4cc4feb960cf5774297e261da75da03eeaac17",
+    "docs/guides/flux-image-workflow.md": "465435a0aa013b7c9425b4a7692a7f13b12451ce5dec440d0e447cd1b479a822",
+    "docs/guides/image-inference.md": "941cb6be10f6f3b2aa5d6be987b2c6919eeda329e00760e30968ff2419fc58f1",
+    "docs/guides/image-to-video.md": "044263d2c4873ca1597f93b7d7e7f3a565ac151f2698e4dd8c7fc430e9444a89",
+    "docs/guides/operator-runbook.md": "2885cd06cd82967ab25805f159c754e60251566fd6006d8b5ecef434c916eea7",
+    "docs/guides/README.md": "a39effc28329ea5083140a44a9944bdb2a43516c9c36cd45b683acee40e63106",
+    "docs/guides/runtime-and-jobs.md": "2a307eb93e227a6e6d384bc0ad2c3ef55526fc76e18719183f2dafe82205436d",
+    "docs/guides/workspace-workflow.md": "28c71d49695aecdb9d1aac32beea7fecec56c271bcfaf52c18598efb0a3ba008",
+    "docs/contracts/assessment-records.md": "de37b9e3d85d9fce1c5343b059ee7ae17d89be8e7a57b9ade434b8fe275b0298",
+    "docs/contracts/batch-execution.md": "4bb5843bccca646dd49e4dd7c10ccccbc38e3b24472e4fecd5a58cb3c6a0c991",
+    "docs/contracts/batch-planning.md": "743ce5835ab6f0e87513d7e7e2eb3795469a9455c330cf6daab9480964ce9500",
+    "docs/contracts/catalog-and-ledger.md": "14c9c0efa130dd005213a930017708b37ef574273afdeee6af2cf54c4f53d3ec",
+    "docs/contracts/execution-ownership.md": "2f08569fa3b2ad7f597f6e49e50bb11bfa40f0f4e5b99dafb3e9fbcc2557f270",
+    "docs/contracts/parallel-execution.md": "187c7e3dc8b23ee7ad61a5cc1579a720379b34197b85e649a48d4811d04ba304",
+    "docs/contracts/README.md": "27fe0e6dcbf1ac0278a4ed34a8a78a2d6fdb3871ca38d1e3227fe1dc089dbdf0",
+    "docs/contracts/triggers-and-scenes.md": "05f259b90f2bd7fe8fd82cbf09e08ad3427554d3edd204b9eafc413c401f12e2",
+    "docs/contracts/vram-profiling.md": "0a30ae7d98eb56bf81bc86a71c6c632d74526b038271f4702bb0c2cbb2b84119",
+    "docs/training/curated-quality-review.md": "463045e11f8384acf564bcb75020da8155377a9d3a11dc3c10ec889e4af2bbac",
+    "docs/training/dataset-import.md": "08e642e4feea5b94cd035f127ee790ade41f2e743f2b349b8bfa97c6e7cc528f",
+    "docs/training/dataset-review.md": "709fe7033087f152704bfc28427c098bf036cdc6a2f49f0521e74e958ed7dc58",
+    "docs/training/experiment-variance.md": "98b20285373514b8aee022f40a7b9a99d87df3b0320d382a41af7ab2a2c63b1a",
+    "docs/training/README.md": "6ba31ab72266b12a96ce6b6e4f23e82fc333c3905db32e76ff94d82280195802",
+    "docs/training/training-and-promotion.md": "c05abc1c1f09afff5551dc0aeeabffdff6d9289421b857e75ee7baccdc00f8df",
+    "docs/training/training-checkpoints.md": "2eb667d7dc10c37c1c88e253b7c21bebb63259a5baef2add3f0250464e7687bf",
+    "docs/training/training-configuration.md": "3d76177dee7e5c560a01cebfd20abd6873eefa7d098b5d3b8eb88ae26a937d1f",
+    "docs/training/training-experiments.md": "cb4f0a68077a2911e3674a14e65d17a9eeb43d547474c6b90acd9dafcb91fa8a",
+    "docs/training/training-result-states.md": "25078f74e02b8e8bb0fb3fd323539d166e59e7c9d42f3d23239fb245d2d1b3b8",
+    "docs/evaluation/candidate-lifecycle.md": "10ac1a8786e0fc8a2e9c7e9ba57dc7574baa36b0f876d694b2073fb91cfaf3f9",
+    "docs/evaluation/deployed-evaluation.md": "90b8f5118fb65d29dba5fbfbecee1c57b6fb1880c592cf20a035ebca1c7a7186",
+    "docs/evaluation/deployed-review.md": "87da0faa84b1996f60e20f11948258c18d4d5fb61b5cf2ba128971cd11d96211",
+    "docs/evaluation/evaluation-corpus.md": "0fc2e0d84141074665abf8c88de730f51c9982291820cb259c831bf69ceec805",
+    "docs/evaluation/image-checks.md": "c0a9356bc56023092b4c65923dfcdf087d17a547208505019c76307eb4e58d0e",
+    "docs/evaluation/README.md": "95c63522534b71c3ff284378097a578005d04c7b8b301cd1f4b8842de37522df",
+    "docs/requirements/README.md": "c41de9caa76cb4fd471f5d40264a2ff9cc95f2d26e223eb04f440ee23bb88979",
+    "docs/requirements/training-workspace-requirements.md": "1f0c35cd629e1c024fcfbcb716129ee9a7fd2b88ff03ff04d15d1ccfca55b37f",
+    "docs/decisions/README.md": "315d5770e9a472fa5c5606e7180c82842f4366207e49a04a29c91a53537cbcac",
+    "docs/decisions/visual-development-priority-20260926.md": "531b18a386932f6df52da222b54b9fb3f6d15d7f27a58eae957037eb987da519",
+    "docs/development/cli-reference.md": "0e5f98c43d6d96c99707da93e05e7331368a0eec888805c642a81503ac6b3543",
+    "docs/development/current-state.md": "481a92becc48bbc44c0c8082432077236f464a633855a300eddca37079f60cfc",
+    "docs/development/design-status.md": "09e4680b31d36925cd8a434ae0e087f3c7de1b5ba2b9a201dabfa2e0eaa776a5",
+    "docs/development/documentation-maintenance.md": "d0719a7b38a8680f03017bd585edb7f13cd981371382bb981597974f671e9a07",
+    "docs/development/README.md": "453f548326630011b139788b3182fc2bba4f5646dffa4080f833dccf8437eb0c",
+    "docs/development/source-map.md": "af2c99886033591c5c39b84ee8e8d3f87a10c68b90f08de225d14b72c42c896a",
+    "docs/reports/2026-09-22/development-audit-20260922.md": "64505269212820f36b1c2e93491579236238320367c9ed8dae0f98a6a0917edf",
+    "docs/reports/2026-09-22/development-review.md": "9853635225bad5b453c5f0acb9b852adf68fda8d426437695bc90f895e65d00f",
+    "docs/reports/2026-09-22/README.md": "6fe7e786abdbbb8b6f40d81ea92769acbb7fcb0d413f7b199adbf0599a1d2733",
+    "docs/reports/2026-09-23/candidate-inference-review-20260923.md": "38341faf9bb931110d57996f79d5f43d77639979b335c9d7ab8d483bee80a23f",
+    "docs/reports/2026-09-23/deployed-evaluation-review-20260923.md": "5dc2e7ab103ce4eefe2cf1fc12d492f85baa6bd2478de79878b7675a74a7f9ca",
+    "docs/reports/2026-09-23/README.md": "d87cf8aea8b71859d47b27308c5c58538c6ec15bb443b60e8c07c0f564ca8acc",
+    "docs/reports/2026-09-24/c04-image-index-20260924.md": "4275945d5503105ded63d7180ec78892193c36cb20da880bcba13efe5e18e828",
+    "docs/reports/2026-09-24/c04-investigation-20260924.md": "ff7d174621b6bf67ee119ada4e78e5c0f2dd88e7277fd391661cc6d56dce7c9c",
+    "docs/reports/2026-09-24/deployed-candidate-review-20260924.md": "0ad207a9e0492d4fe229f6e5ae51c8f50b8cb49f1278ee62d03dca931d0f9595",
+    "docs/reports/2026-09-24/evaluation-corpus-baseline-20260924.md": "f68c8afa27a34dd6e97a5b60081fc9704f1160b311b64959ada9dbd9c8cc977a",
+    "docs/reports/2026-09-24/image-check-calibration-20260924.md": "cb264cedda868899608e95afcc02d7212db773f723e63c0e975657a5547c7fc6",
+    "docs/reports/2026-09-24/README.md": "f20294a355b82462fa0e6ae3c9ed541b56007120615f4a9d80a7cfc0caa5ecac",
+    "docs/reports/2026-09-24/training-checkpoint-trial-20260924.md": "6ebbbeef342e920370bf2ea8c324842d3cfac20097253229417935672ced6b78",
+    "docs/reports/2026-09-24/training-experiment-trial-20260924.md": "d14492b34f6aa7a03318bcb4fa1a4b7a413caf1858af8a4495f4527aa848377c",
+    "docs/reports/2026-09-24/training-trials-20260924.md": "027d5deb174b4f638492df72d78654f4c57df59a5ba9eeb472a932e2feacde67",
+    "docs/reports/2026-09-25/c05-lifecycle-verification-20260925.md": "88843153cb7ac93e62493d163bbb5221e0438bc5782035c54c45f6a04efc7b87",
+    "docs/reports/2026-09-25/d01-workflow-verification-20260925.md": "90650d08059a0dc1f3538494e4d238d7c1c73f999ccb31adcdd983add1067257",
+    "docs/reports/2026-09-25/d02-media-verification-20260925.md": "eb7be58bfdb6753fea8251078da1c2547426e43c2b948fc9eb433f114cdeecc9",
+    "docs/reports/2026-09-25/README.md": "1c924acd1151bb82937866f090acacbc77ccf01bcd535f9ef86d06e6dc192d14",
+    "docs/reports/2026-09-26/d02-playback-verification-20260926.md": "d735fc60233a3e0e48bcbf7713e64dc78cecd5516a28590e8ec15c82539de53e",
+    "docs/reports/2026-09-26/d021-flux-code-verification-20260926.md": "a43a177cce773f448463aaf85304ce124c81ca77d760f5dc4500a7f093399719",
+    "docs/reports/2026-09-26/d021-image-development-20260926.md": "f8851f0eab37dc5d634e4288b478a0e6ed8d48560dd5040ad776a800251caf4f",
+    "docs/reports/2026-09-26/d021-image-results-20260926.md": "830126662f06806054fc741f6cda1ed523353b7c4783856b8b3ae552b87e3564",
+    "docs/reports/2026-09-26/d021-image-trial-plan-20260926.md": "96185f3f94392ef4a5ee06cd1e363917588d99008edb6b146245ab5ab4fabfdf",
+    "docs/reports/2026-09-26/README.md": "66d8d8e8dda67dc094fc19688c7ee82cfd5db2ddd29d920424459309769b99dd",
+    "docs/reports/README.md": "876a58fe512a5fd9656cba890d7ceba1382acddedbb44a2c3a00bd023f18c50e",
+    "README.md": "58085117504267fa705bc7291c478feb0e880e7a5f82506730d39a0d5b45254d",
+    "TODO.md": "23b13cb24f50ce780b89a551ba608889192af4245643d8f81447f44984b692a5",
+    "AGENTS.md": "cfe5fb7699ebfcf9239715f253f5b07fcd8935f00c0a091843edd776460c9ba4",
+    "CHANGELOG.md": "ebe92f9a0e0b7cedde37bd3081869328955a10eb3417e64aa87f1abd774ecf2f",
+    ".gitattributes": "8343ea51ed18f6f17ec20bdd12b9c38e1f6b3c8863b0544aad82d52637f24651",
+    "tools/markdown_pdf/README.md": "da48effcde2642a48424aa9ac17b636d0d71a38f5357f96d0708004e56a19d49",
+    "scripts/check_documentation.py": "46c31d3acaed50036ceb9c8a76c7315d0c5c0b5ce911ca57a84efcc94b289968",
+    "docs/README.md": "522875ebf20f15dc865877eccdc6db1d98fec3954eb14a152907d6c04ccd3fcf",
+    "docs/evidence/README.md": "9915a61298169d2c02aee69da20d7668dc7c3f5c9c84a562d4ebc78f9e67813e",
+    "docs/evidence/INDEX.md": "6af1b43a6295baaf3ebcfd661e29d9630384e6de7f5ee04c64caddad1ece56c7",
+    "docs/history/README.md": "1f76460726ef0f6df7a9677da7e44c9c91cfa88508d0f0e0074805119fcd5da0",
+    "docs/legacy/README.md": "95d3e8004861a8a56fd854cb1c66c0a2b173d5a232e36014fd686ede59030576",
+    "docs/methods/README.md": "dc39491b5db3ddbc61b65f78cb45bc019bfd6fcdc6eb8d839bf50b25041b2d5d"
+  }
+}

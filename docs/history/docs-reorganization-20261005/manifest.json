@@ -1,0 +1,2326 @@
+{
+  "date": "2026-10-05",
+  "purpose": "Preserve original bytes and resolve paths during documentation reorganization",
+  "original_document_count": 542,
+  "deleted_without_preservation": [],
+  "files": [
+    {
+      "original_path": "docs/operator-runbook.md",
+      "current_path": "docs/guides/operator-runbook.md",
+      "original_sha256": "dce4196fcceebec85164fe5e9958a36dd8471c4f65abe11c78df187390afdb23",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/operator-runbook.md"
+    },
+    {
+      "original_path": "docs/workspace-workflow.md",
+      "current_path": "docs/guides/workspace-workflow.md",
+      "original_sha256": "28c71d49695aecdb9d1aac32beea7fecec56c271bcfaf52c18598efb0a3ba008",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/workspace-workflow.md"
+    },
+    {
+      "original_path": "docs/runtime-and-jobs.md",
+      "current_path": "docs/guides/runtime-and-jobs.md",
+      "original_sha256": "a3a8f34d192d023f3db8ac37381e5db1e00cf21651b702ac47e3eebdff3df870",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/runtime-and-jobs.md"
+    },
+    {
+      "original_path": "docs/base-image-workflow.md",
+      "current_path": "docs/guides/base-image-workflow.md",
+      "original_sha256": "130094a2862889a96058f02c21ac7da69cf1fd393cc06df7a55763ce8cb7c404",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/base-image-workflow.md"
+    },
+    {
+      "original_path": "docs/candidate-inference.md",
+      "current_path": "docs/guides/candidate-inference.md",
+      "original_sha256": "488cd49dac9548665da03672f3a1798517f45cada84bd4c73ebfe357208cc4b5",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/candidate-inference.md"
+    },
+    {
+      "original_path": "docs/flux-image-workflow.md",
+      "current_path": "docs/guides/flux-image-workflow.md",
+      "original_sha256": "ca65b15ed93fab9288da161ad593015f46434da441a3cd2677117909fa1da3ba",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/flux-image-workflow.md"
+    },
+    {
+      "original_path": "docs/image-inference.md",
+      "current_path": "docs/guides/image-inference.md",
+      "original_sha256": "729944fae244453873443f6ee55b6cf9bcb3e1137945197f6a46981826be2899",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/image-inference.md"
+    },
+    {
+      "original_path": "docs/image-to-video.md",
+      "current_path": "docs/guides/image-to-video.md",
+      "original_sha256": "9a8d7bb5cca6b70729f889e4f2f7595ec7111ea261278ed40977d789efd1fb84",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/image-to-video.md"
+    },
+    {
+      "original_path": "docs/audio-and-av.md",
+      "current_path": "docs/guides/audio-and-av.md",
+      "original_sha256": "a3047ff0eedac3d0271ccfd67f13b48f2a5dda858730444c9fff02d53594e1d0",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/audio-and-av.md"
+    },
+    {
+      "original_path": "docs/extended-media.md",
+      "current_path": "docs/guides/extended-media.md",
+      "original_sha256": "f0e7ae6d5e2c2e6b3d5107db296005edd0d2de890d1eb2c0ad69105e983d7437",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/extended-media.md"
+    },
+    {
+      "original_path": "docs/assessment-records.md",
+      "current_path": "docs/contracts/assessment-records.md",
+      "original_sha256": "2d679acaf4fcd1a0d3b98ceeacee57b7d2218783977a4c1bcd4f8ceeff1fd2e7",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/assessment-records.md"
+    },
+    {
+      "original_path": "docs/batch-planning.md",
+      "current_path": "docs/contracts/batch-planning.md",
+      "original_sha256": "a52a147bac8c52ee07b0bff2eab326dcca94c9582c9992710a53fa92a770d3be",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/batch-planning.md"
+    },
+    {
+      "original_path": "docs/batch-execution.md",
+      "current_path": "docs/contracts/batch-execution.md",
+      "original_sha256": "e673bb894ff68b38532d2048fe7d8083ea4afff94c28671447606d8e6fe0b1de",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/batch-execution.md"
+    },
+    {
+      "original_path": "docs/catalog-and-ledger.md",
+      "current_path": "docs/contracts/catalog-and-ledger.md",
+      "original_sha256": "51e0715d5b069dcb22cd63cd8f4e7fd83af8c0ddbb4e82969ceab454fdcb57b1",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/catalog-and-ledger.md"
+    },
+    {
+      "original_path": "docs/execution-ownership.md",
+      "current_path": "docs/contracts/execution-ownership.md",
+      "original_sha256": "9e460297d7b11a634267a5d38950c9ed854d107f0561d306344563a4cee644d9",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/execution-ownership.md"
+    },
+    {
+      "original_path": "docs/parallel-execution.md",
+      "current_path": "docs/contracts/parallel-execution.md",
+      "original_sha256": "692c568453b1fe42b0063831f43cee3b6428e1e25b41630704cbbc877afc1a88",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/parallel-execution.md"
+    },
+    {
+      "original_path": "docs/vram-profiling.md",
+      "current_path": "docs/contracts/vram-profiling.md",
+      "original_sha256": "c2ad2a6c5c05f040999d1f0d4b3634ef8649a7f1b3d1dff23ea28a14e6e5715a",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/vram-profiling.md"
+    },
+    {
+      "original_path": "docs/triggers-and-scenes.md",
+      "current_path": "docs/contracts/triggers-and-scenes.md",
+      "original_sha256": "dd911681a9492e7d67318bc3299d9e2b2f3c10f353bf1aa5db04b8f949e8ac7f",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/triggers-and-scenes.md"
+    },
+    {
+      "original_path": "docs/dataset-import.md",
+      "current_path": "docs/training/dataset-import.md",
+      "original_sha256": "3e301a4979a0a4993b3b79d0df04a249daff3204848f57c35fc54dfd13b8f4ae",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/dataset-import.md"
+    },
+    {
+      "original_path": "docs/dataset-review.md",
+      "current_path": "docs/training/dataset-review.md",
+      "original_sha256": "aa4ae6f2de799279a81a63abc8d003619c8cb151297e132a709789dfe22998b8",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/dataset-review.md"
+    },
+    {
+      "original_path": "docs/training-and-promotion.md",
+      "current_path": "docs/training/training-and-promotion.md",
+      "original_sha256": "ca79acdac8f914b4b7debc3314c5ca377ff6b08e7a9f3b8cec33a5adbe737eac",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-and-promotion.md"
+    },
+    {
+      "original_path": "docs/training-result-states.md",
+      "current_path": "docs/training/training-result-states.md",
+      "original_sha256": "07361f95627b4c1b71d94f9fd36d1ca3c16ce4272152d2dc070b2e5208478f00",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-result-states.md"
+    },
+    {
+      "original_path": "docs/training-configuration.md",
+      "current_path": "docs/training/training-configuration.md",
+      "original_sha256": "6c0d2962be3675b8fb11537d7feb5cade62f5c9accb8d0bf45c9aa377e33eec4",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-configuration.md"
+    },
+    {
+      "original_path": "docs/training-checkpoints.md",
+      "current_path": "docs/training/training-checkpoints.md",
+      "original_sha256": "270fa8950aefc9bcc9327443e44d7ff19a826f11c35cd4e9c0f9edb93441a8d9",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-checkpoints.md"
+    },
+    {
+      "original_path": "docs/training-experiments.md",
+      "current_path": "docs/training/training-experiments.md",
+      "original_sha256": "82f4e6a33e8df5cdcceaee74aaa4d0cefc346f1311087f4a4a0d3cc418dfe229",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-experiments.md"
+    },
+    {
+      "original_path": "docs/experiment-variance.md",
+      "current_path": "docs/training/experiment-variance.md",
+      "original_sha256": "98b20285373514b8aee022f40a7b9a99d87df3b0320d382a41af7ab2a2c63b1a",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/experiment-variance.md"
+    },
+    {
+      "original_path": "docs/curated-quality-review.md",
+      "current_path": "docs/training/curated-quality-review.md",
+      "original_sha256": "1743aee492370b6ce9b75a9bb4c712c12eff5b22e0d63463744bbb5594b4210e",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/curated-quality-review.md"
+    },
+    {
+      "original_path": "docs/deployed-evaluation.md",
+      "current_path": "docs/evaluation/deployed-evaluation.md",
+      "original_sha256": "f78b339bf640001689f286e994821da874ab04885106d34c46885639b5285d16",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/deployed-evaluation.md"
+    },
+    {
+      "original_path": "docs/deployed-review.md",
+      "current_path": "docs/evaluation/deployed-review.md",
+      "original_sha256": "87da0faa84b1996f60e20f11948258c18d4d5fb61b5cf2ba128971cd11d96211",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/deployed-review.md"
+    },
+    {
+      "original_path": "docs/evaluation-corpus.md",
+      "current_path": "docs/evaluation/evaluation-corpus.md",
+      "original_sha256": "738025554e192a53a0d9ad8bcdff17d5ecc2a3bb89194f95c446a93bba108154",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/evaluation-corpus.md"
+    },
+    {
+      "original_path": "docs/image-checks.md",
+      "current_path": "docs/evaluation/image-checks.md",
+      "original_sha256": "16bf7a8d3901a79715f8aa1cb8416b2eee2a6faedf851c3a031b24cc5c741440",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/image-checks.md"
+    },
+    {
+      "original_path": "docs/candidate-lifecycle.md",
+      "current_path": "docs/evaluation/candidate-lifecycle.md",
+      "original_sha256": "9a6eeb45e1714f612a0d56af90fc70aa5d8a529e2c9d85b8977aa36149863ecd",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/candidate-lifecycle.md"
+    },
+    {
+      "original_path": "docs/training-workspace-requirements.md",
+      "current_path": "docs/requirements/training-workspace-requirements.md",
+      "original_sha256": "53b1f68dabd982f585f95678bed8ffbe36836d3080e64f34c531d70bcb6f6125",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-workspace-requirements.md"
+    },
+    {
+      "original_path": "docs/visual-development-priority-20260926.md",
+      "current_path": "docs/decisions/visual-development-priority-20260926.md",
+      "original_sha256": "b0ffc5eee4c1442654b9dc12c39ae33efca2939dc2438064fcdff95e48818ab6",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/visual-development-priority-20260926.md"
+    },
+    {
+      "original_path": "docs/01comfui_itov_specs.md",
+      "current_path": "docs/legacy/01comfui_itov_specs.md",
+      "original_sha256": "4e5e53bf6a8180499a88c9cb7d8da74cdc74bd49ed92dd91d4a70c7cf673acd8",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/01comfui_itov_specs.md"
+    },
+    {
+      "original_path": "docs/comfyui-pony-diffusion.md",
+      "current_path": "docs/legacy/comfyui-pony-diffusion.md",
+      "original_sha256": "680da8a6ad7c622f02ee592c47f525f0a0bcb689fdbfb58cc5881bf131a824df",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/comfyui-pony-diffusion.md"
+    },
+    {
+      "original_path": "docs/c04-image-index-20260924.md",
+      "current_path": "docs/reports/2026-09-24/c04-image-index-20260924.md",
+      "original_sha256": "882174561ea51fff08e173c35ca427091e11a58218be28f1e0a177741ffe344f",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/c04-image-index-20260924.md"
+    },
+    {
+      "original_path": "docs/c04-investigation-20260924.md",
+      "current_path": "docs/reports/2026-09-24/c04-investigation-20260924.md",
+      "original_sha256": "14cc64cee92f41ac1ef3046cfb52601e9016d506facd41061b25e81af7d95113",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/c04-investigation-20260924.md"
+    },
+    {
+      "original_path": "docs/c05-lifecycle-verification-20260925.md",
+      "current_path": "docs/reports/2026-09-25/c05-lifecycle-verification-20260925.md",
+      "original_sha256": "24fa5e654eab68e382a9e192ed77f191deb28725855faf17220bb3e584b2d74d",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/c05-lifecycle-verification-20260925.md"
+    },
+    {
+      "original_path": "docs/candidate-inference-review-20260923.md",
+      "current_path": "docs/reports/2026-09-23/candidate-inference-review-20260923.md",
+      "original_sha256": "3e1e9286306cf781ebd89889b1e953f294372d9826e7d0d5b323d554cf559a9c",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/candidate-inference-review-20260923.md"
+    },
+    {
+      "original_path": "docs/d01-workflow-verification-20260925.md",
+      "current_path": "docs/reports/2026-09-25/d01-workflow-verification-20260925.md",
+      "original_sha256": "7125c48d09a37897534754deba87b9683264118edebd0cac055ee1241c62d147",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/d01-workflow-verification-20260925.md"
+    },
+    {
+      "original_path": "docs/d02-media-verification-20260925.md",
+      "current_path": "docs/reports/2026-09-25/d02-media-verification-20260925.md",
+      "original_sha256": "f8af88543fe97c7bf03b14f2cb0ff7632cd8c1c84c3973411d263b7c10be865c",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/d02-media-verification-20260925.md"
+    },
+    {
+      "original_path": "docs/d02-playback-verification-20260926.md",
+      "current_path": "docs/reports/2026-09-26/d02-playback-verification-20260926.md",
+      "original_sha256": "27da08d305fd7187ffbef0745037afd47b08168deaca5f3b0d7649165280f53c",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/d02-playback-verification-20260926.md"
+    },
+    {
+      "original_path": "docs/d021-flux-code-verification-20260926.md",
+      "current_path": "docs/reports/2026-09-26/d021-flux-code-verification-20260926.md",
+      "original_sha256": "95b69a03ba247485fb1754d8b7666a2ea2eebd3b5834236c6e008137627f1088",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/d021-flux-code-verification-20260926.md"
+    },
+    {
+      "original_path": "docs/d021-image-development-20260926.md",
+      "current_path": "docs/reports/2026-09-26/d021-image-development-20260926.md",
+      "original_sha256": "d3ee4923f0ead1c6a6b6099dad06804a236cd48692aba4ec1ae5af777891d2f9",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/d021-image-development-20260926.md"
+    },
+    {
+      "original_path": "docs/d021-image-results-20260926.md",
+      "current_path": "docs/reports/2026-09-26/d021-image-results-20260926.md",
+      "original_sha256": "2a0a85750042cfd38ec88fcef4c4b569669f1a1acc3810c0ea41219907720397",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/d021-image-results-20260926.md"
+    },
+    {
+      "original_path": "docs/d021-image-trial-plan-20260926.md",
+      "current_path": "docs/reports/2026-09-26/d021-image-trial-plan-20260926.md",
+      "original_sha256": "96185f3f94392ef4a5ee06cd1e363917588d99008edb6b146245ab5ab4fabfdf",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/d021-image-trial-plan-20260926.md"
+    },
+    {
+      "original_path": "docs/deployed-candidate-review-20260924.md",
+      "current_path": "docs/reports/2026-09-24/deployed-candidate-review-20260924.md",
+      "original_sha256": "b520ed36aa9166cebcbd59b56047c38f8b4b91788814acfdf6d53fff62bde519",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/deployed-candidate-review-20260924.md"
+    },
+    {
+      "original_path": "docs/deployed-evaluation-review-20260923.md",
+      "current_path": "docs/reports/2026-09-23/deployed-evaluation-review-20260923.md",
+      "original_sha256": "df913ce5d5d56272c8106a95f777b5ed8194fd5556f10ae676d5def4ff54ffe6",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/deployed-evaluation-review-20260923.md"
+    },
+    {
+      "original_path": "docs/development-audit-20260922.md",
+      "current_path": "docs/reports/2026-09-22/development-audit-20260922.md",
+      "original_sha256": "8585853ef3e1c76cb927b90ef5ef4fe929025d3c75569e3852949b9e36db67fe",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/development-audit-20260922.md"
+    },
+    {
+      "original_path": "docs/development-review.md",
+      "current_path": "docs/reports/2026-09-22/development-review.md",
+      "original_sha256": "34661bdf5215c2941ea91041a83ab51032eabb6b65fcaf3b36681d6e5e10c416",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/development-review.md"
+    },
+    {
+      "original_path": "docs/evaluation-corpus-baseline-20260924.md",
+      "current_path": "docs/reports/2026-09-24/evaluation-corpus-baseline-20260924.md",
+      "original_sha256": "afd0efc25e6ca4a639cf0df9c8195d04d0621478698e5e35b847e7d1d5f1fa02",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/evaluation-corpus-baseline-20260924.md"
+    },
+    {
+      "original_path": "docs/image-check-calibration-20260924.md",
+      "current_path": "docs/reports/2026-09-24/image-check-calibration-20260924.md",
+      "original_sha256": "f20461338814d952d47a8cc351a0edc0363430d40282f802ee720b139173da90",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/image-check-calibration-20260924.md"
+    },
+    {
+      "original_path": "docs/training-checkpoint-trial-20260924.md",
+      "current_path": "docs/reports/2026-09-24/training-checkpoint-trial-20260924.md",
+      "original_sha256": "ddc8eaefe62852982c05513fae945b740162589f73055043611f4a1f37926b11",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-checkpoint-trial-20260924.md"
+    },
+    {
+      "original_path": "docs/training-experiment-trial-20260924.md",
+      "current_path": "docs/reports/2026-09-24/training-experiment-trial-20260924.md",
+      "original_sha256": "6f2004f0a031ef1696983e41e55f47d35aa3a295263912ccea8dd641e0553522",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-experiment-trial-20260924.md"
+    },
+    {
+      "original_path": "docs/training-trials-20260924.md",
+      "current_path": "docs/reports/2026-09-24/training-trials-20260924.md",
+      "original_sha256": "4b46231b2874c0be7f4507a7df3941864a0403a5b09b28bfbf4de0e52d4e2b89",
+      "preserved_path": "docs/history/docs-reorganization-20261005/docs/training-trials-20260924.md"
+    },
+    {
+      "original_path": "README.md",
+      "current_path": "README.md",
+      "original_sha256": "c817252eea0c5268ac300747e7de05501d13f05c0d8e45d376f53019ce3c866b",
+      "preserved_path": "docs/history/docs-reorganization-20261005/README.md"
+    },
+    {
+      "original_path": "TODO.md",
+      "current_path": "TODO.md",
+      "original_sha256": "448cbaa5efa4a6372b6451b5697823e6fa3626d42f26879100018069a67c45be",
+      "preserved_path": "docs/history/docs-reorganization-20261005/TODO.md"
+    },
+    {
+      "original_path": "CHANGELOG.md",
+      "current_path": "CHANGELOG.md",
+      "original_sha256": "895ceed943e5fb47f10bed45ec2a5e45f06c38c13b05c144f2bd5dea5d78d084",
+      "preserved_path": "docs/history/docs-reorganization-20261005/CHANGELOG.md"
+    },
+    {
+      "original_path": "AGENTS.md",
+      "current_path": "AGENTS.md",
+      "original_sha256": "fd49ede8ef3e33bbad4d07a74a36f8306fbfef32031aeb546c8406c85b25b74b",
+      "preserved_path": "docs/history/docs-reorganization-20261005/AGENTS.md"
+    },
+    {
+      "original_path": ".gitattributes",
+      "current_path": ".gitattributes",
+      "original_sha256": "10ebbe7f2012b8b26ab864030ce9701f6fe0dfa46356291d6fea9ef1af6891db",
+      "preserved_path": "docs/history/docs-reorganization-20261005/.gitattributes"
+    },
+    {
+      "original_path": "tools/markdown_pdf/README.md",
+      "current_path": "tools/markdown_pdf/README.md",
+      "original_sha256": "4d6a72151f53082ad6b0f2142879f78808f6540a3ffec1bfdc1621cabf847e2a",
+      "preserved_path": "docs/history/docs-reorganization-20261005/tools/markdown_pdf/README.md"
+    }
+  ],
+  "untouched_documents": [
+    {
+      "path": "docs/design_spec/01_overview.md",
+      "sha256": "ddcde4955cf0f1febe774473740306b3d42f1d1a711f63e7a09c1109681c1571"
+    },
+    {
+      "path": "docs/design_spec/02_workflow_pipeline.md",
+      "sha256": "7e6f6aab53ed39f144aa9db5e3004e2148f2b3207918bd143bc2370a22bccaaf"
+    },
+    {
+      "path": "docs/design_spec/03_rotation.md",
+      "sha256": "b870523249c242a2a221e56163a6a5f85f81208875e3f340aeff3964f8d69318"
+    },
+    {
+      "path": "docs/design_spec/04_LoRA_Stack.md",
+      "sha256": "3de11b6e96c7cb2add68b2f957a48230941bb1017509a41547f8894821da1508"
+    },
+    {
+      "path": "docs/design_spec/05_LoRA_voice_pipeline.md",
+      "sha256": "71f7d50e7e529d643f33eb62d294f38b16d8722d3a2d6097d08f3927ed3c4cbf"
+    },
+    {
+      "path": "docs/design_spec/06_audio_visual_batch.md",
+      "sha256": "974d469efd42d9aad4dcd1944e6e20fe915e00cbe122d719d5dc49c2e813efeb"
+    },
+    {
+      "path": "docs/design_spec/07_scraper.md",
+      "sha256": "8af205562be870e17d1dacd09291657b5f8a690cd67c3e077a0d710908d81791"
+    },
+    {
+      "path": "docs/design_spec/08_reverse_lookup_query.md",
+      "sha256": "7d84d95b7d2ccef027ba2973e52a38ba8056a2733b111bdec41de2119d10c531"
+    },
+    {
+      "path": "docs/design_spec/09_concurrency_layer.md",
+      "sha256": "037944732b99a2caa7aa3c62d55e12018daa403af42fff67a00dc04742f6fd15"
+    },
+    {
+      "path": "docs/design_spec/10_ledger_integrity.md",
+      "sha256": "cd404c60019ee140f601872bd2a624861ef788a1c763f16a7a63ff9f41531cfb"
+    },
+    {
+      "path": "docs/design_spec/11_VRAM_budget.md",
+      "sha256": "4e2d1dcbfa09f93b6adc6def4dc91758c44bdcd4c3da2ddf86d8b0eaca879b66"
+    },
+    {
+      "path": "docs/design_spec/12.1_audio_scorecard_integration.md",
+      "sha256": "23a9d3bf979dcf369d32a24b3cc1de4b73db3b711a17a2bc619d4f2fdc61dcce"
+    },
+    {
+      "path": "docs/design_spec/12.2_balancing_constraints.md",
+      "sha256": "5bcca41b493faf9c404a3435ca01caddd627031f631df2aa1cbb938d11f79cce"
+    },
+    {
+      "path": "docs/design_spec/12.3_curator.md",
+      "sha256": "c880a9a9e49aade94e6fca83793d4f8a885725d717f756a3c10f5aeeac4a0452"
+    },
+    {
+      "path": "docs/design_spec/12.4_phrase_bank_curator.md",
+      "sha256": "7445077f4878cf47d1484d44c00446802f67c97a20bb87549e95dee2d4dcc54c"
+    },
+    {
+      "path": "docs/design_spec/12_trigger_word_linter.md",
+      "sha256": "7978fcccd194ad3dd8b89bdeaed9b96dab1e759ced37124bb03f92e5c3c71dd6"
+    },
+    {
+      "path": "docs/design_spec/scene_templates/comfyuiwan22nsfw.txt",
+      "sha256": "73ff1fe2fb6538f8e7bb10cd6ece5f57dfc252229c4ae5bd00d223dc0c43db7b"
+    },
+    {
+      "path": "docs/design_spec/scene_templates/templates-overview.md",
+      "sha256": "0f49a80f120d2acd7e11b4a6512d74d4046eaa1fca8bdff64d2e819690edb976"
+    },
+    {
+      "path": "docs/evidence/bamboozle-core-20260921.json",
+      "sha256": "1d684f0c3ce9f40e4da6bb5eaccdad89bb990496d2eeefdae974a46e665d5304"
+    },
+    {
+      "path": "docs/evidence/bamboozle-operations-20260921.json",
+      "sha256": "c869d8942923fbbddfa17ea3069d33acc9b6c9d231868e80148ba24d83328ad9"
+    },
+    {
+      "path": "docs/evidence/bamboozle-recovery-20260921.json",
+      "sha256": "fda493a24ea5825d598d6cdde5356ab3fcd13cc2f7b00410287af958de1ef036"
+    },
+    {
+      "path": "docs/evidence/bamboozle-terminal-20260921.json",
+      "sha256": "0308fbe97ef05e2c78e98e628b3c820126a4819c8af0e203f293685dc9fc593a"
+    },
+    {
+      "path": "docs/evidence/phase-a01-verification-20260922.json",
+      "sha256": "ee912f821bf96831db0d0a8b0b0f64da21ce002a9ab0e326210cbe110670fdad"
+    },
+    {
+      "path": "docs/evidence/phase-a02-deployed-plan-20260923.json",
+      "sha256": "8ef5efa041e729bba222d48dfc4eb39572925b30e8630381d5e81597939bb051"
+    },
+    {
+      "path": "docs/evidence/phase-a02-deployed-report-20260923.json",
+      "sha256": "4db2ff624b596c454cf53d6eadd2274684735b2b2ad34816b32b98d603618581"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/paper-geometry-11860922-adapter_plain.png",
+      "sha256": "421a41b8505916f3e977aedb39a41f5e4bb5d8162f326a808784da64027507ff"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/paper-geometry-11860922-adapter_trigger.png",
+      "sha256": "0d32b4624611cfe81a355cb928fa07cc89953a3b8a652ba7fc33ab3ca58b7635"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/paper-geometry-11860922-base_plain.png",
+      "sha256": "39ec765ae6c894d8dbb73d1c2c3f28db4fee7a34b58244af2137f33f967d1600"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/paper-geometry-11860922-base_trigger.png",
+      "sha256": "f042fb624def39a941b889946d15e92fe5f75ad28621a642feaaad60277c77be"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/paper-geometry-11860923-adapter_plain.png",
+      "sha256": "f644c0f94a6a125b069651d409afcf2f39d8559dd2f8550a4c5360607e5b9150"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/paper-geometry-11860923-adapter_trigger.png",
+      "sha256": "22ce468d8815bc3600dd7aae7a5fcf91f6bfd3d146f6fd6b8b70d7e8968dcb29"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/paper-geometry-11860923-base_plain.png",
+      "sha256": "b6ee3f91796f9a2913ad4171aa7b9b44ca85c926513ceaf5ea596b1aab27839f"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/paper-geometry-11860923-base_trigger.png",
+      "sha256": "786cbd069fa525e0e2e5d833a94f1512ad08616630716e35b4dbdf6ccbbddc02"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/vase-and-pears-11760922-adapter_plain.png",
+      "sha256": "48e84a2053a8aba491fa416a35869cdc6e8aebab72a9e0d3b9191e5eb7dcab5f"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/vase-and-pears-11760922-adapter_trigger.png",
+      "sha256": "c0a2d5455d026bb725e95d4d1cd55e7a55c2abd18d57de9baccd9247e1213170"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/vase-and-pears-11760922-base_plain.png",
+      "sha256": "a6166199c27446cb30841f513aeba1a2f632751df3acfdfe480bffa348f7d7d1"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/vase-and-pears-11760922-base_trigger.png",
+      "sha256": "5d6b49b9f5410c97102edde6ac4a1bd260028cc8391a7b756634ab2f6ab866f6"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/vase-and-pears-11760923-adapter_plain.png",
+      "sha256": "539ed37be7ba6cd38c75c2876604cfe36cf77c5dc8e0bc59875fc7b9109643a1"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/vase-and-pears-11760923-adapter_trigger.png",
+      "sha256": "51889489b6024cbe2864afdb502f494e4716b3090dc51001d3fc30714379a861"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/vase-and-pears-11760923-base_plain.png",
+      "sha256": "38e27e1a5301681f64ba6c7aadb34bc0d146072e5c7c71f644e782fb8b068113"
+    },
+    {
+      "path": "docs/evidence/phase-a02-images/vase-and-pears-11760923-base_trigger.png",
+      "sha256": "c81354bd18344bf4381773fc4b15af2012892cab657dc96ebd47e3a97120523d"
+    },
+    {
+      "path": "docs/evidence/phase-a02-verification-20260923.json",
+      "sha256": "025f395bd44089846e6de53cff0990f24568296449dd0f85ec01b3c9a0ebe06f"
+    },
+    {
+      "path": "docs/evidence/phase-a02-visual-review-20260923.json",
+      "sha256": "df1534510dc2282df2bdd019452224481de3054f3af71688df0af3ab948b055b"
+    },
+    {
+      "path": "docs/evidence/phase-a03-runtime-20260923.json",
+      "sha256": "8abd55a27478446196071014e7133b2c019a53036d196edbafb9d3dbd8548146"
+    },
+    {
+      "path": "docs/evidence/phase-a03-verification-20260923.json",
+      "sha256": "db7cabb53597c3abfddb946f4a9b977ce4fc7b9387cb51ef5e6cb5409dab5bcf"
+    },
+    {
+      "path": "docs/evidence/phase-a04-candidate-20260923.png",
+      "sha256": "afe5275dc1723952809297745a11e8a1b12c647c0cfef9f204895991a5f06223"
+    },
+    {
+      "path": "docs/evidence/phase-a04-candidate-plan-20260923.json",
+      "sha256": "25bb26dc7994ea7beb30cc85d3dc886cc46d1c124f5700b1224807e226de705a"
+    },
+    {
+      "path": "docs/evidence/phase-a04-candidate-report-20260923.json",
+      "sha256": "9b5bccb765353805fbe5a9f9d89085d1a009efeed721fb7de8b42e700a8e75aa"
+    },
+    {
+      "path": "docs/evidence/phase-a04-runtime-20260923.json",
+      "sha256": "206c65fec91bbe6549c9dc9a1288fdfdb4c2d1a14f044c332dde433e7f54a105"
+    },
+    {
+      "path": "docs/evidence/phase-a04-stack-20260923.png",
+      "sha256": "6f731b597c038fb5dd400755a42fca08150d91b87cc5c597211ae94e9770704e"
+    },
+    {
+      "path": "docs/evidence/phase-a04-stack-plan-20260923.json",
+      "sha256": "6778b849f693ff3ab4f376104fa6501436875e38f15eae9bcea649908ffd5995"
+    },
+    {
+      "path": "docs/evidence/phase-a04-stack-report-20260923.json",
+      "sha256": "bfa10b7a8be960f39830c0d9a77e7283a9f7fe0e03944c6b9917d2916a8dc0b9"
+    },
+    {
+      "path": "docs/evidence/phase-a04-verification-20260923.json",
+      "sha256": "e1396de72e680de39b46cc398dc3dd10c97d8db8659f23e030226df9a61a188e"
+    },
+    {
+      "path": "docs/evidence/phase-a05-profile-20260923.json",
+      "sha256": "98da171d616aca025609955109d9938636f3aed927640de34be702b85a8c80cc"
+    },
+    {
+      "path": "docs/evidence/phase-a05-verification-20260923.json",
+      "sha256": "da20df5501b8d4a9813ea9b1d2235950dd422945f90e413214879263cec671f7"
+    },
+    {
+      "path": "docs/evidence/phase-a06-verification-20260923.json",
+      "sha256": "12cb5cdb9e87fd52959ee84f2ab43343f9eb8f60511354bb8d59d2e9b444e4f4"
+    },
+    {
+      "path": "docs/evidence/phase-b01-verification-20260923.json",
+      "sha256": "8fcc786bd10c09d39cd321aa382a295c21104bc37ed9879a09433f950ecd764a"
+    },
+    {
+      "path": "docs/evidence/phase-b02-source-observations-20260923.json",
+      "sha256": "0d6bcd10f22cb23f226aa72035ab9d4e5550a216eaafd7159406c75b430c8fdf"
+    },
+    {
+      "path": "docs/evidence/phase-b02-verification-20260923.json",
+      "sha256": "7a97ab9853747b1e3bf379b7981e1b3aeadd35cd5e932d52a04f38c00b80937d"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/accumulated-constant.contact.png",
+      "sha256": "da813f93a5336345703654151308f650d4068e9c969e3447ab90c9cf2115edfd"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/accumulated-warmup.contact.png",
+      "sha256": "62ab26fe8e310386e692feae55ff34fb460ba465dead3f17a68831c8db3efb19"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/batched-constant.contact.png",
+      "sha256": "461e6ee79045cd978c32808dbb40acbb6b8e872e23b624f13705b8772333faa3"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/batched-warmup-geometry-11860922.png",
+      "sha256": "db37127962fe2eed3f7d8a45c05a932e01896aa39f71b4662ea0b32f22eaf21c"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/batched-warmup-geometry-11860923.png",
+      "sha256": "5f38e7faee504c3e4507c35545f4239d030f927b60af1764efc7662bb274cdb7"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/batched-warmup-heldout.png",
+      "sha256": "1c5567653c8750cadddc6e28df810f01b2e9fa4b0f698444e55b78638eeda394"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/batched-warmup-vase-11760922.png",
+      "sha256": "4e89b2eb31f6ddcfe54c54aa48636ba37a5e90feba64d67a5348166328cae197"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/batched-warmup.contact.png",
+      "sha256": "452a1de8c19c3be4145ad792aadcf481e4268f31a67b325ec8a0d4a3ec813daf"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/serial-constant.contact.png",
+      "sha256": "342dc60fed3cec2bdfc44fbe6cc24949a1c3fe6db1612dd2e3ab8930ad020686"
+    },
+    {
+      "path": "docs/evidence/phase-b03-images/serial-warmup.contact.png",
+      "sha256": "00dadd7ffde4ee9e8d7476ef181f6da712bd148974e8841664f9864c0821bfae"
+    },
+    {
+      "path": "docs/evidence/phase-b03-verification-20260924.json",
+      "sha256": "8eaa5874a461e8f6394f4bad3cec7bf79e5c704d8744c9d00eed5dea96def4bf"
+    },
+    {
+      "path": "docs/evidence/phase-b04-images/resumed-geometry.png",
+      "sha256": "6c5757beb0911021ec9fc1900c20fe52eb65f972ca3613539d42350588a6f2e8"
+    },
+    {
+      "path": "docs/evidence/phase-b04-images/resumed-heldout.png",
+      "sha256": "45e83297adc6f0a4fd2207c942e4526b8afce62211f43733351aeaca28cb38c9"
+    },
+    {
+      "path": "docs/evidence/phase-b04-images/resumed-one-pear.png",
+      "sha256": "52fafc6d2d2bf294fea3de3457098899b326caa65115d4f2ab41cd242daff2ba"
+    },
+    {
+      "path": "docs/evidence/phase-b04-images/resumed.contact.png",
+      "sha256": "a14fdc0e3c994fa9f30175710f4eaf8cf7c3b6efcc8c41f076bed37f4de6884e"
+    },
+    {
+      "path": "docs/evidence/phase-b04-images/uninterrupted.contact.png",
+      "sha256": "ad9fc589514f3cb7ad0b1f49f93403b13013d2e315f90560b452849895cf6f24"
+    },
+    {
+      "path": "docs/evidence/phase-b04-verification-20260924.json",
+      "sha256": "7dde1a3e24e55331351de328e6468456f76c70ec90ec8b499cd5d7c4012babee"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/heldout-baseline.png",
+      "sha256": "22951cc10b475099e1e89a771c50c51bded9abb5dfc8bd2425115b6b330ecd38"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-geometry-folded-sheet.png",
+      "sha256": "544caf1a3aeb32f36a96e38b80ef7641aab8d5eae5b773335a5dcabdeef5b742"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-pears-on-stems.png",
+      "sha256": "38c2add99eb2545476de9cf42247109ca94c9f72954d9dbfe4c8e4e1332a2c1e"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-r1-heldout.png",
+      "sha256": "9a14d88b6676f362399d202c95b6b160202d714f58db4671fb8a3ba4e68dc46c"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-r1-paper-geometry.png",
+      "sha256": "aa0052000cd3ac7aa10ea3700f51c7033469bd3260e4666786d1794cb41a0b43"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-r1-vase-and-pears.png",
+      "sha256": "6a9cdcc96c0470304aa2695fff5fda2ceb3306f17fc982dc4fbd1fb864523790"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-r2-heldout.png",
+      "sha256": "69f5fcbdcce4ff3a2bd0716482dcebb3865e6431a6bc67e36b9efcbce72c26ba"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-r2-paper-geometry.png",
+      "sha256": "9dbf6be64fe5caacb258bcb146ff88c88b758d4581484f582665efc572eb4b35"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-r2-vase-and-pears.png",
+      "sha256": "a4c16f7fdaabc4fbdeec89c3e580e13901654608d9c1de6bc219b2f3bb76eeef"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/long-repeat-geometry-ornament.png",
+      "sha256": "bbcfbc024dafc2e719fc9e8b3e27cc8a8ad119cdf36223f8d5d0e1da6b7fae00"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/short-geometry-fluted-disk.png",
+      "sha256": "166780455ff488079f5a078b7a747c3815b9d3c6b4162fea214d627a7a09c1b2"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/short-r1-heldout.png",
+      "sha256": "0fbeb85e870984d6cb2e0f4d1770735550788c4e657d560297a28e8101e75887"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/short-r1-paper-geometry.png",
+      "sha256": "3f22ac531f35ccb262ad695dce5c11de97e2e5a289d76d19117982c7c4e961bc"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/short-r1-vase-and-pears.png",
+      "sha256": "180741c23d31a50192b47fef5b0adc19d96ae60b831797ab82e40b4c137949dd"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/short-r2-heldout.png",
+      "sha256": "217b3893351ee4b2a622063740ade306a6be153a6454323f21a063f3df14c4d8"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/short-r2-paper-geometry.png",
+      "sha256": "5b99305c0f6892752ecd510b81daf45595ec19081903c85aa2330ac9b757f971"
+    },
+    {
+      "path": "docs/evidence/phase-b05-images/short-r2-vase-and-pears.png",
+      "sha256": "a3c0539fe8865d8a7cef18f641b9478ac49d05905d456128d658917e2a457b56"
+    },
+    {
+      "path": "docs/evidence/phase-b05-verification-20260924.json",
+      "sha256": "5615b7eb6d03369032ce0461a25ae732806a80966ecc1a3e702f496ebec16c2b"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/bicycle-photo.png",
+      "sha256": "b5cd3be65374fc4f094f9e39b65170920c8187b7f669b91776727fe9f8042cd3"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/bird-photo.png",
+      "sha256": "cbeb7578021e764c12af918848e84bcc69868e41003db7ab187c0355d3464027"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/color-binding.png",
+      "sha256": "abacb7f34a3af5e129243df779232685225d6ff8322822ee6229cf9f7f7ac4e9"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/linen-metal.png",
+      "sha256": "df042e250b97661f79b84ddc97f01933d4484f492d32219ffb88831f6a5cc962"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/matte-gloss.png",
+      "sha256": "7ca98413320b0a85c5086a9f9cf067ee43d400c30214ed117c70ed8b15d2783e"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/mountain-photo.png",
+      "sha256": "90d0e6807d54a46b7050646087dec7be0c2cc69fa7530063649bfbc65950a293"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/paper-geometry.png",
+      "sha256": "b2e7ef94acc4ad998c6c0fb9b7fb3bc309a9f8cfe78ffa7c6df146384717f5cb"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/plate-left-vase.png",
+      "sha256": "f3131995188ca697f808a7d1893193ca911c108017f834afbf7b83ef6403a2dc"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/single-cup.png",
+      "sha256": "c86c35b180f400870ec4ff9d98c2125e1b2cd4b4b882f885f5729f22bd159fef"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/size-binding.png",
+      "sha256": "60f30b11b2b44175d02a72acba58d61d611d0ccc28dd1001c394a7de61d4d0bf"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/three-apples.png",
+      "sha256": "ad3bfa0e0814fcf6ad9b9b11a66aba38d29253d5f3123d264803684985324e35"
+    },
+    {
+      "path": "docs/evidence/phase-c01-images/vase-and-pears.png",
+      "sha256": "a5dbffe33c3827474480dcf8c77fa7aa188a57aebe6b395a73c0dc71767a208e"
+    },
+    {
+      "path": "docs/evidence/phase-c01-verification-20260924.json",
+      "sha256": "fe93d98355a60f18024fc475067602c12b76bb335ac845f5544ed691a3f1bc0d"
+    },
+    {
+      "path": "docs/evidence/phase-c02-verification-20260924.json",
+      "sha256": "471100a22588500e4364d61b2237732370a4199e7d8adbe445c62855d062582e"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/bicycle-photo-12061724.png",
+      "sha256": "7a4375a1addc6622ac58c4d886a43ad6c8effb606e90451729e3360e64542ae8"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/bicycle-photo-12061725.png",
+      "sha256": "3eeea154462814af4c51593f4feb84f9aa44b70ad8bd498f8393dd10eb098450"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/bicycle-photo-12061726.png",
+      "sha256": "1dd1fe2e033673b645038ec4cc68db5059a7614939a051f4061b37bd3e7a7c7b"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/bird-photo-12061824.png",
+      "sha256": "143ce326ba48798b6cf5b4df6f961a7262f736d8ec90bd3e228755bb37998fcd"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/bird-photo-12061825.png",
+      "sha256": "12dfc6f005ccf8f77dede55cdcd40215457cd0d97f1c62dfaecae12e88f85973"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/bird-photo-12061826.png",
+      "sha256": "0dbbf735edaa953ffbad03ceae7d22661f306df5afebadb929bebe93e8c18084"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/color-binding-12061124.png",
+      "sha256": "68d168bf84d6b3db0576f52a8709913208470d8dccd9fa46028ae37d9ba652a5"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/color-binding-12061125.png",
+      "sha256": "67cf5addd800244d5f3e50bf74bea7680a7db30430ab636192072f6eefb0f76f"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/color-binding-12061126.png",
+      "sha256": "a6e0fbaa4d5898d9d85f8a401ceec63f85bb298e8c12d974fda261badcf2ea37"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/linen-metal-12061424.png",
+      "sha256": "dc4046bf8538f99a3690026ebc1d715acad07080777681b39e21e444709ad232"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/linen-metal-12061425.png",
+      "sha256": "a20c885b559714fd1c5e93452cf8fa5ca65a310ad87aa40febd59aa8d8da7574"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/linen-metal-12061426.png",
+      "sha256": "e414adf43ac46076f06456aa6ea6164108f3f7ad455453cc4f036dc41cf24e6f"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/matte-gloss-12061524.png",
+      "sha256": "93e0f53376e82453a2e553a0752abfe9a498e5573ea1fca54471be0bbf88c2b8"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/matte-gloss-12061525.png",
+      "sha256": "3f0d1d1f900aed03af44c211a8cc0b3f88aea6a090f795fe50081507161feaf5"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/matte-gloss-12061526.png",
+      "sha256": "bfd06790b248627f3ffe10ec4534346f579ebbdaa0e8ae8902952525611b5dad"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/mountain-photo-12061624.png",
+      "sha256": "bb3d61ec22be1906e3ff377a9cf581ddcf57eeff6bd2d109b3e2105c268b1b98"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/mountain-photo-12061625.png",
+      "sha256": "4bfb6db4169d48cdcbfe1f68ff94b3f7d5bedefc968260774fb17ec41353866b"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/mountain-photo-12061626.png",
+      "sha256": "61f84422164b91c842319c8b8f5428f2e39b509c907ce4e8f164786e2c4d78c7"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/paper-geometry-11860922.png",
+      "sha256": "92bf09c783b58befc273f23dc4be37b8d3b5e8a63e46ac958b814280c851c394"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/paper-geometry-11860923.png",
+      "sha256": "b27f315a250058c7006b67d5ecad9238ae2794d00decc63a1404922ef31e508b"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/paper-geometry-11960925.png",
+      "sha256": "8433b6c04c6c34631fbd477ee4def97d0844a86046cd98244dfc2773076db898"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/plate-left-vase-12061324.png",
+      "sha256": "5675fda5cee73f990fc1536fd3fb03e4e98f7f4f5e000d073bd98cfa06f5cdd2"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/plate-left-vase-12061325.png",
+      "sha256": "83c1034e88c8bd891d58e02bea2a9f5e333a579674cc9cb087707109f8d9f30a"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/plate-left-vase-12061326.png",
+      "sha256": "86833b0e1a81035dc3308108043766d27afad97b2378459c59adf1cf858c0080"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/single-cup-12061024.png",
+      "sha256": "10a9e5282c3f6f271349f42f4f09cdfa00cca148e98f927863e95cc2afffcba4"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/single-cup-12061025.png",
+      "sha256": "35d7623558cbd96694ea0ec67d24bb89ae2947aba31883c5a3f9a7ffbc014042"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/single-cup-12061026.png",
+      "sha256": "41c5d62b265c2e659c71283f052e839c246e08e348acf46079c51ee2c8da7369"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/size-binding-12061224.png",
+      "sha256": "9c48d51f94b7461b6f85b96a83380dc389a9f82970a10380ace4b9beaa37ed1e"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/size-binding-12061225.png",
+      "sha256": "2eac4cae0dd4e704c3a668bdc639773846b48347c6fff426389e482ef1373f50"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/size-binding-12061226.png",
+      "sha256": "c294db29ad91a1e5eba839f81de061346e6838bc88dbf9895b4e2edce1f0f18b"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/three-apples-12060924.png",
+      "sha256": "3413f4395abf4b8728949f473a85dc2204172eb3d39da59e8733ae9ac0beb4a2"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/three-apples-12060925.png",
+      "sha256": "dd7858263d32cd0d4e1b63fc436641862fd0fc0c93c0ab67e9ebfa8b4d93a94f"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/three-apples-12060926.png",
+      "sha256": "1d754598aace819647e4c3b09117388e90602590c497a7835ed788e793f71002"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/vase-and-pears-11760922.png",
+      "sha256": "e04931c3c9b00463fd7a383b7be5839cad31085fb8aecebc478ffbe199c7c788"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/vase-and-pears-11760923.png",
+      "sha256": "0b36347f315de60397ed3cf3b73f293f444d81fc01c3f78903c63e63cfd7bb87"
+    },
+    {
+      "path": "docs/evidence/phase-c03-images/vase-and-pears-11960924.png",
+      "sha256": "cea3fc5ed637a01d0b8c8fd27e223cdd6c4c088c3da8b824d9b476ff0e3357c1"
+    },
+    {
+      "path": "docs/evidence/phase-c03-verification-20260924.json",
+      "sha256": "2db147896c3b1ba6a117dffeccf5095395914bcb4b82601d8311cc068515a430"
+    },
+    {
+      "path": "docs/evidence/phase-c04-data-source-prepared.png",
+      "sha256": "e98f0bf91e4b7222d52fde2fb7b9040a55cfeee01166fca878dcb3b8c3a2952a"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-1024-1000-paper-geometry-11860922.png",
+      "sha256": "6bf83a8601da25164c272d19fef52213b41d4801c8d6fb79a27bdf1d1a5f5005"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-1024-1000-paper-geometry-11860923.png",
+      "sha256": "7e502f951dfdc4f01bb102ce932aec75ace3a925ba98b98d4ca7c07aa2569050"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-1024-1000-vase-and-pears-11760922.png",
+      "sha256": "17c2ab7d2f93da3e25a3d2beda532412eaa215583e22562a7c9c8e518f52adf9"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-1024-1000-vase-and-pears-11760923.png",
+      "sha256": "649e04f8874cb074c3bb70d5fbef72bca7e91a4be25a1ff3350c2dd872ee9715"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-1024-250-paper-geometry-11860922.png",
+      "sha256": "991275990952a53c32f55f19d590391a0f50f05caa749751063a97debe312645"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-1024-250-paper-geometry-11860923.png",
+      "sha256": "5091bb3a3f228b33c50ca8343981984fd2aa246fc7c8c0e89e5037bc568cb99e"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-1024-250-vase-and-pears-11760922.png",
+      "sha256": "0f50877dc8ffa7a3d54d46f9c1d8b80703f37d90e538dd3f4520cec72789ca14"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-1024-250-vase-and-pears-11760923.png",
+      "sha256": "b701ed6d43d7b1fc792d1d115666a8917bd1dd8e95a7c23be90c3a1ad9f87673"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-512-1000-paper-geometry-11860922.png",
+      "sha256": "5c14e7c57974e2832ad475cf2491e1f79367da61802234e034e61d562d5f3023"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-512-1000-paper-geometry-11860923.png",
+      "sha256": "073d8e100a56343d34353c32176ecd28fbe9a09feb181e166377d93936d802b0"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-512-1000-vase-and-pears-11760922.png",
+      "sha256": "8756338fb37c5d7901d3575f56b634da0ca647fdf5b86de9086521a81a29203e"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-512-1000-vase-and-pears-11760923.png",
+      "sha256": "8935dff2aef8e022142eb2f64a3372af4580d58150fc76d003a35cb850ec1ac6"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-512-250-paper-geometry-11860922.png",
+      "sha256": "3373d481376572a8299067c4e807b8af465c1f3e9873d9e06c5be03e7c3d7fd5"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-512-250-paper-geometry-11860923.png",
+      "sha256": "bccde20e0aed2cca9fe1028216f44063887f6c8c36db462d1053c6389f332931"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-512-250-vase-and-pears-11760922.png",
+      "sha256": "4e345f7fcb3d6a5ba964dc693c3d39172200813ab5564e4cfb6e5e0033faecc1"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/diagnostic-512-250-vase-and-pears-11760923.png",
+      "sha256": "b86063719e4fbde80564fe7a0befbad4153cea9cc83f7d49b82d68cf70572e34"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-long-r1-paper-geometry.png",
+      "sha256": "c87a98e934ba3eb99350e8f38b4a4e2d8bc4abff4aa484eea4f7b6ff9df54ba7"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-long-r1-vase-and-pears.png",
+      "sha256": "5b8b9385e7860d258d9011f04ac0546e71c3e4bfa96d00f2e67f6417bf4c6392"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-long-r2-paper-geometry.png",
+      "sha256": "d9d1b90623fe5ee38afd47bd82d26fdd7446574d092f3c2fefc244d671c97a14"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-long-r2-vase-and-pears.png",
+      "sha256": "61df04e913af1968544860ff94c019a17e51c61e8e510e4d6ddc8aae85feaf51"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-long-r3-paper-geometry.png",
+      "sha256": "21abac00a10c7e2a26bed90865b610f10269e097031a4f12cc473c14509e422e"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-long-r3-vase-and-pears.png",
+      "sha256": "4a20f9da9b278b74f02011bc334141dad5733edd82e9a15b03f65d446c4c9e3e"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-short-r1-paper-geometry.png",
+      "sha256": "117cff11f933d2ff668ea3f6272c9e0db90df9b2d3956fdc957f1da4cb545645"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-short-r1-vase-and-pears.png",
+      "sha256": "8da29b2ec21aaefeb5be8ad81c4fefa266e00cdba59b015f4fafdd6f13c024b3"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-short-r2-paper-geometry.png",
+      "sha256": "0930e7270333d066e59e90be6a6afe362be3e05283f5e057980d09685e46b1c1"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-short-r2-vase-and-pears.png",
+      "sha256": "72fdebe9e953437f8524d163531d4d3c8ccb0c61dc77521f80520771a8d7fcea"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-short-r3-paper-geometry.png",
+      "sha256": "ee47e6aa9d6c4cee9ab61f6b6b908fb7b6337ff45877c575ec5f55d819ec7230"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-short-r3-vase-and-pears.png",
+      "sha256": "61e371b561d32e318261e0ad44bb0332e32c92357e01af5a54c4c1863f908b3b"
+    },
+    {
+      "path": "docs/evidence/phase-c04-images/training-validation-previews.png",
+      "sha256": "fc8b769ec787d2d2239befb9449aef2ac544992e8488341c4b9312b868be5424"
+    },
+    {
+      "path": "docs/evidence/phase-c04-interim-verification-20260924.json",
+      "sha256": "475857d186f56dff5185efbca2ed3e23ce1269f347e57bf9a65648f69af5b211"
+    },
+    {
+      "path": "docs/evidence/phase-c04-verification-20260924.json",
+      "sha256": "2cb5a26b5a44e9526e389d8dcafe85facdf7243df0761c2ed52ddf0c71d502f2"
+    },
+    {
+      "path": "docs/evidence/phase-c05-verification-20260925.json",
+      "sha256": "e2c7a5d58a29da5f4e271d1e61a5fccb9ae031e01a8cb5ae69d117d6b2ccaeda"
+    },
+    {
+      "path": "docs/evidence/phase-d01-verification-20260925.json",
+      "sha256": "3f27c40ca907405acfac77a5916b67740434667ef31f95672f341048a7af2bc8"
+    },
+    {
+      "path": "docs/evidence/phase-d02-audio-20.flac",
+      "sha256": "7494b094b1aaaecec7dbca722e7f183094c3d88e273c27ed7e5b35d00eed6796"
+    },
+    {
+      "path": "docs/evidence/phase-d02-audio-47.flac",
+      "sha256": "ebd8b11acb8cfa5fc3a02015ed198d3a53725c868de1cff5ee0e1639d892cbf7"
+    },
+    {
+      "path": "docs/evidence/phase-d02-av-121-browser-20260926.png",
+      "sha256": "e1b2c24b298b48d771e1f7a24430fc9da6ccc0742028fb99230570d119994df1"
+    },
+    {
+      "path": "docs/evidence/phase-d02-av-121.mp4",
+      "sha256": "30b09b4bd79d1161e3f5e10ba53d781aff91e7f756fc7db94a5f90aaa3138dd5"
+    },
+    {
+      "path": "docs/evidence/phase-d02-av-81-browser-20260926.png",
+      "sha256": "32b693b8f77682cd10f12895ade44c488398a62463a941f08b22cad34c913bd3"
+    },
+    {
+      "path": "docs/evidence/phase-d02-av-81.mp4",
+      "sha256": "f0ee2c899c8ccfe1df094943388d2267f75b577ba9c0a4e87bd2107867c0ae79"
+    },
+    {
+      "path": "docs/evidence/phase-d02-browser-playback-20260926.json",
+      "sha256": "2d7a5310bfe07c06c00c2d39d1fc7ca53713128fdb34a4b3afb1946a11fc4280"
+    },
+    {
+      "path": "docs/evidence/phase-d02-inspection-paths-20260926.json",
+      "sha256": "85ece0db2b1a0d418ff289b716e897fd839408c6923c8dc609a6b55c843c5d58"
+    },
+    {
+      "path": "docs/evidence/phase-d02-playback-verification-20260926.json",
+      "sha256": "14c7b85ea3d2e870d8de688de3fd91ae4870b433d5111eed1dcd75a2296236f5"
+    },
+    {
+      "path": "docs/evidence/phase-d02-training-priority-20260926.json",
+      "sha256": "ebdd1d89a0a5d97e0765a74c3856cf17cf3ff1d62bde36a06eee3b89805d299f"
+    },
+    {
+      "path": "docs/evidence/phase-d02-verification-20260925.json",
+      "sha256": "08b3b8c6b02bd2536eaf5ed2cb7c3eaebf01837102c6e9350bb8524d56057b40"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121-browser-20260926.png",
+      "sha256": "cd5f74d8c7c6b10a50d53663bea1dfef60c1647cb2161a90ae4ffdbe0709b61b"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121-sheet-01.png",
+      "sha256": "d5f036364bfb45319a0a8983d070176d7e4e0250e61eb83c69ca3110bce752b2"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121-sheet-02.png",
+      "sha256": "644354e75fd0fd9f43adb6055ad0bbcfd0798398e483d604ecc90161b7be294e"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121-sheet-03.png",
+      "sha256": "76014b221ee4320e83fa8db9ba32aa7b561b03051c103ce62ac23f45518404c9"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121-sheet-04.png",
+      "sha256": "435a98fa6f563189270d20286cf035b0bf5a7171a9703baeb8991ce731e5797c"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121-sheet-05.png",
+      "sha256": "153ff5410fc15fb2d9442761255642bd74bb98cdb87353541f49c24c15ff7d57"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121-sheet-06.png",
+      "sha256": "f299bb08269303adce19b94a6ed96fbb97ecefc2e767f4d058f2add5b46a9224"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121-sheet-07.png",
+      "sha256": "8c4d504cfbed7cb00e3044707b647c8371058f10d5de5c5d02e8666f99e81efd"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-121.mp4",
+      "sha256": "3a64f7f928f490f43d90b541fb421dc74df544ee0e9e22efec0db0e080da544e"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-81-browser-20260926.png",
+      "sha256": "87b3420e0ec5a86697a9d00e80316785e50ef0c518abbfcf26a8752ee9b395fe"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-81-sheet-01.png",
+      "sha256": "09f311965c3e05dece2d7bf8c9d5dd1429f8dd1c06da0918e63579d7ef612c89"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-81-sheet-02.png",
+      "sha256": "5db3ee199bdf9cdf629f35618d15f0a380e3f980004e72e2be61861380c610e1"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-81-sheet-03.png",
+      "sha256": "70e1a3a12f846d331beab19008a67f7182d1c30a23598ac63638d0cee8cb6c87"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-81-sheet-04.png",
+      "sha256": "eaf402205c0de655e8d8af87cb1e7162f0d0532ceb2a785a79ccb446a9f1b006"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-81-sheet-05.png",
+      "sha256": "4a749f6bf1f8e14de760a8adb4a5a2b43d8ccffcacee0e0930dfb9c43fff37a0"
+    },
+    {
+      "path": "docs/evidence/phase-d02-video-81.mp4",
+      "sha256": "5555e084e199481503341c636431a39ef508af456a46edfb61a360742f06205e"
+    },
+    {
+      "path": "docs/evidence/phase-d02-visual-priority-20260926.json",
+      "sha256": "29f6db088cf739c774568cdd1a3cfc398327c1d6fe80c78f22924badaa2a8f9f"
+    },
+    {
+      "path": "docs/evidence/phase-d021-development-20260926.json",
+      "sha256": "b3e52ff8530edb84245a66b31991856e86aca0c1f88c7020e720edf84c59dddd"
+    },
+    {
+      "path": "docs/evidence/phase-d021-flux-code-20260926.json",
+      "sha256": "8b0b8ba97ba6d9f937ef32c40f3e25bcc4fe06aa1b1ac919caad95454022ac36"
+    },
+    {
+      "path": "docs/evidence/phase-d021-flux-sources/comfy-klein-metadata.json",
+      "sha256": "fade25ab33c26e6d9f6c6414c5cf09985fbf3daaa5f1219c69a8dcbe9e435024"
+    },
+    {
+      "path": "docs/evidence/phase-d021-flux-sources/diffusion-metadata.json",
+      "sha256": "598c9a71b4c03bab11fb1b1e359136ec806c4538ca9e4c5788b0d12a198f216f"
+    },
+    {
+      "path": "docs/evidence/phase-d021-flux-sources/official-fp8-distilled-edit.json",
+      "sha256": "c6f244ca71db195dec9b5e902c35af82b788871ad4b6247fdd88b10ea65a5b20"
+    },
+    {
+      "path": "docs/evidence/phase-d021-flux-sources/official-text-to-image.json",
+      "sha256": "28ce65d9b8b248b807599cb053e0a08d0ed123878edd0ac99dc900c60988b44e"
+    },
+    {
+      "path": "docs/evidence/phase-d021-flux-sources/text-metadata.json",
+      "sha256": "177180e24991183d7059f0005785160a37e7c88d8a277f8fd5fd377fba738ac7"
+    },
+    {
+      "path": "docs/evidence/phase-d021-flux-sources/vae-metadata.json",
+      "sha256": "ac8e271f9e0b4364f4ec0b89b815d4b184fd322b4a5508f38a3756db0826fe06"
+    },
+    {
+      "path": "docs/evidence/phase-d021-image-review-20260926.json",
+      "sha256": "f2b538d436a8275f1bcab180943ae48f46f4ba0000c1fa6b07c3f60b91dfeeb0"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-bottle-apple-226092621.png",
+      "sha256": "3519a5c5a199efb9933c5e8e60fcf3f85253d490a5cebe89daafc9b6f40870a6"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-bottle-apple-226092622.png",
+      "sha256": "ad8db818093d32be368c4d48e61d12b2c6967041beb297ea4b8346cef03d9929"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-bottle-apple-226092623.png",
+      "sha256": "959ab151cc1ed485fd8ccba186eb1700c0e985e50c247788644066d1bab35471"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-bottle-apple-sheet.png",
+      "sha256": "e31e18e649e654ebefcbb4cc943afdf54d921ebcaf0cfc569ee888ec2c3d46b1"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-paper-geometry-11860922.png",
+      "sha256": "1c60bdc09c603e9f46adc5cc36ed7eafa9e4a31f066ca3a5d6c0baf49907dd29"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-paper-geometry-11860923.png",
+      "sha256": "d2a3fb505f9abf2154747b239742fd0d3604742244dfe1883f9b2ae914bad938"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-paper-geometry-11860924.png",
+      "sha256": "45b6482282e446ec4a7bd2c673849428c59db1e3d54462e72baa644475cdd95d"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-paper-geometry-sheet.png",
+      "sha256": "eaed016b8a59ee635ef7461ec7ed87d8f8b02831c997c8a2d216f06f2c4f8e84"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-two-lemons-226092611.png",
+      "sha256": "214208b9085ad85bdfa37743cb9ed3eece0719e834fc9791012967a76043b520"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-two-lemons-226092612.png",
+      "sha256": "d0d0cee6da72868b6e4750181f9b709b1f247fc91681976b4dd2a1bebb1890c7"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-two-lemons-226092613.png",
+      "sha256": "89cfd92c0de4f47af60a3104cc4d0f00cdf600da156f8ba674d26d2fb189bad6"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-two-lemons-sheet.png",
+      "sha256": "fdfdda4713a39cf2efb0ff60b9b35f8b6f0bc5152bd0ad4d2027125dd3b00c33"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-vase-and-pears-11760922.png",
+      "sha256": "ca95c17649d6c0fa6bbda1a63baad6570d869c12119ba3653399808e8e959e16"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-vase-and-pears-11760923.png",
+      "sha256": "2c37cb546f0d0c73c727cb5279f04eb65285e385acaadb7385ec91ece39aea9b"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-vase-and-pears-11760924.png",
+      "sha256": "8cfe2283b6c54cdebf87e72aec030be723cbf8c995c67f07f6b8f761ba02d02e"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-vase-and-pears-sheet.png",
+      "sha256": "2007be787947b283f87392625d3754c5a17e07defbc71f8c939f593bc5c8d49c"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-yellow-duck-226092601.png",
+      "sha256": "42362a8e4febc781781899374d3017cdbc8ec3571a47a5705b378edcf68551fa"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-yellow-duck-226092602.png",
+      "sha256": "3b1fedcdca97a60789579ccfd49f04083f4501fdd743ae4caad62b637a56219f"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-yellow-duck-226092603.png",
+      "sha256": "0562f7d523930a5bfac6e210f951b852b7986aa56276d2669967a8bd9b70b2ae"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/1024-yellow-duck-sheet.png",
+      "sha256": "3896d382a8aaecad8123becaeeb318dbb6be598af2d5da8d20ec1a83b267c925"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/512-paper-geometry-11860922.png",
+      "sha256": "668093a436e739aacd688643945cf405bd228d37fdf99cb9c100a9b037d0e31c"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/512-paper-geometry-11860923.png",
+      "sha256": "b5069e0c782035d58e6cf4476fa1fad07fb88d44e0983da100cc491f25d50b4a"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/512-paper-geometry-11860924.png",
+      "sha256": "0791cf0929514eddebcc7023aebfa205ed6fc8c2eacbfe228f332a52761d96a0"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/512-paper-geometry-sheet.png",
+      "sha256": "4b8377a82aea77e4cea1f0077c809500b04717127b0c8972955706db6b62223f"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/512-vase-and-pears-11760922.png",
+      "sha256": "d9c615593e024ca2929dd8b866787ec69d75f91853cd769ca660297a6ccd368f"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/512-vase-and-pears-11760923.png",
+      "sha256": "ccdff12a3aa1a502c5721a4fded1286ff1ef7e698106296772503a4469853244"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/512-vase-and-pears-11760924.png",
+      "sha256": "d82c2b9ff129c7744474297b4c1927249e1cc6f0a34dd55f677fa53bcc12253b"
+    },
+    {
+      "path": "docs/evidence/phase-d021-images/512-vase-and-pears-sheet.png",
+      "sha256": "1f12be07c0e3e0910f9ab27fc2609c9c92fb2e606193ee7b8a3832280a870e01"
+    },
+    {
+      "path": "docs/evidence/phase-d021-verification-20260926.json",
+      "sha256": "3940ec679b7325899a0ef4c5eeebef8e0d3aab8991700da5fe9b2d182bf404a8"
+    },
+    {
+      "path": "docs/evidence/python-dev-profile-20261003.json",
+      "sha256": "d97f2eae0c39e9a938a12b8fca2efff21a9a8163b3b70bbf6da58eb8e773cf83"
+    },
+    {
+      "path": "docs/evidence/python-errors-pass1-20261002.json",
+      "sha256": "8314197776d97441d61154f5bbf5e0fa0a47272473fb44c0ad45dcf401b0731b"
+    },
+    {
+      "path": "docs/evidence/python-errors-pass2-20261002.json",
+      "sha256": "c7bbeb57c6ead9d61cfd189f85968b3b7e8321c02c33173c341b3e81b7a29106"
+    },
+    {
+      "path": "docs/evidence/python-errors-pass3-20261003.json",
+      "sha256": "eee89d3a795fbeddc4c672c96720bde6916b30d64ae5177b2db5a6472342f10c"
+    },
+    {
+      "path": "docs/evidence/review-policy-reassessment-20260922.json",
+      "sha256": "de4c9bcfad3af60808af2fc592e6d015960ee06797442e55dee27a8c71bc9c64"
+    },
+    {
+      "path": "docs/evidence/review-policy-verification-20260922.json",
+      "sha256": "cfb21aacb6c61b7f498b6f9aebe1ca27a6d972b7cc5356a288efc24b1383725d"
+    },
+    {
+      "path": "docs/evidence/stage-01-doctor-20260921.json",
+      "sha256": "cae3976cebdafc8e126ab2614600422b5713770e56bc3bdd6a27ad76a2b98124"
+    },
+    {
+      "path": "docs/evidence/stage-01-verification-20260921.json",
+      "sha256": "8c22f61d4f37ff67800027f4e7f345d8c3ad40bd6f650168a9297cf9c6c440c5"
+    },
+    {
+      "path": "docs/evidence/stage-02-image-copy-input.png",
+      "sha256": "f0bd095306c785347fcd260ebcd40a26b1c837d5006581b21d9b800e28950afb"
+    },
+    {
+      "path": "docs/evidence/stage-02-image-copy-output.png",
+      "sha256": "941b0014c3652b83f72bb7be7e0ebbd95373a5c18725a9eb51e7e0098071606d"
+    },
+    {
+      "path": "docs/evidence/stage-02-runtime-20260921.json",
+      "sha256": "808841915f10fa9d4ede8b3cf13044f892b8f86dcced52ade2c9fcf471e2ccb6"
+    },
+    {
+      "path": "docs/evidence/stage-02-verification-20260921.json",
+      "sha256": "cc713f3ddd128948a135c539409ba62ad3c2410a8136430d4532da1f4f6b9896"
+    },
+    {
+      "path": "docs/evidence/stage-03-catalog-20260921.json",
+      "sha256": "bf2d95fae69d8ade111a02bcb5854971fe4778653be574412b13b4cd69cc3bee"
+    },
+    {
+      "path": "docs/evidence/stage-03-verification-20260921.json",
+      "sha256": "9f9ffa0c8b2ac57ca9bb325af939f4f60b9be749beec6ac4863cb539b34578c4"
+    },
+    {
+      "path": "docs/evidence/stage-04-planning-20260921.json",
+      "sha256": "b39df9bd646b02dac490f08b6accc0f0aa74776b672f291067e63789a8ed71e0"
+    },
+    {
+      "path": "docs/evidence/stage-04-verification-20260921.json",
+      "sha256": "f0c7abfcffacfecb4d1295f3520fd3983a614ce7f8c2e6e5f13472305844197b"
+    },
+    {
+      "path": "docs/evidence/stage-05-execution-20260921.json",
+      "sha256": "8ae21f3ab34a255f6773ad2412c0a75aeeb7719d54eab55278c2bf010d7eea14"
+    },
+    {
+      "path": "docs/evidence/stage-05-verification-20260921.json",
+      "sha256": "6a1b2419a3ab32a9de22181d24877683bcb6cf061308884c58fb3567122feb79"
+    },
+    {
+      "path": "docs/evidence/stage-06-inference-20260921.json",
+      "sha256": "48d79c0452c2eb04436f533357861eb4509e1021920012ec082dd9c98e57a47f"
+    },
+    {
+      "path": "docs/evidence/stage-06-initial-collection-20260921.json",
+      "sha256": "8e27f3cda81e5552ee13251fd9e49ac8027c6c139fc38493b22c3e01ff7956cd"
+    },
+    {
+      "path": "docs/evidence/stage-06-initial-observation-20260921.json",
+      "sha256": "cd7a2d40e1cbf74b50eec352cbee947775cc4bc46a575d440e5fc249532e89cf"
+    },
+    {
+      "path": "docs/evidence/stage-06-initial-server-history-20260921.json",
+      "sha256": "33290200df05cd22f4b6c11a8825a1100e1c26f8a2d744ee678b92d1127d3044"
+    },
+    {
+      "path": "docs/evidence/stage-06-output-01.png",
+      "sha256": "0565201066a6ef26dd716919cd171f455418de83fb9b96dca012feef05230d99"
+    },
+    {
+      "path": "docs/evidence/stage-06-output-02.png",
+      "sha256": "cef6ae53fa7b547b18d8bcecbaac994d8bdec84958c2a18ffdeafdbb14894f33"
+    },
+    {
+      "path": "docs/evidence/stage-06-output-03.png",
+      "sha256": "d34a0d2ae8aecc10e763d6fdffbb8b3a93f5bcd15a9130413f98e0e3190c6787"
+    },
+    {
+      "path": "docs/evidence/stage-06-output-04.png",
+      "sha256": "eda2e1f8b5d422121e5cf203bea6d2712907d8573a61de35241d2bd10a765335"
+    },
+    {
+      "path": "docs/evidence/stage-06-runtime-20260921.log",
+      "sha256": "e4809ac0f8b4472e0ebce2cec63898c8d27e5ac592718deb1e616fdea109ee0e"
+    },
+    {
+      "path": "docs/evidence/stage-06-verification-20260921.json",
+      "sha256": "45308e5c5b88e033c64c8b4c748ee0033c42ca8f98aebec9995c48b18b6e2058"
+    },
+    {
+      "path": "docs/evidence/stage-07-initial-preflight-20260921.json",
+      "sha256": "0c3708290643488aabf127848ef04d99ce1a3891cad69fe7ad37f498d01d5cdd"
+    },
+    {
+      "path": "docs/evidence/stage-07-output-01-frame-00.png",
+      "sha256": "18b8947e0f5939cec43e15f3a2d8f34893ad31c89f268ff7b3b58f20f1011d93"
+    },
+    {
+      "path": "docs/evidence/stage-07-output-01-frame-16.png",
+      "sha256": "b4e50a06c2fd33af7143e24d135796c595cad0e78d6403202b6193a73fb8964e"
+    },
+    {
+      "path": "docs/evidence/stage-07-output-01-frame-32.png",
+      "sha256": "d8e694e39cdcf61fe79132c7be637d59c5e10c54ce8cd491095a8681aba8ec3c"
+    },
+    {
+      "path": "docs/evidence/stage-07-output-01.mp4",
+      "sha256": "60ced939747135c82ab812536a20a8571990514690e69bc4fc0ceebe078e6f6e"
+    },
+    {
+      "path": "docs/evidence/stage-07-output-02-frame-00.png",
+      "sha256": "2e91722cafba294ac3b0058a41ff57da1dab6b953f6f381f4b0cc44cb132775f"
+    },
+    {
+      "path": "docs/evidence/stage-07-output-02-frame-16.png",
+      "sha256": "2f78ce46526df27a85ac9dfc264255bd300a4627773089d1f41c971ed67614ef"
+    },
+    {
+      "path": "docs/evidence/stage-07-output-02-frame-32.png",
+      "sha256": "de28eca9b6416b8da5ee66dfd22be646bdebc5d800a6875a52b192240c8bc83a"
+    },
+    {
+      "path": "docs/evidence/stage-07-output-02.mp4",
+      "sha256": "1074820a01d8a339bab414cb0350547b58a6f5a03987f0cbe12191dd3701a362"
+    },
+    {
+      "path": "docs/evidence/stage-07-runtime-20260921.log",
+      "sha256": "8ffb748969a51a278b622af8c34814f54219550fff575c8782b35eb2c8011bc8"
+    },
+    {
+      "path": "docs/evidence/stage-07-verification-20260921.json",
+      "sha256": "d615a936c93082d22827d2b590569fcfe47df63545e094367e37f63ce7969938"
+    },
+    {
+      "path": "docs/evidence/stage-07-video-20260921.json",
+      "sha256": "894b1d76aeac1a43e06bae1a42b247a0e955e0e99949f88847172c986e9f70ce"
+    },
+    {
+      "path": "docs/evidence/stage-08-audio-20260921.json",
+      "sha256": "a10617cfe875ab493db836ade1fd53b229812aa3a2b2583c0e978fd0dcbcf68d"
+    },
+    {
+      "path": "docs/evidence/stage-08-av-01.mp4",
+      "sha256": "a8a6b98feff5f8fcb489796f233e218ec7ef119b70b2469ef0459a6eeb31d868"
+    },
+    {
+      "path": "docs/evidence/stage-08-av-02.mp4",
+      "sha256": "720aa36996c7b193c5bf146f34648bd2448cdf080887d7b97b39cb14f15a02e3"
+    },
+    {
+      "path": "docs/evidence/stage-08-output-01.flac",
+      "sha256": "22e51e7b2d922d15b564ce9cb5b83f59ec2e82de68aa5de0b24e36752cac18ad"
+    },
+    {
+      "path": "docs/evidence/stage-08-output-02.flac",
+      "sha256": "01b667b48c61e4e2ef11462c1d32c4ace1db337f83d28580657d857ea9c6be66"
+    },
+    {
+      "path": "docs/evidence/stage-08-runtime-20260921.log",
+      "sha256": "3c36a7de99d87dded99b43cfabef7986b576819b3493aec7ab5c3bcc764f7184"
+    },
+    {
+      "path": "docs/evidence/stage-08-verification-20260921.json",
+      "sha256": "322b2644ce58c2ec072d4f4f4c9f8fc86ca653a2fdd7e6b011c616c66f53e26b"
+    },
+    {
+      "path": "docs/evidence/stage-09-admission-20260921.json",
+      "sha256": "313771e370f6c7f1ed3b98356d826ad65aa030a763a26c2b7486fbdb5c9a8ac2"
+    },
+    {
+      "path": "docs/evidence/stage-09-initial-measurements-20260921.json",
+      "sha256": "ac9d98d53b149db4b566096618060dc6b3b54c11e6c4cafe8bbc26737f2c65e1"
+    },
+    {
+      "path": "docs/evidence/stage-09-initial-schema-measurements-20260921.json",
+      "sha256": "7f6fc7361b965e44cb8f007e9759494502be6fc7f366dfc103a00480746001cd"
+    },
+    {
+      "path": "docs/evidence/stage-09-initial-startup-20260921.json",
+      "sha256": "62f08c0114baf57da4a83a52ecc922da75408f000edcd976a9d9ae47044a6206"
+    },
+    {
+      "path": "docs/evidence/stage-09-schema-order-20260921.json",
+      "sha256": "dc575eeaa71fff0cb1fd62aa0eb78c84737c174b22dc36d95e7fcad9730345be"
+    },
+    {
+      "path": "docs/evidence/stage-09-verification-20260921.json",
+      "sha256": "f92bca585cbeb738328f8da1f874ee9a988f73739572899124db16db61c8d0b3"
+    },
+    {
+      "path": "docs/evidence/stage-09-video-admission-20260921.json",
+      "sha256": "8ff2b3236d8ffe23fcee71405f53457ec8642381a0c85f2026ed3a9da507f6fa"
+    },
+    {
+      "path": "docs/evidence/stage-09-vram-20260921.json",
+      "sha256": "7dc1eae02a9f6cb4b04a36d7dde4a5be0750d9e58684a9e275e04ab14d871cd4"
+    },
+    {
+      "path": "docs/evidence/stage-09b-cache-release-20260921.json",
+      "sha256": "437ad08a882212cc80c54e481bcfe075daaa3bf2f67ea06d1e37a4a535ab5a90"
+    },
+    {
+      "path": "docs/evidence/stage-09b-calibration-20260921.json",
+      "sha256": "cf77b543996cdd30bf701a04c4f14f9c697baa43ca4e5670045b20ed8abc5cd6"
+    },
+    {
+      "path": "docs/evidence/stage-09b-completion-20260921.json",
+      "sha256": "fb97047544539ca0a784bb12da49a98508fd47ba6177b87ad5a48ed7a088c01b"
+    },
+    {
+      "path": "docs/evidence/stage-09b-initial-calibration-20260921.json",
+      "sha256": "1527946b1be8a6add20c53422b95187653543d6d26da044546cf97b03382a14b"
+    },
+    {
+      "path": "docs/evidence/stage-09b-initial-parallel-20260921.json",
+      "sha256": "9984f4b0aa10ca00299989d746ebd8f7d66f452441a1e267b60a29a2c45d9efe"
+    },
+    {
+      "path": "docs/evidence/stage-09b-initial-preflight-20260921.json",
+      "sha256": "1d88797732c03329fd1d44cf223b9a1926a947ff170b9af538d2c464365c9a22"
+    },
+    {
+      "path": "docs/evidence/stage-09b-initial-verification-20260921.json",
+      "sha256": "5fc307986b97995ed4637dd7453ebbf428d53300c10ff152d703aa8596a1d5bb"
+    },
+    {
+      "path": "docs/evidence/stage-09b-output-01.flac",
+      "sha256": "2df54351c829bb96f20880b694b5bb22c972ecbd9384a066008b7e337ed0379c"
+    },
+    {
+      "path": "docs/evidence/stage-09b-output-02.flac",
+      "sha256": "9f12db6320ef07f3e561a7be5b3382da12964689db6418d1098e258453d6f29f"
+    },
+    {
+      "path": "docs/evidence/stage-09b-parallel-20260921.json",
+      "sha256": "dc41712450c7141974522b105f68f356fb42f6f9f58c1cd029697dd8ad76d822"
+    },
+    {
+      "path": "docs/evidence/stage-09b-preflight-20260921.json",
+      "sha256": "d9fa2b1bc4c28e73af472f0d6521af4e72e76b8047a3af2dadadecab7c498f51"
+    },
+    {
+      "path": "docs/evidence/stage-09b-verification-20260921.json",
+      "sha256": "e7ac6676510262515d5d190603bc7635f8d2b9c752a31daa80a51dca74d9465d"
+    },
+    {
+      "path": "docs/evidence/stage-10-initial-package-check-20260921.json",
+      "sha256": "155ec0a2e54c61583245344a421a737544a247e70c273dbf82cedbd95088e7c8"
+    },
+    {
+      "path": "docs/evidence/stage-10-initial-verification-20260921.json",
+      "sha256": "b58cdf3373b45232c8c3c1452208d0f9e2e0b8fd90714cbe86e8e1fe3deaaca7"
+    },
+    {
+      "path": "docs/evidence/stage-10-offline-20260921.json",
+      "sha256": "d99de1d77cfe67d3c945d44daea92dfcf9b433a4dbfa5878af13a2d01cae4c97"
+    },
+    {
+      "path": "docs/evidence/stage-10-verification-20260921.json",
+      "sha256": "64bbb52f82cb3212f67aa82a81779bc497ba3fa349573b643c36bfc2d36409b6"
+    },
+    {
+      "path": "docs/evidence/stage-11-before-text-output-verification-20260921.json",
+      "sha256": "f008997a83311a179305464974ece33127e59815e9c7956ef88cf261a97a91fb"
+    },
+    {
+      "path": "docs/evidence/stage-11-comfy-baseline.png",
+      "sha256": "b31047d1cb4bcd64b679545d2a930c291f528f6c5e0453b3e78e782d074f2145"
+    },
+    {
+      "path": "docs/evidence/stage-11-comfy-candidate.png",
+      "sha256": "31b456bf5c3566b8fb0fd1c7fdcaf05a996591f4c3f47b9d4d03e335d93dd0f8"
+    },
+    {
+      "path": "docs/evidence/stage-11-comfy-export-20260921.json",
+      "sha256": "2af72da55b90867df8b59520a94cafba7c94740f5df71af5a04ffe75d2d7da26"
+    },
+    {
+      "path": "docs/evidence/stage-11-comfy-export-qualified-20260921.json",
+      "sha256": "e160dec3ec2857b684a2768d43aa56e916c4202298f83c565fc82adeadbecf60"
+    },
+    {
+      "path": "docs/evidence/stage-11-comfy-export-transport-20260921.json",
+      "sha256": "2e396493847e2297f98bed5b6a44c9dc00995156712293a0d59d373b22cbdf99"
+    },
+    {
+      "path": "docs/evidence/stage-11-comfy-mapping-20260921.json",
+      "sha256": "046198f14ee9c4a0b7d0da821127d58da347ca2157ff79e9f849a6f24667135c"
+    },
+    {
+      "path": "docs/evidence/stage-11-geometry-08-baseline.png",
+      "sha256": "9c5e08b2677f11629aca3eeff953dc9db61b3fbd7be80e349819e4dd53da313e"
+    },
+    {
+      "path": "docs/evidence/stage-11-geometry-08-candidate.png",
+      "sha256": "cf54bdb66cc6f43039b4448307bb32066b8dedb176c6b2766d3011caaa34c6c0"
+    },
+    {
+      "path": "docs/evidence/stage-11-geometry-09-baseline.png",
+      "sha256": "cfe420ab115e876d56f415dc966a7515211b0114de979dab869b957367e89620"
+    },
+    {
+      "path": "docs/evidence/stage-11-geometry-09-candidate.png",
+      "sha256": "d56a8ce897b5de2ac9a87c3a8eeff053f6f6ee35a1e71ee42e9307a1bc9ccc01"
+    },
+    {
+      "path": "docs/evidence/stage-11-training-attempt-01-20260921.json",
+      "sha256": "f07a78097d99623fb3dff7c7286dfd8fdfede821a29a54fdbc2e09b42c587b76"
+    },
+    {
+      "path": "docs/evidence/stage-11-training-attempt-02-20260921.json",
+      "sha256": "6eeed7577551148b3b5baf9a947d0a62b9e284936e22597d48f7a80d9b747911"
+    },
+    {
+      "path": "docs/evidence/stage-11-training-attempt-03-20260921.json",
+      "sha256": "3701f0d2044b9dc279728a0bbc3682902cd62f38160a922efb6a2529d3a2daf7"
+    },
+    {
+      "path": "docs/evidence/stage-11-training-attempt-04-20260921.json",
+      "sha256": "379beaa5c5b13bca84e0ad99f4590ec4c05e1a147c3ff3a97c83ce9bae7cfa43"
+    },
+    {
+      "path": "docs/evidence/stage-11-verification-20260921.json",
+      "sha256": "3a8847ec22a575acf50c2551affc9d9d3b50066aa9150966af67b710403dad16"
+    },
+    {
+      "path": "docs/evidence/stage-11-visual-review-20260921.json",
+      "sha256": "1a9e69b5acd27745635298b5671e67227ad2efe444bfb1730c34da87fe619679"
+    },
+    {
+      "path": "docs/evidence/stage-11b-assistant-observations-20260922.json",
+      "sha256": "0a2801aa0232ea3ca5a7a83d151c2da10497574284041da8c4a0e8d416917086"
+    },
+    {
+      "path": "docs/evidence/stage-11b-cache-release-20260922.json",
+      "sha256": "925b329d858a431132b0c711738a3511169a6beebbc88f481fa637d1723ed81f"
+    },
+    {
+      "path": "docs/evidence/stage-11b-comfy-export-20260922.json",
+      "sha256": "e071fec654c5d3d3988d9a07a81ccee5e80ee9eb38c21fd583dd455068969471"
+    },
+    {
+      "path": "docs/evidence/stage-11b-curation-20260922.json",
+      "sha256": "4b50f361fbe48200a5dc55208d8fcf740046a0c6436ecfb372424e7db0b581a0"
+    },
+    {
+      "path": "docs/evidence/stage-11b-development-findings-20260922.json",
+      "sha256": "f69a96b492d27d3c88fac6b91f85de735d9a9a5c20646776ed070898cf1842f1"
+    },
+    {
+      "path": "docs/evidence/stage-11b-heldout-decode-20260922.json",
+      "sha256": "f36982443b92a88d0a7515ea8a1c294064f6ace17adb5025f6947107e3b1905d"
+    },
+    {
+      "path": "docs/evidence/stage-11b-images-20260922.json",
+      "sha256": "422c9f33e4d57ecc635cd06da7676801a0399e812531bbde53b952aaafdaa9c9"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/README.md",
+      "sha256": "433d156234be7d372e07ded66e2a44da0c885a3f2d1f0aa669ad81bc19c4c5b0"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/comfy-baseline.png",
+      "sha256": "057bbea95faf08e4bdae57e951c9309b1d410847103324ac05f851ce7c9fe659"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/comfy-candidate.png",
+      "sha256": "9da26a3cfebd435313604155751e3dd43554aac86c642e7ffc4fc61dcf544f07"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/comfy-pair.png",
+      "sha256": "bc00a357f4bac2c42373705411bce3943f8da7827a354233ef6472c9e98db706"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/curated-data-sheet.png",
+      "sha256": "ec1c347b8edbb7c682e747c093c2f218348e093f24d3b74ff0cc6cd6542498b2"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-11860922-adapter_plain.png",
+      "sha256": "213a59273fd0f48bc931579c012e018a2a2f9ddbc33d01eaa8ab7df1d4ec3ef0"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-11860922-adapter_trigger.png",
+      "sha256": "d17e38f4f5db4f959ce197b1c717ec129649d087a2024daaec559bd2e977622b"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-11860922-base_plain.png",
+      "sha256": "57cb5d09af6e5462ade028da5dfb133d4fd1ee6b841226da66adaadef5d220e3"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-11860922-base_trigger.png",
+      "sha256": "1111f0529c819b5518ee2bf6382bde073029824ab1f309660c4841e1d15ec796"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-11860923-adapter_plain.png",
+      "sha256": "11f7a46de782ed50e07f83cedb27221f7b818cc6a14c90ed1e4abc7d8984d3d0"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-11860923-adapter_trigger.png",
+      "sha256": "c6bf759002b73a17cf95f3d404565d10d0428b33775071cf6150a2e249669ca1"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-11860923-base_plain.png",
+      "sha256": "6df43c23d552ad905205face6f4d419ec91e021e198e67555fc01a5c6cdb236e"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-11860923-base_trigger.png",
+      "sha256": "39a9334a94fa7671f7bffdaf64b1c03c4dc82c746a330d5a1a3b667329806d13"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/paper-geometry-sheet.png",
+      "sha256": "cfa9ea950fa52ab6f7018bc0d564628903ba86664b1b5d07f9b98c4adde3185a"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-11760922-adapter_plain.png",
+      "sha256": "d32e33518fddbedd32f41c3f4be87acb7003c45a06886889fb581ce51548b934"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-11760922-adapter_trigger.png",
+      "sha256": "c4c9069b3c1f938f175c70ef109dfeb54eba3c1e3e1f45873a972ef3fdf7e511"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-11760922-base_plain.png",
+      "sha256": "6048cb84079c5a5dff63cda2bf8bf7a781a9ad0b501d67949c146539f073ef8a"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-11760922-base_trigger.png",
+      "sha256": "795cbe5020faaffa6c8a6a567e4b35c04db04a07ba4f606359145b9f9eee4e42"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-11760923-adapter_plain.png",
+      "sha256": "a450e52052b4ee8ac2a3c7de4345941a57837b3928adefeb4401c9d6fec9274b"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-11760923-adapter_trigger.png",
+      "sha256": "924cd01da89cf8727632b28cb34f6216a3d323f294432e6d66eedc2c90026649"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-11760923-base_plain.png",
+      "sha256": "414b6e18abbb38c31dfa2861382efa08e72af11df6e0b48820a03218b7a50a3d"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-11760923-base_trigger.png",
+      "sha256": "b7c792719cd60602c1a337709bf367a6b56977f43e3af3cd7ea950094ab3c32c"
+    },
+    {
+      "path": "docs/evidence/stage-11b-review/vase-and-pears-sheet.png",
+      "sha256": "490824a4983b2f7a8b460a6d891e1556a3427ced36d13ba91581276a09e82bae"
+    },
+    {
+      "path": "docs/evidence/stage-11b-training-attempt-01-20260922.json",
+      "sha256": "bdf14678619e4645ae5c030b26180599cd69457603cc8b1133a7d9ba9d2e3962"
+    },
+    {
+      "path": "docs/evidence/stage-11b-training-attempt-02-20260922.json",
+      "sha256": "de36515332abace6e78d67b7e7cdfa60f30d1eb8d37bc2342da268555f24753d"
+    },
+    {
+      "path": "docs/evidence/stage-11b-training-attempt-03-20260922.json",
+      "sha256": "57376ea401def4f430e404a205bc14ce3304205ae797849c1cfbfe93ddd0966e"
+    },
+    {
+      "path": "docs/evidence/stage-11b-verification-20260922.json",
+      "sha256": "c9ebdd9dd50f512ebac08244a1ab110d120dbab8d10182fbba228ed32c3b3207"
+    },
+    {
+      "path": "docs/history/TODO-20260922-stage-prototypes.md",
+      "sha256": "05de0b2841ba9f427f0d3dd3be18d24e1da051937aff219022c195b23e9195b7"
+    },
+    {
+      "path": "docs/history/d02-before-training-priority-20260926/CHANGELOG.md",
+      "sha256": "6f46f9e49723ddf75584cb21d3ef3fd237e3098edbf85ffc23e75ffae9500b0a"
+    },
+    {
+      "path": "docs/history/d02-before-training-priority-20260926/TODO.md",
+      "sha256": "21dcb920f5a94d29b766112d8ad145b3c76eff16f32f95d7849b78648cc46253"
+    },
+    {
+      "path": "docs/history/d02-before-training-priority-20260926/operator-runbook.md",
+      "sha256": "f22efcfc330160ba5e4338e95f61d9627b6a8c6bf25444c3e2d2a02ed2827808"
+    },
+    {
+      "path": "docs/history/d02-before-training-priority-20260926/visual-development-priority-20260926.md",
+      "sha256": "48f811f4072a5fb3ebf245392b16d570dd70f62e8101a5b2af0955dd67cf8002"
+    },
+    {
+      "path": "docs/history/d02-before-visual-priority-20260926/CHANGELOG.md",
+      "sha256": "4030c795421bed7b61d4c6312102a1410371b27635c1b731e79d1fcd9aa2d523"
+    },
+    {
+      "path": "docs/history/d02-before-visual-priority-20260926/TODO.md",
+      "sha256": "6688bc6c1c56bba70e5eb55f7c5d30b3062c8295a7d81458c73a19bc66edf6a1"
+    },
+    {
+      "path": "docs/history/d02-before-visual-priority-20260926/extended-media.md",
+      "sha256": "4c896e7167ab1f7e604117830c9caf5d6cc3e1a59aeb54ddd29c9afc4fbb1cfa"
+    },
+    {
+      "path": "docs/history/d021-before-development-20260926/CHANGELOG.md",
+      "sha256": "4cf3c07e53226e3c1e536fb53faa0a95ed54bd6a9b254c232f1caa8300d4045a"
+    },
+    {
+      "path": "docs/history/d021-before-development-20260926/README.md",
+      "sha256": "9e36a4231a05b0c82fd328600dc0d317385ecc55bc716644180143e210fa27d5"
+    },
+    {
+      "path": "docs/history/d021-before-development-20260926/TODO.md",
+      "sha256": "2003811c499ad5be2f28421b3a32d6216edbd4edaca3957a42fb9f3effec87e7"
+    },
+    {
+      "path": "docs/history/d021-before-development-20260926/candidate-inference.md",
+      "sha256": "832d94accac4dece2504b563842be542bca136cc0990d0247e04f78ffbe4bcae"
+    },
+    {
+      "path": "docs/history/d021-before-development-20260926/operator-runbook.md",
+      "sha256": "fcc8c2a393e74d6a6d538423db3db2096eee830916dc242a7e31f892ce2b2a47"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/CHANGELOG.md",
+      "sha256": "60f5e4c7997757dded91b1bf2321b90d81bd57adaa25d9a4885a72b63cea7ad2"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/README.md",
+      "sha256": "41644614dbd41873d3381ff9d095d6f09e79b8e8ca70d39db0cc0171fe7611e7"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/TODO.md",
+      "sha256": "59e6f98457e912a7617f53ee47bb92d3b388fa7967347392900a51c67461c0e2"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/docs/base-image-workflow.md",
+      "sha256": "9c7390d0ec82469a37a556d00e8644108a4b21e540c8ae948bcc720c13d9133f"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/docs/candidate-inference.md",
+      "sha256": "2c6bd570a79eb4c8a6d8989c629cdcd940d90ad1e9d44c7ab86f609a0cb3a561"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/docs/operator-runbook.md",
+      "sha256": "8c7d3e16c9dccb3e36c8c1896aa28ea638cca9dd8508e530d176a8e6bc824733"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/__init__.py",
+      "sha256": "183ada5d87a4c2fc1cddc76015b470e0736dcc02aab5a0f43182e7115a32134a"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/__main__.py",
+      "sha256": "fae92c23c539632b87f7329467958c96109345d1e7bf5740eba636e48d4109b3"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/assessment_context.py",
+      "sha256": "75f17cb7516e46764fc390edb61930d3283d1d5f39c2ad4988d4e7c0b03364f1"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/audio.py",
+      "sha256": "a67bf917af0e50c3a84ccea2efa010a90a1a6c57c7a0aecbb84f00225a1f5aa0"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/audio_media.py",
+      "sha256": "9486796ebee4e395dc31cbeb27bd6134a3ad37051a211bbd94e88e3c5c14dfc9"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/audiovisual.py",
+      "sha256": "cbca72179f3ec8f8ce8de5f83761bafe244e8f570aff6d0bd434561c5c906753"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/batch.py",
+      "sha256": "337d3b0328d2cdd376719f53abc9f58138e526041ab4333b3cdd590f09e3e587"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/batch_cancellation.py",
+      "sha256": "9683b762dcbd043c3d281a9c417aa64dcb18d69f1f2f2af06c814ea86f5a417b"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/batch_execution.py",
+      "sha256": "57907361a5ff4eb27599b2147bc2560423122bfa0a28cb1cce2f90bc7f2c011d"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/batch_request.py",
+      "sha256": "616587a41130c2ae2dda4cb0cd03981f073d574ceb8df73e7a6861373dc7818f"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/candidate_lifecycle.py",
+      "sha256": "f611af8d22fb9fa369897bf82b07cffde55d475be9d9feb914ac26d259d540cc"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/catalog.py",
+      "sha256": "b8801f2405c2eae7b839ab19f8b17ad437296ca2bc84f327df4e2581cd05c08c"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/catalog_store.py",
+      "sha256": "c0063761edfca7f61ca04dfc8a2aaa2bde448156ce9ddb77c2a317a1e25aa516"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/checkpoint_tensors.py",
+      "sha256": "4b14b9bbabc382f5404a1b824060eff89eaea563d913bd38174ffa3a8abd0fdc"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/cli.py",
+      "sha256": "c1874046def8021fa221f52c87c32b64f55d4a84940808efef835d37e3fb6496"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/cli_output.py",
+      "sha256": "e8a5424c3424dddfe870282c385fb8be7d49a9cb06c06c8bdef7dcab10fb0605"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/client_ownership.py",
+      "sha256": "16a76c29f23e43e79839e7e4bb08a7345b8a02bb711df2519a9b983ae0be1c73"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/comfyui.py",
+      "sha256": "84f016ac098090ce23b05ac3bd8ea9f2990532f0a5f9b0f85d9d1aa6e1043477"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/config.py",
+      "sha256": "35efaa21a5b4b991d54062251ca98363713dcc04966907587215a20da4758949"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/curation.py",
+      "sha256": "11e06b4ad6f4a0bed771a3a3521f392961a6730b1db4bf5ac15b67ad9f7f850c"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/dataset_features.py",
+      "sha256": "2c6fe67f51aeb800aa9fc5a8cb310498b85b2b43a1ed8be2f8628790cbd824e8"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/dataset_freeze.py",
+      "sha256": "fdde5fd8031cc222d69295812615b7432fb7782a2e2c460fc68d24ab8fe74e09"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/dataset_identity.py",
+      "sha256": "d53b085649c80dbd77761ca3b152ebb2f13c11ac1d952e2ee3d48b05478f4c1f"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/dataset_images.py",
+      "sha256": "c49c6ac73ede0d4093c1fb6602285daba5f8ff685746453e30a683a33d710ccf"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/dataset_import.py",
+      "sha256": "386505da9f79d20e50c96e89475a5d0edab686984c5142c686671fab90a21c2e"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/dataset_inspection.py",
+      "sha256": "c67d9c418cc7009ca62a6da859964de3a78a555d0b86fa2b6a991dd56538b4f1"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/dataset_manifest.py",
+      "sha256": "4ebcae79445060e548d21e7c687ed9b54094db3db97848bfed7350720150f240"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/dataset_snapshot.py",
+      "sha256": "afe10e747ee309e93d4b0591f0925204da1f9c52445bab64998d5efba3282926"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/deployed_loader.py",
+      "sha256": "f0913e39cf84e19bea7cf90b33415a8865a8a858449158f30eaf932c48cfb0cb"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/deployed_loader_worker.py",
+      "sha256": "082244ff1f0fb83d9f0117709499593caaa00ba056fbb5c487c8bf3b60b9335e"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/deployed_review.py",
+      "sha256": "069ac4bb7beba2c3aadd9d8dde1f4ad663f55477b251fa412f49dc71bc7cfbcb"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/device.py",
+      "sha256": "445050f8a307052fd53aeacc0448ac251b113ebb96e34bba6d6557d3bbe97c51"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/doctor.py",
+      "sha256": "308c1d1c419fa65e523e1c40a8889b75349325306c5bf8c5825b8ed31cd9e523"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/evaluation.py",
+      "sha256": "ff94418347a7ff0468bebd57eb50502be17fcfa751ed4c13c717c27bacb17fd5"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/evaluation_cases.py",
+      "sha256": "b81e0d9a649c72be88a573e817583d8d2ab7b7a6d18d15e6c32299007f069033"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/evaluation_corpus.py",
+      "sha256": "74f92dc97277888b42e26331426c0230583833b1f8273c075127834ba1651cb2"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/evaluation_runtime.py",
+      "sha256": "9911b9f6930547b2df8f2cdcb5f05ab0918fedb9e5f0f4569e1e6ef5d5b791f1"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/evidence_reads.py",
+      "sha256": "8dce0a30032ca28df2cbae02b07c6af132cdbcba6c228528fa83c2a7e4616d8e"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/execution_ownership.py",
+      "sha256": "65dd9400f319ccd0007616097513306f850d041de7c0511b5f7011dda5deac33"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/execution_store.py",
+      "sha256": "2a798db089eaf40791d7b468e0ed2c4ffd815df299d544905d8cd4a787a4dfe4"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/experiment_variance.py",
+      "sha256": "1caf93861a493f3d6276e36fb5d7fb4b3185d81cb4e43ba4a5347d1c2cc822b8"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/experiments.py",
+      "sha256": "ced9bdccefef4a45c826a650ed730cda286cad0387b7b8d95155f3ad427a00f4"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/image_checks.py",
+      "sha256": "cc34f6ca912412a521f38fff9bb23df88d5e5909f61c54843b29d71edb714c6c"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/image_media.py",
+      "sha256": "4d98933760364421362a17099df78be07ee9645587ec3f7afae8bcbb0f09ee03"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/image_metrics.py",
+      "sha256": "a04213edc2432988ad9b455877865a5a688134d7cb496010bf104214caaa161d"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/image_request.py",
+      "sha256": "9519ab8e84e2ecd50f524d6a7f96bb690ce21a748337282d5f754284377377ce"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/inference.py",
+      "sha256": "abed4f457ee81a40297af7f2d13892b5f7bd29e557bc55aedce1fadd5c724721"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/inference_capabilities.py",
+      "sha256": "fa441ce471d2378e5a829d7b97ec7681cb610ac6dd54b9d510bd2e65e0c5cf4e"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/inference_graph.py",
+      "sha256": "c8265a6caf5fccedb77fe332ac0dcbaec63f82e27de62fc49afee45487109c62"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/inference_runtime.py",
+      "sha256": "c9000ce8e07eb6c7325970de8f1194466f503d9785add9770b2ace34f9e63501"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/jobs.py",
+      "sha256": "d0558692e66909a5226170aa1ed76b3c4921c66bd33f32d9bda845991b3f1a18"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/ledger.py",
+      "sha256": "cb0f70896fd5825ac712bab81576644a859664ddca0bbdded51dea6b556eeb6b"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/linting.py",
+      "sha256": "6a89d2d799becbc5c811cfae2ae198ad5ff13d926ffc4fe4c3c51166adf5e604"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/locking.py",
+      "sha256": "f63a12c293ea9ce01ebf2cf3735d707f9522ecb15d126f9069a26e4bb3220455"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/media.py",
+      "sha256": "171ff0f1e3ba97525b05734832cb03cdf638875d85d2867b98dcdbadb5d532b7"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/media_configuration.py",
+      "sha256": "43a27ef84c4b7a0a48edb1c2e85e744f317a0a174e5702338e28a757546134d8"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/media_sources.py",
+      "sha256": "5d3191e0e205252fb814953dd43520d0a1cf72d98ef969ecf7950592f7d9c741"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/owned_jobs.py",
+      "sha256": "882bf2da4a59412e11b5622e2af44394c54621ca85aa9e5893d428f39362098a"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/parallel.py",
+      "sha256": "e2c254d4430444a10dd8e6ef5b72a423f87702300621a243f0f77d8ec975cf84"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/qualification.py",
+      "sha256": "6ceb826c00d620076baeb0ed1142150bf8d3d99e16ac3ccaea1823fc5e151eab"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/quality.py",
+      "sha256": "d70cd556a124d94a66951d06b4d52e92ff5114f8e0328885a309871b43f82681"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/records.py",
+      "sha256": "79a1d25ee2ab9861024eba75ff20fba278fecaeddc8b3dbfa806508a32f9e164"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/review_records.py",
+      "sha256": "a68ff970d8e97fec4e4039a9ee4422b59862f17d1bf7c966eecde965c770a506"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/rotation.py",
+      "sha256": "c931aafde31a762e6f818e3bad175e08a5c11f497141ed34c25d42c107ce3429"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/runtime.py",
+      "sha256": "f75eea94469fcc08661534d8c301785a7dbfa439ef720f672363075d586fc969"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/scene.py",
+      "sha256": "0f75ce19794d19c0d85885cb608e28bd531fa58dd157ee00b34512fe75794c26"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training.py",
+      "sha256": "70e9a81147bb4fc0bfd22099c373ae5d5b045bd172ced69dc1ef1bc22c565070"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training_checkpoint_worker.py",
+      "sha256": "907aa12161b3cf7a4c9437128ec72d0227056a42e563368f2566b3b687285dbb"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training_checkpoints.py",
+      "sha256": "3dbb89b7537e129773250818140bed15ec8df4d188315a7f9673cd770fad5193"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training_config.py",
+      "sha256": "b38ea9fea6e48f150ea80e80d3879a1af221baecdd43b7d67504bb4b2fb2e91f"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training_data.py",
+      "sha256": "3abfb0809503de6c111b90d470e61ef1185035a9409e8bff8c0b302dded34ba4"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training_optimization.py",
+      "sha256": "9f6468679588a87f94b7798aad635309afcf1d312f5213534c6d52210c7a0113"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training_records.py",
+      "sha256": "5f12d1a0a01937fe8f4bdd5a9b4e5e1024214fb47431f35ce410a4436545af30"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training_results.py",
+      "sha256": "d5f4633ce6b6340cab13232d9016422262a275d8798e1875f60f6b3ce646bd01"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/training_worker.py",
+      "sha256": "46ebec9b0b7fe6de0ba73285658f0d84e3646079e9d3ccaf7fb0a4bed702ee5b"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/trigger.py",
+      "sha256": "b1ee60a7bae70d551449d97c272a8aa179154f3cdc76bb452dc23aa5a5b84bd3"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/video.py",
+      "sha256": "e80ee9cf6039409bebea10e11123727f8b956f2e673211c0fd3081e015d1b9d4"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/vram.py",
+      "sha256": "44bab97b77a282553f639f381ba2ca98959df63197bbc635ac036498be6b1b31"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/vram_identity.py",
+      "sha256": "8a3a8ccfd425714406aa092a93a5b1209bad5f30a6af1265f458cb4d46be2d61"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/vram_runtime.py",
+      "sha256": "b035af264492143cbad5b111395c859276e40ad2be506d46cae718c08c53c41c"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/windows_process.py",
+      "sha256": "c8d6fbd2b6f8e6b47c6151d371b25817f35d11ac3c69bf76ae40e672a214b05d"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/worker_bootstrap.py",
+      "sha256": "ddd546efab8c7b45dac22dcb0032539076f2570d5a86cf7b0d2556d46c91bbd6"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/workflow.py",
+      "sha256": "56f4159d7b6cb28fe7e74e193913278f3ef4a0e04474e3d3086ce78e9fd99d85"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/workspace_dependencies.py",
+      "sha256": "909426365be41c05664ef0f2038436104671711dedf7be932a7c30deb069e2e0"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/workspace_guide.py",
+      "sha256": "57a0f4cc6ca4ef452c8f7a4009e38a6474db5ca1e136f0b98fb21ed65161ea12"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/workspace_navigation.py",
+      "sha256": "4e433dc71f268efe98cb8a386e8047cd2375ac514fe10d4fcedc9314363b10ea"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/src/itov/workspace_starter.py",
+      "sha256": "d03868a52b09473ed7c1478584f4b4d444d4761be27bf373ccc15d81640fc9f8"
+    },
+    {
+      "path": "docs/history/d021-before-flux-code-20260926/tests/test_image_request.py",
+      "sha256": "484990e9cab2fb25e0ca07d7ba79de2ed3537d339b0c6a7f9325b83ef5e412f8"
+    },
+    {
+      "path": "docs/history/d021-before-image-results-20260926/CHANGELOG.md",
+      "sha256": "535792c2aff1d572de78479911224027dacdeb2a4c12c611b394517e37a17b38"
+    },
+    {
+      "path": "docs/history/d021-before-image-results-20260926/TODO.md",
+      "sha256": "746cfe22010aa0563dafc5cff6a97933b179b65163b28a10ea5703ca274540a0"
+    },
+    {
+      "path": "docs/history/d021-before-image-results-20260926/base-image-workflow.md",
+      "sha256": "36340c03326d6a4361bcd5d9f7448d4b3276952d0fb9a24ad3c029e762bbeba4"
+    },
+    {
+      "path": "docs/itov-design-specs.pdf",
+      "sha256": "f14375cbc7aaecaa2194d2e304689e889cc85557e2294263b07d3adf90dffb76"
+    },
+    {
+      "path": "docs/itov-design-specs.validation.json",
+      "sha256": "d7c98a89184d7587c6f6a5319d3b12efb7bb90a0dfce57b1177fbda9948eba58"
+    },
+    {
+      "path": "docs/methods/image-to-video-research.md",
+      "sha256": "3400469a961353c5d1d74525a676cac0a969a1d18d4880e85265592053a68d89"
+    },
+    {
+      "path": "docs/design_spec/scene_templates/sensitive/00_templates.md",
+      "sha256": "420edabb856e2cdaa212ed1bb2bdd3090d89c7748c12fb39f1b244e2d1908467"
+    },
+    {
+      "path": "docs/design_spec/scene_templates/sensitive/01_face_retention.md",
+      "sha256": "32412ad065d97f26e0245ed8c2cee9f3dcc3bfedca25872ae03077b8e4b44fbc"
+    },
+    {
+      "path": "docs/design_spec/scene_templates/sensitive/02_face_retention_audit.md",
+      "sha256": "749f9f57c5fdd52f2991d17e6b782fe6b3ef9a597a411a469d072aa5ae9e54e8"
+    },
+    {
+      "path": "docs/design_spec/scene_templates/sensitive/03_template_rotation.md",
+      "sha256": "93cdb013accae80640454cfc1ca11d36680f08daba5356845cab7acfbf3b2217"
+    },
+    {
+      "path": "docs/design_spec/scene_templates/sensitive/04_identity_preserving_pipeline.md",
+      "sha256": "8104aa6fd3ddc6dd7102b6e7ea82cef89d89d26f50e61e10038275ea86046d13"
+    },
+    {
+      "path": "docs/design_spec/scene_templates/sensitive/05_refactoring_correcftions.md",
+      "sha256": "4f4d2eb760a2ccf457edddf00da30ba71d46af9870a5f0b7b3f471b9930d11c8"
+    }
+  ]
+}

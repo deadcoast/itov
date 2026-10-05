@@ -3,3 +3,5 @@
 /docs/history/d021-before-image-results-20260926/** -text
 /docs/history/d021-before-flux-code-20260926/** -text
 /docs/evidence/phase-d021-flux-sources/** -text
+# Preserve pre-reorganization documents, including their original line endings.
+/docs/history/docs-reorganization-20261005/** -text
